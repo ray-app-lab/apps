@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ray App Lab - 便利なアプリポータル</title>
+
+<script>
+    // ブラウザの言語設定を取得
+    const browserLang = window.navigator.language.toLowerCase();
+    
+    // 対応している言語のプレフィックス
+    const supported = {
+        'en': 'en', 'es': 'es', 'hi': 'hi', 'id': 'id',
+        'it': 'it', 'ja': 'ja', 'ko': 'ko', 'pt': 'pt',
+        'th': 'th', 'vi': 'vi', 'zh': 'zh'
+    };
+
+    // 言語判定と言語別紹介ページへのリダイレクト
+    const langKey = browserLang.split('-')[0];
+    if (langKey !== 'ja' && supported[langKey]) {
+        // 日本語以外で対応言語なら、それぞれの紹介ページ(intro_xx.html)へ
+        window.location.href = './quantiventra/intro_' + supported[langKey] + '.html';
+    }
+</script>
+
+    <style>
+        :root { --bg-cream: #fdfaf5; --main-text: #333; --accent-color: #d4a373; --card-bg: #ffffff; }
+        body { margin: 0; font-family: "Helvetica Neue", Arial, sans-serif; background-color: var(--bg-cream); color: var(--main-text); line-height: 1.6; }
+        header { background: #fff; padding: 30px 20px; text-align: center; border-bottom: 1px solid #eee; }
+        .logo { font-size: 1.8rem; font-weight: bold; letter-spacing: 4px; margin: 0; }
+        .hero { max-width: 800px; margin: 50px auto; text-align: center; padding: 0 20px; }
+        .ray-photo { width: 220px; height: 220px; border-radius: 50%; object-fit: cover; border: 6px solid #fff; box-shadow: 0 5px 15px rgba(0,0,0,0.08); margin-bottom: 25px; }
+        .container { max-width: 1000px; margin: 0 auto 80px; padding: 0 20px; }
+        .app-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; }
+        .card { background: var(--card-bg); border-radius: 15px; padding: 35px; text-align: center; box-shadow: 0 4px 12px rgba(0,0,0,0.02); transition: transform 0.3s ease; text-decoration: none; color: inherit; display: block; }
+        .card:hover { transform: translateY(-8px); box-shadow: 0 10px 25px rgba(0,0,0,0.06); }
+        .app-icon { font-size: 2.5rem; margin-bottom: 15px; display: block; }
+        .app-name { font-size: 1.3rem; font-weight: bold; margin-bottom: 10px; }
+        .app-desc { font-size: 0.9rem; color: #777; margin-bottom: 20px; }
+        .btn { display: inline-block; background: var(--main-text); color: #fff; padding: 8px 25px; border-radius: 20px; font-size: 0.85rem; font-weight: bold; }
+        footer { text-align: center; padding: 50px 20px; font-size: 0.8rem; color: #aaa; border-top: 1px solid #eee; background: #fff; }
+    </style>
+</head>
+<body>
+<header><div class="logo">RAY APP LAB</div></header>
+<section class="hero">
+    <img src="ray-mascot.jpg" alt="Mascot Ray" class="ray-photo">
+    <h2>こんにちは、レイです</h2>
+    <p>日常の「あったらいいな」を形にしています。<br>仕事も遊びも、もっとスマートに。</p>
+</section>
+<div class="container">
+    <div class="app-grid">
+        <a href="quantiventra/quantiventra.html" class="card">
+            <span class="app-icon">📦</span>
+            <div class="app-name">Quantiventra</div>
+            <p class="app-desc">現場を支えるスマート棚卸アプリ。バーコードスキャンで、在庫管理の負担を最小限に抑えます。</p>
+            <span class="btn">詳細・取説を見る</span>
+        </a>
+        <div class="card" style="opacity: 0.6;">
+            <span class="app-icon">✨</span><div class="app-name">Next Project</div>
+            <p class="app-desc">新しいツールを準備中です。</p>
+            <span class="btn" style="background:#ccc;">準備中</span>
+        </div>
+    </div>
+</div>
+<footer><p>&copy; 2026 Ray App Lab / Developed by Ito</p></footer>
+</body>
+</html>

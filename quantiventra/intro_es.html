@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quantiventra - Gestión de Inventarios Profesional</title>
+    <style>
+        :root {
+            --bg-cream: #fdfaf5;
+            --main-text: #333;
+            --accent-blue: #006C9C;
+            --card-bg: #ffffff;
+            --accent-gold: #d4a373;
+        }
+
+        body {
+            margin: 0;
+            font-family: "Helvetica Neue", Arial, sans-serif;
+            background-color: var(--bg-cream);
+            color: var(--main-text);
+            line-height: 1.8;
+        }
+
+        header {
+            background: #fff;
+            padding: 20px;
+            text-align: center;
+            border-bottom: 1px solid #eee;
+        }
+
+        .logo {
+            font-size: 1.2rem;
+            font-weight: bold;
+            letter-spacing: 3px;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .back-nav { margin-bottom: 20px; }
+        .back-nav a { text-decoration: none; color: var(--accent-gold); font-size: 0.9rem; font-weight: bold; }
+
+        .app-hero {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .app-icon-large {
+            font-size: 5rem;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .app-hero h1 {
+            font-size: 2.8rem;
+            color: var(--accent-blue);
+            margin: 0;
+        }
+
+        .tagline {
+            font-size: 1.3rem;
+            color: #555;
+            margin-top: 10px;
+            font-weight: 500;
+        }
+
+        .section {
+            background: var(--card-bg);
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            margin-bottom: 30px;
+        }
+
+        .section h2 {
+            color: var(--accent-blue);
+            border-left: 5px solid var(--accent-blue);
+            padding-left: 15px;
+            margin-bottom: 25px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+
+        .feature-item strong {
+            display: block;
+            font-size: 1.1rem;
+            color: var(--accent-blue);
+            margin-bottom: 8px;
+        }
+
+        .pro-box {
+            background: #fff9e6;
+            border: 1px solid #ffeeba;
+            padding: 20px;
+            border-radius: 12px;
+            margin-top: 20px;
+        }
+
+        .pro-badge {
+            background: #FFD700;
+            color: #333;
+            font-size: 0.75rem;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: bold;
+            margin-left: 5px;
+        }
+
+        .cta-box {
+            text-align: center;
+            padding: 40px 20px 80px;
+        }
+
+        .btn-manual {
+            display: inline-block;
+            background: var(--accent-blue);
+            color: #fff;
+            padding: 18px 50px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,108,156,0.3);
+        }
+
+        .btn-manual:hover {
+            background: #005a83;
+            transform: translateY(-3px);
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px;
+            font-size: 0.8rem;
+            color: #aaa;
+            border-top: 1px solid #eee;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <a href="../index.html" class="logo">RAY APP LAB</a>
+</header>
+
+<div class="container">
+    <nav class="back-nav"><a href="../index.html">← Volver al Portal</a></nav>
+
+    <section class="app-hero">
+        <span class="app-icon-large">📦</span>
+        <h1>Quantiventra</h1>
+        <p class="tagline">Convierta su smartphone en la mejor herramienta de inventario.</p>
+        <p>No se requiere terminal dedicado. Gestión de stock precisa, rápida y segura directamente desde su dispositivo móvil.</p>
+    </section>
+
+    <section class="section">
+        <h2>Características Principales</h2>
+        <div class="features-grid">
+            <div class="feature-item">
+                <strong>📸 Escaneo de Alta Velocidad</strong>
+                Equipado con Google ML Kit. Escanee códigos de barras al instante, incluso en almacenes oscuros o a distancia.
+            </div>
+            <div class="feature-item">
+                <strong>🧮 Función de Suma Integrada</strong>
+                Permite realizar cálculos directamente en el campo de entrada (ej. <code>10*5+3</code>) para sumar resultados al stock actual rápidamente.
+            </div>
+            <div class="feature-item">
+                <strong>📄 Integración con Excel (CSV)</strong>
+                Importe sus maestros de artículos y exporte sus resultados en formato CSV para una integración perfecta con su flujo de trabajo en PC.
+            </div>
+            <div class="feature-item">
+                <strong>🔒 Privacidad y Funcionamiento Offline</strong>
+                Sus datos permanecen en su dispositivo. Funciona 100% offline sin transmisión de datos a servidores externos.
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>Quantiventra Pro</h2>
+        <p>Actualice a la versión Pro para maximizar su eficiencia operativa.</p>
+        <div class="pro-box">
+            <ul>
+                <li><strong>Sin límites de datos</strong>: Registro de artículos e historial ilimitado.</li>
+                <li><strong>Gestión de Código de Socio (Joint Code)</strong><span class="pro-badge">PRO</span>: Vincule códigos de proveedores con sus propios códigos internos.</li>
+                <li><strong>Edición Directa de Stock</strong>: Corrija los totales acumulados de stock real al instante.</li>
+                <li><strong>Exportación Avanzada</strong>: Personalice el formato CSV (soporte para comillas, etc.).</li>
+            </ul>
+        </div>
+    </section>
+
+    <div class="cta-box">
+        <p>Para aprender a utilizar todas las funciones, consulte el manual.</p>
+        <a href="manual_es-419.html" class="btn-manual">Ver Manual de Usuario</a>
+    </div>
+</div>
+
+<footer>
+    <p>&copy; 2026 Ray App Lab / Proyecto Quantiventra</p>
+</footer>
+
+</body>
+</html>

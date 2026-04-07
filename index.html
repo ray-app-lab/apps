@@ -1,15 +1,15 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html>
 <head>
     <meta charset="UTF-8">
     <title>Ray App Lab - Redirecting...</title>
     <script>
         (function() {
-            // 1. ブラウザの言語を取得
-            const browserLang = window.navigator.language.toLowerCase();
+            // 1. ブラウザ言語を取得
+            const browserLang = (window.navigator.language || window.navigator.userLanguage).toLowerCase();
             const langKey = browserLang.split('-')[0];
 
-            // 2. 言語とファイルの対応表
+            // 2. 言語とファイルの対応表 (12言語)
             const langMap = {
                 'ja': 'index_ja.html',
                 'en': 'index_en.html',
@@ -24,17 +24,17 @@
                 'zh': 'index_zh.html'
             };
 
-            // 中国語（繁体字）の判定
+            // 中国語（繁体字）の特別判定
             if (browserLang.includes('tw') || browserLang.includes('hk')) {
                 langMap['zh'] = 'index_tw.html';
             }
 
-            // 3. 転送先の決定（対応してない言語は英語へ）
+            // 3. 転送先の決定（未対応言語は英語へ）
             const target = langMap[langKey] || 'index_en.html';
 
-            // 4. 実行（今いるのが index.html なら転送する）
-            // ※無限ループ防止のため、自分自身（index.html）への転送は避ける
-            if (window.location.pathname.endsWith('index.html') || window.location.pathname.endsWith('/')) {
+            // 4. GitHub Pages対応：現在のURLがベース（index.html または 末尾が /）なら転送
+            const path = window.location.pathname;
+            if (path.endsWith('index.html') || path.endsWith('/')) {
                 window.location.replace(target);
             }
         })();
@@ -42,6 +42,10 @@
 </head>
 <body>
     <p>Redirecting... / 転送中...</p>
-    <p>If not redirected, click here: <a href="index_ja.html">日本語</a> / <a href="index_en.html">English</a></p>
+    <p>Please select your language / 言語を選択してください:</p>
+    <ul>
+        <li><a href="index_ja.html">日本語 (Japanese)</a></li>
+        <li><a href="index_en.html">English</a></li>
+    </ul>
 </body>
 </html>

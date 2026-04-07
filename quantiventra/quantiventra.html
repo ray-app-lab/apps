@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quantiventra - スマート在庫管理アプリ</title>
+    <style>
+        :root {
+            --bg-cream: #fdfaf5;
+            --main-text: #333;
+            --accent-blue: #006C9C; /* アプリのテーマカラー */
+            --accent-gold: #d4a373;
+            --card-bg: #ffffff;
+        }
+
+        body {
+            margin: 0;
+            font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
+            background-color: var(--bg-cream);
+            color: var(--main-text);
+            line-height: 1.8;
+        }
+
+        header {
+            background: #fff;
+            padding: 20px;
+            text-align: center;
+            border-bottom: 1px solid #eee;
+        }
+
+        .logo {
+            font-size: 1.2rem;
+            font-weight: bold;
+            letter-spacing: 3px;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .back-nav { margin-bottom: 20px; }
+        .back-nav a { text-decoration: none; color: var(--accent-gold); font-size: 0.9rem; font-weight: bold; }
+
+        .app-hero {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .app-icon-large {
+            font-size: 5rem;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .app-hero h1 {
+            font-size: 2.8rem;
+            color: var(--accent-blue);
+            margin: 0;
+            letter-spacing: 1px;
+        }
+
+        .tagline {
+            font-size: 1.3rem;
+            color: #555;
+            margin-top: 10px;
+            font-weight: 500;
+        }
+
+        .section {
+            background: var(--card-bg);
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            margin-bottom: 30px;
+        }
+
+        .section h2 {
+            color: var(--accent-blue);
+            border-left: 5px solid var(--accent-blue);
+            padding-left: 15px;
+            margin-bottom: 25px;
+            font-size: 1.5rem;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+
+        .feature-item strong {
+            display: block;
+            font-size: 1.1rem;
+            color: var(--accent-blue);
+            margin-bottom: 8px;
+        }
+
+        .pro-box {
+            background: #fff9e6;
+            border: 1px solid #ffeeba;
+            padding: 20px;
+            border-radius: 12px;
+            margin-top: 20px;
+        }
+
+        .pro-badge {
+            background: #FFD700;
+            color: #333;
+            font-size: 0.75rem;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: bold;
+            margin-left: 5px;
+            vertical-align: middle;
+        }
+
+        .cta-box {
+            text-align: center;
+            padding: 40px 20px 80px;
+        }
+
+        .btn-manual {
+            display: inline-block;
+            background: var(--accent-blue);
+            color: #fff;
+            padding: 18px 50px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,108,156,0.3);
+        }
+
+        .btn-manual:hover {
+            background: #005a83;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0,108,156,0.4);
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px;
+            font-size: 0.8rem;
+            color: #aaa;
+            border-top: 1px solid #eee;
+            background: #fff;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <a href="../index.html" class="logo">RAY APP LAB</a>
+</header>
+
+<div class="container">
+    <nav class="back-nav"><a href="../index.html">← ポータルへ戻る</a></nav>
+
+    <section class="app-hero">
+        <span class="app-icon-large">📦</span>
+        <h1>Quantiventra</h1>
+        <p class="tagline">スマホを最強の棚卸ツールに。</p>
+        <p>専用端末はもう不要。あなたのスマートフォンで、<br>正確かつスピーディーな在庫管理を実現します。</p>
+    </section>
+
+    <section class="section">
+        <h2>Quantiventraでできること</h2>
+        <div class="features-grid">
+            <div class="feature-item">
+                <strong>📸 高性能バーコードスキャン</strong>
+                Google ML Kitを採用した解析エンジンを搭載。暗い倉庫や離れた場所からでも、素早く正確にコードを読み取ります。
+            </div>
+            <div class="feature-item">
+                <strong>🧮 独自の加算計算機能</strong>
+                「10個入りの箱が5つとバラが3個」といった場合も、入力欄で直接 <code>10*5+3</code> と入力するだけで、その場で在庫に加算できます。
+            </div>
+            <div class="feature-item">
+                <strong>📄 スムーズなCSV連携</strong>
+                既存のマスタ取込はもちろん、作業履歴や最新の在庫状況をCSVで書き出し可能。メールやLINEですぐに共有できます。
+            </div>
+            <div class="feature-item">
+                <strong>🔒 プライバシーとオフライン動作</strong>
+                データはすべて端末内に保存。外部サーバーへ送信されることはありません。電波の届かない地下倉庫でも安心して使えます。
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>Quantiventra Pro（プロ版）</h2>
+        <p>買い切りのPro版へアップグレードすることで、業務効率を最大化する機能が解放されます。</p>
+        <div class="pro-box">
+            <ul>
+                <li><strong>データ上限の完全解除</strong>：商品登録数や履歴保存数が無制限に。</li>
+                <li><strong>相手先品番（ジョイントコード）管理</strong><span class="pro-badge">PRO</span>：取引先のコードと自社コードを紐付けて管理。</li>
+                <li><strong>在庫累計の直接編集</strong>：登録済みの実在庫数をその場で修正可能。</li>
+                <li><strong>高度なエクスポート</strong>：CSV出力形式のカスタマイズ（引用符対応など）。</li>
+            </ul>
+        </div>
+    </section>
+
+    <div class="cta-box">
+        <p>各機能の詳しい使い方は、マニュアルをご覧ください。</p>
+        <a href="manual_portal.html" class="btn-manual">ユーザーマニュアル（各言語）</a>
+    </div>
+</div>
+
+<footer>
+    <p>&copy; 2026 Ray App Lab / Quantiventra Project</p>
+</footer>
+
+</body>
+</html>

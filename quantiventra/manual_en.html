@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quantiventra User Manual</title>
+<style>@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&family=IBM+Plex+Mono:wght@400;600&display=swap');:root{--primary:#006C9C;--primary-lt:#C3E7FF;--primary-dk:#004A6E;--accent:#FF6D00;--error:#BA1A1A;--bg:#F8FDFF;--surface:#FFFFFF;--border:#D0E8F5;--text:#1A1A2E;--muted:#5A7A8A;--mono:'IBM Plex Mono',monospace;--sans:'Inter',sans-serif;--radius:8px;--shadow:0 2px 12px rgba(0,108,156,.12)}*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}body{font-family:var(--sans);background:var(--bg);color:var(--text);font-size:15px;line-height:1.8}.site-header{background:linear-gradient(135deg,var(--primary-dk) 0%,var(--primary) 60%,#0090CC 100%);color:#fff;padding:56px 40px 48px;position:relative;overflow:hidden}.site-header::before{content:'';position:absolute;right:-80px;top:-80px;width:360px;height:360px;border-radius:50%;background:rgba(255,255,255,.06)}.site-header::after{content:'';position:absolute;right:60px;bottom:-40px;width:200px;height:200px;border-radius:50%;background:rgba(255,255,255,.04)}.header-badge{display:inline-block;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.35);border-radius:20px;padding:4px 14px;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-bottom:16px}.site-header h1{font-size:clamp(28px,5vw,42px);font-weight:900;letter-spacing:-.02em;line-height:1.15;margin-bottom:10px}.site-header .subtitle{font-size:14px;opacity:.8;margin-bottom:24px}.header-meta{display:flex;gap:24px;flex-wrap:wrap;font-size:12px;opacity:.75}.wrapper{max-width:900px;margin:0 auto;padding:0 20px 80px}.toc-card{background:var(--surface);border:1px solid var(--border);border-left:4px solid var(--primary);border-radius:var(--radius);padding:28px 32px;margin:36px 0 48px;box-shadow:var(--shadow)}.toc-card h2{font-size:13px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--primary);margin-bottom:18px}.toc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:6px 24px}.toc-grid a{color:var(--text);text-decoration:none;font-size:13.5px;padding:3px 0;border-bottom:1px dashed transparent;transition:color .15s,border-color .15s;display:block}.toc-grid a:hover{color:var(--primary);border-color:var(--primary)}.toc-num{color:var(--primary);font-weight:700;margin-right:6px;font-family:var(--mono);font-size:12px}section{margin-bottom:60px}.section-label{display:inline-flex;align-items:center;gap:8px;background:var(--primary);color:#fff;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:4px 12px;border-radius:4px;margin-bottom:10px}h2.section-title{font-size:clamp(20px,3vw,26px);font-weight:900;color:var(--primary-dk);border-bottom:2px solid var(--border);padding-bottom:10px;margin-bottom:24px;line-height:1.3}h3{font-size:16px;font-weight:700;color:var(--primary);margin:28px 0 12px;display:flex;align-items:center;gap:8px}h3::before{content:'';display:inline-block;width:4px;height:16px;background:var(--primary);border-radius:2px}h4{font-size:14px;font-weight:700;margin:20px 0 8px;color:var(--text)}p{margin-bottom:14px}.callout{border-radius:var(--radius);padding:16px 20px;margin:18px 0;display:flex;gap:14px;align-items:flex-start}.callout-icon{font-size:20px;flex-shrink:0;line-height:1.5}.callout-body{flex:1;font-size:13.5px;line-height:1.75}.callout-body strong{display:block;margin-bottom:4px;font-size:14px}.callout.info{background:#E8F4FD;border:1px solid #B3D9F2}.callout.warn{background:#FFF8E1;border:1px solid #FFD54F}.callout.danger{background:#FFEBEE;border:1px solid #FFCDD2}.callout.success{background:#E8F5E9;border:1px solid #A5D6A7}.table-wrap{overflow-x:auto;margin:18px 0;border-radius:var(--radius);box-shadow:var(--shadow)}table{width:100%;border-collapse:collapse;background:var(--surface);font-size:13.5px}thead th{background:var(--primary);color:#fff;font-weight:700;padding:12px 16px;text-align:left;white-space:nowrap}tbody td{padding:11px 16px;border-bottom:1px solid var(--border);vertical-align:top}tbody tr:last-child td{border-bottom:none}tbody tr:hover{background:#F0F8FF}td code,th code{font-family:var(--mono);background:rgba(0,108,156,.1);padding:1px 6px;border-radius:3px;font-size:12px}.badge-req{background:var(--error);color:#fff;font-size:10px;font-weight:700;padding:2px 7px;border-radius:10px;white-space:nowrap}.badge-opt{background:#90A4AE;color:#fff;font-size:10px;font-weight:700;padding:2px 7px;border-radius:10px;white-space:nowrap}pre{background:#0F1923;color:#C8E6FF;font-family:var(--mono);font-size:13px;padding:20px 24px;border-radius:var(--radius);overflow-x:auto;margin:14px 0;line-height:1.7;box-shadow:inset 0 0 0 1px rgba(255,255,255,.08)}pre .comment{color:#5C8099}pre .hl{color:#7FD8FF;font-weight:600}pre .val{color:#A5E6A1}code{font-family:var(--mono);background:rgba(0,108,156,.1);color:var(--primary-dk);padding:2px 7px;border-radius:4px;font-size:13px}.path{background:#0F1923;color:#7FD8FF;font-family:var(--mono);font-size:13px;padding:14px 20px;border-radius:var(--radius);margin:12px 0;line-height:2}.path .dim{color:#5C8099}.path .file{color:#A5E6A1;font-weight:600}.steps{list-style:none;counter-reset:step-counter}.steps li{counter-increment:step-counter;display:flex;gap:16px;margin-bottom:14px;align-items:flex-start}.steps li::before{content:counter(step-counter);flex-shrink:0;width:28px;height:28px;background:var(--primary);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;margin-top:2px}.steps li p{margin:0}.ui-label{display:inline-block;background:#E3F2FD;border:1px solid #90CAF9;color:#0D47A1;font-size:12px;font-weight:700;padding:2px 10px;border-radius:4px;font-family:var(--mono);white-space:nowrap}.key{display:inline-block;background:var(--text);color:#fff;font-size:12px;font-weight:700;padding:2px 10px;border-radius:5px;font-family:var(--mono)}.card-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px;margin:18px 0}.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow)}.card h4{margin-top:0;color:var(--primary);font-size:14px}.trouble{border:1px solid var(--border);border-radius:var(--radius);margin:16px 0;overflow:hidden}.trouble-q{background:#EEF6FD;padding:14px 20px;font-weight:700;font-size:14px;color:var(--primary-dk);cursor:pointer;display:flex;align-items:center;gap:10px}.trouble-q::before{content:'Q';background:var(--primary);color:#fff;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900;flex-shrink:0}.trouble-a{padding:14px 20px 16px 52px;font-size:13.5px;border-top:1px solid var(--border)}.legal-block{background:#F5F5F5;border:1px solid #DDD;border-radius:var(--radius);padding:20px 24px;font-size:12.5px;color:#444;line-height:1.9;margin:16px 0}.legal-block h4{font-size:13px;color:#333;margin:18px 0 6px;border-bottom:1px solid #DDD;padding-bottom:4px}.legal-block h4:first-child{margin-top:0}footer{background:var(--primary-dk);color:rgba(255,255,255,.65);text-align:center;padding:32px 20px;font-size:12px;line-height:2}footer strong{color:#fff}.back-top{position:fixed;right:24px;bottom:28px;background:var(--primary);color:#fff;width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:20px;text-decoration:none;box-shadow:0 4px 16px rgba(0,108,156,.4);transition:transform .2s,box-shadow .2s;z-index:100}.back-top:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,108,156,.5)}hr{border:none;border-top:1px solid var(--border);margin:40px 0}@media (max-width:600px){.site-header{padding:36px 20px 32px}.toc-grid{grid-template-columns:1fr}.card-grid{grid-template-columns:1fr}}@media print{.back-top{display:none}body{font-size:13px}pre{font-size:11px}.site-header{background:var(--primary) !important}}</style>
+</head>
+<body>
+
+<header class="site-header" id="top">
+  <div class="header-badge">User Manual</div>
+  <h1>Quantiventra</h1>
+  <p class="subtitle">Barcode Scan Inventory App — Operation Manual</p>
+  <div class="header-meta">
+    <span>OS: Android 7.0 (API 24) or later</span>
+    <span>Version: v1.x</span>
+    <span>Last updated: 2026</span>
+  </div>
+</header>
+
+<div class="wrapper">
+
+<nav class="toc-card">
+  <h2>📋 Table of Contents</h2>
+  <div class="toc-grid">
+    <a href="#sec1"><span class="toc-num">1</span>Introduction</a>
+    <a href="#sec2"><span class="toc-num">2</span>Installation &amp; Initial Setup</a>
+    <a href="#sec3"><span class="toc-num">3</span>Creating &amp; Importing Master CSV</a>
+    <a href="#sec4"><span class="toc-num">4</span>Screen Layout &amp; Field Reference</a>
+    <a href="#sec5"><span class="toc-num">5</span>Basic Operation Flow</a>
+    <a href="#sec6"><span class="toc-num">6</span>Advanced Operations</a>
+    <a href="#sec7"><span class="toc-num">7</span>History Feature</a>
+    <a href="#sec8"><span class="toc-num">8</span>Settings (Language, Rules, Camera)</a>
+    <a href="#sec9"><span class="toc-num">9</span>File Management &amp; Backup</a>
+    <a href="#sec10"><span class="toc-num">10</span>Troubleshooting</a>
+    <a href="#sec11"><span class="toc-num">11</span>Terms &amp; Disclaimer</a>
+  </div>
+</nav>
+
+<section id="sec1">
+  <div class="section-label">Section 01</div>
+  <h2 class="section-title">Introduction</h2>
+
+  <h3>1-1. About this app</h3>
+  <p>Quantiventra (a portmanteau of "Quantity" and "Inventory") is an Android app that streamlines physical inventory counting through barcode scanning using your smartphone's camera.</p>
+  <p>Simply point the camera at a barcode to automatically identify the item, enter the quantity, and save — transforming paper-based inventory into digital records. Results are stored as CSV files on the device for easy import into Excel or Google Sheets.</p>
+
+  <div class="card-grid">
+    <div class="card">
+      <h4>📦 Inventory Count</h4>
+      <p>Quickly identify items via barcode scan and record quantities instantly. Built-in calculator makes summing across multiple locations easy.</p>
+    </div>
+    <div class="card">
+      <h4>🗂️ Master Management</h4>
+      <p>Bulk-import master data via CSV. Pre-configure item names, part numbers, and theoretical stock levels.</p>
+    </div>
+    <div class="card">
+      <h4>📍 Location Management</h4>
+      <p>Scan QR codes to set shelf locations. The shelf number is recorded in the CSV alongside each count.</p>
+    </div>
+    <div class="card">
+      <h4>📊 CSV Export</h4>
+      <p>Scan results are automatically saved to device storage. Transfer to PC for aggregation and analysis.</p>
+    </div>
+  </div>
+
+  <h3>1-2. System requirements</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Item</th><th>Requirement</th></tr></thead>
+      <tbody>
+        <tr><td>OS</td><td>Android 7.0 (Nougat / API 24) or later</td></tr>
+        <tr><td>Camera</td><td>Autofocus camera (required)</td></tr>
+        <tr><td>Storage</td><td>50 MB free space recommended</td></tr>
+        <tr><td>Permissions</td><td>Camera</td></tr>
+        <tr><td>Internet</td><td>Not required (fully offline)</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>1-3. Permissions</h3>
+  <p>The app requests the following permission on first launch. Camera access is required for normal barcode scanning.</p>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Permission</th><th>Purpose</th><th>If denied</th></tr></thead>
+      <tbody>
+        <tr><td>Camera</td><td>Scanning barcodes and QR codes</td><td>Camera features unavailable (manual input only)</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout info">
+    <span class="callout-icon">ℹ️</span>
+    <div class="callout-body">
+      <strong>About data storage</strong>
+      Master, history, and settings files are managed inside the app's internal storage area. Use the Settings screen to import a master CSV or export your data.
+    </div>
+  </div>
+</section>
+
+<section id="sec2">
+  <div class="section-label">Section 02</div>
+  <h2 class="section-title">Installation &amp; Initial Setup</h2>
+
+  <h3>2-1. Installation</h3>
+  <p>Install the app from Google Play Store. After installation, tap the app icon to launch it.</p>
+
+  <h3>2-2. First launch</h3>
+  <ol class="steps">
+    <li><p>A camera permission dialog appears — tap <strong>Allow</strong>.</p></li>
+    <li><p>After allowing camera access, you can start scanning immediately.</p></li>
+    <li><p>If you want to use a master CSV, open Settings and tap <strong>Import Master CSV</strong>.</p></li>
+  </ol>
+
+  <div class="callout info">
+    <span class="callout-icon">ℹ️</span>
+    <div class="callout-body">
+      <strong>After setup</strong>
+      Once camera permission is granted, you can start scanning, saving, importing a master CSV, and exporting data from the Settings screen.
+    </div>
+  </div>
+
+  <h3>2-3. How data is handled</h3>
+  <p>The app manages master, history, and settings data automatically. In normal use, you do not need to know or handle the internal storage structure.</p>
+  <div class="callout info">
+    <span class="callout-icon">ℹ️</span>
+    <div class="callout-body">
+      <strong>What the user needs to do</strong>
+      Use <strong>Import Master CSV</strong> when you want to load master data, and use <strong>Export All Data</strong> or <strong>Share History</strong> when you want to take data out of the app.
+    </div>
+  </div>
+</section>
+
+<section id="sec3">
+  <div class="section-label">Section 03</div>
+  <h2 class="section-title">Creating &amp; Importing Master CSV [Important]</h2>
+
+  <div class="callout success">
+    <span class="callout-icon">✅</span>
+    <div class="callout-body">
+      <strong>Preparing a master file greatly improves efficiency</strong>
+      By importing a master CSV, item names and theoretical stock levels are automatically displayed when scanning. Without it, manual input is required each time.
+    </div>
+  </div>
+
+  <h3>3-1. Two Ways to Prepare the Master CSV (with Column Names)</h3>
+  <p>There are two main methods to prepare your master file.</p>
+
+  <h4>Method A: Create from scratch using Excel or Google Sheets</h4>
+  <ol class="steps">
+    <li><p>Open Microsoft Excel or Google Sheets on your PC.</p></li>
+    <li><p>Do not type the first-row headers manually. Copy and paste the header line exactly as shown in <strong>3-3 Column Specifications (Column Names)</strong>.</p></li>
+    <li><p>Enter your item data starting from the second row.</p></li>
+    <li><p>Save or download the file as "CSV (Comma delimited)" with the exact name <code>quantiventra_master.csv</code> (UTF-8 encoding is recommended).</p></li>
+  </ol>
+
+  <h4>Method B: Create a template in the app first (Beginner-friendly)</h4>
+  <p>If starting from a blank CSV feels difficult, first register one sample item in the app, then export that CSV and use it as your editing template.</p>
+  <ol class="steps">
+    <li><p>Launch the app and register one sample item.</p></li>
+    <li><p>Open Settings and run <span class="ui-label">Export All Data</span> so the master CSV is written out (see <strong>9-2 Recommended backup procedure</strong>).</p></li>
+    <li><p>Move the exported <code>quantiventra_master_export.csv</code> to your PC by mail, cloud storage, or direct copy.</p></li>
+    <li><p>Open that CSV in Excel on your PC. Use the sample row as a guide, and paste data from any existing item table you already have into the matching columns.</p></li>
+    <li><p>When editing is complete, save the file as <code>CSV UTF-8</code>.</p></li>
+    <li><p>After editing, go back to the app and use <span class="ui-label">Settings → Import Master CSV</span>.</p></li>
+    <li><p>Verify that item names and theoretical stock display correctly after import.</p></li>
+  </ol>
+
+  <h3>3-2. File name and requirements</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Item</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td>File name</td><td><code>quantiventra_master.csv</code> (Exact lowercase name required)</td></tr>
+        <tr><td>Encoding</td><td>UTF-8 (without BOM recommended)</td></tr>
+        <tr><td>Line Break</td><td>LF or CRLF</td></tr>
+        <tr><td>Import method</td><td>Select from <code>Settings → Import Master CSV</code></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>3-3. Column Specifications (Column Names)</h3>
+  <p>The first row is the header row. Copy and paste the single line below exactly as shown. All five column names are required.</p>
+  <pre><span class="hl">joint_code</span>,<span class="hl">barcode</span>,<span class="hl">name</span>,<span class="hl">theoretical_stock</span>,<span class="hl">actual_stock_total</span></pre>
+
+  <div class="callout info">
+    <span class="callout-icon">ℹ️</span>
+    <div class="callout-body">
+      <strong>You can keep the same five columns even when Partner Code is OFF</strong>
+      The default setting is <strong>Partner Code OFF</strong>. If you manage only your own codes, simply leave the <code>joint_code</code> column blank. If you also use partner part numbers, fill the <code>joint_code</code> column. If imported master data contains values in <code>joint_code</code>, the app automatically turns Partner Code ON at startup.
+    </div>
+  </div>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>#</th><th>Column</th><th>Type</th><th>Required</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td><code>joint_code</code></td>
+          <td>String</td>
+          <td><span class="badge-opt">Optional</span></td>
+          <td>Partner part number. Leave this blank if you manage own codes only. Fill it only when partner-code mode is needed.</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td><code>barcode</code></td>
+          <td>String</td>
+          <td><span class="badge-req">Required</span></td>
+          <td>Own part number / barcode. This column is always required, even when Partner Code is OFF. Must be unique.</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td><code>name</code></td>
+          <td>String</td>
+          <td><span class="badge-req">Required</span></td>
+          <td>Item name. Enclose in double quotes if it contains commas.</td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td><code>theoretical_stock</code></td>
+          <td>Integer</td>
+          <td><span class="badge-opt">Optional</span></td>
+          <td>Theoretical (book) stock quantity. Enter 0 if unknown.</td>
+        </tr>
+        <tr>
+          <td>5</td>
+          <td><code>actual_stock_total</code></td>
+          <td>Integer</td>
+          <td><span class="badge-opt">Optional</span></td>
+          <td>Running actual count total. Recommend 0 for first inventory.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>3-4. Example</h3>
+  <pre><span class="comment"># Row 1: Header (Required)</span>
+<span class="hl">joint_code</span>,<span class="hl">barcode</span>,<span class="hl">name</span>,<span class="hl">theoretical_stock</span>,<span class="hl">actual_stock_total</span>
+<span class="comment"># Row 2+: Data</span>
+<span class="val">ABC-001</span>,<span class="val">4912345678904</span>,<span class="val">Hex Bolt M6x20</span>,<span class="val">500</span>,<span class="val">0</span>
+<span class="val">ABC-002</span>,<span class="val">4912345678911</span>,<span class="val">Hex Nut M6</span>,<span class="val">1000</span>,<span class="val">0</span>
+,<span class="val">4912345678928</span>,<span class="val">Spring Washer M6</span>,<span class="val">800</span>,<span class="val">0</span>
+<span class="val">XY-999</span>,<span class="val">4912345678935</span>,<span class="val">"Bolt Set, M4"</span>,<span class="val">200</span>,<span class="val">0</span></pre>
+
+  <div class="callout warn">
+    <span class="callout-icon">⚠️</span>
+    <div class="callout-body">
+      <strong>Save as UTF-8</strong>
+      Always save as UTF-8 encoding. Shift-JIS or other encodings may cause garbled characters. Use "Save As" -> "CSV UTF-8" in Excel.
+    </div>
+  </div>
+
+  <h3>3-5. Importing the master CSV</h3>
+  <p>You do not need to place the CSV in a fixed folder. Import it directly from the Settings screen.</p>
+
+  <h4>🔌 Method 1: Select a local file</h4>
+  <ol class="steps">
+    <li><p>Save the CSV anywhere on the device, such as Downloads.</p></li>
+    <li><p>In the app, tap <span class="ui-label">Settings → Import Master CSV</span>.</p></li>
+    <li><p>Choose the CSV in the system file picker.</p></li>
+    <li><p>The imported data is applied immediately.</p></li>
+  </ol>
+
+  <h4>☁️ Method 2: Google Drive</h4>
+  <ol class="steps">
+    <li><p>Upload the CSV to <a href="https://drive.google.com" target="_blank">Google Drive</a> from your PC.</p></li>
+    <li><p>In the app, tap <span class="ui-label">Settings → Import Master CSV</span>.</p></li>
+    <li><p>Select the CSV directly from Google Drive in the file picker.</p></li>
+  </ol>
+
+  <h4>📧 Method 3: Email attachment</h4>
+  <ol class="steps">
+    <li><p>Email the CSV file to yourself.</p></li>
+    <li><p>Download the attachment on your phone.</p></li>
+    <li><p>In the app, tap <span class="ui-label">Settings → Import Master CSV</span>.</p></li>
+    <li><p>Select the downloaded file.</p></li>
+  </ol>
+  
+  <div class="callout info">
+    <span class="callout-icon">ℹ️</span>
+    <div class="callout-body">
+      <strong>Master Update Note</strong>
+      If you edit the CSV again, import the updated file once more. The internal master file will be replaced with the new contents.
+    </div>
+  </div>
+</section>
+
+<section id="sec4">
+  <div class="section-label">Section 04</div>
+  <h2 class="section-title">Screen Layout &amp; Field Reference</h2>
+
+  <p>The main screen is divided into five areas: Header Bar, Camera Area, Input Form Area, Save History Area, and Keypad.</p>
+
+  <h3>4-1. Header bar</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Element</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td>App name (Quantiventra)</td><td>Display only — no action on tap</td></tr>
+        <tr><td>⚙️ Settings icon</td><td>Opens the settings dialog</td></tr>
+        <tr><td>ON / OFF switch</td><td>Toggles the camera preview</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>4-2. Camera area</h3>
+  <p>Scans barcodes and QR codes in real time. With the camera ON, the app reads the same code 3 consecutive frames before accepting it as a valid scan.</p>
+  <div class="callout info">
+    <span class="callout-icon">ℹ️</span>
+    <div class="callout-body"><strong>Scan accuracy</strong> Only codes within ±15% of the screen center are prioritized. Keep the barcode centered for best results.</div>
+  </div>
+
+  <h3>4-3. Input form fields</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Field</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td>Location (LOC)</td><td>Shelf location. Manual input or scan via Location Scan button.</td></tr>
+        <tr><td>Barcode / Own Code</td><td>Scanned or manually entered. Auto-filled from master if found. (On tablets or when Partner Code is enabled, shown as two separate fields.)</td></tr>
+        <tr><td>Item Name</td><td>Auto-filled from master. Editable only during new registration, name edit, or name-search mode.</td></tr>
+        <tr><td>Qty</td><td>Count quantity for this scan. Input via keypad. Expressions (e.g. 3*5) are supported.</td></tr>
+        <tr><td>Theoretical</td><td>Book stock from master (read-only reference).</td></tr>
+        <tr><td>Registered</td><td>Running total of saved counts. Editable via the Edit button.</td></tr>
+        <tr><td>Calc</td><td>Auxiliary calculator. Tap Add to add result to Qty.</td></tr>
+        <tr><td>Calc Log</td><td>Log of additions made via the Calc field (read-only).</td></tr>
+        <tr><td>Memo</td><td>Optional notes saved to CSV.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>4-4. Keypad</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Key</th><th>Action</th></tr></thead>
+      <tbody>
+        <tr><td><span class="key">0–9</span> / <span class="key">00</span></td><td>Enter digits into the focused field.</td></tr>
+        <tr><td><span class="key">−</span> / <span class="key">×</span></td><td>Subtraction / multiplication (for expressions).</td></tr>
+        <tr><td><span class="key">CLR</span></td><td>Clear the focused field.</td></tr>
+        <tr><td><span class="key">Confirm</span> / <span class="key">Search</span></td><td>Confirm / search / save depending on focus position.</td></tr>
+        <tr><td><span class="key">Add</span> (calc mode)</td><td>Add calc result to Qty.</td></tr>
+        <tr><td><span class="key">Save</span> (calc mode)</td><td>Save current data.</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section id="sec5">
+  <div class="section-label">Section 05</div>
+  <h2 class="section-title">Basic Operation Flow</h2>
+
+  <h3>5-1. Standard inventory flow</h3>
+
+  <h4>Step 1: Set the location (shelf)</h4>
+  <ol class="steps">
+    <li><p>Tap the <span class="ui-label">Location Scan</span> button (it turns yellow).</p></li>
+    <li><p>Point the camera at the shelf QR code — it is read automatically and filled into the Location field.</p></li>
+    <li><p>Alternatively, tap the Location field and type the shelf number manually.</p></li>
+  </ol>
+  <div class="callout info">
+    <span class="callout-icon">ℹ️</span>
+    <div class="callout-body">The location persists across scans. Update it each time you move to a different shelf.</div>
+  </div>
+
+  <h4>Step 2: Scan the product barcode</h4>
+  <ol class="steps">
+    <li><p>Confirm the camera switch is ON.</p></li>
+    <li><p>Point the camera at the product barcode — it scans automatically.</p></li>
+    <li><p>If found in master, the item name and theoretical stock are filled in automatically.</p></li>
+    <li><p>If partner-code mode is enabled and the same input could match both an own code and a partner code, a selection dialog is shown instead of auto-opening the wrong item.</p></li>
+    <li><p>If the code is not in master, the "Not in Master" dialog appears (→ see 6-3).</p></li>
+  </ol>
+
+  <h4>Step 3: Enter the quantity</h4>
+  <ol class="steps">
+    <li><p>The Qty field receives focus automatically.</p></li>
+    <li><p>Enter the count using the keypad.</p></li>
+    <li><p>Use the calculator feature for multi-location totals (→ see 5-2).</p></li>
+  </ol>
+
+  <h4>Step 4: Save</h4>
+  <ol class="steps">
+    <li><p>Optionally enter a memo.</p></li>
+    <li><p>Tap <span class="key">ENT</span> or <span class="key">Save</span>.</p></li>
+    <li><p>A sound plays and "Saved." appears — you're done. Proceed to the next item.</p></li>
+  </ol>
+
+  <h3>5-2. Using the calculator</h3>
+  <p>Useful when items are spread across multiple locations and you need to total them.</p>
+  <ol class="steps">
+    <li><p>Tap the <strong>Calc</strong> field (keypad switches to calc mode).</p></li>
+    <li><p>Example: 30 on top shelf, 25 on bottom → Enter <code>30</code>, tap <span class="key">Add</span> → Enter <code>25</code>, tap <span class="key">Add</span>.</p></li>
+    <li><p>Expressions work too: <code>3*10</code> → <span class="key">Add</span> adds 30 to Qty.</p></li>
+    <li><p>When the Qty total is correct, tap <span class="key">Save</span>.</p></li>
+  </ol>
+
+  <h3>5-3. Clear</h3>
+  <p>The <span class="ui-label">Clear</span> button resets the barcode, item name, quantity, memo, and calc log — ready for the next item. The Location field is NOT cleared.</p>
+  <div class="callout info">
+    <span class="callout-icon">ℹ️</span>
+    <div class="callout-body"><strong>To reset the location:</strong> Tap the Location Scan button, use <span class="key">CLR</span> to erase it manually, or scan a new shelf code to overwrite it.</div>
+  </div>
+</section>
+
+<section id="sec6">
+  <div class="section-label">Section 06</div>
+  <h2 class="section-title">Advanced Operations</h2>
+
+  <h3>6-1. Name search mode</h3>
+  <p>When a barcode is unavailable or unreadable, search for items by keyword.</p>
+  <ol class="steps">
+    <li><p>Enable the <strong>Name Search</strong> toggle at the bottom of the screen.</p></li>
+    <li><p>Type a keyword in the Item Name field (partial match, case-insensitive).</p></li>
+    <li><p>Tap 🔍 or <span class="key">Search</span>.</p></li>
+    <li><p>Select the item from the results dialog.</p></li>
+    <li><p>Enter quantity and save as normal.</p></li>
+  </ol>
+  <div class="callout info">
+    <span class="callout-icon">ℹ️</span>
+    <div class="callout-body"><strong>After saving:</strong> With the Continuous toggle OFF, name-search mode turns off automatically after each save. Enable Continuous (→ 6-2) to keep it active.</div>
+  </div>
+
+  <h3>6-2. Continuous search mode</h3>
+  <p>With the <strong>Cont.</strong> toggle ON, name-search mode remains active after each save. Convenient for entering multiple items from a single shelf by name.</p>
+
+  <h3>6-3. Registering new items</h3>
+  <p>When an unregistered code is scanned, the "Not in Master" dialog appears.</p>
+  <ol class="steps">
+    <li><p>Tap "Yes (Register)".</p></li>
+    <li><p>An auto-generated ID starting with <code>99999</code> is set in the barcode field. For manual input, you choose whether to register as Own Code or Partner Code.</p></li>
+    <li><p>Focus moves to the Item Name field — type the name.</p></li>
+    <li><p>Enter quantity and save. The item is now in master for future scans.</p></li>
+  </ol>
+
+  <h3>6-4. Editing an item name</h3>
+  <ol class="steps">
+    <li><p>Scan (or search by name) to load the item.</p></li>
+    <li><p>Tap <span class="ui-label">Edit Name</span> (button turns orange).</p></li>
+    <li><p>Edit the name in the Item Name field.</p></li>
+    <li><p>Save — master is updated with the new name.</p></li>
+  </ol>
+
+  <h3>6-5. Editing the registered total</h3>
+  <ol class="steps">
+    <li><p>Scan the item to load it.</p></li>
+    <li><p>Tap the <span class="ui-label">Edit</span> button next to "Registered".</p></li>
+    <li><p>Enter the new value in the dialog and tap Apply.</p></li>
+  </ol>
+  <div class="callout warn">
+    <span class="callout-icon">⚠️</span>
+    <div class="callout-body">Editing the registered total only updates the master file. Historical records in scan_history.csv are not modified.</div>
+  </div>
+
+  <h3>6-6. Choosing own code or partner code</h3>
+  <p>When partner-code mode is ON, some inputs may have more than one interpretation.</p>
+  <ol class="steps">
+    <li><p>If the "Search Type" dialog appears, choose <strong>Own Code</strong> or <strong>Partner Code</strong>.</p></li>
+    <li><p>The same confirmation flow is used during camera scanning when the code is ambiguous.</p></li>
+    <li><p>If this happens frequently, review the code design in your master CSV.</p></li>
+  </ol>
+</section>
+
+<section id="sec7">
+  <div class="section-label">Section 07</div>
+  <h2 class="section-title">History Feature</h2>
+
+  <h3>7-1. Viewing save history</h3>
+  <p>The Save History bar at the bottom of the screen shows recent records (newest first): time, item name, quantity, and theoretical stock.</p>
+  <p>Tap the <span class="ui-label">History</span> button for the full history dialog, which also shows location and memo.</p>
+
+  <h3>7-2. History CSV</h3>
+  <p>Every save appends a row to <code>scan_history.csv</code>. Transfer this file to a PC to analyze in Excel or Google Sheets.</p>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Column</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td><code>date</code></td><td>Save date (YYYY-MM-DD)</td></tr>
+        <tr><td><code>time</code></td><td>Save time (HH:mm:ss)</td></tr>
+        <tr><td><code>joint_code</code></td><td>Partner part number</td></tr>
+        <tr><td><code>barcode</code></td><td>Own code / barcode</td></tr>
+        <tr><td><code>name</code></td><td>Item name</td></tr>
+        <tr><td><code>actual_stock</code></td><td>Quantity counted this session</td></tr>
+        <tr><td><code>location</code></td><td>Shelf location</td></tr>
+        <tr><td><code>memo</code></td><td>Notes</td></tr>
+        <tr><td><code>theoretical_stock</code></td><td>Theoretical stock at time of save</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout warn">
+    <span class="callout-icon">⚠️</span>
+    <div class="callout-body"><strong>Upgrading from an older version:</strong> If an old-format history file is detected, it is automatically backed up as <code>scan_history_old_[datetime].csv</code> and a new file is created. No data is lost.</div>
+  </div>
+</section>
+
+<section id="sec8">
+  <div class="section-label">Section 08</div>
+  <h2 class="section-title">Settings (Language, Rules, Camera)</h2>
+
+  <p>Tap the ⚙️ icon in the header to open the settings dialog.</p>
+
+  <h3>8-1. Import Master CSV</h3>
+  <p>Select a CSV from your device, Downloads folder, or cloud storage to update the internal master data. The imported data is applied immediately, so no separate reload action is needed.</p>
+
+  <h3>8-2. Clear All History</h3>
+  <p>Deletes <code>scan_history.csv</code> and resets the history completely. Run this at the end of each inventory cycle.</p>
+  <div class="callout danger">
+    <span class="callout-icon">🚨</span>
+    <div class="callout-body"><strong>This action cannot be undone.</strong> Always back up the CSV file before proceeding.</div>
+  </div>
+
+  <h3>8-3. Use Partner Code</h3>
+  <p>When ON, a dedicated Partner Code field appears alongside the Own Code field. Use this when you need to track your trading partner's part numbers alongside your own.</p>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>State</th><th>Behavior</th></tr></thead>
+      <tbody>
+        <tr><td>OFF (default)</td><td>Partner code field hidden. Manage with own codes only.</td></tr>
+        <tr><td>ON</td><td>Partner code field displayed. When entering a code, a dialog asks whether it is an Own Code or Partner Code.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="callout info">
+    <span class="callout-icon">ℹ️</span>
+    <div class="callout-body">If the master CSV contains data in the <code>joint_code</code> column, this setting turns ON automatically at startup.</div>
+  </div>
+
+  <h3>8-4. Own Code rules</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Setting</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td>Character mode</td><td>"Alphanumeric", "Numeric only", or "No restriction".</td></tr>
+        <tr><td>Min length</td><td>Minimum code length (e.g. 12 for JAN/EAN).</td></tr>
+        <tr><td>Max length</td><td>Maximum code length.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>8-5. Camera scan type settings</h3>
+  <p>Configure which barcode formats to scan for products and locations. Disabling unused formats reduces false reads.</p>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Format</th><th>Product</th><th>Location</th><th>Typical use</th></tr></thead>
+      <tbody>
+        <tr><td>CODE39</td><td>✅ Default ON</td><td>—</td><td>Industrial parts, internal codes</td></tr>
+        <tr><td>CODE128</td><td>Optional</td><td>—</td><td>Logistics codes</td></tr>
+        <tr><td>EAN13</td><td>Optional</td><td>—</td><td>JAN/EAN retail codes</td></tr>
+        <tr><td>QRCODE</td><td>—</td><td>✅ Default ON</td><td>Shelf location QR codes</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>8-6. Data import / export</h3>
+  <p>From the Settings screen, you can import a master CSV, share the current history and master files, and export all data.</p>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Item</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td>Import Master CSV</td><td>Select a CSV file from the system file picker and replace the internal master data.</td></tr>
+        <tr><td>Share History</td><td>Attach the current history CSV and master CSV to mail or messaging apps.</td></tr>
+        <tr><td>Export All Data</td><td>Write both the history CSV and master CSV to a folder you select.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="callout info">
+    <span class="callout-icon">ℹ️</span>
+    <div class="callout-body"><strong>CSV quote selection</strong> Before exporting, you can choose either "Quote only when needed" or "Quote all fields". The selected format is applied to both exported CSV files.</div>
+  </div>
+
+  <h3>8-7. Language &amp; Manual Selection</h3>
+  <p>You can change the app's display language from the Settings screen. Current in-app options are Japanese, English, Simplified Chinese, Traditional Chinese, Korean, Hindi, Vietnamese, Italian, Portuguese (Brazil), Spanish (Latin America), Indonesian, and Thai.</p>
+  <div class="callout warn">
+    <span class="callout-icon">⚠️</span>
+    <div class="callout-body">
+      <strong>Note:</strong> The language setting will not change until you save the settings. After selecting a language, you must click the "Save" button. Once saved, open the user manual again to view it in the selected language.
+    </div>
+  </div>
+</section>
+
+<section id="sec9">
+  <div class="section-label">Section 09</div>
+  <h2 class="section-title">File Management &amp; Backup</h2>
+
+  <h3>9-1. Output files</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>File</th><th>Created</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td><code>quantiventra_master.csv</code></td><td>On import / updated on save</td><td>Item master. Updated by CSV import, save, new registration, item-name changes, and registered-total edits.</td></tr>
+        <tr><td><code>scan_history.csv</code></td><td>Appended on every save</td><td>Full scan history.</td></tr>
+        <tr><td><code>settings.json</code></td><td>On settings save</td><td>Stores code rules, camera settings, language, etc.</td></tr>
+        <tr><td><code>scan_history_old_[datetime].csv</code></td><td>Auto-generated on format migration</td><td>Backup of old-format history.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>9-2. Recommended backup procedure</h3>
+  <ol class="steps">
+    <li><p>Tap <span class="ui-label">Export All Data</span> in Settings.</p></li>
+    <li><p>Choose the CSV quote format.</p></li>
+    <li><p>Select an output folder and keep the exported history CSV and master CSV in a safe place.</p></li>
+  </ol>
+</section>
+
+<section id="sec10">
+  <div class="section-label">Section 10</div>
+  <h2 class="section-title">Troubleshooting</h2>
+
+  <div class="trouble">
+    <div class="trouble-q">Barcode won't scan / no response</div>
+    <div class="trouble-a">
+      <ul style="padding-left:20px;line-height:2;">
+        <li>Make sure the camera switch (top right) is ON.</li>
+        <li>Keep the code centered on screen (recognition drops near the edges).</li>
+        <li>Check that the correct scan format (CODE39 / EAN13 etc.) is enabled in Settings.</li>
+        <li>Damaged or dirty barcodes may not scan — use manual entry.</li>
+        <li>Verify camera permission: Settings → Apps → Quantiventra → Permissions → Camera.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="trouble">
+    <div class="trouble-q">Master CSV placed on device but item names aren't showing</div>
+    <div class="trouble-a">
+      <ul style="padding-left:20px;line-height:2;">
+        <li>Filename must be exactly <code>quantiventra_master.csv</code> (all lowercase).</li>
+        <li>Make sure you selected the correct file through <code>Settings → Import Master CSV</code>.</li>
+        <li>If you want to use a different CSV, run <span class="ui-label">Import Master CSV</span> again from Settings and select the file.</li>
+        <li>Confirm the file is saved as UTF-8 (not Shift-JIS or Windows-1252).</li>
+        <li>Check that the header row matches: <code>joint_code,barcode,name,theoretical_stock,actual_stock_total</code></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="trouble">
+    <div class="trouble-q">Can't save / "Save failed" message</div>
+    <div class="trouble-a">
+      <ul style="padding-left:20px;line-height:2;">
+        <li>Ensure the device has sufficient free storage.</li>
+        <li>A barcode or item name must be entered before saving.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="trouble">
+    <div class="trouble-q">Location Scan pressed but shelf number isn't set</div>
+    <div class="trouble-a">
+      <ul style="padding-left:20px;line-height:2;">
+        <li>Check that the location scan format is correct (default: QRCODE).</li>
+        <li>If your shelf labels use a different format, change the Location code type in Settings.</li>
+        <li>Make sure the camera switch is ON.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="trouble">
+    <div class="trouble-q">I cannot find the exported files</div>
+    <div class="trouble-a">
+      <p style="padding-top:4px;">Check the folder you selected during export. The files are named <code>scan_history_[timestamp].csv</code> and <code>quantiventra_master_export.csv</code>.</p>
+    </div>
+  </div>
+
+  <div class="trouble">
+    <div class="trouble-q">Edit Name button pressed but the name field isn't editable</div>
+    <div class="trouble-a">
+      <ul style="padding-left:20px;line-height:2;">
+        <li>An item must be loaded first (via scan or name search). The button has no effect when no item is loaded.</li>
+        <li>The button turns orange when active — if it's still grey, tap it again.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="trouble">
+    <div class="trouble-q">ENT in the Calc field gives 0 / calculation doesn't apply</div>
+    <div class="trouble-a">
+      <ul style="padding-left:20px;line-height:2;">
+        <li>Use the <span class="key">Add</span> key to add the calc result to Qty, then save. Pressing ENT from the Calc field does not save.</li>
+        <li>Full-width (double-byte) characters in expressions cause errors — use the on-screen keypad.</li>
+        <li>Expressions cannot start with an operator (e.g. <code>*5</code> is invalid; use <code>3*5</code>).</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="sec11">
+  <div class="section-label">Section 11</div>
+  <h2 class="section-title">Terms &amp; Disclaimer</h2>
+
+  <div class="legal-block">
+    <h4>■ Terms of Use</h4>
+    <p>Please read these terms carefully before using Quantiventra (the "App"). By downloading or using the App, you agree to these terms.</p>
+    <p><strong>1. License</strong><br>The App is licensed for use by individuals and businesses for inventory management and stock-taking purposes. Reverse engineering, decompilation, modification, or redistribution is prohibited.</p>
+    <p><strong>2. User Data</strong><br>All data generated by the App (master CSV, history CSV, settings file) is stored exclusively on the user's device. The App does not transmit any data to external servers.</p>
+    <p><strong>3. Prohibited Uses</strong><br>Use of the App for illegal purposes, infringement of third-party rights, or generation of fraudulent data is prohibited.</p>
+
+    <h4>■ Disclaimer</h4>
+    <p>The App is provided "AS IS." The developer accepts no liability for any damages arising from use or inability to use the App, including data loss, business interruption, or other direct or indirect damages.</p>
+    <p>Users are responsible for verifying the accuracy and completeness of CSV data generated by the App. The developer is not liable for data inconsistencies caused by scan errors or input mistakes.</p>
+    <p>Scan accuracy depends on the device camera, barcode condition, and environmental factors. Use manual entry when scanning fails.</p>
+
+    <h4>■ Privacy Policy</h4>
+    <p>The App collects, transmits, or uses no personal information whatsoever. It requires no internet connection and processes everything locally on the device.</p>
+    <p>The camera is used solely for barcode and QR code scanning. No video is recorded, stored, or transmitted.</p>
+    <p>Storage access is used only for importing user-selected CSV files and exporting data to a folder chosen by the user. Internal app data remains stored locally on the device.</p>
+
+    <h4>■ Copyright</h4>
+    <p>Copyright © Quantiventra. All Rights Reserved.</p>
+    <p>All content in the App and this manual (text, design, logos, etc.) is the property of the developer.</p>
+
+    <h4>■ Changes to Terms</h4>
+    <p>These terms may be updated without notice. Updated terms take effect upon publication on Google Play. Continued use constitutes acceptance of the updated terms.</p>
+  </div>
+</section>
+
+</div>
+
+<a href="#top" class="back-top" title="Back to top">↑</a>
+
+<footer>
+  <strong>Quantiventra</strong> — Barcode Scan Inventory App<br>
+  Copyright © Quantiventra. All Rights Reserved.<br>
+  Manual content is subject to change without notice.
+</footer>
+
+</body>
+</html>

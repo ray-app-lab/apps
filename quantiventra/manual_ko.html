@@ -1,0 +1,1130 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quantiventra 사용자 매뉴얼</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=IBM+Plex+Mono:wght@400;600&display=swap');
+
+  :root {
+    --primary:    #006C9C;
+    --primary-lt: #C3E7FF;
+    --primary-dk: #004A6E;
+    --accent:     #FF6D00;
+    --error:      #BA1A1A;
+    --bg:         #F8FDFF;
+    --surface:    #FFFFFF;
+    --border:     #D0E8F5;
+    --text:       #1A1A2E;
+    --muted:      #5A7A8A;
+    --mono:       'IBM Plex Mono', monospace;
+    --sans:       'Noto Sans KR', sans-serif;
+    --radius:     8px;
+    --shadow:     0 2px 12px rgba(0,108,156,.12);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--sans);
+    background: var(--bg);
+    color: var(--text);
+    font-size: 15px;
+    line-height: 1.8;
+  }
+
+  /* ── HEADER ── */
+  .site-header {
+    background: linear-gradient(135deg, var(--primary-dk) 0%, var(--primary) 60%, #0090CC 100%);
+    color: #fff;
+    padding: 56px 40px 48px;
+    position: relative;
+    overflow: hidden;
+  }
+  .site-header::before {
+    content: '';
+    position: absolute;
+    right: -80px; top: -80px;
+    width: 360px; height: 360px;
+    border-radius: 50%;
+    background: rgba(255,255,255,.06);
+  }
+  .site-header::after {
+    content: '';
+    position: absolute;
+    right: 60px; bottom: -40px;
+    width: 200px; height: 200px;
+    border-radius: 50%;
+    background: rgba(255,255,255,.04);
+  }
+  .header-badge {
+    display: inline-block;
+    background: rgba(255,255,255,.18);
+    border: 1px solid rgba(255,255,255,.35);
+    border-radius: 20px;
+    padding: 4px 14px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+  .site-header h1 {
+    font-size: clamp(28px, 5vw, 42px);
+    font-weight: 900;
+    letter-spacing: -.02em;
+    line-height: 1.15;
+    margin-bottom: 10px;
+  }
+  .site-header .subtitle {
+    font-size: 14px;
+    opacity: .8;
+    margin-bottom: 24px;
+  }
+  .header-meta {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+    font-size: 12px;
+    opacity: .75;
+  }
+
+  /* ── LAYOUT ── */
+  .wrapper {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 20px 80px;
+  }
+
+  /* ── TOC ── */
+  .toc-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--primary);
+    border-radius: var(--radius);
+    padding: 28px 32px;
+    margin: 36px 0 48px;
+    box-shadow: var(--shadow);
+  }
+  .toc-card h2 {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--primary);
+    margin-bottom: 18px;
+  }
+  .toc-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 6px 24px;
+  }
+  .toc-grid a {
+    color: var(--text);
+    text-decoration: none;
+    font-size: 13.5px;
+    padding: 3px 0;
+    border-bottom: 1px dashed transparent;
+    transition: color .15s, border-color .15s;
+    display: block;
+  }
+  .toc-grid a:hover { color: var(--primary); border-color: var(--primary); }
+  .toc-num { color: var(--primary); font-weight: 700; margin-right: 6px; font-family: var(--mono); font-size: 12px; }
+
+  /* ── SECTIONS ── */
+  section { margin-bottom: 60px; }
+
+  .section-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--primary);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border-radius: 4px;
+    margin-bottom: 10px;
+  }
+
+  h2.section-title {
+    font-size: clamp(20px, 3vw, 26px);
+    font-weight: 900;
+    color: var(--primary-dk);
+    border-bottom: 2px solid var(--border);
+    padding-bottom: 10px;
+    margin-bottom: 24px;
+    line-height: 1.3;
+  }
+
+  h3 {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--primary);
+    margin: 28px 0 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  h3::before {
+    content: '';
+    display: inline-block;
+    width: 4px; height: 16px;
+    background: var(--primary);
+    border-radius: 2px;
+  }
+
+  h4 {
+    font-size: 14px;
+    font-weight: 700;
+    margin: 20px 0 8px;
+    color: var(--text);
+  }
+
+  p { margin-bottom: 14px; }
+
+  /* ── CALLOUTS ── */
+  .callout {
+    border-radius: var(--radius);
+    padding: 16px 20px;
+    margin: 18px 0;
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+  }
+  .callout-icon { font-size: 20px; flex-shrink: 0; line-height: 1.5; }
+  .callout-body { flex: 1; font-size: 13.5px; line-height: 1.75; }
+  .callout-body strong { display: block; margin-bottom: 4px; font-size: 14px; }
+  .callout.info    { background: #E8F4FD; border: 1px solid #B3D9F2; }
+  .callout.warn    { background: #FFF8E1; border: 1px solid #FFD54F; }
+  .callout.danger  { background: #FFEBEE; border: 1px solid #FFCDD2; }
+  .callout.success { background: #E8F5E9; border: 1px solid #A5D6A7; }
+
+  /* ── TABLES ── */
+  .table-wrap { overflow-x: auto; margin: 18px 0; border-radius: var(--radius); box-shadow: var(--shadow); }
+  table { width: 100%; border-collapse: collapse; background: var(--surface); font-size: 13.5px; }
+  thead th {
+    background: var(--primary);
+    color: #fff;
+    font-weight: 700;
+    padding: 12px 16px;
+    text-align: left;
+    white-space: nowrap;
+  }
+  tbody td { padding: 11px 16px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  tbody tr:last-child td { border-bottom: none; }
+  tbody tr:hover { background: #F0F8FF; }
+  td code, th code { font-family: var(--mono); background: rgba(0,108,156,.1); padding: 1px 6px; border-radius: 3px; font-size: 12px; }
+  .badge-req { background: var(--error); color: #fff; font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 10px; white-space: nowrap; }
+  .badge-opt { background: #90A4AE; color: #fff; font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 10px; white-space: nowrap; }
+
+  /* ── CODE BLOCKS ── */
+  pre {
+    background: #0F1923;
+    color: #C8E6FF;
+    font-family: var(--mono);
+    font-size: 13px;
+    padding: 20px 24px;
+    border-radius: var(--radius);
+    overflow-x: auto;
+    margin: 14px 0;
+    line-height: 1.7;
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,.08);
+  }
+  pre .comment { color: #5C8099; }
+  pre .hl { color: #7FD8FF; font-weight: 600; }
+  pre .val { color: #A5E6A1; }
+  code {
+    font-family: var(--mono);
+    background: rgba(0,108,156,.1);
+    color: var(--primary-dk);
+    padding: 2px 7px;
+    border-radius: 4px;
+    font-size: 13px;
+  }
+
+  /* ── PATH DISPLAY ── */
+  .path {
+    background: #0F1923;
+    color: #7FD8FF;
+    font-family: var(--mono);
+    font-size: 13px;
+    padding: 14px 20px;
+    border-radius: var(--radius);
+    margin: 12px 0;
+    line-height: 2;
+  }
+  .path .dim { color: #5C8099; }
+  .path .file { color: #A5E6A1; font-weight: 600; }
+
+  /* ── STEPS ── */
+  .steps { list-style: none; counter-reset: step-counter; }
+  .steps li {
+    counter-increment: step-counter;
+    display: flex;
+    gap: 16px;
+    margin-bottom: 14px;
+    align-items: flex-start;
+  }
+  .steps li::before {
+    content: counter(step-counter);
+    flex-shrink: 0;
+    width: 28px; height: 28px;
+    background: var(--primary);
+    color: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 700;
+    margin-top: 2px;
+  }
+  .steps li p { margin: 0; }
+
+  /* ── UI LABEL ── */
+  .ui-label {
+    display: inline-block;
+    background: #E3F2FD;
+    border: 1px solid #90CAF9;
+    color: #0D47A1;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 2px 10px;
+    border-radius: 4px;
+    font-family: var(--mono);
+    white-space: nowrap;
+  }
+  .key {
+    display: inline-block;
+    background: var(--text);
+    color: #fff;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 2px 10px;
+    border-radius: 5px;
+    font-family: var(--mono);
+  }
+
+  /* ── CARDS ── */
+  .card-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 16px; margin: 18px 0; }
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px;
+    box-shadow: var(--shadow);
+  }
+  .card h4 { margin-top: 0; color: var(--primary); font-size: 14px; }
+
+  /* ── TROUBLE ── */
+  .trouble { border: 1px solid var(--border); border-radius: var(--radius); margin: 16px 0; overflow: hidden; }
+  .trouble-q { background: #EEF6FD; padding: 14px 20px; font-weight: 700; font-size: 14px; color: var(--primary-dk); cursor: pointer; display: flex; align-items: center; gap: 10px; }
+  .trouble-q::before { content: 'Q'; background: var(--primary); color: #fff; width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 900; flex-shrink: 0; }
+  .trouble-a { padding: 14px 20px 16px 52px; font-size: 13.5px; border-top: 1px solid var(--border); }
+
+  /* ── LEGAL ── */
+  .legal-block {
+    background: #F5F5F5;
+    border: 1px solid #DDD;
+    border-radius: var(--radius);
+    padding: 20px 24px;
+    font-size: 12.5px;
+    color: #444;
+    line-height: 1.9;
+    margin: 16px 0;
+  }
+  .legal-block h4 { font-size: 13px; color: #333; margin: 18px 0 6px; border-bottom: 1px solid #DDD; padding-bottom: 4px; }
+  .legal-block h4:first-child { margin-top: 0; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--primary-dk);
+    color: rgba(255,255,255,.65);
+    text-align: center;
+    padding: 32px 20px;
+    font-size: 12px;
+    line-height: 2;
+  }
+  footer strong { color: #fff; }
+
+  /* ── BACK TO TOP ── */
+  .back-top {
+    position: fixed;
+    right: 24px; bottom: 28px;
+    background: var(--primary);
+    color: #fff;
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px;
+    text-decoration: none;
+    box-shadow: 0 4px 16px rgba(0,108,156,.4);
+    transition: transform .2s, box-shadow .2s;
+    z-index: 100;
+  }
+  .back-top:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,108,156,.5); }
+
+  /* ── DIVIDER ── */
+  hr { border: none; border-top: 1px solid var(--border); margin: 40px 0; }
+
+  @media (max-width: 600px) {
+    .site-header { padding: 36px 20px 32px; }
+    .toc-grid { grid-template-columns: 1fr; }
+    .card-grid { grid-template-columns: 1fr; }
+  }
+  @media print {
+    .back-top { display: none; }
+    body { font-size: 13px; }
+    pre { font-size: 11px; }
+    .site-header { background: var(--primary) !important; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== HEADER ===== -->
+<header class="site-header" id="top">
+  <div class="header-badge">User Manual</div>
+  <h1>Quantiventra</h1>
+  <p class="subtitle">코드 스캔 재고 카운트 앱 — 조작 매뉴얼</p>
+  <div class="header-meta">
+    <span>대상 OS: Android 8.0(API 26) 이상</span>
+    <span>대상 버전: v1.x</span>
+    <span>최종 업데이트: 2026년</span>
+  </div>
+</header>
+
+<div class="wrapper">
+
+<!-- ===== TOC ===== -->
+<nav class="toc-card">
+  <h2>📋 목차</h2>
+  <div class="toc-grid">
+    <a href="#sec1"><span class="toc-num">1</span> 소개</a>
+    <a href="#sec2"><span class="toc-num">2</span> 설치 및 초기 설정</a>
+    <a href="#sec3"><span class="toc-num">3</span> 마스터 CSV 작성 및 등록</a>
+    <a href="#sec4"><span class="toc-num">4</span> 화면 구성 및 각부 설명</a>
+    <a href="#sec5"><span class="toc-num">5</span> 기본 조작 흐름</a>
+    <a href="#sec6"><span class="toc-num">6</span> 응용 조작</a>
+    <a href="#sec7"><span class="toc-num">7</span> 이력 기능</a>
+    <a href="#sec8"><span class="toc-num">8</span> 설정 (언어·규칙·카메라 등)</a>
+    <a href="#sec9"><span class="toc-num">9</span> 파일 관리 및 백업</a>
+    <a href="#sec10"><span class="toc-num">10</span> 문제 해결(트러블슈팅)</a>
+    <a href="#sec11"><span class="toc-num">11</span> 약관 및 면책 사항</a>
+  </div>
+</nav>
+
+
+<!-- ===== SECTION 1 ===== -->
+<section id="sec1">
+  <div class="section-label">Section 01</div>
+  <h2 class="section-title">소개</h2>
+
+  <h3>1-1. 본 앱에 대하여</h3>
+  <p>Quantiventra(콴티벤트라)는 'Quantity(수량)'와 'Inventory(재고·실사)'를 조합한 이름으로, 스마트폰 카메라를 이용한 코드 스캔을 통해 재고 조사 및 카운트 작업을 효율화하는 Android 앱입니다.</p>
+  <p>카메라를 코드에 비추기만 하면 상품을 자동으로 인식하고, 수량을 입력하여 저장하는 직관적인 조작으로 종이 기반의 재고 조사 작업을 디지털화할 수 있습니다. 스캔 결과는 CSV 파일로 기기에 저장되므로 Excel이나 Google 스프레드시트와의 연동도 간편합니다.</p>
+
+  <div class="card-grid">
+    <div class="card">
+      <h4>📦 재고 카운트</h4>
+      <p>코드 스캔으로 상품을 빠르게 특정하고 수량을 즉시 기록. 계산 기능 내장으로 여러 장소의 합산도 간단.</p>
+    </div>
+    <div class="card">
+      <h4>🗂️ 마스터 관리</h4>
+      <p>CSV 파일로 마스터 데이터를 일괄 등록. 품명·품번·이론 재고를 미리 설정할 수 있습니다.</p>
+    </div>
+    <div class="card">
+      <h4>📍 로케이션 관리</h4>
+      <p>QR 코드로 선반 번호(로케이션)를 스캔 설정. 어느 선반의 재고인지 CSV에 기록합니다.</p>
+    </div>
+    <div class="card">
+      <h4>📊 CSV 출력</h4>
+      <p>스캔 결과는 기기 저장소에 자동 저장. PC로 가져와서 집계 및 분석 가능.</p>
+    </div>
+  </div>
+
+  <h3>1-2. 동작 환경</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>항목</th><th>요구사항</th></tr></thead>
+      <tbody>
+        <tr><td>OS</td><td>Android 7.0(Nougat / API 24) 이상</td></tr>
+        <tr><td>카메라</td><td>자동 초점(AF) 지원 카메라 (필수)</td></tr>
+        <tr><td>저장공간</td><td>여유 공간 50MB 이상 권장</td></tr>
+        <tr><td>권한</td><td>카메라 권한</td></tr>
+        <tr><td>인터넷</td><td>불필요 (완전 오프라인 동작)</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>1-3. 권한에 대하여</h3>
+  <p>본 앱은 최초 실행 시 다음 권한을 요청합니다. 바코드 스캔을 정상적으로 사용하려면 카메라 권한만 필요합니다.</p>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>권한</th><th>용도</th><th>거부 시</th></tr></thead>
+      <tbody>
+        <tr><td>카메라</td><td>코드·QR 코드 스캔</td><td>카메라 스캔 불가 (수동 입력은 가능)</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout info">
+    <span class="callout-icon">ℹ️</span>
+    <div class="callout-body">
+      <strong>데이터 저장 위치 안내</strong>
+      마스터, 이력, 설정 파일은 앱 내부에서 자동으로 관리됩니다. 마스터 CSV를 가져오거나 데이터를 내보낼 때는 설정 화면을 사용해 주십시오.
+    </div>
+  </div>
+</section>
+
+
+<!-- ===== SECTION 2 ===== -->
+<section id="sec2">
+  <div class="section-label">Section 02</div>
+  <h2 class="section-title">설치 및 초기 설정</h2>
+
+  <h3>2-1. 설치 절차</h3>
+  <ol class="steps">
+    <li><p>Android 기기에서 <strong>Google Play 스토어</strong>를 엽니다.</p></li>
+    <li><p>검색창에 "<strong>Quantiventra</strong>"를 입력하여 검색합니다.</p></li>
+    <li><p>앱을 선택하고 <span class="ui-label">설치</span>를 탭합니다.</p></li>
+    <li><p>설치 완료 후 <span class="ui-label">열기</span>를 탭하거나 홈 화면의 아이콘을 눌러 앱을 실행합니다.</p></li>
+  </ol>
+
+  <h3>2-2. 최초 실행 및 권한 허용</h3>
+  <ol class="steps">
+    <li><p>앱 실행 후 <strong>카메라 권한</strong> 대화상자가 표시되면 <span class="ui-label">허용</span>을 탭해 주십시오.</p></li>
+    <li><p>권한을 허용하면 바로 스캔을 시작할 수 있습니다.</p></li>
+    <li><p>마스터 CSV를 사용하려면 <span class="ui-label">설정 → 마스터 CSV 가져오기</span>에서 파일을 선택해 주십시오.</p></li>
+  </ol>
+
+  <div class="callout info">
+    <span class="callout-icon">ℹ️</span>
+    <div class="callout-body">
+      <strong>초기 설정 후</strong>
+      카메라 권한만 허용하면 스캔, 저장, 마스터 CSV 가져오기, 데이터 내보내기를 모두 설정 화면에서 진행할 수 있습니다.
+    </div>
+  </div>
+
+  <h3>2-3. 데이터가 관리되는 방식</h3>
+  <p>마스터, 이력, 설정 데이터는 앱이 자동으로 관리합니다. 일반적인 사용에서는 내부 폴더 구조를 알거나 직접 다룰 필요가 없습니다.</p>
+  <div class="callout info">
+    <span class="callout-icon">ℹ️</span>
+    <div class="callout-body">
+      <strong>사용자가 해야 할 일</strong>
+      마스터 데이터를 불러올 때는 <span class="ui-label">마스터 CSV 가져오기</span>를, 데이터를 앱 밖으로 꺼낼 때는 <span class="ui-label">전체 데이터 내보내기</span> 또는 <span class="ui-label">이력 공유</span>를 사용해 주십시오.
+    </div>
+  </div>
+</section>
+
+
+<!-- ===== SECTION 3 ===== -->
+<section id="sec3">
+  <div class="section-label">Section 03</div>
+  <h2 class="section-title">마스터 CSV 작성 및 등록 【중요】</h2>
+
+  <div class="callout success">
+    <span class="callout-icon">✅</span>
+    <div class="callout-body">
+      <strong>마스터를 미리 준비하면 작업 효율이 대폭 향상됩니다</strong>
+      마스터 CSV를 등록해 두면 코드 스캔 시 품명·이론 재고가 자동 표시됩니다. 미등록 상태인 경우 매번 수동으로 입력해야 합니다.
+    </div>
+  </div>
+
+  <h3>3-1. 마스터 CSV 준비 방법 (열 이름 포함, 2가지 방법)</h3>
+  <p>마스터 파일을 준비하는 방법은 크게 두 가지가 있습니다.</p>
+
+  <h4>방법 A: Excel이나 스프레드시트에서 처음부터 작성하기</h4>
+  <ol class="steps">
+    <li><p>PC에서 Excel 또는 Google 스프레드시트를 엽니다.</p></li>
+    <li><p>첫 번째 줄 헤더는 직접 입력하지 말고, 이 매뉴얼의 <strong>3-3 컬럼 사양 (열 이름)</strong>에 있는 한 줄을 그대로 복사해서 붙여넣으십시오.</p></li>
+    <li><p>두 번째 줄부터 상품 데이터를 입력합니다.</p></li>
+    <li><p>'CSV(쉼표로 분리)' 형식으로 파일 이름을 <code>quantiventra_master.csv</code>로 저장합니다(UTF-8 인코딩 권장).</p></li>
+  </ol>
+
+  <h4>방법 B: 앱에서 자동 생성된 파일을 기반으로 하기 (초보자 권장)</h4>
+  <p>처음부터 만들기 번거로운 경우 앱이 견본을 만들게 할 수 있습니다.</p>
+  <ol class="steps">
+    <li><p>마스터 파일이 없는 상태에서 앱을 실행하여 아무 상품의 바코드를 스캔합니다.</p></li>
+    <li><p>'미등록 코드' 대화상자가 나타나면 '예(신규 등록)'를 선택합니다.</p></li>
+    <li><p>품명에 '테스트' 등을 입력하고 저장합니다.</p></li>
+    <li><p>이후 앱에서 <span class="ui-label">설정 → 전체 데이터 내보내기</span>를 실행하면 현재 마스터 CSV를 내보낼 수 있습니다.</p></li>
+    <li><p>내보낸 파일을 PC로 가져와(USB, 메일, 클라우드 등) Excel에서 엽니다. 테스트 데이터 형식을 참고해 실제 데이터를 추가·수정한 뒤, 앱의 <span class="ui-label">마스터 CSV 가져오기</span>로 다시 불러오십시오.</p></li>
+  </ol>
+
+  <h3>3-2. 파일 이름과 저장 위치</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>항목</th><th>값</th></tr></thead>
+      <tbody>
+        <tr><td>파일 이름</td><td><code>quantiventra_master.csv</code> (고정·변경 불가)</td></tr>
+        <tr><td>문자 코드</td><td>UTF-8 (BOM 없음 권장)</td></tr>
+        <tr><td>줄 바꿈 코드</td><td>LF 또는 CRLF (둘 다 가능)</td></tr>
+        <tr><td>가져오는 방법</td><td><span class="ui-label">설정 → 마스터 CSV 가져오기</span>에서 파일 선택</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>3-3. 컬럼 사양 (열 이름)</h3>
+  <p><strong>첫 번째 줄은 헤더 행</strong>입니다. 아래 한 줄을 그대로 복사해서 붙여넣으십시오. 5개의 열 이름이 모두 필요합니다.</p>
+  <pre><span class="hl">joint_code</span>,<span class="hl">barcode</span>,<span class="hl">name</span>,<span class="hl">theoretical_stock</span>,<span class="hl">actual_stock_total</span></pre>
+  <div class="callout info">
+    <span class="callout-icon">ℹ️</span>
+    <div class="callout-body">
+      <strong>자사 품번만 사용하는 경우에도 같은 5개 열을 그대로 사용합니다</strong>
+      앱의 기본 설정은 <strong>상대방 품번 OFF</strong>입니다. 자사 품번만 관리할 경우 <code>joint_code</code> 열은 비워 두면 됩니다. 상대방 품번도 함께 관리할 때만 값을 입력하십시오. 가져온 마스터 CSV의 <code>joint_code</code> 열에 데이터가 있으면, 앱 시작 시 자동으로 ON으로 전환됩니다.
+    </div>
+  </div>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>#</th><th>컬럼명</th><th>타입</th><th>필수</th><th>설명·주의사항</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td><code>joint_code</code></td>
+          <td>문자열</td>
+          <td><span class="badge-opt">선택</span></td>
+          <td>거래처 품번(상대방 코드). 빈칸 가능. 영문자·숫자·하이픈·언더바만 가능(설정에 따름).</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td><code>barcode</code></td>
+          <td>문자열</td>
+          <td><span class="badge-req">필수</span></td>
+          <td>자사 코드 번호. 실제 코드와 일치해야 함. 중복 불가.</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td><code>name</code></td>
+          <td>문자열</td>
+          <td><span class="badge-req">필수</span></td>
+          <td>품명. 쉼표(,)를 포함하는 경우 따옴표로 감쌈 (예: <code>"볼트,M4"</code>).</td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td><code>theoretical_stock</code></td>
+          <td>정수</td>
+          <td><span class="badge-opt">선택</span></td>
+          <td>이론 재고수(장부 재고). 모를 경우 <code>0</code> 입력.</td>
+        </tr>
+        <tr>
+          <td>5</td>
+          <td><code>actual_stock_total</code></td>
+          <td>정수</td>
+          <td><span class="badge-opt">선택</span></td>
+          <td>등록된 누적 재고수. 재고 조사 시작 시에는 <code>0</code>을 권장.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>3-4. CSV 샘플</h3>
+  <pre><span class="comment"># 1행: 헤더 행 (필수)</span>
+<span class="hl">joint_code</span>,<span class="hl">barcode</span>,<span class="hl">name</span>,<span class="hl">theoretical_stock</span>,<span class="hl">actual_stock_total</span>
+<span class="comment"># 2행 이후: 데이터 행</span>
+<span class="val">ABC-001</span>,<span class="val">4912345678904</span>,<span class="val">육각볼트M6×20</span>,<span class="val">500</span>,<span class="val">0</span>
+<span class="val">ABC-002</span>,<span class="val">4912345678911</span>,<span class="val">육각너트M6</span>,<span class="val">1000</span>,<span class="val">0</span>
+,<span class="val">4912345678928</span>,<span class="val">스프링와셔M6</span>,<span class="val">800</span>,<span class="val">0</span>
+<span class="val">XY-999</span>,<span class="val">4912345678935</span>,<span class="val">"볼트세트,M4"</span>,<span class="val">200</span>,<span class="val">0</span></pre>
+
+  <div class="callout warn">
+    <span class="callout-icon">⚠️</span>
+    <div class="callout-body">
+      <strong>Excel에서 편집 시 주의사항</strong>
+      Excel에서 저장하면 문자 코드가 Shift-JIS가 될 수 있습니다. '다른 이름으로 저장' → 'CSV UTF-8(쉼표로 분리)'을 선택하십시오. 파일 맨 앞의 BOM이 문제가 될 경우 메모장 등으로 다시 열어 저장하십시오.
+    </div>
+  </div>
+
+  <h3>3-5. 마스터 CSV 가져오기</h3>
+  <p>CSV를 고정 폴더에 넣을 필요는 없습니다. 설정 화면에서 직접 가져오면 됩니다.</p>
+
+  <h4>🔌 방법 ①: 로컬 파일 선택</h4>
+  <ol class="steps">
+    <li><p>CSV 파일을 기기의 임의 위치(예: 다운로드)에 저장합니다.</p></li>
+    <li><p>앱에서 <span class="ui-label">설정 → 마스터 CSV 가져오기</span>를 탭합니다.</p></li>
+    <li><p>시스템 파일 선택기에서 CSV 파일을 선택합니다.</p></li>
+    <li><p>가져오기가 끝나면 마스터 데이터가 즉시 반영됩니다.</p></li>
+  </ol>
+
+  <h4>☁️ 방법 ②: Google Drive에서 선택</h4>
+  <ol class="steps">
+    <li><p>PC에서 CSV를 <a href="https://drive.google.com" target="_blank">Google Drive</a>에 업로드합니다.</p></li>
+    <li><p>앱에서 <span class="ui-label">설정 → 마스터 CSV 가져오기</span>를 탭합니다.</p></li>
+    <li><p>파일 선택기에서 Google Drive의 CSV를 직접 선택합니다.</p></li>
+  </ol>
+
+  <h4>📧 방법 ③: 메일 첨부파일 사용</h4>
+  <ol class="steps">
+    <li><p>CSV 파일을 본인에게 메일로 보냅니다.</p></li>
+    <li><p>스마트폰에서 첨부파일을 다운로드합니다.</p></li>
+    <li><p>앱으로 돌아와 <span class="ui-label">설정 → 마스터 CSV 가져오기</span>를 탭한 뒤 다운로드한 파일을 선택합니다.</p></li>
+  </ol>
+
+  <div class="callout info">
+    <span class="callout-icon">ℹ️</span>
+    <div class="callout-body">
+      <strong>마스터를 수정한 뒤에는</strong>
+      CSV를 다시 편집했다면 업데이트된 파일을 한 번 더 가져와 주십시오. 앱 내부의 마스터 데이터는 새 파일 내용으로 교체됩니다.
+    </div>
+  </div>
+</section>
+
+
+<!-- ===== SECTION 4 ===== -->
+<section id="sec4">
+  <div class="section-label">Section 04</div>
+  <h2 class="section-title">화면 구성 및 각부 설명</h2>
+
+  <p>메인 화면은 위에서부터 '헤더 바', '카메라 영역', '입력 폼 영역', '저장 이력 영역', '숫자 키패드'의 5개 영역으로 구성되어 있습니다.</p>
+
+  <h3>4-1. 헤더 바</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>요소</th><th>설명</th></tr></thead>
+      <tbody>
+        <tr><td>앱 이름 (Quantiventra)</td><td>탭해도 동작 없음 (표시 전용)</td></tr>
+        <tr><td>⚙️ 설정 아이콘</td><td>설정 대화상자를 엶</td></tr>
+        <tr><td>ON / OFF 스위치</td><td>카메라 프리뷰 켜기/끄기 전환</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>4-2. 카메라 영역</h3>
+  <p>코드·QR 코드를 실시간으로 스캔하는 영역입니다. 카메라를 켠 상태에서 코드를 카메라에 비추면, 3프레임 연속으로 같은 코드를 읽었을 때 자동으로 인식됩니다.</p>
+  <div class="callout info">
+    <span class="callout-icon">ℹ️</span>
+    <div class="callout-body">
+      <strong>스캔 정밀도에 대하여</strong>
+      카메라는 화면 중앙 ±15% 범위에 들어온 코드만 우선 인식합니다. 인식이 잘 안 될 경우 코드를 화면 중앙에 맞추어 주십시오.
+    </div>
+  </div>
+
+  <h3>4-3. 입력 폼 영역</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>필드</th><th>설명</th></tr></thead>
+      <tbody>
+        <tr><td>로케이션 (LOC)</td><td>상품이 놓인 선반 번호. 수동 입력 또는 로케이션 읽기 버튼으로 스캔 입력.</td></tr>
+        <tr><td>자사 품번(화면 크기나 설정에 따라 상대방 품번도 별도로 표시될 수 있음. 한 칸인 경우 칸 내에 모두 표시)</td><td>스캔 또는 수동 입력. 마스터에 있는 경우 품번이 자동 표시됨.</td></tr>
+        <tr><td>품명</td><td>상품명. 마스터 등록 상품인 경우 자동 표시. 신규 등록·수정·검색 시에만 입력 가능.</td></tr>
+        <tr><td>수량</td><td>이번에 카운트한 수량을 입력. 숫자 키패드로 입력하며 계산식(예: 3*5)도 사용 가능.</td></tr>
+        <tr><td>이론 재고</td><td>마스터에 등록된 장부상 재고수 (참조용·수정 불가).</td></tr>
+        <tr><td>등록됨</td><td>지금까지 저장된 누적 재고수. '변경' 버튼으로 수정 가능.</td></tr>
+        <tr><td>계산용</td><td>수량 입력 보조 계산 칸. '가산' 버튼으로 계산 결과를 수량에 더함.</td></tr>
+        <tr><td>계산 이력</td><td>계산용 칸에서 더한 이력을 표시 (참조 전용).</td></tr>
+        <tr><td>비고 (메모)</td><td>임의의 메모를 기록. CSV에 저장됨.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>4-4. 숫자 키패드</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>키</th><th>동작</th></tr></thead>
+      <tbody>
+        <tr><td><span class="key">0〜9</span> / <span class="key">00</span></td><td>현재 포커스된 필드에 숫자 입력.</td></tr>
+        <tr><td><span class="key">−</span> / <span class="key">×</span></td><td>뺄셈·곱셈 기호 입력 (계산식 입력용).</td></tr>
+        <tr><td><span class="key">CLR</span></td><td>현재 포커스된 필드의 입력 내용을 모두 지움.</td></tr>
+        <tr><td><span class="key">확정</span> / <span class="key">검색</span></td><td>입력 확정·검색 실행·저장 (포커스 위치에 따름).</td></tr>
+        <tr><td><span class="key">가산</span> (계산 모드 시)</td><td>계산용 칸의 결과를 수량에 더함.</td></tr>
+        <tr><td><span class="key">저장</span> (계산 모드 시)</td><td>현재 내용을 저장함.</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+
+<!-- ===== SECTION 5 ===== -->
+<section id="sec5">
+  <div class="section-label">Section 05</div>
+  <h2 class="section-title">기본 조작 흐름</h2>
+
+  <h3>5-1. 표준적인 재고 조사 흐름</h3>
+
+  <h4>단계 1: 로케이션(선반 번호) 설정하기</h4>
+  <ol class="steps">
+    <li><p>로케이션을 설정할 경우: <span class="ui-label">로케이션 읽기</span> 버튼을 탭합니다 (버튼이 노란색으로 변함).</p></li>
+    <li><p>로케이션 코드에 카메라를 비추면 자동 인식되어 '로케이션 (LOC)' 필드에 반영됩니다.</p></li>
+    <li><p>수동 입력 시: '로케이션 (LOC)' 필드를 탭하여 포커스한 후 소프트 키보드로 입력합니다.</p></li>
+  </ol>
+
+  <div class="callout info">
+    <span class="callout-icon">ℹ️</span>
+    <div class="callout-body">로케이션은 한 번 설정하면 다음 상품 스캔 시에도 유지됩니다. 선반을 이동했을 때 매번 업데이트해 주십시오.</div>
+  </div>
+
+  <h4>단계 2: 상품 코드를 스캔하기</h4>
+  <ol class="steps">
+    <li><p>카메라 스위치가 ON인지 확인합니다.</p></li>
+    <li><p>상품 코드에 카메라를 비춥니다. 자동으로 스캔됩니다.</p></li>
+    <li><p>마스터 등록 상품인 경우 품명·이론 재고가 자동 표시됩니다. (상대방 품번 → 자사 품번 순으로 검색합니다.)</p></li>
+    <li><p>미등록 코드인 경우 '미등록 코드' 대화상자가 표시됩니다 (→ 6-3 참조).</p></li>
+  </ol>
+
+  <h4>단계 3: 수량 입력하기</h4>
+  <ol class="steps">
+    <li><p>'수량' 필드에 자동으로 포커스가 이동합니다.</p></li>
+    <li><p>숫자 키패드로 수량을 입력합니다.</p></li>
+    <li><p>여러 위치의 합산이 필요한 경우 계산 기능을 이용합니다 (→ 5-2 참조).</p></li>
+  </ol>
+
+  <h4>단계 4: 저장하기</h4>
+  <ol class="steps">
+    <li><p>필요에 따라 메모를 입력합니다.</p></li>
+    <li><p><span class="key">ENT</span> 키 또는 <span class="key">저장</span> 키를 탭합니다.</p></li>
+    <li><p>효과음이 울리고 '저장했습니다' 메시지가 표시되면 완료입니다.</p></li>
+    <li><p>다음 상품 스캔으로 진행합니다.</p></li>
+  </ol>
+
+  <h3>5-2. 계산 기능 사용법</h3>
+  <p>여러 층이나 장소에 나뉘어 있는 상품을 카운트할 때 편리한 기능입니다.</p>
+
+  <ol class="steps">
+    <li><p>'계산용' 필드를 탭하여 포커스합니다 (숫자 키패드가 계산 모드로 전환됨).</p></li>
+    <li><p>예: 선반 상단에 30개, 하단에 25개 있는 경우 → <code>30</code> 입력 후 <span class="key">가산</span> → <code>25</code> 입력 후 <span class="key">가산</span></p></li>
+    <li><p>계산식 사용 가능: <code>3*10</code> → <span class="key">가산</span>을 누르면 30이 수량에 더해집니다.</p></li>
+    <li><p>계산 이력 칸에 가산된 내역이 표시됩니다.</p></li>
+    <li><p>합계가 수량 칸에 반영되면 <span class="key">저장</span>을 탭합니다.</p></li>
+  </ol>
+
+  <h3>5-3. 클리어 (초기화)</h3>
+  <p><span class="ui-label">클리어</span> 버튼을 탭하면 현재 입력 내용(코드·품명·수량·메모·계산 이력)을 모두 리셋하고 다음 상품 입력이 가능한 상태로 돌아갑니다. 로케이션(LOC)은 초기화되지 않습니다.</p>
+  <div class="callout info">
+    <span class="callout-icon">ℹ️</span>
+    <div class="callout-body">
+      <strong>로케이션(LOC)을 리셋하고 싶은 경우</strong>
+      로케이션은 클리어 버튼으로 지워지지 않습니다. 다른 선반으로 이동할 때는 로케이션 읽기 버튼을 눌러 <span class="key">CLR</span> 키로 수동 삭제하거나, 새로운 로케이션 코드를 스캔하여 덮어쓰십시오.
+    </div>
+  </div>
+</section>
+
+
+<!-- ===== SECTION 6 ===== -->
+<section id="sec6">
+  <div class="section-label">Section 06</div>
+  <h2 class="section-title">응용 조작</h2>
+
+  <h3>6-1. 품명 검색 모드</h3>
+  <p>코드가 없거나 읽을 수 없을 때 품명 키워드로 상품을 검색할 수 있습니다.</p>
+  <ol class="steps">
+    <li><p>화면 하단의 '품명 검색' 스위치를 ON으로 설정합니다.</p></li>
+    <li><p>'품명' 필드에 키워드를 입력합니다 (부분 일치·전각 반각 구분 없음).</p></li>
+    <li><p>🔍 검색 버튼 또는 <span class="key">검색</span>(확정)을 탭합니다.</p></li>
+    <li><p>검색 결과 대화상자가 표시되면 해당 상품을 탭하여 선택합니다.</p></li>
+    <li><p>이후에는 평소와 같이 수량을 입력하여 저장합니다.</p></li>
+  </ol>
+  <div class="callout info">
+    <span class="callout-icon">ℹ️</span>
+    <div class="callout-body">
+      <strong>저장 후 품명 검색 모드의 동작</strong>
+      '연속' 스위치가 OFF인 경우, 상품을 선택하여 저장하면 품명 검색 모드가 자동으로 꺼집니다. 다음번에는 코드 스캔 대기 상태인 일반 상태로 돌아갑니다. 계속해서 품명 검색을 사용하려면 '연속' 스위치를 ON으로 설정하십시오 (→ 6-2 참조).
+    </div>
+  </div>
+
+  <h3>6-2. 연속 검색 모드</h3>
+  <p>'연속' 스위치를 ON으로 설정하면 저장 후에도 품명 검색 모드가 유지됩니다. 동일한 선반의 여러 상품을 품명으로 연속 입력할 때 편리합니다.</p>
+
+  <h3>6-3. 신규 상품 등록</h3>
+  <p>마스터에 등록되지 않은 코드를 스캔한 경우 '미등록 코드' 대화상자가 표시됩니다.</p>
+  <ol class="steps">
+    <li><p>대화상자에서 '예(신규 등록)'를 탭합니다.</p></li>
+    <li><p>자동 채번된 자사 ID가 코드 칸에 설정됩니다 (<code>99999</code>로 시작하는 번호). 수동 입력으로 신규 등록하는 경우에는 상대방 품번인지 자사 품번인지 선택하게 됩니다.</p></li>
+    <li><p>품명 필드로 포커스가 이동하면 품명을 입력합니다.</p></li>
+    <li><p>수량을 입력하여 저장합니다. 다음번부터는 마스터 등록 상품으로 인식됩니다.</p></li>
+  </ol>
+
+  <h3>6-4. 품명 변경</h3>
+  <p>마스터에 이미 등록된 상품의 품명을 수정할 수 있습니다.</p>
+  <ol class="steps">
+    <li><p>대상 상품을 스캔(또는 품명 검색으로 선택)합니다.</p></li>
+    <li><p><span class="ui-label">품명 변경</span> 버튼을 탭합니다 (버튼이 주황색으로 변함).</p></li>
+    <li><p>품명 필드가 편집 가능하게 바뀌면 수정합니다.</p></li>
+    <li><p>저장하면 새로운 품명으로 마스터가 업데이트됩니다.</p></li>
+  </ol>
+
+  <h3>6-5. 등록됨 누적 수정</h3>
+  <p>과거의 재고 데이터를 수정해야 하거나 초기값을 설정할 때 사용합니다.</p>
+  <ol class="steps">
+    <li><p>대상 상품을 스캔하여 불러옵니다.</p></li>
+    <li><p>'등록됨' 옆에 있는 <span class="ui-label">변경</span> 버튼을 탭합니다.</p></li>
+    <li><p>대화상자에서 새로운 값을 입력하고 '변경'을 탭합니다.</p></li>
+  </ol>
+
+  <div class="callout warn">
+    <span class="callout-icon">⚠️</span>
+    <div class="callout-body">등록됨 누적을 변경해도 scan_history.csv의 과거 이력은 변경되지 않습니다. 어디까지나 마스터의 누적값만 변경됩니다.</div>
+  </div>
+</section>
+
+
+<!-- ===== SECTION 7 ===== -->
+<section id="sec7">
+  <div class="section-label">Section 07</div>
+  <h2 class="section-title">이력 기능</h2>
+
+  <h3>7-1. 저장 이력 확인</h3>
+  <p>화면 하단의 저장 이력 영역에는 최근 저장된 레코드가 최신순으로 표시됩니다. 시각·품명·수량·이론 재고를 목록으로 확인할 수 있습니다.</p>
+  <p>또한 <span class="ui-label">이력</span> 버튼을 탭하면 상세 이력 목록 대화상자가 표시되며 로케이션·메모도 확인할 수 있습니다.</p>
+
+  <h3>7-2. 이력 CSV에 대하여</h3>
+  <p>저장 조작을 할 때마다 <code>scan_history.csv</code>에 자동으로 추가 기록됩니다. 이 파일을 PC로 전송하여 Excel 등에서 집계 및 분석이 가능합니다.</p>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>컬럼</th><th>내용</th></tr></thead>
+      <tbody>
+        <tr><td><code>date</code></td><td>저장 날짜 (YYYY-MM-DD 형식)</td></tr>
+        <tr><td><code>time</code></td><td>저장 시각 (HH:mm:ss 형식)</td></tr>
+        <tr><td><code>joint_code</code></td><td>상대방 품번</td></tr>
+        <tr><td><code>barcode</code></td><td>자사 코드 번호</td></tr>
+        <tr><td><code>name</code></td><td>품명</td></tr>
+        <tr><td><code>actual_stock</code></td><td>이번에 카운트한 수량</td></tr>
+        <tr><td><code>location</code></td><td>로케이션 (선반 번호)</td></tr>
+        <tr><td><code>memo</code></td><td>비고 메모</td></tr>
+        <tr><td><code>theoretical_stock</code></td><td>이론 재고수</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout warn">
+    <span class="callout-icon">⚠️</span>
+    <div class="callout-body">
+      <strong>이전 버전에서 업데이트 시</strong>
+      이전 형식의 이력 파일을 감지하면 자동으로 백업(<code>scan_history_이전_일시.csv</code>)을 생성한 후 새로운 형식의 파일을 생성합니다. 데이터는 유실되지 않습니다.
+    </div>
+  </div>
+</section>
+
+
+<!-- ===== SECTION 8 ===== -->
+<section id="sec8">
+  <div class="section-label">Section 08</div>
+  <h2 class="section-title">설정 (언어·규칙·카메라 등)</h2>
+
+  <p>헤더 바의 ⚙️ 아이콘을 탭하면 설정 대화상자가 열립니다.</p>
+
+  <h3>8-1. 마스터 CSV 가져오기</h3>
+  <p>기기, 다운로드 폴더, 클라우드 저장소에서 CSV를 선택해 앱 내부 마스터를 업데이트합니다. 가져오기 후 즉시 반영되므로 별도의 다시 읽기 작업은 필요하지 않습니다.</p>
+
+  <h3>8-2. 이력 데이터 전체 삭제</h3>
+  <p><code>scan_history.csv</code>를 삭제하고 이력을 완전히 리셋합니다. 재고 조사가 일단락되었을 때 실행하십시오.</p>
+  <div class="callout danger">
+    <span class="callout-icon">🚨</span>
+    <div class="callout-body"><strong>이 조작은 취소할 수 없습니다.</strong> 실행 전에 반드시 CSV 파일을 백업하십시오.</div>
+  </div>
+
+  <h3>8-3. 상대방 품번 사용</h3>
+  <p>스위치를 ON으로 설정하면 코드 필드 옆에 '상대방 품번' 입력란이 활성화됩니다. 거래처 고유의 품번 코드를 함께 기록·관리하고 싶은 경우에 사용합니다.</p>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>상태</th><th>동작</th></tr></thead>
+      <tbody>
+        <tr><td>OFF (기본값)</td><td>상대방 품번 칸 숨김. 코드만으로 관리.</td></tr>
+        <tr><td>ON</td><td>상대방 품번 칸 표시. 마스터 CSV의 <code>joint_code</code> 열이 활성화되며, 코드 입력 시 자사 품번인지 상대방 품번인지 선택하는 대화상자가 표시됨.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="callout info">
+    <span class="callout-icon">ℹ️</span>
+    <div class="callout-body">마스터 CSV의 <code>joint_code</code> 열에 데이터가 포함되어 있는 경우, 앱 시작 시 자동으로 ON으로 전환됩니다.</div>
+  </div>
+
+  <h3>8-4. 자사 품번 규칙 설정</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>설정 항목</th><th>설명</th></tr></thead>
+      <tbody>
+        <tr><td>문자 종류 모드</td><td>'영숫자', '숫자 전용', '제한 없음' 중 선택.</td></tr>
+        <tr><td>최소 문자 수</td><td>코드의 최소 글자 수 (예: JAN 코드라면 12).</td></tr>
+        <tr><td>최대 문자 수</td><td>코드의 최대 글자 수.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>8-5. 카메라 읽기 종류 설정</h3>
+  <p>스캔 대상이 되는 코드 형식을 설정합니다. 불필요한 형식을 제외하면 오독을 방지할 수 있습니다.</p>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>종류</th><th>상품용</th><th>로케이션용</th><th>주요 용도</th></tr></thead>
+      <tbody>
+        <tr><td>CODE39</td><td>✅ 기본값 ON</td><td>—</td><td>공업 부품·사내 관리 코드</td></tr>
+        <tr><td>CODE128</td><td>선택 가능</td><td>—</td><td>물류 코드</td></tr>
+        <tr><td>EAN13</td><td>선택 가능</td><td>—</td><td>JAN 코드 (시중 상품)</td></tr>
+        <tr><td>QRCODE</td><td>—</td><td>✅ 기본값 ON</td><td>로케이션용 QR 코드</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>8-6. 언어·취급 설명서 선택</h3>
+  <p>설정 화면에서 앱의 표시 언어(한국어, 일본어, 영어 등)를 변경할 수 있습니다.</p>
+  <p>언어를 변경하고 저장하면 앱 내부의 표시 언어가 전환됩니다. 또한 설정을 저장한 후 취급 설명서를 다시 열면 선택한 언어에 맞는 취급 설명서가 표시됩니다.</p>
+</section>
+
+
+<!-- ===== SECTION 9 ===== -->
+<section id="sec9">
+  <div class="section-label">Section 09</div>
+  <h2 class="section-title">파일 관리 및 백업</h2>
+
+  <h3>9-1. 출력 파일 목록</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>파일 이름</th><th>생성 타이밍</th><th>설명</th></tr></thead>
+      <tbody>
+        <tr><td><code>quantiventra_master.csv</code></td><td>수동 배치 / 저장 시 업데이트</td><td>재고 조사용 마스터. 수량 저장·신규 등록·품명 변경 시 자동 업데이트됨. 재고 조사 결과 집계에 사용.</td></tr>
+        <tr><td><code>scan_history.csv</code></td><td>저장 시마다 추가 기록</td><td>모든 스캔 저장 이력.</td></tr>
+        <tr><td><code>settings.json</code></td><td>설정 저장 시</td><td>코드 규칙·카메라 설정·언어 설정 등을 저장.</td></tr>
+        <tr><td><code>scan_history_이전_일시.csv</code></td><td>이전 형식 감지 시 자동 생성</td><td>이전 버전 이력 백업.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>9-2. 권장 백업 절차</h3>
+  <p>재고 조사 작업이 끝난 뒤 또는 정기적으로 다음 순서로 백업하는 것을 권장합니다.</p>
+  <ol class="steps">
+    <li><p>앱에서 <span class="ui-label">설정 → 전체 데이터 내보내기</span>를 실행합니다.</p></li>
+    <li><p>CSV 따옴표 출력 방식을 선택한 뒤 저장할 폴더를 지정합니다.</p></li>
+    <li><p>내보낸 <code>scan_history_[timestamp].csv</code>와 <code>quantiventra_master_export.csv</code>를 PC나 클라우드에 보관합니다.</p></li>
+  </ol>
+</section>
+
+
+<!-- ===== SECTION 10 ===== -->
+<section id="sec10">
+  <div class="section-label">Section 10</div>
+  <h2 class="section-title">문제 해결(트러블슈팅)</h2>
+
+  <div class="trouble">
+    <div class="trouble-q">코드가 읽히지 않거나 반응이 없음</div>
+    <div class="trouble-a">
+      <ul style="padding-left: 20px; line-height: 2;">
+        <li>카메라 스위치(오른쪽 상단)가 ON으로 되어 있는지 확인하십시오.</li>
+        <li>코드를 화면 중앙에 맞추십시오 (가장자리로 치우치면 인식률이 떨어집니다).</li>
+        <li>설정에서 스캔 대상 종류(CODE39 / EAN13 등)가 해당 코드와 일치하는지 확인하십시오.</li>
+        <li>코드 인쇄 상태가 불량하거나 오염된 경우 읽지 못할 수 있습니다.</li>
+        <li>카메라 권한이 허용되어 있는지 확인하십시오: 설정 → 앱 → Quantiventra → 권한 → 카메라.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="trouble">
+    <div class="trouble-q">마스터 CSV를 배치했지만 품명이 표시되지 않음</div>
+    <div class="trouble-a">
+      <ul style="padding-left: 20px; line-height: 2;">
+        <li>선택한 CSV 파일의 내용이 올바른지, 그리고 헤더 행이 맞는지 확인하십시오.</li>
+        <li>다른 CSV로 바꾸고 싶다면 설정 화면에서 <span class="ui-label">마스터 CSV 가져오기</span>를 다시 실행해 파일을 선택하십시오.</li>
+        <li>CSV의 문자 코드가 UTF-8인지 확인하십시오 (Shift-JIS인 경우 글자 깨짐이 발생합니다).</li>
+        <li>헤더 행 형식이 올바른지 확인하십시오 (<code>joint_code,barcode,name,theoretical_stock,actual_stock_total</code>).</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="trouble">
+    <div class="trouble-q">저장되지 않음 / '저장 실패' 메시지가 뜸</div>
+    <div class="trouble-a">
+      <ul style="padding-left: 20px; line-height: 2;">
+        <li>카메라 권한은 스캔용이며, 수동 입력만 사용할 경우 카메라를 켜지 않아도 됩니다.</li>
+        <li>기기의 여유 공간이 부족하지 않은지 확인하십시오.</li>
+        <li>코드와 품명이 모두 입력되지 않은 상태에서는 저장할 수 없습니다.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="trouble">
+    <div class="trouble-q">로케이션 읽기 버튼을 눌렀지만 로케이션이 설정되지 않음</div>
+    <div class="trouble-a">
+      <ul style="padding-left: 20px; line-height: 2;">
+        <li>로케이션용 코드 종류 설정이 올바른지 확인하십시오 (기본값은 QRCODE).</li>
+        <li>로케이션용 코드가 QR 코드가 아닌 바코드인 경우, 설정에서 로케이션용 종류를 변경하십시오.</li>
+        <li>카메라 스위치가 ON인지 확인하십시오.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="trouble">
+    <div class="trouble-q">앱 실행 시 저장소 설정 화면이 열림</div>
+    <div class="trouble-a">
+      <p style="padding-top: 4px;">현재 버전에서는 보통 이런 권한 화면이 필요하지 않습니다. 만약 시스템이 관련 화면을 열더라도 일반적인 사용에는 카메라 권한만 있으면 됩니다.</p>
+    </div>
+  </div>
+
+  <div class="trouble">
+    <div class="trouble-q">품명 변경 버튼을 눌러도 품명 필드를 편집할 수 없음</div>
+    <div class="trouble-a">
+      <ul style="padding-left: 20px; line-height: 2;">
+        <li>코드 또는 품명 검색으로 상품을 불러온 상태인지 확인하십시오. 아무것도 불러오지 않은 상태에서는 품명 변경이 기능하지 않습니다.</li>
+        <li>품명 변경 버튼을 탭하면 버튼이 주황색으로 변합니다. 주황색이 되지 않았다면 탭이 인식되지 않았을 가능성이 있으니 다시 한번 탭하십시오.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="trouble">
+    <div class="trouble-q">계산용 칸에서 ENT를 눌러도 결과가 0이 됨 / 계산이 반영 안 됨</div>
+    <div class="trouble-a">
+      <ul style="padding-left: 20px; line-height: 2;">
+        <li>'가산' 키를 눌러 수량 칸에 더한 후에 저장하십시오. 계산용 칸 상태에서 ENT를 눌러도 저장이 수행되지 않습니다.</li>
+        <li>계산식에 전각 문자(전각 숫자·기호)가 포함되면 오류가 발생합니다. 숫자 키패드를 사용하여 입력하십시오.</li>
+        <li>계산식 맨 앞이 연산자(예: <code>*5</code>)인 경우 오류가 발생합니다. 숫자부터 입력하십시오 (예: <code>3*5</code>).</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+
+<!-- ===== SECTION 11 ===== -->
+<section id="sec11">
+  <div class="section-label">Section 11</div>
+  <h2 class="section-title">약관 및 면책 사항</h2>
+
+  <div class="legal-block">
+    <h4>■ 이용 약관 (Terms of Use)</h4>
+    <p>본 앱(이하 '본 앱')을 이용하시기 전에 다음의 이용 약관을 주의 깊게 읽어 주십시오. 본 앱을 다운로드하거나 사용한 경우 본 약관에 동의한 것으로 간주합니다.</p>
+
+    <p><strong>1. 사용 허가</strong><br>
+    본 앱은 개인·법인을 불문하고 업무 목적·비업무 목적을 포함한 재고 관리·실사 업무를 목적으로 한 사용을 허가합니다. 단, 본 앱의 리버스 엔지니어링, 디컴파일, 개작, 재배포는 금지합니다.</p>
+
+    <p><strong>2. 사용자 데이터</strong><br>
+    본 앱이 생성하는 모든 데이터(마스터 CSV·이력 CSV·설정 파일)는 사용자의 기기 내에만 저장됩니다. 본 앱은 외부 서버로 데이터를 전송하지 않습니다.</p>
+
+    <p><strong>3. 금지 사항</strong><br>
+    본 앱을 불법적인 목적으로 사용하는 것, 제3자의 권리를 침해하는 목적으로 사용하는 것, 본 앱의 기능을 악용하여 부정직한 데이터를 생성하는 행위를 금지합니다.</p>
+
+    <h4>■ 면책 사항 (Disclaimer)</h4>
+    <p>본 앱은 현재 상태 그대로(AS IS) 제공됩니다. 본 앱의 사용 또는 사용 불능으로 인해 발생하는 모든 손해(데이터 유실, 업무상 손실, 기타 직접적·간접적 손해 포함)에 대해 개발자는 일절 책임을 지지 않습니다.</p>
+    <p>본 앱이 생성하는 CSV 데이터의 정확성·완전성에 대해서는 사용자 본인이 직접 확인하시기 바랍니다. 스캔 오류나 입력 실수로 인한 데이터 불일치에 대해 개발자는 책임지지 않습니다.</p>
+    <p>코드 인식 정밀도는 기기의 카메라 성능·코드 상태·주변 환경에 따라 다릅니다. 인식이 불가능한 경우에는 수동 입력을 사용해 주십시오.</p>
+
+    <h4>■ 개인정보 처리방침 (Privacy Policy)</h4>
+    <p>본 앱이 수집·전송·사용하는 개인정보는 일절 없습니다. 본 앱은 인터넷 연결을 필요로 하지 않으며 모든 처리를 기기 내에서 로컬로 실행합니다.</p>
+    <p>본 앱이 사용하는 카메라는 코드·QR 코드 인식을 위한 목적으로만 사용되며, 영상 녹화·저장·전송은 수행하지 않습니다.</p>
+    <p>모든 데이터 처리는 기기 안에서 로컬로 수행되며, 파일을 가져오거나 내보낼 때는 설정 화면을 사용합니다.</p>
+
+    <h4>■ 저작권 (Copyright)</h4>
+    <p>Copyright © Quantiventra. All Rights Reserved.</p>
+    <p>본 앱 및 본 매뉴얼에 포함된 모든 콘텐츠(텍스트·디자인·로고 등)의 저작권은 개발자에게 귀속됩니다.</p>
+    <p>본 앱은 오픈 소스 라이브러리를 사용하고 있습니다. 각 라이브러리의 라이선스는 해당 라이브러리의 규정을 따릅니다.</p>
+
+    <h4>■ 약관의 변경</h4>
+    <p>본 약관은 예고 없이 변경될 수 있습니다. 변경된 약관은 Google Play 스토어 게시 시점부터 효력을 발생합니다. 계속해서 이용하실 경우 변경된 약관에 동의한 것으로 간주합니다.</p>
+  </div>
+</section>
+
+</div><!-- /wrapper -->
+
+<a href="#top" class="back-top" title="맨 위로">↑</a>
+
+<footer>
+  <strong>Quantiventra</strong> — 코드 스캔 재고 카운트 앱<br>
+  Copyright © Quantiventra. All Rights Reserved.<br>
+  본 매뉴얼의 내용은 예고 없이 변경될 수 있습니다.
+</footer>
+
+</body>
+</html>

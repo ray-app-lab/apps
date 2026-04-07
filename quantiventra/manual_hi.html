@@ -1,0 +1,1133 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quantiventra उपयोगकर्ता नियमावली</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;500;700;900&family=IBM+Plex+Mono:wght@400;600&display=swap');
+
+  :root {
+    --primary:    #006C9C;
+    --primary-lt: #C3E7FF;
+    --primary-dk: #004A6E;
+    --accent:     #FF6D00;
+    --error:      #BA1A1A;
+    --bg:         #F8FDFF;
+    --surface:    #FFFFFF;
+    --border:     #D0E8F5;
+    --text:       #1A1A2E;
+    --muted:      #5A7A8A;
+    --mono:       'IBM Plex Mono', monospace;
+    --sans:       'Noto Sans Devanagari', sans-serif;
+    --radius:     8px;
+    --shadow:     0 2px 12px rgba(0,108,156,.12);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--sans);
+    background: var(--bg);
+    color: var(--text);
+    font-size: 15px;
+    line-height: 1.8;
+  }
+
+  /* ── HEADER ── */
+  .site-header {
+    background: linear-gradient(135deg, var(--primary-dk) 0%, var(--primary) 60%, #0090CC 100%);
+    color: #fff;
+    padding: 56px 40px 48px;
+    position: relative;
+    overflow: hidden;
+  }
+  .site-header::before {
+    content: '';
+    position: absolute;
+    right: -80px; top: -80px;
+    width: 360px; height: 360px;
+    border-radius: 50%;
+    background: rgba(255,255,255,.06);
+  }
+  .site-header::after {
+    content: '';
+    position: absolute;
+    right: 60px; bottom: -40px;
+    width: 200px; height: 200px;
+    border-radius: 50%;
+    background: rgba(255,255,255,.04);
+  }
+  .header-badge {
+    display: inline-block;
+    background: rgba(255,255,255,.18);
+    border: 1px solid rgba(255,255,255,.35);
+    border-radius: 20px;
+    padding: 4px 14px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+  .site-header h1 {
+    font-size: clamp(28px, 5vw, 42px);
+    font-weight: 900;
+    letter-spacing: -.02em;
+    line-height: 1.15;
+    margin-bottom: 10px;
+  }
+  .site-header .subtitle {
+    font-size: 14px;
+    opacity: .8;
+    margin-bottom: 24px;
+  }
+  .header-meta {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+    font-size: 12px;
+    opacity: .75;
+  }
+
+  /* ── LAYOUT ── */
+  .wrapper {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 20px 80px;
+  }
+
+  /* ── TOC ── */
+  .toc-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--primary);
+    border-radius: var(--radius);
+    padding: 28px 32px;
+    margin: 36px 0 48px;
+    box-shadow: var(--shadow);
+  }
+  .toc-card h2 {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--primary);
+    margin-bottom: 18px;
+  }
+  .toc-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 6px 24px;
+  }
+  .toc-grid a {
+    color: var(--text);
+    text-decoration: none;
+    font-size: 13.5px;
+    padding: 3px 0;
+    border-bottom: 1px dashed transparent;
+    transition: color .15s, border-color .15s;
+    display: block;
+  }
+  .toc-grid a:hover { color: var(--primary); border-color: var(--primary); }
+  .toc-num { color: var(--primary); font-weight: 700; margin-right: 6px; font-family: var(--mono); font-size: 12px; }
+
+  /* ── SECTIONS ── */
+  section { margin-bottom: 60px; }
+
+  .section-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--primary);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border-radius: 4px;
+    margin-bottom: 10px;
+  }
+
+  h2.section-title {
+    font-size: clamp(20px, 3vw, 26px);
+    font-weight: 900;
+    color: var(--primary-dk);
+    border-bottom: 2px solid var(--border);
+    padding-bottom: 10px;
+    margin-bottom: 24px;
+    line-height: 1.3;
+  }
+
+  h3 {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--primary);
+    margin: 28px 0 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  h3::before {
+    content: '';
+    display: inline-block;
+    width: 4px; height: 16px;
+    background: var(--primary);
+    border-radius: 2px;
+  }
+
+  h4 {
+    font-size: 14px;
+    font-weight: 700;
+    margin: 20px 0 8px;
+    color: var(--text);
+  }
+
+  p { margin-bottom: 14px; }
+
+  /* ── CALLOUTS ── */
+  .callout {
+    border-radius: var(--radius);
+    padding: 16px 20px;
+    margin: 18px 0;
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+  }
+  .callout-icon { font-size: 20px; flex-shrink: 0; line-height: 1.5; }
+  .callout-body { flex: 1; font-size: 13.5px; line-height: 1.75; }
+  .callout-body strong { display: block; margin-bottom: 4px; font-size: 14px; }
+  .callout.info    { background: #E8F4FD; border: 1px solid #B3D9F2; }
+  .callout.warn    { background: #FFF8E1; border: 1px solid #FFD54F; }
+  .callout.danger  { background: #FFEBEE; border: 1px solid #FFCDD2; }
+  .callout.success { background: #E8F5E9; border: 1px solid #A5D6A7; }
+
+  /* ── TABLES ── */
+  .table-wrap { overflow-x: auto; margin: 18px 0; border-radius: var(--radius); box-shadow: var(--shadow); }
+  table { width: 100%; border-collapse: collapse; background: var(--surface); font-size: 13.5px; }
+  thead th {
+    background: var(--primary);
+    color: #fff;
+    font-weight: 700;
+    padding: 12px 16px;
+    text-align: left;
+    white-space: nowrap;
+  }
+  tbody td { padding: 11px 16px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  tbody tr:last-child td { border-bottom: none; }
+  tbody tr:hover { background: #F0F8FF; }
+  td code, th code { font-family: var(--mono); background: rgba(0,108,156,.1); padding: 1px 6px; border-radius: 3px; font-size: 12px; }
+  .badge-req { background: var(--error); color: #fff; font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 10px; white-space: nowrap; }
+  .badge-opt { background: #90A4AE; color: #fff; font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 10px; white-space: nowrap; }
+
+  /* ── CODE BLOCKS ── */
+  pre {
+    background: #0F1923;
+    color: #C8E6FF;
+    font-family: var(--mono);
+    font-size: 13px;
+    padding: 20px 24px;
+    border-radius: var(--radius);
+    overflow-x: auto;
+    margin: 14px 0;
+    line-height: 1.7;
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,.08);
+  }
+  pre .comment { color: #5C8099; }
+  pre .hl { color: #7FD8FF; font-weight: 600; }
+  pre .val { color: #A5E6A1; }
+  code {
+    font-family: var(--mono);
+    background: rgba(0,108,156,.1);
+    color: var(--primary-dk);
+    padding: 2px 7px;
+    border-radius: 4px;
+    font-size: 13px;
+  }
+
+  /* ── PATH DISPLAY ── */
+  .path {
+    background: #0F1923;
+    color: #7FD8FF;
+    font-family: var(--mono);
+    font-size: 13px;
+    padding: 14px 20px;
+    border-radius: var(--radius);
+    margin: 12px 0;
+    line-height: 2;
+  }
+  .path .dim { color: #5C8099; }
+  .path .file { color: #A5E6A1; font-weight: 600; }
+
+  /* ── STEPS ── */
+  .steps { list-style: none; counter-reset: step-counter; }
+  .steps li {
+    counter-increment: step-counter;
+    display: flex;
+    gap: 16px;
+    margin-bottom: 14px;
+    align-items: flex-start;
+  }
+  .steps li::before {
+    content: counter(step-counter);
+    flex-shrink: 0;
+    width: 28px; height: 28px;
+    background: var(--primary);
+    color: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 700;
+    margin-top: 2px;
+  }
+  .steps li p { margin: 0; }
+
+  /* ── UI LABEL ── */
+  .ui-label {
+    display: inline-block;
+    background: #E3F2FD;
+    border: 1px solid #90CAF9;
+    color: #0D47A1;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 2px 10px;
+    border-radius: 4px;
+    font-family: var(--mono);
+    white-space: nowrap;
+  }
+  .key {
+    display: inline-block;
+    background: var(--text);
+    color: #fff;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 2px 10px;
+    border-radius: 5px;
+    font-family: var(--mono);
+  }
+
+  /* ── CARDS ── */
+  .card-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 16px; margin: 18px 0; }
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px;
+    box-shadow: var(--shadow);
+  }
+  .card h4 { margin-top: 0; color: var(--primary); font-size: 14px; }
+
+  /* ── TROUBLE ── */
+  .trouble { border: 1px solid var(--border); border-radius: var(--radius); margin: 16px 0; overflow: hidden; }
+  .trouble-q { background: #EEF6FD; padding: 14px 20px; font-weight: 700; font-size: 14px; color: var(--primary-dk); cursor: pointer; display: flex; align-items: center; gap: 10px; }
+  .trouble-q::before { content: 'Q'; background: var(--primary); color: #fff; width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 900; flex-shrink: 0; }
+  .trouble-a { padding: 14px 20px 16px 52px; font-size: 13.5px; border-top: 1px solid var(--border); }
+
+  /* ── LEGAL ── */
+  .legal-block {
+    background: #F5F5F5;
+    border: 1px solid #DDD;
+    border-radius: var(--radius);
+    padding: 20px 24px;
+    font-size: 12.5px;
+    color: #444;
+    line-height: 1.9;
+    margin: 16px 0;
+  }
+  .legal-block h4 { font-size: 13px; color: #333; margin: 18px 0 6px; border-bottom: 1px solid #DDD; padding-bottom: 4px; }
+  .legal-block h4:first-child { margin-top: 0; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--primary-dk);
+    color: rgba(255,255,255,.65);
+    text-align: center;
+    padding: 32px 20px;
+    font-size: 12px;
+    line-height: 2;
+  }
+  footer strong { color: #fff; }
+
+  /* ── BACK TO TOP ── */
+  .back-top {
+    position: fixed;
+    right: 24px; bottom: 28px;
+    background: var(--primary);
+    color: #fff;
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px;
+    text-decoration: none;
+    box-shadow: 0 4px 16px rgba(0,108,156,.4);
+    transition: transform .2s, box-shadow .2s;
+    z-index: 100;
+  }
+  .back-top:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,108,156,.5); }
+
+  /* ── DIVIDER ── */
+  hr { border: none; border-top: 1px solid var(--border); margin: 40px 0; }
+
+  @media (max-width: 600px) {
+    .site-header { padding: 36px 20px 32px; }
+    .toc-grid { grid-template-columns: 1fr; }
+    .card-grid { grid-template-columns: 1fr; }
+  }
+  @media print {
+    .back-top { display: none; }
+    body { font-size: 13px; }
+    pre { font-size: 11px; }
+    .site-header { background: var(--primary) !important; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== HEADER ===== -->
+<header class="site-header" id="top">
+  <div class="header-badge">उपयोगकर्ता नियमावली</div>
+  <h1>Quantiventra</h1>
+  <p class="subtitle">कोड स्कैन इन्वेंट्री काउंट ऐप — ऑपरेशन मैनुअल</p>
+  <div class="header-meta">
+    <span>लक्ष्य OS: Android 8.0 (API 26) या उससे ऊपर</span>
+    <span>लक्ष्य संस्करण: v1.x</span>
+    <span>अंतिम अपडेट: 2026</span>
+  </div>
+</header>
+
+<div class="wrapper">
+
+<!-- ===== TOC ===== -->
+<nav class="toc-card">
+  <h2>📋 विषय सूची</h2>
+  <div class="toc-grid">
+    <a href="#sec1"><span class="toc-num">1</span> परिचय</a>
+    <a href="#sec2"><span class="toc-num">2</span> इंस्टालेशन और प्रारंभिक सेटअप</a>
+    <a href="#sec3"><span class="toc-num">3</span> मास्टर CSV बनाना और लोड करना</a>
+    <a href="#sec4"><span class="toc-num">4</span> स्क्रीन लेआउट और विवरण</a>
+    <a href="#sec5"><span class="toc-num">5</span> बुनियादी संचालन प्रवाह</a>
+    <a href="#sec6"><span class="toc-num">6</span> उन्नत संचालन</a>
+    <a href="#sec7"><span class="toc-num">7</span> इतिहास सुविधा</a>
+    <a href="#sec8"><span class="toc-num">8</span> सेटिंग्स (भाषा, नियम, कैमरा, आदि)</a>
+    <a href="#sec9"><span class="toc-num">9</span> फ़ाइल प्रबंधन और बैकअप</a>
+    <a href="#sec10"><span class="toc-num">10</span> समस्या निवारण</a>
+    <a href="#sec11"><span class="toc-num">11</span> शर्तें और अस्वीकरण</a>
+  </div>
+</nav>
+
+
+<!-- ===== SECTION 1 ===== -->
+<section id="sec1">
+  <div class="section-label">Section 01</div>
+  <h2 class="section-title">परिचय</h2>
+
+  <h3>1-1. इस ऐप के बारे में</h3>
+  <p>Quantiventra (क्वांटिवेंट्रा) (एक शब्द जो "Quantity (मात्रा)" और "Inventory (इन्वेंट्री/स्टॉक)" को जोड़कर बनाया गया है) एक Android ऐप है जो स्मार्टफोन कैमरे का उपयोग करके कोड स्कैनिंग के माध्यम से इन्वेंट्री गिनती कार्यों को सुव्यवस्थित करता है।</p>
+  <p>बस कैमरे को कोड की ओर ले जाएं, यह उत्पाद को स्वचालित रूप से पहचान लेगा। आप मात्रा दर्ज करके उसे सहेज सकते हैं। यह सहज संचालन पेपर-आधारित इन्वेंट्री कार्यों को डिजिटल बनाने में मदद करता है। स्कैन परिणाम आपके डिवाइस पर CSV फ़ाइल के रूप में सहेजे जाते हैं, जिससे Excel या Google Sheets के साथ डेटा लिंक करना आसान हो जाता है।</p>
+
+  <div class="card-grid">
+    <div class="card">
+      <h4>📦 इन्वेंट्री गिनती</h4>
+      <p>कोड स्कैनिंग के साथ उत्पादों को तुरंत पहचानें और मात्रा रिकॉर्ड करें। इसमें कई स्थानों की गिनती जोड़ने के लिए अंतर्निहित कैलकुलेटर है।</p>
+    </div>
+    <div class="card">
+      <h4>🗂️ मास्टर प्रबंधन</h4>
+      <p>CSV फ़ाइलों के माध्यम से थोक में मास्टर डेटा लोड करें। उत्पाद का नाम, भाग संख्या और सैद्धांतिक स्टॉक पहले से सेट करें।</p>
+    </div>
+    <div class="card">
+      <h4>📍 शेल्फ प्रबंधन</h4>
+      <p>QR कोड के साथ शेल्फ नंबर (स्थान) सेट करें। CSV में रिकॉर्ड करें कि स्टॉक किस शेल्फ पर है।</p>
+    </div>
+    <div class="card">
+      <h4>📊 CSV निर्यात</h4>
+      <p>स्कैन परिणाम स्वचालित रूप से स्थानीय स्टोरेज में सहेजे जाते हैं। विश्लेषण के लिए डेटा को PC पर आयात करें।</p>
+    </div>
+  </div>
+
+  <h3>1-2. ऑपरेटिंग वातावरण</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>आइटम</th><th>आवश्यकता</th></tr></thead>
+      <tbody>
+        <tr><td>OS</td><td>Android 7.0 (Nougat / API 24) या उससे ऊपर</td></tr>
+        <tr><td>कैमरा</td><td>ऑटोफोकस कैमरा (अनिवार्य)</td></tr>
+        <tr><td>स्टोरेज</td><td>50MB या अधिक खाली स्थान अनुशंसित</td></tr>
+        <tr><td>अनुमतियाँ</td><td>कैमरा अनुमति</td></tr>
+        <tr><td>इंटरनेट</td><td>आवश्यक नहीं (पूरी तरह से ऑफ़लाइन काम करता है)</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>1-3. अनुमतियों के बारे में</h3>
+  <p>यह ऐप पहली बार खुलने पर निम्न अनुमति मांगता है। बारकोड स्कैनिंग को सामान्य रूप से उपयोग करने के लिए केवल कैमरा अनुमति आवश्यक है।</p>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>अनुमति</th><th>उपयोग</th><th>यदि मना किया गया</th></tr></thead>
+      <tbody>
+        <tr><td>कैमरा</td><td>कोड और QR कोड स्कैन करना</td><td>कैमरा स्कैन उपलब्ध नहीं होगा (मैन्युअल इनपुट संभव रहेगा)</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout info">
+    <span class="callout-icon">ℹ️</span>
+    <div class="callout-body">
+      <strong>डेटा कहाँ सहेजा जाता है</strong>
+      मास्टर, इतिहास और सेटिंग फ़ाइलें ऐप के अंदर स्वचालित रूप से प्रबंधित होती हैं। मास्टर CSV आयात करने या डेटा निर्यात करने के लिए सेटिंग्स स्क्रीन का उपयोग करें।
+    </div>
+  </div>
+</section>
+
+
+<!-- ===== SECTION 2 ===== -->
+<section id="sec2">
+  <div class="section-label">Section 02</div>
+  <h2 class="section-title">इंस्टालेशन और प्रारंभिक सेटअप</h2>
+
+  <h3>2-1. इंस्टालेशन चरण</h3>
+  <ol class="steps">
+    <li><p>अपने Android डिवाइस पर <strong>Google Play Store</strong> खोलें।</p></li>
+    <li><p>सर्च बार में "<strong>Quantiventra</strong>" टाइप करें और सर्च करें।</p></li>
+    <li><p>ऐप चुनें और <span class="ui-label">इंस्टॉल करें</span> पर टैप करें।</p></li>
+    <li><p>इंस्टालेशन पूरा होने के बाद, <span class="ui-label">खोलें</span> पर टैप करें या होम स्क्रीन आइकन से ऐप शुरू करें।</p></li>
+  </ol>
+
+  <h3>2-2. पहली बार लॉन्च</h3>
+  <ol class="steps">
+    <li><p>ऐप खुलने पर <strong>कैमरा अनुमति</strong> का डायलॉग दिखाई देगा। <span class="ui-label">अनुमति दें</span> पर टैप करें।</p></li>
+    <li><p>कैमरा अनुमति मिलते ही आप तुरंत स्कैनिंग शुरू कर सकते हैं।</p></li>
+    <li><p>यदि आप मास्टर CSV का उपयोग करना चाहते हैं, तो <span class="ui-label">सेटिंग्स → मास्टर CSV आयात करें</span> से फ़ाइल चुनें।</p></li>
+  </ol>
+
+  <div class="callout info">
+    <span class="callout-icon">ℹ️</span>
+    <div class="callout-body">
+      <strong>प्रारंभिक सेटअप के बाद</strong>
+      कैमरा अनुमति देने के बाद आप स्कैन, सेव, मास्टर CSV आयात और डेटा निर्यात सभी कार्य सेटिंग्स स्क्रीन से कर सकते हैं।
+    </div>
+  </div>
+
+  <h3>2-3. डेटा कैसे संभाला जाता है</h3>
+  <p>मास्टर, इतिहास और सेटिंग डेटा ऐप द्वारा स्वचालित रूप से प्रबंधित किए जाते हैं। सामान्य उपयोग में आपको आंतरिक फ़ोल्डर संरचना जानने या संभालने की आवश्यकता नहीं है।</p>
+  <div class="callout info">
+    <span class="callout-icon">ℹ️</span>
+    <div class="callout-body">
+      <strong>उपयोगकर्ता को क्या करना है</strong>
+      मास्टर डेटा लोड करने के लिए <span class="ui-label">मास्टर CSV आयात करें</span> का उपयोग करें, और डेटा बाहर निकालने के लिए <span class="ui-label">सभी डेटा निर्यात करें</span> या <span class="ui-label">इतिहास साझा करें</span> का उपयोग करें।
+    </div>
+  </div>
+</section>
+
+
+<!-- ===== SECTION 3 ===== -->
+<section id="sec3">
+  <div class="section-label">Section 03</div>
+  <h2 class="section-title">मास्टर CSV बनाना और लोड करना 【महत्वपूर्ण】</h2>
+
+  <div class="callout success">
+    <span class="callout-icon">✅</span>
+    <div class="callout-body">
+      <strong>मास्टर डेटा तैयार रखने से कार्यक्षमता में काफी सुधार होता है</strong>
+      मास्टर CSV लोड करके, कोड स्कैन करते समय उत्पाद का नाम और सैद्धांतिक स्टॉक अपने आप दिखाई देगा। यदि यह पंजीकृत नहीं है, तो आपको हर बार मैन्युअल रूप से विवरण दर्ज करना होगा।
+    </div>
+  </div>
+
+  <h3>3-1. मास्टर CSV तैयार करने के तरीके (कॉलम नाम सहित, 2 तरीके)</h3>
+  <p>मास्टर फ़ाइल तैयार करने के मुख्य रूप से दो तरीके हैं।</p>
+
+  <h4>विधि A: Excel या स्प्रेडशीट के साथ खरोंच से बनाएं</h4>
+  <ol class="steps">
+    <li><p>अपने PC पर Excel या Google Sheets खोलें।</p></li>
+    <li><p>पहली पंक्ति का हेडर हाथ से टाइप न करें। इस मैनुअल के <strong>3-3 कॉलम विनिर्देश (कॉलम नाम)</strong> में दी गई पूरी पंक्ति को ज्यों का त्यों कॉपी करके पेस्ट करें।</p></li>
+    <li><p>दूसरी पंक्ति से उत्पाद डेटा दर्ज करना शुरू करें।</p></li>
+    <li><p>"CSV (Comma delimited)" प्रारूप में <code>quantiventra_master.csv</code> नाम से फ़ाइल सहेजें (UTF-8 एन्कोडिंग अनुशंसित है)।</p></li>
+  </ol>
+
+  <h4>विधि B: ऐप द्वारा बनाई गई टेम्पलेट का उपयोग करें (शुरुआती लोगों के लिए)</h4>
+  <p>यदि आप शून्य से शुरू नहीं करना चाहते, तो आप ऐप को एक टेम्पलेट बनाने दे सकते हैं।</p>
+  <ol class="steps">
+    <li><p>मास्टर फ़ाइल के बिना ऐप शुरू करें और किसी भी उत्पाद का बारकोड स्कैन करें।</p></li>
+    <li><p>"अपंजीकृत कोड" डायलॉग दिखाई देगा, "हाँ (नया पंजीकरण)" चुनें।</p></li>
+    <li><p>उत्पाद के नाम के रूप में "टेस्ट" जैसा कुछ दर्ज करें और सहेजें।</p></li>
+    <li><p>इसके बाद ऐप में <span class="ui-label">सेटिंग्स → सभी डेटा निर्यात करें</span> चलाएँ, ताकि वर्तमान मास्टर CSV बाहर निकाली जा सके।</p></li>
+    <li><p>निर्यात की गई फ़ाइल को PC पर ले जाएँ (USB, ईमेल या क्लाउड से), Excel में खोलें, और टेस्ट डेटा के फ़ॉर्मेट को आधार बनाकर असली डेटा भरें। फिर <span class="ui-label">मास्टर CSV आयात करें</span> से उसे दोबारा ऐप में लाएँ।</p></li>
+  </ol>
+
+  <h3>3-2. फ़ाइल नाम और स्थान</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>आइटम</th><th>मान</th></tr></thead>
+      <tbody>
+        <tr><td>फ़ाइल नाम</td><td><code>quantiventra_master.csv</code> (स्थिर, बदला नहीं जा सकता)</td></tr>
+        <tr><td>कैरेक्टर कोड</td><td>UTF-8 (बिना BOM के अनुशंसित)</td></tr>
+        <tr><td>लाइन ब्रेक</td><td>LF या CRLF (दोनों स्वीकार्य)</td></tr>
+        <tr><td>आयात का तरीका</td><td><span class="ui-label">सेटिंग्स → मास्टर CSV आयात करें</span> से फ़ाइल चुनें</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>3-3. कॉलम विनिर्देश (कॉलम नाम)</h3>
+  <p><strong>पहली पंक्ति हेडर पंक्ति है</strong>। नीचे दी गई पूरी पंक्ति को उसी रूप में कॉपी और पेस्ट करें। सभी 5 कॉलम नाम आवश्यक हैं।</p>
+  <pre><span class="hl">joint_code</span>,<span class="hl">barcode</span>,<span class="hl">name</span>,<span class="hl">theoretical_stock</span>,<span class="hl">actual_stock_total</span></pre>
+  <div class="callout info">
+    <span class="callout-icon">ℹ️</span>
+    <div class="callout-body">
+      <strong>यदि आप केवल अपनी आंतरिक कोड प्रणाली उपयोग करते हैं, तब भी यही 5 कॉलम रखें</strong>
+      ऐप की डिफ़ॉल्ट सेटिंग <strong>पार्टनर कोड OFF</strong> है। यदि आप केवल अपने कोड का उपयोग करते हैं, तो <code>joint_code</code> कॉलम खाली छोड़ दें। पार्टनर कोड उपयोग करने पर ही इस कॉलम में मान भरें। यदि आयातित मास्टर CSV में <code>joint_code</code> कॉलम में डेटा है, तो ऐप शुरू होते समय यह सेटिंग अपने आप ON हो जाएगी।
+    </div>
+  </div>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>#</th><th>कॉलम नाम</th><th>प्रकार</th><th>आवश्यक</th><th>विवरण/नोट्स</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td><code>joint_code</code></td>
+          <td>स्ट्रिंग</td>
+          <td><span class="badge-opt">वैकल्पिक</span></td>
+          <td>पार्टनर भाग संख्या (ग्राहक कोड)। खाली छोड़ सकते हैं। केवल अक्षर, संख्या, हाइफ़न, अंडरस्कोर (सेटिंग्स के आधार पर)।</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td><code>barcode</code></td>
+          <td>स्ट्रिंग</td>
+          <td><span class="badge-req">अनिवार्य</span></td>
+          <td>आंतरिक कोड संख्या। वास्तविक कोड के साथ मेल खाना चाहिए। अद्वितीय होना चाहिए।</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td><code>name</code></td>
+          <td>स्ट्रिंग</td>
+          <td><span class="badge-req">अनिवार्य</span></td>
+          <td>उत्पाद का नाम। यदि नाम में अल्पविराम (Comma) है, तो उसे डबल कोट्स में घेरें (उदा: <code>"Bolt,M4"</code>)।</td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td><code>theoretical_stock</code></td>
+          <td>पूर्णांक</td>
+          <td><span class="badge-opt">वैकल्पिक</span></td>
+          <td>सैद्धांतिक स्टॉक (खाता स्टॉक)। अज्ञात होने पर <code>0</code> दर्ज करें।</td>
+        </tr>
+        <tr>
+          <td>5</td>
+          <td><code>actual_stock_total</code></td>
+          <td>पूर्णांक</td>
+          <td><span class="badge-opt">वैकल्पिक</span></td>
+          <td>पंजीकृत संचयी स्टॉक। पहली बार इन्वेंट्री के लिए <code>0</code> अनुशंसित है।</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>3-4. CSV नमूना</h3>
+  <pre><span class="comment"># पंक्ति 1: हेडर पंक्ति (अनिवार्य)</span>
+<span class="hl">joint_code</span>,<span class="hl">barcode</span>,<span class="hl">name</span>,<span class="hl">theoretical_stock</span>,<span class="hl">actual_stock_total</span>
+<span class="comment"># पंक्ति 2 और आगे: डेटा पंक्तियाँ</span>
+<span class="val">ABC-001</span>,<span class="val">4912345678904</span>,<span class="val">Hex Bolt M6x20</span>,<span class="val">500</span>,<span class="val">0</span>
+<span class="val">ABC-002</span>,<span class="val">4912345678911</span>,<span class="val">Hex Nut M6</span>,<span class="val">1000</span>,<span class="val">0</span>
+,<span class="val">4912345678928</span>,<span class="val">Spring Washer M6</span>,<span class="val">800</span>,<span class="val">0</span>
+<span class="val">XY-999</span>,<span class="val">4912345678935</span>,<span class="val">"Bolt Set,M4"</span>,<span class="val">200</span>,<span class="val">0</span></pre>
+
+  <div class="callout warn">
+    <span class="callout-icon">⚠️</span>
+    <div class="callout-body">
+      <strong>Excel में संपादन करते समय सावधानी</strong>
+      Excel में सहेजते समय कैरेक्टर कोड Shift-JIS हो सकता है। "Save As" चुनें और "CSV UTF-8 (Comma delimited)" चुनें। यदि शुरुआत में BOM की समस्या आती है, तो इसे नोटपैड में फिर से खोलें और सहेजें।
+    </div>
+  </div>
+
+  <h3>3-5. मास्टर CSV आयात करना</h3>
+  <p>CSV को किसी निश्चित फ़ोल्डर में रखने की आवश्यकता नहीं है। इसे सीधे सेटिंग्स स्क्रीन से आयात करें।</p>
+
+  <h4>🔌 विधि 1: स्थानीय फ़ाइल चुनें</h4>
+  <ol class="steps">
+    <li><p>CSV फ़ाइल को डिवाइस के किसी भी स्थान, जैसे "Downloads", में सहेजें।</p></li>
+    <li><p>ऐप में <span class="ui-label">सेटिंग्स → मास्टर CSV आयात करें</span> पर टैप करें।</p></li>
+    <li><p>सिस्टम फ़ाइल चयनकर्ता में CSV फ़ाइल चुनें।</p></li>
+    <li><p>आयात पूरा होते ही मास्टर डेटा तुरंत लागू हो जाएगा।</p></li>
+  </ol>
+
+  <h4>☁️ विधि 2: Google Drive से</h4>
+  <ol class="steps">
+    <li><p>अपने PC से CSV को <a href="https://drive.google.com" target="_blank">Google Drive</a> पर अपलोड करें।</p></li>
+    <li><p>ऐप में <span class="ui-label">सेटिंग्स → मास्टर CSV आयात करें</span> पर टैप करें।</p></li>
+    <li><p>फ़ाइल चयनकर्ता में सीधे Google Drive की CSV चुनें।</p></li>
+  </ol>
+
+  <h4>📧 विधि 3: ईमेल अटैचमेंट</h4>
+  <ol class="steps">
+    <li><p>CSV फ़ाइल खुद को ईमेल से भेजें।</p></li>
+    <li><p>फ़ोन पर अटैचमेंट डाउनलोड करें।</p></li>
+    <li><p>ऐप में <span class="ui-label">सेटिंग्स → मास्टर CSV आयात करें</span> खोलें और डाउनलोड की गई फ़ाइल चुनें।</p></li>
+  </ol>
+
+  <div class="callout info">
+    <span class="callout-icon">ℹ️</span>
+    <div class="callout-body">
+      <strong>मास्टर अपडेट के बाद</strong>
+      यदि आपने CSV में बदलाव किया है, तो अपडेट की गई फ़ाइल को फिर से आयात करें। ऐप के अंदर का मास्टर डेटा नई फ़ाइल से बदल दिया जाएगा।
+    </div>
+  </div>
+</section>
+
+
+<!-- ===== SECTION 4 ===== -->
+<section id="sec4">
+  <div class="section-label">Section 04</div>
+  <h2 class="section-title">स्क्रीन लेआउट और विवरण</h2>
+
+  <p>मुख्य स्क्रीन ऊपर से नीचे तक पांच क्षेत्रों से बनी है: "हेडर बार", "कैमरा क्षेत्र", "इनपुट फॉर्म क्षेत्र", "सेव हिस्ट्री क्षेत्र" और "संख्यात्मक कीपैड"।</p>
+
+  <h3>4-1. हेडर बार</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>तत्व</th><th>विवरण</th></tr></thead>
+      <tbody>
+        <tr><td>ऐप का नाम (Quantiventra)</td><td>टैप करने पर कोई क्रिया नहीं (केवल डिस्प्ले)</td></tr>
+        <tr><td>⚙️ सेटिंग्स आइकन</td><td>सेटिंग्स डायलॉग खोलता है</td></tr>
+        <tr><td>ON / OFF स्विच</td><td>कैमरा पूर्वावलोकन चालू/बंद करता है</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>4-2. कैमरा क्षेत्र</h3>
+  <p>यह वह क्षेत्र है जहाँ कोड और QR कोड रीयल-टाइम में स्कैन किए जाते हैं। जब कैमरा चालू हो और कोड कैमरे की ओर हो, तो यह लगातार 3 फ्रेम तक एक ही कोड मिलने पर उसे स्वचालित रूप से पहचान लेगा।</p>
+  <div class="callout info">
+    <span class="callout-icon">ℹ️</span>
+    <div class="callout-body">
+      <strong>स्कैनिंग सटीकता के बारे में</strong>
+      कैमरा स्क्रीन के केंद्र ±15% के भीतर के कोड को प्राथमिकता से पहचानता है। यदि पढ़ने में मुश्किल हो, तो कोड को स्क्रीन के ठीक बीच में रखने का प्रयास करें।
+    </div>
+  </div>
+
+  <h3>4-3. इनपुट फॉर्म क्षेत्र</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>फ़ील्ड</th><th>विवरण</th></tr></thead>
+      <tbody>
+        <tr><td>शेल्फ (LOC)</td><td>वह स्थान जहाँ उत्पाद रखा गया है। मैन्युअल इनपुट या स्थान स्कैन बटन के माध्यम से दर्ज किया गया।</td></tr>
+        <tr><td>आंतरिक भाग संख्या (स्क्रीन आकार और सेटिंग्स के आधार पर, पार्टनर भाग संख्या अलग से दिखाई दे सकती है)</td><td>स्कैन या मैन्युअल इनपुट। यदि मास्टर में है, तो भाग संख्या स्वचालित रूप से दिखाई देगी।</td></tr>
+        <tr><td>उत्पाद का नाम</td><td>उत्पाद का नाम। यदि मास्टर पंजीकृत है, तो स्वतः प्रदर्शित होता है। केवल पंजीकरण/संपादन/खोज के दौरान संपादन योग्य।</td></tr>
+        <tr><td>मात्रा</td><td>वर्तमान गिनती दर्ज करें। संख्यात्मक कीपैड का उपयोग करें। गणना सूत्र (उदा: 3*5) भी उपयोग किए जा सकते हैं।</td></tr>
+        <tr><td>सैद्धांतिक स्टॉक</td><td>मास्टर में दर्ज खाता स्टॉक (केवल संदर्भ के लिए, संपादन योग्य नहीं)।</td></tr>
+        <tr><td>पंजीकृत</td><td>अब तक सहेजी गई कुल संचयी मात्रा। "बदलें" बटन से बदला जा सकता है।</td></tr>
+        <tr><td>गणना के लिए</td><td>मात्रा इनपुट के लिए सहायक गणना क्षेत्र। "जोड़ें" बटन गणना परिणाम को मात्रा में जोड़ देता है।</td></tr>
+        <tr><td>गणना इतिहास</td><td>सहायक क्षेत्र में जोड़े गए मानों का इतिहास दिखाता है (केवल संदर्भ के लिए)।</td></tr>
+        <tr><td>नोट्स (मेमो)</td><td>कोई भी अतिरिक्त जानकारी। CSV में सहेजी जाती है।</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>4-4. संख्यात्मक कीपैड</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>कुंजी</th><th>क्रिया</th></tr></thead>
+      <tbody>
+        <tr><td><span class="key">0〜9</span> / <span class="key">00</span></td><td>वर्तमान फ़ोकस फ़ील्ड में नंबर दर्ज करें।</td></tr>
+        
+        <tr><td><span class="key">−</span> / <span class="key">×</span></td><td>घटाव/गुणा चिह्न (गणना के लिए)।</td></tr>
+        <tr><td><span class="key">CLR</span></td><td>वर्तमान फ़ोकस फ़ील्ड की सामग्री साफ़ करें।</td></tr>
+        <tr><td><span class="key">Enter</span> / <span class="key">सर्च</span></td><td>पुष्टि/खोज/सहेजें (फ़ोकस के आधार पर)।</td></tr>
+        <tr><td><span class="key">जोड़ें</span> (गणना मोड)</td><td>सहायक क्षेत्र के परिणाम को मुख्य मात्रा में जोड़ें।</td></tr>
+        <tr><td><span class="key">सहेजें</span> (गणना मोड)</td><td>वर्तमान डेटा सहेजें।</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  
+</section>
+
+
+<!-- ===== SECTION 5 ===== -->
+<section id="sec5">
+  <div class="section-label">Section 05</div>
+  <h2 class="section-title">बुनियादी संचालन प्रवाह</h2>
+
+  <h3>5-1. मानक इन्वेंट्री प्रवाह</h3>
+
+  <h4>चरण 1: शेल्फ नंबर (स्थान) सेट करें</h4>
+  <ol class="steps">
+    <li><p>शेल्फ सेट करने के लिए: <span class="ui-label">स्थान पढ़ें</span> बटन टैप करें (बटन पीला हो जाएगा)।</p></li>
+    <li><p>कैमरे को शेल्फ कोड की ओर ले जाएं, यह स्वचालित रूप से पढ़ा जाएगा और "शेल्फ (LOC)" में दिखाई देगा।</p></li>
+    <li><p>मैन्युअल इनपुट के लिए: "शेल्फ (LOC)" फ़ील्ड टैप करें और कीबोर्ड से टाइप करें।</p></li>
+  </ol>
+
+  <div class="callout info">
+    <span class="callout-icon">ℹ️</span>
+    <div class="callout-body">एक बार सेट होने के बाद, स्थान अगले उत्पाद स्कैन के लिए बना रहता है। शेल्फ बदलते समय इसे अपडेट करें।</div>
+  </div>
+
+  <h4>चरण 2: उत्पाद कोड स्कैन करें</h4>
+  <ol class="steps">
+    <li><p>सुनिश्चित करें कि कैमरा स्विच चालू (ON) है।</p></li>
+    <li><p>उत्पाद के कोड की ओर कैमरा ले जाएं। यह स्वचालित रूप से स्कैन हो जाएगा।</p></li>
+    <li><p>यदि मास्टर पंजीकृत है, तो नाम और सैद्धांतिक स्टॉक स्वतः दिखाई देगा। (खोज का क्रम: पार्टनर भाग संख्या → आंतरिक भाग संख्या।)</p></li>
+    <li><p>यदि कोड अपंजीकृत है, तो "अपंजीकृत कोड" डायलॉग दिखाई देगा (देखें 6-3)।</p></li>
+  </ol>
+
+  <h4>चरण 3: मात्रा दर्ज करें</h4>
+  <ol class="steps">
+    <li><p>"मात्रा" फ़ील्ड पर स्वतः फ़ोकस होगा।</p></li>
+    <li><p>कीपैड से मात्रा दर्ज करें।</p></li>
+    <li><p>यदि कई स्थानों के स्टॉक को जोड़ना है, तो कैलकुलेटर सुविधा का उपयोग करें (देखें 5-2)।</p></li>
+  </ol>
+
+  <h4>चरण 4: सहेजें</h4>
+  <ol class="steps">
+    <li><p>यदि आवश्यक हो तो मेमो दर्ज करें।</p></li>
+    <li><p><span class="key">ENT</span> कुंजी या <span class="key">सहेजें</span> कुंजी टैप करें।</p></li>
+    <li><p>ध्वनि संकेत सुनाई देगा और "सहेजा गया" संदेश दिखाई देगा। कार्य पूरा हुआ।</p></li>
+    <li><p>अगले उत्पाद पर जाएँ।</p></li>
+  </ol>
+
+  <h3>5-2. गणना सुविधा का उपयोग कैसे करें</h3>
+  <p>यह उन उत्पादों की गिनती के लिए उपयोगी है जो एक ही शेल्फ पर अलग-अलग डिब्बों या परतों में रखे गए हैं।</p>
+
+  <ol class="steps">
+    <li><p>"गणना के लिए" फ़ील्ड टैप करें (कीपैड गणना मोड में बदल जाएगा)।</p></li>
+    <li><p>उदाहरण: ऊपरी शेल्फ पर 30, निचले पर 25 -> <code>30</code> दर्ज करें और <span class="key">जोड़ें</span> -> <code>25</code> दर्ज करें और <span class="key">जोड़ें</span>।</p></li>
+    <li><p>सूत्रों का उपयोग करें: <code>3*10</code> -> <span class="key">जोड़ें</span> दबाने पर 30 मात्रा में जुड़ जाएगा।</p></li>
+    <li><p>जोड़ने का इतिहास इतिहास कॉलम में दिखाई देता है।</p></li>
+    <li><p>जब कुल मात्रा में दिखाई दे, तो <span class="key">सहेजें</span> टैप करें।</p></li>
+  </ol>
+
+  <h3>5-3. साफ़ करें (Clear)</h3>
+  <p><span class="ui-label">साफ़ करें</span> बटन टैप करने से वर्तमान इनपुट (कोड, नाम, मात्रा, मेमो, इतिहास) रीसेट हो जाता है। शेल्फ (LOC) साफ़ नहीं होता है।</p>
+  <div class="callout info">
+    <span class="callout-icon">ℹ️</span>
+    <div class="callout-body">
+      <strong>शेल्फ (LOC) को रीसेट करने के लिए</strong>
+      शेल्फ नंबर क्लियर बटन से नहीं हटता। जब आप दूसरे शेल्फ पर जाते हैं, तो स्थान पढ़ें बटन दबाएं, <span class="key">CLR</span> कुंजी से मैन्युअल रूप से हटाएं, या नया शेल्फ कोड स्कैन करें।
+    </div>
+  </div>
+</section>
+
+
+<!-- ===== SECTION 6 ===== -->
+<section id="sec6">
+  <div class="section-label">Section 06</div>
+  <h2 class="section-title">उन्नत संचालन</h2>
+
+  <h3>6-1. नाम खोज मोड</h3>
+  <p>यदि कोड उपलब्ध नहीं है या पढ़ने योग्य नहीं है, तो आप नाम कीवर्ड द्वारा खोज सकते हैं।</p>
+  <ol class="steps">
+    <li><p>स्क्रीन के नीचे "नाम खोज" स्विच चालू करें।</p></li>
+    <li><p>"नाम" फ़ील्ड में कीवर्ड दर्ज करें (आंशिक मिलान समर्थित)।</p></li>
+    <li><p>🔍 खोज बटन या <span class="key">खोज</span>(Enter) टैप करें।</p></li>
+    <li><p>खोज परिणाम डायलॉग से उत्पाद चुनें।</p></li>
+    <li><p>इसके बाद सामान्य रूप से मात्रा दर्ज करें और सहेजें।</p></li>
+  </ol>
+  <div class="callout info">
+    <span class="callout-icon">ℹ️</span>
+    <div class="callout-body">
+      <strong>सहेजने के बाद नाम खोज मोड का व्यवहार</strong>
+      यदि "निरंतर" स्विच बंद है, तो सहेजने के बाद मोड बंद हो जाएगा। अगली बार ऐप सामान्य कोड स्कैनिंग मोड में होगा। निरंतर उपयोग के लिए "निरंतर" स्विच चालू करें (देखें 6-2)।
+    </div>
+  </div>
+
+  <h3>6-2. निरंतर खोज मोड</h3>
+  <p>जब "निरंतर" स्विच चालू होता है, तो सहेजने के बाद भी नाम खोज मोड बना रहता है। यह एक ही शेल्फ के कई उत्पादों को नाम से जल्दी दर्ज करने के लिए उपयोगी है।</p>
+
+  <h3>6-3. नए उत्पादों का पंजीकरण</h3>
+  <p>यदि आप ऐसा कोड स्कैन करते हैं जो मास्टर में नहीं है, तो "अपंजीकृत कोड" डायलॉग दिखाई देगा।</p>
+  <ol class="steps">
+    <li><p>डायलॉग में "हाँ (नया पंजीकरण)" टैप करें।</p></li>
+    <li><p>एक स्वतः-जनरेटेड आंतरिक ID सेट की जाएगी (<code>99999</code> से शुरू होने वाली)। यदि आप मैन्युअल रूप से नया कोड दर्ज करते हैं, तो चुनें कि यह पार्टनर कोड है या आंतरिक कोड।</p></li>
+    <li><p>फ़ोकस नाम फ़ील्ड पर जाएगा, नाम दर्ज करें।</p></li>
+    <li><p>मात्रा दर्ज करें और सहेजें। अगली बार से इसे मास्टर डेटा के रूप में पहचाना जाएगा।</p></li>
+  </ol>
+
+  <h3>6-4. उत्पाद का नाम बदलना</h3>
+  <p>आप मास्टर में पहले से पंजीकृत उत्पाद का नाम बदल सकते हैं।</p>
+  <ol class="steps">
+    <li><pउत्पाद को स्कैन करें या खोज द्वारा लोड करें।</li>
+    <li><p><span class="ui-label">नाम बदलें</span> बटन टैप करें (बटन नारंगी हो जाएगा)।</p></li>
+    <li><p>नाम फ़ील्ड संपादन योग्य हो जाएगी, सुधार करें।</p></li>
+    <li><p>सहेजने पर मास्टर डेटा नए नाम के साथ अपडेट हो जाएगा।</p></li>
+  </ol>
+
+  <h3>6-5. पंजीकृत संचयी स्टॉक बदलना</h3>
+  <p>इसका उपयोग पिछले डेटा को सही करने या प्रारंभिक मान सेट करने के लिए किया जाता है।</p>
+  <ol class="steps">
+    <li><p>उत्पाद को स्कैन करें और लोड करें।</p></li>
+    <li><p>"पंजीकृत" के बगल में स्थित <span class="ui-label">बदलें</span> बटन टैप करें।</p></li>
+    <li><p>डायलॉग में नया मान दर्ज करें और "बदलें" टैप करें।</p></li>
+  </ol>
+
+  <div class="callout warn">
+    <span class="callout-icon">⚠️</span>
+    <div class="callout-body">पंजीकृत स्टॉक बदलने से scan_history.csv में पिछला इतिहास नहीं बदलेगा। यह केवल मास्टर में संचयी मान को बदलता है।</div>
+  </div>
+</section>
+
+
+<!-- ===== SECTION 7 ===== -->
+<section id="sec7">
+  <div class="section-label">Section 07</div>
+  <h2 class="section-title">इतिहास सुविधा</h2>
+
+  <h3>7-1. इतिहास की जाँच</h3>
+  <p>स्क्रीन के निचले भाग में सेव हिस्ट्री क्षेत्र सबसे हाल के रिकॉर्ड दिखाता है। समय, नाम, मात्रा और सैद्धांतिक स्टॉक एक सूची में देखे जा सकते हैं।</p>
+  <p>साथ ही, <span class="ui-label">इतिहास</span> बटन टैप करने से विस्तृत इतिहास डायलॉग खुलेगा जहाँ स्थान और मेमो भी देखे जा सकते हैं।</p>
+
+  <h3>7-2. इतिहास CSV के बारे में</h3>
+  <p>हर बार डेटा सहेजने पर <code>scan_history.csv</code> में एक प्रविष्टि जुड़ जाती है। विश्लेषण के लिए इस फ़ाइल को PC पर ट्रांसफर करें।</p>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>कॉलम</th><th>सामग्री</th></tr></thead>
+      <tbody>
+        <tr><td><code>date</code></td><td>सहेजने की तारीख (YYYY-MM-DD प्रारूप)</td></tr>
+        <tr><td><code>time</code></td><td>सहेजने का समय (HH:mm:ss प्रारूप)</td></tr>
+        <tr><td><code>joint_code</code></td><td>पार्टनर भाग संख्या</td></tr>
+        <tr><td><code>barcode</code></td><td>आंतरिक कोड संख्या</td></tr>
+        <tr><td><code>name</code></td><td>उत्पाद का नाम</td></tr>
+        <tr><td><code>actual_stock</code></td><td>वर्तमान गिनती की मात्रा</td></tr>
+        <tr><td><code>location</code></td><td>शेल्फ/स्थान</td></tr>
+        <tr><td><code>memo</code></td><td>मेमो/नोट्स</td></tr>
+        <tr><td><code>theoretical_stock</code></td><td>सैद्धांतिक स्टॉक</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout warn">
+    <span class="callout-icon">⚠️</span>
+    <div class="callout-body">
+      <strong>पुराने संस्करण से अपडेट करते समय</strong>
+      यदि पुरानी इतिहास फ़ाइल मिलती है, तो ऐप स्वतः बैकअप (<code>scan_history_पुराना_तारीख.csv</code>) बना देगा और नया प्रारूप शुरू करेगा। डेटा खोएगा नहीं।
+    </div>
+  </div>
+</section>
+
+
+<!-- ===== SECTION 8 ===== -->
+<section id="sec8">
+  <div class="section-label">Section 08</div>
+  <h2 class="section-title">सेटिंग्स (भाषा, नियम, कैमरा, आदि)</h2>
+
+  <p>हेडर बार में ⚙️ आइकन टैप करने से सेटिंग्स डायलॉग खुलता है।</p>
+
+  <h3>8-1. मास्टर CSV आयात करें</h3>
+  <p>डिवाइस, Downloads फ़ोल्डर या क्लाउड स्टोरेज से CSV चुनकर ऐप के अंदर का मास्टर डेटा अपडेट करें। आयात होते ही डेटा लागू हो जाता है, इसलिए अलग से पुनः लोड करने की आवश्यकता नहीं है।</p>
+
+  <h3>8-2. सारा इतिहास डेटा हटाएं</h3>
+  <p><code>scan_history.csv</code> को हटा देता है और इतिहास रीसेट करता है। इन्वेंट्री चक्र पूरा होने के बाद इसका उपयोग करें।</p>
+  <div class="callout danger">
+    <span class="callout-icon">🚨</span>
+    <div class="callout-body"><strong>यह क्रिया पूर्ववत नहीं की जा सकती।</strong> कृपया आगे बढ़ने से पहले अपनी CSV फ़ाइल का बैकअप लें।</div>
+  </div>
+
+  <h3>8-3. पार्टनर भाग संख्या का उपयोग</h3>
+  <p>जब स्विच चालू होता है, तो कोड फ़ील्ड के बगल में "पार्टनर भाग संख्या" इनपुट सक्षम हो जाता है। इसका उपयोग तब करें जब आपको ग्राहक-विशिष्ट कोड भी प्रबंधित करने हों।</p>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>स्थिति</th><th>क्रिया</th></tr></thead>
+      <tbody>
+        <tr><td>OFF (डिफ़ॉल्ट)</td><td>पार्टनर कोड फ़ील्ड छिपी रहती है। केवल आंतरिक कोड का उपयोग।</td></tr>
+        <tr><td>ON</td><td>पार्टनर कोड फ़ील्ड दिखाई देती है। मास्टर CSV का <code>joint_code</code> सक्रिय हो जाता है। कोड दर्ज करते समय पूछा जाएगा कि यह आंतरिक है या पार्टनर।</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="callout info">
+    <span class="callout-icon">ℹ️</span>
+    <div class="callout-body">यदि मास्टर CSV में <code>joint_code</code> कॉलम में डेटा है, तो ऐप लॉन्च पर यह स्वतः चालू (ON) हो जाएगा।</div>
+  </div>
+
+  <h3>8-4. आंतरिक कोड नियम सेटिंग्स</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>सेटिंग आइटम</th><th>विवरण</th></tr></thead>
+      <tbody>
+        <tr><td>कैरेक्टर प्रकार</td><td>"अल्फ़ान्यूमेरिक", "केवल नंबर", "कोई सीमा नहीं" में से चुनें।</td></tr>
+        <tr><td>न्यूनतम वर्ण</td><td>कोड की न्यूनतम लंबाई (उदा: JAN कोड के लिए 12)।</td></tr>
+        <tr><td>अधिकतम वर्ण</td><td>कोड की अधिकतम लंबाई।</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>8-5. कैमरा स्कैनिंग प्रकार सेटिंग्स</h3>
+  <p>स्कैन किए जाने वाले कोड के प्रारूप सेट करें। त्रुटियों से बचने के लिए अनावश्यक प्रकारों को बंद कर दें।</p>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>प्रकार</th><th>उत्पाद के लिए</th><th>स्थान के लिए</th><th>मुख्य उपयोग</th></tr></thead>
+      <tbody>
+        <tr><td>CODE39</td><td>✅ डिफ़ॉल्ट ON</td><td>—</td><td>औद्योगिक पार्ट्स/आंतरिक कोड</td></tr>
+        <tr><td>CODE128</td><td>वैकल्पिक</td><td>—</td><td>लॉजिस्टिक कोड</td></tr>
+        <tr><td>EAN13</td><td>वैकल्पिक</td><td>—</td><td>JAN कोड (उपभोक्ता वस्तुएं)</td></tr>
+        <tr><td>QRCODE</td><td>—</td><td>✅ डिफ़ॉल्ट ON</td><td>शेल्फ QR कोड</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>8-6. भाषा और मैनुअल का चयन</h3>
+  <p>आप सेटिंग्स स्क्रीन से ऐप की भाषा (हिंदी, अंग्रेजी, जापानी, आदि) बदल सकते हैं।</p>
+  <p>सेटिंग्स सहेजने के बाद ऐप की भाषा बदल जाएगी। अगली बार मैनुअल खोलने पर, यह चुनी हुई भाषा में प्रदर्शित होगा।</p>
+</section>
+
+
+<!-- ===== SECTION 9 ===== -->
+<section id="sec9">
+  <div class="section-label">Section 09</div>
+  <h2 class="section-title">फ़ाइल प्रबंधन और बैकअप</h2>
+
+  <h3>9-1. आउटपुट फ़ाइल सूची</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>फ़ाइल नाम</th><th>जनरेशन समय</th><th>विवरण</th></tr></thead>
+      <tbody>
+        <tr><td><code>quantiventra_master.csv</code></td><td>मैन्युअल / सेव पर अपडेट</td><td>इन्वेंट्री मास्टर। मात्रा सहेजने, नए पंजीकरण या नाम परिवर्तन पर अपडेट होता है। इन्वेंट्री परिणामों को सारांशित करने के लिए उपयोग किया जाता है।</td></tr>
+        <tr><td><code>scan_history.csv</code></td><td>हर सेव पर जोड़ा गया</td><td>पूर्ण स्कैन इतिहास।</td></tr>
+        <tr><td><code>settings.json</code></td><td>सेटिंग्स सहेजने पर</td><td>कोड नियम, कैमरा सेटिंग्स और भाषा प्राथमिकताएं।</td></tr>
+        <tr><td><code>scan_history_पुराना_तारीख.csv</code></td><td>पुराना प्रारूप मिलने पर</td><td>पुराने इतिहास का बैकअप।</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>9-2. अनुशंसित बैकअप प्रक्रिया</h3>
+  <p>इन्वेंट्री कार्य समाप्त होने के बाद या नियमित रूप से निम्न चरणों के अनुसार बैकअप लेने की सलाह दी जाती है।</p>
+  <ol class="steps">
+    <li><p>ऐप में <span class="ui-label">सेटिंग्स → सभी डेटा निर्यात करें</span> खोलें।</p></li>
+    <li><p>CSV में उद्धरणचिह्न का फ़ॉर्मेट चुनें और सेव करने के लिए फ़ोल्डर चुनें।</p></li>
+    <li><p>निर्यात की गई <code>scan_history_[timestamp].csv</code> और <code>quantiventra_master_export.csv</code> फ़ाइलों को PC या क्लाउड पर सुरक्षित रखें।</p></li>
+  </ol>
+</section>
+
+
+<!-- ===== SECTION 10 ===== -->
+<section id="sec10">
+  <div class="section-label">Section 10</div>
+  <h2 class="section-title">समस्या निवारण</h2>
+
+  <div class="trouble">
+    <div class="trouble-q">कोड स्कैन नहीं हो रहा है या कोई प्रतिक्रिया नहीं है</div>
+    <div class="trouble-a">
+      <ul style="padding-left: 20px; line-height: 2;">
+        <li>जांचें कि ऊपरी दाएं कोने में कैमरा स्विच चालू (ON) है।</li>
+        <li>कोड को स्क्रीन के केंद्र में रखें (किनारों पर पहचान कम होती है)।</li>
+        <li>जांचें कि सेटिंग्स में कोड प्रकार (CODE39 / EAN13 आदि) सही सेट है।</li>
+        <li>यदि कोड गंदा या फटा हुआ है, तो उसे पढ़ा नहीं जा सकता।</li>
+        <li>कैमरा अनुमति की जाँच करें: सेटिंग्स → ऐप्स → Quantiventra → अनुमतियाँ → कैमरा।</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="trouble">
+    <div class="trouble-q">मास्टर CSV मौजूद है लेकिन नाम नहीं आ रहा</div>
+    <div class="trouble-a">
+      <ul style="padding-left: 20px; line-height: 2;">
+        <li>जाँचें कि चुनी गई CSV फ़ाइल की सामग्री सही है और हेडर पंक्ति सही है।</li>
+        <li>यदि किसी अन्य CSV पर स्विच करना हो, तो सेटिंग्स स्क्रीन से <span class="ui-label">मास्टर CSV आयात करें</span> फिर से चलाकर फ़ाइल चुनें।</li>
+        <li>जांचें कि CSV एन्कोडिंग UTF-8 है (Shift-JIS वर्णों को खराब कर सकता है)।</li>
+        <li>जांचें कि हेडर (<code>joint_code,barcode,name,theoretical_stock,actual_stock_total</code>) सही है।</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="trouble">
+    <div class="trouble-q">सहेजा नहीं जा सकता / "सेव विफल" संदेश</div>
+    <div class="trouble-a">
+      <ul style="padding-left: 20px; line-height: 2;">
+        <li>कैमरा अनुमति केवल स्कैन के लिए है; यदि आप केवल मैन्युअल इनपुट उपयोग कर रहे हैं तो कैमरा चालू होना आवश्यक नहीं है।</li>
+        <li>डिवाइस के स्टोरेज स्पेस की जांच करें।</li>
+        <li>यदि कोड और नाम दोनों खाली हैं, तो डेटा सहेजा नहीं जा सकता।</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="trouble">
+    <div class="trouble-q">स्थान बटन दबाया लेकिन शेल्फ सेट नहीं हो रहा</div>
+    <div class="trouble-a">
+      <ul style="padding-left: 20px; line-height: 2;">
+        <li>जांचें कि स्थान कोड का प्रकार सेटिंग्स में सही है (डिफ़ॉल्ट QRCODE)।</li>
+        <li>यदि शेल्फ पर QR के बजाय बारकोड है, तो सेटिंग्स में "स्थान के लिए प्रकार" बदलें।</li>
+        <li>कैमरा स्विच चालू रखें।</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="trouble">
+    <div class="trouble-q">ऐप शुरू होने पर स्टोरेज सेटिंग्स खुलती हैं</div>
+    <div class="trouble-a">
+      <p style="padding-top: 4px;">वर्तमान संस्करण में सामान्यतः इस प्रकार की अनुमति की आवश्यकता नहीं होती। यदि सिस्टम ऐसा पृष्ठ दिखाए भी, तो सामान्य उपयोग के लिए केवल कैमरा अनुमति पर्याप्त है।</p>
+    </div>
+  </div>
+
+  <div class="trouble">
+    <div class="trouble-q">"नाम बदलें" बटन काम नहीं कर रहा</div>
+    <div class="trouble-a">
+      <ul style="padding-left: 20px; line-height: 2;">
+        <li>सुनिश्चित करें कि कोई उत्पाद लोड किया गया है। खाली स्क्रीन पर यह काम नहीं करेगा।</li>
+        <li>बटन का रंग नारंगी होना चाहिए। यदि नहीं, तो फिर से टैप करें।</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="trouble">
+    <div class="trouble-q">गणना फ़ील्ड में Enter दबाने पर 0 आता है</div>
+    <div class="trouble-a">
+      <ul style="padding-left: 20px; line-height: 2;">
+        <li>सहेजने से पहले "जोड़ें" कुंजी दबाकर मान को मुख्य मात्रा में जोड़ना होगा। केवल गणना क्षेत्र में Enter दबाने से डेटा सहेजा नहीं जाता।</li>
+        <li>सुनिश्चित करें कि सूत्र में केवल कीपैड के वर्णों का उपयोग किया गया है।</li>
+        <li>सूत्र संख्या से शुरू होना चाहिए (उदा: <code>3*5</code>), ऑपरेटर से नहीं (उदा: <code>*5</code>)।</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+
+<!-- ===== SECTION 11 ===== -->
+<section id="sec11">
+  <div class="section-label">Section 11</div>
+  <h2 class="section-title">शर्तें और अस्वीकरण</h2>
+
+  <div class="legal-block">
+    <h4>■ उपयोग की शर्तें (Terms of Use)</h4>
+    <p>इस ऐप ("ऐप") का उपयोग करने से पहले कृपया निम्नलिखित शर्तों को ध्यान से पढ़ें। ऐप डाउनलोड करने या उपयोग करने का अर्थ है कि आप इन शर्तों से सहमत हैं।</p>
+
+    <p><strong>1. लाइसेंस</strong><br>
+    यह ऐप व्यक्तियों और व्यवसायों को इन्वेंट्री प्रबंधन उद्देश्यों के लिए उपयोग करने की अनुमति देता है। ऐप की रिवर्स इंजीनियरिंग, डिकंपाइलिंग, संशोधन या पुनर्वितरण सख्त वर्जित है।</p>
+
+    <p><strong>2. उपयोगकर्ता डेटा</strong><br>
+    इस ऐप द्वारा उत्पन्न सभी डेटा (CSV और सेटिंग्स) केवल उपयोगकर्ता के डिवाइस पर स्थानीय रूप से संग्रहीत किए जाते हैं। यह ऐप किसी भी बाहरी सर्वर पर डेटा नहीं भेजता है।</p>
+
+    <p><strong>3. निषिद्ध गतिविधियाँ</strong><br>
+    अवैध उद्देश्यों के लिए ऐप का उपयोग करना, तीसरे पक्ष के अधिकारों का उल्लंघन करना, या गलत डेटा उत्पन्न करने के लिए कार्यों का दुरुपयोग करना वर्जित है।</p>
+
+    <h4>■ अस्वीकरण (Disclaimer)</h4>
+    <p>यह ऐप "जैसा है" (AS IS) आधार पर प्रदान किया गया है। डेवलपर इस ऐप के उपयोग या अनुपयोग से होने वाले किसी भी नुकसान (डेटा हानि, व्यावसायिक हानि, आदि) के लिए उत्तरदायी नहीं है।</p>
+    <p>उपयोगकर्ता को उत्पन्न CSV डेटा की सटीकता को सत्यापित करना होगा। स्कैनिंग त्रुटियों या गलत इनपुट के कारण होने वाली डेटा विसंगतियों के लिए डेवलपर जिम्मेदार नहीं है।</p>
+    <p>स्कैनिंग प्रदर्शन कैमरा गुणवत्ता, प्रकाश और कोड की स्थिति पर निर्भर करता है। यदि स्कैन विफल रहता है, तो कृपया मैन्युअल इनपुट का उपयोग करें।</p>
+
+    <h4>■ गोपनीयता नीति (Privacy Policy)</h4>
+    <p>यह ऐप किसी भी व्यक्तिगत जानकारी को एकत्र, प्रसारित या उपयोग नहीं करता है। सभी प्रोसेसिंग डिवाइस के भीतर स्थानीय रूप से की जाती है और इंटरनेट की आवश्यकता नहीं होती है।</p>
+    <p>कैमरे का उपयोग केवल स्कैनिंग के लिए किया जाता है; कोई भी फुटेज रिकॉर्ड या प्रसारित नहीं किया जाता है।</p>
+    <p>सभी डेटा प्रोसेसिंग डिवाइस के भीतर स्थानीय रूप से होती है। फ़ाइल आयात और निर्यात के लिए सेटिंग्स स्क्रीन का उपयोग करें।</p>
+
+    <h4>■ कॉपीराइट (Copyright)</h4>
+    <p>Copyright © Quantiventra. All Rights Reserved.</p>
+    <p>इस ऐप और मैनुअल की सभी सामग्री (पाठ, डिज़ाइन, लोगो) डेवलपर की संपत्ति है।</p>
+    <p>प्रयुक्त कोई भी ओपन-सोर्स लाइब्रेरी उनके संबंधित लाइसेंसों द्वारा शासित होती है।</p>
+
+    <h4>■ शर्तों में परिवर्तन</h4>
+    <p>ये शर्तें बिना किसी पूर्व सूचना के बदल सकती हैं। Google Play Store पर पोस्ट किए जाने पर नई शर्तें प्रभावी होंगी।</p>
+  </div>
+</section>
+
+</div><!-- /wrapper -->
+
+<a href="#top" class="back-top" title="ऊपर जाएँ">↑</a>
+
+<footer>
+  <strong>Quantiventra</strong> — कोड स्कैन इन्वेंट्री काउंट ऐप<br>
+  Copyright © Quantiventra. All Rights Reserved.<br>
+  इस मैनुअल की सामग्री बिना किसी सूचना के बदल सकती है।
+</footer>
+
+</body>
+</html>

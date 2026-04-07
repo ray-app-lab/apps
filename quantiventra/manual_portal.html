@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quantiventra - User Manual Selection</title>
+    <style>
+        :root {
+            --bg-cream: #fdfaf5;
+            --main-text: #333;
+            --accent-blue: #006C9C;
+            --card-bg: #ffffff;
+            --accent-gold: #d4a373;
+        }
+
+        body {
+            margin: 0;
+            font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
+            background-color: var(--bg-cream);
+            color: var(--main-text);
+            line-height: 1.6;
+        }
+
+        header {
+            background: #fff;
+            padding: 20px;
+            text-align: center;
+            border-bottom: 1px solid #eee;
+        }
+
+        .logo {
+            font-size: 1.2rem;
+            font-weight: bold;
+            letter-spacing: 3px;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto 60px;
+            padding: 0 20px;
+        }
+
+        .back-nav {
+            margin-top: 30px;
+            margin-bottom: 10px;
+        }
+        .back-nav a {
+            text-decoration: none;
+            color: var(--accent-gold);
+            font-size: 0.9rem;
+            font-weight: bold;
+        }
+
+        .hero {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .hero h1 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            color: var(--accent-blue);
+        }
+
+        .hero p {
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        /* 12言語を綺麗に並べるグリッド設定 */
+        .lang-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .lang-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border: 1px solid transparent;
+        }
+
+        .lang-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+            border-color: var(--accent-blue);
+            background-color: #fff;
+        }
+
+        .flag {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .lang-name {
+            font-size: 1.05rem;
+            font-weight: bold;
+            margin-bottom: 3px;
+        }
+
+        .lang-native {
+            font-size: 0.8rem;
+            color: #888;
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            font-size: 0.8rem;
+            color: #aaa;
+            border-top: 1px solid #eee;
+            background: #fff;
+        }
+
+        @media (max-width: 480px) {
+            .lang-grid {
+                grid-template-columns: 1fr 1fr; /* スマホでは2列 */
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <a href="../index.html" class="logo">RAY APP LAB</a>
+</header>
+
+<div class="container">
+    <nav class="back-nav"><a href="quantiventra.html">← アプリ紹介へ戻る</a></nav>
+
+    <section class="hero">
+        <h1>Quantiventra Manual</h1>
+        <p>Select your language / 使用言語を選択してください</p>
+    </section>
+
+    <div class="lang-grid">
+        <a href="manual_ja.html" class="lang-card">
+            <span class="flag">🇯🇵</span>
+            <div class="lang-name">日本語</div>
+            <div class="lang-native">Japanese</div>
+        </a>
+
+        <a href="manual_en.html" class="lang-card">
+            <span class="flag">🇺🇸</span>
+            <div class="lang-name">English</div>
+            <div class="lang-native">English</div>
+        </a>
+
+        <a href="manual_zh.html" class="lang-card">
+            <span class="flag">🇨🇳</span>
+            <div class="lang-name">中文 (简体)</div>
+            <div class="lang-native">Chinese (Simplified)</div>
+        </a>
+
+        <a href="manual_tw.html" class="lang-card">
+            <span class="flag">🇹🇼</span>
+            <div class="lang-name">中文 (繁體)</div>
+            <div class="lang-native">Chinese (Traditional)</div>
+        </a>
+
+        <a href="manual_ko.html" class="lang-card">
+            <span class="flag">🇰🇷</span>
+            <div class="lang-name">한국어</div>
+            <div class="lang-native">Korean</div>
+        </a>
+
+        <a href="manual_hi.html" class="lang-card">
+            <span class="flag">🇮🇳</span>
+            <div class="lang-name">हिन्दी</div>
+            <div class="lang-native">Hindi</div>
+        </a>
+
+        <a href="manual_vi.html" class="lang-card">
+            <span class="flag">🇻🇳</span>
+            <div class="lang-name">Tiếng Việt</div>
+            <div class="lang-native">Vietnamese</div>
+        </a>
+
+        <a href="manual_it.html" class="lang-card">
+            <span class="flag">🇮🇹</span>
+            <div class="lang-name">Italiano</div>
+            <div class="lang-native">Italian</div>
+        </a>
+
+        <a href="manual_pt-BR.html" class="lang-card">
+            <span class="flag">🇧🇷</span>
+            <div class="lang-name">Português</div>
+            <div class="lang-native">Portuguese (Brazil)</div>
+        </a>
+
+        <a href="manual_es-419.html" class="lang-card">
+            <span class="flag">🇲🇽</span>
+            <div class="lang-name">Español</div>
+            <div class="lang-native">Spanish (LatAm)</div>
+        </a>
+
+        <a href="manual_id.html" class="lang-card">
+            <span class="flag">🇮🇩</span>
+            <div class="lang-name">Bahasa Indonesia</div>
+            <div class="lang-native">Indonesian</div>
+        </a>
+
+        <a href="manual_th.html" class="lang-card">
+            <span class="flag">🇹🇭</span>
+            <div class="lang-name">ภาษาไทย</div>
+            <div class="lang-native">Thai</div>
+        </a>
+    </div>
+</div>
+
+<footer>
+    <p>&copy; 2026 Ray App Lab / Quantiventra Project</p>
+</footer>
+
+</body>
+</html>

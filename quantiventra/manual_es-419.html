@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="es-419">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quantiventra - Manual de usuario</title>
+<style>
+  :root{--primary:#006C9C;--primary-dark:#004A6E;--border:#D0E8F5;--bg:#F8FDFF;--surface:#FFFFFF;--text:#1A1A2E;--info:#E8F4FD;--warn:#FFF8E1;--danger:#FFEBEE;--success:#E8F5E9}
+  *{box-sizing:border-box} body{margin:0;font-family:Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.8}
+  header{background:linear-gradient(135deg,var(--primary-dark),var(--primary));color:#fff;padding:44px 20px}
+  header h1{margin:0 0 8px;font-size:34px} header p{margin:4px 0}
+  .wrap{max-width:980px;margin:0 auto;padding:24px 20px 64px}
+  nav,section{background:var(--surface);border:1px solid var(--border);border-radius:8px}
+  nav{padding:20px 24px;margin:24px 0 40px}
+  nav h2{margin:0 0 12px;color:var(--primary-dark)} nav a{display:block;color:var(--text);text-decoration:none;padding:4px 0}
+  section{padding:24px;margin:0 0 28px}
+  h2{margin:0 0 18px;color:var(--primary-dark);border-bottom:2px solid var(--border);padding-bottom:8px}
+  h3{margin:24px 0 10px;color:var(--primary)} h4{margin:18px 0 8px}
+  p,li{margin:0 0 10px} ul,ol{padding-left:22px}
+  table{width:100%;border-collapse:collapse;margin:16px 0;background:#fff} th,td{border:1px solid var(--border);padding:10px 12px;text-align:left;vertical-align:top}
+  th{background:var(--primary);color:#fff} code,pre{font-family:Consolas,monospace} code{background:#E8F4FD;padding:2px 6px;border-radius:4px}
+  pre{background:#0F1923;color:#C8E6FF;padding:16px;border-radius:8px;overflow:auto}
+  .callout{padding:14px 16px;border-radius:8px;margin:16px 0;border:1px solid var(--border)}
+  .info{background:var(--info)} .warn{background:var(--warn)} .danger{background:var(--danger)} .success{background:var(--success)}
+</style>
+</head>
+<body>
+<header id="top">
+  <h1>Quantiventra</h1>
+  <p>Manual de usuario de la aplicación de inventario con escaneo de códigos</p>
+  <p>Android 7.0 (API 24) o superior / funcionamiento sin conexión</p>
+</header>
+
+<div class="wrap">
+  <nav>
+    <h2>Índice</h2>
+    <a href="#sec1">1. Introducción</a>
+    <a href="#sec2">2. Instalación y configuración inicial</a>
+    <a href="#sec3">3. Creación e importación del CSV maestro</a>
+    <a href="#sec4">4. Pantalla principal y campos</a>
+    <a href="#sec5">5. Flujo básico de uso</a>
+    <a href="#sec6">6. Operaciones avanzadas</a>
+    <a href="#sec7">7. Historial</a>
+    <a href="#sec8">8. Configuración</a>
+    <a href="#sec9">9. Archivos y respaldo</a>
+    <a href="#sec10">10. Solución de problemas</a>
+    <a href="#sec11">11. Términos y aviso legal</a>
+  </nav>
+
+  <section id="sec1">
+    <h2>1. Introducción</h2>
+    <h3>1-1. Qué es esta aplicación</h3>
+    <p>Quantiventra es una aplicación Android para conteo de inventario que usa la cámara del teléfono para leer códigos de barras y códigos QR. Su objetivo es simplificar el conteo físico y convertirlo en registros digitales fáciles de exportar.</p>
+    <p>Después de leer un código, usted ingresa la cantidad, agrega una nota si lo necesita y guarda. Los resultados pueden exportarse como CSV para Excel, Google Sheets u otros sistemas.</p>
+    <h3>1-2. Requisitos del sistema</h3>
+    <table>
+      <tr><th>Elemento</th><th>Requisito</th></tr>
+      <tr><td>Sistema operativo</td><td>Android 7.0 (API 24) o superior</td></tr>
+      <tr><td>Cámara</td><td>Obligatoria para el escaneo</td></tr>
+      <tr><td>Espacio libre</td><td>Se recomiendan 50 MB o más</td></tr>
+      <tr><td>Permiso</td><td>Cámara</td></tr>
+      <tr><td>Internet</td><td>No obligatorio</td></tr>
+    </table>
+    <h3>1-3. Permisos</h3>
+    <p>En el primer inicio, la aplicación solicita permiso de cámara. Si usted lo rechaza, no podrá usar el escaneo y tendrá que ingresar los códigos manualmente.</p>
+    <div class="callout info">
+      <strong>Almacenamiento de datos</strong><br>
+      El maestro, el historial y la configuración se administran automáticamente dentro de la aplicación. Para sacar una copia, use Exportar o Compartir desde la pantalla de Configuración.
+    </div>
+  </section>
+
+  <section id="sec2">
+    <h2>2. Instalación y configuración inicial</h2>
+    <h3>2-1. Instalación</h3>
+    <p>Instale la aplicación desde Google Play Store y abra Quantiventra desde su ícono.</p>
+    <h3>2-2. Primer uso</h3>
+    <ol>
+      <li>Abra la aplicacion.</li>
+      <li>Permita el uso de la cámara.</li>
+      <li>Si desea trabajar con un maestro, abra Configuración y seleccione <strong>Importar CSV maestro</strong>.</li>
+      <li>Después de eso ya puede empezar a escanear, registrar y guardar.</li>
+    </ol>
+    <h3>2-3. Cómo se manejan los datos</h3>
+    <p>En el uso normal no es necesario conocer la estructura interna del almacenamiento. El usuario solo necesita importar un CSV cuando quiera cargar un maestro y exportar o compartir cuando quiera sacar datos de la aplicación.</p>
+    <div class="callout info">
+      <strong>Qué debe hacer el usuario</strong><br>
+      Use <strong>Importar CSV maestro</strong> para cargar datos maestros. Use <strong>Exportar todos los datos</strong> o <strong>Compartir historial</strong> para sacar archivos de la aplicación.
+    </div>
+  </section>
+
+  <section id="sec3">
+    <h2>3. Creación e importación del CSV maestro</h2>
+    <div class="callout success">
+      <strong>Ventaja de preparar el maestro</strong><br>
+      Cuando el CSV maestro ya está importado, el nombre del artículo y el stock teórico aparecen automáticamente después del escaneo. Esto ahorra tiempo y reduce errores.
+    </div>
+    <h3>3-1. Dos formas de preparar el CSV maestro (con nombres de columna)</h3>
+    <h4>Metodo A: crear desde cero en Excel o Google Sheets</h4>
+    <ol>
+      <li>Abra Excel o Google Sheets en su PC.</li>
+      <li>No escriba manualmente los encabezados. Copie y pegue exactamente la linea mostrada en <strong>3-3 Especificacion de columnas (nombres de columna)</strong>.</li>
+      <li>Ingrese los datos a partir de la segunda fila.</li>
+      <li>Guarde el archivo como <code>quantiventra_master.csv</code> en formato <code>CSV UTF-8</code>.</li>
+    </ol>
+    <h4>Metodo B: crear una plantilla desde la app</h4>
+    <ol>
+      <li>Abra la app y registre un articulo de ejemplo.</li>
+      <li>Entre a Configuracion y ejecute <strong>Exportar todos los datos</strong>.</li>
+      <li>Envie o copie el archivo <code>quantiventra_master_export.csv</code> a su PC.</li>
+      <li>Abra ese archivo en Excel y use la fila de ejemplo como guia. Si ya tiene una tabla preparada, pegue sus datos en las columnas correspondientes.</li>
+      <li>Guarde de nuevo como <code>CSV UTF-8</code>.</li>
+      <li>Regrese a la app y use <strong>Configuracion -> Importar CSV maestro</strong>.</li>
+      <li>Verifique que el nombre del articulo y el stock teorico aparezcan correctamente.</li>
+    </ol>
+    <h3>3-2. Nombre del archivo y requisitos</h3>
+    <table>
+      <tr><th>Elemento</th><th>Descripcion</th></tr>
+      <tr><td>Nombre del archivo</td><td><code>quantiventra_master.csv</code></td></tr>
+      <tr><td>Codificacion</td><td>UTF-8 recomendado</td></tr>
+      <tr><td>Salto de linea</td><td>LF o CRLF</td></tr>
+      <tr><td>Importacion</td><td>Desde <code>Configuracion -> Importar CSV maestro</code></td></tr>
+    </table>
+    <h3>3-3. Especificacion de columnas (nombres de columna)</h3>
+    <p>La primera fila es el encabezado. Copie y pegue exactamente la linea siguiente. Los cinco nombres de columna son obligatorios.</p>
+    <pre>joint_code,barcode,name,theoretical_stock,actual_stock_total</pre>
+    <div class="callout info">
+      <strong>Aunque el codigo del cliente este desactivado, siga usando las 5 columnas</strong><br>
+      La configuracion inicial es <strong>codigo del cliente OFF</strong>. Si trabaja solo con su propio codigo, deje vacia la columna <code>joint_code</code>. Si tambien usa codigo del cliente, rellene esa columna. Si el maestro importado contiene datos en <code>joint_code</code>, la aplicacion activa ese modo automaticamente al iniciar.
+    </div>
+    <table>
+      <tr><th>Columna</th><th>Obligatoria</th><th>Descripcion</th></tr>
+      <tr><td><code>joint_code</code></td><td>No</td><td>Codigo del cliente o socio comercial.</td></tr>
+      <tr><td><code>barcode</code></td><td>Si</td><td>Codigo propio o codigo de barras. Debe ser unico.</td></tr>
+      <tr><td><code>name</code></td><td>Si</td><td>Nombre del articulo. Si contiene comas, use comillas dobles.</td></tr>
+      <tr><td><code>theoretical_stock</code></td><td>No</td><td>Stock teorico. Use 0 si no lo conoce.</td></tr>
+      <tr><td><code>actual_stock_total</code></td><td>No</td><td>Total acumulado registrado. Para el primer inventario, normalmente 0.</td></tr>
+    </table>
+    <h3>3-4. Ejemplo</h3>
+    <pre>joint_code,barcode,name,theoretical_stock,actual_stock_total
+ABC-001,4912345678904,Tornillo hexagonal M6x20,500,0
+ABC-002,4912345678911,Tuerca hexagonal M6,1000,0
+,4912345678928,Arandela de presion M6,800,0
+XY-999,4912345678935,"Juego de tornillos, M4",200,0</pre>
+    <div class="callout warn">
+      <strong>Importante sobre la codificacion</strong><br>
+      Guarde siempre en UTF-8. Otros formatos pueden provocar caracteres dañados.
+    </div>
+    <h3>3-5. Como importar el CSV maestro</h3>
+    <p>No necesita copiar el archivo a una carpeta fija. Seleccionelo directamente desde la pantalla de configuracion.</p>
+    <ol>
+      <li>Guarde el CSV en el telefono, en Drive o envielo por correo.</li>
+      <li>En la app abra <strong>Configuracion -> Importar CSV maestro</strong>.</li>
+      <li>Seleccione el archivo en el selector del sistema.</li>
+      <li>El maestro interno se reemplazara con el archivo elegido.</li>
+      <li>Si vuelve a editar el archivo mas adelante, importe otra vez la version actualizada.</li>
+    </ol>
+  </section>
+
+  <section id="sec4">
+    <h2>4. Pantalla principal y campos</h2>
+    <p>La pantalla principal se divide en barra superior, area de camara, formulario de entrada, historial de guardado y teclado numerico.</p>
+    <h3>4-1. Barra superior</h3>
+    <table>
+      <tr><th>Elemento</th><th>Funcion</th></tr>
+      <tr><td>Nombre de la app</td><td>Solo visualizacion</td></tr>
+      <tr><td>Icono de configuracion</td><td>Abre configuracion</td></tr>
+      <tr><td>Interruptor ON/OFF</td><td>Activa o desactiva la vista de camara</td></tr>
+    </table>
+    <h3>4-2. Area de camara</h3>
+    <p>Lee codigos en tiempo real. La aplicacion valida el mismo codigo en 3 cuadros consecutivos antes de aceptarlo, para reducir lecturas falsas.</p>
+    <div class="callout info">
+      <strong>Precision de lectura</strong><br>
+      La app prioriza codigos cercanos al centro de la pantalla. Mantenga el codigo alineado al centro.
+    </div>
+    <h3>4-3. Campos de entrada</h3>
+    <table>
+      <tr><th>Campo</th><th>Descripcion</th></tr>
+      <tr><td>Location</td><td>Ubicacion del estante. Puede ingresarse manualmente o por lectura.</td></tr>
+      <tr><td>Barcode / Own Code</td><td>Codigo escaneado o capturado. Si existe en el maestro, la app completa los datos.</td></tr>
+      <tr><td>Item Name</td><td>Nombre del articulo. Editable en nuevo registro, edicion de nombre o busqueda por nombre.</td></tr>
+      <tr><td>Qty</td><td>Cantidad contada en esta captura.</td></tr>
+      <tr><td>Theoretical</td><td>Stock teorico del maestro.</td></tr>
+      <tr><td>Registered</td><td>Total acumulado registrado. Puede editarse.</td></tr>
+      <tr><td>Calc</td><td>Calculadora auxiliar.</td></tr>
+      <tr><td>Calc Log</td><td>Historial de sumas realizadas.</td></tr>
+      <tr><td>Memo</td><td>Nota opcional guardada en el CSV.</td></tr>
+    </table>
+    <h3>4-4. Teclado</h3>
+    <table>
+      <tr><th>Tecla</th><th>Accion</th></tr>
+      <tr><td>0 a 9 / 00</td><td>Ingresa numeros en el campo activo</td></tr>
+      <tr><td>- / x</td><td>Resta o multiplicacion en expresiones</td></tr>
+      <tr><td>CLR</td><td>Limpia el campo activo</td></tr>
+      <tr><td>ENT / Search / Confirm</td><td>Busca, confirma o guarda segun el foco</td></tr>
+      <tr><td>Add</td><td>Suma el resultado de la calculadora a Qty</td></tr>
+      <tr><td>Save</td><td>Guarda los datos actuales</td></tr>
+    </table>
+  </section>
+
+  <section id="sec5">
+    <h2>5. Flujo basico de uso</h2>
+    <h3>5-1. Flujo estandar de inventario</h3>
+    <h4>Paso 1: definir la ubicacion</h4>
+    <ol>
+      <li>Toque el boton de lectura de ubicacion.</li>
+      <li>Lea el QR del estante o escriba la ubicacion manualmente.</li>
+      <li>La ubicacion permanece hasta que usted la cambie.</li>
+    </ol>
+    <h4>Paso 2: leer el codigo del producto</h4>
+    <ol>
+      <li>Confirme que la camara este activada.</li>
+      <li>Apunte al codigo del producto.</li>
+      <li>Si el articulo existe en el maestro, se completan nombre y stock teorico.</li>
+      <li>Si el modo de codigo del cliente esta activo y hay ambiguedad, aparecera un dialogo de seleccion.</li>
+      <li>Si el codigo no existe en el maestro, aparecera el dialogo para registrar un nuevo articulo.</li>
+    </ol>
+    <h4>Paso 3: ingresar cantidad</h4>
+    <ol>
+      <li>El foco pasa automaticamente a Qty.</li>
+      <li>Ingrese la cantidad con el teclado.</li>
+      <li>Si necesita sumar varias cantidades, use la calculadora.</li>
+    </ol>
+    <h4>Paso 4: guardar</h4>
+    <ol>
+      <li>Agregue un memo si es necesario.</li>
+      <li>Toque ENT o Save.</li>
+      <li>La app reproduce un sonido y el registro entra al historial.</li>
+    </ol>
+    <h3>5-2. Uso de la calculadora</h3>
+    <ol>
+      <li>Toque el campo Calc.</li>
+      <li>Ingrese valores como <code>30</code>, Add, luego <code>25</code>, Add.</li>
+      <li>Tambien puede usar expresiones como <code>3*10</code>.</li>
+      <li>Cuando el total sea correcto, guarde normalmente.</li>
+    </ol>
+    <h3>5-3. Limpiar</h3>
+    <p>El boton Clear borra codigo, nombre, cantidad, memo y el log de calculo. La ubicacion no se borra automaticamente.</p>
+  </section>
+
+  <section id="sec6">
+    <h2>6. Operaciones avanzadas</h2>
+    <h3>6-1. Busqueda por nombre</h3>
+    <ol>
+      <li>Active el modo de busqueda por nombre.</li>
+      <li>Escriba una palabra clave en el campo del nombre.</li>
+      <li>Toque Search.</li>
+      <li>Seleccione el articulo en la lista.</li>
+      <li>Ingrese cantidad y guarde.</li>
+    </ol>
+    <h3>6-2. Busqueda continua</h3>
+    <p>Cuando el modo continuo esta activado, la busqueda por nombre sigue habilitada despues de cada guardado. Es util para registrar varios articulos por nombre en la misma ubicacion.</p>
+    <h3>6-3. Registro de articulos nuevos</h3>
+    <p>Si se escanea un codigo que todavia no esta en el maestro, la aplicacion muestra un dialogo de nuevo registro.</p>
+    <ol>
+      <li>Elija registrar el articulo.</li>
+      <li>Si hace falta, la app genera un codigo con prefijo <code>99999</code>.</li>
+      <li>Ingrese el nombre del articulo.</li>
+      <li>Ingrese la cantidad y guarde. El maestro se actualizara.</li>
+    </ol>
+    <h3>6-4. Edicion del nombre del articulo</h3>
+    <ol>
+      <li>Cargue el articulo mediante lectura o busqueda.</li>
+      <li>Toque <strong>Edit Name</strong>.</li>
+      <li>Edite el nombre en el campo correspondiente.</li>
+      <li>Guarde para actualizar el maestro.</li>
+    </ol>
+    <h3>6-5. Edicion del total registrado</h3>
+    <ol>
+      <li>Cargue el articulo.</li>
+      <li>Toque Edit junto a Registered.</li>
+      <li>Ingrese el nuevo valor y confirme.</li>
+    </ol>
+    <div class="callout warn">
+      <strong>Atencion</strong><br>
+      La edicion del total registrado solo modifica el maestro. El historial ya guardado no se reescribe.
+    </div>
+    <h3>6-6. Eleccion entre codigo propio y codigo del cliente</h3>
+    <p>Cuando el modo de codigo del cliente esta activado, algunos codigos pueden coincidir con mas de un campo. En ese caso la app muestra un dialogo para evitar abrir el articulo equivocado.</p>
+  </section>
+
+  <section id="sec7">
+    <h2>7. Historial</h2>
+    <h3>7-1. Visualizacion del historial</h3>
+    <p>La barra inferior muestra los registros mas recientes. El boton History abre la lista completa con fecha, hora, nombre, ubicacion, memo, cantidad y stock teorico.</p>
+    <h3>7-2. CSV de historial</h3>
+    <p>Cada guardado agrega una fila a <code>scan_history.csv</code>.</p>
+    <table>
+      <tr><th>Columna</th><th>Descripcion</th></tr>
+      <tr><td><code>date</code></td><td>Fecha de guardado</td></tr>
+      <tr><td><code>time</code></td><td>Hora de guardado</td></tr>
+      <tr><td><code>joint_code</code></td><td>Codigo del cliente</td></tr>
+      <tr><td><code>barcode</code></td><td>Codigo propio o codigo de barras</td></tr>
+      <tr><td><code>name</code></td><td>Nombre del articulo</td></tr>
+      <tr><td><code>actual_stock</code></td><td>Cantidad contada en esta captura</td></tr>
+      <tr><td><code>location</code></td><td>Ubicacion</td></tr>
+      <tr><td><code>memo</code></td><td>Nota</td></tr>
+      <tr><td><code>theoretical_stock</code></td><td>Stock teorico al momento de guardar</td></tr>
+    </table>
+    <div class="callout warn">
+      <strong>Compatibilidad con versiones anteriores</strong><br>
+      Si la app detecta un historial de formato antiguo, crea automaticamente un respaldo llamado <code>scan_history_old_[fecha_hora].csv</code> antes de iniciar el formato nuevo.
+    </div>
+  </section>
+
+  <section id="sec8">
+    <h2>8. Configuracion</h2>
+    <p>Abra la configuracion desde el icono superior.</p>
+    <h3>8-1. Importar CSV maestro</h3>
+    <p>Seleccione un CSV desde el dispositivo, la carpeta Descargas o la nube para actualizar el maestro interno. La importación se aplica de inmediato, así que no hace falta ejecutar una recarga aparte.</p>
+    <h3>8-2. Borrar todo el historial</h3>
+    <p>Elimina <code>scan_history.csv</code> y reinicia el historial.</p>
+    <div class="callout danger">
+      <strong>Esta accion no se puede deshacer</strong><br>
+      Exporte los datos antes de borrar si quiere conservar una copia.
+    </div>
+    <h3>8-3. Usar codigo del cliente</h3>
+    <p>Cuando esta opcion esta activa, la app tambien trabaja con el campo de codigo del cliente.</p>
+    <table>
+      <tr><th>Estado</th><th>Comportamiento</th></tr>
+      <tr><td>Desactivado</td><td>Solo se usa codigo propio</td></tr>
+      <tr><td>Activado</td><td>Se habilita el campo de codigo del cliente y el dialogo de eleccion cuando hace falta</td></tr>
+    </table>
+    <h3>8-4. Reglas del codigo propio</h3>
+    <table>
+      <tr><th>Configuracion</th><th>Descripcion</th></tr>
+      <tr><td>Modo de caracteres</td><td>Alfanumerico, solo numerico o sin restriccion</td></tr>
+      <tr><td>Longitud minima</td><td>Longitud minima permitida</td></tr>
+      <tr><td>Longitud maxima</td><td>Longitud maxima permitida</td></tr>
+    </table>
+    <h3>8-5. Tipos de escaneo de camara</h3>
+    <p>Puede activar o desactivar formatos como CODE39, CODE128, EAN13 y QRCODE para producto y ubicacion.</p>
+    <h3>8-6. Importacion y exportacion de datos</h3>
+    <table>
+      <tr><th>Elemento</th><th>Descripcion</th></tr>
+      <tr><td>Importar CSV maestro</td><td>Reemplaza el maestro interno con el CSV seleccionado</td></tr>
+      <tr><td>Compartir historial</td><td>Adjunta historial y maestro a correo o mensajeria</td></tr>
+      <tr><td>Exportar todos los datos</td><td>Guarda historial y maestro en una carpeta elegida</td></tr>
+    </table>
+    <div class="callout info">
+      <strong>Seleccion de comillas en CSV</strong><br>
+      Antes de exportar puede elegir entre <strong>poner comillas solo cuando haga falta</strong> o <strong>poner comillas en todos los campos</strong>. La eleccion se aplica a ambos CSV exportados.
+    </div>
+    <h3>8-7. Idioma y manual</h3>
+    <p>La aplicacion admite japones, ingles, chino simplificado, chino tradicional, coreano, hindi, vietnamita, italiano, portugues de Brasil, espanol de Latinoamerica, indonesio y tailandes.</p>
+    <p>Despues de cambiar el idioma, toque Save en la pantalla de configuracion y vuelva a abrir el manual.</p>
+  </section>
+
+  <section id="sec9">
+    <h2>9. Archivos y respaldo</h2>
+    <h3>9-1. Archivos generados</h3>
+    <table>
+      <tr><th>Archivo</th><th>Cuando se crea o actualiza</th><th>Uso</th></tr>
+      <tr><td><code>quantiventra_master.csv</code></td><td>En la importacion y en los guardados que modifican el maestro</td><td>Maestro de articulos</td></tr>
+      <tr><td><code>scan_history.csv</code></td><td>En cada guardado</td><td>Historial completo</td></tr>
+      <tr><td><code>settings.json</code></td><td>Al guardar configuracion</td><td>Reglas, camara e idioma</td></tr>
+      <tr><td><code>scan_history_old_[fecha_hora].csv</code></td><td>Durante migracion de formato</td><td>Respaldo de historial antiguo</td></tr>
+    </table>
+    <h3>9-2. Procedimiento recomendado de respaldo</h3>
+    <ol>
+      <li>Abra Configuracion y toque <strong>Exportar todos los datos</strong>.</li>
+      <li>Seleccione el formato de comillas del CSV.</li>
+      <li>Elija la carpeta de salida.</li>
+      <li>Guarde el historial y el maestro exportados en un lugar seguro.</li>
+    </ol>
+  </section>
+
+  <section id="sec10">
+    <h2>10. Solucion de problemas</h2>
+    <h3>El codigo no se escanea</h3>
+    <ul>
+      <li>Confirme que la camara este activada.</li>
+      <li>Mantenga el codigo cerca del centro de la pantalla.</li>
+      <li>Revise que el formato correcto este habilitado en configuracion.</li>
+      <li>Si el codigo esta dañado, use captura manual.</li>
+      <li>Verifique el permiso de camara en Android.</li>
+    </ul>
+    <h3>El nombre del articulo no aparece despues de importar el CSV</h3>
+    <ul>
+      <li>Compruebe que selecciono el archivo correcto.</li>
+      <li>Revise el encabezado: <code>joint_code,barcode,name,theoretical_stock,actual_stock_total</code>.</li>
+      <li>Asegure que el archivo este en UTF-8.</li>
+      <li>Si quiere cambiar a otro CSV, ejecute <strong>Importar CSV maestro</strong> otra vez en Configuración y seleccione el archivo.</li>
+    </ul>
+    <h3>Fallo al guardar</h3>
+    <ul>
+      <li>Confirme que exista un codigo o un nombre ingresado.</li>
+      <li>Revise que el dispositivo tenga espacio libre.</li>
+    </ul>
+    <h3>La lectura de ubicacion no fija el estante</h3>
+    <ul>
+      <li>Verifique el formato de lectura de ubicacion.</li>
+      <li>Si su etiqueta usa otro tipo de codigo, cambielo en configuracion.</li>
+    </ul>
+    <h3>No encuentro los archivos exportados</h3>
+    <p>Busquelos en la carpeta elegida durante la exportacion. Los nombres habituales son <code>scan_history_[timestamp].csv</code> y <code>quantiventra_master_export.csv</code>.</p>
+    <h3>La calculadora no aplica el resultado</h3>
+    <ul>
+      <li>Use Add para sumar el resultado a Qty.</li>
+      <li>Evite caracteres de ancho completo.</li>
+      <li>La expresion no puede empezar con un operador, por ejemplo <code>*5</code>.</li>
+    </ul>
+  </section>
+
+  <section id="sec11">
+    <h2>11. Terminos y aviso legal</h2>
+    <p>Al utilizar Quantiventra usted acepta los terminos siguientes.</p>
+    <p><strong>Licencia:</strong> la aplicacion puede usarse para inventario y conteo de stock por personas o empresas. Se prohibe la ingenieria inversa, redistribucion no autorizada y modificaciones indebidas.</p>
+    <p><strong>Datos del usuario:</strong> los archivos generados por la aplicacion permanecen en el dispositivo del usuario. La app no envia datos a servidores externos.</p>
+    <p><strong>Uso prohibido:</strong> se prohibe utilizar la aplicacion con fines ilegales, fraude o violacion de derechos de terceros.</p>
+    <p><strong>Exclusion de responsabilidad:</strong> la aplicacion se ofrece tal como esta. El desarrollador no es responsable por perdida de datos, interrupciones del negocio ni daños directos o indirectos derivados de su uso.</p>
+    <p><strong>Privacidad:</strong> no se recopila informacion personal. La camara se usa solo para leer codigos. No se graba ni se transmite video.</p>
+    <p><strong>Derechos de autor:</strong> Copyright © Quantiventra. Todos los derechos reservados.</p>
+    <p><strong>Cambios:</strong> este manual y estos terminos pueden actualizarse sin aviso previo.</p>
+  </section>
+</div>
+</body>
+</html>

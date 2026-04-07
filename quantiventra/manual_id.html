@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quantiventra Panduan Pengguna</title>
+<style>
+  :root{--primary:#006C9C;--primary-dark:#004A6E;--border:#D0E8F5;--bg:#F8FDFF;--surface:#FFFFFF;--text:#1A1A2E;--info:#E8F4FD;--warn:#FFF8E1;--danger:#FFEBEE;--success:#E8F5E9}
+  *{box-sizing:border-box} body{margin:0;font-family:Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.8}
+  header{background:linear-gradient(135deg,var(--primary-dark),var(--primary));color:#fff;padding:44px 20px}
+  header h1{margin:0 0 8px;font-size:34px} header p{margin:4px 0}
+  .wrap{max-width:980px;margin:0 auto;padding:24px 20px 64px}
+  nav,section{background:var(--surface);border:1px solid var(--border);border-radius:8px}
+  nav{padding:20px 24px;margin:24px 0 40px}
+  nav h2{margin:0 0 12px;color:var(--primary-dark)} nav a{display:block;color:var(--text);text-decoration:none;padding:4px 0}
+  section{padding:24px;margin:0 0 28px}
+  h2{margin:0 0 18px;color:var(--primary-dark);border-bottom:2px solid var(--border);padding-bottom:8px}
+  h3{margin:24px 0 10px;color:var(--primary)} h4{margin:18px 0 8px}
+  p,li{margin:0 0 10px} ul,ol{padding-left:22px}
+  table{width:100%;border-collapse:collapse;margin:16px 0;background:#fff} th,td{border:1px solid var(--border);padding:10px 12px;text-align:left;vertical-align:top}
+  th{background:var(--primary);color:#fff} code,pre{font-family:Consolas,monospace} code{background:#E8F4FD;padding:2px 6px;border-radius:4px}
+  pre{background:#0F1923;color:#C8E6FF;padding:16px;border-radius:8px;overflow:auto}
+  .callout{padding:14px 16px;border-radius:8px;margin:16px 0;border:1px solid var(--border)}
+  .info{background:var(--info)} .warn{background:var(--warn)} .danger{background:var(--danger)} .success{background:var(--success)}
+</style>
+</head>
+<body>
+<header id="top">
+  <h1>Quantiventra</h1>
+  <p>Panduan pengguna aplikasi inventaris dengan pemindaian kode</p>
+  <p>Android 7.0 (API 24) atau lebih baru / dapat digunakan tanpa internet</p>
+</header>
+
+<div class="wrap">
+  <nav>
+    <h2>Daftar isi</h2>
+    <a href="#sec1">1. Pendahuluan</a>
+    <a href="#sec2">2. Instalasi dan pengaturan awal</a>
+    <a href="#sec3">3. Membuat dan mengimpor CSV master</a>
+    <a href="#sec4">4. Layar utama dan kolom input</a>
+    <a href="#sec5">5. Alur kerja dasar</a>
+    <a href="#sec6">6. Operasi lanjutan</a>
+    <a href="#sec7">7. Riwayat</a>
+    <a href="#sec8">8. Pengaturan</a>
+    <a href="#sec9">9. File dan pencadangan</a>
+    <a href="#sec10">10. Pemecahan masalah</a>
+    <a href="#sec11">11. Ketentuan dan penafian</a>
+  </nav>
+
+  <section id="sec1">
+    <h2>1. Pendahuluan</h2>
+    <h3>1-1. Tentang aplikasi ini</h3>
+    <p>Quantiventra adalah aplikasi Android untuk menghitung stok dengan bantuan kamera ponsel. Aplikasi ini membaca barcode atau QR code, lalu membantu Anda mencatat jumlah secara cepat.</p>
+    <p>Setelah kode dibaca, Anda memasukkan jumlah, menambahkan memo bila perlu, lalu menyimpan. Data dapat diekspor sebagai CSV untuk Excel, Google Sheets, atau sistem lain.</p>
+    <h3>1-2. Persyaratan sistem</h3>
+    <table>
+      <tr><th>Item</th><th>Persyaratan</th></tr>
+      <tr><td>Sistem operasi</td><td>Android 7.0 (API 24) atau lebih baru</td></tr>
+      <tr><td>Kamera</td><td>Wajib untuk pemindaian</td></tr>
+      <tr><td>Ruang kosong</td><td>Disarankan 50 MB atau lebih</td></tr>
+      <tr><td>Izin</td><td>Kamera</td></tr>
+      <tr><td>Internet</td><td>Tidak wajib</td></tr>
+    </table>
+    <h3>1-3. Izin aplikasi</h3>
+    <p>Saat pertama kali dijalankan aplikasi meminta izin kamera. Jika izin ditolak, pemindaian tidak bisa digunakan dan Anda harus memasukkan kode secara manual.</p>
+    <div class="callout info">
+      <strong>Penyimpanan data</strong><br>
+      Data master, riwayat, dan pengaturan dikelola otomatis di dalam aplikasi. Untuk membawa data keluar, gunakan ekspor atau berbagi dari layar pengaturan.
+    </div>
+  </section>
+
+  <section id="sec2">
+    <h2>2. Instalasi dan pengaturan awal</h2>
+    <h3>2-1. Instalasi</h3>
+    <p>Instal aplikasi dari Google Play Store lalu buka Quantiventra dari ikonnya.</p>
+    <h3>2-2. Penggunaan pertama</h3>
+    <ol>
+      <li>Buka aplikasi.</li>
+      <li>Izinkan penggunaan kamera.</li>
+      <li>Jika ingin memakai data master, buka Pengaturan dan pilih <strong>Impor CSV master</strong>.</li>
+      <li>Setelah itu Anda dapat mulai memindai, mencatat, dan menyimpan.</li>
+    </ol>
+    <h3>2-3. Cara data ditangani</h3>
+    <p>Dalam penggunaan normal Anda tidak perlu mengetahui struktur penyimpanan internal. Pengguna hanya perlu mengimpor CSV saat ingin memuat master dan mengekspor atau berbagi saat ingin mengeluarkan data dari aplikasi.</p>
+    <div class="callout info">
+      <strong>Apa yang perlu dilakukan pengguna</strong><br>
+      Gunakan <strong>Impor CSV master</strong> untuk memuat data master. Gunakan <strong>Ekspor semua data</strong> atau <strong>Bagikan riwayat</strong> saat ingin mengambil file dari aplikasi.
+    </div>
+  </section>
+
+  <section id="sec3">
+    <h2>3. Membuat dan mengimpor CSV master</h2>
+    <div class="callout success">
+      <strong>Manfaat menyiapkan master</strong><br>
+      Jika CSV master sudah diimpor, nama barang dan stok teoritis akan tampil otomatis setelah pemindaian. Ini mengurangi pengetikan manual dan membantu mencegah kesalahan.
+    </div>
+    <h3>3-1. Dua cara menyiapkan CSV master (dengan nama kolom)</h3>
+    <h4>Metode A: membuat dari nol di Excel atau Google Sheets</h4>
+    <ol>
+      <li>Buka Excel atau Google Sheets di PC.</li>
+      <li>Jangan mengetik header secara manual. Salin dan tempel persis baris yang ada di <strong>3-3 Spesifikasi kolom (nama kolom)</strong>.</li>
+      <li>Isi data mulai dari baris kedua.</li>
+      <li>Simpan file dengan nama <code>quantiventra_master.csv</code> dalam format <code>CSV UTF-8</code>.</li>
+    </ol>
+    <h4>Metode B: membuat template dari aplikasi</h4>
+    <ol>
+      <li>Buka aplikasi dan daftarkan satu item contoh.</li>
+      <li>Masuk ke Pengaturan lalu jalankan <strong>Ekspor semua data</strong>.</li>
+      <li>Kirim atau salin file <code>quantiventra_master_export.csv</code> ke PC.</li>
+      <li>Buka file itu di Excel dan gunakan baris contoh sebagai panduan. Jika Anda sudah punya tabel barang, tempelkan data ke kolom yang sesuai.</li>
+      <li>Simpan kembali sebagai <code>CSV UTF-8</code>.</li>
+      <li>Kembali ke aplikasi lalu gunakan <strong>Pengaturan -> Impor CSV master</strong>.</li>
+      <li>Pastikan nama barang dan stok teoritis tampil dengan benar.</li>
+    </ol>
+    <h3>3-2. Nama file dan persyaratan</h3>
+    <table>
+      <tr><th>Item</th><th>Keterangan</th></tr>
+      <tr><td>Nama file</td><td><code>quantiventra_master.csv</code></td></tr>
+      <tr><td>Encoding</td><td>UTF-8 disarankan</td></tr>
+      <tr><td>Baris baru</td><td>LF atau CRLF</td></tr>
+      <tr><td>Impor</td><td>Dari <code>Pengaturan -> Impor CSV master</code></td></tr>
+    </table>
+    <h3>3-3. Spesifikasi kolom (nama kolom)</h3>
+    <p>Baris pertama adalah header. Salin dan tempel persis satu baris berikut. Kelima nama kolom wajib ada.</p>
+    <pre>joint_code,barcode,name,theoretical_stock,actual_stock_total</pre>
+    <div class="callout info">
+      <strong>Walaupun kode partner masih OFF, tetap gunakan 5 kolom yang sama</strong><br>
+      Pengaturan awal aplikasi adalah <strong>kode partner OFF</strong>. Jika Anda hanya memakai kode sendiri, biarkan kolom <code>joint_code</code> kosong. Jika Anda juga memakai kode partner, isi kolom tersebut. Bila master yang diimpor berisi data pada <code>joint_code</code>, aplikasi akan menyalakan mode itu secara otomatis saat dibuka.
+    </div>
+    <table>
+      <tr><th>Kolom</th><th>Wajib</th><th>Keterangan</th></tr>
+      <tr><td><code>joint_code</code></td><td>Tidak</td><td>Kode partner atau pelanggan.</td></tr>
+      <tr><td><code>barcode</code></td><td>Ya</td><td>Kode sendiri atau barcode. Harus unik.</td></tr>
+      <tr><td><code>name</code></td><td>Ya</td><td>Nama barang. Jika ada koma, gunakan tanda kutip ganda.</td></tr>
+      <tr><td><code>theoretical_stock</code></td><td>Tidak</td><td>Stok teoritis. Gunakan 0 jika tidak diketahui.</td></tr>
+      <tr><td><code>actual_stock_total</code></td><td>Tidak</td><td>Total tercatat yang sudah terkumpul. Untuk inventaris pertama biasanya 0.</td></tr>
+    </table>
+    <h3>3-4. Contoh</h3>
+    <pre>joint_code,barcode,name,theoretical_stock,actual_stock_total
+ABC-001,4912345678904,Baut segi enam M6x20,500,0
+ABC-002,4912345678911,Mur segi enam M6,1000,0
+,4912345678928,Ring pegas M6,800,0
+XY-999,4912345678935,"Set baut, M4",200,0</pre>
+    <div class="callout warn">
+      <strong>Penting tentang encoding</strong><br>
+      Simpan selalu dalam UTF-8. Format lain dapat menyebabkan karakter rusak.
+    </div>
+    <h3>3-5. Cara mengimpor CSV master</h3>
+    <p>Anda tidak perlu menaruh file di folder tertentu. Pilih langsung dari layar pengaturan.</p>
+    <ol>
+      <li>Simpan CSV di ponsel, Drive, atau kirim lewat email.</li>
+      <li>Di aplikasi buka <strong>Pengaturan -> Impor CSV master</strong>.</li>
+      <li>Pilih file di pemilih file sistem.</li>
+      <li>Master internal akan diganti dengan file yang dipilih.</li>
+      <li>Jika Anda mengedit file lagi nanti, impor ulang versi terbarunya.</li>
+    </ol>
+  </section>
+
+  <section id="sec4">
+    <h2>4. Layar utama dan kolom input</h2>
+    <p>Layar utama terdiri dari bilah atas, area kamera, formulir input, riwayat simpan, dan keypad numerik.</p>
+    <h3>4-1. Bilah atas</h3>
+    <table>
+      <tr><th>Elemen</th><th>Fungsi</th></tr>
+      <tr><td>Nama aplikasi</td><td>Hanya tampilan</td></tr>
+      <tr><td>Ikon pengaturan</td><td>Membuka pengaturan</td></tr>
+      <tr><td>Sakelar ON/OFF</td><td>Mengaktifkan atau menonaktifkan tampilan kamera</td></tr>
+    </table>
+    <h3>4-2. Area kamera</h3>
+    <p>Membaca kode secara real time. Aplikasi memvalidasi kode yang sama selama 3 frame berturut-turut sebelum menerimanya, untuk mengurangi salah baca.</p>
+    <div class="callout info">
+      <strong>Akurasi pembacaan</strong><br>
+      Aplikasi memprioritaskan kode yang berada dekat pusat layar. Usahakan kode tetap berada di tengah.
+    </div>
+    <h3>4-3. Kolom input</h3>
+    <table>
+      <tr><th>Kolom</th><th>Keterangan</th></tr>
+      <tr><td>Location</td><td>Lokasi rak. Dapat diisi manual atau melalui pemindaian.</td></tr>
+      <tr><td>Barcode / Own Code</td><td>Kode hasil pemindaian atau input manual. Jika ada di master, data akan terisi otomatis.</td></tr>
+      <tr><td>Item Name</td><td>Nama barang. Bisa diedit pada pendaftaran baru, edit nama, atau pencarian nama.</td></tr>
+      <tr><td>Qty</td><td>Jumlah yang dihitung pada pencatatan ini.</td></tr>
+      <tr><td>Theoretical</td><td>Stok teoritis dari master.</td></tr>
+      <tr><td>Registered</td><td>Total tercatat yang sudah tersimpan. Dapat diedit.</td></tr>
+      <tr><td>Calc</td><td>Kalkulator bantu.</td></tr>
+      <tr><td>Calc Log</td><td>Riwayat penjumlahan yang dilakukan.</td></tr>
+      <tr><td>Memo</td><td>Catatan opsional yang disimpan ke CSV.</td></tr>
+    </table>
+    <h3>4-4. Keypad</h3>
+    <table>
+      <tr><th>Tombol</th><th>Aksi</th></tr>
+      <tr><td>0 sampai 9 / 00</td><td>Memasukkan angka ke kolom aktif</td></tr>
+      <tr><td>- / x</td><td>Pengurangan atau perkalian pada ekspresi</td></tr>
+      <tr><td>CLR</td><td>Menghapus isi kolom aktif</td></tr>
+      <tr><td>ENT / Search / Confirm</td><td>Mencari, mengonfirmasi, atau menyimpan sesuai fokus</td></tr>
+      <tr><td>Add</td><td>Menambahkan hasil kalkulator ke Qty</td></tr>
+      <tr><td>Save</td><td>Menyimpan data saat ini</td></tr>
+    </table>
+  </section>
+
+  <section id="sec5">
+    <h2>5. Alur kerja dasar</h2>
+    <h3>5-1. Alur inventaris standar</h3>
+    <h4>Langkah 1: tentukan lokasi</h4>
+    <ol>
+      <li>Tekan tombol pemindaian lokasi.</li>
+      <li>Pindai QR code rak atau isi lokasi secara manual.</li>
+      <li>Lokasi tetap tersimpan sampai Anda menggantinya.</li>
+    </ol>
+    <h4>Langkah 2: pindai kode produk</h4>
+    <ol>
+      <li>Pastikan kamera aktif.</li>
+      <li>Arahkan ke kode produk.</li>
+      <li>Jika barang ada di master, nama dan stok teoritis akan terisi.</li>
+      <li>Jika mode kode partner aktif dan terjadi ambiguitas, aplikasi menampilkan dialog pilihan.</li>
+      <li>Jika kode tidak ada di master, akan muncul dialog untuk mendaftarkan barang baru.</li>
+    </ol>
+    <h4>Langkah 3: masukkan jumlah</h4>
+    <ol>
+      <li>Fokus otomatis berpindah ke Qty.</li>
+      <li>Masukkan jumlah dengan keypad.</li>
+      <li>Jika perlu menjumlahkan beberapa hitungan, gunakan kalkulator.</li>
+    </ol>
+    <h4>Langkah 4: simpan</h4>
+    <ol>
+      <li>Tambahkan memo bila perlu.</li>
+      <li>Tekan ENT atau Save.</li>
+      <li>Aplikasi memutar bunyi dan data masuk ke riwayat.</li>
+    </ol>
+    <h3>5-2. Menggunakan kalkulator</h3>
+    <ol>
+      <li>Ketuk kolom Calc.</li>
+      <li>Masukkan angka seperti <code>30</code>, lalu Add, kemudian <code>25</code>, Add.</li>
+      <li>Anda juga bisa memakai ekspresi seperti <code>3*10</code>.</li>
+      <li>Jika total sudah benar, simpan seperti biasa.</li>
+    </ol>
+    <h3>5-3. Membersihkan layar</h3>
+    <p>Tombol Clear menghapus kode, nama, jumlah, memo, dan log kalkulator. Kolom lokasi tidak dihapus otomatis.</p>
+  </section>
+
+  <section id="sec6">
+    <h2>6. Operasi lanjutan</h2>
+    <h3>6-1. Pencarian berdasarkan nama</h3>
+    <ol>
+      <li>Aktifkan mode pencarian nama.</li>
+      <li>Ketik kata kunci di kolom nama barang.</li>
+      <li>Tekan Search.</li>
+      <li>Pilih barang dari daftar hasil.</li>
+      <li>Masukkan jumlah lalu simpan.</li>
+    </ol>
+    <h3>6-2. Pencarian berkelanjutan</h3>
+    <p>Jika mode berkelanjutan aktif, pencarian nama tetap menyala setelah setiap penyimpanan. Ini berguna jika Anda mencatat banyak barang berdasarkan nama di lokasi yang sama.</p>
+    <h3>6-3. Pendaftaran barang baru</h3>
+    <p>Jika kode yang dipindai belum ada di master, aplikasi menampilkan dialog pendaftaran baru.</p>
+    <ol>
+      <li>Pilih untuk mendaftarkan barang.</li>
+      <li>Jika perlu, aplikasi akan membuat kode dengan awalan <code>99999</code>.</li>
+      <li>Masukkan nama barang.</li>
+      <li>Masukkan jumlah lalu simpan. Data master akan diperbarui.</li>
+    </ol>
+    <h3>6-4. Mengedit nama barang</h3>
+    <ol>
+      <li>Muat barang dengan pemindaian atau pencarian.</li>
+      <li>Tekan <strong>Edit Name</strong>.</li>
+      <li>Ubah nama pada kolom yang tersedia.</li>
+      <li>Simpan untuk memperbarui master.</li>
+    </ol>
+    <h3>6-5. Mengedit total tercatat</h3>
+    <ol>
+      <li>Muat barangnya.</li>
+      <li>Tekan Edit di samping Registered.</li>
+      <li>Masukkan nilai baru lalu terapkan.</li>
+    </ol>
+    <div class="callout warn">
+      <strong>Perhatian</strong><br>
+      Pengeditan total tercatat hanya mengubah file master. Riwayat yang sudah tersimpan tidak ditulis ulang.
+    </div>
+    <h3>6-6. Memilih kode sendiri atau kode partner</h3>
+    <p>Jika mode kode partner aktif, beberapa kode bisa memiliki lebih dari satu arti. Dalam keadaan itu aplikasi menampilkan dialog pilihan agar barang yang terbuka tidak salah.</p>
+  </section>
+
+  <section id="sec7">
+    <h2>7. Riwayat</h2>
+    <h3>7-1. Melihat riwayat</h3>
+    <p>Bagian bawah layar menampilkan catatan terbaru. Tombol History membuka daftar lengkap yang berisi tanggal, waktu, nama, lokasi, memo, jumlah, dan stok teoritis.</p>
+    <h3>7-2. CSV riwayat</h3>
+    <p>Setiap penyimpanan menambahkan satu baris ke <code>scan_history.csv</code>.</p>
+    <table>
+      <tr><th>Kolom</th><th>Keterangan</th></tr>
+      <tr><td><code>date</code></td><td>Tanggal penyimpanan</td></tr>
+      <tr><td><code>time</code></td><td>Waktu penyimpanan</td></tr>
+      <tr><td><code>joint_code</code></td><td>Kode partner</td></tr>
+      <tr><td><code>barcode</code></td><td>Kode sendiri / barcode</td></tr>
+      <tr><td><code>name</code></td><td>Nama barang</td></tr>
+      <tr><td><code>actual_stock</code></td><td>Jumlah pada pencatatan ini</td></tr>
+      <tr><td><code>location</code></td><td>Lokasi</td></tr>
+      <tr><td><code>memo</code></td><td>Catatan</td></tr>
+      <tr><td><code>theoretical_stock</code></td><td>Stok teoritis saat disimpan</td></tr>
+    </table>
+    <div class="callout warn">
+      <strong>Kompatibilitas versi lama</strong><br>
+      Jika riwayat dengan format lama ditemukan, aplikasi otomatis membuat cadangan bernama <code>scan_history_old_[tanggal_waktu].csv</code> sebelum memakai format baru.
+    </div>
+  </section>
+
+  <section id="sec8">
+    <h2>8. Pengaturan</h2>
+    <p>Buka Pengaturan melalui ikon di bagian atas layar.</p>
+    <h3>8-1. Impor CSV master</h3>
+    <p>Pilih CSV dari perangkat, folder Unduhan, atau penyimpanan cloud untuk memperbarui master internal. Setelah impor selesai, data langsung diterapkan sehingga tidak perlu proses muat ulang terpisah.</p>
+    <h3>8-2. Hapus semua riwayat</h3>
+    <p>Menghapus <code>scan_history.csv</code> dan mengosongkan riwayat.</p>
+    <div class="callout danger">
+      <strong>Tindakan ini tidak bisa dibatalkan</strong><br>
+      Ekspor data terlebih dahulu jika Anda ingin menyimpan salinannya.
+    </div>
+    <h3>8-3. Gunakan kode partner</h3>
+    <p>Jika fitur ini diaktifkan, aplikasi juga akan menampilkan dan menggunakan kolom kode partner.</p>
+    <table>
+      <tr><th>Status</th><th>Perilaku</th></tr>
+      <tr><td>Nonaktif</td><td>Hanya kode sendiri yang digunakan</td></tr>
+      <tr><td>Aktif</td><td>Kolom kode partner dan dialog pemilihan akan digunakan bila perlu</td></tr>
+    </table>
+    <h3>8-4. Aturan kode sendiri</h3>
+    <table>
+      <tr><th>Pengaturan</th><th>Keterangan</th></tr>
+      <tr><td>Mode karakter</td><td>Alfanumerik, hanya angka, atau tanpa batasan</td></tr>
+      <tr><td>Panjang minimum</td><td>Panjang minimum yang diizinkan</td></tr>
+      <tr><td>Panjang maksimum</td><td>Panjang maksimum yang diizinkan</td></tr>
+    </table>
+    <h3>8-5. Jenis pemindaian kamera</h3>
+    <p>Anda dapat mengaktifkan atau menonaktifkan format seperti CODE39, CODE128, EAN13, dan QRCODE untuk produk maupun lokasi.</p>
+    <h3>8-6. Impor dan ekspor data</h3>
+    <table>
+      <tr><th>Item</th><th>Keterangan</th></tr>
+      <tr><td>Impor CSV master</td><td>Mengganti master internal dengan CSV yang dipilih</td></tr>
+      <tr><td>Bagikan riwayat</td><td>Melampirkan riwayat dan master ke email atau aplikasi pesan</td></tr>
+      <tr><td>Ekspor semua data</td><td>Menyimpan riwayat dan master ke folder pilihan</td></tr>
+    </table>
+    <div class="callout info">
+      <strong>Pilihan tanda kutip CSV</strong><br>
+      Sebelum ekspor Anda dapat memilih <strong>beri kutip hanya bila perlu</strong> atau <strong>beri kutip pada semua kolom</strong>. Pilihan ini berlaku untuk kedua file CSV hasil ekspor.
+    </div>
+    <h3>8-7. Bahasa dan panduan pengguna</h3>
+    <p>Aplikasi mendukung bahasa Jepang, Inggris, Mandarin sederhana, Mandarin tradisional, Korea, Hindi, Vietnam, Italia, Portugis Brasil, Spanyol Amerika Latin, Indonesia, dan Thailand.</p>
+    <p>Setelah mengubah bahasa, tekan <strong>Save</strong> di layar Pengaturan, lalu buka kembali panduan pengguna.</p>
+  </section>
+
+  <section id="sec9">
+    <h2>9. File dan pencadangan</h2>
+    <h3>9-1. File yang dihasilkan</h3>
+    <table>
+      <tr><th>File</th><th>Kapan dibuat atau diperbarui</th><th>Kegunaan</th></tr>
+      <tr><td><code>quantiventra_master.csv</code></td><td>Saat impor dan saat penyimpanan yang mengubah master</td><td>Data master barang</td></tr>
+      <tr><td><code>scan_history.csv</code></td><td>Setiap kali menyimpan</td><td>Riwayat lengkap</td></tr>
+      <tr><td><code>settings.json</code></td><td>Saat pengaturan disimpan</td><td>Aturan, kamera, dan bahasa</td></tr>
+      <tr><td><code>scan_history_old_[tanggal_waktu].csv</code></td><td>Saat migrasi format</td><td>Cadangan riwayat lama</td></tr>
+    </table>
+    <h3>9-2. Prosedur pencadangan yang disarankan</h3>
+    <ol>
+      <li>Buka Pengaturan lalu tekan <strong>Ekspor semua data</strong>.</li>
+      <li>Pilih format tanda kutip CSV.</li>
+      <li>Pilih folder tujuan.</li>
+      <li>Simpan file riwayat dan master yang diekspor di tempat aman.</li>
+    </ol>
+  </section>
+
+  <section id="sec10">
+    <h2>10. Pemecahan masalah</h2>
+    <h3>Kode tidak terbaca</h3>
+    <ul>
+      <li>Pastikan kamera aktif.</li>
+      <li>Jaga kode berada dekat tengah layar.</li>
+      <li>Periksa apakah format yang benar aktif di pengaturan.</li>
+      <li>Jika kode rusak, gunakan input manual.</li>
+      <li>Periksa izin kamera di Android.</li>
+    </ul>
+    <h3>Nama barang tidak muncul setelah impor CSV</h3>
+    <ul>
+      <li>Pastikan Anda memilih file yang benar.</li>
+      <li>Periksa header: <code>joint_code,barcode,name,theoretical_stock,actual_stock_total</code>.</li>
+      <li>Pastikan file menggunakan UTF-8.</li>
+      <li>Jika ingin memakai CSV lain, jalankan <strong>Impor CSV master</strong> lagi dari Pengaturan lalu pilih file tersebut.</li>
+    </ul>
+    <h3>Gagal menyimpan</h3>
+    <ul>
+      <li>Pastikan ada kode atau nama barang yang terisi.</li>
+      <li>Periksa ruang kosong perangkat.</li>
+    </ul>
+    <h3>Pemindaian lokasi tidak mengisi rak</h3>
+    <ul>
+      <li>Periksa format pemindaian lokasi.</li>
+      <li>Jika label memakai format lain, ubah di pengaturan.</li>
+    </ul>
+    <h3>Saya tidak menemukan file ekspor</h3>
+    <p>Cari di folder yang dipilih saat ekspor. Nama umumnya adalah <code>scan_history_[timestamp].csv</code> dan <code>quantiventra_master_export.csv</code>.</p>
+    <h3>Kalkulator tidak menerapkan hasil</h3>
+    <ul>
+      <li>Gunakan Add untuk menambahkan hasil ke Qty.</li>
+      <li>Hindari karakter full-width.</li>
+      <li>Ekspresi tidak boleh dimulai dengan operator, misalnya <code>*5</code>.</li>
+    </ul>
+  </section>
+
+  <section id="sec11">
+    <h2>11. Ketentuan dan penafian</h2>
+    <p>Dengan menggunakan Quantiventra Anda dianggap menyetujui ketentuan berikut.</p>
+    <p><strong>Lisensi:</strong> aplikasi dapat digunakan untuk inventaris dan perhitungan stok oleh individu atau perusahaan. Rekayasa balik, distribusi ulang tanpa izin, dan modifikasi yang tidak sah dilarang.</p>
+    <p><strong>Data pengguna:</strong> file yang dibuat aplikasi tetap berada di perangkat pengguna. Aplikasi tidak mengirim data ke server eksternal.</p>
+    <p><strong>Penggunaan terlarang:</strong> aplikasi tidak boleh digunakan untuk tujuan ilegal, penipuan, atau pelanggaran hak pihak ketiga.</p>
+    <p><strong>Penafian:</strong> aplikasi disediakan sebagaimana adanya. Pengembang tidak bertanggung jawab atas kehilangan data, gangguan bisnis, atau kerugian langsung maupun tidak langsung akibat penggunaan aplikasi.</p>
+    <p><strong>Privasi:</strong> tidak ada informasi pribadi yang dikumpulkan. Kamera hanya digunakan untuk membaca kode. Tidak ada video yang direkam atau dikirim.</p>
+    <p><strong>Hak cipta:</strong> Copyright © Quantiventra. Seluruh hak dilindungi.</p>
+    <p><strong>Perubahan:</strong> manual dan ketentuan ini dapat diperbarui tanpa pemberitahuan sebelumnya.</p>
+  </section>
+</div>
+</body>
+</html>

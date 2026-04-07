@@ -1,0 +1,1164 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quantiventra ユーザーマニュアル</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=IBM+Plex+Mono:wght@400;600&display=swap');
+
+  :root {
+    --primary:    #006C9C;
+    --primary-lt: #C3E7FF;
+    --primary-dk: #004A6E;
+    --accent:     #FF6D00;
+    --error:      #BA1A1A;
+    --bg:         #F8FDFF;
+    --surface:    #FFFFFF;
+    --border:     #D0E8F5;
+    --text:       #1A1A2E;
+    --muted:      #5A7A8A;
+    --mono:       'IBM Plex Mono', monospace;
+    --sans:       'Noto Sans JP', sans-serif;
+    --radius:     8px;
+    --shadow:     0 2px 12px rgba(0,108,156,.12);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--sans);
+    background: var(--bg);
+    color: var(--text);
+    font-size: 15px;
+    line-height: 1.8;
+  }
+
+  /* ── HEADER ── */
+  .site-header {
+    background: linear-gradient(135deg, var(--primary-dk) 0%, var(--primary) 60%, #0090CC 100%);
+    color: #fff;
+    padding: 56px 40px 48px;
+    position: relative;
+    overflow: hidden;
+  }
+  .site-header::before {
+    content: '';
+    position: absolute;
+    right: -80px; top: -80px;
+    width: 360px; height: 360px;
+    border-radius: 50%;
+    background: rgba(255,255,255,.06);
+  }
+  .site-header::after {
+    content: '';
+    position: absolute;
+    right: 60px; bottom: -40px;
+    width: 200px; height: 200px;
+    border-radius: 50%;
+    background: rgba(255,255,255,.04);
+  }
+  .header-badge {
+    display: inline-block;
+    background: rgba(255,255,255,.18);
+    border: 1px solid rgba(255,255,255,.35);
+    border-radius: 20px;
+    padding: 4px 14px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+  .site-header h1 {
+    font-size: clamp(28px, 5vw, 42px);
+    font-weight: 900;
+    letter-spacing: -.02em;
+    line-height: 1.15;
+    margin-bottom: 10px;
+  }
+  .site-header .subtitle {
+    font-size: 14px;
+    opacity: .8;
+    margin-bottom: 24px;
+  }
+  .header-meta {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+    font-size: 12px;
+    opacity: .75;
+  }
+
+  /* ── LAYOUT ── */
+  .wrapper {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 20px 80px;
+  }
+
+  /* ── TOC ── */
+  .toc-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--primary);
+    border-radius: var(--radius);
+    padding: 28px 32px;
+    margin: 36px 0 48px;
+    box-shadow: var(--shadow);
+  }
+  .toc-card h2 {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--primary);
+    margin-bottom: 18px;
+  }
+  .toc-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 6px 24px;
+  }
+  .toc-grid a {
+    color: var(--text);
+    text-decoration: none;
+    font-size: 13.5px;
+    padding: 3px 0;
+    border-bottom: 1px dashed transparent;
+    transition: color .15s, border-color .15s;
+    display: block;
+  }
+  .toc-grid a:hover { color: var(--primary); border-color: var(--primary); }
+  .toc-num { color: var(--primary); font-weight: 700; margin-right: 6px; font-family: var(--mono); font-size: 12px; }
+
+  /* ── SECTIONS ── */
+  section { margin-bottom: 60px; }
+
+  .section-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--primary);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border-radius: 4px;
+    margin-bottom: 10px;
+  }
+
+  h2.section-title {
+    font-size: clamp(20px, 3vw, 26px);
+    font-weight: 900;
+    color: var(--primary-dk);
+    border-bottom: 2px solid var(--border);
+    padding-bottom: 10px;
+    margin-bottom: 24px;
+    line-height: 1.3;
+  }
+
+  h3 {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--primary);
+    margin: 28px 0 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  h3::before {
+    content: '';
+    display: inline-block;
+    width: 4px; height: 16px;
+    background: var(--primary);
+    border-radius: 2px;
+  }
+
+  h4 {
+    font-size: 14px;
+    font-weight: 700;
+    margin: 20px 0 8px;
+    color: var(--text);
+  }
+
+  p { margin-bottom: 14px; }
+
+  /* ── CALLOUTS ── */
+  .callout {
+    border-radius: var(--radius);
+    padding: 16px 20px;
+    margin: 18px 0;
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+  }
+  .callout-icon { font-size: 20px; flex-shrink: 0; line-height: 1.5; }
+  .callout-body { flex: 1; font-size: 13.5px; line-height: 1.75; }
+  .callout-body strong { display: block; margin-bottom: 4px; font-size: 14px; }
+  .callout.info    { background: #E8F4FD; border: 1px solid #B3D9F2; }
+  .callout.warn    { background: #FFF8E1; border: 1px solid #FFD54F; }
+  .callout.danger  { background: #FFEBEE; border: 1px solid #FFCDD2; }
+  .callout.success { background: #E8F5E9; border: 1px solid #A5D6A7; }
+
+  /* ── TABLES ── */
+  .table-wrap { overflow-x: auto; margin: 18px 0; border-radius: var(--radius); box-shadow: var(--shadow); }
+  table { width: 100%; border-collapse: collapse; background: var(--surface); font-size: 13.5px; }
+  thead th {
+    background: var(--primary);
+    color: #fff;
+    font-weight: 700;
+    padding: 12px 16px;
+    text-align: left;
+    white-space: nowrap;
+  }
+  tbody td { padding: 11px 16px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  tbody tr:last-child td { border-bottom: none; }
+  tbody tr:hover { background: #F0F8FF; }
+  td code, th code { font-family: var(--mono); background: rgba(0,108,156,.1); padding: 1px 6px; border-radius: 3px; font-size: 12px; }
+  .badge-req { background: var(--error); color: #fff; font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 10px; white-space: nowrap; }
+  .badge-opt { background: #90A4AE; color: #fff; font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 10px; white-space: nowrap; }
+
+  /* ── CODE BLOCKS ── */
+  pre {
+    background: #0F1923;
+    color: #C8E6FF;
+    font-family: var(--mono);
+    font-size: 13px;
+    padding: 20px 24px;
+    border-radius: var(--radius);
+    overflow-x: auto;
+    margin: 14px 0;
+    line-height: 1.7;
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,.08);
+  }
+  pre .comment { color: #5C8099; }
+  pre .hl { color: #7FD8FF; font-weight: 600; }
+  pre .val { color: #A5E6A1; }
+  code {
+    font-family: var(--mono);
+    background: rgba(0,108,156,.1);
+    color: var(--primary-dk);
+    padding: 2px 7px;
+    border-radius: 4px;
+    font-size: 13px;
+  }
+
+  /* ── PATH DISPLAY ── */
+  .path {
+    background: #0F1923;
+    color: #7FD8FF;
+    font-family: var(--mono);
+    font-size: 13px;
+    padding: 14px 20px;
+    border-radius: var(--radius);
+    margin: 12px 0;
+    line-height: 2;
+  }
+  .path .dim { color: #5C8099; }
+  .path .file { color: #A5E6A1; font-weight: 600; }
+
+  /* ── STEPS ── */
+  .steps { list-style: none; counter-reset: step-counter; }
+  .steps li {
+    counter-increment: step-counter;
+    display: flex;
+    gap: 16px;
+    margin-bottom: 14px;
+    align-items: flex-start;
+  }
+  .steps li::before {
+    content: counter(step-counter);
+    flex-shrink: 0;
+    width: 28px; height: 28px;
+    background: var(--primary);
+    color: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 700;
+    margin-top: 2px;
+  }
+  .steps li p { margin: 0; }
+
+  /* ── UI LABEL ── */
+  .ui-label {
+    display: inline-block;
+    background: #E3F2FD;
+    border: 1px solid #90CAF9;
+    color: #0D47A1;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 2px 10px;
+    border-radius: 4px;
+    font-family: var(--mono);
+    white-space: nowrap;
+  }
+  .key {
+    display: inline-block;
+    background: var(--text);
+    color: #fff;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 2px 10px;
+    border-radius: 5px;
+    font-family: var(--mono);
+  }
+
+  /* ── CARDS ── */
+  .card-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 16px; margin: 18px 0; }
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px;
+    box-shadow: var(--shadow);
+  }
+  .card h4 { margin-top: 0; color: var(--primary); font-size: 14px; }
+
+  /* ── TROUBLE ── */
+  .trouble { border: 1px solid var(--border); border-radius: var(--radius); margin: 16px 0; overflow: hidden; }
+  .trouble-q { background: #EEF6FD; padding: 14px 20px; font-weight: 700; font-size: 14px; color: var(--primary-dk); cursor: pointer; display: flex; align-items: center; gap: 10px; }
+  .trouble-q::before { content: 'Q'; background: var(--primary); color: #fff; width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 900; flex-shrink: 0; }
+  .trouble-a { padding: 14px 20px 16px 52px; font-size: 13.5px; border-top: 1px solid var(--border); }
+
+  /* ── LEGAL ── */
+  .legal-block {
+    background: #F5F5F5;
+    border: 1px solid #DDD;
+    border-radius: var(--radius);
+    padding: 20px 24px;
+    font-size: 12.5px;
+    color: #444;
+    line-height: 1.9;
+    margin: 16px 0;
+  }
+  .legal-block h4 { font-size: 13px; color: #333; margin: 18px 0 6px; border-bottom: 1px solid #DDD; padding-bottom: 4px; }
+  .legal-block h4:first-child { margin-top: 0; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--primary-dk);
+    color: rgba(255,255,255,.65);
+    text-align: center;
+    padding: 32px 20px;
+    font-size: 12px;
+    line-height: 2;
+  }
+  footer strong { color: #fff; }
+
+  /* ── BACK TO TOP ── */
+  .back-top {
+    position: fixed;
+    right: 24px; bottom: 28px;
+    background: var(--primary);
+    color: #fff;
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px;
+    text-decoration: none;
+    box-shadow: 0 4px 16px rgba(0,108,156,.4);
+    transition: transform .2s, box-shadow .2s;
+    z-index: 100;
+  }
+  .back-top:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,108,156,.5); }
+
+  /* ── DIVIDER ── */
+  hr { border: none; border-top: 1px solid var(--border); margin: 40px 0; }
+
+  @media (max-width: 600px) {
+    .site-header { padding: 36px 20px 32px; }
+    .toc-grid { grid-template-columns: 1fr; }
+    .card-grid { grid-template-columns: 1fr; }
+  }
+  @media print {
+    .back-top { display: none; }
+    body { font-size: 13px; }
+    pre { font-size: 11px; }
+    .site-header { background: var(--primary) !important; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== HEADER ===== -->
+<header class="site-header" id="top">
+  <div class="header-badge">User Manual</div>
+  <h1>Quantiventra</h1>
+  <p class="subtitle">コードスキャン在庫カウントアプリ — 操作マニュアル</p>
+  <div class="header-meta">
+    <span>対象OS：Android 7.0（API 24）以上</span>
+    <span>対象バージョン：v1.x</span>
+    <span>最終更新：2026年</span>
+  </div>
+</header>
+
+<div class="wrapper">
+
+<!-- ===== TOC ===== -->
+<nav class="toc-card">
+  <h2>📋 目次</h2>
+  <div class="toc-grid">
+    <a href="#sec1"><span class="toc-num">1</span>はじめに</a>
+    <a href="#sec2"><span class="toc-num">2</span>インストールと初期設定</a>
+    <a href="#sec3"><span class="toc-num">3</span>マスタCSVの作成と投入</a>
+    <a href="#sec4"><span class="toc-num">4</span>画面構成と各部説明</a>
+    <a href="#sec5"><span class="toc-num">5</span>基本操作フロー</a>
+    <a href="#sec6"><span class="toc-num">6</span>応用操作</a>
+    <a href="#sec7"><span class="toc-num">7</span>履歴機能</a>
+    <a href="#sec8"><span class="toc-num">8</span>設定（言語・ルール・カメラ等）</a>
+    <a href="#sec9"><span class="toc-num">9</span>ファイル管理とバックアップ</a>
+    <a href="#sec10"><span class="toc-num">10</span>トラブルシューティング</a>
+    <a href="#sec11"><span class="toc-num">11</span>規約・免責事項</a>
+  </div>
+</nav>
+
+
+<!-- ===== SECTION 1 ===== -->
+<section id="sec1">
+  <div class="section-label">Section 01</div>
+  <h2 class="section-title">はじめに</h2>
+
+  <h3>1-1. 本アプリについて</h3>
+  <p>Quantiventra（クアンティベントラ）（「Quantity（数量）」と「Inventory（在庫・棚卸）」を組み合わせた造語です。）は、スマートフォンのカメラを使ったコードスキャンによって、棚卸・在庫カウント作業を効率化するAndroidアプリです。</p>
+  <p>カメラをコードに向けるだけで商品を自動認識し、数量を入力して保存するという直感的な操作で、紙での棚卸作業をデジタル化できます。スキャン結果はCSVファイルとして端末に保存されるため、ExcelやGoogleスプレッドシートとの連携も容易です。</p>
+
+  <div class="card-grid">
+    <div class="card">
+      <h4>📦 在庫カウント</h4>
+      <p>コードスキャンで商品を素早く特定し、数量を即時記録。計算機能内蔵で複数箇所の合算も簡単。</p>
+    </div>
+    <div class="card">
+      <h4>🗂️ マスタ管理</h4>
+      <p>CSVファイルでマスタを一括投入。品名・品番・理論在庫をあらかじめ設定できます。</p>
+    </div>
+    <div class="card">
+      <h4>📍 棚番管理</h4>
+      <p>QRコードで棚番（ロケーション）をスキャン設定。どの棚の在庫かをCSVに記録します。</p>
+    </div>
+    <div class="card">
+      <h4>📊 CSV出力</h4>
+      <p>スキャン結果は端末のストレージに自動保存。PCへの取り込みで集計・分析が可能。</p>
+    </div>
+  </div>
+
+  <h3>1-2. 動作環境</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>項目</th><th>要件</th></tr></thead>
+      <tbody>
+        <tr><td>OS</td><td>Android 7.0（Nougat / API 24）以上</td></tr>
+        <tr><td>カメラ</td><td>自動フォーカス対応カメラ（必須）</td></tr>
+        <tr><td>ストレージ</td><td>空き容量 50MB以上推奨</td></tr>
+        <tr><td>権限</td><td>カメラ権限</td></tr>
+        <tr><td>インターネット</td><td>不要（完全オフライン動作）</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>1-3. 権限について</h3>
+  <p>本アプリは初回起動時に以下の権限を要求します。正常動作に必要なのはカメラ権限です。</p>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>権限</th><th>用途</th><th>拒否した場合</th></tr></thead>
+      <tbody>
+        <tr><td>カメラ</td><td>コード・QRコードのスキャン</td><td>カメラ機能が使用不可（手動入力のみ）</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout info">
+    <span class="callout-icon">ℹ️</span>
+    <div class="callout-body">
+      <strong>データ保存について</strong>
+      マスタ・履歴・設定ファイルはアプリ内部の保存領域で管理されます。マスタCSVの取込やデータの出力は、設定画面の「マスタCSVを取り込む」「全データをエクスポート」から行ってください。
+    </div>
+  </div>
+</section>
+
+
+<!-- ===== SECTION 2 ===== -->
+<section id="sec2">
+  <div class="section-label">Section 02</div>
+  <h2 class="section-title">インストールと初期設定</h2>
+
+  <h3>2-1. インストール手順</h3>
+  <ol class="steps">
+    <li><p>Androidデバイスで <strong>Google Play ストア</strong> を開きます。</p></li>
+    <li><p>検索バーに「<strong>Quantiventra</strong>」と入力して検索します。</p></li>
+    <li><p>アプリを選択し、<span class="ui-label">インストール</span> をタップします。</p></li>
+    <li><p>インストール完了後、<span class="ui-label">開く</span> をタップするか、ホーム画面のアイコンからアプリを起動します。</p></li>
+  </ol>
+
+  <h3>2-2. 初回起動と権限の許可</h3>
+  <ol class="steps">
+    <li><p>アプリ起動後、<strong>カメラ権限の許可</strong>ダイアログが表示されます。<span class="ui-label">許可</span>をタップしてください。</p></li>
+    <li><p>許可後、そのままアプリを利用開始できます。</p></li>
+    <li><p>マスタCSVを使う場合は、設定画面から「<strong>マスタCSVを取り込む</strong>」を実行してください。</p></li>
+  </ol>
+
+  <div class="callout info">
+    <span class="callout-icon">ℹ️</span>
+    <div class="callout-body">
+      <strong>初期設定後にできること</strong>
+      カメラ権限を許可すると、すぐにスキャン・入力・保存が使えます。必要に応じて設定画面からマスタCSVを取り込み、履歴やマスタを任意のフォルダへエクスポートしてください。
+    </div>
+  </div>
+
+  <h3>2-3. データの扱い</h3>
+  <p>本アプリのマスタ・履歴・設定データは、アプリ側で自動的に管理されます。通常の利用では保存場所や内部フォルダ構造を意識する必要はありません。</p>
+  <div class="callout info">
+    <span class="callout-icon">ℹ️</span>
+    <div class="callout-body">
+      <strong>ユーザーが行う操作</strong>
+      マスタCSVを使いたいときは設定画面の「マスタCSVを取り込む」、バックアップしたいときは「全データをエクスポート」または「履歴を共有」を使ってください。
+    </div>
+  </div>
+</section>
+
+
+<!-- ===== SECTION 3 ===== -->
+<section id="sec3">
+  <div class="section-label">Section 03</div>
+  <h2 class="section-title">マスタCSVの作成と投入【重要】</h2>
+
+  <div class="callout success">
+    <span class="callout-icon">✅</span>
+    <div class="callout-body">
+      <strong>マスタを事前に用意すると作業効率が大幅に向上します</strong>
+      マスタCSVを投入しておくことで、コードスキャン時に品名・理論在庫が自動表示されます。未登録の場合は都度手動入力が必要です。
+    </div>
+  </div>
+
+  <h3>3-1. マスタCSVの準備方法（列名つき・2つのアプローチ）</h3>
+  <p>マスタファイルを用意するには、大きく分けて以下の2つの方法があります。</p>
+
+  <h4>方法A：Excelやスプレッドシートでゼロから作成する</h4>
+  <ol class="steps">
+    <li><p>PCでExcelまたはGoogleスプレッドシートを開きます。</p></li>
+    <li><p>1行目のヘッダーは手入力せず、このマニュアルの <strong>3-3 カラム仕様（列名）</strong> にある文字列をそのままコピー＆ペーストしてください。</p></li>
+    <li><p>2行目以降に商品データを入力します。</p></li>
+    <li><p>「CSV（コンマ区切り）」形式で、ファイル名を <code>quantiventra_master.csv</code> として保存します（UTF-8エンコーディングを推奨）。</p></li>
+  </ol>
+
+  <h4>方法B：アプリで雛形を作ってから編集する（初心者向け）</h4>
+  <p>CSVを一から作るのが不安な場合は、まずアプリで1件だけ登録し、その後にエクスポートしたCSVを土台として編集する方法がわかりやすいです。</p>
+  <ol class="steps">
+    <li><p>アプリを起動し、任意の商品を1件だけ新規登録します。</p></li>
+    <li><p>設定画面で <span class="ui-label">全データをエクスポート</span> を実行し、マスタCSVを出力します（エクスポート方法は <strong>9-2 バックアップ推奨手順</strong> を参照）。</p></li>
+    <li><p>出力した <code>quantiventra_master_export.csv</code> をメール送信やPCへのコピーで取り出します。</p></li>
+    <li><p>PCでそのCSVをExcelで開きます。すでにある1件の行を見本にして、別で作ってある商品一覧表から必要な列を貼り付けていくと作業しやすくなります。</p></li>
+    <li><p>編集が終わったら、Excelで <code>CSV UTF-8</code> 形式として保存します。</p></li>
+    <li><p>編集後のCSVを、設定画面の <span class="ui-label">マスタCSVを取り込む</span> から取り込みます。</p></li>
+    <li><p>取り込み後、品名や理論在庫が想定どおりに表示されるかをアプリ上で確認します。</p></li>
+  </ol>
+
+  <h3>3-2. ファイル名と保存場所</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>項目</th><th>値</th></tr></thead>
+      <tbody>
+        <tr><td>ファイル名</td><td><code>quantiventra_master.csv</code>（固定・変更不可）</td></tr>
+        <tr><td>文字コード</td><td>UTF-8（BOMなし推奨）</td></tr>
+        <tr><td>改行コード</td><td>LF または CRLF（どちらでも可）</td></tr>
+        <tr><td>取り込み方法</td><td>設定画面の <code>マスタCSVを取り込む</code> から選択</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>3-3. カラム仕様（列名）</h3>
+  <p><strong>1行目はヘッダー行</strong>です。下の1行をそのままコピー＆ペーストしてください。列名は5つとも必要です。</p>
+  <pre><span class="hl">joint_code</span>,<span class="hl">barcode</span>,<span class="hl">name</span>,<span class="hl">theoretical_stock</span>,<span class="hl">actual_stock_total</span></pre>
+
+  <div class="callout info">
+    <span class="callout-icon">ℹ️</span>
+    <div class="callout-body">
+      <strong>自社品番のみで運用する場合も、この5列のままで大丈夫です</strong>
+      初期設定では <strong>相手先品番はOFF</strong> です。自社品番のみで運用する場合は、<code>joint_code</code> 列を空欄のまま使ってください。相手先品番も使う場合だけ <code>joint_code</code> 列に値を入れます。なお、マスタCSV内の <code>joint_code</code> 列にデータが含まれていると、アプリ起動時に相手先品番設定が自動でONになります。
+    </div>
+  </div>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>#</th><th>カラム名</th><th>型</th><th>必須</th><th>説明・注意事項</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td><code>joint_code</code></td>
+          <td>文字列</td>
+          <td><span class="badge-opt">任意</span></td>
+          <td>相手先品番（取引先コード）。初期設定はOFFです。自社品番のみで使う場合は空欄のままで問題ありません。相手先品番も使う場合だけ入力します。</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td><code>barcode</code></td>
+          <td>文字列</td>
+          <td><span class="badge-req">必須</span></td>
+          <td>自社コード番号。実際のコードと一致させること。相手先品番設定がOFFでも、この列は必須です。重複不可。</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td><code>name</code></td>
+          <td>文字列</td>
+          <td><span class="badge-req">必須</span></td>
+          <td>品名。カンマを含む場合はダブルクォートで囲む（例：<code>"ボルト,M4"</code>）。</td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td><code>theoretical_stock</code></td>
+          <td>整数</td>
+          <td><span class="badge-opt">任意</span></td>
+          <td>理論在庫数（帳簿在庫）。不明な場合は <code>0</code> を入力。</td>
+        </tr>
+        <tr>
+          <td>5</td>
+          <td><code>actual_stock_total</code></td>
+          <td>整数</td>
+          <td><span class="badge-opt">任意</span></td>
+          <td>登録済累計在庫数。棚卸初回は <code>0</code> を推奨。</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>3-4. CSVサンプル</h3>
+  <pre><span class="comment"># 1行目：ヘッダー行（必須）</span>
+<span class="hl">joint_code</span>,<span class="hl">barcode</span>,<span class="hl">name</span>,<span class="hl">theoretical_stock</span>,<span class="hl">actual_stock_total</span>
+<span class="comment"># 2行目以降：データ行</span>
+<span class="val">ABC-001</span>,<span class="val">4912345678904</span>,<span class="val">六角ボルトM6×20</span>,<span class="val">500</span>,<span class="val">0</span>
+<span class="val">ABC-002</span>,<span class="val">4912345678911</span>,<span class="val">六角ナットM6</span>,<span class="val">1000</span>,<span class="val">0</span>
+,<span class="val">4912345678928</span>,<span class="val">スプリングワッシャーM6</span>,<span class="val">800</span>,<span class="val">0</span>
+<span class="val">XY-999</span>,<span class="val">4912345678935</span>,<span class="val">"ボルトセット,M4"</span>,<span class="val">200</span>,<span class="val">0</span></pre>
+
+  <div class="callout warn">
+    <span class="callout-icon">⚠️</span>
+    <div class="callout-body">
+      <strong>Excelで編集する際の注意</strong>
+      Excelで保存すると文字コードがShift-JISになる場合があります。「名前を付けて保存」→「CSV UTF-8（コンマ区切り）」を選択してください。先頭のBOMが問題になる場合はメモ帳などで開き直して保存してください。
+    </div>
+  </div>
+
+  <h3>3-5. マスタCSVの取り込み手順</h3>
+  <p>作成したCSVファイルは、保存場所を意識せず設定画面から直接取り込めます。</p>
+
+  <h4>🔌 方法①：端末内ファイルを直接選ぶ</h4>
+  <ol class="steps">
+    <li><p>CSVファイルを端末の「ダウンロード」など任意の場所に保存します。</p></li>
+    <li><p>アプリで <span class="ui-label">設定</span> を開き、<span class="ui-label">マスタCSVを取り込む</span> をタップします。</p></li>
+    <li><p>システムのファイル選択画面で対象のCSVを選びます。</p></li>
+    <li><p>取り込み完了後、マスタ内容がアプリに反映されます。</p></li>
+  </ol>
+
+  <h4>☁️ 方法②：Google Drive経由</h4>
+  <ol class="steps">
+    <li><p>PCのブラウザで <a href="https://drive.google.com" target="_blank">Google Drive</a> を開き、CSVファイルをアップロードします。</p></li>
+    <li><p>スマートフォンの <strong>Google Driveアプリ</strong> またはファイル選択画面から対象ファイルを開ける状態にします。</p></li>
+    <li><p>アプリで <span class="ui-label">設定 → マスタCSVを取り込む</span> をタップします。</p></li>
+    <li><p>ファイル選択画面からGoogle Drive上のCSVを選択します。</p></li>
+  </ol>
+
+  <h4>📧 方法③：メール添付経由</h4>
+  <ol class="steps">
+    <li><p>PCからCSVファイルを添付したメールを <strong>自分のメールアドレス</strong> 宛に送信します。</p></li>
+    <li><p>スマートフォンのメールアプリで添付ファイルを保存します。</p></li>
+    <li><p>アプリで <span class="ui-label">設定 → マスタCSVを取り込む</span> をタップします。</p></li>
+    <li><p>保存したCSVファイルを選択して取り込みます。</p></li>
+  </ol>
+
+  <div class="callout info">
+    <span class="callout-icon">ℹ️</span>
+    <div class="callout-body">
+      <strong>マスタ更新時の注意</strong>
+      CSVを編集したら、再度「マスタCSVを取り込む」から選択してください。既存の内部マスタが新しい内容で置き換わります。
+    </div>
+  </div>
+</section>
+
+
+<!-- ===== SECTION 4 ===== -->
+<section id="sec4">
+  <div class="section-label">Section 04</div>
+  <h2 class="section-title">画面構成と各部説明</h2>
+
+  <p>メイン画面は上から順に「ヘッダーバー」「カメラエリア」「入力フォームエリア」「保存履歴エリア」「テンキー」の5つのエリアで構成されています。</p>
+
+  <h3>4-1. ヘッダーバー</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>要素</th><th>説明</th></tr></thead>
+      <tbody>
+        <tr><td>アプリ名（Quantiventra）</td><td>タップしても動作なし（表示のみ）</td></tr>
+        <tr><td>⚙️ 設定アイコン</td><td>設定ダイアログを開く</td></tr>
+        <tr><td>ON / OFF スイッチ</td><td>カメラプレビューのON/OFF切替</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>4-2. カメラエリア</h3>
+  <p>コード・QRコードをリアルタイムでスキャンするエリアです。カメラをONにした状態でコードをカメラに向けると、3フレーム連続で同じコードを読み取った時点で自動認識されます。</p>
+  <div class="callout info">
+    <span class="callout-icon">ℹ️</span>
+    <div class="callout-body">
+      <strong>スキャンの精度について</strong>
+      カメラは画面中央±15%の範囲に入ったコードのみを優先認識します。読み取りにくい場合は、コードを画面の中央に収めるようにしてください。
+    </div>
+  </div>
+
+  <h3>4-3. 入力フォームエリア</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>フィールド</th><th>説明</th></tr></thead>
+      <tbody>
+        <tr><td>棚番（LOC）</td><td>商品が置かれている棚の番号。手動入力またはロケーション読取ボタンでスキャン入力。</td></tr>
+        <tr><td>自社品番(画面の大きさ、設定により相手先品番も別枠で表示される。一枠時は、枠内に両方表示される</td><td>スキャンまたは手動入力。マスタにある場合は品番が自動表示される。</td></tr>
+        <tr><td>品名</td><td>商品名。マスタ登録済みの場合は自動表示。新規登録・編集・検索時のみ入力可能。</td></tr>
+        <tr><td>数量</td><td>今回カウントした数量を入力。テンキーで入力。計算式（例: 3*5）も使用可能。</td></tr>
+        <tr><td>理論在庫</td><td>マスタに登録された帳簿上の在庫数（参照用・編集不可）。</td></tr>
+        <tr><td>登録済</td><td>これまでに保存済みの累計在庫数。「変更」ボタンで修正可能。</td></tr>
+        <tr><td>計算用</td><td>数量入力の補助計算欄。「加算」ボタンで計算結果を数量に加算する。</td></tr>
+        <tr><td>計算履歴</td><td>計算用欄で加算した履歴を表示（参照のみ）。</td></tr>
+        <tr><td>備考（メモ）</td><td>任意のメモを記録。CSVに保存される。</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>4-4. テンキー</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>キー</th><th>動作</th></tr></thead>
+      <tbody>
+        <tr><td><span class="key">0〜9</span> / <span class="key">00</span></td><td>現在のフォーカスフィールドに数字を入力。</td></tr>
+        
+        <tr><td><span class="key">−</span> / <span class="key">×</span></td><td>減算・乗算記号の入力（計算式入力用）。</td></tr>
+        <tr><td><span class="key">CLR</span></td><td>現在のフォーカスフィールドの入力内容を全消去。</td></tr>
+        <tr><td><span class="key">確定</span> / <span class="key">検索</span></td><td>入力確定・検索実行・保存（フォーカス位置による）。</td></tr>
+        <tr><td><span class="key">加算</span>（計算モード時）</td><td>計算用欄の計算結果を数量に加算する。</td></tr>
+        <tr><td><span class="key">保存</span>（計算モード時）</td><td>現在の内容を保存する。</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  
+</section>
+
+
+<!-- ===== SECTION 5 ===== -->
+<section id="sec5">
+  <div class="section-label">Section 05</div>
+  <h2 class="section-title">基本操作フロー</h2>
+
+  <h3>5-1. 標準的な棚卸フロー</h3>
+
+  <h4>ステップ１：棚番（ロケーション）を設定する</h4>
+  <ol class="steps">
+    <li><p>棚番を設定する場合：<span class="ui-label">ロケーション読取</span> ボタンをタップします（ボタンが黄色になります）。</p></li>
+    <li><p>棚番のコードにカメラを向けると自動読み取りされ、「棚番（LOC）」フィールドに反映されます。</p></li>
+    <li><p>手動入力の場合：「棚番（LOC）」フィールドをタップしてフォーカスし、ソフトキーボードで入力します。</p></li>
+  </ol>
+
+  <div class="callout info">
+    <span class="callout-icon">ℹ️</span>
+    <div class="callout-body">棚番は一度設定すると次の商品スキャン時も引き継がれます。棚を移動した際に都度更新してください。</div>
+  </div>
+
+  <h4>ステップ２：商品コードをスキャンする</h4>
+  <ol class="steps">
+    <li><p>カメラスイッチがONであることを確認します。</p></li>
+    <li><p>商品のコードにカメラを向けます。自動的にスキャンされます。</p></li>
+    <li><p>マスタに登録済みの商品であれば品名・理論在庫が自動表示されます。</p></li>
+    <li><p>相手先品番機能がONで、同じ入力値が自社品番と相手先品番の両方に該当する場合は、自動確定せず選択ダイアログが表示されます。</p></li>
+    <li><p>未登録コードの場合は「未登録コード」ダイアログが表示されます（→ 6-3参照）。</p></li>
+  </ol>
+
+  <h4>ステップ３：数量を入力する</h4>
+  <ol class="steps">
+    <li><p>「数量」フィールドが自動フォーカスされます。</p></li>
+    <li><p>テンキーで数量を入力します。</p></li>
+    <li><p>複数箇所の合算が必要な場合は計算機能を利用します（→ 5-2参照）。</p></li>
+  </ol>
+
+  <h4>ステップ４：保存する</h4>
+  <ol class="steps">
+    <li><p>必要に応じてメモを入力します。</p></li>
+    <li><p><span class="key">ENT</span> キーまたは <span class="key">保存</span> キーをタップします。</p></li>
+    <li><p>効果音が鳴り、「保存しました」のメッセージが表示されれば完了です。</p></li>
+    <li><p>次の商品スキャンに進みます。</p></li>
+  </ol>
+
+  <h3>5-2. 計算機能の使い方</h3>
+  <p>複数の段・場所に分かれて置いてある商品をカウントする際に便利な機能です。</p>
+
+  <ol class="steps">
+    <li><p>「計算用」フィールドをタップしてフォーカスします（テンキーが計算モードに切り替わります）。</p></li>
+    <li><p>例：棚の上段に30個、下段に25個ある場合 → <code>30</code> と入力し <span class="key">加算</span> → <code>25</code> と入力し <span class="key">加算</span></p></li>
+    <li><p>計算式も使用可能：<code>3*10</code> → <span class="key">加算</span> で30が数量に加算されます。</p></li>
+    <li><p>計算履歴欄に加算の履歴が表示されます。</p></li>
+    <li><p>合計が数量欄に反映されたら <span class="key">保存</span> をタップします。</p></li>
+  </ol>
+
+  <h3>5-3. クリア</h3>
+  <p><span class="ui-label">クリア</span> ボタンをタップすると、現在の入力内容（コード・品名・数量・メモ・計算履歴）をすべてリセットし、次の商品入力が可能な状態に戻ります。棚番（LOC）はクリアされません。</p>
+  <div class="callout info">
+    <span class="callout-icon">ℹ️</span>
+    <div class="callout-body">
+      <strong>棚番（LOC）をリセットしたい場合</strong>
+      棚番はクリアボタンでは消えません。別の棚に移動する際は、ローケーション読取ボタンを押して、<span class="key">CLR</span> キーで手動消去するか、新しい棚番のコードをスキャンして上書きしてください。
+    </div>
+  </div>
+</section>
+
+
+<!-- ===== SECTION 6 ===== -->
+<section id="sec6">
+  <div class="section-label">Section 06</div>
+  <h2 class="section-title">応用操作</h2>
+
+  <h3>6-1. 品名検索モード</h3>
+  <p>コードが手元にない・読み取れない場合に、品名のキーワードで商品を検索できます。</p>
+  <ol class="steps">
+    <li><p>画面下部の「品名検索」スイッチをONにします。</p></li>
+    <li><p>「品名」フィールドにキーワードを入力します（部分一致・全角半角の区別なし）。</p></li>
+    <li><p>🔍 検索ボタンまたは <span class="key">検索</span>(確定)をタップします。</p></li>
+    <li><p>検索結果ダイアログが表示されるので、該当商品をタップして選択します。</p></li>
+    <li><p>その後は通常通り数量を入力して保存します。</p></li>
+  </ol>
+  <div class="callout info">
+    <span class="callout-icon">ℹ️</span>
+    <div class="callout-body">
+      <strong>保存後の品名検索モードの動作</strong>
+      「連続」スイッチがOFFの場合、商品を選択して保存すると品名検索モードが自動でOFFになります。次回はコードスキャン待ちの通常状態に戻ります。連続して品名検索を使いたい場合は「連続」スイッチをONにしてください（→ 6-2参照）。
+    </div>
+  </div>
+
+  <h3>6-2. 連続検索モード</h3>
+  <p>「連続」スイッチをONにすると、保存後も品名検索モードが継続します。同一棚の複数商品を品名で連続入力する際に便利です。</p>
+
+  <h3>6-3. 新規商品の登録</h3>
+  <p>マスタに未登録のコードをスキャンした場合、「未登録コード」ダイアログが表示されます。</p>
+  <ol class="steps">
+    <li><p>ダイアログで「はい（新規登録）」をタップします。</p></li>
+    <li><p>自動採番された自社IDがコード欄に設定されます（<code>99999</code>から始まる番号（999990000001～））。番号を手動入力による新規登録の場合は、相手先品番か自社品番か選択になります。</p></li>
+    <li><p>品名フィールドにフォーカスが移るので、品名を入力します。</p></li>
+    <li><p>数量を入力して保存します。次回からはマスタに登録済として認識されます。</p></li>
+  </ol>
+
+  <h3>6-4. 品名変更</h3>
+  <p>マスタに登録済みの商品の品名を修正できます。</p>
+  <ol class="steps">
+    <li><p>対象商品をスキャン（または品名検索で選択）します。</p></li>
+    <li><p><span class="ui-label">品名変更</span> ボタンをタップします（ボタンがオレンジ色になります）。</p></li>
+    <li><p>品名フィールドが編集可能になるので、修正します。</p></li>
+    <li><p>保存すると新しい品名でマスタが更新されます。</p></li>
+  </ol>
+
+  <h3>6-5. 登録済累計の変更</h3>
+  <p>過去の棚卸データを修正する必要がある場合や、初期値を設定する場合に使用します。</p>
+  <ol class="steps">
+    <li><p>対象商品をスキャンして読み込みます。</p></li>
+    <li><p>「登録済」の横にある <span class="ui-label">変更</span> ボタンをタップします。</p></li>
+    <li><p>ダイアログで新しい値を入力して「変更」をタップします。</p></li>
+  </ol>
+
+  <div class="callout warn">
+    <span class="callout-icon">⚠️</span>
+    <div class="callout-body">登録済累計を変更してもscan_history.csvの過去履歴は変更されません。あくまでマスタの累計値のみが変更されます。</div>
+  </div>
+
+  <h3>6-6. 相手先品番と自社品番の選択</h3>
+  <p>相手先品番機能をONにしている場合、手入力やスキャンしたコードが複数の意味を持つときは確認ダイアログが表示されます。</p>
+  <ol class="steps">
+    <li><p>「検索の選択」ダイアログが表示されたら、<strong>自社品番</strong> または <strong>相手先品番</strong> を選択します。</p></li>
+    <li><p>この仕組みにより、誤った商品が自動で開いてしまうことを防ぎます。</p></li>
+    <li><p>あいまいな一致が頻発する場合は、マスタCSV内のコード設計を見直してください。</p></li>
+  </ol>
+</section>
+
+
+<!-- ===== SECTION 7 ===== -->
+<section id="sec7">
+  <div class="section-label">Section 07</div>
+  <h2 class="section-title">履歴機能</h2>
+
+  <h3>7-1. 保存履歴の確認</h3>
+  <p>画面下部の保存履歴エリアには、直近の保存レコードが新しい順に表示されます。時刻・品名・数量・理論在庫が一覧で確認できます。</p>
+  <p>また、<span class="ui-label">履歴</span> ボタンをタップすると詳細な履歴一覧ダイアログが表示され、棚番・メモも確認できます。</p>
+
+  <h3>7-2. 履歴CSVについて</h3>
+  <p>保存操作のたびに <code>scan_history.csv</code> に自動追記されます。このファイルをPCに転送することで、Excelなどで集計・分析が可能です。</p>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>カラム</th><th>内容</th></tr></thead>
+      <tbody>
+        <tr><td><code>date</code></td><td>保存日（YYYY-MM-DD形式）</td></tr>
+        <tr><td><code>time</code></td><td>保存時刻（HH:mm:ss形式）</td></tr>
+        <tr><td><code>joint_code</code></td><td>相手先品番</td></tr>
+        <tr><td><code>barcode</code></td><td>自社コード番号</td></tr>
+        <tr><td><code>name</code></td><td>品名</td></tr>
+        <tr><td><code>actual_stock</code></td><td>今回カウントした数量</td></tr>
+        <tr><td><code>location</code></td><td>棚番</td></tr>
+        <tr><td><code>memo</code></td><td>備考メモ</td></tr>
+        <tr><td><code>theoretical_stock</code></td><td>理論在庫数</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout warn">
+    <span class="callout-icon">⚠️</span>
+    <div class="callout-body">
+      <strong>旧バージョンからのアップデート時</strong>
+      旧形式の履歴ファイルを検出した場合、自動的にバックアップ（<code>scan_history_旧_日時.csv</code>）を作成した上で新形式のファイルを生成します。データは失われません。
+    </div>
+  </div>
+</section>
+
+
+<!-- ===== SECTION 8 ===== -->
+<section id="sec8">
+  <div class="section-label">Section 08</div>
+  <h2 class="section-title">設定（言語・ルール・カメラ等）</h2>
+
+  <p>ヘッダーバーの ⚙️ アイコンをタップすると設定ダイアログが開きます。</p>
+
+  <h3>8-1. マスタCSVを取り込む</h3>
+  <p>端末・ダウンロードフォルダ・クラウド上のCSVを選択して、内部マスタを更新します。取り込んだ内容はすぐ反映されるため、再読み込み操作は不要です。</p>
+
+  <h3>8-2. 履歴データの全消去</h3>
+  <p><code>scan_history.csv</code> を削除し、履歴を完全にリセットします。棚卸の区切りで実行してください。</p>
+  <div class="callout danger">
+    <span class="callout-icon">🚨</span>
+    <div class="callout-body"><strong>この操作は取り消しできません。</strong>実行前に必ずCSVファイルをバックアップしてください。</div>
+  </div>
+
+  <h3>8-3. 相手先品番の使用</h3>
+  <p>スイッチをONにすると、コードフィールドの隣に「相手先品番」入力欄が有効になります。取引先固有の品番コードをあわせて記録・管理したい場合に使用します。</p>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>状態</th><th>動作</th></tr></thead>
+      <tbody>
+        <tr><td>OFF（初期値）</td><td>相手先品番欄は非表示。コードのみで管理。</td></tr>
+        <tr><td>ON</td><td>相手先品番欄が表示される。マスタCSVの <code>joint_code</code> 列が有効になり、コード入力時に自社品番か相手先品番かを選択するダイアログが表示される。</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="callout info">
+    <span class="callout-icon">ℹ️</span>
+    <div class="callout-body">マスタCSVに <code>joint_code</code> 列にデータが含まれていた場合、アプリ起動時に自動でONに切り替わります。</div>
+  </div>
+
+  <h3>8-4. 自社品番ルール設定</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>設定項目</th><th>説明</th></tr></thead>
+      <tbody>
+        <tr><td>文字種モード</td><td>「英数字」「数字のみ」「制限なし」から選択。</td></tr>
+        <tr><td>最小文字数</td><td>コードの最低文字数（例：JANコードなら12）。</td></tr>
+        <tr><td>最大文字数</td><td>コードの最大文字数。</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>8-5. カメラ読取種別設定</h3>
+  <p>スキャン対象のコード形式を設定します。不要な形式を外すことで誤読を防げます。</p>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>種別</th><th>商品用</th><th>ロケーション用</th><th>主な用途</th></tr></thead>
+      <tbody>
+        <tr><td>CODE39</td><td>✅ 初期値ON</td><td>—</td><td>工業部品・社内管理コード</td></tr>
+        <tr><td>CODE128</td><td>任意</td><td>—</td><td>物流コード</td></tr>
+        <tr><td>EAN13</td><td>任意</td><td>—</td><td>JANコード（市販品）</td></tr>
+        <tr><td>QRCODE</td><td>—</td><td>✅ 初期値ON</td><td>棚番QRコード</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>8-6. データの入出力</h3>
+  <p>設定画面からマスタCSVの取り込み、履歴とマスタの共有、全データのエクスポートを実行できます。</p>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>項目</th><th>説明</th></tr></thead>
+      <tbody>
+        <tr><td>マスタCSVを取り込む</td><td>システムのファイル選択画面からCSVを選び、内部マスタを更新します。</td></tr>
+        <tr><td>履歴を共有</td><td>現在の履歴CSVとマスタCSVをメールやメッセージアプリへ添付して共有します。</td></tr>
+        <tr><td>全データをエクスポート</td><td>履歴CSVとマスタCSVを選択したフォルダへ出力します。</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="callout info">
+    <span class="callout-icon">ℹ️</span>
+    <div class="callout-body"><strong>CSV引用符の選択</strong> 「全データをエクスポート」では、出力前に「必要な項目だけ囲む」または「すべての項目を囲む」を選択できます。この設定は履歴CSVとマスタCSVの両方に適用されます。</div>
+  </div>
+
+  <h3>8-7. 言語・取扱説明書の選択</h3>
+  <p>設定画面からアプリの表示言語を変更できます。現在は日本語、英語、簡体字中国語、繁体字中国語、韓国語、ヒンディー語、ベトナム語、イタリア語、ポルトガル語（ブラジル）、スペイン語（中南米）、インドネシア語、タイ語に対応しています。</p>
+  <p>言語を変更して保存すると、アプリ内の表示言語が切り替わります。また、設定を保存してから再度取扱説明書を開くと、選択した言語に応じた取扱説明書が表示されます。</p>
+</section>
+
+
+<!-- ===== SECTION 9 ===== -->
+<section id="sec9">
+  <div class="section-label">Section 09</div>
+  <h2 class="section-title">ファイル管理とバックアップ</h2>
+
+  <h3>9-1. 出力ファイル一覧</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>ファイル名</th><th>生成タイミング</th><th>説明</th></tr></thead>
+      <tbody>
+        <tr><td><code>quantiventra_master.csv</code></td><td>取込時 / 保存時更新</td><td>棚卸用マスタ。CSV取り込み、数量保存、新規登録、品名変更、登録済累計変更時に更新される。</td></tr>
+        <tr><td><code>scan_history.csv</code></td><td>保存操作のたびに追記（なければ自動作成）</td><td>全スキャン保存履歴。</td></tr>
+        <tr><td><code>settings.json</code></td><td>設定保存時</td><td>コードルール・カメラ設定・言語設定などを保存。</td></tr>
+        <tr><td><code>scan_history_旧_日時.csv</code></td><td>旧形式検出時に自動生成</td><td>旧バージョンの履歴バックアップ。</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>9-2. バックアップ推奨手順</h3>
+  <p>棚卸作業の終了後、または定期的に以下の手順でバックアップを実施することを推奨します。</p>
+  <ol class="steps">
+    <li><p>設定画面で <span class="ui-label">全データをエクスポート</span> をタップします。</p></li>
+    <li><p>CSVの出力形式を選択します。</p></li>
+    <li><p>保存先フォルダを選択し、出力された履歴CSVとマスタCSVをPCやクラウドへ保管します。</p></li>
+  </ol>
+</section>
+
+
+<!-- ===== SECTION 10 ===== -->
+<section id="sec10">
+  <div class="section-label">Section 10</div>
+  <h2 class="section-title">トラブルシューティング</h2>
+
+  <div class="trouble">
+    <div class="trouble-q">コードが読み取れない・反応しない</div>
+    <div class="trouble-a">
+      <ul style="padding-left: 20px; line-height: 2;">
+        <li>カメラスイッチ（右上）がONになっているか確認してください。</li>
+        <li>コードを画面中央に収めてください（端に寄せると認識率が下がります）。</li>
+        <li>設定でスキャン対象の種別（CODE39 / EAN13等）が対象コードと一致しているか確認してください。</li>
+        <li>コードの印刷が破れていたり汚れている場合は読み取れないことがあります。</li>
+        <li>カメラ権限が許可されているか確認してください：設定 → アプリ → Quantiventra → 権限 → カメラ。</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="trouble">
+    <div class="trouble-q">マスタCSVを配置したが品名が表示されない</div>
+    <div class="trouble-a">
+      <ul style="padding-left: 20px; line-height: 2;">
+        <li>ファイル名が <code>quantiventra_master.csv</code>（半角・小文字）になっているか確認してください。</li>
+        <li>設定画面の「マスタCSVを取り込む」から正しいファイルを選択したか確認してください。</li>
+        <li>別のCSVを使いたい場合は、設定画面の「マスタCSVを取り込む」からもう一度選択してください。</li>
+        <li>CSVの文字コードがUTF-8になっているか確認してください（Shift-JISでは文字化けが起きます）。</li>
+        <li>ヘッダー行が正しい形式（<code>joint_code,barcode,name,theoretical_stock,actual_stock_total</code>）であるか確認してください。</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="trouble">
+    <div class="trouble-q">保存できない・「保存失敗」のメッセージが出る</div>
+    <div class="trouble-a">
+      <ul style="padding-left: 20px; line-height: 2;">
+        <li>端末の空き容量が不足していないか確認してください。</li>
+        <li>コードが未入力で品名も未入力の場合は保存できません。</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="trouble">
+    <div class="trouble-q">ロケーション読取ボタンを押したが棚番が設定されない</div>
+    <div class="trouble-a">
+      <ul style="padding-left: 20px; line-height: 2;">
+        <li>ロケーション用のコード種別設定が正しいか確認してください（初期値はQRCODE）。</li>
+        <li>棚番コードがQRコードではなくコードの場合は、設定でロケーション用種別を変更してください。</li>
+        <li>カメラスイッチがONであることを確認してください。</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="trouble">
+    <div class="trouble-q">エクスポートしたファイルが見つからない</div>
+    <div class="trouble-a">
+      <p style="padding-top: 4px;">エクスポート時に選択したフォルダを確認してください。ファイル名は <code>scan_history_日時.csv</code> と <code>quantiventra_master_export.csv</code> です。</p>
+    </div>
+  </div>
+
+  <div class="trouble">
+    <div class="trouble-q">品名変更ボタンを押しても品名フィールドが編集できない</div>
+    <div class="trouble-a">
+      <ul style="padding-left: 20px; line-height: 2;">
+        <li>コードまたは品名検索で商品を読み込んでいるか確認してください。何も読み込まれていない状態では品名変更は機能しません。</li>
+        <li>品名変更ボタンをタップするとボタンがオレンジ色になります。オレンジ色になっていない場合はタップが認識されていない可能性があります。再度タップしてください。</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="trouble">
+    <div class="trouble-q">計算用欄でENTを押しても結果が0になる / 計算が反映されない</div>
+    <div class="trouble-a">
+      <ul style="padding-left: 20px; line-height: 2;">
+        <li>「加算」キーを押して数量欄に加算してから保存してください。計算用欄のままENTを押しても保存にはなりません。</li>
+        <li>計算式に全角文字（全角数字・全角記号）が含まれていると計算エラーになります。テンキーを使って入力してください。</li>
+        <li>計算式の先頭が演算子（例：<code>*5</code>）になっている場合はエラーになります。数値から入力してください（例：<code>3*5</code>）。</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+
+<!-- ===== SECTION 11 ===== -->
+<section id="sec11">
+  <div class="section-label">Section 11</div>
+  <h2 class="section-title">規約・免責事項</h2>
+
+  <div class="legal-block">
+    <h4>■ 利用規約（Terms of Use）</h4>
+    <p>本アプリ（以下「本アプリ」）をご利用いただく前に、以下の利用規約をよくお読みください。本アプリをダウンロード・使用した場合、本規約に同意したものとみなします。</p>
+
+    <p><strong>1. 使用許諾</strong><br>
+    本アプリは個人・法人を問わず、業務目的・非業務目的を含む在庫管理・棚卸業務を目的とした使用を許可します。ただし、本アプリのリバースエンジニアリング、逆コンパイル、改変、再配布は禁止します。</p>
+
+    <p><strong>2. ユーザーデータ</strong><br>
+    本アプリが生成するすべてのデータ（マスタCSV・履歴CSV・設定ファイル）はユーザーの端末内にのみ保存されます。本アプリは外部サーバーへのデータ送信を一切行いません。</p>
+
+    <p><strong>3. 禁止事項</strong><br>
+    本アプリを違法な目的に使用すること、第三者の権利を侵害する目的に使用すること、本アプリの機能を悪用して不正なデータを生成する行為を禁止します。</p>
+
+    <h4>■ 免責事項（Disclaimer）</h4>
+    <p>本アプリは現状有姿（AS IS）で提供されます。本アプリの使用または使用不能から生じるいかなる損害（データ消失、業務上の損失、その他直接的・間接的損害を含む）についても、開発者は一切の責任を負いません。</p>
+    <p>本アプリが生成するCSVデータの正確性・完全性については、ユーザー自身がご確認ください。スキャンエラーや入力ミスによるデータ不整合については開発者は責任を負いません。</p>
+    <p>コードの読み取り精度はデバイスのカメラ性能・コードの状態・周囲環境により異なります。読み取り不能な場合は手動入力をご使用ください。</p>
+
+    <h4>■ プライバシーポリシー（Privacy Policy）</h4>
+    <p>本アプリが収集・送信・使用する個人情報は一切ありません。本アプリはインターネット接続を必要とせず、すべての処理をデバイス内でローカルに実行します。</p>
+    <p>本アプリが使用するカメラは、コード・QRコードの読み取りのみを目的として使用し、映像の録画・保存・送信は行いません。</p>
+    <p>ストレージアクセスは、ユーザーが選択したCSVの取り込みや、エクスポート先フォルダへの書き出しのためにのみ使用します。アプリ内部データは端末内でローカルに管理されます。</p>
+
+    <h4>■ 著作権（Copyright）</h4>
+    <p>Copyright © Quantiventra. All Rights Reserved.</p>
+    <p>本アプリおよび本マニュアルに含まれるすべてのコンテンツ（テキスト・デザイン・ロゴ等）の著作権は開発者に帰属します。</p>
+    <p>本アプリはオープンソースライブラリを使用しています。各ライブラリのライセンスは当該ライブラリの規定に従います。</p>
+
+    <h4>■ 規約の変更</h4>
+    <p>本規約は予告なく変更される場合があります。変更後の規約はGoogle Playストアへの掲載をもって効力を生じます。継続してご利用の場合は変更後の規約に同意したものとみなします。</p>
+  </div>
+</section>
+
+</div><!-- /wrapper -->
+
+<a href="#top" class="back-top" title="トップへ戻る">↑</a>
+
+<footer>
+  <strong>Quantiventra</strong> — コードスキャン在庫カウントアプリ<br>
+  Copyright © Quantiventra. All Rights Reserved.<br>
+  本マニュアルの内容は予告なく変更される場合があります。
+</footer>
+
+</body>
+</html>

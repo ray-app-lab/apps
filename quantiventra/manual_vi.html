@@ -1,0 +1,1106 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hướng dẫn sử dụng Quantiventra</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;700;900&family=IBM+Plex+Mono:wght@400;600&display=swap');
+
+  :root {
+    --primary:    #006C9C;
+    --primary-lt: #C3E7FF;
+    --primary-dk: #004A6E;
+    --accent:     #FF6D00;
+    --error:      #BA1A1A;
+    --bg:         #F8FDFF;
+    --surface:    #FFFFFF;
+    --border:     #D0E8F5;
+    --text:       #1A1A2E;
+    --muted:      #5A7A8A;
+    --mono:       'IBM Plex Mono', monospace;
+    --sans:       'Noto Sans', sans-serif;
+    --radius:     8px;
+    --shadow:     0 2px 12px rgba(0,108,156,.12);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--sans);
+    background: var(--bg);
+    color: var(--text);
+    font-size: 15px;
+    line-height: 1.8;
+  }
+
+  /* ── HEADER ── */
+  .site-header {
+    background: linear-gradient(135deg, var(--primary-dk) 0%, var(--primary) 60%, #0090CC 100%);
+    color: #fff;
+    padding: 56px 40px 48px;
+    position: relative;
+    overflow: hidden;
+  }
+  .site-header::before {
+    content: '';
+    position: absolute;
+    right: -80px; top: -80px;
+    width: 360px; height: 360px;
+    border-radius: 50%;
+    background: rgba(255,255,255,.06);
+  }
+  .site-header::after {
+    content: '';
+    position: absolute;
+    right: 60px; bottom: -40px;
+    width: 200px; height: 200px;
+    border-radius: 50%;
+    background: rgba(255,255,255,.04);
+  }
+  .header-badge {
+    display: inline-block;
+    background: rgba(255,255,255,.18);
+    border: 1px solid rgba(255,255,255,.35);
+    border-radius: 20px;
+    padding: 4px 14px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+  .site-header h1 {
+    font-size: clamp(28px, 5vw, 42px);
+    font-weight: 900;
+    letter-spacing: -.02em;
+    line-height: 1.15;
+    margin-bottom: 10px;
+  }
+  .site-header .subtitle {
+    font-size: 14px;
+    opacity: .8;
+    margin-bottom: 24px;
+  }
+  .header-meta {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+    font-size: 12px;
+    opacity: .75;
+  }
+
+  /* ── LAYOUT ── */
+  .wrapper {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 20px 80px;
+  }
+
+  /* ── TOC ── */
+  .toc-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--primary);
+    border-radius: var(--radius);
+    padding: 28px 32px;
+    margin: 36px 0 48px;
+    box-shadow: var(--shadow);
+  }
+  .toc-card h2 {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--primary);
+    margin-bottom: 18px;
+  }
+  .toc-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 6px 24px;
+  }
+  .toc-grid a {
+    color: var(--text);
+    text-decoration: none;
+    font-size: 13.5px;
+    padding: 3px 0;
+    border-bottom: 1px dashed transparent;
+    transition: color .15s, border-color .15s;
+    display: block;
+  }
+  .toc-grid a:hover { color: var(--primary); border-color: var(--primary); }
+  .toc-num { color: var(--primary); font-weight: 700; margin-right: 6px; font-family: var(--mono); font-size: 12px; }
+
+  /* ── SECTIONS ── */
+  section { margin-bottom: 60px; }
+
+  .section-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--primary);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border-radius: 4px;
+    margin-bottom: 10px;
+  }
+
+  h2.section-title {
+    font-size: clamp(20px, 3vw, 26px);
+    font-weight: 900;
+    color: var(--primary-dk);
+    border-bottom: 2px solid var(--border);
+    padding-bottom: 10px;
+    margin-bottom: 24px;
+    line-height: 1.3;
+  }
+
+  h3 {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--primary);
+    margin: 28px 0 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  h3::before {
+    content: '';
+    display: inline-block;
+    width: 4px; height: 16px;
+    background: var(--primary);
+    border-radius: 2px;
+  }
+
+  h4 {
+    font-size: 14px;
+    font-weight: 700;
+    margin: 20px 0 8px;
+    color: var(--text);
+  }
+
+  p { margin-bottom: 14px; }
+
+  /* ── CALLOUTS ── */
+  .callout {
+    border-radius: var(--radius);
+    padding: 16px 20px;
+    margin: 18px 0;
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+  }
+  .callout-icon { font-size: 20px; flex-shrink: 0; line-height: 1.5; }
+  .callout-body { flex: 1; font-size: 13.5px; line-height: 1.75; }
+  .callout-body strong { display: block; margin-bottom: 4px; font-size: 14px; }
+  .callout.info    { background: #E8F4FD; border: 1px solid #B3D9F2; }
+  .callout.warn    { background: #FFF8E1; border: 1px solid #FFD54F; }
+  .callout.danger  { background: #FFEBEE; border: 1px solid #FFCDD2; }
+  .callout.success { background: #E8F5E9; border: 1px solid #A5D6A7; }
+
+  /* ── TABLES ── */
+  .table-wrap { overflow-x: auto; margin: 18px 0; border-radius: var(--radius); box-shadow: var(--shadow); }
+  table { width: 100%; border-collapse: collapse; background: var(--surface); font-size: 13.5px; }
+  thead th {
+    background: var(--primary);
+    color: #fff;
+    font-weight: 700;
+    padding: 12px 16px;
+    text-align: left;
+    white-space: nowrap;
+  }
+  tbody td { padding: 11px 16px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  tbody tr:last-child td { border-bottom: none; }
+  tbody tr:hover { background: #F0F8FF; }
+  td code, th code { font-family: var(--mono); background: rgba(0,108,156,.1); padding: 1px 6px; border-radius: 3px; font-size: 12px; }
+  .badge-req { background: var(--error); color: #fff; font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 10px; white-space: nowrap; }
+  .badge-opt { background: #90A4AE; color: #fff; font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 10px; white-space: nowrap; }
+
+  /* ── CODE BLOCKS ── */
+  pre {
+    background: #0F1923;
+    color: #C8E6FF;
+    font-family: var(--mono);
+    font-size: 13px;
+    padding: 20px 24px;
+    border-radius: var(--radius);
+    overflow-x: auto;
+    margin: 14px 0;
+    line-height: 1.7;
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,.08);
+  }
+  pre .comment { color: #5C8099; }
+  pre .hl { color: #7FD8FF; font-weight: 600; }
+  pre .val { color: #A5E6A1; }
+  code {
+    font-family: var(--mono);
+    background: rgba(0,108,156,.1);
+    color: var(--primary-dk);
+    padding: 2px 7px;
+    border-radius: 4px;
+    font-size: 13px;
+  }
+
+  /* ── PATH DISPLAY ── */
+  .path {
+    background: #0F1923;
+    color: #7FD8FF;
+    font-family: var(--mono);
+    font-size: 13px;
+    padding: 14px 20px;
+    border-radius: var(--radius);
+    margin: 12px 0;
+    line-height: 2;
+  }
+  .path .dim { color: #5C8099; }
+  .path .file { color: #A5E6A1; font-weight: 600; }
+
+  /* ── STEPS ── */
+  .steps { list-style: none; counter-reset: step-counter; }
+  .steps li {
+    counter-increment: step-counter;
+    display: flex;
+    gap: 16px;
+    margin-bottom: 14px;
+    align-items: flex-start;
+  }
+  .steps li::before {
+    content: counter(step-counter);
+    flex-shrink: 0;
+    width: 28px; height: 28px;
+    background: var(--primary);
+    color: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 700;
+    margin-top: 2px;
+  }
+  .steps li p { margin: 0; }
+
+  /* ── UI LABEL ── */
+  .ui-label {
+    display: inline-block;
+    background: #E3F2FD;
+    border: 1px solid #90CAF9;
+    color: #0D47A1;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 2px 10px;
+    border-radius: 4px;
+    font-family: var(--mono);
+    white-space: nowrap;
+  }
+  .key {
+    display: inline-block;
+    background: var(--text);
+    color: #fff;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 2px 10px;
+    border-radius: 5px;
+    font-family: var(--mono);
+  }
+
+  /* ── CARDS ── */
+  .card-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 16px; margin: 18px 0; }
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px;
+    box-shadow: var(--shadow);
+  }
+  .card h4 { margin-top: 0; color: var(--primary); font-size: 14px; }
+
+  /* ── TROUBLE ── */
+  .trouble { border: 1px solid var(--border); border-radius: var(--radius); margin: 16px 0; overflow: hidden; }
+  .trouble-q { background: #EEF6FD; padding: 14px 20px; font-weight: 700; font-size: 14px; color: var(--primary-dk); cursor: pointer; display: flex; align-items: center; gap: 10px; }
+  .trouble-q::before { content: 'Q'; background: var(--primary); color: #fff; width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 900; flex-shrink: 0; }
+  .trouble-a { padding: 14px 20px 16px 52px; font-size: 13.5px; border-top: 1px solid var(--border); }
+
+  /* ── LEGAL ── */
+  .legal-block {
+    background: #F5F5F5;
+    border: 1px solid #DDD;
+    border-radius: var(--radius);
+    padding: 20px 24px;
+    font-size: 12.5px;
+    color: #444;
+    line-height: 1.9;
+    margin: 16px 0;
+  }
+  .legal-block h4 { font-size: 13px; color: #333; margin: 18px 0 6px; border-bottom: 1px solid #DDD; padding-bottom: 4px; }
+  .legal-block h4:first-child { margin-top: 0; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--primary-dk);
+    color: rgba(255,255,255,.65);
+    text-align: center;
+    padding: 32px 20px;
+    font-size: 12px;
+    line-height: 2;
+  }
+  footer strong { color: #fff; }
+
+  /* ── BACK TO TOP ── */
+  .back-top {
+    position: fixed;
+    right: 24px; bottom: 28px;
+    background: var(--primary);
+    color: #fff;
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px;
+    text-decoration: none;
+    box-shadow: 0 4px 16px rgba(0,108,156,.4);
+    transition: transform .2s, box-shadow .2s;
+    z-index: 100;
+  }
+  .back-top:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,108,156,.5); }
+
+  /* ── DIVIDER ── */
+  hr { border: none; border-top: 1px solid var(--border); margin: 40px 0; }
+
+  @media (max-width: 600px) {
+    .site-header { padding: 36px 20px 32px; }
+    .toc-grid { grid-template-columns: 1fr; }
+    .card-grid { grid-template-columns: 1fr; }
+  }
+  @media print {
+    .back-top { display: none; }
+    body { font-size: 13px; }
+    pre { font-size: 11px; }
+    .site-header { background: var(--primary) !important; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== HEADER ===== -->
+<header class="site-header" id="top">
+  <div class="header-badge">Hướng dẫn sử dụng</div>
+  <h1>Quantiventra</h1>
+  <p class="subtitle">Ứng dụng đếm kho bằng quét mã vạch - Hướng dẫn vận hành</p>
+  <div class="header-meta">
+    <span>Hệ điều hành mục tiêu: Android 8.0 (API 26) trở lên</span>
+    <span>Phiên bản mục tiêu: v1.x</span>
+    <span>Cập nhật lần cuối: 2026</span>
+  </div>
+</header>
+
+<div class="wrapper">
+
+<!-- ===== TOC ===== -->
+<nav class="toc-card">
+  <h2>📋 Mục lục</h2>
+  <div class="toc-grid">
+    <a href="#sec1"><span class="toc-num">1</span> Giới thiệu</a>
+    <a href="#sec2"><span class="toc-num">2</span> Cài đặt và thiết lập ban đầu</a>
+    <a href="#sec3"><span class="toc-num">3</span> Tạo và nạp file CSV danh mục gốc (Master)</a>
+    <a href="#sec4"><span class="toc-num">4</span> Cấu trúc màn hình và giải thích các bộ phận</a>
+    <a href="#sec5"><span class="toc-num">5</span> Quy trình thao tác cơ bản</a>
+    <a href="#sec6"><span class="toc-num">6</span> Thao tác nâng cao</a>
+    <a href="#sec7"><span class="toc-num">7</span> Tính năng lịch sử</a>
+    <a href="#sec8"><span class="toc-num">8</span> Cài đặt (Ngôn ngữ, Quy tắc, Camera...)</a>
+    <a href="#sec9"><span class="toc-num">9</span> Quản lý file và sao lưu</a>
+    <a href="#sec10"><span class="toc-num">10</span> Xử lý sự cố (Troubleshooting)</a>
+    <a href="#sec11"><span class="toc-num">11</span> Điều khoản & Miễn trừ trách nhiệm</a>
+  </div>
+</nav>
+
+
+<!-- ===== SECTION 1 ===== -->
+<section id="sec1">
+  <div class="section-label">Section 01</div>
+  <h2 class="section-title">Giới thiệu</h2>
+
+  <h3>1-1. Về ứng dụng này</h3>
+  <p>Quantiventra (là một từ ghép được tạo ra từ "Quantity - Số lượng" và "Inventory - Kiểm kê kho") là ứng dụng Android giúp tối ưu hóa việc đếm tồn kho thông qua quét mã bằng camera điện thoại thông minh.</p>
+  <p>Chỉ cần hướng camera vào mã vạch, ứng dụng sẽ tự động nhận diện sản phẩm, cho phép nhập số lượng và lưu trữ một cách trực quan, giúp số hóa quy trình kiểm kê giấy truyền thống. Kết quả quét được lưu dưới dạng file CSV trong thiết bị, giúp dễ dàng liên kết với Excel hoặc Google Sheets.</p>
+
+  <div class="card-grid">
+    <div class="card">
+      <h4>📦 Đếm tồn kho</h4>
+      <p>Nhận diện sản phẩm nhanh chóng qua quét mã. Tích hợp chức năng tính toán để cộng dồn từ nhiều vị trí.</p>
+    </div>
+    <div class="card">
+      <h4>🗂️ Quản lý danh mục (Master)</h4>
+      <p>Nạp dữ liệu gốc hàng loạt qua file CSV. Thiết lập trước tên sản phẩm, mã số và tồn kho lý thuyết.</p>
+    </div>
+    <div class="card">
+      <h4>📍 Quản lý vị trí kệ</h4>
+      <p>Quét mã QR để thiết lập mã vị trí (Location). Ghi lại sản phẩm thuộc kệ nào vào file CSV.</p>
+    </div>
+    <div class="card">
+      <h4>📊 Xuất file CSV</h4>
+      <p>Kết quả quét tự động lưu vào bộ nhớ máy. Có thể đưa lên PC để tổng hợp và phân tích.</p>
+    </div>
+  </div>
+
+  <h3>1-2. Môi trường hoạt động</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Hạng mục</th><th>Yêu cầu</th></tr></thead>
+      <tbody>
+        <tr><td>Hệ điều hành</td><td>Android 7.0 (Nougat / API 24) trở lên</td></tr>
+        <tr><td>Camera</td><td>Camera hỗ trợ tự động lấy nét (Bắt buộc)</td></tr>
+        <tr><td>Bộ nhớ</td><td>Trống từ 50MB trở lên (Khuyến nghị)</td></tr>
+        <tr><td>Quyền</td><td>Quyền Camera</td></tr>
+        <tr><td>Internet</td><td>Không cần (Hoạt động hoàn toàn offline)</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>1-3. Về các quyền truy cập</h3>
+  <p>Ứng dụng sẽ yêu cầu quyền sau trong lần khởi chạy đầu tiên. Để sử dụng tính năng quét bình thường, bạn chỉ cần cấp quyền Camera.</p>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Quyền</th><th>Mục đích</th><th>Nếu từ chối</th></tr></thead>
+      <tbody>
+        <tr><td>Camera</td><td>Quét mã vạch / mã QR</td><td>Không thể quét bằng camera (vẫn có thể nhập tay)</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout info">
+    <span class="callout-icon">ℹ️</span>
+    <div class="callout-body">
+      <strong>Dữ liệu được lưu ở đâu</strong>
+      Tệp danh mục, lịch sử và cài đặt đều được ứng dụng tự quản lý ở bên trong. Khi cần nhập CSV danh mục hoặc xuất dữ liệu, hãy thao tác từ màn hình Cài đặt.
+    </div>
+  </div>
+</section>
+
+
+<!-- ===== SECTION 2 ===== -->
+<section id="sec2">
+  <div class="section-label">Section 02</div>
+  <h2 class="section-title">Cài đặt và thiết lập ban đầu</h2>
+
+  <h3>2-1. Quy trình cài đặt</h3>
+  <ol class="steps">
+    <li><p>Mở <strong>Google Play Store</strong> trên thiết bị Android.</p></li>
+    <li><p>Tìm kiếm với từ khóa "<strong>Quantiventra</strong>".</p></li>
+    <li><p>Chọn ứng dụng và nhấn <span class="ui-label">Cài đặt</span>.</p></li>
+    <li><p>Sau khi hoàn tất, nhấn <span class="ui-label">Mở</span> hoặc nhấn vào biểu tượng ứng dụng trên màn hình chính.</p></li>
+  </ol>
+
+  <h3>2-2. Khởi chạy lần đầu</h3>
+  <ol class="steps">
+    <li><p>Khi mở ứng dụng, hộp thoại <strong>quyền Camera</strong> sẽ hiện ra. Hãy nhấn <span class="ui-label">Cho phép</span>.</p></li>
+    <li><p>Sau khi cấp quyền Camera, bạn có thể bắt đầu quét ngay.</p></li>
+    <li><p>Nếu muốn dùng CSV danh mục, hãy vào <span class="ui-label">Cài đặt → Nhập CSV danh mục</span> và chọn tệp.</p></li>
+  </ol>
+
+  <div class="callout info">
+    <span class="callout-icon">ℹ️</span>
+    <div class="callout-body">
+      <strong>Sau khi thiết lập xong</strong>
+      Chỉ cần cấp quyền Camera là bạn có thể quét, lưu, nhập CSV danh mục và xuất dữ liệu từ màn hình Cài đặt.
+    </div>
+  </div>
+
+  <h3>2-3. Ứng dụng quản lý dữ liệu như thế nào</h3>
+  <p>Dữ liệu danh mục, lịch sử và cài đặt đều được ứng dụng tự động quản lý. Trong quá trình sử dụng thông thường, bạn không cần biết hoặc thao tác với cấu trúc thư mục bên trong.</p>
+  <div class="callout info">
+    <span class="callout-icon">ℹ️</span>
+    <div class="callout-body">
+      <strong>Người dùng cần làm gì</strong>
+      Khi cần nạp danh mục, hãy dùng <span class="ui-label">Nhập CSV danh mục</span>. Khi cần lấy dữ liệu ra khỏi ứng dụng, hãy dùng <span class="ui-label">Xuất toàn bộ dữ liệu</span> hoặc <span class="ui-label">Chia sẻ lịch sử</span>.
+    </div>
+  </div>
+</section>
+
+
+<!-- ===== SECTION 3 ===== -->
+<section id="sec3">
+  <div class="section-label">Section 03</div>
+  <h2 class="section-title">Tạo và nạp file CSV gốc (Master) 【Quan trọng】</h2>
+
+  <div class="callout success">
+    <span class="callout-icon">✅</span>
+    <div class="callout-body">
+      <strong>Chuẩn bị trước danh mục giúp tăng hiệu quả công việc</strong>
+      Bằng cách nạp trước file CSV gốc, tên sản phẩm và tồn kho lý thuyết sẽ tự động hiển thị khi quét mã. Nếu không đăng ký, bạn sẽ phải nhập tay mỗi lần quét.
+    </div>
+  </div>
+
+  <h3>3-1. Cách chuẩn bị file CSV (kèm tên cột, 2 cách)</h3>
+  <p>Có hai cách chính để chuẩn bị file danh mục gốc.</p>
+
+  <h4>Cách A: Tạo từ đầu bằng Excel hoặc Google Sheets</h4>
+  <ol class="steps">
+    <li><p>Mở Excel hoặc Google Sheets trên PC.</p></li>
+    <li><p>Không nên tự gõ hàng tiêu đề ở dòng đầu tiên. Hãy sao chép và dán nguyên dòng trong <strong>3-3. Định nghĩa các cột (tên cột)</strong>.</p></li>
+    <li><p>Nhập dữ liệu sản phẩm từ hàng thứ 2 trở đi.</p></li>
+    <li><p>Lưu dưới định dạng "CSV (Comma delimited)" với tên file là <code>quantiventra_master.csv</code> (Khuyên dùng mã hóa UTF-8).</p></li>
+  </ol>
+
+  <h4>Cách B: Dùng file do ứng dụng tự tạo làm mẫu (Dành cho người mới)</h4>
+  <p>Nếu bạn thấy phiền khi phải tạo từ đầu, hãy để ứng dụng tạo mẫu.</p>
+  <ol class="steps">
+    <li><p>Khởi chạy ứng dụng khi chưa có file gốc và quét thử một mã vạch bất kỳ.</p></li>
+    <li><p>Thông báo "Mã chưa đăng ký" hiện ra, chọn "Có (Đăng ký mới)".</p></li>
+    <li><p>Nhập tên sản phẩm ví dụ là "Test" và lưu lại.</p></li>
+    <li><p>Sau đó hãy chạy <span class="ui-label">Cài đặt → Xuất toàn bộ dữ liệu</span> để xuất file CSV danh mục hiện tại.</p></li>
+    <li><p>Chuyển file đã xuất sang máy tính (qua USB, email hoặc đám mây), mở bằng Excel, rồi dùng dữ liệu mẫu làm khuôn để nhập dữ liệu thật. Sau đó dùng <span class="ui-label">Nhập CSV danh mục</span> để đưa file trở lại ứng dụng.</p></li>
+  </ol>
+
+  <h3>3-2. Tên file và vị trí lưu trữ</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Hạng mục</th><th>Giá trị</th></tr></thead>
+      <tbody>
+        <tr><td>Tên file</td><td><code>quantiventra_master.csv</code> (Cố định, không đổi)</td></tr>
+        <tr><td>Mã ký tự</td><td>UTF-8 (Khuyên dùng không BOM)</td></tr>
+        <tr><td>Mã xuống dòng</td><td>LF hoặc CRLF (Đều được)</td></tr>
+        <tr><td>Cách nhập</td><td>Chọn tệp từ <span class="ui-label">Cài đặt → Nhập CSV danh mục</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>3-3. Định nghĩa các cột (tên cột)</h3>
+  <p><strong>Hàng đầu tiên là hàng tiêu đề</strong>. Hãy sao chép và dán nguyên văn một dòng dưới đây. Cần giữ đủ cả 5 tên cột.</p>
+  <pre><span class="hl">joint_code</span>,<span class="hl">barcode</span>,<span class="hl">name</span>,<span class="hl">theoretical_stock</span>,<span class="hl">actual_stock_total</span></pre>
+  <div class="callout info">
+    <span class="callout-icon">ℹ️</span>
+    <div class="callout-body">
+      <strong>Nếu chỉ dùng mã nội bộ, bạn vẫn giữ nguyên 5 cột này</strong>
+      Thiết lập mặc định của ứng dụng là <strong>mã đối tác OFF</strong>. Nếu chỉ quản lý mã nội bộ, hãy để trống cột <code>joint_code</code>. Chỉ điền cột này khi bạn cũng cần dùng mã đối tác. Nếu file master được nhập có dữ liệu trong <code>joint_code</code>, ứng dụng sẽ tự chuyển sang ON khi khởi động.
+    </div>
+  </div>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>#</th><th>Tên cột</th><th>Kiểu</th><th>Yêu cầu</th><th>Mô tả / Lưu ý</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td><code>joint_code</code></td>
+          <td>Chuỗi</td>
+          <td><span class="badge-opt">Tùy chọn</span></td>
+          <td>Mã sản phẩm đối tác (hoặc nhà cung cấp). Có thể để trống.</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td><code>barcode</code></td>
+          <td>Chuỗi</td>
+          <td><span class="badge-req">Bắt buộc</span></td>
+          <td>Mã số nội bộ của công ty. Phải khớp với mã vạch thực tế. Không trùng lặp.</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td><code>name</code></td>
+          <td>Chuỗi</td>
+          <td><span class="badge-req">Bắt buộc</span></td>
+          <td>Tên sản phẩm. Nếu tên có dấu phẩy, hãy bao trong ngoặc kép (VD: <code>"Bulong,M4"</code>).</td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td><code>theoretical_stock</code></td>
+          <td>Số</td>
+          <td><span class="badge-opt">Tùy chọn</span></td>
+          <td>Số tồn kho lý thuyết (trên sổ sách). Nếu không rõ hãy nhập <code>0</code>.</td>
+        </tr>
+        <tr>
+          <td>5</td>
+          <td><code>actual_stock_total</code></td>
+          <td>Số</td>
+          <td><span class="badge-opt">Tùy chọn</span></td>
+          <td>Tổng tồn kho đã đăng ký. Nên để <code>0</code> khi bắt đầu kiểm kê.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>3-4. Mẫu file CSV</h3>
+  <pre><span class="comment"># Hàng 1: Tiêu đề (Bắt buộc)</span>
+<span class="hl">joint_code</span>,<span class="hl">barcode</span>,<span class="hl">name</span>,<span class="hl">theoretical_stock</span>,<span class="hl">actual_stock_total</span>
+<span class="comment"># Từ hàng 2 trở đi: Dữ liệu</span>
+<span class="val">ABC-001</span>,<span class="val">4912345678904</span>,<span class="val">Bulong luc giac M6×20</span>,<span class="val">500</span>,<span class="val">0</span>
+<span class="val">ABC-002</span>,<span class="val">4912345678911</span>,<span class="val">Dai oc luc giac M6</span>,<span class="val">1000</span>,<span class="val">0</span>
+,<span class="val">4912345678928</span>,<span class="val">Vong dem venh M6</span>,<span class="val">800</span>,<span class="val">0</span>
+<span class="val">XY-999</span>,<span class="val">4912345678935</span>,<span class="val">"Set bulong,M4"</span>,<span class="val">200</span>,<span class="val">0</span></pre>
+
+  <div class="callout warn">
+    <span class="callout-icon">⚠️</span>
+    <div class="callout-body">
+      <strong>Lưu ý khi dùng Excel</strong>
+      Khi lưu bằng Excel, mã ký tự có thể bị chuyển thành Shift-JIS. Hãy chọn "Save As" → "CSV UTF-8 (Comma delimited)". Nếu gặp lỗi do BOM, hãy mở lại bằng Notepad và lưu lại.
+    </div>
+  </div>
+
+  <h3>3-5. Nhập CSV danh mục</h3>
+  <p>Bạn không cần đặt CSV vào một thư mục cố định. Hãy nhập trực tiếp từ màn hình Cài đặt.</p>
+
+  <h4>🔌 Cách ①: Chọn tệp cục bộ</h4>
+  <ol class="steps">
+    <li><p>Lưu tệp CSV ở bất kỳ đâu trên thiết bị, ví dụ thư mục "Tải xuống".</p></li>
+    <li><p>Trong ứng dụng, nhấn <span class="ui-label">Cài đặt → Nhập CSV danh mục</span>.</p></li>
+    <li><p>Chọn tệp CSV trong bộ chọn tệp của hệ thống.</p></li>
+    <li><p>Sau khi nhập xong, dữ liệu danh mục sẽ được áp dụng ngay.</p></li>
+  </ol>
+
+  <h4>☁️ Cách ②: Từ Google Drive</h4>
+  <ol class="steps">
+    <li><p>Tải tệp CSV lên <a href="https://drive.google.com" target="_blank">Google Drive</a> từ máy tính.</p></li>
+    <li><p>Trong ứng dụng, nhấn <span class="ui-label">Cài đặt → Nhập CSV danh mục</span>.</p></li>
+    <li><p>Chọn trực tiếp tệp CSV từ Google Drive trong bộ chọn tệp.</p></li>
+  </ol>
+
+  <h4>📧 Cách ③: Tệp đính kèm trong email</h4>
+  <ol class="steps">
+    <li><p>Gửi tệp CSV cho chính bạn qua email.</p></li>
+    <li><p>Tải tệp đính kèm xuống điện thoại.</p></li>
+    <li><p>Trong ứng dụng, nhấn <span class="ui-label">Cài đặt → Nhập CSV danh mục</span> rồi chọn tệp đã tải xuống.</p></li>
+  </ol>
+
+  <div class="callout info">
+    <span class="callout-icon">ℹ️</span>
+    <div class="callout-body">
+      <strong>Khi cập nhật danh mục</strong>
+      Nếu bạn đã chỉnh sửa lại CSV, hãy nhập lại tệp mới một lần nữa. Dữ liệu danh mục bên trong ứng dụng sẽ được thay thế bằng nội dung của tệp mới.
+    </div>
+  </div>
+</section>
+
+
+<!-- ===== SECTION 4 ===== -->
+<section id="sec4">
+  <div class="section-label">Section 04</div>
+  <h2 class="section-title">Cấu trúc màn hình và giải thích các bộ phận</h2>
+
+  <p>Màn hình chính bao gồm 5 khu vực: "Thanh tiêu đề", "Khu vực Camera", "Khu vực nhập liệu", "Khu vực lịch sử" và "Bàn phím số".</p>
+
+  <h3>4-1. Thanh tiêu đề</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Yếu tố</th><th>Mô tả</th></tr></thead>
+      <tbody>
+        <tr><td>Tên ứng dụng (Quantiventra)</td><td>Không có tác dụng khi chạm (chỉ hiển thị)</td></tr>
+        <tr><td>Biểu tượng ⚙️</td><td>Mở hộp thoại cài đặt</td></tr>
+        <tr><td>Công tắc ON / OFF</td><td>Bật/Tắt xem trước của camera</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>4-2. Khu vực Camera</h3>
+  <p>Khu vực quét mã vạch/QR theo thời gian thực. Khi bật camera và hướng vào mã, ứng dụng sẽ tự động nhận diện nếu bắt được mã giống nhau trong 3 khung hình liên tiếp.</p>
+  <div class="callout info">
+    <span class="callout-icon">ℹ️</span>
+    <div class="callout-body">
+      <strong>Về độ chính xác khi quét</strong>
+      Camera ưu tiên nhận diện mã nằm trong phạm vi ±15% giữa màn hình. Nếu khó đọc, hãy thử đặt mã vào chính giữa màn hình.
+    </div>
+  </div>
+
+  <h3>4-3. Khu vực nhập liệu</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Trường thông tin</th><th>Mô tả</th></tr></thead>
+      <tbody>
+        <tr><td>Vị trí (LOC)</td><td>Mã kệ/vị trí đặt sản phẩm. Nhập tay hoặc quét mã vị trí.</td></tr>
+        <tr><td>Mã sản phẩm</td><td>Tự động hiện khi quét mã hoặc nhập tay. Có thể hiện mã đối tác tùy cài đặt.</td></tr>
+        <tr><td>Tên sản phẩm</td><td>Tên sản phẩm. Tự hiển thị nếu có trong danh mục gốc.</td></tr>
+        <tr><td>Số lượng</td><td>Nhập số lượng đếm được lần này. Có thể dùng phép tính (VD: 3*5).</td></tr>
+        <tr><td>Tồn kho lý thuyết</td><td>Số tồn kho trên sổ sách từ danh mục gốc (Chỉ tham khảo, không sửa được).</td></tr>
+        <tr><td>Đã đăng ký</td><td>Tổng số lượng đã lưu trước đó. Nhấn nút "Thay đổi" để sửa.</td></tr>
+        <tr><td>Ô tính toán</td><td>Hỗ trợ tính toán nhanh. Nhấn "Cộng" để đưa kết quả vào ô Số lượng.</td></tr>
+        <tr><td>Lịch sử tính toán</td><td>Hiển thị lịch sử các giá trị đã cộng dồn (Chỉ tham khảo).</td></tr>
+        <tr><td>Ghi chú (Memo)</td><td>Ghi chép thêm. Thông tin này sẽ được lưu vào CSV.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>4-4. Bàn phím số</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Phím</th><th>Hành động</th></tr></thead>
+      <tbody>
+        <tr><td><span class="key">0〜9</span> / <span class="key">00</span></td><td>Nhập số vào trường đang được chọn.</td></tr>
+        <tr><td><span class="key">−</span> / <span class="key">×</span></td><td>Dấu trừ / nhân (Dùng cho phép tính).</td></tr>
+        <tr><td><span class="key">CLR</span></td><td>Xóa trắng nội dung của trường đang chọn.</td></tr>
+        <tr><td><span class="key">ENT</span> / <span class="key">Tìm</span></td><td>Xác nhận / Tìm kiếm / Lưu (Tùy vào vị trí con trỏ).</td></tr>
+        <tr><td><span class="key">Cộng</span> (Khi ở ô tính toán)</td><td>Cộng giá trị trong ô tính toán vào ô Số lượng.</td></tr>
+        <tr><td><span class="key">Lưu</span> (Khi ở ô tính toán)</td><td>Lưu nội dung hiện tại.</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+
+<!-- ===== SECTION 5 ===== -->
+<section id="sec5">
+  <div class="section-label">Section 05</div>
+  <h2 class="section-title">Quy trình thao tác cơ bản</h2>
+
+  <h3>5-1. Quy trình kiểm kê tiêu chuẩn</h3>
+
+  <h4>Bước 1: Thiết lập mã vị trí (Location)</h4>
+  <ol class="steps">
+    <li><p>Để thiết lập mã vị trí: Nhấn nút <span class="ui-label">Quét vị trí</span> (Nút sẽ chuyển sang màu vàng).</p></li>
+    <li><p>Hướng camera vào mã vị trí của kệ, mã sẽ tự động được đọc và điền vào trường "Vị trí (LOC)".</p></li>
+    <li><p>Nếu nhập tay: Nhấn vào trường "Vị trí (LOC)" và nhập bằng bàn phím phần mềm.</p></li>
+  </ol>
+
+  <div class="callout info">
+    <span class="callout-icon">ℹ️</span>
+    <div class="callout-body">Mã vị trí sau khi thiết lập sẽ được giữ lại cho các lần quét sản phẩm tiếp theo. Hãy cập nhật khi bạn chuyển sang kệ khác.</div>
+  </div>
+
+  <h4>Bước 2: Quét mã sản phẩm</h4>
+  <ol class="steps">
+    <li><p>Đảm bảo công tắc Camera đang ở trạng thái ON.</p></li>
+    <li><p>Hướng camera vào mã vạch của sản phẩm. Nó sẽ được quét tự động.</p></li>
+    <li><p>Nếu sản phẩm có trong danh mục gốc, tên và tồn kho lý thuyết sẽ tự hiện ra.</p></li>
+    <li><p>Nếu là mã chưa đăng ký, hộp thoại "Mã chưa đăng ký" sẽ hiện ra (→ Xem 6-3).</p></li>
+  </ol>
+
+  <h4>Bước 3: Nhập số lượng</h4>
+  <ol class="steps">
+    <li><p>Ô "Số lượng" sẽ tự động được chọn con trỏ.</p></li>
+    <li><p>Dùng bàn phím số để nhập số lượng.</p></li>
+    <li><p>Nếu cần cộng dồn từ nhiều cụm sản phẩm, hãy dùng chức năng tính toán (→ Xem 5-2).</p></li>
+  </ol>
+
+  <h4>Bước 4: Lưu dữ liệu</h4>
+  <ol class="steps">
+    <li><p>Nhập ghi chú nếu cần.</p></li>
+    <li><p>Nhấn phím <span class="key">ENT</span> hoặc phím <span class="key">Lưu</span>.</p></li>
+    <li><p>Âm thanh thông báo vang lên và thông báo "Đã lưu" hiện ra là hoàn tất.</p></li>
+    <li><p>Tiến hành quét sản phẩm tiếp theo.</p></li>
+  </ol>
+
+  <h3>5-2. Cách sử dụng chức năng tính toán</h3>
+  <p>Đây là chức năng tiện lợi khi bạn đếm sản phẩm được đặt chia nhỏ ở nhiều ngăn hoặc vị trí trên cùng một kệ.</p>
+  <ol class="steps">
+    <li><p>Nhấn vào trường "Ô tính toán" (Bàn phím số chuyển sang chế độ tính toán).</p></li>
+    <li><p>VD: Tầng trên có 30 cái, tầng dưới có 25 cái → Nhập <code>30</code> rồi nhấn <span class="key">Cộng</span> → Nhập <code>25</code> rồi nhấn <span class="key">Cộng</span>.</p></li>
+    <li><p>Có thể dùng phép tính: <code>3*10</code> → Nhấn <span class="key">Cộng</span>, giá trị 30 sẽ được đưa vào ô Số lượng.</p></li>
+    <li><p>Lịch sử các lần cộng dồn sẽ hiện ở ô Lịch sử tính toán.</p></li>
+    <li><p>Khi tổng số lượng đã hiện đúng ở ô Số lượng, nhấn <span class="key">Lưu</span>.</p></li>
+  </ol>
+
+  <h3>5-3. Xóa trắng (Clear)</h3>
+  <p>Nhấn nút <span class="ui-label">Xóa trắng</span> sẽ reset toàn bộ nội dung nhập liệu hiện tại (Mã, Tên, Số lượng, Ghi chú, Lịch sử tính toán) để chuẩn bị cho sản phẩm tiếp theo. Mã vị trí (LOC) sẽ không bị xóa.</p>
+  <div class="callout info">
+    <span class="callout-icon">ℹ️</span>
+    <div class="callout-body">
+      <strong>Nếu muốn reset mã vị trí (LOC)</strong>
+      Nút Xóa trắng không xóa vị trí. Khi chuyển sang kệ khác, hãy nhấn nút Quét vị trí, hoặc dùng phím <span class="key">CLR</span> để xóa tay, hoặc quét mã vị trí mới để ghi đè.
+    </div>
+  </div>
+</section>
+
+
+<!-- ===== SECTION 6 ===== -->
+<section id="sec6">
+  <div class="section-label">Section 06</div>
+  <h2 class="section-title">Thao tác nâng cao</h2>
+
+  <h3>6-1. Chế độ tìm kiếm theo tên</h3>
+  <p>Dùng khi không có mã vạch hoặc mã vạch không đọc được.</p>
+  <ol class="steps">
+    <li><p>Bật công tắc "Tìm theo tên" ở phía dưới màn hình.</p></li>
+    <li><p>Nhập từ khóa vào trường "Tên sản phẩm" (Không phân biệt hoa thường, nửa chiều/toàn chiều).</p></li>
+    <li><p>Nhấn nút 🔍 Tìm kiếm hoặc phím <span class="key">ENT</span>.</p></li>
+    <li><p>Hộp thoại kết quả hiện ra, chạm vào sản phẩm đúng để chọn.</p></li>
+    <li><p>Sau đó nhập số lượng và lưu như bình thường.</p></li>
+  </ol>
+  <div class="callout info">
+    <span class="callout-icon">ℹ️</span>
+    <div class="callout-body">
+      <strong>Hành vi sau khi lưu ở chế độ tìm tên</strong>
+      Nếu công tắc "Liên tục" đang OFF, chế độ tìm tên sẽ tự tắt sau khi lưu. Ứng dụng quay về trạng thái quét mã vạch. Để tìm tên liên tục, hãy BẬT công tắc "Liên tục".
+    </div>
+  </div>
+
+  <h3>6-2. Chế độ tìm kiếm liên tục</h3>
+  <p>Khi BẬT công tắc "Liên tục", chế độ tìm tên sẽ không tự đóng sau khi lưu. Tiện lợi khi phải nhập nhiều sản phẩm cùng lúc bằng tên trên một kệ.</p>
+
+  <h3>6-3. Đăng ký sản phẩm mới</h3>
+  <p>Khi quét mã không có trong danh mục gốc, hộp thoại "Mã chưa đăng ký" sẽ hiện ra.</p>
+  <ol class="steps">
+    <li><p>Nhấn "Có (Đăng ký mới)".</p></li>
+    <li><p>Ứng dụng tự cấp mã số nội bộ (bắt đầu bằng <code>99999...</code>). Nếu bạn nhập tay mã mới, bạn sẽ chọn đó là mã đối tác hay mã nội bộ.</p></li>
+    <li><p>Con trỏ nhảy đến ô Tên sản phẩm, hãy nhập tên.</p></li>
+    <li><p>Nhập số lượng và lưu. Lần tới quét mã này ứng dụng sẽ nhận diện được.</p></li>
+  </ol>
+
+  <h3>6-4. Thay đổi tên sản phẩm</h3>
+  <p>Bạn có thể sửa tên sản phẩm đã có trong danh mục.</p>
+  <ol class="steps">
+    <li><p>Quét (hoặc tìm tên) sản phẩm cần sửa.</p></li>
+    <li><p>Nhấn nút <span class="ui-label">Đổi tên</span> (Nút chuyển sang màu cam).</p></li>
+    <li><p>Ô Tên sản phẩm cho phép chỉnh sửa, hãy nhập tên mới.</p></li>
+    <li><p>Lưu lại, danh mục gốc sẽ được cập nhật với tên mới.</p></li>
+  </ol>
+
+  <h3>6-5. Thay đổi tổng số lượng đã đăng ký</h3>
+  <p>Dùng khi cần sửa dữ liệu kiểm kê cũ hoặc thiết lập giá trị ban đầu.</p>
+  <ol class="steps">
+    <li><p>Quét sản phẩm cần sửa.</p></li>
+    <li><p>Nhấn nút <span class="ui-label">Thay đổi</span> bên cạnh mục "Đã đăng ký".</p></li>
+    <li><p>Nhập giá trị mới vào hộp thoại và nhấn "Thay đổi".</p></li>
+  </ol>
+
+  <div class="callout warn">
+    <span class="callout-icon">⚠️</span>
+    <div class="callout-body">Thay đổi tổng số lượng đăng ký không làm thay đổi lịch sử trong file scan_history.csv. Nó chỉ cập nhật giá trị tích lũy trong danh mục gốc.</div>
+  </div>
+</section>
+
+
+<!-- ===== SECTION 7 ===== -->
+<section id="sec7">
+  <div class="section-label">Section 07</div>
+  <h2 class="section-title">Tính năng lịch sử</h2>
+
+  <h3>7-1. Kiểm tra lịch sử lưu trữ</h3>
+  <p>Khu vực lịch sử dưới cùng hiển thị các bản ghi vừa lưu theo thứ tự mới nhất. Bạn có thể xem Thời gian, Tên, Số lượng, Tồn lý thuyết ngay tại danh sách.</p>
+  <p>Nhấn nút <span class="ui-label">Lịch sử</span> để xem bảng chi tiết hơn bao gồm cả Mã vị trí và Ghi chú.</p>
+
+  <h3>7-2. Về file lịch sử CSV</h3>
+  <p>Mỗi thao tác lưu sẽ được ghi thêm vào <code>scan_history.csv</code>. Chuyển file này vào PC để tổng hợp bằng Excel.</p>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Cột</th><th>Nội dung</th></tr></thead>
+      <tbody>
+        <tr><td><code>date</code></td><td>Ngày lưu (YYYY-MM-DD)</td></tr>
+        <tr><td><code>time</code></td><td>Giờ lưu (HH:mm:ss)</td></tr>
+        <tr><td><code>joint_code</code></td><td>Mã đối tác</td></tr>
+        <tr><td><code>barcode</code></td><td>Mã số nội bộ</td></tr>
+        <tr><td><code>name</code></td><td>Tên sản phẩm</td></tr>
+        <tr><td><code>actual_stock</code></td><td>Số lượng vừa đếm</td></tr>
+        <tr><td><code>location</code></td><td>Mã vị trí (Kệ)</td></tr>
+        <tr><td><code>memo</code></td><td>Ghi chú</td></tr>
+        <tr><td><code>theoretical_stock</code></td><td>Tồn kho lý thuyết</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout warn">
+    <span class="callout-icon">⚠️</span>
+    <div class="callout-body">
+      <strong>Khi cập nhật từ phiên bản cũ</strong>
+      Nếu phát hiện file lịch sử định dạng cũ, ứng dụng tự động tạo bản sao lưu (<code>scan_history_旧_NgàyGiờ.csv</code>) và tạo file mới. Dữ liệu sẽ không bị mất.
+    </div>
+  </div>
+</section>
+
+
+<!-- ===== SECTION 8 ===== -->
+<section id="sec8">
+  <div class="section-label">Section 08</div>
+  <h2 class="section-title">Cài đặt (Ngôn ngữ, Quy tắc, Camera...)</h2>
+
+  <p>Nhấn biểu tượng ⚙️ trên thanh tiêu đề để mở cài đặt.</p>
+
+  <h3>8-1. Nhập CSV danh mục</h3>
+  <p>Chọn tệp CSV từ thiết bị, thư mục Tải xuống hoặc dịch vụ đám mây để cập nhật dữ liệu danh mục bên trong ứng dụng. Sau khi nhập xong, dữ liệu được áp dụng ngay nên không cần thao tác tải lại riêng.</p>
+
+  <h3>8-2. Xóa sạch lịch sử</h3>
+  <p>Xóa file <code>scan_history.csv</code> để reset toàn bộ lịch sử. Hãy thực hiện khi kết thúc đợt kiểm kê.</p>
+  <div class="callout danger">
+    <span class="callout-icon">🚨</span>
+    <div class="callout-body"><strong>Thao tác này không thể hoàn tác.</strong> Hãy đảm bảo đã sao lưu file CSV trước khi thực hiện.</div>
+  </div>
+
+  <h3>8-3. Sử dụng mã đối tác</h3>
+  <p>Khi BẬT, ô nhập "Mã đối tác" sẽ hiện ra cạnh ô mã nội bộ. Dùng khi bạn cần quản lý cả mã riêng của nhà cung cấp.</p>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Trạng thái</th><th>Hành vi</th></tr></thead>
+      <tbody>
+        <tr><td>OFF (Mặc định)</td><td>Ẩn mã đối tác. Chỉ quản lý bằng mã nội bộ.</td></tr>
+        <tr><td>ON</td><td>Hiện mã đối tác. Cột <code>joint_code</code> trong CSV được kích hoạt. Khi nhập mã sẽ có hộp thoại hỏi đó là mã nội bộ hay đối tác.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>8-4. Quy tắc mã nội bộ</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Mục cài đặt</th><th>Mô tả</th></tr></thead>
+      <tbody>
+        <tr><td>Chế độ ký tự</td><td>Chọn giữa "Chữ & Số", "Chỉ số", "Không giới hạn".</td></tr>
+        <tr><td>Độ dài tối thiểu</td><td>Số ký tự tối thiểu của mã (VD: 12 cho mã JAN).</td></tr>
+        <tr><td>Độ dài tối đa</td><td>Số ký tự tối đa của mã.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>8-5. Loại mã Camera có thể đọc</h3>
+  <p>Chọn loại mã vạch ứng dụng sẽ quét. Tắt các loại không cần thiết để tránh quét nhầm.</p>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Loại</th><th>Cho sản phẩm</th><th>Cho vị trí kệ</th><th>Ứng dụng phổ biến</th></tr></thead>
+      <tbody>
+        <tr><td>CODE39</td><td>✅ Mặc định ON</td><td>—</td><td>Linh kiện công nghiệp / Mã nội bộ</td></tr>
+        <tr><td>CODE128</td><td>Tùy chọn</td><td>—</td><td>Mã vận chuyển/logistics</td></tr>
+        <tr><td>EAN13</td><td>Tùy chọn</td><td>—</td><td>Mã JAN (Hàng tiêu dùng)</td></tr>
+        <tr><td>QRCODE</td><td>—</td><td>✅ Mặc định ON</td><td>Mã QR cho vị trí kệ</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>8-6. Ngôn ngữ & Tài liệu hướng dẫn</h3>
+  <p>Thay đổi ngôn ngữ hiển thị (Tiếng Việt, Tiếng Nhật, Tiếng Anh...) từ màn hình cài đặt.</p>
+</section>
+
+
+<!-- ===== SECTION 9 ===== -->
+<section id="sec9">
+  <div class="section-label">Section 09</div>
+  <h2 class="section-title">Quản lý file và sao lưu</h2>
+
+  <h3>9-1. Danh sách các file đầu ra</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Tên file</th><th>Thời điểm tạo</th><th>Mô tả</th></tr></thead>
+      <tbody>
+        <tr><td><code>quantiventra_master.csv</code></td><td>Nạp tay / Cập nhật khi lưu</td><td>Danh mục gốc. Tự động cập nhật khi lưu số lượng, đăng ký mới, đổi tên. Dùng để xem kết quả kiểm kê cuối cùng.</td></tr>
+        <tr><td><code>scan_history.csv</code></td><td>Ghi thêm sau mỗi lần lưu</td><td>Toàn bộ lịch sử quét.</td></tr>
+        <tr><td><code>settings.json</code></td><td>Khi lưu cài đặt</td><td>Lưu quy tắc mã, cài đặt camera, ngôn ngữ...</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>9-2. Quy trình sao lưu khuyến nghị</h3>
+  <ol class="steps">
+    <li><p>Trong ứng dụng, mở <span class="ui-label">Cài đặt → Xuất toàn bộ dữ liệu</span>.</p></li>
+    <li><p>Chọn cách xuất dấu ngoặc kép trong CSV, sau đó chọn thư mục lưu.</p></li>
+    <li><p>Lưu lại các tệp <code>scan_history_[timestamp].csv</code> và <code>quantiventra_master_export.csv</code> vào PC hoặc dịch vụ đám mây.</p></li>
+  </ol>
+</section>
+
+
+<!-- ===== SECTION 10 ===== -->
+<section id="sec10">
+  <div class="section-label">Section 10</div>
+  <h2 class="section-title">Xử lý sự cố (Troubleshooting)</h2>
+
+  <div class="trouble">
+    <div class="trouble-q">Không quét được mã / Không phản ứng</div>
+    <div class="trouble-a">
+      <ul style="padding-left: 20px; line-height: 2;">
+        <li>Kiểm tra công tắc Camera (góc trên bên phải) đã ON chưa.</li>
+        <li>Đưa mã vào vùng chính giữa màn hình.</li>
+        <li>Kiểm tra xem loại mã (CODE39 / EAN13...) đã được bật trong cài đặt chưa.</li>
+        <li>Mã in mờ, rách hoặc bẩn có thể không đọc được.</li>
+        <li>Kiểm tra quyền Camera: Cài đặt → Ứng dụng → Quantiventra → Quyền → Camera.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="trouble">
+    <div class="trouble-q">Đã đặt file CSV nhưng không hiện tên sản phẩm</div>
+    <div class="trouble-a">
+      <ul style="padding-left: 20px; line-height: 2;">
+        <li>Hãy kiểm tra nội dung của tệp CSV đã chọn và đảm bảo hàng tiêu đề đúng định dạng.</li>
+        <li>Nếu muốn chuyển sang CSV khác, hãy chạy lại <span class="ui-label">Nhập CSV danh mục</span> từ màn hình Cài đặt và chọn tệp.</li>
+        <li>Mã hóa file CSV phải là UTF-8.</li>
+        <li>Kiểm tra hàng tiêu đề phải đúng định dạng quy định.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="trouble">
+    <div class="trouble-q">Không lưu được / Thông báo "Lưu thất bại"</div>
+    <div class="trouble-a">
+      <ul style="padding-left: 20px; line-height: 2;">
+        <li>Quyền Camera chỉ cần cho việc quét; nếu chỉ nhập tay thì không cần bật camera.</li>
+        <li>Kiểm tra bộ nhớ máy có bị đầy không.</li>
+        <li>Không thể lưu nếu cả mã sản phẩm và tên sản phẩm đều để trống.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="trouble">
+    <div class="trouble-q">Nhấn nút Quét vị trí nhưng không thiết lập được kệ</div>
+    <div class="trouble-a">
+      <ul style="padding-left: 20px; line-height: 2;">
+        <li>Kiểm tra loại mã dùng cho vị trí trong cài đặt (Mặc định là QRCODE).</li>
+        <li>Nếu mã kệ là mã vạch, hãy đổi cài đặt loại mã cho vị trí kệ.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="trouble">
+    <div class="trouble-q">Màn hình cài đặt quyền hiện ra khi mở app</div>
+    <div class="trouble-a">
+      <p style="padding-top: 4px;">Ở phiên bản hiện tại, thông thường bạn sẽ không cần quyền như vậy. Nếu hệ thống vẫn mở trang này, hãy quay lại ứng dụng; trong cách dùng thông thường chỉ cần quyền Camera.</p>
+    </div>
+  </div>
+
+  <div class="trouble">
+    <div class="trouble-q">Nút Đổi tên không cho phép sửa ô Tên sản phẩm</div>
+    <div class="trouble-a">
+      <ul style="padding-left: 20px; line-height: 2;">
+        <li>Đảm bảo sản phẩm đã được quét hoặc tìm thấy trước khi nhấn Đổi tên.</li>
+        <li>Nút phải chuyển sang màu cam. Nếu chưa, hãy nhấn lại lần nữa.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="trouble">
+    <div class="trouble-q">Nhấn ENT ở ô tính toán nhưng kết quả về 0</div>
+    <div class="trouble-a">
+      <ul style="padding-left: 20px; line-height: 2;">
+        <li>Bạn phải nhấn phím "Cộng" để đưa kết quả vào ô số lượng trước khi nhấn Lưu.</li>
+        <li>Phép tính phải bắt đầu bằng số (VD: <code>3*5</code>), không được bắt đầu bằng dấu (VD: <code>*5</code>).</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+
+<!-- ===== SECTION 11 ===== -->
+<section id="sec11">
+  <div class="section-label">Section 11</div>
+  <h2 class="section-title">Điều khoản & Miễn trừ trách nhiệm</h2>
+
+  <div class="legal-block">
+    <h4>■ Điều khoản sử dụng (Terms of Use)</h4>
+    <p>Vui lòng đọc kỹ các điều khoản sau trước khi sử dụng ứng dụng. Việc tải và sử dụng ứng dụng đồng nghĩa với việc bạn đồng ý với các điều khoản này.</p>
+    <p><strong>1. Cấp phép sử dụng:</strong> Cho phép sử dụng cho mục đích kiểm kê kho của cá nhân hoặc doanh nghiệp. Nghiêm cấm hành vi dịch ngược, sửa đổi hoặc phát tán trái phép.</p>
+    <p><strong>2. Dữ liệu người dùng:</strong> Toàn bộ dữ liệu (Danh mục, Lịch sử, Cài đặt) chỉ được lưu trên máy người dùng. Ứng dụng không gửi bất kỳ dữ liệu nào ra máy chủ bên ngoài.</p>
+
+    <h4>■ Miễn trừ trách nhiệm (Disclaimer)</h4>
+    <p>Ứng dụng được cung cấp "nguyên trạng" (AS IS). Nhà phát triển không chịu trách nhiệm cho bất kỳ thiệt hại nào (mất dữ liệu, tổn thất kinh doanh...) phát sinh từ việc sử dụng hoặc không thể sử dụng ứng dụng.</p>
+    <p>Người dùng có trách nhiệm tự kiểm tra tính chính xác của dữ liệu CSV. Nhà phát triển không chịu trách nhiệm cho sai lệch dữ liệu do lỗi quét hoặc nhập sai.</p>
+
+    <h4>■ Chính sách bảo mật (Privacy Policy)</h4>
+    <p>Ứng dụng không thu thập hay sử dụng thông tin cá nhân. Mọi xử lý diễn ra cục bộ trên thiết bị.</p>
+    <p>Camera chỉ được dùng để nhận diện mã vạch/QR, không thực hiện ghi hình hay truyền phát video.</p>
+
+    <h4>■ Bản quyền (Copyright)</h4>
+    <p>Copyright © Quantiventra. All Rights Reserved.</p>
+  </div>
+</section>
+
+</div><!-- /wrapper -->
+
+<a href="#top" class="back-top" title="Lên đầu trang">↑</a>
+
+<footer>
+  <strong>Quantiventra</strong> — Ứng dụng đếm kho bằng quét mã vạch<br>
+  Copyright © Quantiventra. All Rights Reserved.<br>
+  Nội dung hướng dẫn có thể thay đổi mà không báo trước.
+</footer>
+
+</body>
+</html>

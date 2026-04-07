@@ -1,0 +1,1130 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Manuale Utente Quantiventra</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;700;900&family=IBM+Plex+Mono:wght@400;600&display=swap');
+
+  :root {
+    --primary:    #006C9C;
+    --primary-lt: #C3E7FF;
+    --primary-dk: #004A6E;
+    --accent:     #FF6D00;
+    --error:      #BA1A1A;
+    --bg:         #F8FDFF;
+    --surface:    #FFFFFF;
+    --border:     #D0E8F5;
+    --text:       #1A1A2E;
+    --muted:      #5A7A8A;
+    --mono:       'IBM Plex Mono', monospace;
+    --sans:       'Noto Sans', sans-serif;
+    --radius:     8px;
+    --shadow:     0 2px 12px rgba(0,108,156,.12);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--sans);
+    background: var(--bg);
+    color: var(--text);
+    font-size: 15px;
+    line-height: 1.8;
+  }
+
+  /* ── HEADER ── */
+  .site-header {
+    background: linear-gradient(135deg, var(--primary-dk) 0%, var(--primary) 60%, #0090CC 100%);
+    color: #fff;
+    padding: 56px 40px 48px;
+    position: relative;
+    overflow: hidden;
+  }
+  .site-header::before {
+    content: '';
+    position: absolute;
+    right: -80px; top: -80px;
+    width: 360px; height: 360px;
+    border-radius: 50%;
+    background: rgba(255,255,255,.06);
+  }
+  .site-header::after {
+    content: '';
+    position: absolute;
+    right: 60px; bottom: -40px;
+    width: 200px; height: 200px;
+    border-radius: 50%;
+    background: rgba(255,255,255,.04);
+  }
+  .header-badge {
+    display: inline-block;
+    background: rgba(255,255,255,.18);
+    border: 1px solid rgba(255,255,255,.35);
+    border-radius: 20px;
+    padding: 4px 14px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+  .site-header h1 {
+    font-size: clamp(28px, 5vw, 42px);
+    font-weight: 900;
+    letter-spacing: -.02em;
+    line-height: 1.15;
+    margin-bottom: 10px;
+  }
+  .site-header .subtitle {
+    font-size: 14px;
+    opacity: .8;
+    margin-bottom: 24px;
+  }
+  .header-meta {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+    font-size: 12px;
+    opacity: .75;
+  }
+
+  /* ── LAYOUT ── */
+  .wrapper {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 20px 80px;
+  }
+
+  /* ── TOC ── */
+  .toc-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--primary);
+    border-radius: var(--radius);
+    padding: 28px 32px;
+    margin: 36px 0 48px;
+    box-shadow: var(--shadow);
+  }
+  .toc-card h2 {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--primary);
+    margin-bottom: 18px;
+  }
+  .toc-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 6px 24px;
+  }
+  .toc-grid a {
+    color: var(--text);
+    text-decoration: none;
+    font-size: 13.5px;
+    padding: 3px 0;
+    border-bottom: 1px dashed transparent;
+    transition: color .15s, border-color .15s;
+    display: block;
+  }
+  .toc-grid a:hover { color: var(--primary); border-color: var(--primary); }
+  .toc-num { color: var(--primary); font-weight: 700; margin-right: 6px; font-family: var(--mono); font-size: 12px; }
+
+  /* ── SECTIONS ── */
+  section { margin-bottom: 60px; }
+
+  .section-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--primary);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border-radius: 4px;
+    margin-bottom: 10px;
+  }
+
+  h2.section-title {
+    font-size: clamp(20px, 3vw, 26px);
+    font-weight: 900;
+    color: var(--primary-dk);
+    border-bottom: 2px solid var(--border);
+    padding-bottom: 10px;
+    margin-bottom: 24px;
+    line-height: 1.3;
+  }
+
+  h3 {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--primary);
+    margin: 28px 0 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  h3::before {
+    content: '';
+    display: inline-block;
+    width: 4px; height: 16px;
+    background: var(--primary);
+    border-radius: 2px;
+  }
+
+  h4 {
+    font-size: 14px;
+    font-weight: 700;
+    margin: 20px 0 8px;
+    color: var(--text);
+  }
+
+  p { margin-bottom: 14px; }
+
+  /* ── CALLOUTS ── */
+  .callout {
+    border-radius: var(--radius);
+    padding: 16px 20px;
+    margin: 18px 0;
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+  }
+  .callout-icon { font-size: 20px; flex-shrink: 0; line-height: 1.5; }
+  .callout-body { flex: 1; font-size: 13.5px; line-height: 1.75; }
+  .callout-body strong { display: block; margin-bottom: 4px; font-size: 14px; }
+  .callout.info    { background: #E8F4FD; border: 1px solid #B3D9F2; }
+  .callout.warn    { background: #FFF8E1; border: 1px solid #FFD54F; }
+  .callout.danger  { background: #FFEBEE; border: 1px solid #FFCDD2; }
+  .callout.success { background: #E8F5E9; border: 1px solid #A5D6A7; }
+
+  /* ── TABLES ── */
+  .table-wrap { overflow-x: auto; margin: 18px 0; border-radius: var(--radius); box-shadow: var(--shadow); }
+  table { width: 100%; border-collapse: collapse; background: var(--surface); font-size: 13.5px; }
+  thead th {
+    background: var(--primary);
+    color: #fff;
+    font-weight: 700;
+    padding: 12px 16px;
+    text-align: left;
+    white-space: nowrap;
+  }
+  tbody td { padding: 11px 16px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  tbody tr:last-child td { border-bottom: none; }
+  tbody tr:hover { background: #F0F8FF; }
+  td code, th code { font-family: var(--mono); background: rgba(0,108,156,.1); padding: 1px 6px; border-radius: 3px; font-size: 12px; }
+  .badge-req { background: var(--error); color: #fff; font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 10px; white-space: nowrap; }
+  .badge-opt { background: #90A4AE; color: #fff; font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 10px; white-space: nowrap; }
+
+  /* ── CODE BLOCKS ── */
+  pre {
+    background: #0F1923;
+    color: #C8E6FF;
+    font-family: var(--mono);
+    font-size: 13px;
+    padding: 20px 24px;
+    border-radius: var(--radius);
+    overflow-x: auto;
+    margin: 14px 0;
+    line-height: 1.7;
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,.08);
+  }
+  pre .comment { color: #5C8099; }
+  pre .hl { color: #7FD8FF; font-weight: 600; }
+  pre .val { color: #A5E6A1; }
+  code {
+    font-family: var(--mono);
+    background: rgba(0,108,156,.1);
+    color: var(--primary-dk);
+    padding: 2px 7px;
+    border-radius: 4px;
+    font-size: 13px;
+  }
+
+  /* ── PATH DISPLAY ── */
+  .path {
+    background: #0F1923;
+    color: #7FD8FF;
+    font-family: var(--mono);
+    font-size: 13px;
+    padding: 14px 20px;
+    border-radius: var(--radius);
+    margin: 12px 0;
+    line-height: 2;
+  }
+  .path .dim { color: #5C8099; }
+  .path .file { color: #A5E6A1; font-weight: 600; }
+
+  /* ── STEPS ── */
+  .steps { list-style: none; counter-reset: step-counter; }
+  .steps li {
+    counter-increment: step-counter;
+    display: flex;
+    gap: 16px;
+    margin-bottom: 14px;
+    align-items: flex-start;
+  }
+  .steps li::before {
+    content: counter(step-counter);
+    flex-shrink: 0;
+    width: 28px; height: 28px;
+    background: var(--primary);
+    color: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 700;
+    margin-top: 2px;
+  }
+  .steps li p { margin: 0; }
+
+  /* ── UI LABEL ── */
+  .ui-label {
+    display: inline-block;
+    background: #E3F2FD;
+    border: 1px solid #90CAF9;
+    color: #0D47A1;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 2px 10px;
+    border-radius: 4px;
+    font-family: var(--mono);
+    white-space: nowrap;
+  }
+  .key {
+    display: inline-block;
+    background: var(--text);
+    color: #fff;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 2px 10px;
+    border-radius: 5px;
+    font-family: var(--mono);
+  }
+
+  /* ── CARDS ── */
+  .card-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 16px; margin: 18px 0; }
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px;
+    box-shadow: var(--shadow);
+  }
+  .card h4 { margin-top: 0; color: var(--primary); font-size: 14px; }
+
+  /* ── TROUBLE ── */
+  .trouble { border: 1px solid var(--border); border-radius: var(--radius); margin: 16px 0; overflow: hidden; }
+  .trouble-q { background: #EEF6FD; padding: 14px 20px; font-weight: 700; font-size: 14px; color: var(--primary-dk); cursor: pointer; display: flex; align-items: center; gap: 10px; }
+  .trouble-q::before { content: 'Q'; background: var(--primary); color: #fff; width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 900; flex-shrink: 0; }
+  .trouble-a { padding: 14px 20px 16px 52px; font-size: 13.5px; border-top: 1px solid var(--border); }
+
+  /* ── LEGAL ── */
+  .legal-block {
+    background: #F5F5F5;
+    border: 1px solid #DDD;
+    border-radius: var(--radius);
+    padding: 20px 24px;
+    font-size: 12.5px;
+    color: #444;
+    line-height: 1.9;
+    margin: 16px 0;
+  }
+  .legal-block h4 { font-size: 13px; color: #333; margin: 18px 0 6px; border-bottom: 1px solid #DDD; padding-bottom: 4px; }
+  .legal-block h4:first-child { margin-top: 0; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--primary-dk);
+    color: rgba(255,255,255,.65);
+    text-align: center;
+    padding: 32px 20px;
+    font-size: 12px;
+    line-height: 2;
+  }
+  footer strong { color: #fff; }
+
+  /* ── BACK TO TOP ── */
+  .back-top {
+    position: fixed;
+    right: 24px; bottom: 28px;
+    background: var(--primary);
+    color: #fff;
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px;
+    text-decoration: none;
+    box-shadow: 0 4px 16px rgba(0,108,156,.4);
+    transition: transform .2s, box-shadow .2s;
+    z-index: 100;
+  }
+  .back-top:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,108,156,.5); }
+
+  /* ── DIVIDER ── */
+  hr { border: none; border-top: 1px solid var(--border); margin: 40px 0; }
+
+  @media (max-width: 600px) {
+    .site-header { padding: 36px 20px 32px; }
+    .toc-grid { grid-template-columns: 1fr; }
+    .card-grid { grid-template-columns: 1fr; }
+  }
+  @media print {
+    .back-top { display: none; }
+    body { font-size: 13px; }
+    pre { font-size: 11px; }
+    .site-header { background: var(--primary) !important; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== HEADER ===== -->
+<header class="site-header" id="top">
+  <div class="header-badge">Manuale Utente</div>
+  <h1>Quantiventra</h1>
+  <p class="subtitle">App di conteggio inventario tramite scansione codici — Manuale operativo</p>
+  <div class="header-meta">
+    <span>OS supportato: Android 8.0 (API 26) o superiore</span>
+    <span>Versione target: v1.x</span>
+    <span>Ultimo aggiornamento: 2026</span>
+  </div>
+</header>
+
+<div class="wrapper">
+
+<!-- ===== TOC ===== -->
+<nav class="toc-card">
+  <h2>📋 Indice</h2>
+  <div class="toc-grid">
+    <a href="#sec1"><span class="toc-num">1</span> Introduzione</a>
+    <a href="#sec2"><span class="toc-num">2</span> Installazione e configurazione iniziale</a>
+    <a href="#sec3"><span class="toc-num">3</span> Creazione e caricamento del CSV Master</a>
+    <a href="#sec4"><span class="toc-num">4</span> Struttura dello schermo e spiegazione dei componenti</a>
+    <a href="#sec5"><span class="toc-num">5</span> Flusso operativo di base</a>
+    <a href="#sec6"><span class="toc-num">6</span> Operazioni avanzate</a>
+    <a href="#sec7"><span class="toc-num">7</span> Funzionalità di cronologia</a>
+    <a href="#sec8"><span class="toc-num">8</span> Impostazioni (Lingua, regole, fotocamera, ecc.)</a>
+    <a href="#sec9"><span class="toc-num">9</span> Gestione file e backup</a>
+    <a href="#sec10"><span class="toc-num">10</span> Risoluzione dei problemi</a>
+    <a href="#sec11"><span class="toc-num">11</span> Termini e limitazione di responsabilità</a>
+  </div>
+</nav>
+
+
+<!-- ===== SECTION 1 ===== -->
+<section id="sec1">
+  <div class="section-label">Sezione 01</div>
+  <h2 class="section-title">Introduzione</h2>
+
+  <h3>1-1. Informazioni sull'app</h3>
+  <p>Quantiventra (un termine coniato combinando "Quantity - Quantità" e "Inventory - Inventario") è un'app Android progettata per rendere efficiente il conteggio dell'inventario tramite la scansione di codici con la fotocamera dello smartphone.</p>
+  <p>È sufficiente puntare la fotocamera verso il codice affinché l'app riconosca automaticamente il prodotto; l'utente può quindi inserire la quantità e salvare l'operazione in modo intuitivo. Questo processo permette di digitalizzare le operazioni di inventario cartaceo. I risultati della scansione vengono salvati nel dispositivo come file CSV, facilitando il collegamento con Excel o Google Sheets.</p>
+
+  <div class="card-grid">
+    <div class="card">
+      <h4>📦 Conteggio inventario</h4>
+      <p>Identifica rapidamente i prodotti tramite scansione codici e registra immediatamente le quantità. Funzione di calcolo integrata per sommare scorte in più posizioni.</p>
+    </div>
+    <div class="card">
+      <h4>🗂️ Gestione Master</h4>
+      <p>Carica i dati anagrafici in blocco tramite file CSV. È possibile preimpostare nomi, codici articolo e giacenza teorica.</p>
+    </div>
+    <div class="card">
+      <h4>📍 Gestione Ubicazioni</h4>
+      <p>Imposta il numero dello scaffale (ubicazione) tramite scansione QR. Registra nel CSV in quale scaffale si trova la merce.</p>
+    </div>
+    <div class="card">
+      <h4>📊 Esportazione CSV</h4>
+      <p>I risultati vengono salvati automaticamente nella memoria del dispositivo. Importabili su PC per analisi e riepiloghi.</p>
+    </div>
+  </div>
+
+  <h3>1-2. Requisiti di sistema</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Voce</th><th>Requisito</th></tr></thead>
+      <tbody>
+        <tr><td>OS</td><td>Android 7.0 (Nougat / API 24) o superiore</td></tr>
+        <tr><td>Fotocamera</td><td>Dotata di autofocus (obbligatorio)</td></tr>
+        <tr><td>Memoria</td><td>Consigliati 50MB o più di spazio libero</td></tr>
+        <tr><td>Autorizzazioni</td><td>Permesso fotocamera</td></tr>
+        <tr><td>Internet</td><td>Non necessario (funzionamento offline completo)</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>1-3. Informazioni sulle autorizzazioni</h3>
+  <p>Al primo avvio, l'app richiede la seguente autorizzazione. Per usare normalmente la scansione è necessario solo il permesso della fotocamera.</p>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Autorizzazione</th><th>Scopo</th><th>In caso di rifiuto</th></tr></thead>
+      <tbody>
+        <tr><td>Fotocamera</td><td>Scansione di codici a barre e QR</td><td>Scansione con fotocamera non disponibile (resta possibile l'inserimento manuale)</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout info">
+    <span class="callout-icon">ℹ️</span>
+    <div class="callout-body">
+      <strong>Dove vengono salvati i dati</strong>
+      Master, cronologia e impostazioni sono gestiti automaticamente all'interno dell'app. Quando vuoi importare un CSV Master o esportare i dati, usa la schermata Impostazioni.
+    </div>
+  </div>
+</section>
+
+
+<!-- ===== SECTION 2 ===== -->
+<section id="sec2">
+  <div class="section-label">Sezione 02</div>
+  <h2 class="section-title">Installazione e configurazione iniziale</h2>
+
+  <h3>2-1. Procedura di installazione</h3>
+  <ol class="steps">
+    <li><p>Apri il <strong>Google Play Store</strong> sul tuo dispositivo Android.</p></li>
+    <li><p>Cerca "<strong>Quantiventra</strong>" nella barra di ricerca.</p></li>
+    <li><p>Seleziona l'app e tocca <span class="ui-label">Installa</span>.</p></li>
+    <li><p>Al termine dell'installazione, tocca <span class="ui-label">Apri</span> o avvia l'app dall'icona nella schermata iniziale.</p></li>
+  </ol>
+
+  <h3>2-2. Primo avvio</h3>
+  <ol class="steps">
+    <li><p>All'apertura dell'app comparirà la richiesta del <strong>permesso fotocamera</strong>. Tocca <span class="ui-label">Consenti</span>.</p></li>
+    <li><p>Una volta concesso il permesso, puoi iniziare subito a scansionare.</p></li>
+    <li><p>Se vuoi usare un CSV Master, vai in <span class="ui-label">Impostazioni → Importa CSV Master</span> e seleziona il file.</p></li>
+  </ol>
+
+  <div class="callout info">
+    <span class="callout-icon">ℹ️</span>
+    <div class="callout-body">
+      <strong>Dopo la configurazione iniziale</strong>
+      Con il solo permesso della fotocamera puoi scansionare, salvare, importare il CSV Master ed esportare i dati dalla schermata Impostazioni.
+    </div>
+  </div>
+
+  <h3>2-3. Come vengono gestiti i dati</h3>
+  <p>I dati del master, della cronologia e delle impostazioni sono gestiti automaticamente dall'app. Nell'uso normale non è necessario conoscere o manipolare la struttura delle cartelle interne.</p>
+  <div class="callout info">
+    <span class="callout-icon">ℹ️</span>
+    <div class="callout-body">
+      <strong>Cosa deve fare l'utente</strong>
+      Quando vuoi caricare il master usa <span class="ui-label">Importa CSV Master</span>. Quando vuoi portare fuori i dati dall'app usa <span class="ui-label">Esporta tutti i dati</span> oppure <span class="ui-label">Condividi cronologia</span>.
+    </div>
+  </div>
+</section>
+
+
+<!-- ===== SECTION 3 ===== -->
+<section id="sec3">
+  <div class="section-label">Sezione 03</div>
+  <h2 class="section-title">Creazione e caricamento del CSV Master 【Importante】</h2>
+
+  <div class="callout success">
+    <span class="callout-icon">✅</span>
+    <div class="callout-body">
+      <strong>Preparare il Master in anticipo migliora drasticamente l'efficienza</strong>
+      Caricando il CSV Master, il nome del prodotto e la giacenza teorica verranno visualizzati automaticamente alla scansione del codice. Se non registrati, sarà necessario inserirli manualmente ogni volta.
+    </div>
+  </div>
+
+  <h3>3-1. Come preparare il CSV Master (con nomi colonna, 2 metodi)</h3>
+  <p>Esistono due modi principali per preparare il file Master.</p>
+
+  <h4>Metodo A: Creazione da zero con Excel o Google Sheets</h4>
+  <ol class="steps">
+    <li><p>Apri Excel o Google Sheets sul PC.</p></li>
+    <li><p>Non digitare manualmente l'intestazione della prima riga. Copia e incolla esattamente la riga mostrata in <strong>3-3. Specifiche delle colonne (nomi colonna)</strong>.</p></li>
+    <li><p>Inserisci i dati dei prodotti dalla seconda riga in poi.</p></li>
+    <li><p>Salva in formato "CSV (delimitato da virgole)" con il nome file <code>quantiventra_master.csv</code> (si consiglia la codifica UTF-8).</p></li>
+  </ol>
+
+  <h4>Metodo B: Utilizzo del file generato automaticamente dall'app (consigliato per principianti)</h4>
+  <p>Se non vuoi crearlo da zero, puoi far generare un modello all'app.</p>
+  <ol class="steps">
+    <li><p>Avvia l'app senza file Master e scansiona il codice a barre di un prodotto qualsiasi.</p></li>
+    <li><p>Apparirà il dialogo "Codice non registrato"; seleziona "Sì (Nuova registrazione)".</p></li>
+    <li><p>Inserisci un nome come "Test" e salva.</p></li>
+    <li><p>Successivamente esegui <span class="ui-label">Impostazioni → Esporta tutti i dati</span> per ottenere il CSV Master corrente.</p></li>
+    <li><p>Porta il file esportato sul PC (via USB, email o cloud), aprilo con Excel e usa i dati di test come modello per inserire quelli reali. Poi reimportalo nell'app con <span class="ui-label">Importa CSV Master</span>.</p></li>
+  </ol>
+
+  <h3>3-2. Nome file e posizione di salvataggio</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Voce</th><th>Valore</th></tr></thead>
+      <tbody>
+        <tr><td>Nome file</td><td><code>quantiventra_master.csv</code> (fisso, non modificabile)</td></tr>
+        <tr><td>Codifica caratteri</td><td>UTF-8 (consigliato senza BOM)</td></tr>
+        <tr><td>Codice a capo</td><td>LF o CRLF (indifferente)</td></tr>
+        <tr><td>Metodo di importazione</td><td>Seleziona il file da <span class="ui-label">Impostazioni → Importa CSV Master</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>3-3. Specifiche delle colonne (nomi colonna)</h3>
+  <p><strong>La prima riga deve essere l'intestazione</strong>. Copia e incolla esattamente la riga seguente. Tutti e 5 i nomi colonna sono necessari.</p>
+  <pre><span class="hl">joint_code</span>,<span class="hl">barcode</span>,<span class="hl">name</span>,<span class="hl">theoretical_stock</span>,<span class="hl">actual_stock_total</span></pre>
+  <div class="callout info">
+    <span class="callout-icon">ℹ️</span>
+    <div class="callout-body">
+      <strong>Anche se usi solo il codice interno, mantieni comunque queste 5 colonne</strong>
+      L'impostazione predefinita dell'app è <strong>codice partner OFF</strong>. Se gestisci solo il tuo codice interno, lascia vuota la colonna <code>joint_code</code>. Compilala solo se vuoi usare anche il codice partner. Se il CSV master importato contiene dati nella colonna <code>joint_code</code>, l'app passa automaticamente a ON all'avvio.
+    </div>
+  </div>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>#</th><th>Nome colonna</th><th>Tipo</th><th>Obbl.</th><th>Descrizione e note</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td><code>joint_code</code></td>
+          <td>Stringa</td>
+          <td><span class="badge-opt">Opz.</span></td>
+          <td>Codice articolo partner (codice cliente). Può essere vuoto. Solo caratteri alfanumerici, trattino, underscore (secondo impostazioni).</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td><code>barcode</code></td>
+          <td>Stringa</td>
+          <td><span class="badge-req">Sì</span></td>
+          <td>Codice articolo interno. Deve corrispondere al codice reale. Non duplicabile.</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td><code>name</code></td>
+          <td>Stringa</td>
+          <td><span class="badge-req">Sì</span></td>
+          <td>Nome prodotto. Se contiene virgole, racchiuderlo tra virgolette doppie (es: <code>"Bullone,M4"</code>).</td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td><code>theoretical_stock</code></td>
+          <td>Intero</td>
+          <td><span class="badge-opt">Opz.</span></td>
+          <td>Giacenza teorica (contabile). Inserire <code>0</code> se sconosciuta.</td>
+        </tr>
+        <tr>
+          <td>5</td>
+          <td><code>actual_stock_total</code></td>
+          <td>Intero</td>
+          <td><span class="badge-opt">Opz.</span></td>
+          <td>Quantità totale già registrata. Consigliato <code>0</code> per il primo inventario.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>3-4. Esempio CSV</h3>
+  <pre><span class="comment"># Riga 1: Intestazione (obbligatoria)</span>
+<span class="hl">joint_code</span>,<span class="hl">barcode</span>,<span class="hl">name</span>,<span class="hl">theoretical_stock</span>,<span class="hl">actual_stock_total</span>
+<span class="comment"># Dalla riga 2: Righe dati</span>
+<span class="val">ABC-001</span>,<span class="val">4912345678904</span>,<span class="val">Bullone esagonale M6×20</span>,<span class="val">500</span>,<span class="val">0</span>
+<span class="val">ABC-002</span>,<span class="val">4912345678911</span>,<span class="val">Dado esagonale M6</span>,<span class="val">1000</span>,<span class="val">0</span>
+,<span class="val">4912345678928</span>,<span class="val">Rondella elastica M6</span>,<span class="val">800</span>,<span class="val">0</span>
+<span class="val">XY-999</span>,<span class="val">4912345678935</span>,<span class="val">"Set bulloni,M4"</span>,<span class="val">200</span>,<span class="val">0</span></pre>
+
+  <div class="callout warn">
+    <span class="callout-icon">⚠️</span>
+    <div class="callout-body">
+      <strong>Attenzione all'editing con Excel</strong>
+      Il salvataggio con Excel potrebbe impostare la codifica Shift-JIS. Scegli "Salva con nome" → "CSV UTF-8 (delimitato da virgole)". Se il BOM iniziale causa problemi, apri e salva nuovamente il file con Blocco Note.
+    </div>
+  </div>
+
+  <h3>3-5. Importare il CSV Master</h3>
+  <p>Non è necessario mettere il CSV in una cartella fissa. Importalo direttamente dalla schermata Impostazioni.</p>
+
+  <h4>🔌 Metodo ①: Selezionare un file locale</h4>
+  <ol class="steps">
+    <li><p>Salva il CSV in qualsiasi posizione del dispositivo, per esempio in "Download".</p></li>
+    <li><p>Nell'app tocca <span class="ui-label">Impostazioni → Importa CSV Master</span>.</p></li>
+    <li><p>Seleziona il file CSV nel selettore file di sistema.</p></li>
+    <li><p>Appena l'importazione termina, i dati del master vengono applicati subito.</p></li>
+  </ol>
+
+  <h4>☁️ Metodo ②: Da Google Drive</h4>
+  <ol class="steps">
+    <li><p>Carica il CSV su <a href="https://drive.google.com" target="_blank">Google Drive</a> dal PC.</p></li>
+    <li><p>Nell'app tocca <span class="ui-label">Impostazioni → Importa CSV Master</span>.</p></li>
+    <li><p>Nel selettore file scegli direttamente il CSV da Google Drive.</p></li>
+  </ol>
+
+  <h4>📧 Metodo ③: Allegato email</h4>
+  <ol class="steps">
+    <li><p>Invia il file CSV al tuo stesso indirizzo email.</p></li>
+    <li><p>Scarica l'allegato sul telefono.</p></li>
+    <li><p>Nell'app apri <span class="ui-label">Impostazioni → Importa CSV Master</span> e seleziona il file scaricato.</p></li>
+  </ol>
+
+  <div class="callout info">
+    <span class="callout-icon">ℹ️</span>
+    <div class="callout-body">
+      <strong>Dopo aver aggiornato il master</strong>
+      Se modifichi di nuovo il CSV, importa nuovamente il file aggiornato. Il master interno dell'app verrà sostituito con il contenuto del nuovo file.
+    </div>
+  </div>
+</section>
+
+
+<!-- ===== SECTION 4 ===== -->
+<section id="sec4">
+  <div class="section-label">Sezione 04</div>
+  <h2 class="section-title">Struttura dello schermo e spiegazione dei componenti</h2>
+
+  <p>La schermata principale è composta, dall'alto verso il basso, da cinque aree: "Barra del titolo", "Area fotocamera", "Area modulo di inserimento", "Area cronologia salvataggi" e "Tastierino numerico".</p>
+
+  <h3>4-1. Barra del titolo</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Elemento</th><th>Descrizione</th></tr></thead>
+      <tbody>
+        <tr><td>Nome app (Quantiventra)</td><td>Nessuna azione al tocco (solo visualizzazione)</td></tr>
+        <tr><td>⚙️ Icona impostazioni</td><td>Apre il dialogo delle impostazioni</td></tr>
+        <tr><td>Interruttore ON / OFF</td><td>Attiva o disattiva l'anteprima della fotocamera</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>4-2. Area fotocamera</h3>
+  <p>Area in cui i codici a barre o QR vengono scansionati in tempo reale. Con la fotocamera attiva, se il codice viene puntato e riconosciuto in modo identico per 3 frame consecutivi, l'app lo identificherà automaticamente.</p>
+  <div class="callout info">
+    <span class="callout-icon">ℹ️</span>
+    <div class="callout-body">
+      <strong>Sulla precisione di scansione</strong>
+      La fotocamera riconosce prioritariamente i codici situati nell'area centrale ±15% dello schermo. Se la lettura risulta difficile, prova a centrare perfettamente il codice.
+    </div>
+  </div>
+
+  <h3>4-3. Area modulo di inserimento</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Campo</th><th>Descrizione</th></tr></thead>
+      <tbody>
+        <tr><td>Ubicazione (LOC)</td><td>Numero dello scaffale in cui si trova il prodotto. Inseribile manualmente o tramite scansione con il pulsante apposito.</td></tr>
+        <tr><td>Codice interno (A seconda dello schermo o impostazioni, il codice partner potrebbe apparire separato. Se a campo singolo, appaiono entrambi)</td><td>Inserimento tramite scansione o manuale. Se presente nel Master, il codice viene visualizzato automaticamente.</td></tr>
+        <tr><td>Nome prodotto</td><td>Nome del prodotto. Se registrato nel Master, appare automaticamente. Modificabile solo durante registrazione/modifica/ricerca.</td></tr>
+        <tr><td>Quantità</td><td>Inserire la quantità conteggiata. Usare il tastierino numerico. Supporta formule (es: 3*5).</td></tr>
+        <tr><td>Giacenza teorica</td><td>Quantità contabile registrata nel Master (solo consultazione, non modificabile).</td></tr>
+        <tr><td>Registrato</td><td>Quantità cumulativa salvata finora. Modificabile con il pulsante "Cambia".</td></tr>
+        <tr><td>Per calcolo</td><td>Campo ausiliario per il conteggio delle quantità. Il pulsante "Aggiungi" somma il risultato al campo Quantità.</td></tr>
+        <tr><td>Cronologia calcolo</td><td>Visualizza lo storico delle somme effettuate nel campo ausiliario (solo consultazione).</td></tr>
+        <tr><td>Note (Memo)</td><td>Qualsiasi annotazione libera. Viene salvata nel CSV.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>4-4. Tastierino numerico</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Tasto</th><th>Azione</th></tr></thead>
+      <tbody>
+        <tr><td><span class="key">0〜9</span> / <span class="key">00</span></td><td>Inserisce numeri nel campo attualmente focalizzato.</td></tr>
+        <tr><td><span class="key">−</span> / <span class="key">×</span></td><td>Simboli di sottrazione e moltiplicazione (per l'inserimento di formule).</td></tr>
+        <tr><td><span class="key">CLR</span></td><td>Cancella tutto il contenuto del campo focalizzato.</td></tr>
+        <tr><td><span class="key">Conferma</span> / <span class="key">Cerca</span></td><td>Conferma l'input, esegue la ricerca o salva (in base al focus).</td></tr>
+        <tr><td><span class="key">Aggiungi</span> (Modalità calcolo)</td><td>Somma il risultato del campo ausiliario alla quantità principale.</td></tr>
+        <tr><td><span class="key">Salva</span> (Modalità calcolo)</td><td>Salva i contenuti attuali.</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+
+<!-- ===== SECTION 5 ===== -->
+<section id="sec5">
+  <div class="section-label">Sezione 05</div>
+  <h2 class="section-title">Flusso operativo di base</h2>
+
+  <h3>5-1. Flusso di inventario standard</h3>
+
+  <h4>Passo 1: Impostazione dell'ubicazione (scaffale)</h4>
+  <ol class="steps">
+    <li><p>Se si desidera impostare l'ubicazione: Tocca il pulsante <span class="ui-label">Leggi ubicazione</span> (diventerà giallo).</p></li>
+    <li><p>Punta la fotocamera verso il codice dell'ubicazione; verrà letto e inserito nel campo "Ubicazione (LOC)".</p></li>
+    <li><p>In caso di inserimento manuale: Tocca il campo "Ubicazione (LOC)" e inserisci il codice con la tastiera software.</p></li>
+  </ol>
+
+  <div class="callout info">
+    <span class="callout-icon">ℹ️</span>
+    <div class="callout-body">L'ubicazione impostata viene mantenuta per le scansioni dei prodotti successivi. Aggiornala ogni volta che cambi scaffale.</div>
+  </div>
+
+  <h4>Passo 2: Scansione del codice prodotto</h4>
+  <ol class="steps">
+    <li><p>Assicurati che l'interruttore della fotocamera sia su ON.</p></li>
+    <li><p>Punta la fotocamera verso il codice del prodotto. Verrà scansionato automaticamente.</p></li>
+    <li><p>Se il prodotto è nel Master, appariranno nome e giacenza teorica (la ricerca avviene in ordine: codice partner → codice interno).</p></li>
+    <li><p>Se il codice non è registrato, apparirà il dialogo "Codice non registrato" (vedi 6-3).</p></li>
+  </ol>
+
+  <h4>Passo 3: Inserimento della quantità</h4>
+  <ol class="steps">
+    <li><p>Il campo "Quantità" riceve automaticamente il focus.</p></li>
+    <li><p>Inserisci la quantità con il tastierino numerico.</p></li>
+    <li><p>Se è necessario sommare stock da più posizioni, usa la funzione di calcolo (vedi 5-2).</p></li>
+  </ol>
+
+  <h4>Passo 4: Salvataggio</h4>
+  <ol class="steps">
+    <li><p>Inserisci una nota, se necessario.</p></li>
+    <li><p>Tocca il tasto <span class="key">ENT</span> o il tasto <span class="key">Salva</span>.</p></li>
+    <li><p>Il segnale sonoro e il messaggio "Salvato con successo" confermano l'operazione.</p></li>
+    <li><p>Procedi con la scansione del prodotto successivo.</p></li>
+  </ol>
+
+  <h3>5-2. Utilizzo della funzione di calcolo</h3>
+  <p>Questa funzione è utile quando si contano prodotti divisi in diversi ripiani o pacchi nello stesso scaffale.</p>
+
+  <ol class="steps">
+    <li><p>Tocca il campo "Per calcolo" (il tastierino passerà alla modalità calcolo).</p></li>
+    <li><p>Esempio: 30 pezzi nel ripiano superiore, 25 nel ripiano inferiore → inserisci <code>30</code> e tocca <span class="key">Aggiungi</span> → inserisci <code>25</code> e tocca <span class="key">Aggiungi</span>.</p></li>
+    <li><p>Supporto formule: <code>3*10</code> → toccando <span class="key">Aggiungi</span>, 30 verrà sommato alla quantità principale.</p></li>
+    <li><p>La cronologia delle addizioni appare nell'apposito campo.</p></li>
+    <li><p>Una volta ottenuto il totale nel campo quantità, tocca <span class="key">Salva</span>.</p></li>
+  </ol>
+
+  <h3>5-3. Cancellazione (Clear)</h3>
+  <p>Toccando il pulsante <span class="ui-label">Cancella</span>, verranno resettati i contenuti attuali (codice, nome, quantità, note, cronologia calcolo), tornando allo stato pronto per il prossimo prodotto. L'ubicazione (LOC) non viene resettata.</p>
+  <div class="callout info">
+    <span class="callout-icon">ℹ️</span>
+    <div class="callout-body">
+      <strong>Se desideri resettare l'ubicazione (LOC)</strong>
+      Il pulsante cancella non rimuove l'ubicazione. Per spostarsi in un altro scaffale, premi il pulsante leggi ubicazione, usa il tasto <span class="key">CLR</span> per cancellare manualmente o scansiona il nuovo codice ubicazione per sovrascrivere.
+    </div>
+  </div>
+</section>
+
+
+<!-- ===== SECTION 6 ===== -->
+<section id="sec6">
+  <div class="section-label">Sezione 06</div>
+  <h2 class="section-title">Operazioni avanzate</h2>
+
+  <h3>6-1. Modalità ricerca per nome</h3>
+  <p>Permette di cercare i prodotti tramite parole chiave nel caso in cui il codice non sia presente o sia illeggibile.</p>
+  <ol class="steps">
+    <li><p>Attiva l'interruttore "Cerca per nome" nella parte inferiore dello schermo.</p></li>
+    <li><p>Inserisci la parola chiave nel campo "Nome prodotto" (corrispondenza parziale, nessuna distinzione tra caratteri a metà/piena larghezza).</p></li>
+    <li><p>Tocca il pulsante 🔍 o il tasto <span class="key">Cerca</span>(Conferma).</p></li>
+    <li><p>Apparirà un dialogo con i risultati; tocca il prodotto desiderato per selezionarlo.</p></li>
+    <li><p>Successivamente, inserisci la quantità e salva come di consueto.</p></li>
+  </ol>
+  <div class="callout info">
+    <span class="callout-icon">ℹ️</span>
+    <div class="callout-body">
+      <strong>Comportamento dopo il salvataggio in ricerca per nome</strong>
+      Se l'interruttore "Continuo" è OFF, la modalità di ricerca si disattiva automaticamente dopo il salvataggio, tornando all'attesa della scansione codici. Per utilizzarla ripetutamente, attiva l'interruttore "Continuo" (vedi 6-2).
+    </div>
+  </div>
+
+  <h3>6-2. Modalità ricerca continua</h3>
+  <p>Attivando l'interruttore "Continuo", la modalità di ricerca per nome rimarrà attiva anche dopo il salvataggio. Utile per l'inserimento consecutivo di più prodotti nello stesso scaffale tramite ricerca testuale.</p>
+
+  <h3>6-3. Registrazione di nuovi prodotti</h3>
+  <p>Se scansionato un codice non presente nel Master, apparirà il dialogo "Codice non registrato".</p>
+  <ol class="steps">
+    <li><p>Tocca "Sì (Nuova registrazione)" nel dialogo.</p></li>
+    <li><p>Verrà impostato un ID interno generato automaticamente (codici che iniziano con <code>99999</code>). In caso di registrazione manuale di un nuovo codice, dovrai scegliere se è un codice partner o interno.</p></li>
+    <li><p>Il focus passerà al campo nome; inserisci il nome del prodotto.</p></li>
+    <li><p>Inserisci la quantità e salva. Dalle volte successive verrà riconosciuto come registrato.</p></li>
+  </ol>
+
+  <h3>6-4. Modifica del nome prodotto</h3>
+  <p>È possibile correggere il nome di un prodotto già presente nel Master.</p>
+  <ol class="steps">
+    <li><p>Scansiona il prodotto desiderato (o selezionalo con la ricerca).</p></li>
+    <li><p>Tocca il pulsante <span class="ui-label">Cambia nome</span> (il pulsante diventerà arancione).</p></li>
+    <li><p>Il campo nome diventerà modificabile; inserisci la correzione.</p></li>
+    <li><p>Al salvataggio, il Master verrà aggiornato con il nuovo nome.</p></li>
+  </ol>
+
+  <h3>6-5. Modifica del totale registrato</h3>
+  <p>Da utilizzare per correggere dati di inventario passati o per impostare valori iniziali.</p>
+  <ol class="steps">
+    <li><p>Scansiona e carica il prodotto interessato.</p></li>
+    <li><p>Tocca il pulsante <span class="ui-label">Cambia</span> accanto alla voce "Registrato".</p></li>
+    <li><p>Inserisci il nuovo valore nel dialogo e tocca "Cambia".</p></li>
+  </ol>
+
+  <div class="callout warn">
+    <span class="callout-icon">⚠️</span>
+    <div class="callout-body">La modifica del totale registrato non altera i dati passati nel file scan_history.csv. Viene aggiornato esclusivamente il valore cumulativo nel Master.</div>
+  </div>
+</section>
+
+
+<!-- ===== SECTION 7 ===== -->
+<section id="sec7">
+  <div class="section-label">Sezione 07</div>
+  <h2 class="section-title">Funzionalità di cronologia</h2>
+
+  <h3>7-1. Verifica della cronologia salvataggi</h3>
+  <p>L'area della cronologia in fondo allo schermo mostra gli ultimi record salvati in ordine cronologico inverso. È possibile consultare orario, nome, quantità e giacenza teorica direttamente nella lista.</p>
+  <p>Inoltre, toccando il pulsante <span class="ui-label">Cronologia</span>, appare un dialogo con l'elenco dettagliato in cui è possibile verificare anche ubicazioni e note.</p>
+
+  <h3>7-2. Informazioni sul CSV cronologia</h3>
+  <p>Ad ogni salvataggio, i dati vengono aggiunti automaticamente a <code>scan_history.csv</code>. Trasferendo questo file su PC, è possibile eseguire riepiloghi e analisi con Excel.</p>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Colonna</th><th>Contenuto</th></tr></thead>
+      <tbody>
+        <tr><td><code>date</code></td><td>Data di salvataggio (formato YYYY-MM-DD)</td></tr>
+        <tr><td><code>time</code></td><td>Orario di salvataggio (formato HH:mm:ss)</td></tr>
+        <tr><td><code>joint_code</code></td><td>Codice articolo partner</td></tr>
+        <tr><td><code>barcode</code></td><td>Codice articolo interno</td></tr>
+        <tr><td><code>name</code></td><td>Nome prodotto</td></tr>
+        <tr><td><code>actual_stock</code></td><td>Quantità conteggiata in questa sessione</td></tr>
+        <tr><td><code>location</code></td><td>Ubicazione (scaffale)</td></tr>
+        <tr><td><code>memo</code></td><td>Note (memo)</td></tr>
+        <tr><td><code>theoretical_stock</code></td><td>Giacenza teorica</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout warn">
+    <span class="callout-icon">⚠️</span>
+    <div class="callout-body">
+      <strong>In caso di aggiornamento da una versione precedente</strong>
+      Se viene rilevato un file cronologia in formato obsoleto, verrà creato automaticamente un backup (<code>scan_history_VECCHIO_dataora.csv</code>) e verrà generato un file nel nuovo formato. I dati non andranno persi.
+    </div>
+  </div>
+</section>
+
+
+<!-- ===== SECTION 8 ===== -->
+<section id="sec8">
+  <div class="section-label">Sezione 08</div>
+  <h2 class="section-title">Impostazioni (Lingua, regole, fotocamera, ecc.)</h2>
+
+  <p>Toccando l'icona ⚙️ nella barra del titolo si apre il dialogo delle impostazioni.</p>
+
+  <h3>8-1. Importa CSV Master</h3>
+  <p>Seleziona un CSV dal dispositivo, dalla cartella Download o dal cloud per aggiornare il master interno. L'importazione viene applicata subito, quindi non serve alcun comando di ricarica separato.</p>
+
+  <h3>8-2. Cancella tutti i dati cronologia</h3>
+  <p>Elimina <code>scan_history.csv</code> e resetta completamente la cronologia. Da eseguire alla conclusione di una sessione di inventario.</p>
+  <div class="callout danger">
+    <span class="callout-icon">🚨</span>
+    <div class="callout-body"><strong>Questa operazione è irreversibile.</strong> Assicurati di aver effettuato il backup del file CSV prima di procedere.</div>
+  </div>
+
+  <h3>8-3. Utilizzo del codice partner</h3>
+  <p>Se attivato, viene abilitato il campo di inserimento per il "Codice articolo partner" accanto al campo codice. Utile per gestire contemporaneamente codici specifici dei fornitori.</p>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Stato</th><th>Azione</th></tr></thead>
+      <tbody>
+        <tr><td>OFF (Predefinito)</td><td>Campo codice partner nascosto. Gestione solo tramite codice interno.</td></tr>
+        <tr><td>ON</td><td>Viene visualizzato il campo codice partner. La colonna <code>joint_code</code> nel Master diventa attiva e al momento dell'inserimento apparirà un dialogo per scegliere tra codice interno o partner.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="callout info">
+    <span class="callout-icon">ℹ️</span>
+    <div class="callout-body">Se il CSV Master contiene dati nella colonna <code>joint_code</code>, l'impostazione passerà automaticamente su ON all'avvio dell'app.</div>
+  </div>
+
+  <h3>8-4. Impostazione regole codice interno</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Voce impostazione</th><th>Descrizione</th></tr></thead>
+      <tbody>
+        <tr><td>Tipo caratteri</td><td>Scelta tra "Alfanumerico", "Solo numeri", "Nessuna restrizione".</td></tr>
+        <tr><td>Min caratteri</td><td>Lunghezza minima del codice (es: 12 per codice JAN).</td></tr>
+        <tr><td>Max caratteri</td><td>Lunghezza massima del codice.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>8-5. Impostazione tipi di lettura fotocamera</h3>
+  <p>Configura i formati dei codici oggetto di scansione. Disattivare i formati inutilizzati aiuta a prevenire letture errate.</p>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Tipo</th><th>Per prodotti</th><th>Per ubicazione</th><th>Utilizzo principale</th></tr></thead>
+      <tbody>
+        <tr><td>CODE39</td><td>✅ Default ON</td><td>—</td><td>Parti industriali, codici interni</td></tr>
+        <tr><td>CODE128</td><td>Opzionale</td><td>—</td><td>Codici logistici</td></tr>
+        <tr><td>EAN13</td><td>Opzionale</td><td>—</td><td>Codici JAN (prodotti commerciali)</td></tr>
+        <tr><td>QRCODE</td><td>—</td><td>✅ Default ON</td><td>QR ubicazione scaffale</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>8-6. Selezione lingua e manuale</h3>
+  <p>Dalla schermata impostazioni è possibile cambiare la lingua dell'app (italiano, giapponese, inglese, ecc.).</p>
+  <p>Al salvataggio, la lingua dell'interfaccia verrà aggiornata. Inoltre, riaprendo il manuale dopo il salvataggio, verrà visualizzata la versione nella lingua selezionata.</p>
+</section>
+
+
+<!-- ===== SECTION 9 ===== -->
+<section id="sec9">
+  <div class="section-label">Sezione 09</div>
+  <h2 class="section-title">Gestione file e backup</h2>
+
+  <h3>9-1. Elenco dei file generati</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Nome file</th><th>Tempismo generazione</th><th>Descrizione</th></tr></thead>
+      <tbody>
+        <tr><td><code>quantiventra_master.csv</code></td><td>Posizionamento manuale / Aggiornamento al salvataggio</td><td>Master per l'inventario. Si aggiorna salvando quantità, nuove registrazioni o modifiche nomi. Usato per il riepilogo dei risultati.</td></tr>
+        <tr><td><code>scan_history.csv</code></td><td>Aggiunta dati ad ogni salvataggio</td><td>Cronologia completa di tutte le scansioni salvate.</td></tr>
+        <tr><td><code>settings.json</code></td><td>Al salvataggio impostazioni</td><td>Salva regole codici, setup fotocamera, preferenze lingua, ecc.</td></tr>
+        <tr><td><code>scan_history_VECCHIO_dataora.csv</code></td><td>Generato rilevando formato obsoleto</td><td>Backup della cronologia in formato precedente.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>9-2. Procedura di backup consigliata</h3>
+  <p>Al termine delle operazioni di inventario o periodicamente, consigliamo questa procedura di backup:</p>
+  <ol class="steps">
+    <li><p>Nell'app apri <span class="ui-label">Impostazioni → Esporta tutti i dati</span>.</p></li>
+    <li><p>Scegli il formato delle virgolette nel CSV e poi seleziona la cartella di destinazione.</p></li>
+    <li><p>Conserva i file esportati <code>scan_history_[timestamp].csv</code> e <code>quantiventra_master_export.csv</code> su PC o cloud.</p></li>
+  </ol>
+</section>
+
+
+<!-- ===== SECTION 10 ===== -->
+<section id="sec10">
+  <div class="section-label">Sezione 10</div>
+  <h2 class="section-title">Risoluzione dei problemi</h2>
+
+  <div class="trouble">
+    <div class="trouble-q">Il codice non viene letto o l'app non reagisce</div>
+    <div class="trouble-a">
+      <ul style="padding-left: 20px; line-height: 2;">
+        <li>Verifica che l'interruttore della fotocamera (in alto a destra) sia su ON.</li>
+        <li>Centra il codice nell'area di scansione (la precisione cala verso i bordi).</li>
+        <li>Controlla nelle impostazioni che il formato del codice (CODE39 / EAN13 ecc.) sia abilitato.</li>
+        <li>Codici sporchi, strappati o stampati male potrebbero risultare illeggibili.</li>
+        <li>Verifica i permessi: Impostazioni → App → Quantiventra → Autorizzazioni → Fotocamera.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="trouble">
+    <div class="trouble-q">Ho inserito il CSV Master ma il nome del prodotto non appare</div>
+    <div class="trouble-a">
+      <ul style="padding-left: 20px; line-height: 2;">
+        <li>Controlla che il contenuto del CSV selezionato sia corretto e che la riga di intestazione sia nel formato previsto.</li>
+        <li>Se vuoi passare a un altro CSV, esegui di nuovo <span class="ui-label">Importa CSV Master</span> dalla schermata delle impostazioni e seleziona il file.</li>
+        <li>Assicurati che la codifica del CSV sia UTF-8 (caratteri errati con Shift-JIS).</li>
+        <li>Verifica che l'intestazione sia corretta (<code>joint_code,barcode,name,theoretical_stock,actual_stock_total</code>).</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="trouble">
+    <div class="trouble-q">Impossibile salvare / Messaggio "Salvataggio fallito"</div>
+    <div class="trouble-a">
+      <ul style="padding-left: 20px; line-height: 2;">
+        <li>Il permesso della fotocamera serve solo per la scansione; se inserisci i dati a mano non è necessario attivarla.</li>
+        <li>Controlla se lo spazio in memoria del dispositivo è esaurito.</li>
+        <li>Non è possibile salvare se sia il codice che il nome sono vuoti.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="trouble">
+    <div class="trouble-q">Pulsante leggi ubicazione premuto ma l'ubicazione non viene impostata</div>
+    <div class="trouble-a">
+      <ul style="padding-left: 20px; line-height: 2;">
+        <li>Verifica che il tipo di codice per l'ubicazione sia corretto nelle impostazioni (default QRCODE).</li>
+        <li>Se l'ubicazione è un codice a barre invece di un QR, cambia il tipo nelle impostazioni.</li>
+        <li>Assicurati che la fotocamera sia su ON.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="trouble">
+    <div class="trouble-q">All'avvio dell'app si apre la schermata dei permessi di archiviazione</div>
+    <div class="trouble-a">
+      <p style="padding-top: 4px;">Nella versione attuale in genere questa schermata non è necessaria. Se il sistema la mostra comunque, torna pure all'app: per l'uso normale serve solo il permesso della fotocamera.</p>
+    </div>
+  </div>
+
+  <div class="trouble">
+    <div class="trouble-q">Pulsante cambia nome premuto ma il campo nome non è editabile</div>
+    <div class="trouble-a">
+      <ul style="padding-left: 20px; line-height: 2;">
+        <li>Assicurati di aver caricato un prodotto tramite scansione o ricerca. Senza prodotto caricato, la funzione non si attiva.</li>
+        <li>Il pulsante deve diventare arancione. Se non cambia colore, il tocco potrebbe non essere stato registrato; riprova.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="trouble">
+    <div class="trouble-q">Premendo ENT nel campo ausiliario il risultato è 0 / Il calcolo non viene applicato</div>
+    <div class="trouble-a">
+      <ul style="padding-left: 20px; line-height: 2;">
+        <li>Devi premere il tasto "Aggiungi" per sommare il valore alla quantità principale prima di salvare. Premere ENT nel campo ausiliario non avvia il salvataggio.</li>
+        <li>Caratteri non validi nella formula causano errori; usa il tastierino dell'app.</li>
+        <li>La formula non deve iniziare con un operatore (es: <code>*5</code>); inizia sempre con un numero (es: <code>3*5</code>).</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+
+<!-- ===== SECTION 11 ===== -->
+<section id="sec11">
+  <div class="section-label">Sezione 11</div>
+  <h2 class="section-title">Termini e limitazione di responsabilità</h2>
+
+  <div class="legal-block">
+    <h4>■ Termini di utilizzo (Terms of Use)</h4>
+    <p>Si prega di leggere attentamente i seguenti termini prima di utilizzare l'app ("l'App"). Scaricando o utilizzando l'App, si accettano i presenti termini.</p>
+
+    <p><strong>1. Licenza d'uso</strong><br>
+    L'uso dell'App è concesso sia a privati che ad aziende per scopi di gestione dell'inventario. È vietato il reverse engineering, la decompilazione, la modifica o la ridistribuzione dell'App.</p>
+
+    <p><strong>2. Dati utente</strong><br>
+    Tutti i dati generati dall'App (CSV Master, cronologia, file impostazioni) sono salvati esclusivamente all'interno del dispositivo dell'utente. L'App non invia alcun dato a server esterni.</p>
+
+    <p><strong>3. Divieti</strong><br>
+    È vietato l'uso dell'App per scopi illegali, per violare diritti di terzi o per generare dati fraudolenti abusando delle funzioni dell'App.</p>
+
+    <h4>■ Limitazione di responsabilità (Disclaimer)</h4>
+    <p>L'App viene fornita "così com'è" (AS IS). Lo sviluppatore non si assume alcuna responsabilità per eventuali danni (inclusi perdita di dati, perdite aziendali o altri danni diretti/indiretti) derivanti dall'uso o dall'impossibilità di usare l'App.</p>
+    <p>L'utente è tenuto a verificare l'accuratezza e l'completezza dei dati CSV generati. Lo sviluppatore non è responsabile per incongruenze derivanti da errori di scansione o inserimenti errati.</p>
+    <p>La precisione della lettura dipende dalle prestazioni della fotocamera, dallo stato dei codici e dall'ambiente circostante. In caso di impossibilità di lettura, procedere con l'inserimento manuale.</p>
+
+    <h4>■ Informativa sulla privacy (Privacy Policy)</h4>
+    <p>L'App non raccoglie, trasmette né utilizza dati personali. L'App non richiede connessione internet ed esegue tutti i processi localmente sul dispositivo.</p>
+    <p>La fotocamera viene utilizzata esclusivamente per la lettura di codici e non effettua registrazioni, salvataggi o trasmissioni di immagini video.</p>
+    <p>Tutta l'elaborazione dei dati avviene localmente sul dispositivo; per importare o esportare file usa la schermata Impostazioni.</p>
+
+    <h4>■ Copyright</h4>
+    <p>Copyright © Quantiventra. Tutti i diritti riservati.</p>
+    <p>I contenuti dell'App e del presente manuale (testi, design, loghi, ecc.) sono di proprietà dello sviluppatore.</p>
+    <p>L'App utilizza librerie open source, i cui termini sono regolati dalle rispettive licenze.</p>
+
+    <h4>■ Modifiche ai termini</h4>
+    <p>I presenti termini possono subire modifiche senza preavviso. Le modifiche diventano efficaci con la pubblicazione sul Google Play Store. L'uso continuato dell'App implica l'accettazione dei termini aggiornati.</p>
+  </div>
+</section>
+
+</div><!-- /wrapper -->
+
+<a href="#top" class="back-top" title="Torna su">↑</a>
+
+<footer>
+  <strong>Quantiventra</strong> — App di conteggio inventario tramite scansione codici<br>
+  Copyright © Quantiventra. Tutti i diritti riservati.<br>
+  I contenuti di questo manuale possono subire modifiche senza preavviso.
+</footer>
+
+</body>
+</html>

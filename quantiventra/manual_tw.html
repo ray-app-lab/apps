@@ -1,0 +1,1132 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quantiventra 使用手冊</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=IBM+Plex+Mono:wght@400;600&display=swap');
+
+  :root {
+    --primary:    #006C9C;
+    --primary-lt: #C3E7FF;
+    --primary-dk: #004A6E;
+    --accent:     #FF6D00;
+    --error:      #BA1A1A;
+    --bg:         #F8FDFF;
+    --surface:    #FFFFFF;
+    --border:     #D0E8F5;
+    --text:       #1A1A2E;
+    --muted:      #5A7A8A;
+    --mono:       'IBM Plex Mono', monospace;
+    --sans:       'Noto Sans TC', sans-serif;
+    --radius:     8px;
+    --shadow:     0 2px 12px rgba(0,108,156,.12);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--sans);
+    background: var(--bg);
+    color: var(--text);
+    font-size: 15px;
+    line-height: 1.8;
+  }
+
+  /* ── HEADER ── */
+  .site-header {
+    background: linear-gradient(135deg, var(--primary-dk) 0%, var(--primary) 60%, #0090CC 100%);
+    color: #fff;
+    padding: 56px 40px 48px;
+    position: relative;
+    overflow: hidden;
+  }
+  .site-header::before {
+    content: '';
+    position: absolute;
+    right: -80px; top: -80px;
+    width: 360px; height: 360px;
+    border-radius: 50%;
+    background: rgba(255,255,255,.06);
+  }
+  .site-header::after {
+    content: '';
+    position: absolute;
+    right: 60px; bottom: -40px;
+    width: 200px; height: 200px;
+    border-radius: 50%;
+    background: rgba(255,255,255,.04);
+  }
+  .header-badge {
+    display: inline-block;
+    background: rgba(255,255,255,.18);
+    border: 1px solid rgba(255,255,255,.35);
+    border-radius: 20px;
+    padding: 4px 14px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+  .site-header h1 {
+    font-size: clamp(28px, 5vw, 42px);
+    font-weight: 900;
+    letter-spacing: -.02em;
+    line-height: 1.15;
+    margin-bottom: 10px;
+  }
+  .site-header .subtitle {
+    font-size: 14px;
+    opacity: .8;
+    margin-bottom: 24px;
+  }
+  .header-meta {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+    font-size: 12px;
+    opacity: .75;
+  }
+
+  /* ── LAYOUT ── */
+  .wrapper {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 20px 80px;
+  }
+
+  /* ── TOC ── */
+  .toc-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--primary);
+    border-radius: var(--radius);
+    padding: 28px 32px;
+    margin: 36px 0 48px;
+    box-shadow: var(--shadow);
+  }
+  .toc-card h2 {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--primary);
+    margin-bottom: 18px;
+  }
+  .toc-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 6px 24px;
+  }
+  .toc-grid a {
+    color: var(--text);
+    text-decoration: none;
+    font-size: 13.5px;
+    padding: 3px 0;
+    border-bottom: 1px dashed transparent;
+    transition: color .15s, border-color .15s;
+    display: block;
+  }
+  .toc-grid a:hover { color: var(--primary); border-color: var(--primary); }
+  .toc-num { color: var(--primary); font-weight: 700; margin-right: 6px; font-family: var(--mono); font-size: 12px; }
+
+  /* ── SECTIONS ── */
+  section { margin-bottom: 60px; }
+
+  .section-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--primary);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border-radius: 4px;
+    margin-bottom: 10px;
+  }
+
+  h2.section-title {
+    font-size: clamp(20px, 3vw, 26px);
+    font-weight: 900;
+    color: var(--primary-dk);
+    border-bottom: 2px solid var(--border);
+    padding-bottom: 10px;
+    margin-bottom: 24px;
+    line-height: 1.3;
+  }
+
+  h3 {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--primary);
+    margin: 28px 0 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  h3::before {
+    content: '';
+    display: inline-block;
+    width: 4px; height: 16px;
+    background: var(--primary);
+    border-radius: 2px;
+  }
+
+  h4 {
+    font-size: 14px;
+    font-weight: 700;
+    margin: 20px 0 8px;
+    color: var(--text);
+  }
+
+  p { margin-bottom: 14px; }
+
+  /* ── CALLOUTS ── */
+  .callout {
+    border-radius: var(--radius);
+    padding: 16px 20px;
+    margin: 18px 0;
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+  }
+  .callout-icon { font-size: 20px; flex-shrink: 0; line-height: 1.5; }
+  .callout-body { flex: 1; font-size: 13.5px; line-height: 1.75; }
+  .callout-body strong { display: block; margin-bottom: 4px; font-size: 14px; }
+  .callout.info    { background: #E8F4FD; border: 1px solid #B3D9F2; }
+  .callout.warn    { background: #FFF8E1; border: 1px solid #FFD54F; }
+  .callout.danger  { background: #FFEBEE; border: 1px solid #FFCDD2; }
+  .callout.success { background: #E8F5E9; border: 1px solid #A5D6A7; }
+
+  /* ── TABLES ── */
+  .table-wrap { overflow-x: auto; margin: 18px 0; border-radius: var(--radius); box-shadow: var(--shadow); }
+  table { width: 100%; border-collapse: collapse; background: var(--surface); font-size: 13.5px; }
+  thead th {
+    background: var(--primary);
+    color: #fff;
+    font-weight: 700;
+    padding: 12px 16px;
+    text-align: left;
+    white-space: nowrap;
+  }
+  tbody td { padding: 11px 16px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  tbody tr:last-child td { border-bottom: none; }
+  tbody tr:hover { background: #F0F8FF; }
+  td code, th code { font-family: var(--mono); background: rgba(0,108,156,.1); padding: 1px 6px; border-radius: 3px; font-size: 12px; }
+  .badge-req { background: var(--error); color: #fff; font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 10px; white-space: nowrap; }
+  .badge-opt { background: #90A4AE; color: #fff; font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 10px; white-space: nowrap; }
+
+  /* ── CODE BLOCKS ── */
+  pre {
+    background: #0F1923;
+    color: #C8E6FF;
+    font-family: var(--mono);
+    font-size: 13px;
+    padding: 20px 24px;
+    border-radius: var(--radius);
+    overflow-x: auto;
+    margin: 14px 0;
+    line-height: 1.7;
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,.08);
+  }
+  pre .comment { color: #5C8099; }
+  pre .hl { color: #7FD8FF; font-weight: 600; }
+  pre .val { color: #A5E6A1; }
+  code {
+    font-family: var(--mono);
+    background: rgba(0,108,156,.1);
+    color: var(--primary-dk);
+    padding: 2px 7px;
+    border-radius: 4px;
+    font-size: 13px;
+  }
+
+  /* ── PATH DISPLAY ── */
+  .path {
+    background: #0F1923;
+    color: #7FD8FF;
+    font-family: var(--mono);
+    font-size: 13px;
+    padding: 14px 20px;
+    border-radius: var(--radius);
+    margin: 12px 0;
+    line-height: 2;
+  }
+  .path .dim { color: #5C8099; }
+  .path .file { color: #A5E6A1; font-weight: 600; }
+
+  /* ── STEPS ── */
+  .steps { list-style: none; counter-reset: step-counter; }
+  .steps li {
+    counter-increment: step-counter;
+    display: flex;
+    gap: 16px;
+    margin-bottom: 14px;
+    align-items: flex-start;
+  }
+  .steps li::before {
+    content: counter(step-counter);
+    flex-shrink: 0;
+    width: 28px; height: 28px;
+    background: var(--primary);
+    color: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 700;
+    margin-top: 2px;
+  }
+  .steps li p { margin: 0; }
+
+  /* ── UI LABEL ── */
+  .ui-label {
+    display: inline-block;
+    background: #E3F2FD;
+    border: 1px solid #90CAF9;
+    color: #0D47A1;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 2px 10px;
+    border-radius: 4px;
+    font-family: var(--mono);
+    white-space: nowrap;
+  }
+  .key {
+    display: inline-block;
+    background: var(--text);
+    color: #fff;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 2px 10px;
+    border-radius: 5px;
+    font-family: var(--mono);
+  }
+
+  /* ── CARDS ── */
+  .card-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 16px; margin: 18px 0; }
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px;
+    box-shadow: var(--shadow);
+  }
+  .card h4 { margin-top: 0; color: var(--primary); font-size: 14px; }
+
+  /* ── TROUBLE ── */
+  .trouble { border: 1px solid var(--border); border-radius: var(--radius); margin: 16px 0; overflow: hidden; }
+  .trouble-q { background: #EEF6FD; padding: 14px 20px; font-weight: 700; font-size: 14px; color: var(--primary-dk); cursor: pointer; display: flex; align-items: center; gap: 10px; }
+  .trouble-q::before { content: 'Q'; background: var(--primary); color: #fff; width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 900; flex-shrink: 0; }
+  .trouble-a { padding: 14px 20px 16px 52px; font-size: 13.5px; border-top: 1px solid var(--border); }
+
+  /* ── LEGAL ── */
+  .legal-block {
+    background: #F5F5F5;
+    border: 1px solid #DDD;
+    border-radius: var(--radius);
+    padding: 20px 24px;
+    font-size: 12.5px;
+    color: #444;
+    line-height: 1.9;
+    margin: 16px 0;
+  }
+  .legal-block h4 { font-size: 13px; color: #333; margin: 18px 0 6px; border-bottom: 1px solid #DDD; padding-bottom: 4px; }
+  .legal-block h4:first-child { margin-top: 0; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--primary-dk);
+    color: rgba(255,255,255,.65);
+    text-align: center;
+    padding: 32px 20px;
+    font-size: 12px;
+    line-height: 2;
+  }
+  footer strong { color: #fff; }
+
+  /* ── BACK TO TOP ── */
+  .back-top {
+    position: fixed;
+    right: 24px; bottom: 28px;
+    background: var(--primary);
+    color: #fff;
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px;
+    text-decoration: none;
+    box-shadow: 0 4px 16px rgba(0,108,156,.4);
+    transition: transform .2s, box-shadow .2s;
+    z-index: 100;
+  }
+  .back-top:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,108,156,.5); }
+
+  /* ── DIVIDER ── */
+  hr { border: none; border-top: 1px solid var(--border); margin: 40px 0; }
+
+  @media (max-width: 600px) {
+    .site-header { padding: 36px 20px 32px; }
+    .toc-grid { grid-template-columns: 1fr; }
+    .card-grid { grid-template-columns: 1fr; }
+  }
+  @media print {
+    .back-top { display: none; }
+    body { font-size: 13px; }
+    pre { font-size: 11px; }
+    .site-header { background: var(--primary) !important; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== HEADER ===== -->
+<header class="site-header" id="top">
+  <div class="header-badge">User Manual</div>
+  <h1>Quantiventra</h1>
+  <p class="subtitle">條碼掃描庫存盤點 App — 操作手冊</p>
+  <div class="header-meta">
+    <span>支援 OS：Android 8.0 (API 26) 以上</span>
+    <span>支援版本：v1.x</span>
+    <span>最後更新：2026年</span>
+  </div>
+</header>
+
+<div class="wrapper">
+
+<!-- ===== TOC ===== -->
+<nav class="toc-card">
+  <h2>📋 目錄</h2>
+  <div class="toc-grid">
+    <a href="#sec1"><span class="toc-num">1</span> 簡介</a>
+    <a href="#sec2"><span class="toc-num">2</span> 安裝與初始設定</a>
+    <a href="#sec3"><span class="toc-num">3</span> 主檔 CSV 的製作與匯入</a>
+    <a href="#sec4"><span class="toc-num">4</span> 畫面構成與各部說明</a>
+    <a href="#sec5"><span class="toc-num">5</span> 基本操作流程</a>
+    <a href="#sec6"><span class="toc-num">6</span> 進階操作</a>
+    <a href="#sec7"><span class="toc-num">7</span> 歷史紀錄功能</a>
+    <a href="#sec8"><span class="toc-num">8</span> 設定（語言、規則、相機等）</a>
+    <a href="#sec9"><span class="toc-num">9</span> 檔案管理與備份</a>
+    <a href="#sec10"><span class="toc-num">10</span> 常見問題排除</a>
+    <a href="#sec11"><span class="toc-num">11</span> 條款與免責聲明</a>
+  </div>
+</nav>
+
+
+<!-- ===== SECTION 1 ===== -->
+<section id="sec1">
+  <div class="section-label">Section 01</div>
+  <h2 class="section-title">簡介</h2>
+
+  <h3>1-1. 關於本程式</h3>
+  <p>Quantiventra（結合了「Quantity (數量)」與「Inventory (庫存)」的自創詞）是一款利用智慧型手機相機進行條碼掃描，以提升棚卸（盤點）與庫存計算效率的 Android 應用程式。</p>
+  <p>只需將相機對準條碼即可自動辨識商品，並輸入數量儲存，操作直觀，能將紙本盤點作業數位化。掃描結果會以 CSV 格式儲存於裝置中，方便與 Excel 或 Google 試算表進行後續串接。</p>
+
+  <div class="card-grid">
+    <div class="card">
+      <h4>📦 庫存計數</h4>
+      <p>透過條碼掃描快速識別商品，即時記錄數量。內建計算功能，輕鬆加總多處存放的庫存。</p>
+    </div>
+    <div class="card">
+      <h4>🗂️ 主檔管理</h4>
+      <p>透過 CSV 檔案批次匯入主檔。可預先設定品名、品號及理論庫存。</p>
+    </div>
+    <div class="card">
+      <h4>📍 儲位管理</h4>
+      <p>利用 QR Code 掃描設定儲位（位置）。在 CSV 中記錄該庫存存放於哪個貨架。</p>
+    </div>
+    <div class="card">
+      <h4>📊 CSV 匯出</h4>
+      <p>掃描結果自動儲存於裝置空間。匯入電腦即可進行統計與分析。</p>
+    </div>
+  </div>
+
+  <h3>1-2. 運作環境</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>項目</th><th>需求</th></tr></thead>
+      <tbody>
+        <tr><td>OS</td><td>Android 7.0 (Nougat / API 24) 以上</td></tr>
+        <tr><td>相機</td><td>具備自動對焦功能的相機（必備）</td></tr>
+        <tr><td>儲存空間</td><td>建議剩餘 50MB 以上</td></tr>
+        <tr><td>權限</td><td>相機權限</td></tr>
+        <tr><td>網際網路</td><td>不需要（完全離線運作）</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>1-3. 關於權限</h3>
+  <p>本程式在初次啟動時會要求以下權限。若要正常使用掃碼功能，只需要相機權限。</p>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>權限</th><th>用途</th><th>若拒絕</th></tr></thead>
+      <tbody>
+        <tr><td>相機</td><td>掃描條碼與 QR Code</td><td>無法使用相機掃描（僅能手動輸入）</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout info">
+    <span class="callout-icon">ℹ️</span>
+    <div class="callout-body">
+      <strong>關於資料保存位置</strong>
+      主檔、歷史紀錄與設定檔都由程式在內部自動管理。要匯入主檔 CSV 或匯出資料時，請從設定畫面操作。
+    </div>
+  </div>
+</section>
+
+
+<!-- ===== SECTION 2 ===== -->
+<section id="sec2">
+  <div class="section-label">Section 02</div>
+  <h2 class="section-title">安裝與初始設定</h2>
+
+  <h3>2-1. 安裝步驟</h3>
+  <ol class="steps">
+    <li><p>在 Android 裝置上打開 <strong>Google Play 商店</strong>。</p></li>
+    <li><p>在搜尋列輸入「<strong>Quantiventra</strong>」進行搜尋。</p></li>
+    <li><p>選擇程式並點擊 <span class="ui-label">安裝</span>。</p></li>
+    <li><p>安裝完成後，點擊 <span class="ui-label">開啟</span>，或從主畫面圖示啟動程式。</p></li>
+  </ol>
+
+  <h3>2-2. 初次啟動與權限授權</h3>
+  <ol class="steps">
+    <li><p>程式啟動後會顯示 <strong>相機權限</strong> 對話框，請點擊 <span class="ui-label">允許</span>。</p></li>
+    <li><p>授權完成後，就可以立即開始掃碼。</p></li>
+    <li><p>若要使用主檔 CSV，請到 <span class="ui-label">設定 → 匯入主檔 CSV</span> 選擇檔案。</p></li>
+  </ol>
+
+  <div class="callout info">
+    <span class="callout-icon">ℹ️</span>
+    <div class="callout-body">
+      <strong>完成設定後</strong>
+      允許相機權限後，就可以開始掃描、儲存、匯入主檔 CSV，以及從設定畫面匯出資料。
+    </div>
+  </div>
+
+  <h3>2-3. 資料的管理方式</h3>
+  <p>主檔、歷史紀錄與設定資料都由程式自動管理。一般使用時，不需要知道或手動處理內部資料夾結構。</p>
+  <div class="callout info">
+    <span class="callout-icon">ℹ️</span>
+    <div class="callout-body">
+      <strong>使用者需要做的事</strong>
+      要載入主檔時，請使用 <span class="ui-label">匯入主檔 CSV</span>；要把資料帶出程式時，請使用 <span class="ui-label">匯出全部資料</span> 或 <span class="ui-label">分享歷史記錄</span>。
+    </div>
+  </div>
+</section>
+
+
+<!-- ===== SECTION 3 ===== -->
+<section id="sec3">
+  <div class="section-label">Section 03</div>
+  <h2 class="section-title">主檔 CSV 的製作與匯入【重要】</h2>
+
+  <div class="callout success">
+    <span class="callout-icon">✅</span>
+    <div class="callout-body">
+      <strong>預先準備主檔可大幅提升作業效率</strong>
+      匯入主檔 CSV 後，掃描條碼時會自動顯示品名與理論庫存。若未註冊主檔，則每次皆需手動輸入。
+    </div>
+  </div>
+
+  <h3>3-1. 主檔 CSV 的準備方法（含欄名・兩種方式）</h3>
+  <p>您可以透過以下兩種方式準備主檔：</p>
+
+  <h4>方式 A：使用 Excel 或試算表從零開始製作</h4>
+  <ol class="steps">
+    <li><p>在電腦上開啟 Excel 或 Google 試算表。</p></li>
+    <li><p>第 1 行的標題請不要手動輸入，請直接複製本手冊 <strong>3-3 欄位規格（欄名）</strong> 中的整行字串並貼上。</p></li>
+    <li><p>從第 2 行開始輸入商品資料。</p></li>
+    <li><p>以「CSV (逗號分隔)」格式儲存，檔名設為 <code>quantiventra_master.csv</code>（建議使用 UTF-8 編碼）。</p></li>
+  </ol>
+
+  <h4>方式 B：以程式自動產生的檔案為範本（適合初學者）</h4>
+  <p>若不想從頭開始製作，可以讓程式建立範本。</p>
+  <ol class="steps">
+    <li><p>在沒有主檔的狀態下啟動程式，隨便掃描一個商品的條碼。</p></li>
+    <li><p>會出現「未註冊代碼」對話框，選擇「是 (新增註冊)」。</p></li>
+    <li><p>在品名輸入「測試」等內容並儲存。</p></li>
+    <li><p>接著在程式中執行 <span class="ui-label">設定 → 匯出全部資料</span>，就能匯出目前的主檔 CSV。</p></li>
+    <li><p>將匯出的檔案帶到電腦（透過 USB、郵件或雲端都可以），用 Excel 開啟。因為裡面已有測試資料，可依照該格式新增或修改資料，存檔後再用 <span class="ui-label">匯入主檔 CSV</span> 載回程式。</p></li>
+  </ol>
+
+  <h3>3-2. 檔名與儲存位置</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>項目</th><th>數值</th></tr></thead>
+      <tbody>
+        <tr><td>檔名</td><td><code>quantiventra_master.csv</code> (固定，不可變更)</td></tr>
+        <tr><td>編碼</td><td>UTF-8 (建議不含 BOM)</td></tr>
+        <tr><td>換行符號</td><td>LF 或 CRLF (皆可)</td></tr>
+        <tr><td>匯入方式</td><td><span class="ui-label">設定 → 匯入主檔 CSV</span> 選擇檔案</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>3-3. 欄位規格（欄名）</h3>
+  <p><strong>第 1 行為標題行</strong>。請將下方這一整行原樣複製貼上，5 個欄名都必須保留。</p>
+  <pre><span class="hl">joint_code</span>,<span class="hl">barcode</span>,<span class="hl">name</span>,<span class="hl">theoretical_stock</span>,<span class="hl">actual_stock_total</span></pre>
+  <div class="callout info">
+    <span class="callout-icon">ℹ️</span>
+    <div class="callout-body">
+      <strong>即使只使用自家品號，也請維持這 5 欄</strong>
+      應用程式的預設值是<strong>外部品號 OFF</strong>。若您只管理自家品號，可將 <code>joint_code</code> 欄位留空；只有在要同時管理外部品號時才填寫。若匯入的主檔 CSV 內 <code>joint_code</code> 欄含有資料，應用啟動時會自動切換為 ON。
+    </div>
+  </div>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>#</th><th>欄位名稱</th><th>類型</th><th>必填</th><th>說明與注意事項</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td><code>joint_code</code></td>
+          <td>字串</td>
+          <td><span class="badge-opt">選填</span></td>
+          <td>外部品號（往來廠商代碼）。可留空。僅限英數字、連字號、底線（依設定而定）。</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td><code>barcode</code></td>
+          <td>字串</td>
+          <td><span class="badge-req">必填</span></td>
+          <td>自出品號/條碼。須與實際條碼一致。不可重複。</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td><code>name</code></td>
+          <td>字串</td>
+          <td><span class="badge-req">必填</span></td>
+          <td>品名。若包含逗號，請用雙引號包圍（例如：<code>"螺栓,M4"</code>）。</td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td><code>theoretical_stock</code></td>
+          <td>整數</td>
+          <td><span class="badge-opt">選填</span></td>
+          <td>理論庫存數（帳面庫存）。若不清楚請輸入 <code>0</code>。</td>
+        </tr>
+        <tr>
+          <td>5</td>
+          <td><code>actual_stock_total</code></td>
+          <td>整數</td>
+          <td><span class="badge-opt">選填</span></td>
+          <td>已註冊的累計庫存。建議初次盤點設為 <code>0</code>。</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>3-4. CSV 範例</h3>
+  <pre><span class="comment"># 第 1 行：標題行 (必填)</span>
+<span class="hl">joint_code</span>,<span class="hl">barcode</span>,<span class="hl">name</span>,<span class="hl">theoretical_stock</span>,<span class="hl">actual_stock_total</span>
+<span class="comment"># 第 2 行之後：資料行</span>
+<span class="val">ABC-001</span>,<span class="val">4912345678904</span>,<span class="val">六角螺栓M6×20</span>,<span class="val">500</span>,<span class="val">0</span>
+<span class="val">ABC-002</span>,<span class="val">4912345678911</span>,<span class="val">六角螺帽M6</span>,<span class="val">1000</span>,<span class="val">0</span>
+,<span class="val">4912345678928</span>,<span class="val">彈性墊圈M6</span>,<span class="val">800</span>,<span class="val">0</span>
+<span class="val">XY-999</span>,<span class="val">4912345678935</span>,<span class="val">"螺栓組,M4"</span>,<span class="val">200</span>,<span class="val">0</span></pre>
+
+  <div class="callout warn">
+    <span class="callout-icon">⚠️</span>
+    <div class="callout-body">
+      <strong>使用 Excel 編輯時的注意</strong>
+      在 Excel 儲存時，編碼可能會變成 Shift-JIS。請選擇「另存新檔」→「CSV UTF-8 (逗號分隔)」。若開頭的 BOM 造成問題，請用記事本重新開啟並存檔。
+    </div>
+  </div>
+
+  <h3>3-5. 匯入主檔 CSV</h3>
+  <p>不需要把 CSV 放在固定資料夾。請直接從設定畫面匯入。</p>
+
+  <h4>🔌 方法①：選擇本機檔案</h4>
+  <ol class="steps">
+    <li><p>先把 CSV 存在裝置上的任意位置，例如「下載」。</p></li>
+    <li><p>在程式中點擊 <span class="ui-label">設定 → 匯入主檔 CSV</span>。</p></li>
+    <li><p>在系統檔案選擇器中選取 CSV 檔案。</p></li>
+    <li><p>匯入完成後，主檔資料會立即套用。</p></li>
+  </ol>
+
+  <h4>☁️ 方法②：透過 Google Drive</h4>
+  <ol class="steps">
+    <li><p>先在電腦上把 CSV 上傳到 <a href="https://drive.google.com" target="_blank">Google Drive</a>。</p></li>
+    <li><p>在程式中點擊 <span class="ui-label">設定 → 匯入主檔 CSV</span>。</p></li>
+    <li><p>在檔案選擇器中直接從 Google Drive 選取 CSV。</p></li>
+  </ol>
+
+  <h4>📧 方法③：透過電子郵件附件</h4>
+  <ol class="steps">
+    <li><p>先把 CSV 以附件寄給自己。</p></li>
+    <li><p>在手機上下載附件。</p></li>
+    <li><p>回到程式，點擊 <span class="ui-label">設定 → 匯入主檔 CSV</span>，再選擇下載的檔案。</p></li>
+  </ol>
+
+  <div class="callout info">
+    <span class="callout-icon">ℹ️</span>
+    <div class="callout-body">
+      <strong>更新主檔時</strong>
+      若你再次編輯了 CSV，請重新匯入更新後的檔案。程式內部的主檔內容會以新檔案覆蓋。
+    </div>
+  </div>
+</section>
+
+
+<!-- ===== SECTION 4 ===== -->
+<section id="sec4">
+  <div class="section-label">Section 04</div>
+  <h2 class="section-title">畫面構成與各部說明</h2>
+
+  <p>主畫面由上而下分別為「標題列」、「相機區域」、「輸入欄位區域」、「儲存歷史區域」及「數字鍵盤」五個區塊構成。</p>
+
+  <h3>4-1. 標題列</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>要素</th><th>說明</th></tr></thead>
+      <tbody>
+        <tr><td>程式名稱 (Quantiventra)</td><td>點擊無動作（僅顯示）</td></tr>
+        <tr><td>⚙️ 設定圖示</td><td>開啟設定對話框</td></tr>
+        <tr><td>ON / OFF 開關</td><td>切換相機預覽的開啟/關閉</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>4-2. 相機區域</h3>
+  <p>此區域用於即時掃描條碼與 QR Code。在相機開啟的狀態下將條碼對準相機，當連續三幀偵測到相同代碼時會自動辨識。</p>
+  <div class="callout info">
+    <span class="callout-icon">ℹ</span>
+    <div class="callout-body">
+      <strong>關於掃描精度</strong>
+      相機會優先辨識位於畫面中央 ±15% 範圍內的條碼。若難以讀取，請嘗試將條碼置於正中央。
+    </div>
+  </div>
+
+  <h3>4-3. 輸入欄位區域</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>欄位</th><th>說明</th></tr></thead>
+      <tbody>
+        <tr><td>儲位 (LOC)</td><td>商品所在的架位編號。透過手動輸入或點擊「讀取儲位」按鈕掃描輸入。</td></tr>
+        <tr><td>自出品號</td><td>依據畫面大小或設定，可能會與「外部品號」分開顯示。若僅有一欄時，會同時顯示。</td></tr>
+        <tr><td>品名</td><td>商品名稱。主檔已註冊時會自動顯示。僅在新增註冊、編輯或搜尋時可手動輸入。</td></tr>
+        <tr><td>數量</td><td>輸入本次盤點的數量。使用數字鍵盤輸入。支援計算式（例如：3*5）。</td></tr>
+        <tr><td>理論庫存</td><td>主檔中註冊的帳面庫存（僅供參考，不可編輯）。</td></tr>
+        <tr><td>已登記</td><td>至目前為止已儲存的累計庫存。可點擊「變更」按鈕修正。</td></tr>
+        <tr><td>計算用</td><td>數量輸入輔助欄位。點擊「加算」按鈕可將結果加總至數量欄。</td></tr>
+        <tr><td>計算歷史</td><td>顯示在計算用欄位加總的紀錄（僅供參考）。</td></tr>
+        <tr><td>備註 (Memo)</td><td>記錄任意內容。會一併儲存至 CSV。</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>4-4. 數字鍵盤</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>按鍵</th><th>動作</th></tr></thead>
+      <tbody>
+        <tr><td><span class="key">0〜9</span> / <span class="key">00</span></td><td>在目前選取的欄位中輸入數字。</td></tr>
+        <tr><td><span class="key">−</span> / <span class="key">×</span></td><td>輸入減號或乘號（用於計算式）。</td></tr>
+        <tr><td><span class="key">CLR</span></td><td>全數清除目前選取欄位的內容。</td></tr>
+        <tr><td><span class="key">確定</span> / <span class="key">搜尋</span></td><td>依位置執行確定、搜尋或儲存。</td></tr>
+        <tr><td><span class="key">加算</span>（計算模式時）</td><td>將計算用欄位的結果加總至數量欄。</td></tr>
+        <tr><td><span class="key">儲存</span>（計算模式時）</td><td>儲存目前內容。</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  
+</section>
+
+
+<!-- ===== SECTION 5 ===== -->
+<section id="sec5">
+  <div class="section-label">Section 05</div>
+  <h2 class="section-title">基本操作流程</h2>
+
+  <h3>5-1. 標準盤點流程</h3>
+
+  <h4>步驟 1：設定儲位 (Location)</h4>
+  <ol class="steps">
+    <li><p>若要設定儲位：點擊 <span class="ui-label">讀取儲位</span> 按鈕（按鈕會變為黃色）。</p></li>
+    <li><p>將相機對準儲位的條碼，自動讀取後會反映在「儲位 (LOC)」欄位。</p></li>
+    <li><p>手動輸入時：點擊「儲位 (LOC)」欄位，使用螢幕鍵盤輸入。</p></li>
+  </ol>
+
+  <div class="callout info">
+    <span class="callout-icon">ℹ️</span>
+    <div class="callout-body">儲位設定後，下次掃描商品時會自動沿用。更換貨架時請記得更新。</div>
+  </div>
+
+  <h4>步驟 2：掃描商品條碼</h4>
+  <ol class="steps">
+    <li><p>確認相機開關為 ON。</p></li>
+    <li><p>將相機對準商品條碼。條碼會自動被掃描。</p></li>
+    <li><p>若是主檔已註冊商品，會自動顯示品名與理論庫存（會依 外部品號 → 自出品號 的順序進行檢索）。</p></li>
+    <li><p>若為未註冊代碼，會顯示「未註冊代碼」對話框（見 6-3）。</p></li>
+  </ol>
+
+  <h4>步驟 3：輸入數量</h4>
+  <ol class="steps">
+    <li><p>游標會自動跳至「數量」欄位。</p></li>
+    <li><p>使用數字鍵盤輸入數量。</p></li>
+    <li><p>若需要加總多個位置，可使用計算功能（見 5-2）。</p></li>
+  </ol>
+
+  <h4>步驟 4：儲存</h4>
+  <ol class="steps">
+    <li><p>根據需要輸入備註。</p></li>
+    <li><p>點擊 <span class="key">ENT</span> 鍵或 <span class="key">儲存</span> 鍵。</p></li>
+    <li><p>聽到音效並顯示「已儲存」訊息即完成。</p></li>
+    <li><p>繼續下一個商品的掃描。</p></li>
+  </ol>
+
+  <h3>5-2. 計算功能使用方法</h3>
+  <p>適合用於盤點存放在不同層架或位置的同一商品。</p>
+
+  <ol class="steps">
+    <li><p>點擊「計算用」欄位（數字鍵盤會切換至計算模式）。</p></li>
+    <li><p>例如：上層有 30 個，下層有 25 個 → 輸入 <code>30</code> 並點擊 <span class="key">加算</span> → 輸入 <code>25</code> 並點擊 <span class="key">加算</span>。</p></li>
+    <li><p>也支援計算式：<code>3*10</code> → 點擊 <span class="key">加算</span>，30 就會加總至數量欄。</p></li>
+    <li><p>加總紀錄會顯示在計算歷史欄。</p></li>
+    <li><p>合計反映至數量欄後，點擊 <span class="key">儲存</span>。</p></li>
+  </ol>
+
+  <h3>5-3. 清除</h3>
+  <p>點擊 <span class="ui-label">清除</span> 按鈕，會重置目前的輸入內容（條碼、品名、數量、備註、計算歷史），回到可輸入下一個商品的狀態。儲位 (LOC) 不會被清除。</p>
+  <div class="callout info">
+    <span class="callout-icon">ℹ️</span>
+    <div class="callout-body">
+      <strong>若要重置儲位 (LOC)</strong>
+      清除按鈕不會消去儲位。移動至其他貨架時，請按讀取儲位按鈕，或使用 <span class="key">CLR</span> 鍵手動刪除，或掃描新的儲位條碼進行蓋寫。
+    </div>
+  </div>
+</section>
+
+
+<!-- ===== SECTION 6 ===== -->
+<section id="sec6">
+  <div class="section-label">Section 06</div>
+  <h2 class="section-title">進階操作</h2>
+
+  <h3>6-1. 品名搜尋模式</h3>
+  <p>當手邊沒有條碼或無法讀取時，可用品名關鍵字搜尋商品。</p>
+  <ol class="steps">
+    <li><p>開啟畫面下方的「品名搜尋」開關。</p></li>
+    <li><p>在「品名」欄位輸入關鍵字（支援部分符合，不分全半形）。</p></li>
+    <li><p>點擊 🔍 搜尋按鈕或 <span class="key">搜尋</span> (確定) 鍵。</p></li>
+    <li><p>會彈出搜尋結果對話框，點選對應商品即可。</p></li>
+    <li><p>之後即可如往常輸入數量並儲存。</p></li>
+  </ol>
+  <div class="callout info">
+    <span class="callout-icon">ℹ️</span>
+    <div class="callout-body">
+      <strong>儲存後的品名搜尋模式行為</strong>
+      若「連續」開關為 OFF，儲存商品後搜尋模式會自動關閉，回復到一般的掃描等待狀態。若要連續使用搜尋功能，請開啟「連續」開關（見 6-2）。
+    </div>
+  </div>
+
+  <h3>6-2. 連續搜尋模式</h3>
+  <p>開啟「連續」開關，儲存後會維持品名搜尋模式。適合用於同架位多個商品皆透過搜尋連續輸入的場合。</p>
+
+  <h3>6-3. 註冊新商品</h3>
+  <p>掃描主檔未註冊的條碼時，會顯示「未註冊代碼」對話框。</p>
+  <ol class="steps">
+    <li><p>點擊「是 (新增註冊)」。</p></li>
+    <li><p>系統會自動賦予自出品號（從 <code>99999</code> 開始的編號）。若採手動輸入註冊，則需選擇為外部品號或自出品號。</p></li>
+    <li><p>游標會移至品名欄位，請輸入商品名稱。</p></li>
+    <li><p>輸入數量並儲存。下次掃描時即會辨識為已註冊商品。</p></li>
+  </ol>
+
+  <h3>6-4. 變更品名</h3>
+  <p>可修正主檔中已註冊商品的名稱。</p>
+  <ol class="steps">
+    <li><p>掃描（或搜尋）該商品。</p></li>
+    <li><p>點擊 <span class="ui-label">變更品名</span> 按鈕（按鈕會變為橘色）。</p></li>
+    <li><p>品名欄位變為可編輯狀態，請進行修正。</p></li>
+    <li><p>儲存後，主檔即會更新為新的品名。</p></li>
+  </ol>
+
+  <h3>6-5. 變更已登記累計</h3>
+  <p>用於修正過去的盤點資料或設定初始值。</p>
+  <ol class="steps">
+    <li><p>掃描該商品讀取資料。</p></li>
+    <li><p>點擊「已登記」旁的 <span class="ui-label">變更</span> 按鈕。</p></li>
+    <li><p>在對話框輸入新數值並點擊「變更」。</p></li>
+  </ol>
+
+  <div class="callout warn">
+    <span class="callout-icon">⚠️</span>
+    <div class="callout-body">變更已登記累計不會更改 scan_history.csv 中的舊歷史紀錄，僅會更新主檔中的累計值。</div>
+  </div>
+</section>
+
+
+<!-- ===== SECTION 7 ===== -->
+<section id="sec7">
+  <div class="section-label">Section 07</div>
+  <h2 class="section-title">歷史紀錄功能</h2>
+
+  <h3>7-1. 確認儲存歷史</h3>
+  <p>畫面下方的儲存歷史區域會由新到舊顯示最近的儲存紀錄。可一覽時間、品名、數量及理論庫存。</p>
+  <p>此外，點擊 <span class="ui-label">歷史</span> 按鈕可顯示詳細歷史列表，確認儲位與備註資訊。</p>
+
+  <h3>7-2. 關於歷史紀錄 CSV</h3>
+  <p>每次儲存皆會自動追記至 <code>scan_history.csv</code>。將此檔案傳輸至電腦後即可使用 Excel 統計分析。</p>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>欄位</th><th>內容</th></tr></thead>
+      <tbody>
+        <tr><td><code>date</code></td><td>儲存日期 (YYYY-MM-DD)</td></tr>
+        <tr><td><code>time</code></td><td>儲存時間 (HH:mm:ss)</td></tr>
+        <tr><td><code>joint_code</code></td><td>外部品號</td></tr>
+        <tr><td><code>barcode</code></td><td>自出品號/條碼</td></tr>
+        <tr><td><code>name</code></td><td>品名</td></tr>
+        <tr><td><code>actual_stock</code></td><td>本次盤點數量</td></tr>
+        <tr><td><code>location</code></td><td>儲位</td></tr>
+        <tr><td><code>memo</code></td><td>備註</td></tr>
+        <tr><td><code>theoretical_stock</code></td><td>理論庫存數</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout warn">
+    <span class="callout-icon">⚠️</span>
+    <div class="callout-body">
+      <strong>更新舊版本時</strong>
+      若偵測到舊格式的歷史檔案，程式會自動建立備份（<code>scan_history_舊_日期.csv</code>）並產生新格式檔案，資料不會遺失。
+    </div>
+  </div>
+</section>
+
+
+<!-- ===== SECTION 8 ===== -->
+<section id="sec8">
+  <div class="section-label">Section 08</div>
+  <h2 class="section-title">設定（語言、規則、相機等）</h2>
+
+  <p>點擊標題列的 ⚙️ 圖示即可開啟設定對話框。</p>
+
+  <h3>8-1. 匯入主檔 CSV</h3>
+  <p>從裝置、下載資料夾或雲端硬碟選取 CSV，更新程式內部主檔。匯入後會立即套用，不需要再另外執行重新讀取。</p>
+
+  <h3>8-2. 全數刪除歷史資料</h3>
+  <p>刪除 <code>scan_history.csv</code> 並完全重置歷史紀錄。請在盤點階段結束後執行。</p>
+  <div class="callout danger">
+    <span class="callout-icon">🚨</span>
+    <div class="callout-body"><strong>此動作無法還原。</strong>執行前請務必備份 CSV 檔案。</div>
+  </div>
+
+  <h3>8-3. 使用外部品號</h3>
+  <p>開啟此開關後，條碼欄位旁會啟用「外部品號」輸入欄位。適合用於需同時記錄廠商特定品號與內部代碼的場合。</p>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>狀態</th><th>動作</th></tr></thead>
+      <tbody>
+        <tr><td>OFF (預設)</td><td>隱藏外部品號欄位。僅使用條碼管理。</td></tr>
+        <tr><td>ON</td><td>顯示外部品號欄位。主檔 CSV 的 <code>joint_code</code> 欄位生效。輸入代碼時會彈出對話框詢問是自出還是外部品號。</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="callout info">
+    <span class="callout-icon">ℹ️</span>
+    <div class="callout-body">若主檔 CSV 的 <code>joint_code</code> 欄位包含資料，啟動程式時會自動切換為 ON。</div>
+  </div>
+
+  <h3>8-4. 自出品號規則設定</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>設定項目</th><th>說明</th></tr></thead>
+      <tbody>
+        <tr><td>字元類型模式</td><td>可選擇「英數字」、「僅數字」、「無限制」。</td></tr>
+        <tr><td>最小字數</td><td>代碼最低字數（例如：JAN 條碼設為 12）。</td></tr>
+        <tr><td>最大字數</td><td>代碼最高字數。</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>8-5. 相機讀取類型設定</h3>
+  <p>設定掃描對象的條碼格式。停用不必要的格式可防止誤讀。</p>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>種類</th><th>商品用</th><th>儲位用</th><th>主要用途</th></tr></thead>
+      <tbody>
+        <tr><td>CODE39</td><td>✅ 預設 ON</td><td>—</td><td>工業零件、內部管理代碼</td></tr>
+        <tr><td>CODE128</td><td>選填</td><td>—</td><td>物流代碼</td></tr>
+        <tr><td>EAN13</td><td>選填</td><td>—</td><td>JAN 條碼（一般商品）</td></tr>
+        <tr><td>QRCODE</td><td>—</td><td>✅ 預設 ON</td><td>儲位用 QR Code</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>8-6. 語言與說明書選擇</h3>
+  <p>可在設定畫面變更程式顯示語言（中文、日文、英文等）。</p>
+  <p>變更語言並儲存後，介面會切換。再次開啟說明書時，也會依據選取的語言顯示對應的內容。</p>
+</section>
+
+
+<!-- ===== SECTION 9 ===== -->
+<section id="sec9">
+  <div class="section-label">Section 09</div>
+  <h2 class="section-title">檔案管理與備份</h2>
+
+  <h3>9-1. 輸出檔案列表</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>檔名</th><th>產生時機</th><th>說明</th></tr></thead>
+      <tbody>
+        <tr><td><code>quantiventra_master.csv</code></td><td>手動放置 / 儲存時更新</td><td>盤點用主檔。儲存數量、註冊新商品、變更品名時會自動更新。用於盤點結果統計。</td></tr>
+        <tr><td><code>scan_history.csv</code></td><td>每次儲存時追記</td><td>所有掃描儲存的歷史紀錄。</td></tr>
+        <tr><td><code>settings.json</code></td><td>儲存設定時</td><td>儲存代碼規則、相機設定、語言設定等。</td></tr>
+        <tr><td><code>scan_history_舊_日時.csv</code></td><td>偵測到舊格式時</td><td>舊版歷史紀錄的備份。</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>9-2. 建議備份流程</h3>
+  <p>建議在盤點作業結束後或定期依照以下步驟備份：</p>
+  <ol class="steps">
+    <li><p>在程式中開啟 <span class="ui-label">設定 → 匯出全部資料</span>。</p></li>
+    <li><p>選擇 CSV 的引號輸出方式後，指定要儲存的資料夾。</p></li>
+    <li><p>匯出的 <code>scan_history_[timestamp].csv</code> 與 <code>quantiventra_master_export.csv</code> 可再傳送到 PC 或雲端保存。</p></li>
+  </ol>
+</section>
+
+
+<!-- ===== SECTION 10 ===== -->
+<section id="sec10">
+  <div class="section-label">Section 10</div>
+  <h2 class="section-title">常見問題排除</h2>
+
+  <div class="trouble">
+    <div class="trouble-q">無法讀取條碼或沒有反應</div>
+    <div class="trouble-a">
+      <ul style="padding-left: 20px; line-height: 2;">
+        <li>請確認右上角的相機開關是否為 ON。</li>
+        <li>請將條碼對準畫面中央（靠近邊緣辨識率會下降）。</li>
+        <li>請確認設定中的條碼類型（CODE39 / EAN13 等）與目標條碼是否一致。</li>
+        <li>若條碼受損或髒污可能無法讀取。</li>
+        <li>請確認是否授權相機權限：設定 → 應用程式 → Quantiventra → 權限 → 相機。</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="trouble">
+    <div class="trouble-q">已放置主檔 CSV 但未顯示品名</div>
+    <div class="trouble-a">
+      <ul style="padding-left: 20px; line-height: 2;">
+        <li>請確認選到的 CSV 內容正確，且包含正確的標題列。</li>
+        <li>若要改用其他 CSV，請從設定畫面再次執行 <span class="ui-label">匯入主檔 CSV</span> 並選擇檔案。</li>
+        <li>請確認 CSV 編碼為 UTF-8 (若是 Shift-JIS 會產生亂碼)。</li>
+        <li>請確認標題行格式正確 (<code>joint_code,barcode,name,theoretical_stock,actual_stock_total</code>)。</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="trouble">
+    <div class="trouble-q">無法儲存或出現「儲存失敗」訊息</div>
+    <div class="trouble-a">
+      <ul style="padding-left: 20px; line-height: 2;">
+        <li>相機權限是用於掃描；若只使用手動輸入，即使不開啟相機也能操作。</li>
+        <li>請確認裝置剩餘空間是否足夠。</li>
+        <li>若條碼與品名皆為空白，則無法儲存。</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="trouble">
+    <div class="trouble-q">點擊讀取儲位按鈕但未設定儲位</div>
+    <div class="trouble-a">
+      <ul style="padding-left: 20px; line-height: 2;">
+        <li>請確認儲位用條碼種類設定是否正確（預設為 QRCODE）。</li>
+        <li>若儲位標籤是條碼而非 QR Code，請在設定中更改儲位類型。</li>
+        <li>請確認相機開關為 ON。</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="trouble">
+    <div class="trouble-q">啟動程式時開啟了儲存設定畫面</div>
+    <div class="trouble-a">
+      <p style="padding-top: 4px;">目前版本通常不會要求這種權限。若系統仍跳出相關畫面，請先返回應用並確認是否真的需要其他系統設定；一般使用只需要相機權限。</p>
+    </div>
+  </div>
+
+  <div class="trouble">
+    <div class="trouble-q">點擊變更品名按鈕但品名欄位仍無法編輯</div>
+    <div class="trouble-a">
+      <ul style="padding-left: 20px; line-height: 2;">
+        <li>請確認是否已讀取商品資料。在空白狀態下變更品名無效。</li>
+        <li>點擊後按鈕應變為橘色。若未變色，可能未感應到點擊，請再次點選。</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="trouble">
+    <div class="trouble-q">在計算用欄位按 ENT 但結果為 0 / 未反映計算</div>
+    <div class="trouble-a">
+      <ul style="padding-left: 20px; line-height: 2;">
+        <li>需點擊「加算」鍵將結果加進數量欄後再儲存。在計算欄直接按 ENT 不會儲存。</li>
+        <li>若計算式包含全形字元會導致錯誤，請使用數字鍵盤輸入。</li>
+        <li>計算式開頭不能是運算子（例如：<code>*5</code>），必須從數值開始（例如：<code>3*5</code>）。</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+
+<!-- ===== SECTION 11 ===== -->
+<section id="sec11">
+  <div class="section-label">Section 11</div>
+  <h2 class="section-title">條款與免責聲明</h2>
+
+  <div class="legal-block">
+    <h4>■ 使用條款 (Terms of Use)</h4>
+    <p>使用本程式（以下簡稱「本程式」）前，請詳閱以下條款。下載或使用本程式即視為同意本條款。</p>
+
+    <p><strong>1. 使用授權</strong><br>
+    不論個人或法人，皆可於業務或非業務目的之庫存管理、盤點作業中使用本程式。但禁止對本程式進行逆向工程、反編譯、修改或散布。</p>
+
+    <p><strong>2. 使用者資料</strong><br>
+    本程式產生的所有資料（主檔 CSV、歷史紀錄 CSV、設定檔）皆僅儲存於使用者裝置內。本程式不會將資料發送至外部伺服器。</p>
+
+    <p><strong>3. 禁止事項</strong><br>
+    禁止將本程式用於違法目的、侵害第三方權利之目的，或濫用功能產生不實資料。</p>
+
+    <h4>■ 免責聲明 (Disclaimer)</h4>
+    <p>本程式按「現狀 (AS IS)」提供。對於因使用或無法使用本程式所生之任何損害（包含資料遺失、業務損失及其他直接/間接損害），開發者不負任何責任。</p>
+    <p>請使用者自行確認本程式產生的 CSV 資料之正確性與完整性。對於掃描錯誤或輸入錯誤導致的資料不一致，開發者概不負責。</p>
+    <p>條碼讀取精度受裝置相機性能、條碼狀態及周遭環境影響。若無法讀取，請使用手動輸入。</p>
+
+    <h4>■ 隱私權政策 (Privacy Policy)</h4>
+    <p>本程式不蒐集、不傳輸也不使用任何個人資料。本程式不需要網際網路連線，所有處理皆於裝置內本地端執行。</p>
+    <p>本程式使用的相機功能僅用於掃描條碼與 QR Code，不會錄影、儲存或發送影像。</p>
+    <p>所有資料處理都在裝置本地完成；若要匯入或匯出檔案，請從設定畫面操作。</p>
+
+    <h4>■ 著作權 (Copyright)</h4>
+    <p>Copyright © Quantiventra. All Rights Reserved.</p>
+    <p>本程式及本手冊所包含之所有內容（文字、設計、標誌等）之著作權歸開發者所有。</p>
+    <p>本程式使用了開源函式庫，各函式庫之授權遵循該函式庫之規定。</p>
+
+    <h4>■ 條款變更</h4>
+    <p>本條款可能在不經預告的情況下變更。變更後的條款於 Google Play 商店刊登後生效。繼續使用即視為同意變更後的條款。</p>
+  </div>
+</section>
+
+</div><!-- /wrapper -->
+
+<a href="#top" class="back-top" title="回到頂部">↑</a>
+
+<footer>
+  <strong>Quantiventra</strong> — 條碼掃描庫存盤點 App<br>
+  Copyright © Quantiventra. All Rights Reserved.<br>
+  本手冊內容可能在不經預告的情況下變更。
+</footer>
+
+</body>
+</html>

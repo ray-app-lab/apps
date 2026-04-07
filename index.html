@@ -5,11 +5,14 @@
     <title>Ray App Lab - Redirecting...</title>
     <script>
         (function() {
-            // 1. ブラウザの言語設定を取得
+            console.log("--- 転送スクリプト開始 ---");
+
+            // 1. 言語取得
             const browserLang = (navigator.language || navigator.userLanguage).toLowerCase();
             const langKey = browserLang.split('-')[0];
+            console.log("判定された言語:", langKey);
 
-            // 2. 言語とファイルの対応表
+            // 2. 対応表
             const langMap = {
                 'ja': 'index_ja.html',
                 'en': 'index_en.html',
@@ -24,28 +27,36 @@
                 'zh': 'index_zh.html'
             };
 
-            // 中国語（繁体字）の判定
+            // 中国語（繁体字）の特別判定
             if (browserLang.includes('tw') || browserLang.includes('hk')) {
                 langMap['zh'] = 'index_tw.html';
             }
 
-            // 3. 転送先の決定（不明な言語は英語へ）
+            // 3. 転送先の決定
             const target = langMap[langKey] || 'index_en.html';
+            console.log("転送先ファイル:", target);
 
-            // 4. 強制転送（今いるのが index.html もしくはディレクトリ TOP なら実行）
-            // ネット上の反映を確実にするため、相対パスで指定します
-            if (window.location.pathname.indexOf(target) === -1) {
+            // 4. 現在のURLを確認して転送実行
+            const path = window.location.pathname;
+            console.log("現在のパス:", path);
+
+            // index_ja.html などに「既にいる」場合は転送しない（無限ループ防止）
+            if (!path.includes('index_ja.html') && 
+                !path.includes('index_en.html') && 
+                !path.includes('index_es.html')) {
+                
+                console.log(target + " へジャンプします...");
                 window.location.replace(target);
+            } else {
+                console.log("既に言語別ページにいるため、転送を停止しました。");
             }
         })();
     </script>
 </head>
 <body>
-    <p>Redirecting... / 転送中...</p>
-    <p>If you are not redirected, please click your language:</p>
-    <ul>
-        <li><a href="index_ja.html">日本語</a></li>
-        <li><a href="index_en.html">English</a></li>
-    </ul>
+    <div style="text-align: center; padding-top: 50px; font-family: sans-serif;">
+        <p>Redirecting... / 転送中...</p>
+        <p>If not redirected: <a href="index_ja.html">Japanese</a> / <a href="index_en.html">English</a></p>
+    </div>
 </body>
 </html>

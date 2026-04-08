@@ -1,62 +1,65 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Ray App Lab - Redirecting...</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ray App Lab - Select Language</title>
+    <style>
+        :root { --bg-cream: #fdfaf5; --main-text: #333; --accent-color: #d4a373; }
+        body { margin: 0; font-family: sans-serif; background-color: var(--bg-cream); color: var(--main-text); display: flex; align-items: center; justify-content: center; min-height: 100vh; text-align: center; }
+        .container { max-width: 600px; padding: 20px; }
+        .logo { width: 150px; border-radius: 50%; border: 4px solid #fff; box-shadow: 0 4px 10px rgba(0,0,0,0.1); margin-bottom: 20px; }
+        h1 { font-size: 1.5rem; letter-spacing: 2px; margin-bottom: 30px; }
+        .lang-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 15px; }
+        .lang-btn { background: #fff; border: 1px solid #eee; padding: 12px; border-radius: 8px; text-decoration: none; color: #555; font-weight: bold; transition: 0.3s; }
+        .lang-btn:hover { background: var(--accent-color); color: #fff; transform: translateY(-3px); }
+        .footer { margin-top: 40px; font-size: 0.8rem; color: #aaa; }
+    </style>
     <script>
         (function() {
-            console.log("--- 転送スクリプト開始 ---");
+            // URLに ?select=true がついている場合は転送しない（無限ループ防止）
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.get('select') === 'true') return;
 
-            // 1. 言語取得
+            // 言語判定と転送
             const browserLang = (navigator.language || navigator.userLanguage).toLowerCase();
             const langKey = browserLang.split('-')[0];
-            console.log("判定された言語:", langKey);
-
-            // 2. 対応表
             const langMap = {
-                'ja': 'index_ja.html',
-                'en': 'index_en.html',
-                'es': 'index_es.html',
-                'hi': 'index_hi.html',
-                'id': 'index_id.html',
-                'it': 'index_it.html',
-                'ko': 'index_ko.html',
-                'pt': 'index_pt.html',
-                'th': 'index_th.html',
-                'vi': 'index_vi.html',
-                'zh': 'index_zh.html'
+                'ja': 'index_ja.html', 'en': 'index_en.html', 'es': 'index_es.html',
+                'hi': 'index_hi.html', 'id': 'index_id.html', 'it': 'index_it.html',
+                'ko': 'index_ko.html', 'pt': 'index_pt.html', 'th': 'index_th.html',
+                'vi': 'index_vi.html', 'zh': 'index_zh.html'
             };
-
-            // 中国語（繁体字）の特別判定
-            if (browserLang.includes('tw') || browserLang.includes('hk')) {
-                langMap['zh'] = 'index_tw.html';
+            
+            let target = langMap[langKey] || 'index_en.html';
+            if (langKey === 'zh' && (browserLang.includes('tw') || browserLang.includes('hk'))) {
+                target = 'index_tw.html';
             }
 
-            // 3. 転送先の決定
-            const target = langMap[langKey] || 'index_en.html';
-            console.log("転送先ファイル:", target);
-
-            // 4. 現在のURLを確認して転送実行
-            const path = window.location.pathname;
-            console.log("現在のパス:", path);
-
-            // index_ja.html などに「既にいる」場合は転送しない（無限ループ防止）
-            if (!path.includes('index_ja.html') && 
-                !path.includes('index_en.html') && 
-                !path.includes('index_es.html')) {
-                
-                console.log(target + " へジャンプします...");
-                window.location.replace(target);
-            } else {
-                console.log("既に言語別ページにいるため、転送を停止しました。");
-            }
+            // 転送実行
+            window.location.replace(target);
         })();
     </script>
 </head>
 <body>
-    <div style="text-align: center; padding-top: 50px; font-family: sans-serif;">
-        <p>Redirecting... / 転送中...</p>
-        <p>If not redirected: <a href="index_ja.html">Japanese</a> / <a href="index_en.html">English</a></p>
+    <div class="container">
+        <img src="ray-mascot.jpg" alt="Ray Mascot" class="logo">
+        <h1>Select Language / 言語を選択</h1>
+        <div class="lang-grid">
+            <a href="index_ja.html" class="lang-btn">JP 日本語</a>
+            <a href="index_en.html" class="lang-btn">US English</a>
+            <a href="index_es.html" class="lang-btn">MX Español</a>
+            <a href="index_zh.html" class="lang-btn">CN 简体中文</a>
+            <a href="index_tw.html" class="lang-btn">TW 繁體中文</a>
+            <a href="index_ko.html" class="lang-btn">KR 한국어</a>
+            <a href="index_hi.html" class="lang-btn">IN हिन्दी</a>
+            <a href="index_vi.html" class="lang-btn">VN Tiếng Việt</a>
+            <a href="index_id.html" class="lang-btn">ID Indonesia</a>
+            <a href="index_it.html" class="lang-btn">IT Italiano</a>
+            <a href="index_pt.html" class="lang-btn">BR Português</a>
+            <a href="index_th.html" class="lang-btn">TH ภาษาไทย</a>
+        </div>
+        <div class="footer">&copy; 2026 Ray App Lab</div>
     </div>
 </body>
 </html>

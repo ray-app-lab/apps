@@ -3,18 +3,7 @@
     "id": "quantiventra",
     "icon": "📦",
     "names": {
-      "ja": "Quantiventra",
-      "en": "Quantiventra",
-      "zh": "Quantiventra",
-      "tw": "Quantiventra",
-      "ko": "Quantiventra",
-      "hi": "Quantiventra",
-      "vi": "Quantiventra",
-      "it": "Quantiventra",
-      "pt-BR": "Quantiventra",
-      "es-419": "Quantiventra",
-      "id": "Quantiventra",
-      "th": "Quantiventra"
+      "ja": "Quantiventra", "en": "Quantiventra", "zh": "Quantiventra", "tw": "Quantiventra", "ko": "Quantiventra", "hi": "Quantiventra", "vi": "Quantiventra", "it": "Quantiventra", "pt": "Quantiventra", "es": "Quantiventra", "id": "Quantiventra", "th": "Quantiventra"
     },
     "descs": {
       "ja": "現場を支えるスマート棚卸アプリ。高速バーコードスキャンで、在庫管理の負担を最小限に抑えます。",
@@ -25,38 +14,16 @@
       "hi": "पेशेवरों के लिए स्मार्ट इन्वेंट्री ऐप। हाई-स्पीड बारकोड स्कैनिंग के साथ स्टॉक प्रबंधन का बोझ कम करें।",
       "vi": "Ứng dụng kiểm kho thông minh cho chuyên gia. Giảm thiểu gánh nặng quản lý kho với tính năng quét mã vạch tốc độ cao.",
       "it": "L'app intelligente per l'inventario professionale. Riduce il carico della gestione scorte con la scansione rapida dei codici a barre.",
-      "pt-BR": "O app de inventário inteligente para profissionais. Minimize a carga de gestão de estoque com leitura de alta velocidade.",
-      "es-419": "La app de inventario inteligente para profesionales. Minimice la carga de gestión de stock con escaneo de códigos de barras de alta velocidad.",
+      "pt": "O app de inventário inteligente para profissionais. Minimize a carga de gestão de estoque com leitura de alta velocidade.",
+      "es": "La app de inventario inteligente para profesionales. Minimice la carga de gestión de stock con escaneo de códigos de barras de alta velocidad.",
       "id": "Aplikasi inventaris cerdas untuk profesional. Minimalkan beban manajemen stok dengan pemindaian barcode kecepatan tinggi.",
       "th": "แอปจัดการคลังสินค้าอัจฉริยะสำหรับมืออาชีพ ลดภาระการจัดการสต็อกด้วยการสแกนบาร์โค้ดความเร็วสูง"
     },
     "btn_text": {
-      "ja": "詳細・取説を見る",
-      "en": "Details & Manual",
-      "zh": "查看详情与手册",
-      "tw": "查看詳情與手冊",
-      "ko": "상세 및 매뉴얼 보기",
-      "hi": "विवरण और नियमावली",
-      "vi": "Xem chi tiết & Hướng dẫn",
-      "it": "Dettagli e Manuale",
-      "pt-BR": "Detalhes e Manual",
-      "es-419": "Detalles y Manual",
-      "id": "Detail & Panduan",
-      "th": "รายละเอียดและคู่มือ"
+      "ja": "詳細・取説を見る", "en": "Details & Manual", "zh": "查看详情与手册", "tw": "查看詳情與手冊", "ko": "상세 및 매뉴얼 보기", "hi": "विवरण और नियमावली", "vi": "Xem chi tiết & Hướng dẫn", "it": "Dettagli e Manuale", "pt": "Detalhes e Manual", "es": "Detalles y Manual", "id": "Detail & Panduan", "th": "รายละเอียดและคู่มือ"
     },
     "privacy_urls": {
-      "ja": "quantiventra/privacy_ja.html",
-      "en": "quantiventra/privacy_en.html",
-      "zh": "quantiventra/privacy_zh.html",
-      "tw": "quantiventra/privacy_tw.html",
-      "ko": "quantiventra/privacy_ko.html",
-      "hi": "quantiventra/privacy_hi.html",
-      "vi": "quantiventra/privacy_vi.html",
-      "it": "quantiventra/privacy_it.html",
-      "pt-BR": "quantiventra/privacy_pt.html",
-      "es-419": "quantiventra/privacy_es.html",
-      "id": "quantiventra/privacy_id.html",
-      "th": "quantiventra/privacy_th.html"
+      "ja": "quantiventra/privacy_ja.html", "en": "quantiventra/privacy_en.html", "zh": "quantiventra/privacy_zh.html", "tw": "quantiventra/privacy_tw.html", "ko": "quantiventra/privacy_ko.html", "hi": "quantiventra/privacy_hi.html", "vi": "quantiventra/privacy_vi.html", "it": "quantiventra/privacy_it.html", "pt": "quantiventra/privacy_pt.html", "es": "quantiventra/privacy_es.html", "id": "quantiventra/privacy_id.html", "th": "quantiventra/privacy_th.html"
     }
   }
 ]

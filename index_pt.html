@@ -3,47 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ray App Lab - Soluções Inteligentes</title>
-    <style>
-        :root { --bg-cream: #fdfaf5; --main-text: #333; --accent-color: #d4a373; --card-bg: #ffffff; }
-        body { margin: 0; font-family: "Helvetica Neue", Arial, sans-serif; background-color: var(--bg-cream); color: var(--main-text); line-height: 1.6; }
-        header { background: #fff; padding: 30px 20px; text-align: center; border-bottom: 1px solid #eee; position: relative; }
-        .logo { font-size: 1.8rem; font-weight: bold; letter-spacing: 4px; margin: 0; }
-        .lang-switch { position: absolute; top: 15px; right: 20px; font-size: 0.8rem; }
-        .lang-switch a { color: #888; text-decoration: none; margin-left: 10px; border: 1px solid #eee; padding: 4px 8px; border-radius: 4px; }
-        .hero { max-width: 800px; margin: 50px auto; text-align: center; padding: 0 20px; }
-        .ray-photo { width: 180px; height: 180px; border-radius: 50%; object-fit: cover; border: 6px solid #fff; box-shadow: 0 5px 15px rgba(0,0,0,0.08); margin-bottom: 25px; }
-        .container { max-width: 1000px; margin: 0 auto 80px; padding: 0 20px; }
-        .app-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; }
-        .card { background: var(--card-bg); border-radius: 15px; padding: 35px; text-align: center; box-shadow: 0 4px 12px rgba(0,0,0,0.02); transition: 0.3s ease; text-decoration: none; color: inherit; display: block; }
-        .card:hover { transform: translateY(-8px); box-shadow: 0 10px 25px rgba(0,0,0,0.06); }
-        .app-icon { font-size: 3rem; margin-bottom: 15px; display: block; }
-        .app-name { font-size: 1.4rem; font-weight: bold; margin-bottom: 10px; }
-        .app-desc { font-size: 0.95rem; color: #777; margin-bottom: 25px; min-height: 3em; }
-        .btn { display: inline-block; background: #333; color: #fff; padding: 10px 30px; border-radius: 25px; font-size: 0.9rem; font-weight: bold; }
-        footer { text-align: center; padding: 50px 20px; font-size: 0.8rem; color: #aaa; border-top: 1px solid #eee; background: #fff; }
+    <title>Ray App Lab</title>
+    <style>/* styleタグの中身はindex_en.htmlと同じ */
+        :root { --bg-cream: #fdfaf5; --main-text: #333; --accent-color: #d4a373; --card-bg: #ffffff; } body { margin: 0; font-family: "Helvetica Neue", Arial, sans-serif; background-color: var(--bg-cream); color: var(--main-text); line-height: 1.6; } header { background: #fff; padding: 30px 20px; text-align: center; border-bottom: 1px solid #eee; position: relative; z-index: 1; } .logo { font-size: 1.8rem; font-weight: bold; letter-spacing: 4px; margin: 0; position: relative; z-index: 1; pointer-events: none; } .lang-switch { position: absolute; top: 15px; right: 20px; font-size: 0.8rem; z-index: 9999; pointer-events: auto; } .lang-switch a { color: #888; text-decoration: none; margin-left: 10px; border: 1px solid #eee; padding: 4px 8px; border-radius: 4px; position: relative; z-index: 10000; cursor: pointer; display: inline-block; background: #fff; } .lang-switch a:hover { background-color: #eee; transition: 0.3s; } .hero { max-width: 800px; margin: 50px auto; text-align: center; padding: 0 20px; } .ray-photo { width: 180px; height: 180px; border-radius: 50%; object-fit: cover; border: 6px solid #fff; box-shadow: 0 5px 15px rgba(0,0,0,0.08); margin-bottom: 25px; } .container { max-width: 1000px; margin: 0 auto 80px; padding: 0 20px; } .app-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; } .card { background: var(--card-bg); border-radius: 15px; padding: 35px; text-align: center; box-shadow: 0 4px 12px rgba(0,0,0,0.02); transition: 0.3s ease; position: relative; display: flex; flex-direction: column; align-items: center; } .card:hover { transform: translateY(-8px); box-shadow: 0 10px 25px rgba(0,0,0,0.06); } .app-main-link { text-decoration: none; color: inherit; width: 100%; display: block; } .app-icon { font-size: 3rem; margin-bottom: 15px; display: block; } .app-name { font-size: 1.4rem; font-weight: bold; margin-bottom: 10px; } .app-desc { font-size: 0.95rem; color: #777; margin-bottom: 25px; min-height: 3em; } .btn { display: inline-block; background: #333; color: #fff; padding: 10px 30px; border-radius: 25px; font-size: 0.9rem; font-weight: bold; } .privacy-link { font-size: 0.75rem; color: #aaa; text-decoration: none; margin-top: 15px; border-top: 1px solid #f5f5f5; padding-top: 10px; width: 100%; display: block; } .privacy-link:hover { color: var(--accent-color); text-decoration: underline; } footer { text-align: center; padding: 50px 20px; font-size: 0.8rem; color: #aaa; border-top: 1px solid #eee; background: #fff; }
     </style>
 </head>
 <body>
 <header>
-    <div class="lang-switch"><a href="index_en.html">English</a> | <a href="index.html">Escolha o idioma</a></div>
+    <div class="lang-switch"><a href="index_en.html">English</a> | <a href="index.html?select=true">Escolha o idioma</a></div>
     <div class="logo">RAY APP LAB</div>
 </header>
 <section class="hero">
-    <img src="ray-mascot.jpg" alt="Mascot Ray" class="ray-photo">
+    <img src="ray-mascot.jpg" alt="Ray" class="ray-photo">
     <h2>Olá, eu sou o Ray</h2>
     <p>Criando soluções "eu queria ter isso" para o seu dia a dia.<br>Tornando o trabalho e a diversão mais inteligentes.</p>
 </section>
-<div class="container">
-    <div class="app-grid">
-        <a href="quantiventra/intro_pt.html" class="card">
-            <span class="app-icon">📦</span>
-            <div class="app-name">Quantiventra</div>
-            <p class="app-desc">O app de inventário inteligente para profissionais. Minimize a carga de gestão de estoque com leitura de alta velocidade.</p>
-            <span class="btn">Detalhes e Manual</span>
-        </a>
-    </div>
-</div>
-<footer><p>&copy; 2026 Ray App Lab / Developed by Ito</p></footer>
+<div class="container"><div id="app-container" class="app-grid"></div></div>
+<footer><p>&copy; 2026 Ray App Lab</p></footer>
+<script>
+    const PAGE_LANG = 'pt'; 
+    async function loadApps() {
+        try {
+            const response = await fetch('./apps.json');
+            const apps = await response.json();
+            document.getElementById('app-container').innerHTML = apps.map(app => {
+                const name = app.names[PAGE_LANG] || app.names['en'];
+                const desc = app.descs[PAGE_LANG] || app.descs['en'];
+                const btnText = app.btn_text[PAGE_LANG] || app.btn_text['en'];
+                const privacyUrl = app.privacy_urls ? (app.privacy_urls[PAGE_LANG] || app.privacy_urls['en']) : null;
+                const privacyHtml = privacyUrl ? `<a href="${privacyUrl}" class="privacy-link">Política de Privacidade</a>` : "";
+                return `<div class="card"><a href="${app.id}/intro_${PAGE_LANG}.html" class="app-main-link"><span class="app-icon">${app.icon}</span><div class="app-name">${name}</div><p class="app-desc">${desc}</p><span class="btn">${btnText}</span></a>${privacyHtml}</div>`;
+            }).join('');
+        } catch (error) { console.error(error); }
+    }
+    loadApps();
+</script>
 </body>
 </html>

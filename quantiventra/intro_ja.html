@@ -4,76 +4,79 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quantiventra - プロフェッショナル在庫・バーコードソリューション</title>
-    <style>
-        :root { --bg: #fdfaf5; --primary: #006C9C; --card: #ffffff; --gold: #d4a373; }
-        body { margin: 0; font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", sans-serif; background: var(--bg); color: #333; line-height: 1.7; }
-        header { background: #fff; padding: 20px; text-align: center; border-bottom: 1px solid #eee; }
-        .logo { font-size: 1.2rem; font-weight: bold; letter-spacing: 3px; text-decoration: none; color: inherit; }
-        .container { max-width: 800px; margin: 40px auto; padding: 0 20px; }
-        .back-nav a { text-decoration: none; color: var(--gold); font-size: 0.9rem; font-weight: bold; }
-        .hero { text-align: center; margin: 40px 0 60px; }
-        .hero h1 { color: var(--primary); font-size: 3rem; margin: 10px 0; letter-spacing: -1px; }
-        .tagline { font-size: 1.25rem; color: #555; margin-bottom: 20px; }
-        .section { background: var(--card); padding: 40px; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); margin-bottom: 30px; }
-        .section h2 { color: var(--primary); border-left: 5px solid var(--primary); padding-left: 15px; margin-bottom: 25px; }
-        .feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
-        .feature-item strong { display: block; color: var(--primary); font-size: 1.1rem; margin-bottom: 8px; }
-        .pro-badge { background: #FFD700; color: #333; font-size: 0.75rem; padding: 2px 6px; border-radius: 4px; font-weight: bold; margin-left: 5px; }
-        .cta { text-align: center; padding: 40px 0 80px; }
-        .btn-manual { display: inline-block; background: var(--primary); color: #fff; padding: 18px 50px; border-radius: 50px; text-decoration: none; font-weight: bold; font-size: 1.2rem; transition: 0.3s; box-shadow: 0 4px 15px rgba(0,108,156,0.3); }
-        .btn-manual:hover { background: #005a83; transform: translateY(-3px); }
-        footer { text-align: center; padding: 40px; font-size: 0.8rem; color: #aaa; border-top: 1px solid #eee; }
-    </style>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chosen Palette: Warm Neutrals with Ocean Blue (#006C9C) and Gold (#d4a373) -->
+    <!-- Application Structure Plan: A clean, vertical scrolling landing page layout. Features are presented in a straightforward grid to allow rapid visual parsing. The structure prioritizes direct information delivery without hidden tabs, ensuring all vital information, including new search and location features, is immediately accessible. -->
+    <!-- Visualization & Content Choices: 1. Features -> Grid Layout -> Enables rapid visual parsing of core app capabilities including the newly added Location and Item Search. 2. Pro Features -> Bulleted List with Badge -> Clearly demarcates premium features like Customer/Supplier Part Number management. NO SVG used. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
 </head>
-<body>
-<header><a href="../index_ja.html" class="logo">RAY APP LAB</a></header>
-<div class="container">
-    <nav class="back-nav"><a href="../index_ja.html">← ポータルへ戻る</a></nav>
-    <section class="hero">
-        <span style="font-size: 5rem;">📦</span>
-        <h1>Quantiventra</h1>
-        <p class="tagline">スマートフォン1台で、在庫管理を最適化。</p>
-        <p>物流のプロフェッショナルのために設計された高性能バーコードスキャンアプリ。専用ハードウェアは不要。高速、安全、そして現場ですぐに使えます。</p>
-    </section>
+<body class="bg-[#fdfaf5] text-gray-800 font-sans leading-relaxed antialiased">
+    <header class="bg-white p-5 text-center border-b border-gray-200">
+        <a href="../index_ja.html" class="text-xl font-bold tracking-[0.2em] text-gray-800 no-underline">RAY APP LAB</a>
+    </header>
 
-    <section class="section">
-        <h2>主な機能</h2>
-        <div class="feature-grid">
-            <div class="feature-item">
-                <strong>📸 爆速スキャン</strong>
-                Google ML Kitを搭載。暗所や遠距離からでも、瞬時にバーコードを読み取ります。
+    <main class="max-w-4xl mx-auto px-5 py-10">
+        <nav class="mb-10">
+            <a href="../index_ja.html" class="text-[#d4a373] text-sm font-bold no-underline hover:underline">← ポータルへ戻る</a>
+        </nav>
+
+        <section class="text-center mb-16">
+            <div class="text-7xl mb-4">📦</div>
+            <h1 class="text-[#006C9C] text-4xl md:text-5xl font-bold mb-4 tracking-tight">Quantiventra</h1>
+            <p class="text-xl text-gray-600 mb-6">お手持ちのスマートフォンやタブレットで、在庫管理を最適化。</p>
+            <p class="text-lg text-gray-700 max-w-2xl mx-auto">物流のプロフェッショナルのために設計されたバーコードスキャンアプリ。専用ハードウェアは不要で、現場ですぐに使えます。</p>
+        </section>
+
+        <section class="bg-white p-8 md:p-10 rounded-2xl shadow-sm mb-10">
+            <h2 class="text-2xl text-[#006C9C] font-bold border-l-4 border-[#006C9C] pl-4 mb-4">主な機能</h2>
+            <p class="text-gray-600 mb-8">以下のセクションでは、Quantiventraが提供する主要な機能について説明します。各機能がどのように日々の在庫管理業務をサポートするのかをご確認いただけます。</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div>
+                    <strong class="block text-[#006C9C] text-lg mb-2">📸 カメラスキャン</strong>
+                    <p class="text-gray-700">端末のカメラを利用して、バーコードや二次元コード（QRコード等）を読み取ることができます。</p>
+                </div>
+                <div>
+                    <strong class="block text-[#006C9C] text-lg mb-2">🔍 品名検索（部分一致対応）</strong>
+                    <p class="text-gray-700">バーコードがない場合でも、品名の一部を入力するだけで目的のアイテムを素早く絞り込める「含む検索（部分一致）」に対応しています。</p>
+                </div>
+                <div>
+                    <strong class="block text-[#006C9C] text-lg mb-2">📍 ロケーション管理</strong>
+                    <p class="text-gray-700">アイテムごとに保管場所（棚番やエリアなど）を記録・管理。現場でのピッキングや在庫確認の効率を大幅に引き上げます。</p>
+                </div>
+                <div>
+                    <strong class="block text-[#006C9C] text-lg mb-2">🧮 スマート計算＆内蔵電卓</strong>
+                    <p class="text-gray-700">数量フィールドでの直接計算式（例：<code>10*5+3</code>）の入力に加え、便利な電卓機能も搭載。現場での面倒な集計作業を強力にサポートします。</p>
+                </div>
+                <div>
+                    <strong class="block text-[#006C9C] text-lg mb-2">📄 シームレスなCSV連携</strong>
+                    <p class="text-gray-700">マスターデータのインポートと、結果のCSVエクスポートが簡単。ExcelやPCでのワークフローに完全対応。</p>
+                </div>
+                <div>
+                    <strong class="block text-[#006C9C] text-lg mb-2">🔒 オフライン＆プライバシー</strong>
+                    <p class="text-gray-700">100%オフライン処理。データは外部サーバーに送信されません。ビジネスデータはあなたの端末内に守られます。</p>
+                </div>
             </div>
-            <div class="feature-item">
-                <strong>🧮 スマート計算</strong>
-                数量フィールドで直接計算式（例：<code>10*5+3</code>）の入力が可能。現場での集計がスムーズになります。
-            </div>
-            <div class="feature-item">
-                <strong>📄 シームレスなCSV連携</strong>
-                マスターデータのインポートと、結果のCSVエクスポートが簡単。ExcelやPCでのワークフローに完全対応。
-            </div>
-            <div class="feature-item">
-                <strong>🔒 オフライン＆プライバシー</strong>
-                100%オフライン処理。データは外部サーバーに送信されません。ビジネスデータはあなたの端末内に守られます。
-            </div>
+        </section>
+
+        <section class="bg-white p-8 md:p-10 rounded-2xl shadow-sm mb-10">
+            <h2 class="text-2xl text-[#006C9C] font-bold border-l-4 border-[#006C9C] pl-4 mb-4">Quantiventra Pro</h2>
+            <p class="text-gray-600 mb-6">無料版の機能制限を完全に解除します。一度の購入（買い切り）で、プロフェッショナル向けの高度なフル機能を無期限でご利用いただけます。</p>
+            <ul class="space-y-3 text-gray-700">
+                <li><strong class="text-[#006C9C]">無制限データ</strong>: マスター登録数や履歴の制限を解除。</li>
+                <li><strong class="text-[#006C9C]">相手先品番＆業者コード管理</strong>: 仕入先や顧客独自の品番（相手先品番）と社内IDを紐付けてスムーズにスキャン・管理。</li>
+                <li><strong class="text-[#006C9C]">在庫直修正</strong>: 合計在庫数をその場で直接編集可能。</li>
+                <li><strong class="text-[#006C9C]">高度なCSVオプション</strong>: フォーマットのカスタマイズと高度な書き出し機能。</li>
+            </ul>
+        </section>
+
+        <div class="text-center py-10">
+            <p class="text-gray-700 mb-6">基本機能からPro版の高度な全機能まで、詳細な使用方法はすべてオンラインマニュアルに掲載しています。</p>
+            <a href="manual_portal.html" class="inline-block bg-[#006C9C] text-white font-bold text-lg py-4 px-10 rounded-full shadow-md hover:bg-[#005a83] hover:-translate-y-1 transition-all duration-300">ユーザーマニュアル (多言語)</a>
         </div>
-    </section>
+    </main>
 
-    <section class="section">
-        <h2>Quantiventra Pro</h2>
-        <p>一度きりの購入で、高度なビジネス機能をアンロック：</p>
-        <ul>
-            <li><strong>無制限データ</strong>: マスター登録数や履歴の制限を解除。</li>
-            <li><strong>業者コード管理</strong> <span class="pro-badge">PRO</span>: 仕入先/顧客コードと社内IDを紐付け。</li>
-            <li><strong>在庫直修正</strong>: 合計在庫数をその場で直接編集可能。</li>
-            <li><strong>高度なCSVオプション</strong>: フォーマットのカスタマイズと高度な書き出し機能。</li>
-        </ul>
-    </section>
-
-    <div class="cta">
-        <p>詳細な使用方法は、オンラインマニュアルをご確認ください。</p>
-        <a href="manual_portal.html" class="btn-manual">ユーザーマニュアル (多言語)</a>
-    </div>
-</div>
-<footer><p>&copy; 2026 Ray App Lab / Quantiventra Project</p></footer>
+    <footer class="text-center py-10 text-sm text-gray-400 border-t border-gray-200 bg-white">
+        <p>&copy; 2026 Ray App Lab / Quantiventra Project</p>
+    </footer>
 </body>
 </html>

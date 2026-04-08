@@ -3,210 +3,80 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quantiventra - Gestión de Inventarios Profesional</title>
-    <style>
-        :root {
-            --bg-cream: #fdfaf5;
-            --main-text: #333;
-            --accent-blue: #006C9C;
-            --card-bg: #ffffff;
-            --accent-gold: #d4a373;
-        }
-
-        body {
-            margin: 0;
-            font-family: "Helvetica Neue", Arial, sans-serif;
-            background-color: var(--bg-cream);
-            color: var(--main-text);
-            line-height: 1.8;
-        }
-
-        header {
-            background: #fff;
-            padding: 20px;
-            text-align: center;
-            border-bottom: 1px solid #eee;
-        }
-
-        .logo {
-            font-size: 1.2rem;
-            font-weight: bold;
-            letter-spacing: 3px;
-            text-decoration: none;
-            color: inherit;
-        }
-
-        .container {
-            max-width: 800px;
-            margin: 40px auto;
-            padding: 0 20px;
-        }
-
-        .back-nav { margin-bottom: 20px; }
-        .back-nav a { text-decoration: none; color: var(--accent-gold); font-size: 0.9rem; font-weight: bold; }
-
-        .app-hero {
-            text-align: center;
-            margin-bottom: 60px;
-        }
-
-        .app-icon-large {
-            font-size: 5rem;
-            margin-bottom: 10px;
-            display: block;
-        }
-
-        .app-hero h1 {
-            font-size: 2.8rem;
-            color: var(--accent-blue);
-            margin: 0;
-        }
-
-        .tagline {
-            font-size: 1.3rem;
-            color: #555;
-            margin-top: 10px;
-            font-weight: 500;
-        }
-
-        .section {
-            background: var(--card-bg);
-            padding: 40px;
-            border-radius: 16px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
-            margin-bottom: 30px;
-        }
-
-        .section h2 {
-            color: var(--accent-blue);
-            border-left: 5px solid var(--accent-blue);
-            padding-left: 15px;
-            margin-bottom: 25px;
-        }
-
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
-        }
-
-        .feature-item strong {
-            display: block;
-            font-size: 1.1rem;
-            color: var(--accent-blue);
-            margin-bottom: 8px;
-        }
-
-        .pro-box {
-            background: #fff9e6;
-            border: 1px solid #ffeeba;
-            padding: 20px;
-            border-radius: 12px;
-            margin-top: 20px;
-        }
-
-        .pro-badge {
-            background: #FFD700;
-            color: #333;
-            font-size: 0.75rem;
-            padding: 2px 6px;
-            border-radius: 4px;
-            font-weight: bold;
-            margin-left: 5px;
-        }
-
-        .cta-box {
-            text-align: center;
-            padding: 40px 20px 80px;
-        }
-
-        .btn-manual {
-            display: inline-block;
-            background: var(--accent-blue);
-            color: #fff;
-            padding: 18px 50px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 1.2rem;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0,108,156,0.3);
-        }
-
-        .btn-manual:hover {
-            background: #005a83;
-            transform: translateY(-3px);
-        }
-
-        footer {
-            text-align: center;
-            padding: 40px;
-            font-size: 0.8rem;
-            color: #aaa;
-            border-top: 1px solid #eee;
-        }
-    </style>
+    <title>Quantiventra - Solución Profesional de Inventario y Código de Barras</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chosen Palette: Warm Neutrals with Ocean Blue (#006C9C) and Gold (#d4a373) -->
+    <!-- Application Structure Plan: A clean, vertical scrolling landing page layout. Features are presented in a straightforward grid to allow rapid visual parsing. The structure prioritizes direct information delivery without hidden tabs, ensuring all vital information, including search and location features, is immediately accessible. -->
+    <!-- Visualization & Content Choices: 1. Features -> Grid Layout -> Enables rapid visual parsing of core app capabilities including Location and Item Search. 2. Pro Features -> Bulleted List -> Clearly explains the benefits of the one-time purchase premium upgrade. NO SVG used. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
 </head>
-<body>
+<body class="bg-[#fdfaf5] text-gray-800 font-sans leading-relaxed antialiased">
+    <header class="bg-white p-5 text-center border-b border-gray-200">
+        <a href="../index_es.html" class="text-xl font-bold tracking-[0.2em] text-gray-800 no-underline">RAY APP LAB</a>
+    </header>
 
-<header>
-    <a href="../index.html" class="logo">RAY APP LAB</a>
-</header>
+    <main class="max-w-4xl mx-auto px-5 py-10">
+        <nav class="mb-10">
+            <a href="../index_es.html" class="text-[#d4a373] text-sm font-bold no-underline hover:underline">← Volver al Portal</a>
+        </nav>
 
-<div class="container">
-    <nav class="back-nav"><a href="../index.html">← Volver al Portal</a></nav>
+        <section class="text-center mb-16">
+            <div class="text-7xl mb-4">📦</div>
+            <h1 class="text-[#006C9C] text-4xl md:text-5xl font-bold mb-4 tracking-tight">Quantiventra</h1>
+            <p class="text-xl text-gray-600 mb-6">Optimice la gestión de su inventario con su smartphone o tableta.</p>
+            <p class="text-lg text-gray-700 max-w-2xl mx-auto">Una aplicación de escaneo de códigos de barras diseñada para profesionales de la logística. No requiere hardware dedicado; lista para usar en el sitio.</p>
+        </section>
 
-    <section class="app-hero">
-        <span class="app-icon-large">📦</span>
-        <h1>Quantiventra</h1>
-        <p class="tagline">Convierta su smartphone en la mejor herramienta de inventario.</p>
-        <p>No se requiere terminal dedicado. Gestión de stock precisa, rápida y segura directamente desde su dispositivo móvil.</p>
-    </section>
-
-    <section class="section">
-        <h2>Características Principales</h2>
-        <div class="features-grid">
-            <div class="feature-item">
-                <strong>📸 Escaneo de Alta Velocidad</strong>
-                Equipado con Google ML Kit. Escanee códigos de barras al instante, incluso en almacenes oscuros o a distancia.
+        <section class="bg-white p-8 md:p-10 rounded-2xl shadow-sm mb-10">
+            <h2 class="text-2xl text-[#006C9C] font-bold border-l-4 border-[#006C9C] pl-4 mb-4">Características Principales</h2>
+            <p class="text-gray-600 mb-8">La siguiente sección describe las funciones clave proporcionadas por Quantiventra. Descubra cómo cada función puede ayudarle en sus tareas diarias de gestión de inventario.</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div>
+                    <strong class="block text-[#006C9C] text-lg mb-2">📸 Escaneo con Cámara</strong>
+                    <p class="text-gray-700">Use la cámara de su dispositivo para leer códigos de barras y códigos 2D (incluidos códigos QR).</p>
+                </div>
+                <div>
+                    <strong class="block text-[#006C9C] text-lg mb-2">🔍 Búsqueda de Artículos (Coincidencia Parcial)</strong>
+                    <p class="text-gray-700">Incluso sin un código de barras, reduzca rápidamente la búsqueda de artículos ingresando solo una parte del nombre del artículo mediante la función de coincidencia parcial.</p>
+                </div>
+                <div>
+                    <strong class="block text-[#006C9C] text-lg mb-2">📍 Gestión de Ubicaciones</strong>
+                    <p class="text-gray-700">Registre y administre las ubicaciones de almacenamiento (ej. números de estantería o áreas) para cada artículo, aumentando significativamente la eficiencia durante el picking y el control de stock.</p>
+                </div>
+                <div>
+                    <strong class="block text-[#006C9C] text-lg mb-2">🧮 Cálculo Inteligente y Calculadora Integrada</strong>
+                    <p class="text-gray-700">Ingrese fórmulas de cálculo directamente (ej. <code>10*5+3</code>) en el campo de cantidad, además de utilizar una conveniente calculadora integrada. Apoya poderosamente las tediosas tareas de conteo en el sitio.</p>
+                </div>
+                <div>
+                    <strong class="block text-[#006C9C] text-lg mb-2">📄 Integración CSV Perfecta</strong>
+                    <p class="text-gray-700">Importe fácilmente datos maestros y exporte resultados a través de CSV. Totalmente compatible con Excel y flujos de trabajo en PC.</p>
+                </div>
+                <div>
+                    <strong class="block text-[#006C9C] text-lg mb-2">🔒 Sin Conexión y Privacidad</strong>
+                    <p class="text-gray-700">Procesamiento 100% fuera de línea. No se envían datos a servidores externos. Los datos de su negocio permanecen seguros en su dispositivo.</p>
+                </div>
             </div>
-            <div class="feature-item">
-                <strong>🧮 Función de Suma Integrada</strong>
-                Permite realizar cálculos directamente en el campo de entrada (ej. <code>10*5+3</code>) para sumar resultados al stock actual rápidamente.
-            </div>
-            <div class="feature-item">
-                <strong>📄 Integración con Excel (CSV)</strong>
-                Importe sus maestros de artículos y exporte sus resultados en formato CSV para una integración perfecta con su flujo de trabajo en PC.
-            </div>
-            <div class="feature-item">
-                <strong>🔒 Privacidad y Funcionamiento Offline</strong>
-                Sus datos permanecen en su dispositivo. Funciona 100% offline sin transmisión de datos a servidores externos.
-            </div>
-        </div>
-    </section>
+        </section>
 
-    <section class="section">
-        <h2>Quantiventra Pro</h2>
-        <p>Actualice a la versión Pro para maximizar su eficiencia operativa.</p>
-        <div class="pro-box">
-            <ul>
-                <li><strong>Sin límites de datos</strong>: Registro de artículos e historial ilimitado.</li>
-                <li><strong>Gestión de Código de Socio (Joint Code)</strong><span class="pro-badge">PRO</span>: Vincule códigos de proveedores con sus propios códigos internos.</li>
-                <li><strong>Edición Directa de Stock</strong>: Corrija los totales acumulados de stock real al instante.</li>
-                <li><strong>Exportación Avanzada</strong>: Personalice el formato CSV (soporte para comillas, etc.).</li>
+        <section class="bg-white p-8 md:p-10 rounded-2xl shadow-sm mb-10">
+            <h2 class="text-2xl text-[#006C9C] font-bold border-l-4 border-[#006C9C] pl-4 mb-4">Quantiventra Pro</h2>
+            <p class="text-gray-600 mb-6">Elimina por completo los límites funcionales de la versión gratuita. Con una compra única, obtiene acceso de por vida a todas las funciones profesionales avanzadas.</p>
+            <ul class="space-y-3 text-gray-700">
+                <li><strong class="text-[#006C9C]">Datos Ilimitados</strong>: Elimina las restricciones en los registros de datos maestros y el historial.</li>
+                <li><strong class="text-[#006C9C]">Gestión de Códigos de Socios y Proveedores</strong>: Vincule los números de pieza de proveedores o clientes con sus ID internos para un escaneo y gestión fluidos.</li>
+                <li><strong class="text-[#006C9C]">Edición Directa de Stock</strong>: Edite las cantidades totales de inventario directamente en el momento.</li>
+                <li><strong class="text-[#006C9C]">Opciones CSV Avanzadas</strong>: Personalice formatos y acceda a funciones de exportación avanzadas.</li>
             </ul>
+        </section>
+
+        <div class="text-center py-10">
+            <p class="text-gray-700 mb-6">Desde funciones básicas hasta el conjunto completo de funciones Pro avanzadas, las instrucciones detalladas de uso están disponibles en nuestro manual en línea.</p>
+            <a href="manual_portal.html" class="inline-block bg-[#006C9C] text-white font-bold text-lg py-4 px-10 rounded-full shadow-md hover:bg-[#005a83] hover:-translate-y-1 transition-all duration-300">Manual de Usuario (Multilingüe)</a>
         </div>
-    </section>
+    </main>
 
-    <div class="cta-box">
-        <p>Para aprender a utilizar todas las funciones, consulte el manual.</p>
-        <a href="manual_es-419.html" class="btn-manual">Ver Manual de Usuario</a>
-    </div>
-</div>
-
-<footer>
-    <p>&copy; 2026 Ray App Lab / Proyecto Quantiventra</p>
-</footer>
-
+    <footer class="text-center py-10 text-sm text-gray-400 border-t border-gray-200 bg-white">
+        <p>&copy; 2026 Ray App Lab / Quantiventra Project</p>
+    </footer>
 </body>
 </html>

@@ -50,7 +50,6 @@
 </div>
 
 <footer>
-    <p><a href="quantiventra/privacy_ja.html" style="color: #aaa; text-decoration: none;">プライバシーポリシー</a></p>
     <p>&copy; 2026 Ray App Lab</p>
 </footer>
 
@@ -59,7 +58,6 @@
 
     async function loadApps() {
         try {
-            // apps.json を読み込み
             const response = await fetch('./apps.json');
             if (!response.ok) throw new Error('JSON load failed');
             const apps = await response.json();
@@ -71,20 +69,29 @@
                 const desc = app.descs[PAGE_LANG] || app.descs['en'];
                 const btnText = app.btn_text[PAGE_LANG] || app.btn_text['en'];
                 const linkUrl = `${app.id}/intro_${PAGE_LANG}.html`;
+                
+                // アプリ固有のポリシーリンクを生成
+                const privacyUrl = app.privacy_urls ? (app.privacy_urls[PAGE_LANG] || app.privacy_urls['en']) : null;
+                const privacyLink = privacyUrl 
+                    ? `<br><a href="${privacyUrl}" style="font-size:0.75rem; color:#aaa; text-decoration:none; display:inline-block; margin-top:10px;">プライバシーポリシー</a>` 
+                    : "";
 
                 return `
-                    <a href="${linkUrl}" class="card">
-                        <span class="app-icon">${app.icon}</span>
-                        <div class="app-name">${name}</div>
-                        <p class="app-desc">${desc}</p>
-                        <span class="btn">${btnText}</span>
-                    </a>
+                    <div class="card">
+                        <a href="${linkUrl}" style="text-decoration:none; color:inherit;">
+                            <span class="app-icon">${app.icon}</span>
+                            <div class="app-name">${name}</div>
+                            <p class="app-desc">${desc}</p>
+                            <span class="btn">${btnText}</span>
+                        </a>
+                        ${privacyLink}
+                    </div>
                 `;
             }).join('');
 
         } catch (error) {
             console.error('Error:', error);
-            document.getElementById('app-container').innerHTML = '<p style="text-align:center; grid-column: 1/-1;">アプリ情報の取得に失敗しました。サーバー上で確認してください。</p>';
+            document.getElementById('app-container').innerHTML = '<p style="text-align:center; grid-column: 1/-1;">アプリ情報の取得に失敗しました。</p>';
         }
     }
 

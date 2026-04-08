@@ -36,13 +36,27 @@
       "zh": "查看详情与手册",
       "tw": "查看詳情與手冊",
       "ko": "상세 및 매뉴얼 보기",
-      "hi": "विवरण और नियมาवली",
+      "hi": "विवरण और नियमावली",
       "vi": "Xem chi tiết & Hướng dẫn",
       "it": "Dettagli e Manuale",
       "pt-BR": "Detalhes e Manual",
       "es-419": "Detalles y Manual",
       "id": "Detail & Panduan",
       "th": "รายละเอียดและคู่มือ"
+    },
+    "privacy_urls": {
+      "ja": "quantiventra/privacy_ja.html",
+      "en": "quantiventra/privacy_en.html",
+      "zh": "quantiventra/privacy_zh.html",
+      "tw": "quantiventra/privacy_tw.html",
+      "ko": "quantiventra/privacy_ko.html",
+      "hi": "quantiventra/privacy_hi.html",
+      "vi": "quantiventra/privacy_vi.html",
+      "it": "quantiventra/privacy_it.html",
+      "pt-BR": "quantiventra/privacy_pt.html",
+      "es-419": "quantiventra/privacy_es.html",
+      "id": "quantiventra/privacy_id.html",
+      "th": "quantiventra/privacy_th.html"
     }
   }
 ]

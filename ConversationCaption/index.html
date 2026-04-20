@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>聴覚支援 みえる会話 | Android用 会話補助アプリ</title>
+    <style>
+        /* * デザインコンセプト: 
+         * アプリの配色（#FAFAF7, #2F342F, #4F6F64）をベースに、
+         * 高齢者の方にも読みやすく、信頼感のあるデザイン。
+         */
+        :root {
+            --bg-color: #FAFAF7;
+            --text-color: #2F342F;
+            --sub-text-color: #56605A;
+            --primary-color: #4F6F64;
+            --accent-color: #E87A5D; /* 控えめな強調用 */
+            --card-bg: #FFFFFF;
+            --border-color: #E0E0D8;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.7;
+            word-wrap: break-word;
+        }
+
+        /* 共通レイアウト */
+        .container {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        section {
+            padding: 60px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        h1, h2, h3 {
+            color: var(--primary-color);
+            line-height: 1.3;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: "";
+            display: block;
+            width: 50px;
+            height: 4px;
+            background-color: var(--primary-color);
+            margin: 15px auto 0;
+            border-radius: 2px;
+        }
+
+        /* ファーストビュー */
+        .hero {
+            background: linear-gradient(135deg, #f0f2ef 0%, #e1e8e4 100%);
+            padding: 80px 0;
+            text-align: center;
+            border-bottom: none;
+        }
+
+        .hero-title {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            color: var(--sub-text-color);
+            margin-bottom: 30px;
+        }
+
+        .app-mockup {
+            width: 240px;
+            height: 480px;
+            background: #333;
+            margin: 0 auto;
+            border-radius: 30px;
+            border: 8px solid #444;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #777;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .app-mockup-inner {
+            background-color: var(--bg-color);
+            width: 100%;
+            height: 100%;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .mock-header { height: 40px; background: #eee; margin-bottom: 10px; border-radius: 5px; }
+        .mock-text { height: 20px; background: #ddd; margin-bottom: 10px; border-radius: 3px; width: 80%; }
+        .mock-text.short { width: 50%; }
+        .mock-btn { margin-top: auto; height: 50px; background: var(--primary-color); border-radius: 25px; }
+
+        .btn-download {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 15px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin-top: 40px;
+            box-shadow: 0 4px 15px rgba(79, 111, 100, 0.3);
+            transition: transform 0.2s;
+        }
+
+        .btn-download:active {
+            transform: scale(0.98);
+        }
+
+        /* このアプリでできること */
+        .intro-box {
+            background-color: var(--card-bg);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+            border: 1px solid var(--border-color);
+        }
+
+        .intro-step {
+            display: flex;
+            margin-bottom: 25px;
+            align-items: flex-start;
+        }
+
+        .step-num {
+            background: var(--primary-color);
+            color: white;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+
+        /* 特徴 */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .feature-card {
+            background: var(--card-bg);
+            padding: 25px;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+        }
+
+        .feature-card h3 {
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+
+        /* 苦手な場面（注意喚起） */
+        .caution-box {
+            background-color: #fcf4f2;
+            padding: 30px;
+            border-radius: 15px;
+            border-left: 5px solid var(--accent-color);
+        }
+
+        .caution-list {
+            list-style: none;
+            margin-top: 15px;
+        }
+
+        .caution-list li::before {
+            content: "×";
+            color: var(--accent-color);
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        /* プライバシー */
+        .privacy-box {
+            background-color: #f4f6f5;
+            padding: 30px;
+            border-radius: 15px;
+        }
+
+        /* FAQ */
+        .faq-item {
+            margin-bottom: 25px;
+        }
+
+        .faq-q {
+            font-weight: bold;
+            color: var(--primary-color);
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .faq-a {
+            display: block;
+            padding-left: 1.2rem;
+            position: relative;
+        }
+        .faq-a::before {
+            content: "答:";
+            position: absolute;
+            left: 0;
+            color: var(--sub-text-color);
+        }
+
+        /* フッター */
+        footer {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+        }
+
+        .footer-note {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            margin-top: 20px;
+        }
+
+        /* レスポンシブ調整 */
+        @media (max-width: 600px) {
+            .hero-title { font-size: 1.8rem; }
+            .section-title { font-size: 1.5rem; }
+            .hero { padding: 40px 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ファーストビュー -->
+    <header class="hero">
+        <div class="container">
+            <h1 class="hero-title">聴覚支援 みえる会話</h1>
+            <p class="hero-subtitle">近くの会話を、大きな文字でその場で見られる</p>
+            
+            <div class="app-mockup">
+                <div class="app-mockup-inner">
+                    <div class="mock-header"></div>
+                    <div class="mock-text"></div>
+                    <div class="mock-text"></div>
+                    <div class="mock-text short"></div>
+                    <div class="mock-text"></div>
+                    <div class="mock-text short"></div>
+                    <div class="mock-btn"></div>
+                </div>
+            </div>
+
+            <a href="#" class="btn-download">Google Playで確認する</a>
+            <p style="margin-top: 15px; font-size: 0.9rem; color: var(--sub-text-color);">Android 7.0 以上対応</p>
+        </div>
+    </header>
+
+    <!-- アプリ概要 -->
+    <section id="about">
+        <div class="container">
+            <h2 class="section-title">このアプリでできること</h2>
+            <div class="intro-box">
+                <p style="margin-bottom: 20px;">『みえる会話』は、耳が聞こえにくい方や高齢者の方が、相手の話している内容をリアルタイムで文字として読むための<b>会話補助アプリ</b>です。</p>
+                
+                <div class="intro-step">
+                    <span class="step-num">1</span>
+                    <p><b>ボタンを押す</b><br>アプリを立ち上げて「開始」ボタンを押します。押している間だけ認識します。</p>
+                </div>
+                <div class="intro-step">
+                    <span class="step-num">2</span>
+                    <p><b>相手が話す</b><br>スマートフォンを相手に向けて話してもらうと、声が文字に変換されます。</p>
+                </div>
+                <div class="intro-step">
+                    <span class="step-num">3</span>
+                    <p><b>文字を読む</b><br>画面に大きく表示された文字を読みます。ひらがな表示への切り替えも可能です。</p>
+                </div>
+            </div>
+            <p style="margin-top: 20px; font-size: 0.9rem; color: var(--sub-text-color);">※本アプリは医療機器（補聴器など）ではありません。日常会話のコミュニケーションを補助するためのツールです。</p>
+        </div>
+    </section>
+
+    <!-- 特徴 -->
+    <section id="features">
+        <div class="container">
+            <h2 class="section-title">主な特徴</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <h3>見やすい大きな文字</h3>
+                    <p>高齢の方でも読みやすいよう、太くて大きな文字表示を最優先にしています。文字サイズは好みに合わせて変更できます。</p>
+                </div>
+                <div class="feature-card">
+                    <h3>かんたん操作</h3>
+                    <p>「開始」と「停止」の大きなボタンだけで操作可能。難しい設定なしですぐに使い始められます。</p>
+                </div>
+                <div class="feature-card">
+                    <h3>選べる「特別モード」</h3>
+                    <p>「隣同士で話すとき」や「テーブル越しに話すとき」など、場面に合わせた感度設定が選べます。</p>
+                </div>
+                <div class="feature-card">
+                    <h3>ひらがな・配色変更</h3>
+                    <p>漢字が読みにくい場合のための「オールひらがな」機能や、目に優しい落ち着いた配色への切り替えが可能です。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 苦手な場面 -->
+    <section id="caution">
+        <div class="container">
+            <h2 class="section-title">苦手な場面について</h2>
+            <div class="caution-box">
+                <p>音声認識技術には限界があり、以下のような状況では正しく表示されないことがあります。あらかじめご了承ください。</p>
+                <ul class="caution-list">
+                    <li>複数人が同時に、重なって話している場面</li>
+                    <li>テレビやスピーカーから流れる音声の聞き取り</li>
+                    <li>工事の音やガヤガヤしたお店など、雑音が大きい場所</li>
+                    <li>スマートフォンから距離が離れている声</li>
+                </ul>
+                <p style="margin-top: 15px; font-size: 0.9rem;">※端末のマイク性能や、インターネット（Google音声認識サービス）の状態によっても精度が左右されます。</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 対象 -->
+    <section id="target">
+        <div class="container">
+            <h2 class="section-title">こんな方へ</h2>
+            <ul style="list-style: none; text-align: center;">
+                <li style="margin-bottom: 10px;">● 加齢により、少し会話が聞き取りにくくなってきた方</li>
+                <li style="margin-bottom: 10px;">● 病院の受付や窓口で、スムーズに会話をしたい方</li>
+                <li style="margin-bottom: 10px;">● 補聴器と併用して、言葉を文字でも確認したい方</li>
+                <li style="margin-bottom: 10px;">● ご家族との団らんをもっと楽しみたい方</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- プライバシー -->
+    <section id="privacy">
+        <div class="container">
+            <h2 class="section-title">安心のプライバシー設計</h2>
+            <div class="privacy-box">
+                <p><b>1. 音声は保存しません</b><br>録音された音声データは、文字に変換するためだけに一時的に使用され、アプリ内や外部サーバーに保存されることはありません。</p>
+                <p style="margin-top: 15px;"><b>2. マイクの使用について</b><br>アプリで「開始」ボタンを押している間だけマイクを使用します。バックグラウンドで勝手に録音することはありません。</p>
+                <p style="margin-top: 15px;"><b>3. 端末内での管理</b><br>文字サイズや配色の設定、文字起こしの履歴はあなたのスマートフォン内にのみ保存されます。</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq">
+        <div class="container">
+            <h2 class="section-title">よくある質問</h2>
+            
+            <div class="faq-item">
+                <span class="faq-q">お金はかかりますか？</span>
+                <span class="faq-a">1日3分まで無料で体験いただけます。時間制限なしで使いたい場合は、別途「有料版」へのアップグレード（買い切り）をご検討ください。</span>
+            </div>
+
+            <div class="faq-item">
+                <span class="faq-q">インターネットは必要ですか？</span>
+                <span class="faq-a">はい、精度の高い音声認識を行うためにインターネット接続が必要です。</span>
+            </div>
+
+            <div class="faq-item">
+                <span class="faq-q">外部マイクは使えますか？</span>
+                <span class="faq-a">端末が対応していれば、有線やBluetoothマイクもご利用いただけます。設定画面に使い方の案内がございます。</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- フッター -->
+    <footer>
+        <div class="container">
+            <p><b>聴覚支援 みえる会話</b></p>
+            <p style="margin-top: 10px;">開発・提供: RAY APP LAB</p>
+            
+            <p class="footer-note">
+                音声認識は100%の正確性を保証するものではありません。<br>
+                重要な事項（医療行為や契約など）の判断には、筆談や手話など他の手段も併用してください。
+            </p>
+
+            <p style="margin-top: 30px; font-size: 0.8rem;">&copy; 2026 RAY APP LAB. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // 必要に応じて、スムーズスクロールや簡易的なインタラクションを追加可能
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>

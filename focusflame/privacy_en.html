@@ -1,154 +1,335 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Focus Flame Privacy Policy</title>
-  <style>
-    :root {
-      --bg: #0A0A0F;
-      --card: #17171f;
-      --text: #f6f1e9;
-      --muted: #b7b0a6;
-      --warm1: #FF6B35;
-      --warm2: #F7931E;
-      --warm3: #FFD23F;
-    }
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      font-family: "Segoe UI", system-ui, sans-serif;
-      background:
-        radial-gradient(circle at top, rgba(247,147,30,0.16), transparent 35%),
-        linear-gradient(180deg, #111118 0%, var(--bg) 100%);
-      color: var(--text);
-      line-height: 1.75;
-    }
-    main {
-      max-width: 820px;
-      margin: 0 auto;
-      padding: 24px 16px 56px;
-    }
-    h1, h2 { margin: 0 0 12px; }
-    h1 { font-size: 34px; line-height: 1.2; }
-    h2 { font-size: 20px; color: var(--warm3); margin-top: 28px; }
-    p { margin: 0 0 12px; color: var(--muted); }
-    ul { margin: 0; padding-left: 20px; color: var(--text); }
-    li { margin: 8px 0; }
-    a { color: var(--warm3); }
-    .hero, .card {
-      background: rgba(23, 23, 31, 0.92);
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 18px;
-      padding: 18px;
-      box-shadow: 0 16px 40px rgba(0,0,0,0.28);
-    }
-    .hero {
-      margin-bottom: 20px;
-      border-top: 3px solid var(--warm1);
-    }
-    .accent {
-      background: linear-gradient(90deg, var(--warm1), var(--warm2), var(--warm3));
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-    }
-    .note {
-      margin-top: 12px;
-      padding: 12px 14px;
-      border-radius: 14px;
-      background: rgba(255, 69, 0, 0.10);
-      color: var(--text);
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Focus Flame Privacy Policy</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&family=IBM+Plex+Mono:wght@400;600&display=swap');
+
+  :root {
+    --warm1: #FF6B35;
+    --warm2: #F7931E;
+    --warm3: #FFD23F;
+    --bg:     #0A0A0F;
+    --bg2:    #111118;
+    --surface: rgba(23,23,31,0.92);
+    --surface2: #1e1e28;
+    --border:  rgba(255,255,255,0.08);
+    --text:   #f6f1e9;
+    --muted:  #b7b0a6;
+    --mono:   'IBM Plex Mono', monospace;
+    --sans:   'Inter', sans-serif;
+    --radius: 14px;
+    --shadow: 0 16px 40px rgba(0,0,0,0.35);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--sans);
+    background:
+      radial-gradient(circle at top, rgba(247,147,30,0.16), transparent 35%),
+      linear-gradient(180deg, #111118 0%, var(--bg) 100%);
+    background-attachment: fixed;
+    color: var(--text);
+    font-size: 15px;
+    line-height: 1.85;
+    min-height: 100vh;
+  }
+
+  /* ===== HEADER ===== */
+  .site-header {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    border-top: 3px solid var(--warm1);
+    padding: 52px 40px 44px;
+    position: relative; overflow: hidden;
+  }
+  .site-header::before { content:''; position:absolute; right:-60px; top:-60px; width:360px; height:360px; border-radius:50%; background: radial-gradient(circle, rgba(255,107,53,0.14), transparent 70%); }
+  .site-header::after  { content:''; position:absolute; right:60px; bottom:-40px; width:180px; height:180px; border-radius:50%; background: radial-gradient(circle, rgba(247,147,30,0.09), transparent 70%); }
+  .header-badge { display:inline-block; background:rgba(255,107,53,0.18); border:1px solid rgba(255,107,53,0.38); border-radius:20px; padding:4px 14px; font-size:11px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; margin-bottom:14px; color:var(--warm2); }
+  .header-icon { font-size:2.8rem; display:block; margin-bottom:12px; line-height:1; }
+  .site-header h1 { font-size:clamp(28px,5vw,44px); font-weight:900; letter-spacing:-.02em; line-height:1.1; margin-bottom:8px; background:linear-gradient(90deg,var(--warm1),var(--warm2),var(--warm3)); -webkit-background-clip:text; background-clip:text; color:transparent; }
+  .site-header .subtitle { font-size:14px; color:var(--muted); margin-bottom:8px; }
+  .header-meta { display:flex; gap:20px; flex-wrap:wrap; font-size:12px; color:var(--muted); margin-top:10px; }
+
+  /* ===== WRAPPER ===== */
+  .wrapper { max-width: 920px; margin: 0 auto; padding: 0 20px 100px; }
+
+  /* ===== TOC ===== */
+  .toc-card { background:var(--surface); border:1px solid var(--border); border-left:4px solid var(--warm1); border-radius:var(--radius); padding:28px 32px; margin:36px 0 48px; box-shadow:var(--shadow); }
+  .toc-card h2 { font-size:13px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--warm3); margin-bottom:18px; }
+  .toc-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(230px,1fr)); gap:5px 20px; }
+  .toc-grid a { color:var(--muted); text-decoration:none; font-size:13px; padding:3px 0; border-bottom:1px dashed rgba(255,255,255,0.07); transition:color .15s,border-color .15s; display:block; }
+  .toc-grid a:hover { color:var(--warm2); border-color:var(--warm2); }
+  .toc-num { color:var(--warm1); font-weight:700; margin-right:5px; font-family:var(--mono); font-size:11px; }
+
+  /* ===== SECTIONS ===== */
+  section { margin-bottom: 64px; scroll-margin-top: 20px; }
+  .section-label { display:inline-flex; align-items:center; gap:8px; background:rgba(255,107,53,0.16); border:1px solid rgba(255,107,53,0.32); color:var(--warm1); font-size:11px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; padding:4px 12px; border-radius:4px; margin-bottom:10px; }
+  h2.section-title { font-size:clamp(20px,3vw,26px); font-weight:900; color:var(--text); border-bottom:2px solid var(--border); padding-bottom:10px; margin-bottom:24px; line-height:1.3; }
+  h3 { font-size:16px; font-weight:700; color:var(--warm2); margin:28px 0 12px; display:flex; align-items:center; gap:8px; }
+  h3::before { content:''; display:inline-block; width:4px; height:16px; background:var(--warm1); border-radius:2px; flex-shrink:0; }
+  p { margin-bottom:14px; color:var(--muted); }
+  strong { color:var(--text); }
+  a { color:var(--warm3); }
+  a:hover { color:var(--warm2); }
+
+  /* ===== CALLOUTS ===== */
+  .callout { border-radius:12px; padding:16px 20px; margin:18px 0; display:flex; gap:14px; align-items:flex-start; }
+  .callout-icon { font-size:20px; flex-shrink:0; line-height:1.5; margin-top:2px; }
+  .callout-body { flex:1; font-size:13.5px; line-height:1.75; color:var(--text); }
+  .callout-body strong { display:block; margin-bottom:4px; font-size:14px; color:var(--text); }
+  .callout.info   { background:rgba(247,147,30,0.10); border:1px solid rgba(247,147,30,0.28); }
+  .callout.warn   { background:rgba(255,210,63,0.08); border:1px solid rgba(255,210,63,0.25); }
+  .callout.danger { background:rgba(186,26,26,0.12); border:1px solid rgba(186,26,26,0.30); }
+  .callout.success{ background:rgba(46,125,50,0.12); border:1px solid rgba(46,125,50,0.28); }
+  .callout.pro    { background:rgba(255,107,53,0.10); border:1px solid rgba(255,107,53,0.30); }
+
+  /* ===== TABLES ===== */
+  .table-wrap { overflow-x:auto; margin:18px 0; border-radius:12px; box-shadow:var(--shadow); }
+  table { width:100%; border-collapse:collapse; background:var(--surface); font-size:13.5px; border-radius:12px; overflow:hidden; }
+  thead th { background:rgba(255,107,53,0.18); color:var(--warm2); font-weight:700; padding:12px 16px; text-align:left; white-space:nowrap; border-bottom:1px solid rgba(255,107,53,0.2); }
+  tbody td { padding:11px 16px; border-bottom:1px solid var(--border); vertical-align:top; color:var(--text); }
+  tbody tr:last-child td { border-bottom:none; }
+  tbody tr:hover { background:var(--surface2); }
+  td code { font-family:var(--mono); background:rgba(255,210,63,0.12); color:var(--warm3); padding:1px 6px; border-radius:3px; font-size:12px; }
+  .check { color:#66BB6A; font-weight:700; }
+  .cross { color:#555; }
+
+  /* ===== LEGAL BLOCK ===== */
+  .legal-block { background:var(--surface2); border:1px solid var(--border); border-radius:12px; padding:20px 24px; font-size:12.5px; color:var(--muted); line-height:1.9; margin:16px 0; }
+  .legal-block h4 { font-size:13px; color:var(--warm3); margin:18px 0 6px; border-bottom:1px solid var(--border); padding-bottom:4px; }
+  .legal-block h4:first-child { margin-top:0; }
+
+  /* ===== BACK TO TOP ===== */
+  .back-top { position:fixed; right:24px; bottom:28px; background:linear-gradient(135deg,var(--warm1),var(--warm2)); color:#fff; width:44px; height:44px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:20px; text-decoration:none; box-shadow:0 4px 20px rgba(255,107,53,0.5); transition:transform .2s,box-shadow .2s; z-index:100; }
+  .back-top:hover { transform:translateY(-3px); box-shadow:0 8px 28px rgba(255,107,53,0.65); }
+
+  /* ===== FOOTER ===== */
+  footer { background:var(--surface); border-top:1px solid var(--border); color:var(--muted); text-align:center; padding:32px 20px; font-size:12px; line-height:2.2; }
+  footer strong { color:var(--warm2); }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 640px) { .site-header{padding:36px 20px 32px;} .toc-grid{grid-template-columns:1fr;} }
+  @media print { .back-top{display:none;} body{background:#fff;color:#000;} }
+</style>
 </head>
 <body>
-  <main>
-    <section class="hero">
-      <h1><span class="accent">Focus Flame</span> Privacy Policy</h1>
-      <p>Last updated: April 23, 2026</p>
-      <p>This Privacy Policy explains how Focus Flame handles information when you use the app.</p>
-    </section>
 
-    <section class="card">
-      <h2>1. Overview</h2>
-      <p>Focus Flame is a focus timer app. The app is designed to work mainly with local device data, while advertising and purchase features may use Google services.</p>
-      <p>Focus Flame does not require you to create an account.</p>
-    </section>
+<header class="site-header" id="top">
+  <div class="header-badge">Privacy Policy — English</div>
+  <span class="header-icon" aria-hidden="true">🔥</span>
+  <h1>Focus Flame</h1>
+  <p class="subtitle">Privacy Policy</p>
+  <div class="header-meta">
+    <span>Last Updated: April 23, 2026</span>
+  </div>
+</header>
 
-    <section class="card" style="margin-top: 16px;">
-      <h2>2. Information Stored by the App</h2>
-      <p>The app may store the following information on your device:</p>
-      <ul>
-        <li>Timer settings, such as focus duration and break duration.</li>
-        <li>Selected focus mode.</li>
-        <li>Notification, sound, and vibration preferences.</li>
-        <li>Selected theme preference.</li>
-        <li>Session history and statistics generated inside the app.</li>
-        <li>Purchase state, such as Remove Ads or Premium Themes status.</li>
-      </ul>
-    </section>
+<div class="wrapper">
 
-    <section class="card" style="margin-top: 16px;">
-      <h2>3. How Information Is Used</h2>
-      <p>Information is used to provide and improve app features, including:</p>
-      <ul>
-        <li>Running the focus timer.</li>
-        <li>Showing session statistics and streaks.</li>
-        <li>Restoring your settings.</li>
-        <li>Showing or hiding ads based on purchase state.</li>
-        <li>Unlocking premium themes after purchase.</li>
-      </ul>
-    </section>
+<nav class="toc-card" aria-label="Table of Contents">
+  <h2>📋 Table of Contents</h2>
+  <div class="toc-grid">
+    <a href="#sec1"><span class="toc-num">01</span>Overview</a>
+    <a href="#sec2"><span class="toc-num">02</span>Information Stored by the App</a>
+    <a href="#sec3"><span class="toc-num">03</span>How Information Is Used</a>
+    <a href="#sec4"><span class="toc-num">04</span>Third-Party Services</a>
+    <a href="#sec5"><span class="toc-num">05</span>Advertising</a>
+    <a href="#sec6"><span class="toc-num">06</span>Purchases</a>
+    <a href="#sec7"><span class="toc-num">07</span>Data Sharing</a>
+    <a href="#sec8"><span class="toc-num">08</span>Data Retention &amp; Deletion</a>
+    <a href="#sec9"><span class="toc-num">09</span>Children's Privacy</a>
+    <a href="#sec10"><span class="toc-num">10</span>Changes to This Policy</a>
+    <a href="#sec11"><span class="toc-num">11</span>Contact</a>
+  </div>
+</nav>
 
-    <section class="card" style="margin-top: 16px;">
-      <h2>4. Third-Party Services</h2>
-      <p>Focus Flame may use the following Google services:</p>
-      <ul>
-        <li>Google AdMob for advertising.</li>
-        <li>Google Play Billing for in-app purchases.</li>
-      </ul>
-      <p>These services may process data according to Google's own privacy policies and terms. Focus Flame does not control how Google processes data through these services.</p>
-    </section>
 
-    <section class="card" style="margin-top: 16px;">
-      <h2>5. Advertising</h2>
-      <p>The app may show interstitial ads after completed sessions. If you purchase Remove Ads, the app is intended to stop showing those ads.</p>
-      <p>Before release, the app uses Google test ad IDs. Production ad IDs must be configured before public release.</p>
-    </section>
+<!-- ===== SECTION 1 ===== -->
+<section id="sec1">
+  <div class="section-label">Section 01</div>
+  <h2 class="section-title">Overview</h2>
+  <p>This Privacy Policy explains how Focus Flame handles information when you use the app.</p>
+  <p>Focus Flame is a focus timer app. The app is designed to work mainly with local device data, while advertising and purchase features may use Google services.</p>
+  <div class="callout success">
+    <span class="callout-icon">✅</span>
+    <div class="callout-body"><strong>No Account Required</strong> Focus Flame does not require you to create an account. Your timer data and settings are stored locally on your device.</div>
+  </div>
+</section>
 
-    <section class="card" style="margin-top: 16px;">
-      <h2>6. Purchases</h2>
-      <p>The app may offer one-time purchases such as Remove Ads and Premium Themes. Purchase processing is handled through Google Play Billing.</p>
-      <p>The app stores purchase state locally so that purchased features can be reflected in the user interface.</p>
-    </section>
 
-    <section class="card" style="margin-top: 16px;">
-      <h2>7. Data Sharing</h2>
-      <p>Focus Flame does not operate a custom server for user accounts or cloud sync. However, Google services used for ads and billing may receive or process data as part of their functionality.</p>
-    </section>
+<!-- ===== SECTION 2 ===== -->
+<section id="sec2">
+  <div class="section-label">Section 02</div>
+  <h2 class="section-title">Information Stored by the App</h2>
+  <p>The app may store the following information on your device:</p>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Data Type</th><th>Examples</th></tr></thead>
+    <tbody>
+      <tr><td>Timer settings</td><td>Focus duration, short break duration, long break duration</td></tr>
+      <tr><td>Preferences</td><td>Selected focus mode, notification, sound, and vibration preferences</td></tr>
+      <tr><td>Theme selection</td><td>Currently selected colour theme preset</td></tr>
+      <tr><td>Session history &amp; statistics</td><td>Completed session counts, total focus time, session log</td></tr>
+      <tr><td>Purchase state</td><td>Whether Remove Ads or Premium Themes has been purchased</td></tr>
+    </tbody>
+  </table></div>
+  <div class="callout info">
+    <span class="callout-icon">ℹ️</span>
+    <div class="callout-body">All of the above data is stored <strong>locally on your device</strong>. Focus Flame does not operate a server to collect or sync this data.</div>
+  </div>
+</section>
 
-    <section class="card" style="margin-top: 16px;">
-      <h2>8. Data Retention and Deletion</h2>
-      <p>Most app-generated data is stored locally on your device. You can remove locally stored app data by clearing app storage or uninstalling the app.</p>
-      <p>Purchase records are managed through Google Play and may remain available through your Google account according to Google's policies.</p>
-    </section>
 
-    <section class="card" style="margin-top: 16px;">
-      <h2>9. Children's Privacy</h2>
-      <p>Focus Flame is not specifically directed to children. If release targeting changes, this policy and Play Console settings should be reviewed before publication.</p>
-    </section>
+<!-- ===== SECTION 3 ===== -->
+<section id="sec3">
+  <div class="section-label">Section 03</div>
+  <h2 class="section-title">How Information Is Used</h2>
+  <p>Information stored by the app is used solely to provide and improve the app's features:</p>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Purpose</th><th>Details</th></tr></thead>
+    <tbody>
+      <tr><td>Running the timer</td><td>Using your duration settings to count down sessions</td></tr>
+      <tr><td>Showing statistics</td><td>Displaying session counts, focus time, and calendar streaks</td></tr>
+      <tr><td>Restoring settings</td><td>Remembering your preferences between app launches</td></tr>
+      <tr><td>Ad state</td><td>Showing or hiding ads based on whether Remove Ads has been purchased</td></tr>
+      <tr><td>Theme unlocking</td><td>Enabling premium theme presets after purchase</td></tr>
+    </tbody>
+  </table></div>
+</section>
 
-    <section class="card" style="margin-top: 16px;">
-      <h2>10. Changes to This Policy</h2>
-      <p>This policy may be updated when app features, advertising, billing, or data handling changes. The updated date will be revised when changes are made.</p>
-    </section>
 
-    <section class="card" style="margin-top: 16px;">
-      <h2>11. Contact</h2>
-      <p>Contact information must be added before public release.</p>
-      <div class="note">TODO before release: add support email address or official support page URL.</div>
-    </section>
-  </main>
+<!-- ===== SECTION 4 ===== -->
+<section id="sec4">
+  <div class="section-label">Section 04</div>
+  <h2 class="section-title">Third-Party Services</h2>
+  <p>Focus Flame may use the following Google services:</p>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Service</th><th>Purpose</th></tr></thead>
+    <tbody>
+      <tr><td>Google AdMob</td><td>Displaying interstitial advertisements</td></tr>
+      <tr><td>Google Play Billing</td><td>Processing in-app purchases</td></tr>
+    </tbody>
+  </table></div>
+  <div class="callout warn">
+    <span class="callout-icon">⚠️</span>
+    <div class="callout-body"><strong>Google's Privacy Policies Apply</strong> These services may process data according to Google's own privacy policies and terms. Focus Flame does not control how Google processes data through these services. Please refer to <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google's Privacy Policy</a> for details.</div>
+  </div>
+</section>
+
+
+<!-- ===== SECTION 5 ===== -->
+<section id="sec5">
+  <div class="section-label">Section 05</div>
+  <h2 class="section-title">Advertising</h2>
+  <p>The app may show interstitial ads after completed focus sessions.</p>
+  <p>If you purchase <strong>Remove Ads</strong>, the app will stop showing those completion ads.</p>
+  <div class="callout info">
+    <span class="callout-icon">ℹ️</span>
+    <div class="callout-body">Before public release, the app uses Google test ad IDs. Production ad IDs must be configured before the app is published to the Play Store.</div>
+  </div>
+</section>
+
+
+<!-- ===== SECTION 6 ===== -->
+<section id="sec6">
+  <div class="section-label">Section 06</div>
+  <h2 class="section-title">Purchases</h2>
+  <p>The app may offer one-time in-app purchases:</p>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Purchase</th><th>What It Does</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Remove Ads</strong></td><td>Permanently removes interstitial ads after completed sessions</td></tr>
+      <tr><td><strong>Premium Themes</strong></td><td>Unlocks 10 additional colour theme presets in Settings</td></tr>
+    </tbody>
+  </table></div>
+  <p>Purchase processing is handled through <strong>Google Play Billing</strong>. The app stores purchase state locally so that purchased features are reflected in the user interface.</p>
+  <div class="callout success">
+    <span class="callout-icon">✅</span>
+    <div class="callout-body"><strong>One-Time Purchases</strong> Both Remove Ads and Premium Themes are one-time purchases. There are no subscriptions or recurring charges.</div>
+  </div>
+</section>
+
+
+<!-- ===== SECTION 7 ===== -->
+<section id="sec7">
+  <div class="section-label">Section 07</div>
+  <h2 class="section-title">Data Sharing</h2>
+  <p>Focus Flame does not operate a custom server for user accounts or cloud sync. No session data, statistics, or personal information is sent to the developer's own servers.</p>
+  <p>However, Google services used for ads and billing may receive or process data as part of their own functionality. This is governed by Google's policies, not Focus Flame's.</p>
+</section>
+
+
+<!-- ===== SECTION 8 ===== -->
+<section id="sec8">
+  <div class="section-label">Section 08</div>
+  <h2 class="section-title">Data Retention &amp; Deletion</h2>
+  <p>Most app-generated data is stored locally on your device. You can remove it in either of the following ways:</p>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Method</th><th>Effect</th></tr></thead>
+    <tbody>
+      <tr><td>Clear app storage (via device Settings)</td><td>Deletes all locally stored data including history and preferences</td></tr>
+      <tr><td>Uninstall the app</td><td>Removes the app and all associated local data</td></tr>
+    </tbody>
+  </table></div>
+  <div class="callout info">
+    <span class="callout-icon">ℹ️</span>
+    <div class="callout-body"><strong>Purchase Records</strong> Purchase records are managed through Google Play and may remain available through your Google account according to Google's policies. This allows you to restore purchases if you reinstall the app.</div>
+  </div>
+</section>
+
+
+<!-- ===== SECTION 9 ===== -->
+<section id="sec9">
+  <div class="section-label">Section 09</div>
+  <h2 class="section-title">Children's Privacy</h2>
+  <p>Focus Flame is not specifically directed to children. The app does not knowingly collect personal information from children.</p>
+  <div class="callout warn">
+    <span class="callout-icon">⚠️</span>
+    <div class="callout-body">If the app's target audience changes in a future release, this policy and Play Console audience settings should be reviewed before publication.</div>
+  </div>
+</section>
+
+
+<!-- ===== SECTION 10 ===== -->
+<section id="sec10">
+  <div class="section-label">Section 10</div>
+  <h2 class="section-title">Changes to This Policy</h2>
+  <p>This policy may be updated when app features, advertising, billing, or data handling changes. The "Last Updated" date at the top of this page will be revised whenever changes are made.</p>
+  <p>Continued use of the app after a policy update constitutes acceptance of the revised policy.</p>
+</section>
+
+
+<!-- ===== SECTION 11 ===== -->
+<section id="sec11">
+  <div class="section-label">Section 11</div>
+  <h2 class="section-title">Contact</h2>
+  <p>If you have questions about this Privacy Policy or how Focus Flame handles data, please use the contact details below.</p>
+
+  <div class="callout danger">
+    <span class="callout-icon">🚨</span>
+    <div class="callout-body"><strong>TODO before release:</strong> Add a support email address or official support page URL here before publishing the app to Google Play.</div>
+  </div>
+
+  <div class="legal-block">
+    <h4>■ Contact</h4>
+    <p>Developer: <em>[Developer name — add before release]</em></p>
+    <p>Email: <em>[support@example.com — add before release]</em></p>
+  </div>
+</section>
+
+
+</div><!-- /wrapper -->
+
+<a href="#top" class="back-top" title="Back to top">↑</a>
+
+<footer>
+  <strong>Focus Flame</strong> — Privacy Policy<br>
+  Last Updated: April 23, 2026<br>
+  <span style="font-size:11px; opacity:0.45;">privacy_en.html</span>
+</footer>
+
 </body>
 </html>

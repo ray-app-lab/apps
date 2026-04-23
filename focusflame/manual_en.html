@@ -1,169 +1,390 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Focus Flame User Manual</title>
-  <style>
-    :root {
-      --bg: #0A0A0F;
-      --card: #17171f;
-      --text: #f6f1e9;
-      --muted: #b7b0a6;
-      --accent: #FF4500;
-      --warm1: #FF6B35;
-      --warm2: #F7931E;
-      --warm3: #FFD23F;
-    }
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      font-family: "Segoe UI", system-ui, sans-serif;
-      background:
-        radial-gradient(circle at top, rgba(247,147,30,0.18), transparent 35%),
-        linear-gradient(180deg, #111118 0%, var(--bg) 100%);
-      color: var(--text);
-      line-height: 1.7;
-    }
-    main {
-      max-width: 780px;
-      margin: 0 auto;
-      padding: 24px 16px 48px;
-    }
-    h1, h2 { margin: 0 0 12px; }
-    h1 { font-size: 34px; line-height: 1.2; }
-    h2 { font-size: 20px; color: var(--warm3); margin-top: 28px; }
-    p { margin: 0 0 12px; color: var(--muted); }
-    ul { margin: 0; padding-left: 20px; color: var(--text); }
-    li { margin: 8px 0; }
-    code {
-      font-family: Consolas, monospace;
-      color: var(--warm3);
-    }
-    .hero, .card {
-      background: rgba(23, 23, 31, 0.92);
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 18px;
-      padding: 18px;
-      box-shadow: 0 16px 40px rgba(0,0,0,0.28);
-    }
-    .hero {
-      margin-bottom: 20px;
-      border-top: 3px solid var(--warm1);
-    }
-    .accent {
-      background: linear-gradient(90deg, var(--warm1), var(--warm2), var(--warm3));
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-    }
-    .grid {
-      display: grid;
-      gap: 14px;
-    }
-    .note {
-      margin-top: 12px;
-      padding: 12px 14px;
-      border-radius: 14px;
-      background: rgba(255, 69, 0, 0.10);
-      color: var(--text);
-    }
-    @media (min-width: 720px) {
-      .grid { grid-template-columns: 1fr 1fr; }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Focus Flame User Manual</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&family=IBM+Plex+Mono:wght@400;600&display=swap');
+
+  :root {
+    --warm1: #FF6B35;
+    --warm2: #F7931E;
+    --warm3: #FFD23F;
+    --bg:     #0A0A0F;
+    --bg2:    #111118;
+    --surface: rgba(23,23,31,0.92);
+    --surface2: #1e1e28;
+    --border:  rgba(255,255,255,0.08);
+    --border-accent: rgba(255,107,53,0.28);
+    --text:   #f6f1e9;
+    --muted:  #b7b0a6;
+    --mono:   'IBM Plex Mono', monospace;
+    --sans:   'Inter', sans-serif;
+    --radius: 14px;
+    --shadow: 0 16px 40px rgba(0,0,0,0.35);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--sans);
+    background:
+      radial-gradient(circle at top, rgba(247,147,30,0.18), transparent 35%),
+      linear-gradient(180deg, #111118 0%, var(--bg) 100%);
+    background-attachment: fixed;
+    color: var(--text);
+    font-size: 15px;
+    line-height: 1.85;
+    min-height: 100vh;
+  }
+
+  /* ===== HEADER ===== */
+  .site-header {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    border-top: 3px solid var(--warm1);
+    padding: 52px 40px 44px;
+    position: relative; overflow: hidden;
+  }
+  .site-header::before {
+    content:''; position:absolute; right:-60px; top:-60px;
+    width:360px; height:360px; border-radius:50%;
+    background: radial-gradient(circle, rgba(255,107,53,0.14), transparent 70%);
+  }
+  .site-header::after {
+    content:''; position:absolute; right:60px; bottom:-40px;
+    width:180px; height:180px; border-radius:50%;
+    background: radial-gradient(circle, rgba(247,147,30,0.09), transparent 70%);
+  }
+  .header-badge {
+    display:inline-block;
+    background: rgba(255,107,53,0.18); border:1px solid rgba(255,107,53,0.38);
+    border-radius:20px; padding:4px 14px;
+    font-size:11px; font-weight:700; letter-spacing:.1em; text-transform:uppercase;
+    margin-bottom:14px; color: var(--warm2);
+  }
+  .header-icon { font-size:2.8rem; display:block; margin-bottom:12px; line-height:1; }
+  .site-header h1 {
+    font-size:clamp(28px,5vw,44px); font-weight:900;
+    letter-spacing:-.02em; line-height:1.1; margin-bottom:8px;
+    background: linear-gradient(90deg, var(--warm1), var(--warm2), var(--warm3));
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .site-header .subtitle { font-size:14px; color: var(--muted); margin-bottom:8px; }
+  .header-meta { display:flex; gap:20px; flex-wrap:wrap; font-size:12px; color: var(--muted); margin-top:10px; }
+
+  /* ===== WRAPPER ===== */
+  .wrapper { max-width: 920px; margin: 0 auto; padding: 0 20px 100px; }
+
+  /* ===== TOC ===== */
+  .toc-card {
+    background: var(--surface); border:1px solid var(--border);
+    border-left:4px solid var(--warm1); border-radius:var(--radius);
+    padding:28px 32px; margin:36px 0 48px; box-shadow:var(--shadow);
+  }
+  .toc-card h2 { font-size:13px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--warm3); margin-bottom:18px; }
+  .toc-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(230px,1fr)); gap:5px 20px; }
+  .toc-grid a { color:var(--muted); text-decoration:none; font-size:13px; padding:3px 0; border-bottom:1px dashed rgba(255,255,255,0.07); transition:color .15s,border-color .15s; display:block; }
+  .toc-grid a:hover { color:var(--warm2); border-color:var(--warm2); }
+  .toc-num { color:var(--warm1); font-weight:700; margin-right:5px; font-family:var(--mono); font-size:11px; }
+
+  /* ===== SECTIONS ===== */
+  section { margin-bottom: 64px; scroll-margin-top: 20px; }
+  .section-label {
+    display:inline-flex; align-items:center; gap:8px;
+    background: rgba(255,107,53,0.16); border:1px solid rgba(255,107,53,0.32);
+    color: var(--warm1); font-size:11px; font-weight:700; letter-spacing:.1em;
+    text-transform:uppercase; padding:4px 12px; border-radius:4px; margin-bottom:10px;
+  }
+  h2.section-title {
+    font-size:clamp(20px,3vw,26px); font-weight:900;
+    color: var(--text); border-bottom:2px solid var(--border);
+    padding-bottom:10px; margin-bottom:24px; line-height:1.3;
+  }
+  h3 { font-size:16px; font-weight:700; color:var(--warm2); margin:28px 0 12px; display:flex; align-items:center; gap:8px; }
+  h3::before { content:''; display:inline-block; width:4px; height:16px; background:var(--warm1); border-radius:2px; flex-shrink:0; }
+  h4 { font-size:14px; font-weight:700; margin:18px 0 8px; color:var(--warm3); }
+  p { margin-bottom:14px; color:var(--muted); }
+  strong { color:var(--text); }
+
+  /* ===== CALLOUTS ===== */
+  .callout { border-radius:12px; padding:16px 20px; margin:18px 0; display:flex; gap:14px; align-items:flex-start; }
+  .callout-icon { font-size:20px; flex-shrink:0; line-height:1.5; margin-top:2px; }
+  .callout-body { flex:1; font-size:13.5px; line-height:1.75; color:var(--text); }
+  .callout-body strong { display:block; margin-bottom:4px; font-size:14px; color:var(--text); }
+  .callout.info   { background:rgba(247,147,30,0.10); border:1px solid rgba(247,147,30,0.28); }
+  .callout.warn   { background:rgba(255,210,63,0.08); border:1px solid rgba(255,210,63,0.25); }
+  .callout.danger { background:rgba(186,26,26,0.12); border:1px solid rgba(186,26,26,0.30); }
+  .callout.success{ background:rgba(46,125,50,0.12); border:1px solid rgba(46,125,50,0.28); }
+  .callout.pro    { background:rgba(255,107,53,0.10); border:1px solid rgba(255,107,53,0.30); }
+
+  /* ===== TABLES ===== */
+  .table-wrap { overflow-x:auto; margin:18px 0; border-radius:12px; box-shadow:var(--shadow); }
+  table { width:100%; border-collapse:collapse; background:var(--surface); font-size:13.5px; border-radius:12px; overflow:hidden; }
+  thead th { background:rgba(255,107,53,0.18); color:var(--warm2); font-weight:700; padding:12px 16px; text-align:left; white-space:nowrap; border-bottom:1px solid rgba(255,107,53,0.2); }
+  tbody td { padding:11px 16px; border-bottom:1px solid var(--border); vertical-align:top; color:var(--text); }
+  tbody tr:last-child td { border-bottom:none; }
+  tbody tr:hover { background:var(--surface2); }
+  td code, th code { font-family:var(--mono); background:rgba(255,210,63,0.12); color:var(--warm3); padding:1px 6px; border-radius:3px; font-size:12px; }
+  .badge-pro { background:rgba(247,147,30,0.2); color:var(--warm2); font-size:10px; font-weight:700; padding:2px 7px; border-radius:10px; white-space:nowrap; border:1px solid rgba(247,147,30,0.35); }
+  .check { color:#66BB6A; font-weight:700; }
+  .cross { color:#555; }
+
+  /* ===== CODE ===== */
+  pre { background:#0d0d14; color:#FFD8B0; font-family:var(--mono); font-size:13px; padding:20px 24px; border-radius:12px; overflow-x:auto; margin:14px 0; line-height:1.7; border:1px solid rgba(255,107,53,0.15); }
+  code { font-family:var(--mono); background:rgba(255,210,63,0.12); color:var(--warm3); padding:2px 7px; border-radius:4px; font-size:13px; }
+
+  /* ===== STEPS ===== */
+  .steps { list-style:none; counter-reset:step-counter; padding:0; }
+  .steps li { counter-increment:step-counter; display:flex; gap:16px; margin-bottom:14px; align-items:flex-start; }
+  .steps li::before { content:counter(step-counter); flex-shrink:0; width:28px; height:28px; background:linear-gradient(135deg,var(--warm1),var(--warm2)); color:#fff; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:700; margin-top:2px; }
+  .steps li p { margin:0; color:var(--text); }
+
+  /* ===== UI LABELS ===== */
+  .ui-label { display:inline-block; background:rgba(255,107,53,0.14); border:1px solid rgba(255,107,53,0.32); color:var(--warm1); font-size:12px; font-weight:700; padding:2px 10px; border-radius:4px; font-family:var(--mono); white-space:nowrap; }
+
+  /* ===== CARD GRID ===== */
+  .card-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(195px,1fr)); gap:14px; margin:18px 0; }
+  .feat-card { background:var(--surface); border:1px solid var(--border); border-radius:12px; padding:18px; box-shadow:var(--shadow); transition:border-color .2s; }
+  .feat-card:hover { border-color:rgba(255,107,53,0.38); }
+  .feat-card h4 { margin-top:0; margin-bottom:8px; color:var(--warm2); font-size:14px; }
+  .feat-card p { font-size:13px; margin-bottom:0; }
+
+  /* ===== BACK TO TOP ===== */
+  .back-top { position:fixed; right:24px; bottom:28px; background:linear-gradient(135deg,var(--warm1),var(--warm2)); color:#fff; width:44px; height:44px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:20px; text-decoration:none; box-shadow:0 4px 20px rgba(255,107,53,0.5); transition:transform .2s,box-shadow .2s; z-index:100; }
+  .back-top:hover { transform:translateY(-3px); box-shadow:0 8px 28px rgba(255,107,53,0.65); }
+
+  /* ===== FOOTER ===== */
+  footer { background:var(--surface); border-top:1px solid var(--border); color:var(--muted); text-align:center; padding:32px 20px; font-size:12px; line-height:2.2; }
+  footer strong { color:var(--warm2); }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 640px) {
+    .site-header { padding:36px 20px 32px; }
+    .toc-grid { grid-template-columns:1fr; }
+    .card-grid { grid-template-columns:1fr 1fr; }
+  }
+  @media (max-width: 400px) { .card-grid { grid-template-columns:1fr; } }
+  @media print { .back-top { display:none; } body { background:#fff; color:#000; } }
+</style>
 </head>
 <body>
-  <main>
-    <section class="hero">
-      <h1><span class="accent">Focus Flame</span> User Manual</h1>
-      <p>A quick guide for using Focus Flame, a focus timer that grows a flame as your session progresses.</p>
-      <p>Last updated: April 23, 2026</p>
-    </section>
 
-    <section class="card">
-      <h2>1. What Focus Flame Does</h2>
-      <p>Focus Flame helps you run focused timer sessions. As time passes, the flame animation grows to show your progress.</p>
-      <ul>
-        <li><code>START</code>: begin a focus session</li>
-        <li><code>PAUSE</code>: temporarily stop the timer</li>
-        <li><code>RESUME</code>: continue a paused timer</li>
-        <li><code>RESET</code>: stop the current timer and return to the default state</li>
-      </ul>
-    </section>
+<header class="site-header" id="top">
+  <div class="header-badge">User Manual — English</div>
+  <span class="header-icon" aria-hidden="true">🔥</span>
+  <h1>Focus Flame</h1>
+  <p class="subtitle">Focus Timer — User Manual</p>
+  <div class="header-meta">
+    <span>Platform: Android</span>
+    <span>Last Updated: April 23, 2026</span>
+  </div>
+</header>
 
-    <section class="grid" style="margin-top: 16px;">
-      <section class="card">
-        <h2>2. Home Screen</h2>
-        <ul>
-          <li>Select a focus mode near the top of the screen.</li>
-          <li>Choose a timer preset: <code>15</code>, <code>25</code>, <code>45</code>, or <code>60</code> minutes.</li>
-          <li>Tap <code>START</code> to begin.</li>
-          <li>The large timer shows the remaining time in <code>MM:SS</code> format.</li>
-          <li><code>Today</code> shows the number of completed sessions for the current day.</li>
-        </ul>
-      </section>
+<div class="wrapper">
 
-      <section class="card">
-        <h2>3. Settings Screen</h2>
-        <ul>
-          <li>Change focus, short break, and long break durations.</li>
-          <li>Turn completion notifications, sound, and vibration on or off.</li>
-          <li>Use <code>Remove Ads</code> to remove completion ads after purchase.</li>
-          <li>Use <code>Premium Themes</code> to unlock additional color themes after purchase.</li>
-          <li>Use <code>Restore Purchases</code> if a previous purchase is not reflected.</li>
-        </ul>
-      </section>
-    </section>
+<nav class="toc-card" aria-label="Table of Contents">
+  <h2>📋 Table of Contents</h2>
+  <div class="toc-grid">
+    <a href="#sec1"><span class="toc-num">01</span>What Focus Flame Does</a>
+    <a href="#sec2"><span class="toc-num">02</span>Home Screen</a>
+    <a href="#sec3"><span class="toc-num">03</span>Settings Screen</a>
+    <a href="#sec4"><span class="toc-num">04</span>Flame &amp; Themes</a>
+    <a href="#sec5"><span class="toc-num">05</span>Stats Screen</a>
+    <a href="#sec6"><span class="toc-num">06</span>Widget</a>
+    <a href="#sec7"><span class="toc-num">07</span>If Purchase Buttons Do Nothing</a>
+  </div>
+</nav>
 
-    <section class="card" style="margin-top: 16px;">
-      <h2>4. Flame and Themes</h2>
-      <p>The flame reacts to the timer state.</p>
-      <ul>
-        <li>Running: the flame grows with progress.</li>
-        <li>Paused: the flame becomes calmer.</li>
-        <li>Completed: a light sparkle or celebration effect appears.</li>
-        <li>Premium Themes: unlocks 10 selectable theme presets from Settings.</li>
-      </ul>
-    </section>
 
-    <section class="card" style="margin-top: 16px;">
-      <h2>5. Stats Screen</h2>
-      <ul>
-        <li>View today, weekly, monthly, and all-time session counts.</li>
-        <li>Check total focus time.</li>
-        <li>View a mode breakdown bar chart.</li>
-        <li>Use the calendar to see which days had completed sessions.</li>
-        <li>Recent sessions are listed below the calendar.</li>
-      </ul>
-    </section>
+<!-- ===== SECTION 1 ===== -->
+<section id="sec1">
+  <div class="section-label">Section 01</div>
+  <h2 class="section-title">What Focus Flame Does</h2>
+  <p>Focus Flame helps you run focused timer sessions. As time passes, the flame animation grows to show your progress — giving you a satisfying visual reward for staying on task.</p>
+  <div class="card-grid">
+    <div class="feat-card">
+      <h4>▶ START</h4>
+      <p>Begin a new focus session. The timer counts down and the flame begins to grow.</p>
+    </div>
+    <div class="feat-card">
+      <h4>⏸ PAUSE</h4>
+      <p>Temporarily stop the timer. The flame calms down while paused.</p>
+    </div>
+    <div class="feat-card">
+      <h4>▶ RESUME</h4>
+      <p>Continue a paused timer from where you left off.</p>
+    </div>
+    <div class="feat-card">
+      <h4>↩ RESET</h4>
+      <p>Stop the current timer and return to the default ready state.</p>
+    </div>
+  </div>
+</section>
 
-    <section class="card" style="margin-top: 16px;">
-      <h2>6. Widget</h2>
-      <p>Focus Flame includes a simple home screen widget.</p>
-      <ul>
-        <li>The widget shows the remaining time.</li>
-        <li>It also shows the current mode and session progress.</li>
-        <li>Tap the widget to open the app.</li>
-      </ul>
-      <div class="note">
-        The current widget is a minimal status widget. It does not include START, PAUSE, or RESET buttons yet.
-      </div>
-    </section>
 
-    <section class="card" style="margin-top: 16px;">
-      <h2>7. If Purchase Buttons Do Nothing</h2>
-      <p>Purchase buttons open Google Play Billing only when the billing connection and product setup are ready.</p>
-      <ul>
-        <li>Check that <code>Billing Status</code> says <code>Ready</code>.</li>
-        <li>If it says <code>Connecting</code>, wait a moment and try again.</li>
-        <li>Play Console products must exist for real purchase testing.</li>
-        <li>Test purchases require a proper Google Play test environment.</li>
-      </ul>
-      <div class="note">
-        Billing depends on both the app and the Play Console configuration. If Play products are not configured, the button may appear to do nothing.
-      </div>
-    </section>
-  </main>
+<!-- ===== SECTION 2 ===== -->
+<section id="sec2">
+  <div class="section-label">Section 02</div>
+  <h2 class="section-title">Home Screen</h2>
+
+  <h3>How to Start a Session</h3>
+  <ol class="steps">
+    <li><p>Select a <strong>focus mode</strong> near the top of the screen.</p></li>
+    <li><p>Choose a <strong>timer preset</strong>: <code>15</code>, <code>25</code>, <code>45</code>, or <code>60</code> minutes.</p></li>
+    <li><p>Tap <span class="ui-label">START</span> to begin your session.</p></li>
+  </ol>
+
+  <h3>Reading the Timer</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Element</th><th>Description</th></tr></thead>
+    <tbody>
+      <tr><td>Large countdown display</td><td>Shows remaining time in <code>MM:SS</code> format</td></tr>
+      <tr><td><strong>Today</strong> counter</td><td>Number of completed sessions for the current day</td></tr>
+      <tr><td>Flame animation</td><td>Grows as your session progresses; reacts to timer state</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+
+<!-- ===== SECTION 3 ===== -->
+<section id="sec3">
+  <div class="section-label">Section 03</div>
+  <h2 class="section-title">Settings Screen</h2>
+
+  <h3>Timer Durations</h3>
+  <p>Adjust the length of focus sessions, short breaks, and long breaks to fit your workflow.</p>
+
+  <h3>Notifications &amp; Sound</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Setting</th><th>Description</th></tr></thead>
+    <tbody>
+      <tr><td>Completion notifications</td><td>Alert when a session or break ends</td></tr>
+      <tr><td>Sound</td><td>Play a sound at session completion</td></tr>
+      <tr><td>Vibration</td><td>Vibrate at session completion</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>Purchases</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Option</th><th>Description</th></tr></thead>
+    <tbody>
+      <tr><td><span class="ui-label">Remove Ads</span></td><td>Removes completion ads after purchase</td></tr>
+      <tr><td><span class="ui-label">Premium Themes</span></td><td>Unlocks 10 additional colour theme presets after purchase</td></tr>
+      <tr><td><span class="ui-label">Restore Purchases</span></td><td>Use this if a previous purchase is not reflected in the app</td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="callout info">
+    <span class="callout-icon">ℹ️</span>
+    <div class="callout-body"><strong>Restore Purchases</strong> If you reinstall the app or switch devices, tap <strong>Restore Purchases</strong> to recover your previously purchased items using the same Google account.</div>
+  </div>
+</section>
+
+
+<!-- ===== SECTION 4 ===== -->
+<section id="sec4">
+  <div class="section-label">Section 04</div>
+  <h2 class="section-title">Flame &amp; Themes</h2>
+
+  <h3>Flame States</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Timer State</th><th>Flame Behaviour</th></tr></thead>
+    <tbody>
+      <tr><td>Running</td><td>The flame grows larger as your session progresses</td></tr>
+      <tr><td>Paused</td><td>The flame becomes calmer and smaller</td></tr>
+      <tr><td>Completed</td><td>A light sparkle or celebration effect appears</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>Premium Themes <span class="badge-pro">PRO</span></h3>
+  <p>Purchasing <strong>Premium Themes</strong> unlocks 10 selectable theme presets from the Settings screen. Each preset changes the overall colour palette of the app.</p>
+
+  <div class="callout pro">
+    <span class="callout-icon">⭐</span>
+    <div class="callout-body"><strong>One-Time Purchase</strong> Once bought, all 10 theme presets are permanently unlocked with no subscription required.</div>
+  </div>
+</section>
+
+
+<!-- ===== SECTION 5 ===== -->
+<section id="sec5">
+  <div class="section-label">Section 05</div>
+  <h2 class="section-title">Stats Screen</h2>
+  <p>The Stats screen gives you a full picture of your focus habits over time.</p>
+
+  <div class="table-wrap"><table>
+    <thead><tr><th>Element</th><th>Description</th></tr></thead>
+    <tbody>
+      <tr><td>Session counts</td><td>View today, weekly, monthly, and all-time totals</td></tr>
+      <tr><td>Total focus time</td><td>Cumulative time spent in completed sessions</td></tr>
+      <tr><td>Mode breakdown chart</td><td>Bar chart showing sessions by focus mode</td></tr>
+      <tr><td>Calendar view</td><td>See which days had at least one completed session</td></tr>
+      <tr><td>Recent sessions list</td><td>Scrollable log of recent completed sessions below the calendar</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+
+<!-- ===== SECTION 6 ===== -->
+<section id="sec6">
+  <div class="section-label">Section 06</div>
+  <h2 class="section-title">Widget</h2>
+  <p>Focus Flame includes a simple home screen widget so you can keep an eye on your timer without opening the app.</p>
+
+  <h3>Widget Features</h3>
+  <div class="table-wrap"><table>
+    <thead><tr><th>Feature</th><th>Details</th></tr></thead>
+    <tbody>
+      <tr><td>Remaining time</td><td>Displayed on the widget face</td></tr>
+      <tr><td>Current mode</td><td>Shows the active focus mode name</td></tr>
+      <tr><td>Session progress</td><td>Visual indicator of how far through the session you are</td></tr>
+      <tr><td>Tap to open</td><td>Tapping the widget opens the app</td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="callout warn">
+    <span class="callout-icon">⚠️</span>
+    <div class="callout-body"><strong>Widget Limitation</strong> The current widget is a minimal status widget. It does not include <code>START</code>, <code>PAUSE</code>, or <code>RESET</code> buttons yet. Use the app directly to control the timer.</div>
+  </div>
+</section>
+
+
+<!-- ===== SECTION 7 ===== -->
+<section id="sec7">
+  <div class="section-label">Section 07</div>
+  <h2 class="section-title">If Purchase Buttons Do Nothing</h2>
+  <p>Purchase buttons open Google Play Billing only when the billing connection and product setup are both ready. If nothing happens when you tap a purchase button, try the steps below.</p>
+
+  <ol class="steps">
+    <li><p>Check that <strong>Billing Status</strong> shows <code>Ready</code> in Settings. If it shows <code>Connecting</code>, wait a moment and try again.</p></li>
+    <li><p>Make sure you have a stable internet connection.</p></li>
+    <li><p>Close and reopen the app, then attempt the purchase again.</p></li>
+    <li><p>If the issue persists, check that your Google Play account is active and in good standing.</p></li>
+  </ol>
+
+  <div class="callout warn">
+    <span class="callout-icon">⚠️</span>
+    <div class="callout-body"><strong>Play Console Configuration Required</strong> Billing depends on both the app and the Play Console configuration. If Play products are not configured, the purchase button may appear to do nothing even in a signed-in test environment.</div>
+  </div>
+
+  <div class="callout info">
+    <span class="callout-icon">ℹ️</span>
+    <div class="callout-body"><strong>Already Purchased?</strong> If Remove Ads or Premium Themes is not active, tap <span class="ui-label">Restore Purchases</span> in the Settings screen.</div>
+  </div>
+</section>
+
+
+</div><!-- /wrapper -->
+
+<a href="#top" class="back-top" title="Back to top">↑</a>
+
+<footer>
+  <strong>Focus Flame</strong> — Focus Timer App<br>
+  Last Updated: April 23, 2026<br>
+  <span style="font-size:11px; opacity:0.45;">manual_en.html</span>
+</footer>
+
 </body>
 </html>

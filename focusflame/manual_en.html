@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Focus Flame User Manual</title>
+  <style>
+    :root {
+      --bg: #0A0A0F;
+      --card: #17171f;
+      --text: #f6f1e9;
+      --muted: #b7b0a6;
+      --accent: #FF4500;
+      --warm1: #FF6B35;
+      --warm2: #F7931E;
+      --warm3: #FFD23F;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Segoe UI", system-ui, sans-serif;
+      background:
+        radial-gradient(circle at top, rgba(247,147,30,0.18), transparent 35%),
+        linear-gradient(180deg, #111118 0%, var(--bg) 100%);
+      color: var(--text);
+      line-height: 1.7;
+    }
+    main {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 24px 16px 48px;
+    }
+    h1, h2 { margin: 0 0 12px; }
+    h1 { font-size: 34px; line-height: 1.2; }
+    h2 { font-size: 20px; color: var(--warm3); margin-top: 28px; }
+    p { margin: 0 0 12px; color: var(--muted); }
+    ul { margin: 0; padding-left: 20px; color: var(--text); }
+    li { margin: 8px 0; }
+    code {
+      font-family: Consolas, monospace;
+      color: var(--warm3);
+    }
+    .hero, .card {
+      background: rgba(23, 23, 31, 0.92);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 18px;
+      padding: 18px;
+      box-shadow: 0 16px 40px rgba(0,0,0,0.28);
+    }
+    .hero {
+      margin-bottom: 20px;
+      border-top: 3px solid var(--warm1);
+    }
+    .accent {
+      background: linear-gradient(90deg, var(--warm1), var(--warm2), var(--warm3));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .grid {
+      display: grid;
+      gap: 14px;
+    }
+    .note {
+      margin-top: 12px;
+      padding: 12px 14px;
+      border-radius: 14px;
+      background: rgba(255, 69, 0, 0.10);
+      color: var(--text);
+    }
+    @media (min-width: 720px) {
+      .grid { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <section class="hero">
+      <h1><span class="accent">Focus Flame</span> User Manual</h1>
+      <p>A quick guide for using Focus Flame, a focus timer that grows a flame as your session progresses.</p>
+      <p>Last updated: April 23, 2026</p>
+    </section>
+
+    <section class="card">
+      <h2>1. What Focus Flame Does</h2>
+      <p>Focus Flame helps you run focused timer sessions. As time passes, the flame animation grows to show your progress.</p>
+      <ul>
+        <li><code>START</code>: begin a focus session</li>
+        <li><code>PAUSE</code>: temporarily stop the timer</li>
+        <li><code>RESUME</code>: continue a paused timer</li>
+        <li><code>RESET</code>: stop the current timer and return to the default state</li>
+      </ul>
+    </section>
+
+    <section class="grid" style="margin-top: 16px;">
+      <section class="card">
+        <h2>2. Home Screen</h2>
+        <ul>
+          <li>Select a focus mode near the top of the screen.</li>
+          <li>Choose a timer preset: <code>15</code>, <code>25</code>, <code>45</code>, or <code>60</code> minutes.</li>
+          <li>Tap <code>START</code> to begin.</li>
+          <li>The large timer shows the remaining time in <code>MM:SS</code> format.</li>
+          <li><code>Today</code> shows the number of completed sessions for the current day.</li>
+        </ul>
+      </section>
+
+      <section class="card">
+        <h2>3. Settings Screen</h2>
+        <ul>
+          <li>Change focus, short break, and long break durations.</li>
+          <li>Turn completion notifications, sound, and vibration on or off.</li>
+          <li>Use <code>Remove Ads</code> to remove completion ads after purchase.</li>
+          <li>Use <code>Premium Themes</code> to unlock additional color themes after purchase.</li>
+          <li>Use <code>Restore Purchases</code> if a previous purchase is not reflected.</li>
+        </ul>
+      </section>
+    </section>
+
+    <section class="card" style="margin-top: 16px;">
+      <h2>4. Flame and Themes</h2>
+      <p>The flame reacts to the timer state.</p>
+      <ul>
+        <li>Running: the flame grows with progress.</li>
+        <li>Paused: the flame becomes calmer.</li>
+        <li>Completed: a light sparkle or celebration effect appears.</li>
+        <li>Premium Themes: unlocks 10 selectable theme presets from Settings.</li>
+      </ul>
+    </section>
+
+    <section class="card" style="margin-top: 16px;">
+      <h2>5. Stats Screen</h2>
+      <ul>
+        <li>View today, weekly, monthly, and all-time session counts.</li>
+        <li>Check total focus time.</li>
+        <li>View a mode breakdown bar chart.</li>
+        <li>Use the calendar to see which days had completed sessions.</li>
+        <li>Recent sessions are listed below the calendar.</li>
+      </ul>
+    </section>
+
+    <section class="card" style="margin-top: 16px;">
+      <h2>6. Widget</h2>
+      <p>Focus Flame includes a simple home screen widget.</p>
+      <ul>
+        <li>The widget shows the remaining time.</li>
+        <li>It also shows the current mode and session progress.</li>
+        <li>Tap the widget to open the app.</li>
+      </ul>
+      <div class="note">
+        The current widget is a minimal status widget. It does not include START, PAUSE, or RESET buttons yet.
+      </div>
+    </section>
+
+    <section class="card" style="margin-top: 16px;">
+      <h2>7. If Purchase Buttons Do Nothing</h2>
+      <p>Purchase buttons open Google Play Billing only when the billing connection and product setup are ready.</p>
+      <ul>
+        <li>Check that <code>Billing Status</code> says <code>Ready</code>.</li>
+        <li>If it says <code>Connecting</code>, wait a moment and try again.</li>
+        <li>Play Console products must exist for real purchase testing.</li>
+        <li>Test purchases require a proper Google Play test environment.</li>
+      </ul>
+      <div class="note">
+        Billing depends on both the app and the Play Console configuration. If Play products are not configured, the button may appear to do nothing.
+      </div>
+    </section>
+  </main>
+</body>
+</html>

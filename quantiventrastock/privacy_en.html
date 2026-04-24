@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy - Quantiventra Stock</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-[#fdfaf5] text-gray-800 font-sans leading-relaxed antialiased">
+    <div class="max-w-3xl mx-auto my-10 p-8 md:p-12 bg-white rounded-2xl shadow-sm">
+        <a href="../index_en.html" class="inline-block mb-6 text-[#d4a373] text-sm font-bold no-underline hover:underline">← Back to Portal</a>
+
+        <h1 class="text-3xl font-bold text-[#006C9C] border-b-2 border-[#006C9C] pb-3 mb-8">Privacy Policy</h1>
+
+        <p class="mb-6 text-gray-700">
+            Ray App Lab (hereinafter referred to as "the Developer") establishes the following privacy policy
+            regarding the handling of user information in the Android application "Quantiventra Stock"
+            (hereinafter referred to as "the App").
+        </p>
+
+        <h2 class="text-xl font-bold text-[#006C9C] border-l-4 border-[#006C9C] pl-3 mt-10 mb-4">1. Information Used and Purpose of Use</h2>
+        <p class="mb-4 text-gray-700">
+            The App uses the following information for stock management, CSV import, shared-folder sync, and
+            in-app purchase status confirmation.
+        </p>
+        <ul class="list-disc pl-6 space-y-3 mb-6 text-gray-700">
+            <li><strong>Product and stock information</strong>: Product name, barcode, theoretical stock, current stock, and location are stored inside the App and used for inventory management features.</li>
+            <li><strong>CSV files in the shared folder</strong>: Used for reading and writing CSV files for integration with Quantiventra.</li>
+            <li><strong>In-app purchase ownership status</strong>: Used through Google Play Billing to confirm and restore ownership of Pro features.</li>
+        </ul>
+
+        <h2 class="text-xl font-bold text-[#006C9C] border-l-4 border-[#006C9C] pl-3 mt-10 mb-4">2. Permissions and Access Used by the App</h2>
+        <ul class="list-disc pl-6 space-y-3 mb-6 text-gray-700">
+            <li><strong>Access to a shared folder</strong>: Used only for reading and writing CSV files and marker files in the folder selected by the user.</li>
+            <li><strong>Google Play Billing</strong>: Used only for confirming and restoring the one-time Pro purchase.</li>
+        </ul>
+
+        <h2 class="text-xl font-bold text-[#006C9C] border-l-4 border-[#006C9C] pl-3 mt-10 mb-4">3. Where Data Is Stored</h2>
+        <p class="mb-6 text-gray-700">
+            Product information, stock information, and app settings handled by the App are mainly stored on the user's device.
+            If the user enables shared-folder sync, CSV files and marker files may also be stored in the selected shared folder.
+        </p>
+
+        <h2 class="text-xl font-bold text-[#006C9C] border-l-4 border-[#006C9C] pl-3 mt-10 mb-4">4. Third-Party Sharing</h2>
+        <p class="mb-6 text-gray-700">
+            The Developer does not send product or stock data handled by the App to the Developer's own servers,
+            and does not sell or provide such data to third parties. However, Google Play services are used for
+            in-app purchase confirmation.
+        </p>
+
+        <h2 class="text-xl font-bold text-[#006C9C] border-l-4 border-[#006C9C] pl-3 mt-10 mb-4">5. Shared-Folder Integration</h2>
+        <p class="mb-6 text-gray-700">
+            The App uses a shared-folder method to integrate with Quantiventra. The shared folder may contain
+            files such as <code>quantiventra_master.csv</code>, <code>inventory_review_data_yyyyMMdd_HHmm.csv</code>,
+            and marker files for each app. These files are handled only inside the folder selected by the user.
+        </p>
+
+        <h2 class="text-xl font-bold text-[#006C9C] border-l-4 border-[#006C9C] pl-3 mt-10 mb-4">6. Changes to This Policy</h2>
+        <p class="mb-6 text-gray-700">
+            The Developer may revise this policy when necessary. If important changes are made, they will be announced
+            through the app store listing, distribution page, or related notices.
+        </p>
+
+        <h2 class="text-xl font-bold text-[#006C9C] border-l-4 border-[#006C9C] pl-3 mt-10 mb-4">7. Contact</h2>
+        <p class="mb-6 text-gray-700">
+            For questions regarding this policy, please use the contact information on Google Play or the developer contact
+            listed in the app store.
+        </p>
+
+        <div class="mt-12 pt-6 border-t border-gray-200 text-center text-sm text-gray-500">
+            <p class="mb-2">Enactment Date: April 24, 2026</p>
+            <p>&copy; 2026 Ray App Lab / Quantiventra Stock Project</p>
+        </div>
+    </div>
+<script data-codex-source-guard>
+(function () {
+  document.addEventListener('contextmenu', function (event) {
+    event.preventDefault();
+  });
+  document.addEventListener('keydown', function (event) {
+    var key = (event.key || '').toLowerCase();
+    var blocked = event.key === 'F12'
+      || (event.ctrlKey && event.shiftKey && ['i', 'j', 'c'].indexOf(key) !== -1)
+      || (event.ctrlKey && ['u', 's'].indexOf(key) !== -1);
+    if (blocked) {
+      event.preventDefault();
+      event.stopPropagation();
+      return false;
+    }
+  }, true);
+})();
+</script>
+</body>
+</html>

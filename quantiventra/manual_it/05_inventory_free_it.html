@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="it">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quantiventra – Gestione magazzino – Piano gratuito</title>
+<style>*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;font-size:15px;line-height:1.8;color:#1a2535;background:#f4f7fb;}
+a{color:#1a5fa8;text-decoration:none;}a:hover{text-decoration:underline;}
+.site-nav{background:#1a3a5c;color:#fff;padding:0;}.site-nav .nav-inner{max-width:960px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:stretch;}
+.site-nav a{color:#cde;padding:10px 13px;font-size:12px;display:block;border-right:1px solid #2a4a6c;white-space:nowrap;}
+.site-nav a:hover{background:#2a5090;text-decoration:none;}.site-nav a.active{background:#2a6cbe;color:#fff;font-weight:bold;}
+.page-header{background:linear-gradient(135deg,#1a3a5c 0%,#2a6cbe 100%);color:#fff;padding:40px 20px 30px;}
+.page-header .inner{max-width:960px;margin:0 auto;}.page-header .app-name{font-size:13px;opacity:.8;}
+.page-header h1{font-size:22px;font-weight:700;margin-top:6px;line-height:1.4;}.page-header .subtitle{font-size:14px;opacity:.85;margin-top:8px;}
+.scope-box{background:rgba(255,255,255,.15);border-left:4px solid #7ecfff;padding:12px 16px;margin-top:16px;border-radius:4px;font-size:13px;}
+.container{max-width:960px;margin:0 auto;padding:30px 16px;}
+.toc{background:#fff;border:1px solid #c8d8ec;border-radius:8px;padding:24px 28px;margin-bottom:32px;}
+.toc h2{font-size:16px;font-weight:700;color:#1a3a5c;border-bottom:2px solid #2a6cbe;padding-bottom:8px;margin-bottom:14px;}
+.toc ol{margin-left:18px;}.toc li{margin:5px 0;font-size:14px;}
+.chapter{background:#fff;border-radius:8px;box-shadow:0 1px 4px rgba(0,0,0,.08);padding:28px 28px 24px;margin-bottom:28px;}
+.chapter-head{border-left:5px solid #2a6cbe;padding-left:14px;margin-bottom:20px;}
+.chapter-head .ch-no{font-size:12px;color:#2a6cbe;font-weight:700;}.chapter-head h2{font-size:20px;font-weight:700;color:#1a2535;margin-top:2px;}
+h3{font-size:16px;font-weight:700;color:#1a3a5c;border-bottom:1px solid #dde8f5;padding-bottom:5px;margin:22px 0 12px;}
+h4{font-size:14px;font-weight:700;color:#2a4a6c;margin:16px 0 8px;}
+p{margin-bottom:12px;}ul,ol{margin-left:20px;margin-bottom:12px;}li{margin-bottom:5px;}
+.steps{counter-reset:step;list-style:none;margin-left:0;}
+.steps li{counter-increment:step;padding:9px 12px 9px 46px;position:relative;background:#f8fbff;border:1px solid #dde8f5;border-radius:6px;margin-bottom:6px;}
+.steps li::before{content:counter(step);position:absolute;left:12px;top:50%;transform:translateY(-50%);width:24px;height:24px;background:#2a6cbe;color:#fff;border-radius:50%;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;}
+.table-wrap{overflow-x:auto;margin-bottom:16px;}
+table{width:100%;border-collapse:collapse;font-size:13px;min-width:380px;}
+th{background:#1a3a5c;color:#fff;padding:9px 12px;text-align:left;white-space:nowrap;}
+td{padding:8px 12px;border-bottom:1px solid #dde8f5;vertical-align:top;}tr:nth-child(even) td{background:#f4f7fb;}
+code{font-family:'Courier New',monospace;background:rgba(0,80,160,.08);color:#004080;padding:2px 6px;border-radius:3px;font-size:12px;}
+.box{border-radius:6px;padding:13px 16px;margin:14px 0;font-size:13px;}
+.box-warn{background:#fffbe6;border-left:4px solid #f5a623;color:#7a5700;}
+.box-danger{background:#fff0f0;border-left:4px solid #d43f3f;color:#7a0000;}
+.box-hint{background:#e8f4ff;border-left:4px solid #2a6cbe;color:#0a3060;}
+.box-check{background:#f4eeff;border-left:4px solid #8c4fc8;color:#3a0070;}
+.box strong{display:block;margin-bottom:4px;}
+figure{max-width:280px;width:100%;margin:18px auto;text-align:center;}
+figure img{display:block;width:100%;max-width:280px;height:auto;margin:0 auto;border:1px solid #c8d8ec;border-radius:6px;box-shadow:0 2px 8px rgba(0,0,0,.1);}
+figcaption{font-size:12px;color:#5a7a99;margin-top:6px;}
+.img-pending{display:flex;align-items:center;justify-content:center;max-width:280px;width:100%;box-sizing:border-box;background:#e8eef5;border:2px dashed #99b8d8;border-radius:6px;height:160px;color:#5a7a99;font-size:13px;margin:18px auto;}
+.diff-add{background:#e8fff0;border-left:4px solid #2a9c5c;border-radius:6px;padding:12px 16px;margin:14px 0;font-size:13px;}
+.diff-add strong{display:block;color:#1a6c3c;margin-bottom:4px;}
+.flow-box{background:#f4f7fb;border:1px solid #c8d8ec;border-radius:8px;padding:20px;margin:16px 0;}
+.flow-box h4{color:#1a3a5c;margin-top:0;}
+.flow-arrow{text-align:center;font-size:20px;color:#2a6cbe;margin:4px 0;}
+.flow-step{background:#fff;border:1px solid #c8d8ec;border-radius:6px;padding:10px 16px;margin:4px 0;font-size:13px;}
+.flow-step strong{color:#1a3a5c;}
+.summary-box{background:linear-gradient(135deg,#e8f4ff,#f0f8ff);border:1px solid #99c8ec;border-radius:8px;padding:20px 24px;margin-top:32px;}
+.summary-box h3{border:none;color:#1a3a5c;margin-top:0;}
+.confirm-box{background:#fdf4ff;border:1px solid #c8a0e0;border-radius:8px;padding:20px 24px;margin-top:16px;}
+.confirm-box h3{border:none;color:#5a0090;margin-top:0;}
+.check{color:#2e7d32;font-weight:700;}.cross{color:#c62828;}
+th.pro-col{background:#5a2a8c;}
+.feature-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px;margin:16px 0;}
+.feature-card{background:#f4f7fb;border:1px solid #c8d8ec;border-radius:8px;padding:16px;}
+.feature-card h4{color:#1a3a5c;margin-top:0;margin-bottom:6px;font-size:14px;}
+.feature-card p{font-size:13px;margin:0;color:#3a5a7a;}
+.feature-card.pro-card{background:#f4eeff;border-color:#c8a0e0;}
+.feature-card.pro-card h4{color:#5a2a8c;}
+.trouble{border:1px solid #c8d8ec;border-radius:8px;margin:14px 0;overflow:hidden;}
+.trouble-q{background:#eef6fd;padding:13px 18px;font-weight:700;font-size:14px;color:#1a3a5c;display:flex;align-items:flex-start;gap:10px;}
+.trouble-q::before{content:'Q';background:#2a6cbe;color:#fff;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900;flex-shrink:0;margin-top:1px;}
+.trouble-a{padding:13px 18px 14px 50px;font-size:13.5px;border-top:1px solid #c8d8ec;line-height:1.9;}
+.trouble-a ul{margin-left:16px;}
+.legal-block{background:#f5f5f5;border:1px solid #ddd;border-radius:8px;padding:20px 24px;font-size:12.5px;color:#444;line-height:1.9;margin:14px 0;}
+.legal-block h4{font-size:13px;color:#333;margin:18px 0 6px;border-bottom:1px solid #ddd;padding-bottom:4px;}
+.legal-block h4:first-child{margin-top:0;}
+footer{text-align:center;font-size:12px;color:#8a9aaa;padding:30px 16px;border-top:1px solid #dde8f5;margin-top:20px;}
+@media(max-width:640px){.page-header h1{font-size:18px;}.chapter{padding:20px 16px;}.site-nav a{padding:8px 9px;font-size:11px;}}
+@media print{body{background:#fff;font-size:12px;}.site-nav{display:none;}.chapter{box-shadow:none;border:1px solid #ccc;page-break-inside:avoid;}.page-header{background:#1a3a5c !important;-webkit-print-color-adjust:exact;print-color-adjust:exact;}}
+</style></head>
+<body>
+<nav class="site-nav"><div class="nav-inner">
+  <a href="01_top_settings_common_it.html">① Home / Impostazioni</a>
+  <a href="02_stocktake_free_it.html">② Inventario fisico gratuito</a>
+  <a href="03_stocktake_simple_it.html">③ Inventario fisico standard</a>
+  <a href="04_stocktake_full_it.html">④ Inventario fisico completo</a>
+  <a href="05_inventory_free_it.html" class="active">⑤ Magazzino gratuito</a>
+  <a href="06_inventory_simple_it.html">⑥ Magazzino standard</a>
+  <a href="07_inventory_full_it.html">⑦ Magazzino completo</a>
+</div></nav>
+<header class="page-header"><div class="inner">
+  <div class="app-name">Manuale Quantiventra</div>
+  <h1>⑤ Gestione magazzino — Piano gratuito</h1>
+  <div class="subtitle">Cosa può fare il piano gratuito, limiti, consultazione scorte, collegamento ai dati anagrafici, disponibilità di carico/scarico e flussi di lavoro consigliati</div>
+  <div class="scope-box"><strong>Argomenti trattati:</strong> Cosa può fare la Gestione magazzino nel piano gratuito / Limiti del piano gratuito / Consultazione scorte / Dettaglio scorte / Relazione con i dati anagrafici / Disponibilità di carico, scarico e trasferimenti / Limiti CSV / Cosa non è possibile fare nel piano gratuito / Flussi di lavoro consigliati</div>
+</div></header>
+<div class="container">
+  <nav class="toc"><h2>Indice</h2><ol>
+    <li><a href="#overview">Panoramica della Gestione magazzino nel piano gratuito</a></li>
+    <li><a href="#limits">Limiti del piano gratuito</a></li>
+    <li><a href="#stock-check">Consultazione scorte</a></li>
+    <li><a href="#stock-detail">Dettaglio scorte</a></li>
+    <li><a href="#master">Relazione con i dati anagrafici</a></li>
+    <li><a href="#inout">Disponibilità di carico, scarico e trasferimenti</a></li>
+    <li><a href="#csv">Limiti CSV</a></li>
+    <li><a href="#cannot">Cosa non è possibile fare nel piano gratuito</a></li>
+    <li><a href="#tips">Flusso di lavoro consigliato per utenti del piano gratuito</a></li>
+    <li><a href="#summary">Punti salienti del capitolo</a></li>
+    <li><a href="#confirm">Note prima dell'utilizzo</a></li>
+  </ol></nav>
+
+  <section class="chapter" id="overview">
+    <div class="chapter-head"><div class="ch-no">CAPITOLO 1</div><h2>Panoramica della Gestione magazzino nel piano gratuito</h2></div>
+    <p>La Gestione magazzino traccia carichi, scarichi e trasferimenti dei prodotti per mantenere una visione accurata dei livelli di scorta correnti. Il piano gratuito consente di esplorare la consultazione di base delle scorte e l'uso fondamentale dell'Anagrafica prodotti.</p>
+    <p>Schermate principali della Gestione magazzino: Consultazione scorte / Carico / Scarico / Trasferimento scorte / Storico magazzino / Importazione ed esportazione dati</p>
+    <div class="box box-hint"><strong>💡 Inventario fisico vs. Gestione magazzino</strong>La Gestione magazzino serve a registrare le transazioni quotidiane — carichi, scarichi e trasferimenti — che movimentano le scorte. È un modulo separato dall'Inventario fisico (conteggio fisico degli articoli). Non confondere i due moduli.</div>  </section>
+
+  <section class="chapter" id="limits">
+    <div class="chapter-head"><div class="ch-no">CAPITOLO 2</div><h2>Limiti del piano gratuito</h2></div>
+    <div class="table-wrap"><table>
+      <tr><th>Elemento</th><th>Limite del piano gratuito</th><th>Come rimuoverlo</th></tr>
+      <tr><td>Record anagrafici</td><td>Fino a 30</td><td>Gestione magazzino Standard o superiore</td></tr>
+      <tr><td>Record dello storico scorte</td><td>Fino a 30</td><td>Gestione magazzino Standard o superiore</td></tr>
+      <tr><td>Record esportati</td><td>Fino a 30</td><td>Gestione magazzino Standard o superiore</td></tr>
+      <tr><td>Registrazione dell'Anagrafica ubicazioni</td><td>Non disponibile o limitata</td><td>Gestione magazzino Standard o superiore</td></tr>
+      <tr><td>Modifica diretta del totale cumulativo registrato</td><td>Non disponibile</td><td>Piano Completo della Gestione magazzino</td></tr>
+      <tr><td>Regole dettagliate per codice/ubicazione</td><td>Non disponibili</td><td>Piano Completo della Gestione magazzino</td></tr>
+      <tr><td>Importazione/Esportazione CSV estesa</td><td>Limitata (record e funzionalità)</td><td>Piano Completo della Gestione magazzino</td></tr>
+    </table></div>
+    <div class="box box-warn"><strong>⚠ Nota</strong>Raggiungere il limite di 30 record può impedire il salvataggio o l'esportazione. Se prevedi di continuare a usare l'app, valuta l'upgrade a Standard o al Piano Completo prima di raggiungere il limite.</div>
+  </section>
+
+  <section class="chapter" id="stock-check">
+    <div class="chapter-head"><div class="ch-no">CAPITOLO 3</div><h2>Consultazione scorte</h2></div>
+    <p>La schermata Consultazione scorte mostra inizialmente il totale delle scorte combinato per prodotto. Il controllo di riordino viene calcolato usando il totale delle scorte di tutte le ubicazioni per cui nell'Anagrafica ubicazioni è attiva l'opzione "Includi nel controllo di riordino".</p>    <h3>Cosa puoi fare in Consultazione scorte</h3>
+    <ul>
+      <li>Visualizzare il totale corrente combinato delle scorte per ciascun prodotto</li>
+      <li>Filtrare per nome o codice prodotto tramite la ricerca</li>
+      <li>Confrontare il punto di riordino con il totale delle ubicazioni incluse per identificare gli articoli da rifornire</li>
+      <li>Toccare un prodotto per espandere il dettaglio per ubicazione. Nella vista del dettaglio per ubicazione, il controllo di riordino non viene mostrato o viene trattato come inattivo</li>
+    </ul>
+    <h3>Procedura di Consultazione scorte</h3>
+    <ol class="steps">
+      <li>Dalla schermata principale, tocca <strong>Gestione magazzino</strong>.</li>
+      <li>Apri <strong>Consultazione scorte</strong>.</li>
+      <li>Trova il prodotto che vuoi controllare (cerca o scorri l'elenco).</li>
+      <li>Tocca il prodotto per visualizzare il dettaglio scorte.</li>
+    </ol>
+  </section>
+
+  <section class="chapter" id="stock-detail">
+    <div class="chapter-head"><div class="ch-no">CAPITOLO 4</div><h2>Dettaglio scorte</h2></div>
+    <p>Toccando un prodotto nella schermata Consultazione scorte si apre la schermata Dettaglio scorte.</p>    <h3>Cosa puoi vedere in Dettaglio scorte</h3>
+    <ul>
+      <li>Codice e nome del prodotto</li>
+      <li>Quantità totale in scorta</li>
+      <li>Dettaglio delle scorte per ubicazione</li>
+      <li>Punto di riordino e prezzo (se registrati nell'Anagrafica prodotti)</li>
+      <li>Categoria</li>
+    </ul>
+  </section>
+
+  <section class="chapter" id="master">
+    <div class="chapter-head"><div class="ch-no">CAPITOLO 5</div><h2>Relazione con i dati anagrafici</h2></div>
+    <p>La Gestione magazzino lavora insieme all'Anagrafica prodotti, all'Anagrafica categorie e all'Anagrafica ubicazioni. Mantenere informazioni accurate nei dati anagrafici migliora la qualità dei record di magazzino.</p>
+    <div class="table-wrap"><table>
+      <tr><th>Anagrafica</th><th>Ruolo principale</th><th>Campi chiave</th></tr>
+      <tr><td>Anagrafica prodotti</td><td>Registra i prodotti che detengono scorte fisiche</td><td>Codice prodotto/codice a barre, nome prodotto, categoria, prezzo, punto di riordino</td></tr>
+      <tr><td>Anagrafica categorie</td><td>Gestisce i raggruppamenti usati per classificare i prodotti</td><td>Codice categoria, nome categoria, ordine di visualizzazione</td></tr>
+      <tr><td>Anagrafica ubicazioni</td><td>Gestisce le ubicazioni di stoccaggio</td><td>Codice ubicazione, nome ubicazione, ordine di visualizzazione, attivo/inattivo</td></tr>
+    </table></div>
+    <div class="box box-hint"><strong>💡 Prodotto vs. Categoria</strong>Un <strong>prodotto</strong> è un singolo articolo che detiene scorte (es. T-shirt rossa, taglia M). Una <strong>categoria</strong> è un raggruppamento usato per classificare i prodotti (es. Abbigliamento). Non confonderli.</div>
+    <div class="box box-warn"><strong>⚠ Ubicazioni nel piano gratuito</strong>Nel piano gratuito, le funzioni relative alle ubicazioni possono essere limitate. Usa le ubicazioni predefinite mostrate nell'app e segui le indicazioni della schermata dell'app se compare un avviso relativo a un piano a pagamento.</div>
+  </section>
+
+  <section class="chapter" id="inout">
+    <div class="chapter-head"><div class="ch-no">CAPITOLO 6</div><h2>Disponibilità di carico, scarico e trasferimenti</h2></div>
+    <p>Nel piano gratuito, i punti di accesso a carico, scarico e trasferimento scorte possono essere visibili, ma il salvataggio effettivo e il numero di record sono limitati.</p>
+    <div class="box box-check"><strong>🔍 Disponibilità nel piano gratuito</strong>Carico, scarico e trasferimenti di scorte possono avere limiti nel piano gratuito. Segui le indicazioni mostrate nell'app, soprattutto quando compare un avviso di limite o una richiesta di passaggio a un piano a pagamento.</div>
+    <h3>Indicazioni per carico, scarico e trasferimenti nel piano gratuito</h3>
+    <ul>
+      <li>I pulsanti delle funzioni possono essere visibili.</li>
+      <li>Il tentativo di usarli può mostrare un avviso di limite.</li>
+      <li>Segui le istruzioni mostrate sullo schermo.</li>
+      <li>Durante il carico di un codice prodotto non registrato, può apparire una richiesta per creare una nuova voce nell'Anagrafica prodotti.</li>
+      <li>Il campo scorte nella schermata di scarico mostra le scorte correnti come riferimento — non è un campo di input modificabile.</li>
+    </ul>
+    <div class="box box-hint"><strong>💡 Suggerimento</strong>Per usare carico, scarico e trasferimenti in modo continuativo, valuta l'upgrade a Gestione magazzino Standard o al Piano Completo.</div>
+  </section>
+
+  <section class="chapter" id="csv">
+    <div class="chapter-head"><div class="ch-no">CAPITOLO 7</div><h2>Limiti CSV</h2></div>
+    <p>Il piano gratuito limita sia il numero di record che puoi importare o esportare, sia le funzionalità disponibili.</p>
+    <div class="table-wrap"><table>
+      <tr><th>Elemento</th><th>Piano gratuito</th><th>Sblocco Standard</th><th>Sblocco Completo</th></tr>
+      <tr><td>Record esportati</td><td>Fino a 30</td><td>Fino a 300</td><td>Illimitati</td></tr>
+      <tr><td>Record import CSV</td><td>Limitati</td><td>Estesi</td><td>Estesi</td></tr>
+      <tr><td>CSV di backup completo (tutti i dati)</td><td>Limitato; segui le indicazioni in-app</td><td>Esteso</td><td>○</td></tr>
+    </table></div>
+    <div class="box box-warn"><strong>⚠ Nota</strong>L'esportazione CSV dettagliata è una funzione dello Sblocco Completo. Il piano gratuito limita sia il numero di record sia le colonne disponibili.</div>
+  </section>
+
+  <section class="chapter" id="cannot">
+    <div class="chapter-head"><div class="ch-no">CAPITOLO 8</div><h2>Cosa non è possibile fare nel piano gratuito</h2></div>
+    <div class="table-wrap"><table>
+      <tr><th>Funzionalità</th><th>Piano necessario</th></tr>
+      <tr><td>Più di 30 record anagrafici</td><td>Gestione magazzino Standard o superiore</td></tr>
+      <tr><td>Più di 30 record storici</td><td>Gestione magazzino Standard o superiore</td></tr>
+      <tr><td>Esportare più di 30 record</td><td>Gestione magazzino Standard o superiore</td></tr>
+      <tr><td>Blocco della rotazione dello schermo</td><td>Gestione magazzino Standard o superiore</td></tr>
+      <tr><td>Registrazione dettagliata dell'Anagrafica ubicazioni</td><td>Gestione magazzino Standard o superiore</td></tr>
+      <tr><td>Modifica diretta del totale cumulativo registrato</td><td>Piano Completo della Gestione magazzino</td></tr>
+      <tr><td>Regole dettagliate per codice/ubicazione</td><td>Piano Completo della Gestione magazzino</td></tr>
+      <tr><td>Esportazione CSV estesa</td><td>Piano Completo della Gestione magazzino</td></tr>
+      <tr><td>Applicare i dati dell'inventario fisico alla Gestione magazzino</td><td>Piano Completo della Gestione magazzino</td></tr>
+    </table></div>
+  </section>
+
+  <section class="chapter" id="tips">
+    <div class="chapter-head"><div class="ch-no">CAPITOLO 9</div><h2>Flusso di lavoro consigliato per utenti del piano gratuito</h2></div>
+    <h3>Usalo per controllare le scorte con una gamma prodotti ridotta</h3>
+    <p>Se hai 30 prodotti o meno, il piano gratuito supporta la consultazione continua delle scorte. È utile per monitorare i livelli di scorta e confrontarli con i punti di riordino.</p>
+    <h3>Esercitati con dati di esempio</h3>
+    <p>Crea dati di esempio dalla schermata Impostazioni per avere prodotti e dati di scorta pronti per la pratica. Ti consigliamo di familiarizzare con le operazioni prima di registrare dati reali.</p>
+    <h3>Esporta CSV regolarmente per creare uno storico</h3>
+    <p>Esporta in CSV mentre sei ancora entro il limite di 30 record esportabili e accumula i record di magazzino su un PC o in un foglio di calcolo.</p>
+    <h3>Pianifica l'upgrade quando ti avvicini al limite</h3>
+    <p>Quando il numero di prodotti e di record storici si avvicina a 30, valuta l'upgrade allo Sblocco Gestione magazzino Standard.</p>
+    <div class="box box-hint"><strong>💡 Valuta l'upgrade a Standard se…</strong>
+      <ul style="margin-top:6px;">
+        <li>Hai più di 30 prodotti</li>
+        <li>Vuoi conservare a lungo lo storico di carichi e scarichi</li>
+        <li>Vuoi usare ubicazioni separate (magazzino e negozio)</li>
+      </ul>
+    </div>
+  </section>
+
+  <div class="summary-box" id="summary">
+    <h3>📌 Punti salienti del capitolo</h3>
+    <ul>
+      <li>La Gestione magazzino registra transazioni quotidiane (carico, scarico, trasferimenti). È separata dall'Inventario fisico.</li>
+      <li>Il piano gratuito ha un limite di 30 record (anagrafica, storico, esportazione) — adatto all'uso su piccola scala.</li>
+      <li>Consultazione scorte mostra i totali di scorta correnti per prodotto, il dettaglio per ubicazione e gli articoli da rifornire.</li>
+      <li>La Gestione magazzino lavora insieme alle anagrafiche prodotti, categorie e ubicazioni.</li>
+      <li>La possibilità di salvare carichi, scarichi e trasferimenti nel piano gratuito è regolata dalle indicazioni in-app.</li>
+      <li>Pianifica l'upgrade a Standard o al Piano Completo prima di avvicinarti al limite di 30 record.</li>
+    </ul>
+  </div>
+  <div class="confirm-box" id="confirm">
+    <h3>🔍 Note prima dell'utilizzo</h3>
+    <ul>
+      <li>Carico, scarico e trasferimenti di scorte possono avere limiti nel piano gratuito. Segui gli avvisi di limite mostrati nell'app.</li>
+      <li>La registrazione dell'Anagrafica ubicazioni e la gestione dettagliata delle ubicazioni potrebbero richiedere il piano a pagamento applicabile.</li>
+      <li>L'esportazione CSV di backup nel piano gratuito può avere limiti di record e funzionalità. Usa la schermata di esportazione attuale nell'app come fonte di riferimento.</li>
+      <li>Applicare i dati dell'Inventario fisico alla Gestione magazzino è una funzione del Piano Completo. Controlla la schermata di conferma nell'app ed esporta un backup prima di usarla.</li>
+      <li>Controlla la schermata Dettaglio scorte nell'app per verificare quantità e ubicazione prima di procedere.</li>
+    </ul>
+  </div>
+</div>
+<footer>
+  <p>Manuale Quantiventra | ⑤ Gestione magazzino — Piano gratuito</p>
+  <p style="margin-top:4px;">Questo manuale può essere aggiornato senza preavviso. Consulta sempre le schermate dell'app per le informazioni più recenti.</p>
+  <p style="margin-top:4px;"><a href="privacy_it.html">Informativa sulla privacy</a></p>
+</footer>
+</body></html>

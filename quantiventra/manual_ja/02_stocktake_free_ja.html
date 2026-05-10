@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quantiventra 取扱説明書 – 棚卸 無料版</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Hiragino Sans','Meiryo',sans-serif;font-size:15px;line-height:1.8;color:#1a2535;background:#f4f7fb;}
+a{color:#1a5fa8;text-decoration:none;}
+a:hover{text-decoration:underline;}
+.site-nav{background:#1a3a5c;color:#fff;padding:0;}
+.site-nav .nav-inner{max-width:960px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:stretch;}
+.site-nav a{color:#cde;padding:10px 13px;font-size:12px;display:block;border-right:1px solid #2a4a6c;white-space:nowrap;}
+.site-nav a:hover{background:#2a5090;text-decoration:none;}
+.site-nav a.active{background:#2a6cbe;color:#fff;font-weight:bold;}
+.page-header{background:linear-gradient(135deg,#1a3a5c 0%,#2a6cbe 100%);color:#fff;padding:40px 20px 30px;}
+.page-header .inner{max-width:960px;margin:0 auto;}
+.page-header .app-name{font-size:13px;opacity:.8;letter-spacing:.1em;}
+.page-header h1{font-size:26px;font-weight:700;margin-top:6px;line-height:1.3;}
+.page-header .subtitle{font-size:14px;opacity:.85;margin-top:8px;}
+.scope-box{background:rgba(255,255,255,.15);border-left:4px solid #7ecfff;padding:12px 16px;margin-top:16px;border-radius:4px;font-size:13px;}
+.container{max-width:960px;margin:0 auto;padding:30px 16px;}
+.toc{background:#fff;border:1px solid #c8d8ec;border-radius:8px;padding:24px 28px;margin-bottom:32px;}
+.toc h2{font-size:16px;font-weight:700;color:#1a3a5c;border-bottom:2px solid #2a6cbe;padding-bottom:8px;margin-bottom:14px;}
+.toc ol{margin-left:18px;}
+.toc li{margin:5px 0;font-size:14px;}
+.chapter{background:#fff;border-radius:8px;box-shadow:0 1px 4px rgba(0,0,0,.08);padding:28px 28px 24px;margin-bottom:28px;}
+.chapter-head{border-left:5px solid #2a6cbe;padding-left:14px;margin-bottom:20px;}
+.chapter-head .ch-no{font-size:12px;color:#2a6cbe;font-weight:700;letter-spacing:.1em;}
+.chapter-head h2{font-size:20px;font-weight:700;color:#1a2535;margin-top:2px;}
+h3{font-size:16px;font-weight:700;color:#1a3a5c;border-bottom:1px solid #dde8f5;padding-bottom:5px;margin:22px 0 12px;}
+h4{font-size:14px;font-weight:700;color:#2a4a6c;margin:16px 0 8px;}
+p{margin-bottom:12px;}
+ul,ol{margin-left:20px;margin-bottom:12px;}
+li{margin-bottom:5px;}
+.steps{counter-reset:step;list-style:none;margin-left:0;}
+.steps li{counter-increment:step;padding:9px 12px 9px 46px;position:relative;background:#f8fbff;border:1px solid #dde8f5;border-radius:6px;margin-bottom:6px;}
+.steps li::before{content:counter(step);position:absolute;left:12px;top:50%;transform:translateY(-50%);width:24px;height:24px;background:#2a6cbe;color:#fff;border-radius:50%;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;}
+.table-wrap{overflow-x:auto;margin-bottom:16px;}
+table{width:100%;border-collapse:collapse;font-size:13px;min-width:380px;}
+th{background:#1a3a5c;color:#fff;padding:9px 12px;text-align:left;white-space:nowrap;}
+td{padding:8px 12px;border-bottom:1px solid #dde8f5;vertical-align:top;}
+tr:nth-child(even) td{background:#f4f7fb;}
+.box{border-radius:6px;padding:13px 16px;margin:14px 0;font-size:13px;}
+.box-warn{background:#fffbe6;border-left:4px solid #f5a623;color:#7a5700;}
+.box-danger{background:#fff0f0;border-left:4px solid #d43f3f;color:#7a0000;}
+.box-hint{background:#e8f4ff;border-left:4px solid #2a6cbe;color:#0a3060;}
+.box-check{background:#f4eeff;border-left:4px solid #8c4fc8;color:#3a0070;}
+.box strong{display:block;margin-bottom:4px;}
+figure{max-width:280px;width:100%;margin:18px auto;text-align:center;}
+figure img{display:block;width:100%;max-width:280px;height:auto;margin:0 auto;border:1px solid #c8d8ec;border-radius:6px;box-shadow:0 2px 8px rgba(0,0,0,.1);}
+figcaption{font-size:12px;color:#5a7a99;margin-top:6px;}
+.summary-box{background:linear-gradient(135deg,#e8f4ff,#f0f8ff);border:1px solid #99c8ec;border-radius:8px;padding:20px 24px;margin-top:32px;}
+.summary-box h3{border:none;color:#1a3a5c;margin-top:0;}
+.confirm-box{background:#fdf4ff;border:1px solid #c8a0e0;border-radius:8px;padding:20px 24px;margin-top:16px;}
+.confirm-box h3{border:none;color:#5a0090;margin-top:0;}
+.limit-badge{display:inline-block;background:#d43f3f;color:#fff;font-size:11px;font-weight:700;padding:2px 8px;border-radius:3px;margin-left:6px;vertical-align:middle;}
+footer{text-align:center;font-size:12px;color:#8a9aaa;padding:30px 16px;border-top:1px solid #dde8f5;margin-top:20px;}
+@media(max-width:640px){
+  .page-header h1{font-size:20px;}
+  .chapter{padding:20px 16px;}
+  .site-nav a{padding:8px 9px;font-size:11px;}
+}
+@media print{
+  body{background:#fff;font-size:12px;}
+  .site-nav{display:none;}
+  .chapter{box-shadow:none;border:1px solid #ccc;page-break-inside:avoid;}
+  .page-header{background:#1a3a5c !important;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+}
+</style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a href="01_top_settings_common_ja.html">① トップ・設定</a>
+    <a href="02_stocktake_free_ja.html" class="active">② 棚卸 無料版</a>
+    <a href="03_stocktake_simple_ja.html">③ 棚卸 簡単版</a>
+    <a href="04_stocktake_full_ja.html">④ 棚卸 フル版</a>
+    <a href="05_inventory_free_ja.html">⑤ 在庫管理 無料版</a>
+    <a href="06_inventory_simple_ja.html">⑥ 在庫管理 簡単版</a>
+    <a href="07_inventory_full_ja.html">⑦ 在庫管理 フル版</a>
+  </div>
+</nav>
+
+<header class="page-header">
+  <div class="inner">
+    <div class="app-name">Quantiventra 取扱説明書</div>
+    <h1>② 棚卸 無料版</h1>
+    <div class="subtitle">無料版でできる棚卸作業・制限・操作手順・おすすめ運用</div>
+    <div class="scope-box">
+      <strong>このHTMLで説明する範囲：</strong>
+      棚卸 無料版でできること / 無料版の制限 / 棚卸開始から保存までの操作手順 / バーコード・品名・数量入力 / ロケーションの扱い / 履歴確認 / CSV出力制限 / 無料版でできないこと / おすすめ運用
+    </div>
+  </div>
+</header>
+
+<div class="container">
+
+  <nav class="toc">
+    <h2>目次</h2>
+    <ol>
+      <li><a href="#overview">無料版の棚卸 概要</a></li>
+      <li><a href="#limits">無料版の制限</a></li>
+      <li><a href="#howto">棚卸の操作手順（詳細）</a></li>
+      <li><a href="#barcode">バーコード・品名・数量の入力</a></li>
+      <li><a href="#location">ロケーションの扱い</a></li>
+      <li><a href="#history">棚卸履歴の確認</a></li>
+      <li><a href="#csv">CSV出力での制限</a></li>
+      <li><a href="#cannot">無料版でできないこと</a></li>
+      <li><a href="#tips">無料版ユーザー向けおすすめ運用</a></li>
+      <li><a href="#summary">この章のポイント</a></li>
+      <li><a href="#confirm">ご利用前の確認事項</a></li>
+    </ol>
+  </nav>
+
+  <!-- 1. 概要 -->
+  <section class="chapter" id="overview">
+    <div class="chapter-head">
+      <div class="ch-no">第1章</div>
+      <h2>無料版の棚卸 概要</h2>
+    </div>
+    <p>棚卸は、実際に商品を数えて在庫数を記録する作業です。無料版では基本的な棚卸作業を試すことができます。</p>
+    <p>棚卸の流れは「商品を読み取る → 数量を入力する → 保存する → 履歴を確認する」です。</p>
+
+    <div class="box box-hint">
+      <strong>💡 棚卸とは</strong>
+      棚卸は「実際に数えた数量（実棚）」を記録する作業です。在庫管理の入荷・出荷・移動とは別の操作です。混同しないようにしてください。
+    </div>
+
+    <h3>無料版でできる棚卸機能</h3>
+    <ul>
+      <li>商品コードまたはバーコードの入力・読み取り（標準6種類ON固定）</li>
+      <li>商品名の入力</li>
+      <li>実棚数量の入力</li>
+      <li>メモ入力</li>
+      <li>棚卸履歴の確認</li>
+      <li>無料枠内での保存・出力（件数制限あり）</li>
+    </ul>
+  </section>
+
+  <!-- 2. 制限 -->
+  <section class="chapter" id="limits">
+    <div class="chapter-head">
+      <div class="ch-no">第2章</div>
+      <h2>無料版の制限</h2>
+    </div>
+    <p>無料版では、以下の制限があります。</p>
+    <div class="table-wrap">
+      <table>
+        <tr><th>項目</th><th>無料版の制限</th><th>解除するには</th></tr>
+        <tr><td>マスタ件数</td><td>30件まで</td><td>棚卸 簡単版または棚卸 フル版</td></tr>
+        <tr><td>棚卸履歴件数</td><td>30件まで</td><td>棚卸 簡単版または棚卸 フル版</td></tr>
+        <tr><td>エクスポート件数</td><td>30件まで</td><td>棚卸 簡単版または棚卸 フル版</td></tr>
+        <tr><td>画面回転固定</td><td>利用不可</td><td>棚卸 簡単版以上</td></tr>
+        <tr><td>詳細コードルール</td><td>利用不可</td><td>棚卸 フル版</td></tr>
+        <tr><td>ロケーションコードルール</td><td>利用不可</td><td>棚卸 フル版</td></tr>
+        <tr><td>カメラ詳細設定</td><td>利用不可</td><td>棚卸 フル版</td></tr>
+        <tr><td>CSV拡張出力</td><td>利用不可</td><td>棚卸 フル版</td></tr>
+      </table>
+    </div>
+    <div class="box box-warn">
+      <strong>⚠ 注意</strong>
+      件数上限（30件）を超えると保存や出力ができなくなる場合があります。上限に近づいたら、棚卸 簡単版または棚卸 フル版への移行を検討してください。
+    </div>
+    <div class="box box-check">
+      <strong>💡 購入前の確認</strong>
+      価格や実際の購入条件はGoogle Playで確認してください。取扱説明書では価格を断定しません。
+    </div>
+  </section>
+
+  <!-- 3. 操作手順 -->
+  <section class="chapter" id="howto">
+    <div class="chapter-head">
+      <div class="ch-no">第3章</div>
+      <h2>棚卸の操作手順（詳細）</h2>
+    </div>
+
+    <h3>基本の棚卸手順</h3>
+    <ol class="steps">
+      <li>トップ画面で「棚卸」をタップして棚卸画面を開く。</li>
+      <li>バーコードを読み取る、または品番（商品コード）を手入力する。</li>
+      <li>商品名が表示される。未登録コードの場合は商品名を入力する。</li>
+      <li>ロケーション（倉庫・店舗など）を確認または選択する。</li>
+      <li>実際に数えた数量（実棚）を入力する。</li>
+      <li>必要ならメモを入力する。</li>
+      <li>「保存」をタップして棚卸履歴に記録する。</li>
+      <li>棚卸履歴で保存内容を確認する。</li>
+    </ol>
+
+    <div class="box box-danger">
+      <strong>🚨 重要</strong>
+      保存する前に数量を必ず確認してください。数量の入力ミスは在庫との差異につながります。保存後に内容を見直す場合は、アプリ画面の案内に従って操作してください。
+    </div>
+
+    <h3>複数商品を続けて棚卸する場合</h3>
+    <ol class="steps">
+      <li>1件目を保存したら、次の商品のバーコードを読み取る（または品番を入力する）。</li>
+      <li>手順2〜7を繰り返す。</li>
+      <li>すべての商品を入力し終えたら、棚卸履歴で全体を確認する。</li>
+    </ol>
+
+    <div class="box box-hint">
+      <strong>💡 ヒント</strong>
+      棚卸は一度にすべて完了させる必要はありません。途中でアプリを閉じても、保存済みの履歴は残ります。
+    </div>
+  </section>
+
+  <!-- 4. バーコード・品名・数量 -->
+  <section class="chapter" id="barcode">
+    <div class="chapter-head">
+      <div class="ch-no">第4章</div>
+      <h2>バーコード・品名・数量の入力</h2>
+    </div>
+
+    <h3>バーコード読み取り</h3>
+    <p>カメラを起動してバーコードにかざすと自動で読み取ります。読み取りに失敗する場合は、明るい場所で行うか、手入力に切り替えてください。</p>
+
+    <h3>品番（商品コード）の手入力</h3>
+    <p>バーコードが使えない場合は、品番欄に直接商品コードを入力します。登録済みコードの場合は商品名が自動表示されます。</p>
+
+    <h3>商品名の入力</h3>
+    <p>未登録コードの場合は商品名を入力します。入力した商品名は棚卸履歴に記録されます。マスタ未登録状態での運用は件数管理に注意してください。</p>
+
+    <h3>実棚数量の入力</h3>
+    <p>実際に数えた数量（実棚）を数値で入力します。</p>
+
+    <div class="box box-warn">
+      <strong>⚠ 注意</strong>
+      数量は実際に数えた数を正確に入力してください。棚卸数量の誤入力は在庫差異の原因になります。保存前に必ず数値を確認してください。
+    </div>
+
+    <h3>メモの入力</h3>
+    <p>作業メモや備考を自由に入力できます。棚卸履歴に一緒に記録されます。</p>
+
+    <div class="table-wrap">
+      <table>
+        <tr><th>入力項目</th><th>内容</th><th>必須/任意</th></tr>
+        <tr><td>バーコード/品番</td><td>商品を識別するコード</td><td>必須</td></tr>
+        <tr><td>商品名</td><td>未登録コードの場合に入力</td><td>条件付き必須</td></tr>
+        <tr><td>ロケーション</td><td>棚卸を行う場所</td><td>設定による</td></tr>
+        <tr><td>実棚数量</td><td>実際に数えた数量</td><td>必須</td></tr>
+        <tr><td>メモ</td><td>備考・作業メモ</td><td>任意</td></tr>
+      </table>
+    </div>
+  </section>
+
+  <!-- 5. ロケーション -->
+  <section class="chapter" id="location">
+    <div class="chapter-head">
+      <div class="ch-no">第5章</div>
+      <h2>ロケーションの扱い</h2>
+    </div>
+    <p>無料版では、簡単なロケーション運用を前提とします。基本ロケーションは「倉庫」と「店舗」です。</p>
+
+    <h3>簡単モード別ロケーション</h3>
+    <div class="table-wrap">
+      <table>
+        <tr><th>棚卸モード設定</th><th>使えるロケーション</th><th>用途例</th></tr>
+        <tr><td>簡単A</td><td>倉庫のみ</td><td>倉庫だけで管理する場合</td></tr>
+        <tr><td>簡単B</td><td>倉庫 + 店舗</td><td>倉庫と店舗の両方で棚卸する場合</td></tr>
+        <tr><td>簡単C</td><td>店舗のみ</td><td>店舗だけで管理する場合</td></tr>
+      </table>
+    </div>
+
+    <p>棚卸モードは「設定 → 棚卸設定」で選択します。自分の運用に合ったモードを事前に設定しておくと、棚卸作業がスムーズになります。</p>
+
+    <div class="box box-hint">
+      <strong>💡 ヒント</strong>
+      詳細ロケーション（棚番号など細かい場所の管理）はフル解放の機能です。「詳細」モードに設定することで利用できます。
+    </div>
+    <div class="box box-warn">
+      <strong>⚠ 注意</strong>
+      詳細ロケーションが登録されていても、設定が簡単A/B/Cのままだと表示されません。詳細モードへの切替が必要です。
+    </div>
+  </section>
+
+  <!-- 6. 棚卸履歴 -->
+  <section class="chapter" id="history">
+    <div class="chapter-head">
+      <div class="ch-no">第6章</div>
+      <h2>棚卸履歴の確認</h2>
+    </div>
+    <p>保存した棚卸データは棚卸履歴から確認できます。</p>
+
+    <h3>履歴で確認できること</h3>
+    <ul>
+      <li>保存日時</li>
+      <li>商品コード・商品名</li>
+      <li>入力した実棚数量</li>
+      <li>ロケーション</li>
+      <li>メモ</li>
+    </ul>
+
+    <h3>無料版の履歴上限</h3>
+    <p>無料版では棚卸履歴は30件までです。上限に達した場合の挙動については、画面の案内に従ってください。継続して使用する場合は、棚卸 簡単版（1,000件まで）または棚卸 フル版（上限解除）への移行を検討してください。</p>
+
+    <div class="box box-warn">
+      <strong>⚠ 注意</strong>
+      無料版では履歴件数に上限（30件）があります。上限を超えると新しい棚卸データが保存できなくなる場合があります。
+    </div>
+  </section>
+
+  <!-- 7. CSV出力制限 -->
+  <section class="chapter" id="csv">
+    <div class="chapter-head">
+      <div class="ch-no">第7章</div>
+      <h2>CSV出力での制限</h2>
+    </div>
+    <p>無料版では、CSV出力件数に上限があります。</p>
+
+    <div class="table-wrap">
+      <table>
+        <tr><th>項目</th><th>無料版</th><th>簡単解放</th><th>フル解放</th></tr>
+        <tr><td>エクスポート件数</td><td>30件まで</td><td>300件まで</td><td>上限解除</td></tr>
+        <tr><td>全項目出力</td><td>制限あり</td><td>制限あり</td><td>CSV拡張出力</td></tr>
+      </table>
+    </div>
+
+    <div class="box box-hint">
+      <strong>💡 ヒント</strong>
+      棚卸CSVは1行目に言語別ヘッダーが付きます。出力したCSVはExcelやGoogle スプレッドシートで開いて確認できます。
+    </div>
+    <div class="box box-warn">
+      <strong>⚠ 注意</strong>
+      棚卸CSVには日付・時刻列やロケーション列は含まれません（棚卸合計CSV）。ロケーション別や日別の詳細出力はフル解放の機能です。
+    </div>
+  </section>
+
+  <!-- 8. できないこと -->
+  <section class="chapter" id="cannot">
+    <div class="chapter-head">
+      <div class="ch-no">第8章</div>
+      <h2>無料版でできないこと</h2>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <tr><th>機能</th><th>必要なプラン</th></tr>
+        <tr><td>マスタ30件超の登録</td><td>棚卸 簡単版以上</td></tr>
+        <tr><td>履歴30件超の保存</td><td>棚卸 簡単版以上</td></tr>
+        <tr><td>30件超のCSV出力</td><td>棚卸 簡単版以上</td></tr>
+        <tr><td>画面回転固定</td><td>棚卸 簡単版以上</td></tr>
+        <tr><td>詳細コードルール設定</td><td>棚卸 フル版</td></tr>
+        <tr><td>ロケーションコードルール設定</td><td>棚卸 フル版</td></tr>
+        <tr><td>商品コード読み取り形式の変更</td><td>棚卸 簡単版以上（QRは棚卸 フル版）</td></tr>
+        <tr><td>CSV拡張出力</td><td>棚卸 フル版</td></tr>
+        <tr><td>棚卸結果を在庫へ反映する操作</td><td>上位プラン（アプリ画面の案内に従う）</td></tr>
+      </table>
+    </div>
+  </section>
+
+  <!-- 9. おすすめ運用 -->
+  <section class="chapter" id="tips">
+    <div class="chapter-head">
+      <div class="ch-no">第9章</div>
+      <h2>無料版ユーザー向けおすすめ運用</h2>
+    </div>
+
+    <h3>小規模・少品目での利用</h3>
+    <p>商品数が30件以内の小規模運用であれば、無料版で基本的な棚卸作業を継続できます。</p>
+
+    <h3>定期的なCSV出力で記録を残す</h3>
+    <p>履歴上限（30件）に余裕がある間に定期的にCSV出力しておくことで、記録をPCやスプレッドシートに蓄積できます。</p>
+
+    <h3>簡単モードA/B/Cを事前に決める</h3>
+    <p>「設定 → 棚卸設定」で作業に合ったモード（簡単A/B/C）を選んでおくと、毎回の棚卸作業がスムーズになります。</p>
+
+    <h3>件数上限に近づいたら移行を検討する</h3>
+    <p>マスタ・履歴が30件に近づいてきたら、棚卸 簡単版への移行を検討してください。件数が上限に達すると保存や出力ができなくなる場合があります。</p>
+
+    <div class="box box-hint">
+      <strong>💡 ヒント</strong>
+      まずサンプルデータ（設定から作成）で操作を練習してから、本番商品のマスタ登録を始めることをおすすめします。
+    </div>
+  </section>
+
+  <!-- ポイント -->
+  <div class="summary-box" id="summary">
+    <h3>📌 この章のポイント</h3>
+    <ul>
+      <li>無料版の棚卸は30件以内の小規模運用に適している。</li>
+      <li>棚卸の手順は「読み取り → 数量入力 → 保存 → 履歴確認」。</li>
+      <li>ロケーションは簡単A/B/Cで設定。詳細ロケーションはフル解放。</li>
+      <li>CSV出力は30件まで。出力したCSVには日付・ロケーション列は含まれない。</li>
+      <li>件数上限（30件）に近づいたら、棚卸 簡単版または棚卸 フル版を検討する。</li>
+      <li>棚卸は在庫管理の入荷・出荷とは別の作業。混同しないこと。</li>
+    </ul>
+  </div>
+
+  <!-- ご利用前の確認事項 -->
+  <div class="confirm-box" id="confirm">
+    <h3>🔍 ご利用前の確認事項</h3>
+    <ul>
+      <li>保存前に、商品コード・商品名・ロケーション・数量を確認してください。</li>
+      <li>履歴件数が上限に近づいたら、CSV出力またはプラン変更を検討してください。</li>
+      <li>棚卸結果を在庫へ反映する操作は上位機能です。利用できる範囲はアプリ画面とGoogle Playの表示を確認してください。</li>    </ul>
+  </div>
+
+</div>
+
+<footer>
+  <p>Quantiventra 取扱説明書 | ② 棚卸 無料版</p>
+  <p style="margin-top:4px;">本マニュアルの内容は予告なく変更される場合があります。最新情報はアプリ内表示を優先してください。</p>
+  <p style="margin-top:4px;"><a href="privacy_ja.html">プライバシーポリシー</a></p>
+</footer>
+
+</body>
+</html>
+
+
+

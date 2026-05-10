@@ -1,0 +1,737 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quantiventra User Manual – Inventory Management: Full Unlock</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;font-size:15px;line-height:1.8;color:#1a2535;background:#f4f7fb;}
+a{color:#1a5fa8;text-decoration:none;}
+a:hover{text-decoration:underline;}
+.site-nav{background:#1a3a5c;color:#fff;padding:0;}
+.site-nav .nav-inner{max-width:960px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:stretch;}
+.site-nav a{color:#cde;padding:10px 13px;font-size:12px;display:block;border-right:1px solid #2a4a6c;white-space:nowrap;}
+.site-nav a:hover{background:#2a5090;text-decoration:none;}
+.site-nav a.active{background:#2a6cbe;color:#fff;font-weight:bold;}
+.page-header{background:linear-gradient(135deg,#1a3a5c 0%,#2a6cbe 100%);color:#fff;padding:40px 20px 30px;}
+.page-header .inner{max-width:960px;margin:0 auto;}
+.page-header .app-name{font-size:13px;opacity:.8;letter-spacing:.1em;}
+.page-header h1{font-size:26px;font-weight:700;margin-top:6px;line-height:1.3;}
+.page-header .subtitle{font-size:14px;opacity:.85;margin-top:8px;}
+.scope-box{background:rgba(255,255,255,.15);border-left:4px solid #7ecfff;padding:12px 16px;margin-top:16px;border-radius:4px;font-size:13px;}
+.container{max-width:960px;margin:0 auto;padding:30px 16px;}
+.toc{background:#fff;border:1px solid #c8d8ec;border-radius:8px;padding:24px 28px;margin-bottom:32px;}
+.toc h2{font-size:16px;font-weight:700;color:#1a3a5c;border-bottom:2px solid #2a6cbe;padding-bottom:8px;margin-bottom:14px;}
+.toc ol{margin-left:18px;}
+.toc li{margin:5px 0;font-size:14px;}
+.chapter{background:#fff;border-radius:8px;box-shadow:0 1px 4px rgba(0,0,0,.08);padding:28px 28px 24px;margin-bottom:28px;}
+.chapter-head{border-left:5px solid #2a6cbe;padding-left:14px;margin-bottom:20px;}
+.chapter-head .ch-no{font-size:12px;color:#2a6cbe;font-weight:700;letter-spacing:.1em;}
+.chapter-head h2{font-size:20px;font-weight:700;color:#1a2535;margin-top:2px;}
+h3{font-size:16px;font-weight:700;color:#1a3a5c;border-bottom:1px solid #dde8f5;padding-bottom:5px;margin:22px 0 12px;}
+h4{font-size:14px;font-weight:700;color:#2a4a6c;margin:16px 0 8px;}
+p{margin-bottom:12px;}
+ul,ol{margin-left:20px;margin-bottom:12px;}
+li{margin-bottom:5px;}
+.steps{counter-reset:step;list-style:none;margin-left:0;}
+.steps li{counter-increment:step;padding:9px 12px 9px 46px;position:relative;background:#f8fbff;border:1px solid #dde8f5;border-radius:6px;margin-bottom:6px;}
+.steps li::before{content:counter(step);position:absolute;left:12px;top:50%;transform:translateY(-50%);width:24px;height:24px;background:#2a6cbe;color:#fff;border-radius:50%;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;}
+.table-wrap{overflow-x:auto;margin-bottom:16px;}
+table{width:100%;border-collapse:collapse;font-size:13px;min-width:400px;}
+th{background:#1a3a5c;color:#fff;padding:9px 12px;text-align:left;white-space:nowrap;}
+td{padding:8px 12px;border-bottom:1px solid #dde8f5;vertical-align:top;}
+tr:nth-child(even) td{background:#f4f7fb;}
+.box{border-radius:6px;padding:13px 16px;margin:14px 0;font-size:13px;}
+.box-warn{background:#fffbe6;border-left:4px solid #f5a623;color:#7a5700;}
+.box-danger{background:#fff0f0;border-left:4px solid #d43f3f;color:#7a0000;}
+.box-hint{background:#e8f4ff;border-left:4px solid #2a6cbe;color:#0a3060;}
+.box-check{background:#f4eeff;border-left:4px solid #8c4fc8;color:#3a0070;}
+.box strong{display:block;margin-bottom:4px;}
+figure{max-width:280px;width:100%;margin:18px auto;text-align:center;}
+figure img{display:block;width:100%;max-width:280px;height:auto;margin:0 auto;border:1px solid #c8d8ec;border-radius:6px;box-shadow:0 2px 8px rgba(0,0,0,.1);}
+figcaption{font-size:12px;color:#5a7a99;margin-top:6px;}
+.diff-add{background:#e8fff0;border-left:4px solid #2a9c5c;border-radius:6px;padding:12px 16px;margin:14px 0;font-size:13px;}
+.diff-add strong{display:block;color:#1a6c3c;margin-bottom:4px;}
+.summary-box{background:linear-gradient(135deg,#e8f4ff,#f0f8ff);border:1px solid #99c8ec;border-radius:8px;padding:20px 24px;margin-top:32px;}
+.summary-box h3{border:none;color:#1a3a5c;margin-top:0;}
+.confirm-box{background:#fdf4ff;border:1px solid #c8a0e0;border-radius:8px;padding:20px 24px;margin-top:16px;}
+.confirm-box h3{border:none;color:#5a0090;margin-top:0;}
+footer{text-align:center;font-size:12px;color:#8a9aaa;padding:30px 16px;border-top:1px solid #dde8f5;margin-top:20px;}
+@media(max-width:640px){
+  .page-header h1{font-size:20px;}
+  .chapter{padding:20px 16px;}
+  .site-nav a{padding:8px 9px;font-size:11px;}
+}
+@media print{
+  body{background:#fff;font-size:12px;}
+  .site-nav{display:none;}
+  .chapter{box-shadow:none;border:1px solid #ccc;page-break-inside:avoid;}
+  .page-header{background:#1a3a5c !important;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+}
+</style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a href="01_top_settings_common_en.html">① Top &amp; Settings</a>
+    <a href="02_stocktake_free_en.html">② Stocktake: Free</a>
+    <a href="03_stocktake_simple_en.html">③ Stocktake: Simple Unlock</a>
+    <a href="04_stocktake_full_en.html">④ Stocktake: Full</a>
+    <a href="05_inventory_free_en.html">⑤ Inventory: Free</a>
+    <a href="06_inventory_simple_en.html">⑥ Inventory: Simple Unlock</a>
+    <a href="07_inventory_full_en.html" class="active">⑦ Inventory: Full</a>
+  </div>
+</nav>
+
+<header class="page-header">
+  <div class="inner">
+    <div class="app-name">Quantiventra User Manual</div>
+    <h1>⑦ Inventory Management: Full Unlock</h1>
+    <div class="subtitle">Full Unlock capabilities · Master data management · Stock transfer · Apply stocktake · CSV backup · Real-world workflow examples</div>
+    <div class="scope-box">
+      <strong>Topics covered in this document:</strong>
+      What the Inventory Full Unlock enables / Differences from Simple Unlock / Product Master integration / Category Master / Location Master / Stock Transfer / Stock History / Applying Stocktake Data / CSV Backup &amp; Restore / History Backup / Reorder Point &amp; Price / Full Unlock workflow examples / Important notes
+    </div>
+  </div>
+</header>
+
+<div class="container">
+
+  <nav class="toc">
+    <h2>Table of Contents</h2>
+    <ol>
+      <li><a href="#overview">Full Unlock Overview</a></li>
+      <li><a href="#diff">Differences from Simple Unlock</a></li>
+      <li><a href="#master-product">Product Master Integration</a></li>
+      <li><a href="#master-item">Category Master</a></li>
+      <li><a href="#master-location">Location Master</a></li>
+      <li><a href="#stock-move">Stock Transfer</a></li>
+      <li><a href="#stock-history">Stock History</a></li>
+      <li><a href="#stocktake-reflect">Applying Stocktake Data to Inventory</a></li>
+      <li><a href="#csv-backup">CSV Backup &amp; Restore</a></li>
+      <li><a href="#csv-history-backup">History Backup</a></li>
+      <li><a href="#reorder-price">Reorder Point &amp; Price</a></li>
+      <li><a href="#usecase">Full Unlock Workflow Examples</a></li>
+      <li><a href="#notes">Important Notes</a></li>
+      <li><a href="#summary">Key Takeaways</a></li>
+      <li><a href="#confirm">Notes Before Use</a></li>
+    </ol>
+  </nav>
+
+  <!-- 1. Overview -->
+  <section class="chapter" id="overview">
+    <div class="chapter-head">
+      <div class="ch-no">CHAPTER 1</div>
+      <h2>Full Unlock Overview</h2>
+    </div>
+
+    <p>
+      The Inventory Full Unlock removes caps and adds more detailed operating settings, such as advanced rules and extended CSV settings. Receiving, shipping, stock transfer, applying stocktake results to inventory, and CSV backup/restore are used according to the conditions and guidance shown in the app.
+    </p>
+
+    <div class="diff-add">
+      <strong>Features unlocked with the Full Unlock</strong>
+      <ul>
+        <li>No caps on master records, history entries, or export rows</li>
+        <li>Reorder point and price fields in the Product Master</li>
+        <li>Category Master for product classification</li>
+        <li>Location Master registration and management</li>
+        <li>Stock transfer workflows combined with detailed location settings</li>
+        <li>Confirmation and history management when applying stocktake data to inventory</li>
+        <li>CSV backup and restore workflows combined with advanced settings</li>
+        <li>History Backup</li>
+        <li>Direct editing of registered cumulative totals</li>
+        <li>Code rules, location rules, and camera scan settings (shared Full settings)</li>
+        <li>Extended CSV options (column selection and import mode selection)</li>
+      </ul>
+    </div>
+
+    <div class="box box-hint">
+      <strong>Tip: Full Unlock refers to the Inventory Management Full level</strong>
+      In this manual, "Full Unlock" and "Full level" refer to the same Inventory Management plan level.
+      For purchase and plan details, see the "Billing Plans" section in <a href="01_top_settings_common_en.html">① Top &amp; Settings</a>.
+    </div>
+  </section>
+
+  <!-- 2. Differences from Simple Unlock -->
+  <section class="chapter" id="diff">
+    <div class="chapter-head">
+      <div class="ch-no">CHAPTER 2</div>
+      <h2>Differences from Simple Unlock</h2>
+    </div>
+
+    <p>The table below summarizes the features added on top of the Simple Unlock.</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Feature</th>
+            <th>Free Tier</th>
+            <th>Simple Unlock</th>
+            <th>Full Unlock</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Stock Check</td><td>✓</td><td>✓</td><td>✓</td></tr>
+          <tr><td>Receiving (Stock In) / Shipping (Stock Out)</td><td>Available</td><td>Available</td><td>Available</td></tr>
+          <tr><td>Master operation scope</td><td>Follow in-app display</td><td>Easier for ongoing use</td><td>No cap</td></tr>
+          <tr><td>Stock Transfer</td><td>Available when conditions are met</td><td>Available when conditions are met</td><td>Available when conditions are met</td></tr>
+          <tr><td>Apply stocktake data to inventory</td><td>Follow confirmation screen</td><td>Follow confirmation screen</td><td>Follow confirmation screen</td></tr>
+          <tr><td>Category Master</td><td>Available</td><td>Available</td><td>Available</td></tr>
+          <tr><td>Reorder point &amp; price</td><td>Available</td><td>Available</td><td>Available</td></tr>
+          <tr><td>CSV Backup &amp; Restore</td><td>Available</td><td>Available</td><td>Available; can be combined with advanced settings</td></tr>
+          <tr><td>History Backup</td><td>Available</td><td>Available</td><td>Available</td></tr>
+          <tr><td>Code rules &amp; location rules</td><td>✗</td><td>✗</td><td>✓ (shared Full settings)</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="box box-hint">
+      <strong>Tip</strong>
+      For the core operations available in the Simple Unlock — Receiving, Shipping, Stock Check, Stock History, and CSV import/export — see
+      <a href="06_inventory_simple_en.html">⑥ Inventory Management: Simple Unlock</a>.
+      This page covers only the features added in the Full Unlock.
+    </div>
+  </section>
+
+  <!-- 3. Product Master Integration -->
+  <section class="chapter" id="master-product">
+    <div class="chapter-head">
+      <div class="ch-no">CHAPTER 3</div>
+      <h2>Product Master Integration</h2>
+    </div>
+
+    <p>
+      The Product Master is where you register the actual products whose stock you manage.
+      With the Full Unlock, you can add a reorder point and a price to each product, making them available throughout the inventory management workflow.
+    </p>
+
+    <h3>Key fields in the Product Master</h3>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Field</th>
+            <th>Description</th>
+            <th>Added in Full Unlock</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Product Code / Barcode</td><td>Unique identifier for the product</td><td>—</td></tr>
+          <tr><td>Product Name</td><td>Name of the product</td><td>—</td></tr>
+          <tr><td>Category</td><td>Product classification (selected from the Category Master)</td><td>—</td></tr>
+          <tr><td>Price</td><td>Selling price or cost price of the product</td><td>✓</td></tr>
+          <tr><td>Reorder Point</td><td>Reference quantity used to judge when replenishment may be needed</td><td>✓</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Registering or editing a product</h3>
+    <ol class="steps">
+      <li>Open <strong>Master Management</strong> from the top screen.</li>
+      <li>Select <strong>Product Master</strong>.</li>
+      <li>Tap the new-entry card or the <strong>New</strong> button.</li>
+      <li>Enter the product code, product name, and category. Optionally enter the price and reorder point.</li>
+      <li>Tap <strong>Save</strong> to register.</li>
+      <li>To edit an existing product, open its row in the list, make your changes, and tap <strong>Save</strong>.</li>
+    </ol>
+
+    <div class="box box-hint">
+      <strong>Registering an unrecognised product from the Receiving screen</strong>
+      If you enter a product code on the Receiving screen that is not yet in the master, the app will take you to the Product Master new-entry form. Once you save the product name, price, and reorder point there, you are returned to the Receiving screen and the product details are filled in automatically.
+    </div>
+
+    <div class="box box-warn">
+      <strong>Note: Do not confuse Products with Categories</strong>
+      <ul>
+        <li><strong>Product</strong>: An individual item you hold in stock (e.g., Red Pen, Blue Pen)</li>
+        <li><strong>Category</strong>: A classification group for products (e.g., Stationery, Food)</li>
+      </ul>
+      A category is selected in the Product Master as the product's classification. Categories themselves do not hold stock.
+    </div>
+  </section>
+
+  <!-- 4. Category Master -->
+  <section class="chapter" id="master-item">
+    <div class="chapter-head">
+      <div class="ch-no">CHAPTER 4</div>
+      <h2>Category Master</h2>
+    </div>
+
+    <p>
+      The Category Master manages the classification groups used to organise your products.
+      Categories are used to classify products so that the Product Master is easier to organise and review.
+    </p>
+
+    <h3>Key fields in the Category Master</h3>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Field</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Category Code</td><td>Unique identifier for the category</td></tr>
+          <tr><td>Category Name</td><td>Name of the classification (e.g., Food, Apparel)</td></tr>
+          <tr><td>Input Fields</td><td>Follow the fields shown in the app</td></tr>
+          <tr><td>Display Order</td><td>Sort order in the list view</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="box box-hint">
+      <strong>Tip: Categories</strong>
+      Categories help keep products organised and easier to review. Follow the input fields shown in the app.
+    </div>
+
+    <h3>Registering a category</h3>
+    <ol class="steps">
+      <li>Go to <strong>Master Management → Category Master</strong>.</li>
+      <li>Tap the new-entry card or the <strong>New</strong> button.</li>
+      <li>Enter the category code, category name, and display order.</li>
+      <li>Tap <strong>Save</strong>.</li>
+    </ol>
+  </section>
+
+  <!-- 5. Location Master -->
+  <section class="chapter" id="master-location">
+    <div class="chapter-head">
+      <div class="ch-no">CHAPTER 5</div>
+      <h2>Location Master</h2>
+    </div>
+
+    <p>
+      The Location Master is where you register and manage the physical places where stock is stored.
+      By registering multiple locations — such as a warehouse, a retail floor, or individual shelves — you can track inventory on a per-location basis.
+    </p>
+
+    <h3>Key fields in the Location Master</h3>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Field</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Location Code</td><td>Unique identifier for the location</td></tr>
+          <tr><td>Location Name</td><td>Name of the location (e.g., Warehouse, Store A)</td></tr>
+          <tr><td>Display Order</td><td>Sort order in the list view</td></tr>
+          <tr><td>Include in Reorder Check</td><td>When enabled, this location's stock is included in the total used for replenishment decisions on the Stock Check screen</td></tr>
+          <tr><td>Active / Inactive</td><td>Locations no longer in use can be deactivated without deleting them</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="box box-hint">
+      <strong>Default locations</strong>
+      The app ships with "Warehouse" and "Store" pre-registered.
+      Rename, edit, or add locations to match your actual operation.
+    </div>
+
+    <h3>Registering a location</h3>
+    <ol class="steps">
+      <li>Go to <strong>Master Management → Location Master</strong>.</li>
+      <li>Tap the new-entry card or the <strong>New</strong> button.</li>
+      <li>Enter the location code, location name, and display order.</li>
+      <li>Set <strong>Include in Reorder Check</strong> on or off as needed. New entries default to on.</li>
+      <li>Tap <strong>Save</strong>.</li>
+    </ol>
+
+    <div class="box box-hint">
+      <strong>About the "Include in Reorder Check" setting</strong>
+      The reorder check on the Stock Check screen sums stock only from locations where this toggle is on. Use the <strong>Include All Active Locations</strong> button to turn on all active locations at once. Note that the Quick Setup A/B/C modes affect which locations appear in the workflow, but having warehouse or store rows in the Location Master is not a problem in itself.
+    </div>
+
+    <div class="box box-warn">
+      <strong>Note: Deactivating vs. deleting a location</strong>
+      When a location is no longer needed, it is recommended to <strong>deactivate</strong> it rather than delete it.
+      If a location is no longer needed, deactivating it is generally safer than deleting it. Follow the app's on-screen guidance and review related inventory/history before making changes.
+    </div>
+  </section>
+
+  <!-- 6. Stock Transfer -->
+  <section class="chapter" id="stock-move">
+    <div class="chapter-head">
+      <div class="ch-no">CHAPTER 6</div>
+      <h2>Stock Transfer</h2>
+    </div>
+
+    <p>
+      Stock Transfer moves a quantity of stock from one location to another.
+      This operation can be used when the required conditions are met, such as having a product, available stock, and at least two locations.
+    </p>
+
+    <h3>How to perform a stock transfer</h3>
+    <ol class="steps">
+      <li>Open <strong>Stock Transfer</strong> from the Inventory Management menu.</li>
+      <li>Select the <strong>source location</strong> (transferring from).</li>
+      <li>Select the <strong>destination location</strong> (transferring to).</li>
+      <li>Find the target product by scanning its barcode or searching by name.</li>
+      <li>Enter the quantity to transfer.</li>
+      <li>Review the details and tap <strong>Confirm</strong>.</li>
+    </ol>
+
+    <div class="box box-danger">
+      <strong>Important: Never transfer to the same location</strong>
+      Selecting the same location as both source and destination will cause the stock data to be processed incorrectly.
+      Always choose two different locations.
+    </div>
+
+    <div class="box box-hint">
+      <strong>If you only have one location</strong>
+      With a single location registered, Stock Transfer has no purpose. Use
+      <strong>Receiving (Stock In)</strong>, <strong>Shipping (Stock Out)</strong>, or <strong>Edit</strong> to adjust quantities instead.
+      Stock Transfer is only meaningful when two or more locations exist.
+    </div>
+  </section>
+
+  <!-- 7. Stock History -->
+  <section class="chapter" id="stock-history">
+    <div class="chapter-head">
+      <div class="ch-no">CHAPTER 7</div>
+      <h2>Stock History</h2>
+    </div>
+
+    <p>
+      Stock History gives you a complete record of every change to your inventory.
+      With the Full Unlock, the history entry cap is removed, allowing long-term records to be retained.
+    </p>
+
+    <h3>Operation types recorded in the history</h3>
+    <ul>
+      <li><strong>Receiving (Stock In)</strong>: Goods received into stock</li>
+      <li><strong>Shipping (Stock Out)</strong>: Goods dispatched from stock</li>
+      <li><strong>Transfer</strong>: Stock moved between locations</li>
+      <li><strong>Stocktake Adjustment</strong>: Variance correction when stocktake results are applied</li>
+      <li><strong>Initial Stock</strong>: Opening quantity set at the time of initial registration</li>
+      <li><strong>CSV Import</strong>: Stock updated via CSV file import</li>
+    </ul>
+
+    <div class="box box-hint">
+      <strong>Tip: Filtering the history</strong>
+      You may be able to filter the history by product, location, or operation type.
+      Refer to the on-screen options for the available filter controls.
+    </div>
+  </section>
+
+  <!-- 8. Applying Stocktake Data to Inventory -->
+  <section class="chapter" id="stocktake-reflect">
+    <div class="chapter-head">
+      <div class="ch-no">CHAPTER 8</div>
+      <h2>Applying Stocktake Data to Inventory</h2>
+    </div>
+
+    <p>
+      Applying the results of a physical count (stocktake) to the inventory management module brings your system stock in line with actual stock on the shelf.
+      This operation can be executed when the confirmation screen conditions are met.
+    </p>
+
+    <h3>How the apply process works</h3>
+    <p>
+      When stocktake results are applied to inventory, any variance between the theoretical stock level and the physical count is recorded as a <strong>Stocktake Adjustment</strong> entry in the history.
+      This simultaneously updates the inventory to the physical count quantity and preserves a traceable record of the adjustment.
+    </p>
+
+    <div class="box box-check">
+      <strong>Before applying stocktake data</strong>
+      Applying stocktake data can greatly change inventory quantities. Review the app's confirmation screen, affected locations, and adjustment details before proceeding. After applying, check Stock History and keep your backup CSV available.
+    </div>
+
+    <div class="box box-danger">
+      <strong>Important: Back up before applying</strong>
+      Applying stocktake data overwrites inventory quantities.
+      Always export a CSV backup before running this operation.
+      The ability to reverse an apply after the fact may be limited.
+    </div>
+  </section>
+
+  <!-- 9. CSV Backup & Restore -->
+  <section class="chapter" id="csv-backup">
+    <div class="chapter-head">
+      <div class="ch-no">CHAPTER 9</div>
+      <h2>CSV Backup &amp; Restore</h2>
+    </div>
+
+    <p>
+      Inventory Management supports inventory sheet CSV, backup CSV sets, and history backups. Full Unlock makes it easier to combine these with advanced settings and uncapped operation.
+      Because restore and replace operations make sweeping changes to your data, careful verification before executing is essential.
+    </p>
+
+    <h3>CSV types and their uses</h3>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>CSV Type</th>
+            <th>Purpose</th>
+            <th>Main Contents</th>
+            <th>Available In</th>
+            <th>Notes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Inventory Sheet CSV</td>
+            <td>Review and re-import the current stock list</td>
+            <td>Location, product code, product name, quantity</td>
+            <td>Simple Unlock and above</td>
+            <td>If no location column is present, select the target location during import</td>
+          </tr>
+          <tr>
+            <td>Full Backup CSV Set</td>
+            <td>Full dataset backup and restore</td>
+            <td>Products, current stock, receiving/shipping/transfer/adjustment history, locations, categories</td>
+            <td>Full Unlock</td>
+            <td>May be exported as multiple files</td>
+          </tr>
+          <tr>
+            <td>History Backup</td>
+            <td>Backup for reviewing stock movement over time</td>
+            <td>Inventory sheet + complete operation history</td>
+            <td>Full Unlock</td>
+            <td>When restoring or re-importing backup files, follow the app's on-screen guidance and review the generated files before proceeding</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Exporting a Full Backup CSV Set</h3>
+    <ol class="steps">
+      <li>Open <strong>CSV Import / Export</strong> from the Settings screen or the main menu.</li>
+      <li>Select <strong>Full Backup CSV Set</strong>.</li>
+      <li>Choose the destination folder (follow the on-screen prompts).</li>
+      <li>Tap <strong>Export</strong> and confirm the completion message.</li>
+    </ol>
+
+    <h3>Restoring from a CSV backup</h3>
+    <ol class="steps">
+      <li>Go to <strong>CSV Import / Export → Restore</strong> or <strong>CSV Import</strong>.</li>
+      <li>Select the backup CSV file.</li>
+      <li>Verify the column mapping (the app may detect it automatically).</li>
+      <li>Review the confirmation screen carefully, then tap <strong>Run</strong>.</li>
+    </ol>
+
+    <div class="box box-danger">
+      <strong>Important: Always back up your current data before a restore or replace</strong>
+      A CSV restore or Replace Current Stock operation overwrites your existing inventory data.
+      Export and save the current inventory sheet CSV before proceeding.
+    </div>
+
+    <h3>Replace Current Stock</h3>
+    <p>
+      Replace Current Stock overwrites the current inventory quantities with the values in the imported CSV.
+      Existing history is preserved, but the difference is recorded as an <strong>Adjustment</strong> history entry.
+      Any inventory rows not present in the CSV may have their quantities set to 0, so always verify the CSV contents before importing.
+    </p>
+
+    <div class="box box-danger">
+      <strong>Use Replace Current Stock with extra caution</strong>
+      Products or locations absent from the CSV may have their stock set to 0.
+      Before importing, always confirm that the CSV contains the correct set of products and locations.
+    </div>
+  </section>
+
+  <!-- 10. History Backup -->
+  <section class="chapter" id="csv-history-backup">
+    <div class="chapter-head">
+      <div class="ch-no">CHAPTER 10</div>
+      <h2>History Backup</h2>
+    </div>
+
+    <p>
+      History Backup exports both the inventory sheet and a full record of stock movements — receiving, shipping, transfers, adjustments, and more — in a single operation.
+      Use it when you need to audit or trace stock changes after the fact.
+    </p>
+
+    <ul>
+      <li>Inventory sheet CSV (current stock quantities)</li>
+      <li>Complete operation history (receiving, shipping, transfers, stocktake adjustments, CSV imports)</li>
+    </ul>
+
+    <div class="box box-check">
+      <strong>Before restoring from a history backup CSV</strong>
+      Restoring data can overwrite or greatly change current inventory records. Follow the app's on-screen guidance, check the selected files carefully, and keep a separate backup of the current data before proceeding.
+    </div>
+
+    <div class="box box-hint">
+      <strong>Operational tip</strong>
+      Running a History Backup on a regular schedule — weekly or monthly — means that if something goes wrong, you can trace exactly how your stock levels changed over time and recover more accurately.
+    </div>
+  </section>
+
+  <!-- 11 (was 12). Reorder Point & Price -->
+  <section class="chapter" id="reorder-price">
+    <div class="chapter-head">
+      <div class="ch-no">CHAPTER 11</div>
+      <h2>Reorder Point &amp; Price</h2>
+    </div>
+
+    <h3>Reorder Point</h3>
+    <p>
+      Setting a reorder point in the Product Master gives you a reference threshold: when stock falls below this value, you can see at a glance that replenishment is needed.
+      It serves as an indicator to help you manage the timing of restocking.
+    </p>
+
+    <div class="box box-check">
+      <strong>Reorder check on the Stock Check screen</strong>
+      The Stock Check screen displays totals per product by default. The reorder check compares the combined stock across all locations where <strong>Include in Reorder Check</strong> is enabled against the product's reorder point. When viewing stock broken down by individual location, the reorder check is not shown or is treated as inactive.
+    </div>
+
+    <div class="box box-check">
+      <strong>Reorder display behavior</strong>
+      Reorder notices and related display behavior depend on the current app settings and screen. Check the Stock Check screen and the app's on-screen guidance when using reorder points.
+    </div>
+
+    <h3>Price</h3>
+    <p>
+      A price can be registered for each product in the Product Master. It is referenced when calculating the total value of your inventory or when generating reports.
+      Check the app display and exported files for the currency and rounding used in your environment.
+    </p>
+
+    <h3>Using Categories</h3>
+    <p>
+      Link products to categories to make inventory lists and master management easier to organise and review.
+      Follow the actual fields and display shown in the app.
+    </p>
+
+    <div class="box box-warn">
+      <strong>Note</strong>
+      Price information and related calculations are app features.
+      Confirm separately whether they are suitable for accounting or tax filing in your operation.
+    </div>
+  </section>
+
+  <!-- 12 (was 13). Full Unlock Workflow Examples -->
+  <section class="chapter" id="usecase">
+    <div class="chapter-head">
+      <div class="ch-no">CHAPTER 12</div>
+      <h2>Full Unlock Workflow Examples</h2>
+    </div>
+
+    <h3>Example 1: Managing two locations — Warehouse and Store</h3>
+    <ol class="steps">
+      <li>Register "Warehouse" and "Store A" in the Location Master.</li>
+      <li>Register your products in the Product Master and set the opening stock at the Warehouse.</li>
+      <li>When the store needs replenishment, use <strong>Stock Transfer</strong> to move stock from Warehouse to Store A.</li>
+      <li>After sales at the store, record the decrease using <strong>Shipping (Stock Out)</strong>.</li>
+      <li>Conduct stocktakes periodically and use <strong>Apply Stocktake Data</strong> to align system stock with actual counts.</li>
+      <li>Export a <strong>History Backup</strong> monthly and archive it.</li>
+    </ol>
+
+    <h3>Example 2: Regular stocktake cycle</h3>
+    <ol class="steps">
+      <li>At month-end, enter physical counts using the Stocktake app (Stocktake Full Unlock).</li>
+      <li>Finalise the physical count results.</li>
+      <li>Use <strong>Apply Stocktake Data</strong> to push the variances into the inventory module.</li>
+      <li>Review the <strong>Stocktake Adjustment</strong> entries in the Stock History to confirm the changes.</li>
+      <li>Export and save the Full Backup CSV Set.</li>
+    </ol>
+
+    <div class="box box-hint">
+      <strong>Tip: Stocktake integration</strong>
+      For detailed instructions on the Stocktake Full Unlock, see <a href="04_stocktake_full_en.html">④ Stocktake: Full Unlock</a>.
+    </div>
+  </section>
+
+  <!-- 13 (was 14). Important Notes -->
+  <section class="chapter" id="notes">
+    <div class="chapter-head">
+      <div class="ch-no">CHAPTER 13</div>
+      <h2>Important Notes</h2>
+    </div>
+
+    <div class="box box-danger">
+      <strong>CSV Replace Current Stock</strong>
+      Replace Current Stock overwrites your inventory quantities with the values in the CSV.
+      Items not included in the CSV may have their stock set to 0.
+      <strong>Always export a backup CSV before running this operation.</strong>
+    </div>
+
+    <div class="box box-danger">
+      <strong>Applying Stocktake Data</strong>
+      Applying stocktake data rewrites your inventory quantities.
+      After applying stocktake data, reversals may be limited. Review the confirmation screen and Stock History carefully before and after execution.
+      <strong>Always export a backup CSV before running this operation.</strong>
+    </div>
+
+    <div class="box box-danger">
+      <strong>Deleting or overwriting master records</strong>
+      Deleting entries from the Product Master or Location Master may affect your inventory data.
+      When records are no longer needed, consider <strong>deactivating</strong> them rather than deleting.
+      Follow the app's on-screen guidance before deleting records. In most cases, deactivating unused records is safer than deleting them.
+    </div>
+
+    <div class="box box-warn">
+      <strong>Stock Transfer: source and destination must differ</strong>
+      Never select the same location as both source and destination in a Stock Transfer.
+      Doing so may result in unintended data changes.
+    </div>
+
+    <div class="box box-hint">
+      <strong>The stock field on the Shipping screen</strong>
+      The stock quantity shown on the Shipping screen is for reference only — it displays the current stock level and is not editable. Saving a shipping quantity reduces the stock at the selected location as a result.
+    </div>
+
+    <div class="box box-warn">
+      <strong>Pricing and purchase terms</strong>
+      For the Full Unlock purchase price and sales terms, refer to the listing on Google Play.
+      No pricing information is included in this document.
+    </div>
+
+    <div class="box box-hint">
+      <strong>Operational principles</strong>
+      <ul>
+        <li>Always take a backup before any operation that makes large-scale changes to inventory (replace, apply, delete).</li>
+        <li>During CSV import, review the preview or confirmation screen before executing.</li>
+        <li>If you only have one location, use Receiving, Shipping, or Edit rather than Stock Transfer.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Summary -->
+  <section class="summary-box" id="summary">
+    <h3>📋 Key Takeaways</h3>
+    <ul>
+      <li>The Full Unlock removes caps and enables detailed rules, advanced CSV settings, and other tools for more controlled inventory management.</li>
+      <li>Three types of master data work together: Product Master (items held in stock), Category Master (classification groups), and Location Master (storage places).</li>
+      <li>Stock Transfer is only valid between two different locations; never use the same location as source and destination.</li>
+      <li>Applying stocktake data synchronises physical counts with system inventory; variances are recorded as Stocktake Adjustment history entries.</li>
+      <li>Always take a backup before irreversible operations such as Replace Current Stock, Apply Stocktake Data, or deletions.</li>
+      <li>Running a History Backup on a regular (weekly or monthly) schedule reduces the risk of unrecoverable data loss.</li>
+    </ul>
+  </section>
+
+  <!-- Notes Before Use -->
+  <section class="confirm-box" id="confirm">
+    <h3>⚠️ Notes Before Use</h3>
+    <ul>
+      <li>Before applying stocktake data, review the timing, target locations, adjustment details, and confirmation screen carefully.</li>
+      <li>Before restoring from CSV backups, check the selected files and keep a separate backup of the current data.</li>
+      <li>Use the Stock Check screen to confirm how reorder points and related notices are displayed for your current settings.</li>
+      <li>For price-related values, confirm the app display and exported CSV files before using them for business records.</li>
+      <li>When master records are no longer needed, consider deactivating them rather than deleting them.</li>
+      <li>Check the current Full Unlock purchase price and sales terms on Google Play.</li>
+      <li>Before confirming Stock Transfer, verify that the source and destination locations are different and that the quantity is correct.</li>
+    </ul>
+  </section>
+
+</div>
+
+<footer>
+  Quantiventra User Manual ⑦ Inventory Management: Full Unlock &nbsp;/&nbsp; This manual may be updated without prior notice. Always refer to the in-app display for the latest information.
+  <p style="margin-top:4px;"><a href="privacy_en.html">Privacy Policy</a></p>
+</footer>
+
+</body>
+</html>

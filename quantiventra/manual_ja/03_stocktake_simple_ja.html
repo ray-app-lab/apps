@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quantiventra 取扱説明書 – 棚卸 簡単版</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Hiragino Sans','Meiryo',sans-serif;font-size:15px;line-height:1.8;color:#1a2535;background:#f4f7fb;}
+a{color:#1a5fa8;text-decoration:none;}
+a:hover{text-decoration:underline;}
+.site-nav{background:#1a3a5c;color:#fff;padding:0;}
+.site-nav .nav-inner{max-width:960px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:stretch;}
+.site-nav a{color:#cde;padding:10px 13px;font-size:12px;display:block;border-right:1px solid #2a4a6c;white-space:nowrap;}
+.site-nav a:hover{background:#2a5090;text-decoration:none;}
+.site-nav a.active{background:#2a6cbe;color:#fff;font-weight:bold;}
+.page-header{background:linear-gradient(135deg,#1a3a5c 0%,#2a6cbe 100%);color:#fff;padding:40px 20px 30px;}
+.page-header .inner{max-width:960px;margin:0 auto;}
+.page-header .app-name{font-size:13px;opacity:.8;letter-spacing:.1em;}
+.page-header h1{font-size:26px;font-weight:700;margin-top:6px;line-height:1.3;}
+.page-header .subtitle{font-size:14px;opacity:.85;margin-top:8px;}
+.scope-box{background:rgba(255,255,255,.15);border-left:4px solid #7ecfff;padding:12px 16px;margin-top:16px;border-radius:4px;font-size:13px;}
+.container{max-width:960px;margin:0 auto;padding:30px 16px;}
+.toc{background:#fff;border:1px solid #c8d8ec;border-radius:8px;padding:24px 28px;margin-bottom:32px;}
+.toc h2{font-size:16px;font-weight:700;color:#1a3a5c;border-bottom:2px solid #2a6cbe;padding-bottom:8px;margin-bottom:14px;}
+.toc ol{margin-left:18px;}
+.toc li{margin:5px 0;font-size:14px;}
+.chapter{background:#fff;border-radius:8px;box-shadow:0 1px 4px rgba(0,0,0,.08);padding:28px 28px 24px;margin-bottom:28px;}
+.chapter-head{border-left:5px solid #2a6cbe;padding-left:14px;margin-bottom:20px;}
+.chapter-head .ch-no{font-size:12px;color:#2a6cbe;font-weight:700;letter-spacing:.1em;}
+.chapter-head h2{font-size:20px;font-weight:700;color:#1a2535;margin-top:2px;}
+h3{font-size:16px;font-weight:700;color:#1a3a5c;border-bottom:1px solid #dde8f5;padding-bottom:5px;margin:22px 0 12px;}
+h4{font-size:14px;font-weight:700;color:#2a4a6c;margin:16px 0 8px;}
+p{margin-bottom:12px;}
+ul,ol{margin-left:20px;margin-bottom:12px;}
+li{margin-bottom:5px;}
+.steps{counter-reset:step;list-style:none;margin-left:0;}
+.steps li{counter-increment:step;padding:9px 12px 9px 46px;position:relative;background:#f8fbff;border:1px solid #dde8f5;border-radius:6px;margin-bottom:6px;}
+.steps li::before{content:counter(step);position:absolute;left:12px;top:50%;transform:translateY(-50%);width:24px;height:24px;background:#2a6cbe;color:#fff;border-radius:50%;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;}
+.table-wrap{overflow-x:auto;margin-bottom:16px;}
+table{width:100%;border-collapse:collapse;font-size:13px;min-width:380px;}
+th{background:#1a3a5c;color:#fff;padding:9px 12px;text-align:left;white-space:nowrap;}
+td{padding:8px 12px;border-bottom:1px solid #dde8f5;vertical-align:top;}
+tr:nth-child(even) td{background:#f4f7fb;}
+.box{border-radius:6px;padding:13px 16px;margin:14px 0;font-size:13px;}
+.box-warn{background:#fffbe6;border-left:4px solid #f5a623;color:#7a5700;}
+.box-danger{background:#fff0f0;border-left:4px solid #d43f3f;color:#7a0000;}
+.box-hint{background:#e8f4ff;border-left:4px solid #2a6cbe;color:#0a3060;}
+.box-check{background:#f4eeff;border-left:4px solid #8c4fc8;color:#3a0070;}
+.box strong{display:block;margin-bottom:4px;}
+figure{max-width:280px;width:100%;margin:18px auto;text-align:center;}
+figure img{display:block;width:100%;max-width:280px;height:auto;margin:0 auto;border:1px solid #c8d8ec;border-radius:6px;box-shadow:0 2px 8px rgba(0,0,0,.1);}
+figcaption{font-size:12px;color:#5a7a99;margin-top:6px;}
+.diff-add{background:#e8fff0;border-left:4px solid #2a9c5c;border-radius:6px;padding:12px 16px;margin:14px 0;font-size:13px;}
+.diff-add strong{display:block;color:#1a6c3c;margin-bottom:4px;}
+.summary-box{background:linear-gradient(135deg,#e8f4ff,#f0f8ff);border:1px solid #99c8ec;border-radius:8px;padding:20px 24px;margin-top:32px;}
+.summary-box h3{border:none;color:#1a3a5c;margin-top:0;}
+.confirm-box{background:#fdf4ff;border:1px solid #c8a0e0;border-radius:8px;padding:20px 24px;margin-top:16px;}
+.confirm-box h3{border:none;color:#5a0090;margin-top:0;}
+footer{text-align:center;font-size:12px;color:#8a9aaa;padding:30px 16px;border-top:1px solid #dde8f5;margin-top:20px;}
+@media(max-width:640px){
+  .page-header h1{font-size:20px;}
+  .chapter{padding:20px 16px;}
+  .site-nav a{padding:8px 9px;font-size:11px;}
+}
+@media print{
+  body{background:#fff;font-size:12px;}
+  .site-nav{display:none;}
+  .chapter{box-shadow:none;border:1px solid #ccc;page-break-inside:avoid;}
+  .page-header{background:#1a3a5c !important;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+}
+</style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a href="01_top_settings_common_ja.html">① トップ・設定</a>
+    <a href="02_stocktake_free_ja.html">② 棚卸 無料版</a>
+    <a href="03_stocktake_simple_ja.html" class="active">③ 棚卸 簡単版</a>
+    <a href="04_stocktake_full_ja.html">④ 棚卸 フル版</a>
+    <a href="05_inventory_free_ja.html">⑤ 在庫管理 無料版</a>
+    <a href="06_inventory_simple_ja.html">⑥ 在庫管理 簡単版</a>
+    <a href="07_inventory_full_ja.html">⑦ 在庫管理 フル版</a>
+  </div>
+</nav>
+
+<header class="page-header">
+  <div class="inner">
+    <div class="app-name">Quantiventra 取扱説明書</div>
+    <h1>③ 棚卸 簡単版（簡単解放）</h1>
+    <div class="subtitle">簡単版で追加される機能・無料版との差分・簡単モードA/B/C・操作手順・注意事項</div>
+    <div class="scope-box">
+      <strong>このHTMLで説明する範囲：</strong>
+      棚卸 簡単解放で追加される機能 / 無料版との差分 / 簡単モードA/B/Cの違い / 倉庫・店舗などの簡易ロケーション / 棚卸開始から保存までの手順 / 簡単版での注意事項 / 無料版から移るメリット
+    </div>
+  </div>
+</header>
+
+<div class="container">
+
+  <nav class="toc">
+    <h2>目次</h2>
+    <ol>
+      <li><a href="#overview">簡単版（簡単解放）の概要</a></li>
+      <li><a href="#diff">無料版との差分</a></li>
+      <li><a href="#mode">簡単モードA/B/Cの違い</a></li>
+      <li><a href="#location">簡易ロケーションの扱い</a></li>
+      <li><a href="#howto">棚卸操作手順（簡単版）</a></li>
+      <li><a href="#merit">簡単版で便利になるポイント</a></li>
+      <li><a href="#cannot">簡単版でもできないこと</a></li>
+      <li><a href="#notes">注意事項</a></li>
+      <li><a href="#upgrade">無料版から簡単版へ移るメリット</a></li>
+      <li><a href="#summary">この章のポイント</a></li>
+      <li><a href="#confirm">ご利用前の確認事項</a></li>
+    </ol>
+  </nav>
+
+  <!-- 1. 概要 -->
+  <section class="chapter" id="overview">
+    <div class="chapter-head">
+      <div class="ch-no">第1章</div>
+      <h2>簡単版（簡単解放）の概要</h2>
+    </div>
+    <p>棚卸 簡単解放は、無料版より多くの件数を扱えるプランです。マスタ件数・棚卸履歴件数・エクスポート件数の上限が拡張され、対象機能の画面回転固定と、標準6種類内の商品コード読み取り形式選択も利用できます。</p>
+    <p>棚卸操作の基本的な流れは無料版と同じです。制限の上限が広がり、現場での継続運用がしやすくなります。</p>
+
+    <h3>簡単版の制限値</h3>
+    <div class="table-wrap">
+      <table>
+        <tr><th>項目</th><th>無料版</th><th>簡単版（簡単解放）</th></tr>
+        <tr><td>マスタ件数</td><td>30件まで</td><td>300件まで</td></tr>
+        <tr><td>棚卸履歴件数</td><td>30件まで</td><td>1,000件まで</td></tr>
+        <tr><td>エクスポート件数</td><td>30件まで</td><td>300件まで</td></tr>
+        <tr><td>画面回転固定</td><td>✗</td><td>○</td></tr>
+        <tr><td>詳細ルール設定</td><td>✗</td><td>✗（フル解放が必要）</td></tr>
+      </table>
+    </div>
+  </section>
+
+  <!-- 2. 無料版との差分 -->
+  <section class="chapter" id="diff">
+    <div class="chapter-head">
+      <div class="ch-no">第2章</div>
+      <h2>無料版との差分</h2>
+    </div>
+
+    <div class="diff-add">
+      <strong>✅ 簡単版で追加・拡張される内容</strong>
+      <ul style="margin-top:6px;">
+        <li>マスタ件数が30件 → 300件へ拡張</li>
+        <li>棚卸履歴件数が30件 → 1,000件へ拡張</li>
+        <li>エクスポート件数が30件 → 300件へ拡張</li>
+        <li>画面回転固定が利用可能になる</li>
+        <li>棚卸作業を現場でより継続しやすくなる</li>
+      </ul>
+    </div>
+
+    <div class="box box-hint">
+      <strong>💡 ポイント</strong>
+      簡単版では「件数制限の拡張」と「画面回転固定」が追加されます。棚卸の操作手順自体は無料版と同じです。詳細ルール設定が必要な場合はフル解放が必要です。
+    </div>
+  </section>
+
+  <!-- 3. 簡単モードA/B/C -->
+  <section class="chapter" id="mode">
+    <div class="chapter-head">
+      <div class="ch-no">第3章</div>
+      <h2>簡単モードA/B/Cの違い</h2>
+    </div>
+    <p>棚卸設定で「簡単A」「簡単B」「簡単C」のいずれかを選びます。選んだモードによって、棚卸などの作業導線で扱うロケーション候補が変わります。C設定では作業導線で店舗のみを扱います。ロケーションマスタの一覧に倉庫行が残っていても、それ自体は問題ではありません。</p>
+
+    <div class="table-wrap">
+      <table>
+        <tr><th>モード</th><th>表示されるロケーション</th><th>使い方の例</th></tr>
+        <tr><td><strong>簡単A</strong></td><td>倉庫のみ</td><td>倉庫だけで棚卸を行う場合</td></tr>
+        <tr><td><strong>簡単B</strong></td><td>倉庫 + 店舗</td><td>倉庫と店舗の両方で棚卸を行う場合</td></tr>
+        <tr><td><strong>簡単C</strong></td><td>店舗のみ</td><td>店舗だけで棚卸を行う場合</td></tr>
+      </table>
+    </div>
+
+    <h3>モードの設定方法</h3>
+    <ol class="steps">
+      <li>「設定 → 棚卸設定」を開く。</li>
+      <li>使用するモード（簡単A / 簡単B / 簡単C / 詳細）を選択する。</li>
+      <li>設定を保存して棚卸画面に戻る。</li>
+    </ol>
+
+    <div class="box box-warn">
+      <strong>⚠ 注意</strong>
+      フル解放済みでも、設定が簡単A/B/Cのままであれば簡単ロケーション表示になります。詳細ロケーションを使うには「詳細」モードへ変更してください。
+    </div>
+    <div class="box box-hint">
+      <strong>💡 ヒント</strong>
+      どのモードを使えばよいか迷う場合は、まず「簡単B（倉庫+店舗）」を試してみてください。初期ロケーションやサンプルデータの名称は、端末の主言語を基準に作成されます。
+    </div>
+  </section>
+
+  <!-- 4. ロケーション -->
+  <section class="chapter" id="location">
+    <div class="chapter-head">
+      <div class="ch-no">第4章</div>
+      <h2>簡易ロケーションの扱い</h2>
+    </div>
+    <p>簡単版の基本ロケーションは「倉庫」と「店舗」です。実際の表示名は端末の主言語に合わせて作成されます。</p>
+
+    <h3>簡単版のロケーション選択</h3>
+    <p>棚卸中のロケーション選択は、設定したモード（簡単A/B/C）で決まる候補から選ぶ形式です。入力が少なくスムーズに棚卸できます。</p>
+
+    <h3>詳細ロケーションとの違い</h3>
+    <div class="table-wrap">
+      <table>
+        <tr><th>項目</th><th>簡単モード（A/B/C）</th><th>詳細モード（フル解放）</th></tr>
+        <tr><td>ロケーション候補</td><td>倉庫・店舗の固定候補</td><td>ロケーションマスタに登録したすべての場所</td></tr>
+        <tr><td>設定の複雑さ</td><td>シンプル</td><td>詳細設定が必要</td></tr>
+        <tr><td>必要なプラン</td><td>無料版以上</td><td>フル解放（設定を「詳細」に変更）</td></tr>
+      </table>
+    </div>
+  </section>
+
+  <!-- 5. 操作手順 -->
+  <section class="chapter" id="howto">
+    <div class="chapter-head">
+      <div class="ch-no">第5章</div>
+      <h2>棚卸操作手順（簡単版）</h2>
+    </div>
+
+    <h3>棚卸開始から保存までの手順</h3>
+    <ol class="steps">
+      <li>「設定 → 棚卸設定」で簡単A/B/Cのどれを使うか確認しておく。</li>
+      <li>トップ画面で「棚卸」をタップして棚卸画面を開く。</li>
+      <li>バーコードを読み取る、または品番を入力する。</li>
+      <li>商品名を確認する（未登録コードの場合は入力する）。</li>
+      <li>ロケーション候補（倉庫・店舗など）から実棚を数えた場所を選ぶ。</li>
+      <li>実際に数えた数量（実棚）を入力する。</li>
+      <li>メモを入力する（任意）。</li>
+      <li>「保存」をタップして棚卸履歴に記録する。</li>
+      <li>次の商品のバーコードを読み取り、手順3〜8を繰り返す。</li>
+      <li>すべての商品を入力したら、棚卸履歴で全体を確認する。</li>
+    </ol>
+
+    <div class="box box-danger">
+      <strong>🚨 重要</strong>
+      保存する前に数量とロケーションを必ず確認してください。誤ったロケーションに数量を登録すると、在庫の差異原因になります。
+    </div>
+  </section>
+
+  <!-- 6. 便利になるポイント -->
+  <section class="chapter" id="merit">
+    <div class="chapter-head">
+      <div class="ch-no">第6章</div>
+      <h2>簡単版で便利になるポイント</h2>
+    </div>
+
+    <h3>画面回転固定で現場作業がしやすくなる</h3>
+    <p>スマートフォンを横向きに持っても画面が回転しなくなります。バーコードを読み取りながら数量を入力する現場作業で便利です。</p>
+
+    <h3>1,000件の履歴で長期間の棚卸記録を残せる</h3>
+    <p>無料版では30件だった履歴上限が1,000件になります。月次棚卸を続けていても、長期間の棚卸記録を残せます。</p>
+
+    <h3>300件のマスタで中規模運用が可能</h3>
+    <p>商品数が30〜300件程度の中規模店舗・倉庫での継続利用に適しています。</p>
+  </section>
+
+  <!-- 7. できないこと -->
+  <section class="chapter" id="cannot">
+    <div class="chapter-head">
+      <div class="ch-no">第7章</div>
+      <h2>簡単版でもできないこと</h2>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <tr><th>機能</th><th>必要なプラン</th></tr>
+        <tr><td>詳細コードルール設定</td><td>棚卸 フル解放</td></tr>
+        <tr><td>ロケーションコードルール設定</td><td>棚卸 フル解放</td></tr>
+        <tr><td>QRなどフル専用の読み取り形式</td><td>棚卸 フル解放</td></tr>
+        <tr><td>CSV拡張出力</td><td>棚卸 フル解放</td></tr>
+        <tr><td>マスタ300件超の登録</td><td>棚卸 フル解放</td></tr>
+        <tr><td>棚卸結果を在庫へ反映する操作</td><td>在庫管理側の確認画面に従う</td></tr>
+      </table>
+    </div>
+    <div class="box box-hint">
+      <strong>💡 ヒント</strong>
+      詳細なロケーション管理が必要な場合は、フル解放への移行を検討してください。
+    </div>
+  </section>
+
+  <!-- 8. 注意事項 -->
+  <section class="chapter" id="notes">
+    <div class="chapter-head">
+      <div class="ch-no">第8章</div>
+      <h2>注意事項</h2>
+    </div>
+
+    <div class="box box-warn">
+      <strong>⚠ 棚卸モード設定の確認</strong>
+      フル解放済みでも設定が簡単A/B/Cのままでは簡単ロケーション表示になります。詳細ロケーションを使う場合は「詳細」モードへ変更してください。
+    </div>
+    <div class="box box-danger">
+      <strong>🚨 価格・購入条件の確認</strong>
+      購入金額や返金条件はGoogle Play Storeの表示を確認してください。取扱説明書では価格を断定しません。
+    </div>
+  </section>
+
+  <!-- 9. 移行メリット -->
+  <section class="chapter" id="upgrade">
+    <div class="chapter-head">
+      <div class="ch-no">第9章</div>
+      <h2>無料版から簡単版へ移るメリット</h2>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <tr><th>項目</th><th>無料版</th><th>→ 簡単版でこう変わる</th></tr>
+        <tr><td>マスタ件数</td><td>30件まで</td><td>300件まで（10倍に拡張）</td></tr>
+        <tr><td>棚卸履歴件数</td><td>30件まで</td><td>1,000件まで（33倍以上に拡張）</td></tr>
+        <tr><td>エクスポート件数</td><td>30件まで</td><td>300件まで（10倍に拡張）</td></tr>
+        <tr><td>画面回転固定</td><td>利用不可</td><td>利用可能（現場作業に便利）</td></tr>
+        <tr><td>運用の継続性</td><td>件数上限で停止する恐れ</td><td>中長期の継続運用が可能</td></tr>
+      </table>
+    </div>
+
+    <div class="box box-hint">
+      <strong>💡 こんな場合は簡単版への移行を検討</strong>
+      <ul style="margin-top:6px;">
+        <li>商品数が30件を超えてきた</li>
+        <li>月次棚卸を長期間継続したい</li>
+        <li>現場でスマートフォンを固定向きで使いたい</li>
+        <li>300件以内の商品数で棚卸を続けていきたい</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ポイント -->
+  <div class="summary-box" id="summary">
+    <h3>📌 この章のポイント</h3>
+    <ul>
+      <li>簡単版では件数制限が拡張（マスタ300件・履歴1,000件・出力300件）される。</li>
+      <li>画面回転固定が使えるようになり、現場作業が快適になる。</li>
+      <li>棚卸モードは簡単A（倉庫のみ）・簡単B（倉庫+店舗）・簡単C（店舗のみ）から選ぶ。</li>
+      <li>詳細ルール設定はフル解放が必要。簡単版では使えない。</li>
+      <li>操作手順は無料版と同じ。「読み取り → 数量入力 → 保存 → 履歴確認」の流れ。</li>
+    </ul>
+  </div>
+
+  <!-- ご利用前の確認事項 -->
+  <div class="confirm-box" id="confirm">
+    <h3>🔍 ご利用前の確認事項</h3>
+    <ul>
+      <li>棚卸結果を在庫へ反映する場合は、在庫管理側の確認画面と条件を確認してください。簡単版では保存内容を確認しながら運用してください。</li>
+      <li>マスタ件数が300件に近づいた場合は、エクスポートでバックアップし、フル版への移行を検討してください。</li>
+      <li>CSV出力の列内容は、アプリの現在の表示と出力ファイルを優先して確認してください。</li>
+      <li>詳細ロケーション画面はフル解放側の画面案内を確認してください。</li>
+    </ul>
+  </div>
+
+</div>
+
+<footer>
+  <p>Quantiventra 取扱説明書 | ③ 棚卸 簡単版</p>
+  <p style="margin-top:4px;">本マニュアルの内容は予告なく変更される場合があります。最新情報はアプリ内表示を優先してください。</p>
+  <p style="margin-top:4px;"><a href="privacy_ja.html">プライバシーポリシー</a></p>
+</footer>
+
+</body>
+</html>
+
+
+
+

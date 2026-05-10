@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quantiventra – 재고 실사 무료 버전</title>
+<style>*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:-apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo','Noto Sans KR','Malgun Gothic',sans-serif;font-size:15px;line-height:1.9;color:#1a2535;background:#f4f7fb;}
+a{color:#1a5fa8;text-decoration:none;}a:hover{text-decoration:underline;}
+.site-nav{background:#1a3a5c;color:#fff;padding:0;}.site-nav .nav-inner{max-width:960px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:stretch;}
+.site-nav a{color:#cde;padding:10px 13px;font-size:12px;display:block;border-right:1px solid #2a4a6c;white-space:nowrap;}
+.site-nav a:hover{background:#2a5090;text-decoration:none;}.site-nav a.active{background:#2a6cbe;color:#fff;font-weight:bold;}
+.page-header{background:linear-gradient(135deg,#1a3a5c 0%,#2a6cbe 100%);color:#fff;padding:40px 20px 30px;}
+.page-header .inner{max-width:960px;margin:0 auto;}.page-header .app-name{font-size:13px;opacity:.8;}
+.page-header h1{font-size:22px;font-weight:700;margin-top:6px;line-height:1.5;}.page-header .subtitle{font-size:14px;opacity:.85;margin-top:8px;}
+.scope-box{background:rgba(255,255,255,.15);border-left:4px solid #7ecfff;padding:12px 16px;margin-top:16px;border-radius:4px;font-size:13px;}
+.container{max-width:960px;margin:0 auto;padding:30px 16px;}
+.toc{background:#fff;border:1px solid #c8d8ec;border-radius:8px;padding:24px 28px;margin-bottom:32px;}
+.toc h2{font-size:16px;font-weight:700;color:#1a3a5c;border-bottom:2px solid #2a6cbe;padding-bottom:8px;margin-bottom:14px;}
+.toc ol{margin-left:18px;}.toc li{margin:5px 0;font-size:14px;}
+.chapter{background:#fff;border-radius:8px;box-shadow:0 1px 4px rgba(0,0,0,.08);padding:28px 28px 24px;margin-bottom:28px;}
+.chapter-head{border-left:5px solid #2a6cbe;padding-left:14px;margin-bottom:20px;}
+.chapter-head .ch-no{font-size:12px;color:#2a6cbe;font-weight:700;}.chapter-head h2{font-size:20px;font-weight:700;color:#1a2535;margin-top:2px;}
+h3{font-size:16px;font-weight:700;color:#1a3a5c;border-bottom:1px solid #dde8f5;padding-bottom:5px;margin:22px 0 12px;}
+h4{font-size:14px;font-weight:700;color:#2a4a6c;margin:16px 0 8px;}
+p{margin-bottom:12px;}ul,ol{margin-left:20px;margin-bottom:12px;}li{margin-bottom:5px;}
+.steps{counter-reset:step;list-style:none;margin-left:0;}
+.steps li{counter-increment:step;padding:9px 12px 9px 46px;position:relative;background:#f8fbff;border:1px solid #dde8f5;border-radius:6px;margin-bottom:6px;}
+.steps li::before{content:counter(step);position:absolute;left:12px;top:50%;transform:translateY(-50%);width:24px;height:24px;background:#2a6cbe;color:#fff;border-radius:50%;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;}
+.table-wrap{overflow-x:auto;margin-bottom:16px;}
+table{width:100%;border-collapse:collapse;font-size:13px;min-width:380px;}
+th{background:#1a3a5c;color:#fff;padding:9px 12px;text-align:left;white-space:nowrap;}
+td{padding:8px 12px;border-bottom:1px solid #dde8f5;vertical-align:top;}tr:nth-child(even) td{background:#f4f7fb;}
+code{font-family:'Courier New',monospace;background:rgba(0,80,160,.08);color:#004080;padding:2px 6px;border-radius:3px;font-size:12px;}
+.box{border-radius:6px;padding:13px 16px;margin:14px 0;font-size:13px;}
+.box-warn{background:#fffbe6;border-left:4px solid #f5a623;color:#7a5700;}
+.box-danger{background:#fff0f0;border-left:4px solid #d43f3f;color:#7a0000;}
+.box-hint{background:#e8f4ff;border-left:4px solid #2a6cbe;color:#0a3060;}
+.box-check{background:#f4eeff;border-left:4px solid #8c4fc8;color:#3a0070;}
+.box strong{display:block;margin-bottom:4px;}
+figure{max-width:280px;width:100%;margin:18px auto;text-align:center;}
+figure img{display:block;width:100%;max-width:280px;height:auto;margin:0 auto;border:1px solid #c8d8ec;border-radius:6px;box-shadow:0 2px 8px rgba(0,0,0,.1);}
+figcaption{font-size:12px;color:#5a7a99;margin-top:6px;}
+.img-pending{display:flex;align-items:center;justify-content:center;max-width:280px;width:100%;box-sizing:border-box;background:#e8eef5;border:2px dashed #99b8d8;border-radius:6px;height:160px;color:#5a7a99;font-size:13px;margin:18px auto;}
+.diff-add{background:#e8fff0;border-left:4px solid #2a9c5c;border-radius:6px;padding:12px 16px;margin:14px 0;font-size:13px;}
+.diff-add strong{display:block;color:#1a6c3c;margin-bottom:4px;}
+.flow-box{background:#f4f7fb;border:1px solid #c8d8ec;border-radius:8px;padding:20px;margin:16px 0;}
+.flow-box h4{color:#1a3a5c;margin-top:0;}
+.flow-arrow{text-align:center;font-size:20px;color:#2a6cbe;margin:4px 0;}
+.flow-step{background:#fff;border:1px solid #c8d8ec;border-radius:6px;padding:10px 16px;margin:4px 0;font-size:13px;}
+.flow-step strong{color:#1a3a5c;}
+.summary-box{background:linear-gradient(135deg,#e8f4ff,#f0f8ff);border:1px solid #99c8ec;border-radius:8px;padding:20px 24px;margin-top:32px;}
+.summary-box h3{border:none;color:#1a3a5c;margin-top:0;}
+.confirm-box{background:#fdf4ff;border:1px solid #c8a0e0;border-radius:8px;padding:20px 24px;margin-top:16px;}
+.confirm-box h3{border:none;color:#5a0090;margin-top:0;}
+.check{color:#2e7d32;font-weight:700;}.cross{color:#c62828;}
+th.pro-col{background:#5a2a8c;}
+.feature-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px;margin:16px 0;}
+.feature-card{background:#f4f7fb;border:1px solid #c8d8ec;border-radius:8px;padding:16px;}
+.feature-card h4{color:#1a3a5c;margin-top:0;margin-bottom:6px;font-size:14px;}
+.feature-card p{font-size:13px;margin:0;color:#3a5a7a;}
+.feature-card.pro-card{background:#f4eeff;border-color:#c8a0e0;}
+.feature-card.pro-card h4{color:#5a2a8c;}
+.trouble{border:1px solid #c8d8ec;border-radius:8px;margin:14px 0;overflow:hidden;}
+.trouble-q{background:#eef6fd;padding:13px 18px;font-weight:700;font-size:14px;color:#1a3a5c;display:flex;align-items:flex-start;gap:10px;}
+.trouble-q::before{content:'Q';background:#2a6cbe;color:#fff;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900;flex-shrink:0;margin-top:1px;}
+.trouble-a{padding:13px 18px 14px 50px;font-size:13.5px;border-top:1px solid #c8d8ec;line-height:1.9;}
+.trouble-a ul{margin-left:16px;}
+.legal-block{background:#f5f5f5;border:1px solid #ddd;border-radius:8px;padding:20px 24px;font-size:12.5px;color:#444;line-height:1.9;margin:14px 0;}
+.legal-block h4{font-size:13px;color:#333;margin:18px 0 6px;border-bottom:1px solid #ddd;padding-bottom:4px;}
+.legal-block h4:first-child{margin-top:0;}
+footer{text-align:center;font-size:12px;color:#8a9aaa;padding:30px 16px;border-top:1px solid #dde8f5;margin-top:20px;}
+@media(max-width:640px){.page-header h1{font-size:18px;}.chapter{padding:20px 16px;}.site-nav a{padding:8px 9px;font-size:11px;}}
+@media print{body{background:#fff;font-size:12px;}.site-nav{display:none;}.chapter{box-shadow:none;border:1px solid #ccc;page-break-inside:avoid;}.page-header{background:#1a3a5c !important;-webkit-print-color-adjust:exact;print-color-adjust:exact;}}
+</style></head>
+<body>
+<nav class="site-nav"><div class="nav-inner">
+  <a href="01_top_settings_common_ko.html">① 홈 / 설정</a>
+  <a href="02_stocktake_free_ko.html" class="active">② 실사 무료</a>
+  <a href="03_stocktake_simple_ko.html">③ 실사 표준</a>
+  <a href="04_stocktake_full_ko.html">④ 실사 전체</a>
+  <a href="05_inventory_free_ko.html">⑤ 재고 무료</a>
+  <a href="06_inventory_simple_ko.html">⑥ 재고 표준</a>
+  <a href="07_inventory_full_ko.html">⑦ 재고 전체</a>
+</div></nav>
+<header class="page-header"><div class="inner">
+  <div class="app-name">Quantiventra 매뉴얼</div>
+  <h1>② 재고 실사 — 무료 버전</h1>
+  <div class="subtitle">기능 안내, 제한 사항, 단계별 작업 지침 및 권장 워크플로</div>
+  <div class="scope-box"><strong>이 페이지에서 다루는 내용:</strong>무료 버전 실사에서 가능한 것 / 무료 버전 제한 / 단계별 실사 작업 / 바코드·수량 입력 / 위치 선택 / 이력 확인 / CSV 내보내기 제한 / 무료 버전 불가능 기능 / 권장 워크플로</div>
+</div></header>
+<div class="container">
+  <nav class="toc"><h2>목차</h2><ol>
+    <li><a href="#overview">무료 버전 재고 실사 개요</a></li>
+    <li><a href="#limits">무료 버전 제한 사항</a></li>
+    <li><a href="#howto">실사 단계별 작업</a></li>
+    <li><a href="#input">바코드·상품명·수량 입력</a></li>
+    <li><a href="#location">위치 선택</a></li>
+    <li><a href="#history">실사 이력 확인</a></li>
+    <li><a href="#csv">CSV 내보내기 제한</a></li>
+    <li><a href="#cannot">무료 버전에서 불가능한 기능</a></li>
+    <li><a href="#tips">무료 버전 사용자를 위한 권장 워크플로</a></li>
+    <li><a href="#summary">이 장의 핵심 요약</a></li>
+    <li><a href="#confirm">사용 전 확인 사항</a></li>
+  </ol></nav>
+
+  <section class="chapter" id="overview">
+    <div class="chapter-head"><div class="ch-no">제1장</div><h2>무료 버전 재고 실사 개요</h2></div>
+    <p>재고 실사는 현장에서 실제로 상품 수량을 세어 기록하는 작업입니다. 무료 버전에서는 기본적인 실사 작업을 체험할 수 있습니다.</p>
+    <p>실사 흐름은 <strong>상품 스캔 → 수량 입력 → 저장 → 이력 확인</strong> 입니다.</p>
+    <div class="box box-hint"><strong>💡 실사란?</strong>실사는 직접 세어 확인한 수량(실제 수량)을 기록하는 작업입니다. 재고 관리의 입고·출고·이동 작업과는 별도의 작업이므로 혼동하지 마세요.</div>
+
+    <h3>무료 버전 실사에서 가능한 기능</h3>
+    <ul>
+      <li>상품 코드 또는 바코드 입력·스캔</li>
+      <li>상품명 입력</li>
+      <li>실제 수량 입력</li>
+      <li>메모 입력</li>
+      <li>실사 이력 확인</li>
+      <li>무료 버전 한도 내 저장 및 내보내기</li>
+    </ul>
+  </section>
+
+  <section class="chapter" id="limits">
+    <div class="chapter-head"><div class="ch-no">제2장</div><h2>무료 버전 제한 사항</h2></div>
+    <div class="table-wrap"><table>
+      <tr><th>항목</th><th>무료 버전 제한</th><th>해제 방법</th></tr>
+      <tr><td>마스터 레코드 수</td><td>최대 30건</td><td>표준 버전 이상</td></tr>
+      <tr><td>실사 이력 레코드 수</td><td>최대 30건</td><td>표준 버전 이상</td></tr>
+      <tr><td>내보내기 레코드 수</td><td>최대 30건</td><td>표준 버전 이상</td></tr>
+      <tr><td>화면 회전 잠금</td><td>사용 불가</td><td>표준 버전 이상</td></tr>
+      <tr><td>상세 코드 규칙 설정</td><td>사용 불가</td><td>전체 버전</td></tr>
+      <tr><td>상세 위치 규칙 설정</td><td>사용 불가</td><td>전체 버전</td></tr>
+      <tr><td>상세 카메라 스캔 설정</td><td>사용 불가</td><td>전체 버전</td></tr>
+      <tr><td>확장 CSV 내보내기</td><td>사용 불가</td><td>전체 버전</td></tr>
+    </table></div>
+    <div class="box box-warn"><strong>⚠ 주의</strong>30건 한도에 도달하면 저장이나 내보내기가 불가능해질 수 있습니다. 한도에 도달하기 전에 표준 또는 전체 버전으로 업그레이드를 계획하세요.</div>
+  </section>
+
+  <section class="chapter" id="howto">
+    <div class="chapter-head"><div class="ch-no">제3장</div><h2>실사 단계별 작업</h2></div>
+    <ol class="steps">
+      <li>홈 화면에서 <strong>재고 실사</strong>를 탭합니다.</li>
+      <li>바코드를 스캔하거나 상품 코드를 수동으로 입력합니다.</li>
+      <li>상품명이 표시됩니다. 등록되지 않은 코드인 경우 직접 입력합니다.</li>
+      <li>위치를 확인하거나 선택합니다(창고·매장 등).</li>
+      <li>실제로 세어 확인한 수량을 입력합니다.</li>
+      <li>필요에 따라 메모를 입력합니다.</li>
+      <li><strong>저장</strong>을 탭해 이 항목을 실사 이력에 기록합니다.</li>
+      <li>실사 이력에서 기록이 저장되었는지 확인합니다.</li>
+    </ol>
+    <div class="box box-danger"><strong>🚨 중요</strong>저장 전에 반드시 수량을 확인하세요. 입력 오류는 재고 데이터와의 불일치를 초래합니다.</div>
+    <div class="box box-hint"><strong>💡 팁</strong>한 번의 세션에서 모든 실사를 완료할 필요는 없습니다. 앱을 중간에 종료해도 저장된 이력은 보존됩니다.</div>
+  </section>
+
+  <section class="chapter" id="input">
+    <div class="chapter-head"><div class="ch-no">제4장</div><h2>바코드·상품명·수량 입력</h2></div>
+
+    <h3>바코드 스캔</h3>
+    <p>카메라를 실행해 바코드에 맞추면 자동으로 읽습니다. 읽히지 않을 때는 밝은 곳에서 다시 시도하거나 수동 입력으로 전환하세요.</p>
+
+    <h3>상품 코드 수동 입력</h3>
+    <p>바코드를 사용할 수 없는 경우에는 상품 코드 입력란에 상품 코드를 직접 입력합니다. 등록된 코드라면 상품명이 자동으로 표시됩니다.</p>
+
+    <h3>상품명 입력</h3>
+    <p>등록되지 않은 코드인 경우 상품명을 직접 입력합니다. 입력한 상품명은 실사 이력에 함께 기록됩니다. 마스터에 등록하지 않고 운영할 때는 기록 수 제한에 유의하세요.</p>
+
+    <h3>실제 수량 입력</h3>
+    <p>현장에서 실제로 세어 확인한 수량을 숫자로 입력합니다.</p>
+
+    <h3>메모 입력</h3>
+    <p>작업 메모나 비고를 자유롭게 입력할 수 있습니다. 메모는 실사 이력과 함께 저장됩니다.</p>
+
+    <div class="table-wrap"><table>
+      <tr><th>필드</th><th>설명</th><th>필수/선택</th></tr>
+      <tr><td>바코드/상품 코드</td><td>상품을 식별하기 위한 코드</td><td>필수</td></tr>
+      <tr><td>상품명</td><td>코드가 등록되어 있지 않은 경우 입력</td><td>조건부 필수</td></tr>
+      <tr><td>위치</td><td>실사를 실시하는 위치</td><td>설정에 따라 다름</td></tr>
+      <tr><td>실제 수량</td><td>현장에서 실제로 세어 확인한 수량</td><td>필수</td></tr>
+      <tr><td>메모</td><td>작업 메모 또는 설명</td><td>선택</td></tr>
+    </table></div>
+    <div class="box box-warn"><strong>⚠ 주의</strong>실제로 세어 확인한 수량을 정확하게 입력하세요. 입력 오류는 재고 차이를 유발합니다. 저장 전에 숫자를 반드시 확인하세요.</div>
+  </section>
+
+  <section class="chapter" id="location">
+    <div class="chapter-head"><div class="ch-no">제5장</div><h2>위치 선택</h2></div>
+    <div class="table-wrap"><table>
+      <tr><th>실사 모드</th><th>사용 가능한 위치</th><th>사용 예시</th></tr>
+      <tr><td>간단 A</td><td>창고만</td><td>단일 창고 관리</td></tr>
+      <tr><td>간단 B</td><td>창고 + 매장</td><td>창고와 매장 동시 실사</td></tr>
+      <tr><td>간단 C</td><td>매장만</td><td>단일 매장 관리</td></tr>
+    </table></div>
+    <div class="box box-hint"><strong>💡 팁</strong>상세 위치 관리(선반 번호 등)는 전체 버전 기능입니다. 설정에서 <strong>상세</strong> 모드로 전환해 사용할 수 있습니다.</div>
+    <div class="box box-warn"><strong>⚠ 주의</strong>상세 위치를 등록했더라도 모드가 간단 A/B/C인 경우 상세 위치가 표시되지 않습니다. 상세 모드로 전환해야 합니다.</div>
+  </section>
+
+  <section class="chapter" id="history">
+    <div class="chapter-head"><div class="ch-no">제6장</div><h2>실사 이력 확인</h2></div>
+    <p>저장된 모든 실사 항목은 실사 이력에서 확인할 수 있습니다. 저장 날짜·시간, 상품 코드·이름, 실제 수량, 위치, 메모가 표시됩니다.</p>
+    <div class="box box-warn"><strong>⚠ 주의</strong>무료 버전은 최대 30건의 실사 이력을 저장합니다. 한도를 초과하면 새 실사 항목을 저장하지 못할 수 있습니다.</div>
+  </section>
+
+  <section class="chapter" id="csv">
+    <div class="chapter-head"><div class="ch-no">제7장</div><h2>CSV 내보내기 제한</h2></div>
+    <div class="table-wrap"><table>
+      <tr><th>항목</th><th>무료 버전</th><th>표준 버전 잠금 해제</th><th>전체 버전</th></tr>
+      <tr><td>내보내기 레코드 수</td><td>최대 30건</td><td>최대 300건</td><td>무제한</td></tr>
+      <tr><td>전체 컬럼 내보내기</td><td>제한됨</td><td>제한됨</td><td>확장 CSV 내보내기</td></tr>
+    </table></div>
+    <div class="box box-warn"><strong>⚠ 주의</strong>실사 요약 CSV에는 날짜/시간이나 위치 컬럼이 포함되지 않습니다. 위치·날짜별 상세 내보내기는 전체 버전 기능입니다.</div>
+  </section>
+
+  <section class="chapter" id="cannot">
+    <div class="chapter-head"><div class="ch-no">제8장</div><h2>무료 버전에서 불가능한 기능</h2></div>
+    <div class="table-wrap"><table>
+      <tr><th>기능</th><th>필요한 플랜</th></tr>
+      <tr><td>30건 초과 마스터 레코드</td><td>실사 표준 버전 이상</td></tr>
+      <tr><td>30건 초과 이력 레코드</td><td>실사 표준 버전 이상</td></tr>
+      <tr><td>30건 초과 내보내기</td><td>실사 표준 버전 이상</td></tr>
+      <tr><td>화면 회전 잠금</td><td>실사 표준 버전 이상</td></tr>
+      <tr><td>상세 코드/위치 규칙 설정</td><td>실사 전체 버전</td></tr>
+      <tr><td>상세 카메라 스캔 설정</td><td>실사 전체 버전</td></tr>
+      <tr><td>확장 CSV 내보내기</td><td>실사 전체 버전</td></tr>
+      <tr><td>실사 결과를 재고에 반영</td><td>실사 전체 버전</td></tr>
+    </table></div>
+  </section>
+
+  <section class="chapter" id="tips">
+    <div class="chapter-head"><div class="ch-no">제9장</div><h2>무료 버전 사용자를 위한 권장 워크플로</h2></div>
+    <p>상품 수가 30종 이하라면 무료 버전으로도 기본적인 재고 실사를 계속 운용할 수 있습니다. 이력 30건 한도에 가까워지기 전에 CSV로 내보내 기록을 축적하세요.</p>
+    <div class="box box-hint"><strong>💡 업그레이드 권장 시점</strong>상품이 30종을 초과하거나, 월별 실사 기록을 장기 보관하거나, 화면 방향을 고정해야 할 때는 표준 버전으로 업그레이드를 고려하세요.</div>
+  </section>
+
+  <div class="summary-box" id="summary">
+    <h3>📌 이 장의 핵심 요약</h3>
+    <ul>
+      <li>무료 버전 실사는 30종 이하 상품의 소규모 작업에 적합합니다.</li>
+      <li>작업 흐름: 스캔 → 수량 입력 → 저장 → 이력 확인.</li>
+      <li>위치는 간단 A/B/C로 설정합니다. 상세 위치는 전체 버전가 필요합니다.</li>
+      <li>CSV 내보내기는 30건으로 제한되며 날짜·위치 컬럼이 포함되지 않습니다.</li>
+      <li>기록이 30건에 가까워지면 표준 버전 또는 전체 버전 이용을 검토하세요.</li>
+      <li>실사와 재고 관리는 독립된 모듈입니다. 혼동하지 마세요.</li>
+    </ul>
+  </div>
+  <div class="confirm-box" id="confirm">
+    <h3>🔍 사용 전 확인 사항</h3>
+    <ul>
+      <li>저장하기 전에 상품명, 위치, 수량을 확인하세요.</li>
+      <li>저장 후 수정 가능 여부와 방법은 앱 화면의 안내를 따르세요.</li>
+      <li>실사 이력이 30건에 가까워지면 CSV 내보내기 또는 표준/전체 버전 이용을 검토하세요.</li>
+      <li>가격, 구매 조건, 환불 조건은 Google Play 표시를 우선해서 확인하세요.</li>
+    </ul>
+  </div>
+</div>
+<footer>Quantiventra 매뉴얼 · 최신 정보는 앱 화면에서 확인하세요.<p style="margin-top:4px;"><a href="privacy_ko.html">개인정보 처리방침</a></p></footer>
+</body></html>

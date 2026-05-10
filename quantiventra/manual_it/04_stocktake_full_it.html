@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="it">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quantiventra – Inventario fisico – Versione completa</title>
+<style>*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;font-size:15px;line-height:1.8;color:#1a2535;background:#f4f7fb;}
+a{color:#1a5fa8;text-decoration:none;}a:hover{text-decoration:underline;}
+.site-nav{background:#1a3a5c;color:#fff;padding:0;}.site-nav .nav-inner{max-width:960px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:stretch;}
+.site-nav a{color:#cde;padding:10px 13px;font-size:12px;display:block;border-right:1px solid #2a4a6c;white-space:nowrap;}
+.site-nav a:hover{background:#2a5090;text-decoration:none;}.site-nav a.active{background:#2a6cbe;color:#fff;font-weight:bold;}
+.page-header{background:linear-gradient(135deg,#1a3a5c 0%,#2a6cbe 100%);color:#fff;padding:40px 20px 30px;}
+.page-header .inner{max-width:960px;margin:0 auto;}.page-header .app-name{font-size:13px;opacity:.8;}
+.page-header h1{font-size:22px;font-weight:700;margin-top:6px;line-height:1.4;}.page-header .subtitle{font-size:14px;opacity:.85;margin-top:8px;}
+.scope-box{background:rgba(255,255,255,.15);border-left:4px solid #7ecfff;padding:12px 16px;margin-top:16px;border-radius:4px;font-size:13px;}
+.container{max-width:960px;margin:0 auto;padding:30px 16px;}
+.toc{background:#fff;border:1px solid #c8d8ec;border-radius:8px;padding:24px 28px;margin-bottom:32px;}
+.toc h2{font-size:16px;font-weight:700;color:#1a3a5c;border-bottom:2px solid #2a6cbe;padding-bottom:8px;margin-bottom:14px;}
+.toc ol{margin-left:18px;}.toc li{margin:5px 0;font-size:14px;}
+.chapter{background:#fff;border-radius:8px;box-shadow:0 1px 4px rgba(0,0,0,.08);padding:28px 28px 24px;margin-bottom:28px;}
+.chapter-head{border-left:5px solid #2a6cbe;padding-left:14px;margin-bottom:20px;}
+.chapter-head .ch-no{font-size:12px;color:#2a6cbe;font-weight:700;}.chapter-head h2{font-size:20px;font-weight:700;color:#1a2535;margin-top:2px;}
+h3{font-size:16px;font-weight:700;color:#1a3a5c;border-bottom:1px solid #dde8f5;padding-bottom:5px;margin:22px 0 12px;}
+h4{font-size:14px;font-weight:700;color:#2a4a6c;margin:16px 0 8px;}
+p{margin-bottom:12px;}ul,ol{margin-left:20px;margin-bottom:12px;}li{margin-bottom:5px;}
+.steps{counter-reset:step;list-style:none;margin-left:0;}
+.steps li{counter-increment:step;padding:9px 12px 9px 46px;position:relative;background:#f8fbff;border:1px solid #dde8f5;border-radius:6px;margin-bottom:6px;}
+.steps li::before{content:counter(step);position:absolute;left:12px;top:50%;transform:translateY(-50%);width:24px;height:24px;background:#2a6cbe;color:#fff;border-radius:50%;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;}
+.table-wrap{overflow-x:auto;margin-bottom:16px;}
+table{width:100%;border-collapse:collapse;font-size:13px;min-width:380px;}
+th{background:#1a3a5c;color:#fff;padding:9px 12px;text-align:left;white-space:nowrap;}
+td{padding:8px 12px;border-bottom:1px solid #dde8f5;vertical-align:top;}tr:nth-child(even) td{background:#f4f7fb;}
+code{font-family:'Courier New',monospace;background:rgba(0,80,160,.08);color:#004080;padding:2px 6px;border-radius:3px;font-size:12px;}
+.box{border-radius:6px;padding:13px 16px;margin:14px 0;font-size:13px;}
+.box-warn{background:#fffbe6;border-left:4px solid #f5a623;color:#7a5700;}
+.box-danger{background:#fff0f0;border-left:4px solid #d43f3f;color:#7a0000;}
+.box-hint{background:#e8f4ff;border-left:4px solid #2a6cbe;color:#0a3060;}
+.box-check{background:#f4eeff;border-left:4px solid #8c4fc8;color:#3a0070;}
+.box strong{display:block;margin-bottom:4px;}
+figure{max-width:280px;width:100%;margin:18px auto;text-align:center;}
+figure img{display:block;width:100%;max-width:280px;height:auto;margin:0 auto;border:1px solid #c8d8ec;border-radius:6px;box-shadow:0 2px 8px rgba(0,0,0,.1);}
+figcaption{font-size:12px;color:#5a7a99;margin-top:6px;}
+.img-pending{display:flex;align-items:center;justify-content:center;max-width:280px;width:100%;box-sizing:border-box;background:#e8eef5;border:2px dashed #99b8d8;border-radius:6px;height:160px;color:#5a7a99;font-size:13px;margin:18px auto;}
+.diff-add{background:#e8fff0;border-left:4px solid #2a9c5c;border-radius:6px;padding:12px 16px;margin:14px 0;font-size:13px;}
+.diff-add strong{display:block;color:#1a6c3c;margin-bottom:4px;}
+.flow-box{background:#f4f7fb;border:1px solid #c8d8ec;border-radius:8px;padding:20px;margin:16px 0;}
+.flow-box h4{color:#1a3a5c;margin-top:0;}
+.flow-arrow{text-align:center;font-size:20px;color:#2a6cbe;margin:4px 0;}
+.flow-step{background:#fff;border:1px solid #c8d8ec;border-radius:6px;padding:10px 16px;margin:4px 0;font-size:13px;}
+.flow-step strong{color:#1a3a5c;}
+.summary-box{background:linear-gradient(135deg,#e8f4ff,#f0f8ff);border:1px solid #99c8ec;border-radius:8px;padding:20px 24px;margin-top:32px;}
+.summary-box h3{border:none;color:#1a3a5c;margin-top:0;}
+.confirm-box{background:#fdf4ff;border:1px solid #c8a0e0;border-radius:8px;padding:20px 24px;margin-top:16px;}
+.confirm-box h3{border:none;color:#5a0090;margin-top:0;}
+.check{color:#2e7d32;font-weight:700;}.cross{color:#c62828;}
+th.pro-col{background:#5a2a8c;}
+.feature-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px;margin:16px 0;}
+.feature-card{background:#f4f7fb;border:1px solid #c8d8ec;border-radius:8px;padding:16px;}
+.feature-card h4{color:#1a3a5c;margin-top:0;margin-bottom:6px;font-size:14px;}
+.feature-card p{font-size:13px;margin:0;color:#3a5a7a;}
+.feature-card.pro-card{background:#f4eeff;border-color:#c8a0e0;}
+.feature-card.pro-card h4{color:#5a2a8c;}
+.trouble{border:1px solid #c8d8ec;border-radius:8px;margin:14px 0;overflow:hidden;}
+.trouble-q{background:#eef6fd;padding:13px 18px;font-weight:700;font-size:14px;color:#1a3a5c;display:flex;align-items:flex-start;gap:10px;}
+.trouble-q::before{content:'Q';background:#2a6cbe;color:#fff;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900;flex-shrink:0;margin-top:1px;}
+.trouble-a{padding:13px 18px 14px 50px;font-size:13.5px;border-top:1px solid #c8d8ec;line-height:1.9;}
+.trouble-a ul{margin-left:16px;}
+.legal-block{background:#f5f5f5;border:1px solid #ddd;border-radius:8px;padding:20px 24px;font-size:12.5px;color:#444;line-height:1.9;margin:14px 0;}
+.legal-block h4{font-size:13px;color:#333;margin:18px 0 6px;border-bottom:1px solid #ddd;padding-bottom:4px;}
+.legal-block h4:first-child{margin-top:0;}
+footer{text-align:center;font-size:12px;color:#8a9aaa;padding:30px 16px;border-top:1px solid #dde8f5;margin-top:20px;}
+@media(max-width:640px){.page-header h1{font-size:18px;}.chapter{padding:20px 16px;}.site-nav a{padding:8px 9px;font-size:11px;}}
+@media print{body{background:#fff;font-size:12px;}.site-nav{display:none;}.chapter{box-shadow:none;border:1px solid #ccc;page-break-inside:avoid;}.page-header{background:#1a3a5c !important;-webkit-print-color-adjust:exact;print-color-adjust:exact;}}
+</style></head>
+<body>
+<nav class="site-nav"><div class="nav-inner">
+  <a href="01_top_settings_common_it.html">① Home / Impostazioni</a>
+  <a href="02_stocktake_free_it.html">② Inventario fisico gratuito</a>
+  <a href="03_stocktake_simple_it.html">③ Inventario fisico standard</a>
+  <a href="04_stocktake_full_it.html" class="active">④ Inventario fisico completo</a>
+  <a href="05_inventory_free_it.html">⑤ Magazzino gratuito</a>
+  <a href="06_inventory_simple_it.html">⑥ Magazzino standard</a>
+  <a href="07_inventory_full_it.html">⑦ Magazzino completo</a>
+</div></nav>
+<header class="page-header"><div class="inner">
+  <div class="app-name">Manuale Quantiventra</div>
+  <h1>④ Inventario fisico — Versione completa</h1>
+  <div class="subtitle">Funzioni della versione completa, ubicazioni dettagliate, conferma dei risultati, applicazione alle scorte e flussi operativi</div>
+  <div class="scope-box"><strong>Argomenti trattati:</strong> Funzioni della versione completa / Differenze rispetto alla versione Standard / Ubicazioni dettagliate / CSV esteso / Storico / Conferma dei risultati / Applicazione alle scorte / Note importanti / Flusso operativo</div>
+</div></header>
+<div class="container">
+  <nav class="toc"><h2>Indice</h2><ol>
+    <li><a href="#overview">Panoramica versione completa</a></li>
+    <li><a href="#diff">Differenze rispetto alla versione standard</a></li>
+    <li><a href="#location">Ubicazioni dettagliate</a></li>
+    <li><a href="#csv">Importazione / esportazione CSV estesa</a></li>
+    <li><a href="#history">Storico inventario</a></li>
+    <li><a href="#confirm-flow">Conferma dei risultati dell'inventario fisico</a></li>
+    <li><a href="#reflect">Applicazione dei risultati dell'inventario fisico alle scorte</a></li>
+    <li><a href="#notes">Note importanti sull'applicazione alle scorte</a></li>
+    <li><a href="#usecase">Flusso di lavoro pratico — versione completa</a></li>
+    <li><a href="#summary">Punti chiave del capitolo</a></li>
+    <li><a href="#check">Note prima dell'uso</a></li>
+  </ol></nav>
+
+  <section class="chapter" id="overview">
+    <div class="chapter-head"><div class="ch-no">CAPITOLO 1</div><h2>Panoramica versione completa</h2></div>
+    <p>La versione completa dell'inventario fisico rimuove i limiti di record e abilita le impostazioni complete condivise, tra cui regole per i codici, regole per le ubicazioni, impostazioni della fotocamera e funzioni CSV estese. È pensata per gestire molti prodotti e per lavorare con ubicazioni dettagliate.</p>
+    <div class="diff-add">
+      <strong>✅ Cosa aggiunge la versione completa</strong>
+      <ul style="margin-top:6px;">
+        <li>Rimozione dei limiti su anagrafiche, storico inventario ed esportazioni</li>
+        <li>Impostazioni regole codice dettagliate</li>
+        <li>Impostazioni regole ubicazione dettagliate</li>
+        <li>Impostazioni scansione fotocamera dettagliate</li>
+        <li>Esportazione CSV estesa</li>
+        <li>Modifica dettagliata dei dati</li>
+        <li>Blocco della rotazione dello schermo, già disponibile dalla versione Standard</li>
+      </ul>
+    </div>  </section>
+
+  <section class="chapter" id="diff">
+    <div class="chapter-head"><div class="ch-no">CAPITOLO 2</div><h2>Differenze rispetto alla versione standard</h2></div>
+    <div class="table-wrap"><table>
+      <tr><th>Funzionalità / Impostazione</th><th>Versione Standard</th><th>Versione Completa</th></tr>
+      <tr><td>Record anagrafici</td><td>Max 300</td><td>Illimitati</td></tr>
+      <tr><td>Record storico inventario</td><td>Max 1.000</td><td>Illimitati</td></tr>
+      <tr><td>Record esportati</td><td>Max 300</td><td>Illimitati</td></tr>
+      <tr><td>Impostazioni regole codice dettagliate</td><td>✗</td><td>○</td></tr>
+      <tr><td>Impostazioni regole ubicazione dettagliate</td><td>✗</td><td>○</td></tr>
+      <tr><td>Impostazioni fotocamera dettagliate</td><td>✗</td><td>○</td></tr>
+      <tr><td>Esportazione CSV estesa</td><td>✗</td><td>○</td></tr>
+      <tr><td>Uso ubicazioni dettagliate</td><td>✗ (modalità Dettagliata impostabile ma funzionalità limitata)</td><td>○</td></tr>
+    </table></div>
+  </section>
+
+  <section class="chapter" id="location">
+    <div class="chapter-head"><div class="ch-no">CAPITOLO 3</div><h2>Ubicazioni dettagliate</h2></div>
+    <p>Con la versione completa, tutte le ubicazioni registrate nell'Anagrafica ubicazioni sono disponibili per l'inventario. Puoi configurare numeri di scaffale, piani, aree e altre ubicazioni dettagliate oltre a magazzino e negozio.</p>
+    <h3>Come impostare le ubicazioni dettagliate</h3>
+    <ol class="steps">
+      <li>Vai in <strong>Impostazioni → Impostazioni inventario</strong> e seleziona la modalità <strong>Dettagliata</strong>.</li>
+      <li>Vai in <strong>Gestione anagrafiche → Anagrafica ubicazioni</strong> e registra le ubicazioni necessarie.</li>
+      <li>Nella schermata inventario, tocca il campo ubicazione per visualizzare tutte le ubicazioni registrate.</li>
+    </ol>
+    <div class="box box-warn"><strong>⚠ Attenzione</strong>Anche con la versione completa attiva, se la modalità è ancora Semplice A/B/C, vengono mostrate solo le ubicazioni semplici. Passa alla modalità <strong>Dettagliata</strong> per usare tutte le ubicazioni registrate.</div>
+  </section>
+
+  <section class="chapter" id="csv">
+    <div class="chapter-head"><div class="ch-no">CAPITOLO 4</div><h2>Importazione / esportazione CSV estesa</h2></div>
+    <p>Con la versione completa puoi usare funzioni CSV estese per preparare i dati dell'inventario fisico, controllare i risultati e conservarli come archivio. Prima di importare o sostituire dati, controlla sempre il contenuto del file.</p>
+    <h3>Specifiche di importazione CSV per l'inventario fisico</h3>
+    <div class="table-wrap"><table>
+      <tr><th>Tipo CSV</th><th>Uso principale</th><th>Colonne principali</th><th>Note</th></tr>
+      <tr><td>CSV inventario fisico a 2 colonne</td><td>Importazione base dell'elenco da controllare</td><td>Codice prodotto, nome prodotto</td><td>Senza intestazione; i dati iniziano dalla prima riga</td></tr>
+      <tr><td>CSV inventario fisico a 3 colonne</td><td>Importazione con scorte teoriche</td><td>Codice prodotto, nome prodotto, scorte teoriche</td><td>Il conteggio reale viene inserito durante il lavoro di inventario</td></tr>
+    </table></div>
+    <h3>Esportazione CSV dell'inventario fisico</h3>
+    <ul>
+      <li>I file esportati includono una riga di intestazione nella lingua selezionata.</li>
+      <li>Il CSV <code>stocktake_summary</code> non include colonne di data, ora o ubicazione.</li>
+      <li>Per esportazioni dettagliate per ubicazione, data o riga, controlla la schermata di esportazione e il CSV generato dall'app.</li>
+    </ul>
+    <div class="box box-danger"><strong>🚨 Importante</strong>Le operazioni CSV possono modificare o sostituire dati esistenti. Prima di procedere, esporta sempre un backup e controlla attentamente la schermata di conferma.</div>
+  </section>
+
+  <section class="chapter" id="history">
+    <div class="chapter-head"><div class="ch-no">CAPITOLO 5</div><h2>Storico inventario</h2></div>
+    <p>Nella versione completa, lo storico dell'inventario può conservare più record e permette di rivedere i conteggi salvati prima della conferma finale.</p>
+    <h3>Cosa controllare nello storico</h3>
+    <ul>
+      <li>Data e ora del salvataggio</li>
+      <li>Codice prodotto e nome prodotto</li>
+      <li>Quantità effettivamente contata</li>
+      <li>Ubicazione e note</li>
+      <li>Stato del conteggio, se visualizzato dall'app</li>
+    </ul>
+    <div class="box box-hint"><strong>💡 Suggerimento</strong>Prima di confermare il conteggio reale, rivedi lo storico e correggi eventuali errori seguendo le istruzioni disponibili nell'app.</div>
+  </section>
+
+  <section class="chapter" id="confirm-flow">
+    <div class="chapter-head"><div class="ch-no">CAPITOLO 6</div><h2>Conferma dei risultati dell'inventario fisico</h2></div>
+    <p>Nella versione completa, è disponibile l'operazione "Conferma dei risultati dell'inventario fisico" per i dati dell'inventario inseriti. Confermare rende i risultati dell'inventario un dato confermato per il lavoro successivo.</p>
+    <div class="flow-box">
+      <h4>Flusso dall'inventario alla conferma</h4>
+      <div class="flow-step"><strong>① Inserimento dati dell'inventario</strong>: Scansiona codice a barre → Inserisci quantità → Salva</div>
+      <div class="flow-arrow">↓</div>
+      <div class="flow-step"><strong>② Revisione storico inventario</strong>: Verifica le voci salvate e correggi eventuali errori (seguendo le indicazioni disponibili nell'app)</div>
+      <div class="flow-arrow">↓</div>
+      <div class="flow-step"><strong>③ Conferma dei risultati dell'inventario fisico</strong>: Esegui l'operazione di conferma</div>
+      <div class="flow-arrow">↓</div>
+      <div class="flow-step"><strong>④ Applicazione alle scorte (opzionale)</strong>: Applica i risultati confermati alla Gestione magazzino</div>
+    </div>
+    <div class="box box-danger"><strong>🚨 Sul pulsante Conferma</strong>La conferma del conteggio reale è un'operazione ad alto impatto che influisce sui dati delle scorte. Il pulsante di conferma si trova in una zona di pericolo separata sotto i dettagli di conferma — non deve essere trattato come il primo pulsante da premere. Prima di procedere, rivedi attentamente tutte le differenze e i dati interessati.</div>
+    <div class="box box-danger"><strong>🚨 Importante</strong>Prima di confermare, rivedi sempre lo storico inventario. Prima di procedere, leggi attentamente le istruzioni nella schermata di conferma.</div>
+  </section>
+
+  <section class="chapter" id="reflect">
+    <div class="chapter-head"><div class="ch-no">CAPITOLO 7</div><h2>Applicazione dei risultati dell'inventario fisico alle scorte</h2></div>
+    <p>Applicare i risultati dell'inventario fisico alla Gestione magazzino adegua le scorte al conteggio confermato. Le differenze vengono registrate nello storico come rettifiche.</p>
+    <ol class="steps">
+      <li>Inserisci i dati dell'inventario e conferma il conteggio reale.</li>
+      <li>Esegui l'operazione "Applica alle scorte".</li>
+      <li>Rivedi il contenuto (dettagli rettifiche) nella schermata di conferma.</li>
+      <li>Dopo aver confermato, esegui l'applicazione.</li>
+      <li>Verifica i dettagli delle rettifiche nello storico scorte.</li>
+    </ol>
+    <div class="box box-danger"><strong>🚨 Importante</strong>Applicare alle scorte apporta modifiche significative alle quantità. Prima di procedere, esporta sempre un backup CSV. Prima di eseguire, leggi attentamente la schermata di conferma.</div>
+    <div class="box box-check"><strong>🔍 Dopo l'applicazione</strong>Dopo aver applicato i risultati alle scorte, controlla lo storico scorte e conserva il backup CSV. Per eventuali correzioni, segui le indicazioni visualizzate nell'app e verifica i dati modificati prima di continuare.</div>
+  </section>
+
+  <section class="chapter" id="notes">
+    <div class="chapter-head"><div class="ch-no">CAPITOLO 8</div><h2>Note importanti sull'applicazione alle scorte</h2></div>
+    <div class="box box-danger"><strong>🚨 Fai sempre il backup prima di applicare</strong>Applicare alle scorte apporta modifiche su larga scala ai dati. Esporta preventivamente un backup CSV (<strong>Impostazioni → Esporta tutti i dati</strong>).</div>
+    <div class="box box-warn"><strong>⚠ Leggi la schermata di conferma</strong>Per qualsiasi operazione che modifica dati — conferma, applicazione, cancellazione, azzeramento — leggi attentamente la schermata di conferma prima di eseguire.</div>
+  </section>
+
+  <section class="chapter" id="usecase">
+    <div class="chapter-head"><div class="ch-no">CAPITOLO 9</div><h2>Flusso di lavoro pratico — versione completa</h2></div>
+    <h3>Flusso inventario mensile</h3>
+    <ol class="steps">
+      <li>A inizio mese, importa il CSV inventario per aggiornare l'anagrafica prodotti.</li>
+      <li>Imposta le impostazioni inventario sulla modalità <strong>Dettagliata</strong> e prepara le ubicazioni per scaffale e area.</li>
+      <li>Esegui l'inventario: scansiona i codici a barre e inserisci le quantità reali.</li>
+      <li>Rivedi tutte le voci nello storico inventario.</li>
+      <li>Se tutto è corretto, esegui la Conferma dei risultati dell'inventario fisico.</li>
+      <li>Dopo il backup, esegui l'operazione Applica alle scorte.</li>
+      <li>Controlla le voci di rettifica inventario nello storico scorte e indaga eventuali differenze.</li>
+      <li>Esporta il CSV dei risultati inventario per l'archiviazione.</li>
+    </ol>
+  </section>
+
+  <div class="summary-box" id="summary">
+    <h3>📌 Punti chiave del capitolo</h3>
+    <ul>
+      <li>La versione completa rimuove tutti i limiti di record e attiva ubicazioni dettagliate e CSV esteso.</li>
+      <li>Per usare le ubicazioni dettagliate, passa alla modalità <strong>Dettagliata</strong> in <strong>Impostazioni → Impostazioni inventario</strong>.</li>
+      <li>Il flusso Conferma → Applicazione alle scorte comporta modifiche rilevanti ai dati — procedi con cautela.</li>
+      <li>Prima di applicare alle scorte, esporta sempre un backup CSV.</li>
+    </ul>
+  </div>
+  <div class="confirm-box" id="check">
+    <h3>🔍 Note prima dell'uso</h3>
+    <ul>
+      <li>Prima di confermare o applicare i risultati, controlla quantità, ubicazioni e differenze nella schermata dell'app.</li>
+      <li>Dopo la conferma o l'applicazione, usa lo storico e il backup CSV per controllare le modifiche effettuate.</li>
+      <li>Per le esportazioni CSV dettagliate, verifica le colonne nel file generato e scegli il formato più adatto all'archiviazione.</li>
+      <li>Se devi correggere dati già salvati, segui il flusso disponibile nell'app e controlla di nuovo lo storico prima di procedere.</li>
+    </ul>
+  </div>
+</div>
+<footer>Manuale Quantiventra · Il contenuto del manuale può essere aggiornato senza preavviso. Per le informazioni più recenti, fai riferimento alle schermate dell'app.<p style="margin-top:4px;"><a href="privacy_it.html">Informativa sulla privacy</a></p></footer>
+</body></html>

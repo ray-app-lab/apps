@@ -1,0 +1,1019 @@
+﻿<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quantiventra 取扱説明書 – トップ・設定・共通（日本語版）</title>
+<style>
+/* ===== リセット・基本 ===== */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Hiragino Sans','Meiryo',sans-serif;font-size:15px;line-height:1.8;color:#1a2535;background:#f4f7fb;}
+a{color:#1a5fa8;text-decoration:none;}
+a:hover{text-decoration:underline;}
+
+/* ===== ナビゲーション ===== */
+.site-nav{background:#1a3a5c;color:#fff;padding:0;}
+.site-nav .nav-inner{max-width:960px;margin:0 auto;display:flex;flex-wrap:wrap;gap:0;align-items:stretch;}
+.site-nav a{color:#cde;padding:10px 13px;font-size:12px;display:block;border-right:1px solid #2a4a6c;white-space:nowrap;}
+.site-nav a:hover{background:#2a5090;text-decoration:none;}
+.site-nav a.active{background:#2a6cbe;color:#fff;font-weight:bold;}
+
+/* ===== ヘッダー ===== */
+.page-header{background:linear-gradient(135deg,#1a3a5c 0%,#2a6cbe 100%);color:#fff;padding:40px 20px 30px;}
+.page-header .inner{max-width:960px;margin:0 auto;}
+.page-header .app-name{font-size:13px;opacity:.8;letter-spacing:.1em;text-transform:uppercase;}
+.page-header h1{font-size:26px;font-weight:700;margin-top:6px;line-height:1.3;}
+.page-header .subtitle{font-size:14px;opacity:.85;margin-top:8px;}
+.scope-box{background:rgba(255,255,255,.15);border-left:4px solid #7ecfff;padding:12px 16px;margin-top:16px;border-radius:4px;font-size:13px;}
+
+/* ===== Google Play セクション ===== */
+.play-section{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.3);border-radius:10px;padding:22px 28px;margin-top:24px;display:flex;align-items:center;gap:28px;flex-wrap:wrap;}
+.play-qr-wrap{flex-shrink:0;text-align:center;}
+.play-qr-frame{width:130px;height:130px;border:3px solid rgba(255,255,255,.7);border-radius:10px;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.95);position:relative;overflow:hidden;}
+.play-qr-frame img{width:100%;height:100%;object-fit:contain;display:block;}
+.play-qr-corner{pointer-events:none;position:absolute;width:16px;height:16px;border-color:#2a6cbe;border-style:solid;border-width:0;}
+.play-qr-corner.tl{top:5px;left:5px;border-top-width:3px;border-left-width:3px;border-radius:3px 0 0 0;}
+.play-qr-corner.tr{top:5px;right:5px;border-top-width:3px;border-right-width:3px;border-radius:0 3px 0 0;}
+.play-qr-corner.bl{bottom:5px;left:5px;border-bottom-width:3px;border-left-width:3px;border-radius:0 0 0 3px;}
+.play-qr-corner.br{bottom:5px;right:5px;border-bottom-width:3px;border-right-width:3px;border-radius:0 0 3px 0;}
+.play-qr-label{font-size:10px;color:rgba(255,255,255,.8);margin-top:6px;letter-spacing:.05em;}
+.play-info h3{font-size:16px;font-weight:700;color:#fff;margin-bottom:4px;}
+.play-info p{font-size:12px;color:rgba(255,255,255,.75);margin-bottom:10px;}
+.play-badge{display:inline-block;text-decoration:none;}
+.play-badge img{display:block;height:44px;width:auto;max-width:180px;}
+
+/* ===== レイアウト ===== */
+.container{max-width:960px;margin:0 auto;padding:30px 16px;}
+
+/* ===== 目次 ===== */
+.toc{background:#fff;border:1px solid #c8d8ec;border-radius:8px;padding:24px 28px;margin-bottom:32px;}
+.toc h2{font-size:16px;font-weight:700;color:#1a3a5c;border-bottom:2px solid #2a6cbe;padding-bottom:8px;margin-bottom:14px;}
+.toc ol{margin-left:18px;}
+.toc li{margin:5px 0;font-size:14px;}
+.toc a{color:#1a5fa8;}
+
+/* ===== 章見出し ===== */
+.chapter{background:#fff;border-radius:8px;box-shadow:0 1px 4px rgba(0,0,0,.08);padding:28px 28px 24px;margin-bottom:28px;}
+.chapter-head{border-left:5px solid #2a6cbe;padding-left:14px;margin-bottom:20px;}
+.chapter-head .ch-no{font-size:12px;color:#2a6cbe;font-weight:700;letter-spacing:.1em;}
+.chapter-head h2{font-size:20px;font-weight:700;color:#1a2535;margin-top:2px;}
+h3{font-size:16px;font-weight:700;color:#1a3a5c;border-bottom:1px solid #dde8f5;padding-bottom:5px;margin:22px 0 12px;}
+h4{font-size:14px;font-weight:700;color:#2a4a6c;margin:16px 0 8px;}
+
+/* ===== 段落・リスト ===== */
+p{margin-bottom:12px;}
+ul,ol{margin-left:20px;margin-bottom:12px;}
+li{margin-bottom:5px;}
+
+/* ===== 手順 ===== */
+.steps{counter-reset:step;list-style:none;margin-left:0;}
+.steps li{counter-increment:step;padding:9px 12px 9px 46px;position:relative;background:#f8fbff;border:1px solid #dde8f5;border-radius:6px;margin-bottom:6px;}
+.steps li::before{content:counter(step);position:absolute;left:12px;top:50%;transform:translateY(-50%);width:24px;height:24px;background:#2a6cbe;color:#fff;border-radius:50%;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;}
+
+/* ===== テーブル ===== */
+.table-wrap{overflow-x:auto;margin-bottom:16px;}
+table{width:100%;border-collapse:collapse;font-size:13px;min-width:420px;}
+th{background:#1a3a5c;color:#fff;padding:9px 12px;text-align:left;white-space:nowrap;}
+th.pro-col{background:#5a2a8c;}
+td{padding:8px 12px;border-bottom:1px solid #dde8f5;vertical-align:top;}
+tr:nth-child(even) td{background:#f4f7fb;}
+code{font-family:'Courier New',monospace;background:rgba(0,80,160,.08);color:#004080;padding:2px 6px;border-radius:3px;font-size:12px;}
+
+/* ===== バッジ ===== */
+.badge{display:inline-block;font-size:10px;font-weight:700;padding:2px 7px;border-radius:10px;white-space:nowrap;}
+.badge-free{background:#2e7d32;color:#fff;}
+.badge-pro{background:#5a2a8c;color:#fff;}
+.badge-req{background:#c62828;color:#fff;}
+.badge-opt{background:#607d8b;color:#fff;}
+.check{color:#2e7d32;font-weight:700;}
+.cross{color:#c62828;}
+
+/* ===== ノートボックス ===== */
+.box{border-radius:6px;padding:13px 16px;margin:14px 0;font-size:13px;}
+.box-warn{background:#fffbe6;border-left:4px solid #f5a623;color:#7a5700;}
+.box-danger{background:#fff0f0;border-left:4px solid #d43f3f;color:#7a0000;}
+.box-hint{background:#e8f4ff;border-left:4px solid #2a6cbe;color:#0a3060;}
+.box-check{background:#f4eeff;border-left:4px solid #8c4fc8;color:#3a0070;}
+.box-success{background:#e8f5e9;border-left:4px solid #2e7d32;color:#1b4a1e;}
+.box strong{display:block;margin-bottom:4px;}
+
+/* ===== 画像枠 ===== */
+figure{max-width:280px;width:100%;margin:18px auto;text-align:center;}
+figure img{display:block;width:100%;max-width:280px;height:auto;margin:0 auto;border:1px solid #c8d8ec;border-radius:6px;box-shadow:0 2px 8px rgba(0,0,0,.1);}
+figcaption{font-size:12px;color:#5a7a99;margin-top:6px;}
+.img-placeholder{max-width:280px;width:100%;box-sizing:border-box;margin:18px auto;background:#eef3f9;border:2px dashed #99b8d8;border-radius:6px;padding:32px;color:#5a7a99;font-size:13px;text-align:center;}
+
+/* ===== 特徴カード ===== */
+.feature-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px;margin:16px 0;}
+.feature-card{background:#f4f7fb;border:1px solid #c8d8ec;border-radius:8px;padding:16px;}
+.feature-card h4{color:#1a3a5c;margin-top:0;margin-bottom:6px;font-size:14px;}
+.feature-card p{font-size:13px;margin:0;color:#3a5a7a;}
+.feature-card.pro-card{background:#f4eeff;border-color:#c8a0e0;}
+.feature-card.pro-card h4{color:#5a2a8c;}
+
+/* ===== パスブロック ===== */
+.path-block{background:#0f1923;color:#c8e6ff;font-family:'Courier New',monospace;font-size:13px;padding:16px 20px;border-radius:8px;margin:12px 0;line-height:2;overflow-x:auto;}
+.path-block .dim{color:#5c8099;}
+.path-block .file{color:#a5e6a1;font-weight:600;}
+
+/* ===== フロー図 ===== */
+.flow{display:flex;flex-direction:column;gap:0;margin:16px 0;}
+.flow-step{display:flex;align-items:stretch;gap:0;}
+.flow-step-left{display:flex;flex-direction:column;align-items:center;width:36px;flex-shrink:0;}
+.flow-dot{width:14px;height:14px;border-radius:50%;background:#2a6cbe;flex-shrink:0;}
+.flow-line{width:2px;flex:1;background:#c8d8ec;min-height:14px;}
+.flow-content{flex:1;padding:0 0 18px 14px;}
+.flow-title{font-weight:700;color:#1a3a5c;font-size:14px;margin-bottom:3px;}
+.flow-body{font-size:13px;color:#3a5a7a;}
+
+/* ===== トラブルシューティング Q&A ===== */
+.trouble{border:1px solid #c8d8ec;border-radius:8px;margin:14px 0;overflow:hidden;}
+.trouble-q{background:#eef6fd;padding:13px 18px;font-weight:700;font-size:14px;color:#1a3a5c;display:flex;align-items:flex-start;gap:10px;}
+.trouble-q::before{content:'Q';background:#2a6cbe;color:#fff;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900;flex-shrink:0;margin-top:1px;}
+.trouble-a{padding:13px 18px 14px 50px;font-size:13.5px;border-top:1px solid #c8d8ec;line-height:1.9;}
+.trouble-a ul{margin-left:16px;}
+
+/* ===== 法務ブロック ===== */
+.legal-block{background:#f5f5f5;border:1px solid #ddd;border-radius:8px;padding:20px 24px;font-size:12.5px;color:#444;line-height:1.9;margin:14px 0;}
+.legal-block h4{font-size:13px;color:#333;margin:18px 0 6px;border-bottom:1px solid #ddd;padding-bottom:4px;}
+.legal-block h4:first-child{margin-top:0;}
+
+/* ===== ポイント・まとめ ===== */
+.summary-box{background:linear-gradient(135deg,#e8f4ff,#f0f8ff);border:1px solid #99c8ec;border-radius:8px;padding:20px 24px;margin-top:32px;}
+.summary-box h3{border:none;color:#1a3a5c;margin-top:0;}
+.confirm-box{background:#fdf4ff;border:1px solid #c8a0e0;border-radius:8px;padding:20px 24px;margin-top:16px;}
+.confirm-box h3{border:none;color:#5a0090;margin-top:0;}
+
+/* ===== フッター ===== */
+footer{text-align:center;font-size:12px;color:#8a9aaa;padding:30px 16px 60px;border-top:1px solid #dde8f5;margin-top:20px;}
+
+/* ===== 固定ボタン ===== */
+.back-top{position:fixed;right:22px;bottom:28px;background:#1a3a5c;color:#fff;width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:20px;text-decoration:none;box-shadow:0 4px 14px rgba(26,58,92,.45);z-index:100;transition:transform .2s,box-shadow .2s;}
+.back-top:hover{transform:translateY(-3px);box-shadow:0 8px 22px rgba(26,58,92,.55);text-decoration:none;}
+.back-prev{position:fixed;left:18px;top:18px;z-index:200;border:1px solid rgba(255,255,255,.45);border-radius:999px;background:rgba(26,58,92,.88);color:#fff;padding:8px 14px;font:700 13px/1 'Hiragino Sans','Meiryo',sans-serif;box-shadow:0 4px 14px rgba(0,0,0,.2);cursor:pointer;text-decoration:none;}
+.back-prev:hover{background:#1a3a5c;text-decoration:none;}
+
+/* ===== レスポンシブ ===== */
+@media(max-width:640px){
+  .page-header h1{font-size:20px;}
+  .chapter{padding:20px 16px;}
+  .toc{padding:16px;}
+  .site-nav a{padding:8px 9px;font-size:11px;}
+  .play-section{flex-direction:column;align-items:flex-start;gap:16px;}
+  .feature-grid{grid-template-columns:1fr 1fr;}
+  .back-prev{display:none;}
+}
+
+/* ===== 印刷 ===== */
+@media print{
+  body{background:#fff;font-size:12px;}
+  .site-nav,.back-top,.back-prev{display:none;}
+  .chapter{box-shadow:none;border:1px solid #ccc;page-break-inside:avoid;}
+  .page-header{background:#1a3a5c !important;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  a::after{content:" ("attr(href)")";font-size:10px;color:#666;}
+  .play-section{display:none;}
+}
+</style>
+</head>
+<body id="top">
+
+    <div class="scope-box">
+      <strong>このHTMLで説明する範囲：</strong>
+      アプリ概要 / 動作環境 / インストールと初回起動 / データ保存場所 / 棚卸と在庫管理の違い / 最初にやること / トップ画面 / 設定画面 / 言語設定 / 課金プラン / サンプルデータ / トラブルシューティング / 用語集 / 規約・免責事項
+    </div>
+  </div>
+</header>
+
+<div class="container">
+
+  <!-- 目次 -->
+  <nav class="toc">
+    <h2>目次</h2>
+    <ol>
+      <li><a href="#about">Quantiventraとは</a></li>
+      <li><a href="#environment">動作環境と権限</a></li>
+      <li><a href="#install">インストールと初回起動</a></li>
+      <li><a href="#storage">データの保存場所</a></li>
+      <li><a href="#diff">棚卸と在庫管理の違い</a></li>
+      <li><a href="#start">初心者向け「最初にやること」</a></li>
+      <li><a href="#top-screen">トップ画面の使い方</a></li>
+      <li><a href="#settings">設定画面の概要</a></li>
+      <li><a href="#language">言語設定</a></li>
+      <li><a href="#billing">課金プラン概要</a></li>
+      <li><a href="#sample">サンプルデータ</a></li>
+      <li><a href="#trouble">トラブルシューティング</a></li>
+      <li><a href="#glossary">用語集</a></li>
+      <li><a href="#legal">規約・免責事項</a></li>
+      <li><a href="#summary">この章のポイント</a></li>
+      <li><a href="#confirm">正式運用前の確認事項</a></li>
+    </ol>
+  </nav>
+
+  <!-- ========================
+       第1章：Quantiventraとは
+       ======================== -->
+  <section class="chapter" id="about">
+    <div class="chapter-head">
+      <div class="ch-no">第1章</div>
+      <h2>Quantiventraとは</h2>
+    </div>
+
+    <h3>1-1. アプリについて</h3>
+    <p>
+      <strong>Quantiventra（クアンティベントラ）</strong>は、「<em>Quantity</em>（数量）」と「<em>Inventory</em>（在庫・棚卸）」を組み合わせた造語です。
+      スマートフォンのカメラを使ったバーコードスキャンで、棚卸・在庫管理作業を効率化するAndroidアプリです。
+    </p>
+    <p>
+      カメラをコードに向けるだけで商品を自動認識し、数量を入力・保存するという直感的な操作で、紙の棚卸作業をデジタル化できます。
+      スキャン結果はCSVファイルとして保存されるため、ExcelやGoogleスプレッドシートとの連携も容易です。
+    </p>
+
+    
+    <p>棚卸・在庫管理・マスタ管理・CSV取込/出力などの通常業務は、基本的に端末内で行えます。通信が不安定な倉庫、店舗、バックヤード、現場でも記録や確認を進めやすく、入力した業務データも基本的に端末内で扱われます。購入状態の確認、購入済み復元、ストア遷移、外部リンク表示など、一部機能では通信が必要になる場合があります。</p>
+    <h3>1-2. 主な特徴</h3>
+    <div class="feature-grid">
+      <div class="feature-card">
+        <h4>📦 在庫カウント</h4>
+        <p>バーコードスキャンで商品を素早く特定し、数量を即時記録。計算機能内蔵で複数箇所の合算も簡単。</p>
+      </div>
+      <div class="feature-card">
+        <h4>🗂️ マスタ管理</h4>
+        <p>商品・品目・ロケーションをマスタ登録。CSVで一括取込も可能。</p>
+      </div>
+      <div class="feature-card">
+        <h4>📍 ロケーション管理</h4>
+        <p>倉庫・店舗・棚など複数の場所を登録し、場所別に在庫を管理できます。ロケーションごとに、補充判定へ含めるかどうかも設定できます。</p>
+      </div>
+      <div class="feature-card">
+        <h4>📊 CSV入出力</h4>
+        <p>在庫表・バックアップ・履歴をCSVで出力。ExcelやGoogleスプレッドシートで集計可能。</p>
+      </div>
+      <div class="feature-card">
+        <h4>🌐 多言語対応</h4>
+        <p>日本語・英語・中国語・韓国語など12言語に対応。端末言語に自動対応します。</p>
+      </div>
+      <div class="feature-card pro-card">
+        <h4>⭐ フル解放機能</h4>
+        <p>件数上限解除・詳細ルール・CSV拡張設定・ロケーションマスタ管理など、より細かい運用設定が使えます。</p>
+      </div>
+    </div>
+
+    <h3>1-3. カメラスキャンの仕組み</h3>
+    <p>
+      画面中央に表示されるガイド枠（青または黄色の枠）の範囲内にコードが入ると、
+      <strong>同じコードを3フレーム連続</strong>で検出した時点で自動認識されます。
+      3回確認することで誤読を防ぎながら確実な読み取りが可能です。
+    </p>
+    <div class="box box-hint">
+      <strong>💡 コードが認識されないときは</strong>
+      コードはガイド枠の<strong>内側に収まっている必要</strong>があります。枠の外にあるコードは認識されません。
+      枠内にしっかり収まるようにカメラ位置を調整してください。
+    </div>
+
+    <p>アプリは「棚卸」と「在庫管理」の2つの主機能で構成されており、マスタ管理・設定・CSV入出力が共通機能として提供されます。</p>
+  </section>
+
+  <!-- ========================
+       第2章：動作環境と権限
+       ======================== -->
+  <section class="chapter" id="environment">
+    <div class="chapter-head">
+      <div class="ch-no">第2章</div>
+      <h2>動作環境と権限</h2>
+    </div>
+
+    <h3>2-1. 動作環境</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>項目</th><th>要件</th></tr></thead>
+        <tbody>
+          <tr><td>OS</td><td>Android 8.0（Oreo / API 26）以上</td></tr>
+          <tr><td>カメラ</td><td>自動フォーカス対応カメラ（必須）</td></tr>
+          <tr><td>ストレージ</td><td>内部ストレージ 10MB以上の空き推奨</td></tr>
+          <tr><td>必要権限</td><td>カメラ権限（必須）</td></tr>
+          <tr><td>インターネット</td><td>通常の棚卸・在庫管理作業では不要。購入確認、購入済み復元、ストア遷移、外部リンク表示などでは通信が必要になる場合があります。</td></tr>
+          <tr><td>Google Playサービス</td><td>プラン購入・復元に必要</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="box box-success">
+      <strong>✅ 通常業務はオフラインで利用可能</strong>
+      棚卸・在庫管理の通常作業はインターネット接続なしでも行えるため、工場・倉庫・店舗など通信が不安定な環境でも作業を進めやすい構成です。購入確認、復元、ストア遷移、外部リンク表示などでは通信が必要になる場合があります。
+    </div>
+
+    <h3>2-2. 必要な権限</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>権限</th><th>用途</th><th>拒否した場合</th></tr></thead>
+        <tbody>
+          <tr><td>カメラ</td><td>バーコード・QRコードのスキャン</td><td>カメラ機能が使用不可（手動入力のみ可）</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="box box-hint">
+      <strong>💡 ストレージ権限について</strong>
+      本アプリはAndroid標準の<strong>内部ストレージ</strong>にデータを保存します。ストレージ権限は<strong>不要</strong>です。
+      データのやり取りはアプリ内の「インポート」「エクスポート」「共有」機能を使って行います。
+    </div>
+  </section>
+
+  <!-- ========================
+       第3章：インストールと初回起動
+       ======================== -->
+  <section class="chapter" id="install">
+    <div class="chapter-head">
+      <div class="ch-no">第3章</div>
+      <h2>インストールと初回起動</h2>
+    </div>
+
+    <h3>3-1. インストール</h3>
+    <p>Google Play ストアから「Quantiventra」を検索してインストールします。または本ページ上部のQRコードをスキャンしてストアページを直接開くことができます。</p>
+
+    <ol class="steps">
+      <li>Google Play ストアを開く。</li>
+      <li>「Quantiventra」で検索、またはQRコードを読み取ってストアページへ進む。</li>
+      <li>「インストール」をタップする。</li>
+    </ol>
+
+    <h3>3-2. 初回起動フロー</h3>
+    <ol class="steps">
+      <li>アプリアイコンをタップして起動する。</li>
+      <li>カメラ権限の許可ダイアログが表示される。<strong>「許可」</strong>をタップする。</li>
+      <li>サンプルデータ作成の確認ダイアログが出る場合は「作成する」または「スキップ」を選ぶ。</li>
+      <li>データ保存フォルダが内部ストレージに自動作成される。</li>
+      <li>トップ画面が表示されれば初回設定完了。</li>
+    </ol>
+
+    <div class="box box-warn">
+      <strong>⚠ カメラ権限を拒否した場合</strong>
+      カメラ権限を拒否するとバーコードスキャンが使えません。
+      権限を後から許可するには：端末の「設定」→「アプリ」→「Quantiventra」→「権限」→「カメラ」でONにしてください。
+    </div>
+
+    <h3>3-3. 機種変更後の引き継ぎ</h3>
+    <ol class="steps">
+      <li>旧端末で「設定 → エクスポート」または「設定 → 共有」でデータを出力・保存しておく。</li>
+      <li>新端末に同じGoogleアカウントでサインインする。</li>
+      <li>Google PlayからQuantiventraをインストールする。</li>
+      <li>「設定 → 購入済み復元」で購入済みプランを復元する。</li>
+      <li>バックアップしたマスタCSVを「設定 → マスタCSVを取り込む」で読み込む。</li>
+    </ol>
+
+    <div class="box box-danger">
+      <strong>🚨 アンインストール時の注意</strong>
+      アプリをアンインストールすると内部ストレージのデータもすべて削除されます。
+      大切なデータは定期的に「エクスポート」または「共有」でバックアップしてください。
+    </div>
+  </section>
+
+  <!-- ========================
+       第4章：データの保存場所
+       ======================== -->
+  <section class="chapter" id="storage">
+    <div class="chapter-head">
+      <div class="ch-no">第4章</div>
+      <h2>データの保存場所</h2>
+    </div>
+
+    <p>
+      アプリのデータは端末内のアプリ専用領域に保存されます。
+      通常のファイルマネージャーで直接編集するものではありません。データの取り出しやバックアップには、アプリ内の共有・エクスポート機能を使用してください。
+    </p>
+
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>分類</th><th>内容</th><th>主な更新タイミング</th></tr></thead>
+        <tbody>
+          <tr><td>マスタ情報</td><td>商品・品目・ロケーションなどの基本データ</td><td>新規登録・編集・無効化などを行ったとき</td></tr>
+          <tr><td>棚卸・在庫履歴</td><td>棚卸、入荷、出荷、在庫移動、CSV取込などの記録</td><td>保存や取込を行ったとき</td></tr>
+          <tr><td>アプリ設定</td><td>言語、読取、コードルール、ロケーション設定など</td><td>設定を変更したとき</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <h3>ExcelでCSVを開く方法</h3>
+    <p>CSVファイルはUTF-8形式で保存されています。Excelで開く際は以下の手順を推奨します。</p>
+    <ol class="steps">
+      <li>Excelを開き「データ」タブ →「テキストまたはCSVから」を選択する。</li>
+      <li>CSVファイルを選択する。</li>
+      <li>文字コードで「Unicode（UTF-8）」を選択する。</li>
+      <li>「読み込み」をクリックする。</li>
+    </ol>
+    <div class="box box-warn">
+      <strong>⚠ ファイルを直接ダブルクリックしない</strong>
+      CSVをダブルクリックで開くと文字化けする場合があります。必ず「データ」タブからインポートしてください。
+    </div>
+
+    <h3>推奨バックアップ手順</h3>
+    <ol class="steps">
+      <li>「設定 → エクスポート（フォルダを選択）」をタップする。</li>
+      <li>端末の「Documents」フォルダ内にバックアップ用フォルダを作成して選択する。例：<code>Quantiventra_backup_20250401</code></li>
+      <li>履歴CSVとマスタCSVが保存されたら完了。</li>
+      <li>Google Drive・USBケーブル経由でPCにコピーするとさらに安全。</li>
+    </ol>
+  </section>
+
+  <!-- ========================
+       第5章：棚卸と在庫管理の違い
+       ======================== -->
+  <section class="chapter" id="diff">
+    <div class="chapter-head">
+      <div class="ch-no">第5章</div>
+      <h2>棚卸と在庫管理の違い</h2>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <tr><th>項目</th><th>棚卸</th><th>在庫管理</th></tr>
+        <tr><td>目的</td><td>実際の数量を数えて記録する</td><td>入荷・出荷・移動で在庫数を管理する</td></tr>
+        <tr><td>操作の流れ</td><td>商品読取 → 数量入力 → 保存 → 確定</td><td>入荷/出荷/移動 → 保存 → 履歴確認</td></tr>
+        <tr><td>主な利用シーン</td><td>月次棚卸、期末棚卸、抜き打ち確認</td><td>日常の入荷受入、出荷処理、移動管理</td></tr>
+        <tr><td>在庫への影響</td><td>棚卸単体では現在庫を直接変更しません。確定後、在庫管理側の確認画面から反映できる場合があります</td><td>操作のたびに即時反映</td></tr>
+        <tr><td>対応画面</td><td>棚卸画面・棚卸履歴</td><td>在庫確認・入荷・出荷・移動・在庫履歴</td></tr>
+      </table>
+    </div>
+    <div class="box box-warn">
+      <strong>⚠ 注意</strong>
+      棚卸と在庫管理は別機能です。棚卸で数量を入力しても、確定・反映の操作を行わない限り在庫管理の数値は変わりません。混同しないよう注意してください。
+    </div>
+  </section>
+
+  <!-- ========================
+       第6章：最初にやること
+       ======================== -->
+  <section class="chapter" id="start">
+    <div class="chapter-head">
+      <div class="ch-no">第6章</div>
+      <h2>初心者向け「最初にやること」</h2>
+    </div>
+    <h3>ステップ1：サンプルデータで試す</h3>
+    <ol class="steps">
+      <li>アプリを起動し、サンプルデータ作成の確認が出たら「作成する」を選ぶ。</li>
+      <li>トップ画面で「在庫管理」を開き、サンプル商品の在庫を確認する。</li>
+      <li>「棚卸」を開き、バーコード入力や数量入力を試す。</li>
+      <li>CSV出力を試す。</li>
+      <li>本番運用前にサンプルデータを削除する（設定画面から）。</li>
+    </ol>
+
+    <h3>ステップ2：商品マスタを登録する</h3>
+    <ol class="steps">
+      <li>トップ画面で「マスタ管理」を開く。</li>
+      <li>「商品マスタ」から新規登録を行い、商品コードと商品名を入力する。</li>
+      <li>必要に応じて品目、価格、補充目安を設定する。</li>
+      <li>ロケーションマスタで倉庫・店舗などを登録する（在庫管理 簡単解放以上、またはフル解放時に利用）。</li>
+    </ol>
+
+    <h3>ステップ3：日常運用を始める</h3>
+    <ol class="steps">
+      <li>入荷時は「在庫管理 → 入荷」でバーコードを読み取り数量を入力する。</li>
+      <li>出荷時は「在庫管理 → 出荷」で同様に操作する。</li>
+      <li>棚卸は「棚卸」から実棚数量を記録する。</li>
+    </ol>
+
+    <div class="box box-hint">
+      <strong>💡 ヒント</strong>
+      まずサンプルデータで操作を練習し、慣れてから本番データを登録することをおすすめします。
+    </div>
+  </section>
+
+  <!-- ========================
+       第7章：トップ画面
+       ======================== -->
+  <section class="chapter" id="top-screen">
+    <div class="chapter-head">
+      <div class="ch-no">第7章</div>
+      <h2>トップ画面の使い方</h2>
+    </div>
+    <p>アプリ起動後のトップ画面は、主要機能への入口です。</p>
+
+    <div class="table-wrap">
+      <table>
+        <tr><th>入口</th><th>説明</th></tr>
+        <tr><td>棚卸</td><td>商品を読み取り、実棚数量を入力する棚卸作業へ進む</td></tr>
+        <tr><td>在庫管理</td><td>在庫確認、入荷、出荷、在庫移動、在庫履歴へ進む</td></tr>
+        <tr><td>マスタ管理</td><td>商品マスタ、品目マスタ、ロケーションマスタを管理する</td></tr>
+        <tr><td>設定</td><td>言語、棚卸設定、CSV、サンプルデータ、課金、法務文書などを開く</td></tr>
+        <tr><td>ヘルプ</td><td>取扱説明書またはヘルプページへ進む</td></tr>
+      </table>
+    </div>
+
+    <h3>未確定棚卸データがある場合の表示</h3>
+    <p>未確定の棚卸データがある場合、トップ画面に通知が表示されます。棚卸画面で内容を確認・確定してから在庫管理へ進んでください。</p>
+    <div class="box box-warn">
+      <strong>⚠ 注意</strong>
+      未確定の棚卸データがある状態で在庫管理を操作すると、データが混在する場合があります。棚卸を確定してから在庫管理を操作することをおすすめします。
+    </div>
+  </section>
+
+  <!-- ========================
+       第8章：設定画面
+       ======================== -->
+  <section class="chapter" id="settings">
+    <div class="chapter-head">
+      <div class="ch-no">第8章</div>
+      <h2>設定画面の概要</h2>
+    </div>
+    <p>設定画面では、アプリ全体・棚卸・在庫管理・CSV・言語・課金・サンプルデータ・法務文書を管理します。</p>
+
+    <h3>データ入出力</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>ボタン</th><th>説明</th><th>備考</th></tr></thead>
+        <tbody>
+          <tr><td>マスタCSVを取り込む</td><td>外部CSVファイルをマスタとして読み込む（上書き）</td><td>全プラン</td></tr>
+          <tr><td>共有（メール・LINE等）</td><td>履歴CSVとマスタCSVを他アプリへ送信</td><td>全プラン</td></tr>
+          <tr><td>エクスポート（フォルダを選択）</td><td>指定フォルダに履歴・マスタCSVを保存</td><td>全プラン</td></tr>
+          <tr><td>履歴データの全消去</td><td>スキャン履歴を削除してリセット</td><td>全プラン（取消不可）</td></tr>
+          <tr><td>マスタの実数をリセット</td><td>全品目の登録済累計を0にリセット</td><td>フル解放（取消不可）</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>共通設定</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>設定項目</th><th>説明</th><th>プラン</th></tr></thead>
+        <tbody>
+          <tr><td>表示言語</td><td>アプリ表示言語の選択</td><td>全プラン（一部言語は要解放）</td></tr>
+          <tr><td>画面回転固定</td><td>端末を傾けても画面を固定する</td><td>対象機能の簡単解放以上</td></tr>
+          <tr><td>サンプルデータ作成</td><td>練習用サンプルデータを作成する</td><td>全プラン</td></tr>
+          <tr><td>サンプルデータ削除</td><td>サンプルデータを一括削除する</td><td>全プラン</td></tr>
+          <tr><td>購入済み復元</td><td>Google Playで購入済みのプランを復元する</td><td>全プラン</td></tr>
+          <tr><td>法務文書表示</td><td>利用規約、プライバシーポリシーなどを表示する</td><td>全プラン</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>棚卸設定</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>モード</th><th>説明</th><th>ロケーション</th></tr></thead>
+        <tbody>
+          <tr><td>詳細</td><td>登録済みロケーションを詳しく使う</td><td>ロケーションマスタに登録したすべての場所</td></tr>
+          <tr><td>簡単A</td><td>倉庫のみで棚卸を行う</td><td>倉庫のみ</td></tr>
+          <tr><td>簡単B</td><td>倉庫と店舗で棚卸を行う</td><td>倉庫・店舗</td></tr>
+          <tr><td>簡単C</td><td>店舗のみで棚卸を行う</td><td>店舗のみ</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="box box-warn">
+      <strong>⚠ 注意</strong>
+      フル解放済みでも、設定が簡単A/B/Cのままであれば簡単ロケーション表示になります。詳細ロケーションを使うには「詳細」モードに変更してください。
+    </div>
+
+    <h3>商品コード読み取り設定</h3>
+    <p>商品コード用の読み取り形式は、設定画面の「商品コード読み取り設定」から別フォームで確認・変更します。ロケーションコード用の設定とは分けて扱います。不要な形式を外すと誤読を防ぎやすくなります。</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>プラン</th><th>商品コード読み取り形式</th><th>変更可否</th></tr></thead>
+        <tbody>
+          <tr><td>無料版</td><td>EAN-13 / EAN-8 / UPC-A / UPC-E / Code39 / Code128</td><td>ON固定</td></tr>
+          <tr><td>簡単解放</td><td>標準6種類（EAN-13 / EAN-8 / UPC-A / UPC-E / Code39 / Code128）の中で選択</td><td>選択可能</td></tr>
+          <tr><td>フル解放</td><td>標準6種類に加えてQRも選択可能</td><td>選択可能</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>コードルール / ロケーションルール（フル解放）</h3>
+    <p>商品コードの文字種（英数字のみ・数字のみ・制限なし）、最小・最大文字数、ロケーションコードの最大文字数などを設定できます。商品コード用とロケーションコード用のルールは分けて確認してください。</p>
+
+    <h3>購入済み復元</h3>
+    <p>Google Playで購入済みのプランを復元します。購入権利は同じGoogleアカウントで確認されます。端末内データは自動移行されないため、機種変更時はCSVバックアップやエクスポートも併せて行ってください。別のGoogleアカウントへ購入権利を移行することはできません。</p>
+
+    <div class="box box-danger">
+      <strong>🚨 履歴全消去・マスタリセットは取り消し不可</strong>
+      「履歴データの全消去」および「マスタの実数をリセット」は一度実行すると元に戻せません。実行前に必ず「エクスポート」でバックアップしてください。
+    </div>
+  </section>
+
+  <!-- ========================
+       第9章：言語設定
+       ======================== -->
+  <section class="chapter" id="language">
+    <div class="chapter-head">
+      <div class="ch-no">第9章</div>
+      <h2>言語設定</h2>
+    </div>
+    <p>アプリ内で表示言語を選べます。設定は「設定 → 言語設定」から変更します。アプリ起動時に端末の言語設定を自動検出し、対応言語があれば自動的にその言語で起動します。</p>
+
+    <h3>対応言語一覧（全12言語）</h3>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>言語コード</th><th>言語名</th><th>無料版</th><th class="pro-col">全言語解放</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>ja</code></td><td>日本語</td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
+          <tr><td><code>en</code></td><td>English（英語）</td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
+          <tr><td><code>zh</code></td><td>中文（简体）/ 中国語・簡体字</td><td>端末主言語のみ</td><td><span class="check">✓</span></td></tr>
+          <tr><td><code>tw</code></td><td>繁體中文 / 中国語・繁体字</td><td>端末主言語のみ</td><td><span class="check">✓</span></td></tr>
+          <tr><td><code>ko</code></td><td>한국어 / 韓国語</td><td>端末主言語のみ</td><td><span class="check">✓</span></td></tr>
+          <tr><td><code>hi</code></td><td>हिन्दी / ヒンディー語</td><td>端末主言語のみ</td><td><span class="check">✓</span></td></tr>
+          <tr><td><code>vi</code></td><td>Tiếng Việt / ベトナム語</td><td>端末主言語のみ</td><td><span class="check">✓</span></td></tr>
+          <tr><td><code>it</code></td><td>Italiano / イタリア語</td><td>端末主言語のみ</td><td><span class="check">✓</span></td></tr>
+          <tr><td><code>pt-BR</code></td><td>Português (Brasil) / ブラジルポルトガル語</td><td>端末主言語のみ</td><td><span class="check">✓</span></td></tr>
+          <tr><td><code>es-419</code></td><td>Español (LatAm) / ラテンアメリカスペイン語</td><td>端末主言語のみ</td><td><span class="check">✓</span></td></tr>
+          <tr><td><code>id</code></td><td>Bahasa Indonesia / インドネシア語</td><td>端末主言語のみ</td><td><span class="check">✓</span></td></tr>
+          <tr><td><code>th</code></td><td>ภาษาไทย / タイ語</td><td>端末主言語のみ</td><td><span class="check">✓</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="box box-hint">
+      <strong>💡 自動言語検出について</strong>
+      端末言語が対応言語の場合はその言語で起動します。未対応の場合は英語へフォールバックします。
+      アプリ内で言語を明示的に選んだ場合、端末言語よりアプリ内設定が優先されます。
+    </div>
+    <div class="box box-warn">
+      <strong>⚠ 注意</strong>
+      法務・課金・購入条件などの重要な内容は、アプリ内の最新表示およびGoogle Play上の表示を優先してください。
+    </div>
+  </section>
+
+  <!-- ========================
+       第10章：課金プラン
+       ======================== -->
+  <section class="chapter" id="billing">
+    <div class="chapter-head">
+      <div class="ch-no">第10章</div>
+      <h2>課金プラン概要</h2>
+    </div>
+    <p>Quantiventraは無料版で基本機能を試せます。より多くの件数や機能が必要な場合は、Google Playから各プランを購入します。</p>
+    <div class="box box-danger">
+      <strong>🚨 重要</strong>
+      価格・税・購入条件・返金条件はGoogle Playの表示が最終です。本取扱説明書では断定しません。購入前にGoogle Play上の説明を必ず確認してください。
+    </div>
+
+    <h3>機能比較表</h3>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>機能・制限</th>
+            <th>無料版</th>
+            <th>棚卸 簡単解放</th>
+            <th>棚卸 フル解放</th>
+            <th>在庫管理 簡単解放</th>
+            <th>在庫管理 フル解放</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>棚卸マスタ件数</td><td>30件まで</td><td>300件まで</td><td><span class="check">上限解除</span></td><td>在庫管理側はアプリ内表示に従う</td><td>在庫管理側はアプリ内表示に従う</td></tr>
+          <tr><td>棚卸履歴件数</td><td>30件まで</td><td>1,000件まで</td><td><span class="check">上限解除</span></td><td>在庫履歴は利用可</td><td>在庫履歴は利用可</td></tr>
+          <tr><td>棚卸エクスポート件数</td><td>30件まで</td><td>300件まで</td><td><span class="check">上限解除</span></td><td>在庫CSVは画面案内に従う</td><td>在庫CSVは画面案内に従う</td></tr>
+          <tr><td>画面回転固定</td><td><span class="cross">✗</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
+          <tr><td>コード/ロケーションルール設定</td><td><span class="cross">✗（初期値のみ）</span></td><td><span class="cross">✗</span></td><td><span class="check">✓</span></td><td><span class="cross">✗</span></td><td><span class="check">✓</span></td></tr>
+          <tr><td>商品コード読み取り形式</td><td><span class="cross">標準6種類ON固定</span></td><td><span class="check">標準6種類内で選択</span></td><td><span class="check">QRを含めて選択</span></td><td><span class="check">標準6種類内で選択</span></td><td><span class="check">QRを含めて選択</span></td></tr>
+          <tr><td>CSV拡張出力</td><td><span class="cross">✗</span></td><td><span class="cross">✗</span></td><td><span class="check">✓</span></td><td><span class="cross">✗</span></td><td><span class="check">✓</span></td></tr>
+          <tr><td>登録済累計の直接編集</td><td><span class="cross">✗</span></td><td><span class="cross">✗</span></td><td><span class="check">✓</span></td><td><span class="cross">✗</span></td><td><span class="check">✓</span></td></tr>
+          <tr><td>マスタ実績一括リセット</td><td><span class="cross">✗</span></td><td><span class="cross">✗</span></td><td><span class="check">✓</span></td><td><span class="cross">✗</span></td><td><span class="check">✓</span></td></tr>
+          <tr><td>ロケーションマスタ登録</td><td><span class="cross">✗</span></td><td><span class="cross">✗</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
+          <tr><td>在庫移動・棚卸反映</td><td>条件を満たせば利用可</td><td>条件を満たせば利用可</td><td>条件を満たせば利用可</td><td>条件を満たせば利用可</td><td>条件を満たせば利用可</td></tr>
+          <tr><td>対応言語数</td><td>英語＋端末主言語</td><td>同左</td><td>同左</td><td>同左</td><td>同左</td></tr>
+          <tr><td>全言語（12言語）解放</td><td><span class="cross">✗</span></td><td colspan="4">全言語解放プランを別途購入</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>セット購入と全言語解放</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>プラン名</th><th>内容</th></tr></thead>
+        <tbody>
+          <tr><td>両方 簡単</td><td>棚卸 簡単解放 ＋ 在庫管理 簡単解放。両方使う場合は単品購入よりお得になる場合があります。</td></tr>
+          <tr><td>両方 フル</td><td>棚卸 フル解放 ＋ 在庫管理 フル解放。両方使う場合は単品購入よりお得になる場合があります。</td></tr>
+          <tr><td>全言語解放</td><td>全12言語を選択できるようになるプラン</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>プランの購入方法</h3>
+    <ol class="steps">
+      <li>「設定 → 課金プラン」または購入ボタンをタップする。</li>
+      <li>Google Play の購入画面が開く。</li>
+      <li>決済を完了するとすぐにプランが有効になる。</li>
+    </ol>
+
+    <h3>機種変更後の購入復元</h3>
+    <ol class="steps">
+      <li>新しい端末に同じGoogleアカウントでサインインする。</li>
+      <li>アプリをインストールして起動する。</li>
+      <li>「設定 → 購入済みのプランを復元」をタップする。</li>
+      <li>購入が確認されるとプランが有効になる。</li>
+    </ol>
+
+    <div class="box box-check">
+      <strong>🔍 購入前に確認</strong>
+      購入ボタンにはGoogle Playの商品価格が表示されます。価格・購入可否・返金条件はGoogle Play Storeで直接確認してください。簡単解放を購入後にフル解放を購入する場合、表示価格は差額精算ではありません。
+    </div>
+  </section>
+
+  <!-- ========================
+       第11章：サンプルデータ
+       ======================== -->
+  <section class="chapter" id="sample">
+    <div class="chapter-head">
+      <div class="ch-no">第11章</div>
+      <h2>サンプルデータ</h2>
+    </div>
+    <p>サンプルデータは、Quantiventraを試すための練習用データです。実際の業務を始める前に、操作を練習するために使います。</p>
+
+    <h3>サンプルデータの内容</h3>
+    <ul>
+      <li>約10件のサンプル商品</li>
+      <li>サンプル品目</li>
+      <li>基本ロケーション「倉庫」「店舗」</li>
+      <li>サンプル在庫・棚卸履歴</li>
+    </ul>
+
+    <h3>作成方法</h3>
+    <ol class="steps">
+      <li>初回起動時に確認ダイアログが出たら「作成する」を選ぶ。</li>
+      <li>後から作成する場合は「設定 → サンプルデータ作成」から実行する。</li>
+    </ol>
+
+    <h3>削除方法</h3>
+    <ol class="steps">
+      <li>「設定 → サンプルデータ削除」を開く。</li>
+      <li>削除対象を確認する（サンプル商品・在庫・品目・棚卸履歴が対象）。</li>
+      <li>削除を実行する。</li>
+    </ol>
+
+    <div class="box box-hint">
+      <strong>💡 削除後も残るもの</strong>
+      基本ロケーション「倉庫」「店舗」と、サンプル以外のデータは残ります。
+    </div>
+    <div class="box box-danger">
+      <strong>🚨 重要</strong>
+      本番運用を始める前に必ずサンプルデータを削除してください。削除前に本番データが混在していないか確認してください。
+    </div>
+  </section>
+
+  <!-- ========================
+       第12章：トラブルシューティング
+       ======================== -->
+  <section class="chapter" id="trouble">
+    <div class="chapter-head">
+      <div class="ch-no">第12章</div>
+      <h2>トラブルシューティング</h2>
+    </div>
+
+    <div class="trouble">
+      <div class="trouble-q">コードが読み取れない・カメラが反応しない</div>
+      <div class="trouble-a">
+        <ul>
+          <li>カメラスイッチ（右上）がONになっているか確認してください。</li>
+          <li>コードを<strong>ガイド枠の内側</strong>に収めてください。枠外のコードは認識されません。</li>
+          <li>設定で商品コード読み取り形式が対象コードと一致しているか確認してください。無料版は標準6種類ON固定、簡単解放では標準6種類内、フル解放ではQRを含めて選択できます。</li>
+          <li>コードの印刷が破れていたり汚れている場合は手動入力をご使用ください。</li>
+          <li>カメラ権限が許可されているか確認：設定 → アプリ → Quantiventra → 権限 → カメラ。</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="trouble">
+      <div class="trouble-q">マスタCSVを取り込んだが品名が表示されない</div>
+      <div class="trouble-a">
+        <ul>
+          <li>CSVの文字コードがUTF-8になっているか確認してください（Shift-JISでは文字化けします）。</li>
+          <li>ヘッダー行が正しい形式（<code>barcode,name,theoretical_stock,actual_stock_total</code>）か確認してください。</li>
+          <li>品名にカンマが含まれる場合はダブルクォートで囲んでください（例：<code>"ボルト, M6"</code>）。</li>
+          <li>再度「マスタCSVを取り込む」を実行してください。</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="trouble">
+      <div class="trouble-q">保存できない・「保存失敗」のメッセージが出る</div>
+      <div class="trouble-a">
+        <ul>
+          <li>端末の空き容量が不足していないか確認してください。</li>
+          <li>バーコードも品名も入力されていない状態では保存できません。</li>
+          <li>アプリを一度終了して再起動してみてください。</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="trouble">
+      <div class="trouble-q">共有・エクスポートでファイルが出力されない</div>
+      <div class="trouble-a">
+        <ul>
+          <li>履歴が0件の場合はファイルが空になります。少なくとも1件保存してから試してください。</li>
+          <li>エクスポート時はフォルダ選択ダイアログで必ずフォルダを選択して「選択」をタップしてください。</li>
+          <li>共有先のアプリ（メール等）がインストールされているか確認してください。</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="trouble">
+      <div class="trouble-q">在庫数が合わない</div>
+      <div class="trouble-a">
+        <ul>
+          <li>在庫履歴で入荷/出荷/移動/棚卸調整の記録を確認してください。</li>
+          <li>CSV現在庫置換を実行した場合、未記載商品が0に設定されている可能性があります。</li>
+          <li>棚卸反映を実行した場合、差異が「棚卸調整」として記録されています。</li>
+          <li>バックアップCSVと照合してください。</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="trouble">
+      <div class="trouble-q">ロケーションが表示されない・見つからない</div>
+      <div class="trouble-a">
+        <ul>
+          <li>設定の棚卸モードが簡単A/B/Cのままになっていないか確認してください。詳細ロケーションを使うには「詳細」モードに切り替えてください。</li>
+          <li>ロケーションマスタで「無効」になっていないか確認してください。</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="trouble">
+      <div class="trouble-q">購入済みプランの機能が使えない</div>
+      <div class="trouble-a">
+        <ul>
+          <li>「設定 → 購入済みのプランを復元」をタップしてください。</li>
+          <li>購入したGoogleアカウントでログインされているか確認してください。</li>
+          <li>インターネット接続が確認できる環境で試してください（購入確認にネット接続が必要です）。</li>
+          <li>Google Play Store経由のインストール版で確認してください。</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="trouble">
+      <div class="trouble-q">機種変更後、データが消えた</div>
+      <div class="trouble-a">
+        <ul>
+          <li>データはアプリの内部ストレージに保存されているため、アンインストールや機種変更で削除されます。</li>
+          <li>定期的に「エクスポート」または「共有」でデータをバックアップすることを強くおすすめします。</li>
+          <li>バックアップがある場合は「マスタCSVを取り込む」で復元できます。</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="trouble">
+      <div class="trouble-q">画面が回転して作業しにくい</div>
+      <div class="trouble-a">
+        <ul>
+          <li>対象機能の簡単解放以上をお使いの場合：「設定 → 画面回転を固定する」をONにしてください。</li>
+          <li>無料版をお使いの場合：端末本体の画面回転ロック機能をご利用ください（通知パネルから設定可能）。</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="trouble">
+      <div class="trouble-q">言語が切り替わらない</div>
+      <div class="trouble-a">
+        <ul>
+          <li>「設定 → 言語設定」でアプリ内言語を手動で選択してください。</li>
+          <li>アプリ内で選択した言語が優先されます。必要に応じて、言語を選び直してからアプリを開き直してください。</li>
+          <li>未対応の端末言語では英語表示になります。</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3>症状別対処早見表</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>症状</th><th>主な原因</th><th>対処</th></tr></thead>
+        <tbody>
+          <tr><td>在庫数が違う</td><td>入力ミス、CSV置換、棚卸反映</td><td>在庫履歴を確認</td></tr>
+          <tr><td>商品が出ない</td><td>検索文字ミス、未登録、無効化</td><td>マスタを確認</td></tr>
+          <tr><td>ロケーションが出ない</td><td>簡単モード設定、無効化</td><td>設定とマスタを確認</td></tr>
+          <tr><td>CSVが失敗する</td><td>列不足、数量が数値でない</td><td>列選択とCSV内容を確認</td></tr>
+          <tr><td>バーコードが読めない</td><td>光不足、汚れ、未対応形式</td><td>手入力に切替・設定確認</td></tr>
+          <tr><td>購入が反映されない</td><td>アカウント違い、通信不良</td><td>復元操作・通信確認</td></tr>
+          <tr><td>画面が回転する</td><td>回転固定がOFF</td><td>設定で固定 or 端末ロック</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ========================
+       第13章：用語集
+       ======================== -->
+  <section class="chapter" id="glossary">
+    <div class="chapter-head">
+      <div class="ch-no">第13章</div>
+      <h2>用語集</h2>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>用語</th><th>説明</th></tr></thead>
+        <tbody>
+          <tr><td>棚卸</td><td>実際に商品を数えて在庫数を確認する作業</td></tr>
+          <tr><td>実棚</td><td>実際に数えた数量</td></tr>
+          <tr><td>理論在庫</td><td>システム上の計算在庫</td></tr>
+          <tr><td>差異</td><td>実棚と理論在庫の差</td></tr>
+          <tr><td>商品</td><td>実際に在庫を持つ管理対象</td></tr>
+          <tr><td>品目</td><td>商品を分類するカテゴリ</td></tr>
+          <tr><td>ロケーション</td><td>在庫がある場所（例：倉庫、店舗、棚）</td></tr>
+          <tr><td>補充判定に含める</td><td>在庫確認で補充対象を判断するときに、そのロケーションの在庫を合計へ含める設定</td></tr>
+          <tr><td>在庫</td><td>現在ある数量</td></tr>
+          <tr><td>入荷</td><td>在庫を増やす操作</td></tr>
+          <tr><td>出荷</td><td>在庫を減らす操作</td></tr>
+          <tr><td>在庫移動</td><td>あるロケーションから別のロケーションへ在庫を移す操作</td></tr>
+          <tr><td>在庫履歴</td><td>入荷・出荷・移動・棚卸調整などの記録</td></tr>
+          <tr><td>補充目安</td><td>在庫が少ないか判断するための基準数量</td></tr>
+          <tr><td>商品コード</td><td>自社側で使う商品コード</td></tr>
+          <tr><td>登録済累計</td><td>これまでの累計保存数量</td></tr>
+          <tr><td>CSV</td><td>表計算ソフトなどで扱えるカンマ区切りテキストファイル</td></tr>
+          <tr><td>バックアップ</td><td>復元や確認のために保存しておくデータ</td></tr>
+          <tr><td>現在庫置換</td><td>CSVの数量を現在庫として扱う取込方式</td></tr>
+          <tr><td>入荷追加</td><td>CSVの数量を入荷として追加する取込方式</td></tr>
+          <tr><td>指定棚卸日基準</td><td>過去の棚卸日を基準に在庫を再計算する方式</td></tr>
+          <tr><td>実棚確定</td><td>棚卸結果を確定する操作</td></tr>
+          <tr><td>マスタ</td><td>商品・品目・ロケーションなど基本データを管理するデータベース</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ========================
+       第14章：規約・免責事項
+       ======================== -->
+  <section class="chapter" id="legal">
+    <div class="chapter-head">
+      <div class="ch-no">第14章</div>
+      <h2>規約・免責事項</h2>
+    </div>
+
+    <div class="legal-block">
+      <h4>■ 利用規約（Terms of Use）</h4>
+      <p>本アプリをご利用いただく前に、以下の利用規約をよくお読みください。本アプリをダウンロード・使用した場合、本規約に同意したものとみなします。</p>
+
+      <p><strong>1. 使用許諾</strong><br>
+      本アプリは個人・法人を問わず、在庫管理・棚卸業務を目的とした使用を許可します。ただし、本アプリのリバースエンジニアリング、逆コンパイル、改変、再配布は禁止します。</p>
+
+      <p><strong>2. ユーザーデータ</strong><br>
+      本アプリが生成する通常の作業データ（マスタCSV・履歴CSV・設定ファイル）は、基本的にユーザーの端末内で保存・管理されます。購入確認、購入済み復元、ストア遷移などGoogle Play関連の処理では通信が発生する場合があります。</p>
+
+      <p><strong>3. プラン購入</strong><br>
+      各プランの購入はGoogle Play課金を通じて行われます。購入後の返金はGoogle Playの返金ポリシーに準じます。</p>
+
+      <p><strong>4. 禁止事項</strong><br>
+      本アプリを違法な目的に使用すること、第三者の権利を侵害する目的に使用すること、本アプリの機能を悪用して不正なデータを生成する行為を禁止します。</p>
+
+      <h4>■ 免責事項（Disclaimer）</h4>
+      <p>本アプリは現状有姿（AS IS）で提供されます。本アプリの使用または使用不能から生じるいかなる損害（データ消失、業務上の損失、その他直接的・間接的損害を含む）についても、開発者は一切の責任を負いません。</p>
+      <p>本アプリが生成するCSVデータの正確性・完全性については、ユーザー自身がご確認ください。スキャンエラーや入力ミスによるデータ不整合については開発者は責任を負いません。</p>
+      <p>コードの読み取り精度はデバイスのカメラ性能・コードの状態・周囲環境により異なります。読み取り不能な場合は手動入力をご使用ください。</p>
+
+      <h4>■ プライバシーポリシー（Privacy Policy）</h4>
+      <p>本アプリは、氏名・住所・電話番号・メールアドレスなどの個人情報を収集しません。通常の作業データは端末内で処理されますが、購入確認、購入済み復元、ストア遷移など一部のGoogle Play関連処理では通信が発生する場合があります。</p>
+      <p>本アプリが使用するカメラは、バーコード・QRコードの読み取りのみを目的として使用し、映像の録画・保存・送信は行いません。</p>
+
+      <h4>■ 著作権（Copyright）</h4>
+      <p>Copyright © Quantiventra. All Rights Reserved.</p>
+      <p>本アプリおよび本マニュアルに含まれるすべてのコンテンツ（テキスト・デザイン・ロゴ等）の著作権は開発者に帰属します。</p>
+      <p>本アプリはオープンソースライブラリを使用しています。各ライブラリのライセンスは当該ライブラリの規定に従います。</p>
+
+      <h4>■ 規約の変更</h4>
+      <p>本規約は予告なく変更される場合があります。変更後の規約はGoogle Playストアへの掲載またはアプリ内通知をもって効力を生じます。</p>
+    </div>
+  </section>
+
+  <!-- この章のポイント -->
+  <div class="summary-box" id="summary">
+    <h3>📌 この章のポイント</h3>
+    <ul>
+      <li>Quantiventra = Quantity + Inventory の造語。バーコード3フレーム連続検出で自動認識。</li>
+      <li>Android 8.0以上・自動フォーカスカメラ必須。ストレージ権限は不要。通常業務は端末内で利用可能です。</li>
+      <li>データはアプリ内部ストレージに保存。アンインストールで消えるため定期的にエクスポート。</li>
+      <li>「棚卸」と「在庫管理」は別機能。棚卸で数量を入力しても確定しなければ在庫は変わらない。</li>
+      <li>最初はサンプルデータで練習し、本番前に削除する。</li>
+      <li>課金プランはGoogle Playで確認。価格は取説では断定しない。</li>
+      <li>トラブル時は在庫履歴・マスタ・設定の順に確認する。</li>
+      <li>大切な操作（CSV置換・棚卸反映・削除・リセット）は実行前に必ずバックアップ。</li>
+    </ul>
+  </div>
+
+  <!-- 正式運用前の確認事項 -->
+  <div class="confirm-box" id="confirm">
+    <h3>🔍 正式運用前の確認事項</h3>
+    <ul>
+      <li>価格・税・購入条件・返金条件は、購入前にGoogle Play上の最新表示を確認してください。</li>
+      <li>本番データを入力する前にサンプルデータで操作を練習し、正式運用前にサンプルデータを削除してください。</li>
+      <li>CSV取込、現在庫置換、棚卸反映、削除、リセットなど大きくデータを変更する操作の前には、必ずエクスポートでバックアップしてください。</li>
+      <li>機種変更や端末初期化の前には、必要なCSVデータを出力し、新端末では同じGoogleアカウントで購入済み復元を実行してください。端末内データは自動移行されず、別のGoogleアカウントへ購入権利を移行することもできません。</li>
+      <li>通常の棚卸・在庫管理作業は端末内で行えますが、購入確認、購入済み復元、ストア遷移、外部リンク表示などでは通信が必要になる場合があります。</li>
+    </ul>
+  </div>
+
+</div><!-- /container -->
+
+<!-- トップへ戻るボタン -->
+<a href="#top" class="back-top" title="トップへ戻る">↑</a>
+
+<footer>
+  <strong>Quantiventra</strong> — コードスキャン棚卸・在庫管理アプリ<br>
+  Copyright © Quantiventra. All Rights Reserved.<br>
+  本マニュアルの内容は予告なく変更される場合があります。<br>
+  <p style="margin-top:4px;"><a href="privacy_ja.html">プライバシーポリシー</a></p>
+</footer>
+
+</body>
+</html>
+
+
+
+

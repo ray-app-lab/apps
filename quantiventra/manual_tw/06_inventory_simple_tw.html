@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quantiventra – 庫存管理 – 標準版</title>
+<style>*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:-apple-system,BlinkMacSystemFont,'PingFang TC','Microsoft JhengHei','Apple LiGothic',sans-serif;font-size:15px;line-height:1.9;color:#1a2535;background:#f4f7fb;}
+a{color:#1a5fa8;text-decoration:none;}a:hover{text-decoration:underline;}
+.site-nav{background:#1a3a5c;color:#fff;padding:0;}.site-nav .nav-inner{max-width:960px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:stretch;}
+.site-nav a{color:#cde;padding:10px 13px;font-size:12px;display:block;border-right:1px solid #2a4a6c;white-space:nowrap;}
+.site-nav a:hover{background:#2a5090;text-decoration:none;}.site-nav a.active{background:#2a6cbe;color:#fff;font-weight:bold;}
+.page-header{background:linear-gradient(135deg,#1a3a5c 0%,#2a6cbe 100%);color:#fff;padding:40px 20px 30px;}
+.page-header .inner{max-width:960px;margin:0 auto;}.page-header .app-name{font-size:13px;opacity:.8;}
+.page-header h1{font-size:22px;font-weight:700;margin-top:6px;line-height:1.5;}.page-header .subtitle{font-size:14px;opacity:.85;margin-top:8px;}
+.scope-box{background:rgba(255,255,255,.15);border-left:4px solid #7ecfff;padding:12px 16px;margin-top:16px;border-radius:4px;font-size:13px;}
+.container{max-width:960px;margin:0 auto;padding:30px 16px;}
+.toc{background:#fff;border:1px solid #c8d8ec;border-radius:8px;padding:24px 28px;margin-bottom:32px;}
+.toc h2{font-size:16px;font-weight:700;color:#1a3a5c;border-bottom:2px solid #2a6cbe;padding-bottom:8px;margin-bottom:14px;}
+.toc ol{margin-left:18px;}.toc li{margin:5px 0;font-size:14px;}
+.chapter{background:#fff;border-radius:8px;box-shadow:0 1px 4px rgba(0,0,0,.08);padding:28px 28px 24px;margin-bottom:28px;}
+.chapter-head{border-left:5px solid #2a6cbe;padding-left:14px;margin-bottom:20px;}
+.chapter-head .ch-no{font-size:12px;color:#2a6cbe;font-weight:700;}.chapter-head h2{font-size:20px;font-weight:700;color:#1a2535;margin-top:2px;}
+h3{font-size:16px;font-weight:700;color:#1a3a5c;border-bottom:1px solid #dde8f5;padding-bottom:5px;margin:22px 0 12px;}
+h4{font-size:14px;font-weight:700;color:#2a4a6c;margin:16px 0 8px;}
+p{margin-bottom:12px;}ul,ol{margin-left:20px;margin-bottom:12px;}li{margin-bottom:5px;}
+.steps{counter-reset:step;list-style:none;margin-left:0;}
+.steps li{counter-increment:step;padding:9px 12px 9px 46px;position:relative;background:#f8fbff;border:1px solid #dde8f5;border-radius:6px;margin-bottom:6px;}
+.steps li::before{content:counter(step);position:absolute;left:12px;top:50%;transform:translateY(-50%);width:24px;height:24px;background:#2a6cbe;color:#fff;border-radius:50%;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;}
+.table-wrap{overflow-x:auto;margin-bottom:16px;}
+table{width:100%;border-collapse:collapse;font-size:13px;min-width:380px;}
+th{background:#1a3a5c;color:#fff;padding:9px 12px;text-align:left;white-space:nowrap;}
+td{padding:8px 12px;border-bottom:1px solid #dde8f5;vertical-align:top;}tr:nth-child(even) td{background:#f4f7fb;}
+code{font-family:'Courier New',monospace;background:rgba(0,80,160,.08);color:#004080;padding:2px 6px;border-radius:3px;font-size:12px;}
+.box{border-radius:6px;padding:13px 16px;margin:14px 0;font-size:13px;}
+.box-warn{background:#fffbe6;border-left:4px solid #f5a623;color:#7a5700;}
+.box-danger{background:#fff0f0;border-left:4px solid #d43f3f;color:#7a0000;}
+.box-hint{background:#e8f4ff;border-left:4px solid #2a6cbe;color:#0a3060;}
+.box-check{background:#f4eeff;border-left:4px solid #8c4fc8;color:#3a0070;}
+.box strong{display:block;margin-bottom:4px;}
+figure{max-width:280px;width:100%;margin:18px auto;text-align:center;}
+figure img{display:block;width:100%;max-width:280px;height:auto;margin:0 auto;border:1px solid #c8d8ec;border-radius:6px;box-shadow:0 2px 8px rgba(0,0,0,.1);}
+figcaption{font-size:12px;color:#5a7a99;margin-top:6px;}
+.img-pending{display:flex;align-items:center;justify-content:center;max-width:280px;width:100%;box-sizing:border-box;background:#e8eef5;border:2px dashed #99b8d8;border-radius:6px;height:160px;color:#5a7a99;font-size:13px;margin:18px auto;}
+.diff-add{background:#e8fff0;border-left:4px solid #2a9c5c;border-radius:6px;padding:12px 16px;margin:14px 0;font-size:13px;}
+.diff-add strong{display:block;color:#1a6c3c;margin-bottom:4px;}
+.flow-box{background:#f4f7fb;border:1px solid #c8d8ec;border-radius:8px;padding:20px;margin:16px 0;}
+.flow-box h4{color:#1a3a5c;margin-top:0;}
+.flow-arrow{text-align:center;font-size:20px;color:#2a6cbe;margin:4px 0;}
+.flow-step{background:#fff;border:1px solid #c8d8ec;border-radius:6px;padding:10px 16px;margin:4px 0;font-size:13px;}
+.flow-step strong{color:#1a3a5c;}
+.summary-box{background:linear-gradient(135deg,#e8f4ff,#f0f8ff);border:1px solid #99c8ec;border-radius:8px;padding:20px 24px;margin-top:32px;}
+.summary-box h3{border:none;color:#1a3a5c;margin-top:0;}
+.confirm-box{background:#fdf4ff;border:1px solid #c8a0e0;border-radius:8px;padding:20px 24px;margin-top:16px;}
+.confirm-box h3{border:none;color:#5a0090;margin-top:0;}
+.check{color:#2e7d32;font-weight:700;}.cross{color:#c62828;}
+th.pro-col{background:#5a2a8c;}
+.feature-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px;margin:16px 0;}
+.feature-card{background:#f4f7fb;border:1px solid #c8d8ec;border-radius:8px;padding:16px;}
+.feature-card h4{color:#1a3a5c;margin-top:0;margin-bottom:6px;font-size:14px;}
+.feature-card p{font-size:13px;margin:0;color:#3a5a7a;}
+.feature-card.pro-card{background:#f4eeff;border-color:#c8a0e0;}
+.feature-card.pro-card h4{color:#5a2a8c;}
+.trouble{border:1px solid #c8d8ec;border-radius:8px;margin:14px 0;overflow:hidden;}
+.trouble-q{background:#eef6fd;padding:13px 18px;font-weight:700;font-size:14px;color:#1a3a5c;display:flex;align-items:flex-start;gap:10px;}
+.trouble-q::before{content:'Q';background:#2a6cbe;color:#fff;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900;flex-shrink:0;margin-top:1px;}
+.trouble-a{padding:13px 18px 14px 50px;font-size:13.5px;border-top:1px solid #c8d8ec;line-height:1.9;}
+.trouble-a ul{margin-left:16px;}
+.legal-block{background:#f5f5f5;border:1px solid #ddd;border-radius:8px;padding:20px 24px;font-size:12.5px;color:#444;line-height:1.9;margin:14px 0;}
+.legal-block h4{font-size:13px;color:#333;margin:18px 0 6px;border-bottom:1px solid #ddd;padding-bottom:4px;}
+.legal-block h4:first-child{margin-top:0;}
+footer{text-align:center;font-size:12px;color:#8a9aaa;padding:30px 16px;border-top:1px solid #dde8f5;margin-top:20px;}
+@media(max-width:640px){.page-header h1{font-size:18px;}.chapter{padding:20px 16px;}.site-nav a{padding:8px 9px;font-size:11px;}}
+@media print{body{background:#fff;font-size:12px;}.site-nav{display:none;}.chapter{box-shadow:none;border:1px solid #ccc;page-break-inside:avoid;}.page-header{background:#1a3a5c !important;-webkit-print-color-adjust:exact;print-color-adjust:exact;}}
+</style></head>
+<body>
+<nav class="site-nav"><div class="nav-inner">
+  <a href="01_top_settings_common_tw.html">① 主畫面 / 設定</a>
+  <a href="02_stocktake_free_tw.html">② 盤點 免費版</a>
+  <a href="03_stocktake_simple_tw.html">③ 盤點 標準版</a>
+  <a href="04_stocktake_full_tw.html">④ 盤點 完整版</a>
+  <a href="05_inventory_free_tw.html">⑤ 庫存 免費版</a>
+  <a href="06_inventory_simple_tw.html" class="active">⑥ 庫存 標準版</a>
+  <a href="07_inventory_full_tw.html">⑦ 庫存 完整版</a>
+</div></nav>
+<header class="page-header"><div class="inner">
+  <div class="app-name">Quantiventra 使用手冊</div>
+  <h1>⑥ 庫存管理 — 標準版（標準版解鎖）</h1>
+  <div class="subtitle">標準版新增功能、入庫、出庫、庫存查詢、歷史記錄、CSV 匯入/匯出、取代庫存與以入庫方式新增</div>
+  <div class="scope-box"><strong>本頁涵蓋內容：</strong>庫存管理標準版新增內容 / 與免費版差異 / 入庫 / 出庫 / 庫存查詢 / 庫存歷史 / 位置管理 / CSV 匯入/匯出 / 取代目前庫存 / 以入庫方式新增 / 重要注意事項 / 建議工作流程</div>
+</div></header>
+<div class="container">
+  <nav class="toc"><h2>目錄</h2><ol>
+    <li><a href="#overview">標準版概覽</a></li>
+    <li><a href="#diff">與免費版的差異</a></li>
+    <li><a href="#receive">入庫（Stock In）</a></li>
+    <li><a href="#issue">出庫（Stock Out）</a></li>
+    <li><a href="#stock-check">庫存查詢</a></li>
+    <li><a href="#history">庫存歷史</a></li>
+    <li><a href="#location">位置管理</a></li>
+    <li><a href="#csv">CSV 匯入 / 匯出</a></li>
+    <li><a href="#csv-replace">取代目前庫存</a></li>
+    <li><a href="#csv-add">以入庫方式新增</a></li>
+    <li><a href="#notes">重要注意事項</a></li>
+    <li><a href="#tips">建議工作流程</a></li>
+    <li><a href="#summary">本章重點</a></li>
+    <li><a href="#confirm">使用前注意事項</a></li>
+  </ol></nav>
+
+  <section class="chapter" id="overview">
+    <div class="chapter-head"><div class="ch-no">第1章</div><h2>標準版概覽</h2></div>
+    <p>庫存管理標準版支援的記錄數比免費版更多。您可以更順暢地處理日常入庫、出庫、庫存查詢和庫存歷史作業，位置管理的使用範圍也會擴大。</p>
+    <h3>標準版限制</h3>
+    <div class="table-wrap"><table>
+      <tr><th>項目</th><th>免費版</th><th>標準版</th></tr>
+      <tr><td>主資料筆數</td><td>最多 30 筆</td><td>最多 300 筆</td></tr>
+      <tr><td>庫存歷史筆數</td><td>最多 30 筆</td><td>最多 1,000 筆</td></tr>
+      <tr><td>匯出筆數</td><td>最多 30 筆</td><td>最多 300 筆</td></tr>
+      <tr><td>鎖定螢幕旋轉</td><td>✗</td><td>○</td></tr>
+      <tr><td>位置主資料登錄</td><td>免費版中受限</td><td>可在標準版限制範圍內使用</td></tr>
+      <tr><td>直接編輯已登錄累計總量</td><td>✗</td><td>✗（需完整版）</td></tr>
+    </table></div>  </section>
+
+  <section class="chapter" id="diff">
+    <div class="chapter-head"><div class="ch-no">第2章</div><h2>與免費版的差異</h2></div>
+    <div class="diff-add">
+      <strong>✅ 標準版新增或擴充的內容</strong>
+      <ul style="margin-top:6px;">
+        <li>主資料上限從 30 筆提升至 300 筆</li>
+        <li>庫存歷史上限從 30 筆提升至 1,000 筆</li>
+        <li>匯出上限從 30 筆提升至 300 筆</li>
+        <li>可使用螢幕旋轉鎖定功能</li>
+        <li>擴大位置管理的使用範圍</li>
+        <li>更容易持續維護日常入庫、出庫、庫存查詢與歷史記錄</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="chapter" id="receive">
+    <div class="chapter-head"><div class="ch-no">第3章</div><h2>入庫（Stock In）</h2></div>
+    <p>入庫作業會增加庫存。當商品到貨時使用，例如採購、收貨和類似交易。</p>    <h3>入庫步驟</h3>
+    <ol class="steps">
+      <li>前往<strong>庫存管理 → 入庫</strong>。</li>
+      <li>掃描條碼或輸入商品代碼。</li>
+      <li>確認商品名稱。若代碼尚未登錄，請建立新的商品主資料項目。</li>
+      <li>在新的商品主資料項目中，登錄商品名稱、售價和補貨點。</li>
+      <li>儲存後返回入庫畫面，已登錄的商品代碼與名稱會自動帶入。</li>
+      <li>選擇目的位置（倉庫、門市等）。</li>
+      <li>輸入入庫數量。</li>
+      <li>點選<strong>儲存</strong>。數量會立即加入庫存。</li>
+      <li>在庫存查詢或庫存歷史中確認更新。</li>
+    </ol>
+    <div class="box box-hint"><strong>💡 關於商品主資料屬性</strong>售價和補貨點是在商品主資料中管理的屬性，不需要在每次入庫交易中輸入。一般入庫畫面中，請專注於輸入數量、位置和備註。</div>
+    <div class="box box-warn"><strong>⚠ 注意</strong>入庫會立即反映到庫存。儲存前請務必確認數量和位置。若儲存後發現數量錯誤，請查看庫存歷史，並依照應用程式內的指引進行修正、反向處理或記錄調整。</div>
+  </section>
+
+  <section class="chapter" id="issue">
+    <div class="chapter-head"><div class="ch-no">第4章</div><h2>出庫（Stock Out）</h2></div>
+    <p>出庫作業會減少庫存。用於銷售、出貨、交貨和類似交易。</p>    <h3>出庫步驟</h3>
+    <ol class="steps">
+      <li>前往<strong>庫存管理 → 出庫</strong>。</li>
+      <li>掃描條碼或輸入商品代碼。</li>
+      <li>確認商品名稱。</li>
+      <li>選擇來源位置（庫存要從哪個位置扣除）。</li>
+      <li>輸入出庫數量。</li>
+      <li>點選<strong>儲存</strong>。數量會立即從庫存中扣除。</li>
+      <li>在庫存查詢或庫存歷史中確認更新。</li>
+    </ol>
+    <div class="box box-hint"><strong>💡 關於庫存欄位</strong>出庫畫面上的庫存欄位會顯示所選商品與位置的目前庫存，僅供參考；它是顯示欄位，不是可編輯的輸入欄位。儲存出庫數量後，庫存會隨之減少。</div>
+    <div class="box box-danger"><strong>🚨 重要</strong>請勿輸入超過目前庫存的出庫數量。輸入出庫數量前，請先依位置確認庫存水準。</div>
+  </section>
+
+  <section class="chapter" id="stock-check">
+    <div class="chapter-head"><div class="ch-no">第5章</div><h2>庫存查詢</h2></div>
+    <p>庫存查詢一開始會顯示每項商品的合併庫存總量。補貨判斷會將所有「納入補貨判斷」已開啟位置的庫存總量，與商品主資料中的補貨點比較。</p>    <h3>庫存查詢步驟</h3>
+    <ol class="steps">
+      <li>前往<strong>庫存管理 → 庫存查詢</strong>。</li>
+      <li>尋找要查詢的商品（可搜尋或捲動列表）。</li>
+      <li>找出低於補貨點的商品（會顯示為可能需要補貨）。</li>
+      <li>點選商品可查看各位置明細、歷史記錄與詳細資訊。在位置明細畫面中，補貨判斷不會顯示，或會視為停用。</li>
+    </ol>
+  </section>
+
+  <section class="chapter" id="history">
+    <div class="chapter-head"><div class="ch-no">第6章</div><h2>庫存歷史</h2></div>
+    <p>庫存歷史會顯示所有入庫、出庫、調撥、盤點調整、期初庫存和 CSV 匯入作業的紀錄。</p>    <h3>可在庫存歷史中查看的內容</h3>
+    <ul>
+      <li>日期/時間與作業類型（入庫、出庫、調撥、調整等）</li>
+      <li>商品代碼與名稱</li>
+      <li>位置與數量變動</li>
+      <li>備註</li>
+    </ul>
+    <div class="box box-hint"><strong>💡 提示</strong>如果庫存數量對不上，可以回溯庫存歷史，檢查是否有輸入錯誤或未預期的調整。</div>
+  </section>
+
+  <section class="chapter" id="location">
+    <div class="chapter-head"><div class="ch-no">第7章</div><h2>位置管理</h2></div>
+    <p>標準版主要使用「倉庫」和「門市」這兩個基本位置。</p>
+    <div class="table-wrap"><table>
+      <tr><th>模式</th><th>可用位置</th></tr>
+      <tr><td>簡單 A</td><td>僅倉庫</td></tr>
+      <tr><td>簡單 B</td><td>倉庫 + 門市</td></tr>
+      <tr><td>簡單 C</td><td>僅門市</td></tr>
+    </table></div>
+    <h3>庫存調撥</h3>
+    <p>庫存調撥會將庫存數量從一個位置移動到另一個位置。</p>
+    <div class="box box-warn"><strong>⚠ 注意</strong>請勿在同一個位置之間執行調撥。如果只有一個位置（例如簡單 A），就不需要庫存調撥，請改用入庫、出庫或修正作業。</div>
+    <div class="box box-hint"><strong>💡 提示</strong>若要使用詳細位置（例如貨架編號），需要在設定中切換至<strong>詳細</strong>模式。詳細模式會在使用完整版功能時使用。</div>
+  </section>
+
+  <section class="chapter" id="csv">
+    <div class="chapter-head"><div class="ch-no">第8章</div><h2>CSV 匯入 / 匯出</h2></div>
+    <p>庫存管理可讓您使用 CSV 檔案匯入、匯出並備份庫存資料。</p>
+    <div class="box box-danger"><strong>🚨 重要</strong>CSV 匯入作業可能大幅變更您的資料。匯入前請務必先匯出備份 CSV。</div>
+    <h3>庫存 CSV 規格</h3>
+    <div class="table-wrap"><table>
+      <tr><th>CSV 類型</th><th>用途</th><th>主要欄位</th><th>必填 / 選填</th><th>備註</th><th>可用版本</th></tr>
+      <tr><td>庫存 CSV（含位置欄位）</td><td>匯入各位置的庫存資料</td><td>location, item_code, quantity, product_name</td><td>location、item_code、quantity 為必填；product_name 依條件必填</td><td>未登錄代碼需 product_name 欄位</td><td>庫存管理標準版以上</td></tr>
+      <tr><td>庫存 CSV（不含位置欄位）</td><td>將庫存資料匯入到指定位置</td><td>item_code, quantity, product_name</td><td>item_code、quantity 為必填</td><td>匯入時選擇目標位置</td><td>庫存管理標準版以上</td></tr>
+      <tr><td>備份 CSV</td><td>完整資料備份與還原</td><td>商品、目前庫存、位置、類別 — 多個檔案</td><td>需要完整備份組</td><td>可能會分成多個檔案</td><td>庫存管理標準版以上</td></tr>
+    </table></div>
+    <h3>使用欄位對應畫面</h3>
+    <p>匯入 CSV 時，您需要選擇哪個欄位對應商品代碼、商品名稱、數量、位置等資料。</p>
+    <ol class="steps">
+      <li>選擇 CSV 檔案。</li>
+      <li>在欄位對應畫面中，將每個 CSV 欄位指定到對應的欄位（商品代碼、數量等）。</li>
+      <li>確認指定結果並執行匯入。</li>
+    </ol>
+    <div class="box box-warn">
+      <strong>⚠ 常見 CSV 匯入錯誤</strong>
+      <ul style="margin-top:6px;">
+        <li>缺少必填欄位</li>
+        <li>同一個欄位被指定到多個欄位</li>
+        <li>數量欄位為空或不是數字</li>
+        <li>未登錄代碼未選擇商品名稱欄位</li>
+        <li>沒有位置欄位，也沒有選擇目標位置</li>
+        <li>CSV 為空，或沒有可匯入的列</li>
+      </ul>
+    </div>  </section>
+
+  <section class="chapter" id="csv-replace">
+    <div class="chapter-head"><div class="ch-no">第9章</div><h2>取代目前庫存</h2></div>
+    <p>取代目前庫存是一種 CSV 匯入模式，會將檔案中的數量視為新的目前庫存。既有歷史記錄會保留，差異則會記錄為調整歷史項目。</p>
+    <div class="box box-danger">
+      <strong>🚨 重要：請謹慎使用取代目前庫存</strong>
+      <ul style="margin-top:6px;">
+        <li>CSV 中未包含的庫存列可能會被設為 0。</li>
+        <li>此作業可能對既有庫存資料造成重大影響，請務必先備份。</li>
+        <li>執行前請仔細閱讀確認畫面。</li>
+      </ul>
+    </div>
+    <h3>取代目前庫存步驟</h3>
+    <ol class="steps">
+      <li>匯出備份 CSV（必須）。</li>
+      <li>前往<strong>庫存管理 → CSV 匯入 → 取代目前庫存</strong>。</li>
+      <li>選擇要匯入的 CSV 檔案。</li>
+      <li>在欄位對應畫面確認欄位對應。</li>
+      <li>在確認畫面仔細檢查取代內容（調整內容）。</li>
+      <li>確認無誤後執行匯入。</li>
+      <li>在庫存歷史中確認調整紀錄。</li>
+    </ol>  </section>
+
+  <section class="chapter" id="csv-add">
+    <div class="chapter-head"><div class="ch-no">第10章</div><h2>以入庫方式新增</h2></div>
+    <p>以入庫方式新增是一種 CSV 匯入模式，會將檔案中的數量作為入庫交易加入既有庫存。與取代目前庫存不同，它是加入目前庫存，而不是覆蓋目前庫存。</p>
+    <div class="table-wrap"><table>
+      <tr><th>匯入模式</th><th>行為</th><th>使用範例</th></tr>
+      <tr><td>取代目前庫存</td><td>將 CSV 數量視為新的目前庫存，並將差異記錄為調整歷史</td><td>盤點後庫存修正、初始設定</td></tr>
+      <tr><td>以入庫方式新增</td><td>將 CSV 數量作為入庫加入目前庫存</td><td>批次入庫匯入</td></tr>
+    </table></div>
+    <div class="box box-hint"><strong>💡 提示</strong>第一次建立庫存時使用<strong>取代目前庫存</strong>；要把數量加到既有庫存時，使用<strong>以入庫方式新增</strong>。執行匯入前，請先確認需要哪一種模式。</div>
+  </section>
+
+  <section class="chapter" id="notes">
+    <div class="chapter-head"><div class="ch-no">第11章</div><h2>重要注意事項</h2></div>
+    <div class="box box-warn"><strong>⚠ 設定詳細位置</strong>若要使用詳細位置，請在設定中切換至<strong>詳細</strong>模式。如果仍在簡單 A/B/C 模式，詳細位置不會顯示。</div>
+    <div class="box box-warn"><strong>⚠ 操作前確認位置和數量</strong>入庫、出庫、調撥和 CSV 匯入會立即反映到庫存。每次操作前都請先確認位置和數量。</div>
+    <div class="box box-danger"><strong>🚨 CSV 操作前請先備份</strong>使用取代目前庫存、以入庫方式新增或備份還原作業前，請務必先備份。</div>
+  </section>
+
+  <section class="chapter" id="tips">
+    <div class="chapter-head"><div class="ch-no">第12章</div><h2>建議工作流程</h2></div>
+    <h3>每日記錄入庫與出庫</h3>
+    <ul>
+      <li>每次商品到貨時，都透過入庫登錄到貨庫存。</li>
+      <li>每次商品出貨時，都透過出庫記錄出庫庫存。</li>
+      <li>在商品主資料中設定補貨點，並使用庫存查詢監控補貨時機。</li>
+    </ul>
+    <h3>定期查詢庫存</h3>
+    <ul>
+      <li>定期檢查庫存數量，例如每週、每月或依需要進行。</li>
+      <li>搭配盤點使用，定期確認實際數量是否與庫存記錄一致。</li>
+    </ul>
+    <h3>定期備份</h3>
+    <ul>
+      <li>每月至少匯出一次備份 CSV，並儲存到電腦或雲端儲存空間。</li>
+    </ul>
+    <div class="box box-hint"><strong>💡 若您有以下需求，建議考慮升級至完整版</strong>
+      <ul style="margin-top:6px;">
+        <li>希望盤點結果自動更新庫存</li>
+        <li>需要直接編輯已登錄的累計庫存總量</li>
+        <li>商品數量超過 300 種</li>
+      </ul>
+    </div>
+  </section>
+
+  <div class="summary-box" id="summary">
+    <h3>📌 本章重點</h3>
+    <ul>
+      <li>標準版提高上限：主資料最多 300 筆、歷史記錄最多 1,000 筆、匯出最多 300 筆。</li>
+      <li>入庫與出庫會立即反映到庫存；儲存前請確認數量和位置。</li>
+      <li>庫存歷史會完整記錄所有入庫、出庫、調撥和調整作業。</li>
+      <li>CSV 匯入有兩種模式：取代目前庫存與以入庫方式新增。使用任一模式前都請先備份。</li>
+      <li>位置透過簡單 A/B/C 設定。若要使用詳細位置，請切換至詳細模式。</li>
+      <li>直接編輯已登錄累計總量需要完整版。</li>
+    </ul>
+  </div>
+  <div class="confirm-box" id="confirm">
+    <h3>🔍 使用前注意事項</h3>
+    <ul>
+      <li>請在應用程式顯示的選項範圍內使用位置主資料。若需要詳細位置管理，請確認目前模式，並視需要考慮使用完整版功能。</li>
+      <li>如果入庫或出庫資料儲存錯誤，請查看庫存歷史，並依照應用程式內的指引進行修正、反向處理或記錄調整。</li>
+      <li>匯出備份 CSV 組時，請將產生的檔案放在一起並妥善保存。</li>
+      <li>庫存調撥畫面的實際操作流程</li>
+      <li>CSV 欄位對應與取代確認畫面的截圖</li>
+    </ul>
+  </div>
+</div>
+<footer>
+  <p>Quantiventra 使用手冊 | ⑥ 庫存管理標準版</p>
+  <p style="margin-top:4px;">本手冊可能不經預告更新。最新資訊請一律以應用程式內顯示為準。</p>
+  <p style="margin-top:4px;"><a href="privacy_tw.html">隱私權政策</a></p>
+</footer>
+</body></html>

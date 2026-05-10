@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quantiventra 取扱説明書 – 在庫管理 簡単版</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Hiragino Sans','Meiryo',sans-serif;font-size:15px;line-height:1.8;color:#1a2535;background:#f4f7fb;}
+a{color:#1a5fa8;text-decoration:none;}
+a:hover{text-decoration:underline;}
+.site-nav{background:#1a3a5c;color:#fff;padding:0;}
+.site-nav .nav-inner{max-width:960px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:stretch;}
+.site-nav a{color:#cde;padding:10px 13px;font-size:12px;display:block;border-right:1px solid #2a4a6c;white-space:nowrap;}
+.site-nav a:hover{background:#2a5090;text-decoration:none;}
+.site-nav a.active{background:#2a6cbe;color:#fff;font-weight:bold;}
+.page-header{background:linear-gradient(135deg,#1a3a5c 0%,#2a6cbe 100%);color:#fff;padding:40px 20px 30px;}
+.page-header .inner{max-width:960px;margin:0 auto;}
+.page-header .app-name{font-size:13px;opacity:.8;letter-spacing:.1em;}
+.page-header h1{font-size:26px;font-weight:700;margin-top:6px;line-height:1.3;}
+.page-header .subtitle{font-size:14px;opacity:.85;margin-top:8px;}
+.scope-box{background:rgba(255,255,255,.15);border-left:4px solid #7ecfff;padding:12px 16px;margin-top:16px;border-radius:4px;font-size:13px;}
+.container{max-width:960px;margin:0 auto;padding:30px 16px;}
+.toc{background:#fff;border:1px solid #c8d8ec;border-radius:8px;padding:24px 28px;margin-bottom:32px;}
+.toc h2{font-size:16px;font-weight:700;color:#1a3a5c;border-bottom:2px solid #2a6cbe;padding-bottom:8px;margin-bottom:14px;}
+.toc ol{margin-left:18px;}
+.toc li{margin:5px 0;font-size:14px;}
+.chapter{background:#fff;border-radius:8px;box-shadow:0 1px 4px rgba(0,0,0,.08);padding:28px 28px 24px;margin-bottom:28px;}
+.chapter-head{border-left:5px solid #2a6cbe;padding-left:14px;margin-bottom:20px;}
+.chapter-head .ch-no{font-size:12px;color:#2a6cbe;font-weight:700;letter-spacing:.1em;}
+.chapter-head h2{font-size:20px;font-weight:700;color:#1a2535;margin-top:2px;}
+h3{font-size:16px;font-weight:700;color:#1a3a5c;border-bottom:1px solid #dde8f5;padding-bottom:5px;margin:22px 0 12px;}
+h4{font-size:14px;font-weight:700;color:#2a4a6c;margin:16px 0 8px;}
+p{margin-bottom:12px;}
+ul,ol{margin-left:20px;margin-bottom:12px;}
+li{margin-bottom:5px;}
+.steps{counter-reset:step;list-style:none;margin-left:0;}
+.steps li{counter-increment:step;padding:9px 12px 9px 46px;position:relative;background:#f8fbff;border:1px solid #dde8f5;border-radius:6px;margin-bottom:6px;}
+.steps li::before{content:counter(step);position:absolute;left:12px;top:50%;transform:translateY(-50%);width:24px;height:24px;background:#2a6cbe;color:#fff;border-radius:50%;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;}
+.table-wrap{overflow-x:auto;margin-bottom:16px;}
+table{width:100%;border-collapse:collapse;font-size:13px;min-width:400px;}
+th{background:#1a3a5c;color:#fff;padding:9px 12px;text-align:left;white-space:nowrap;}
+td{padding:8px 12px;border-bottom:1px solid #dde8f5;vertical-align:top;}
+tr:nth-child(even) td{background:#f4f7fb;}
+.box{border-radius:6px;padding:13px 16px;margin:14px 0;font-size:13px;}
+.box-warn{background:#fffbe6;border-left:4px solid #f5a623;color:#7a5700;}
+.box-danger{background:#fff0f0;border-left:4px solid #d43f3f;color:#7a0000;}
+.box-hint{background:#e8f4ff;border-left:4px solid #2a6cbe;color:#0a3060;}
+.box-check{background:#f4eeff;border-left:4px solid #8c4fc8;color:#3a0070;}
+.box strong{display:block;margin-bottom:4px;}
+figure{max-width:280px;width:100%;margin:18px auto;text-align:center;}
+figure img{display:block;width:100%;max-width:280px;height:auto;margin:0 auto;border:1px solid #c8d8ec;border-radius:6px;box-shadow:0 2px 8px rgba(0,0,0,.1);}
+figcaption{font-size:12px;color:#5a7a99;margin-top:6px;}
+.diff-add{background:#e8fff0;border-left:4px solid #2a9c5c;border-radius:6px;padding:12px 16px;margin:14px 0;font-size:13px;}
+.diff-add strong{display:block;color:#1a6c3c;margin-bottom:4px;}
+.summary-box{background:linear-gradient(135deg,#e8f4ff,#f0f8ff);border:1px solid #99c8ec;border-radius:8px;padding:20px 24px;margin-top:32px;}
+.summary-box h3{border:none;color:#1a3a5c;margin-top:0;}
+.confirm-box{background:#fdf4ff;border:1px solid #c8a0e0;border-radius:8px;padding:20px 24px;margin-top:16px;}
+.confirm-box h3{border:none;color:#5a0090;margin-top:0;}
+footer{text-align:center;font-size:12px;color:#8a9aaa;padding:30px 16px;border-top:1px solid #dde8f5;margin-top:20px;}
+@media(max-width:640px){
+  .page-header h1{font-size:20px;}
+  .chapter{padding:20px 16px;}
+  .site-nav a{padding:8px 9px;font-size:11px;}
+}
+@media print{
+  body{background:#fff;font-size:12px;}
+  .site-nav{display:none;}
+  .chapter{box-shadow:none;border:1px solid #ccc;page-break-inside:avoid;}
+  .page-header{background:#1a3a5c !important;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+}
+</style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a href="01_top_settings_common_ja.html">① トップ・設定</a>
+    <a href="02_stocktake_free_ja.html">② 棚卸 無料版</a>
+    <a href="03_stocktake_simple_ja.html">③ 棚卸 簡単版</a>
+    <a href="04_stocktake_full_ja.html">④ 棚卸 フル版</a>
+    <a href="05_inventory_free_ja.html">⑤ 在庫管理 無料版</a>
+    <a href="06_inventory_simple_ja.html" class="active">⑥ 在庫管理 簡単版</a>
+    <a href="07_inventory_full_ja.html">⑦ 在庫管理 フル版</a>
+  </div>
+</nav>
+
+<header class="page-header">
+  <div class="inner">
+    <div class="app-name">Quantiventra 取扱説明書</div>
+    <h1>⑥ 在庫管理 簡単版（簡単解放）</h1>
+    <div class="subtitle">簡単版でできること・入荷・出荷・在庫確認・在庫履歴・CSV取込出力・注意事項</div>
+    <div class="scope-box">
+      <strong>このHTMLで説明する範囲：</strong>
+      在庫管理 簡単解放でできること / 無料版との差分 / 入荷 / 出荷 / 在庫確認 / 在庫履歴 / ロケーションの扱い / CSV取込・出力 / 現在庫置換 / 入荷追加 / 注意事項 / おすすめ運用
+    </div>
+  </div>
+</header>
+
+<div class="container">
+
+  <nav class="toc">
+    <h2>目次</h2>
+    <ol>
+      <li><a href="#overview">簡単版（簡単解放）の概要</a></li>
+      <li><a href="#diff">無料版との差分</a></li>
+      <li><a href="#receive">入荷</a></li>
+      <li><a href="#issue">出荷</a></li>
+      <li><a href="#stock-check">在庫確認</a></li>
+      <li><a href="#history">在庫履歴</a></li>
+      <li><a href="#location">ロケーションの扱い</a></li>
+      <li><a href="#csv">CSV取込・出力</a></li>
+      <li><a href="#csv-replace">現在庫置換</a></li>
+      <li><a href="#csv-add">入荷追加</a></li>
+      <li><a href="#notes">注意事項</a></li>
+      <li><a href="#tips">おすすめ運用</a></li>
+      <li><a href="#summary">この章のポイント</a></li>
+      <li><a href="#confirm">ご利用前の確認事項</a></li>
+    </ol>
+  </nav>
+
+  <!-- 1. 概要 -->
+  <section class="chapter" id="overview">
+    <div class="chapter-head">
+      <div class="ch-no">第1章</div>
+      <h2>簡単版（簡単解放）の概要</h2>
+    </div>
+    <p>在庫管理 簡単解放では、無料版より継続利用しやすい範囲に広がります。入荷・出荷・在庫確認・在庫履歴の日常操作を継続的に利用でき、ロケーション管理の利用範囲も広がります。</p>
+
+    <h3>簡単版で広がる範囲</h3>
+    <div class="table-wrap">
+      <table>
+        <tr><th>項目</th><th>無料版</th><th>簡単版（簡単解放）</th></tr>
+        <tr><td>在庫管理データ量</td><td>利用可</td><td>継続利用しやすい範囲へ拡張</td></tr>
+        <tr><td>在庫履歴</td><td>利用可</td><td>継続利用しやすい範囲へ拡張</td></tr>
+        <tr><td>CSV取込/出力</td><td>利用可</td><td>継続利用しやすい範囲へ拡張</td></tr>
+        <tr><td>画面回転固定</td><td>✗</td><td>○</td></tr>
+        <tr><td>ロケーションマスタ登録</td><td>一部条件あり</td><td>利用範囲が拡張</td></tr>
+        <tr><td>登録済累計の直接編集</td><td>✗</td><td>✗（いずれかのフル解放が必要）</td></tr>
+      </table>
+    </div>
+  </section>
+
+  <!-- 2. 無料版との差分 -->
+  <section class="chapter" id="diff">
+    <div class="chapter-head">
+      <div class="ch-no">第2章</div>
+      <h2>無料版との差分</h2>
+    </div>
+    <div class="diff-add">
+      <strong>✅ 簡単版で追加・拡張される内容</strong>
+      <ul style="margin-top:6px;">
+        <li>無料版より継続利用しやすい範囲に広がる。</li>
+        <li>履歴を継続して確認しやすくなる。</li>
+        <li>CSV取込/出力を日常運用で使いやすくなる。</li>
+        <li>画面回転固定が利用可能になる</li>
+        <li>ロケーション管理の利用範囲が広がる</li>
+        <li>日常的な入荷・出荷・在庫確認・在庫履歴を継続利用しやすくなる</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 3. 入荷 -->
+  <section class="chapter" id="receive">
+    <div class="chapter-head">
+      <div class="ch-no">第3章</div>
+      <h2>入荷</h2>
+    </div>
+    <p>入荷操作で、商品の在庫を増やします。仕入れ・受入などの際に使います。</p>
+
+    <h3>入荷の手順</h3>
+    <ol class="steps">
+      <li>「在庫管理 → 入荷」を開く。</li>
+      <li>バーコードを読み取る、または商品コードを入力する。</li>
+      <li>商品名を確認する。未登録の商品コードの場合は、商品マスタ新規登録へ進む。</li>
+      <li>商品マスタ新規登録で、商品名・販売価格・補充目安を登録する。</li>
+      <li>登録後は入荷画面へ戻り、登録した商品コード・商品名が自動反映される。</li>
+      <li>入荷先ロケーション（倉庫・店舗など）を選ぶ。</li>
+      <li>入荷数量を入力する。</li>
+      <li>「保存」をタップする。在庫に数量が加算される。</li>
+      <li>在庫確認または在庫履歴で反映を確認する。</li>
+    </ol>
+
+    <div class="box box-hint">
+      <strong>💡 商品マスタ属性について</strong>
+      販売価格と補充目安は入荷ごとの入力情報ではなく、商品マスタで管理する項目です。通常の入荷画面では、数量・ロケーション・メモを中心に入力します。
+    </div>
+    <div class="box box-warn">
+      <strong>⚠ 注意</strong>
+      入荷は即時在庫に反映されます。数量とロケーションを保存前に必ず確認してください。保存後に誤りに気づいた場合は、在庫履歴で内容を確認し、アプリ内の案内に従って修正・逆操作・調整を行ってください。
+    </div>
+  </section>
+
+  <!-- 4. 出荷 -->
+  <section class="chapter" id="issue">
+    <div class="chapter-head">
+      <div class="ch-no">第4章</div>
+      <h2>出荷</h2>
+    </div>
+    <p>出荷操作で、商品の在庫を減らします。販売・出庫・納品などの際に使います。</p>
+
+    <h3>出荷の手順</h3>
+    <ol class="steps">
+      <li>「在庫管理 → 出荷」を開く。</li>
+      <li>バーコードを読み取る、または商品コードを入力する。</li>
+      <li>商品名を確認する。</li>
+      <li>出荷元ロケーション（出荷する場所）を選ぶ。</li>
+      <li>出荷数量を入力する。</li>
+      <li>「保存」をタップする。在庫から数量が減算される。</li>
+      <li>在庫確認または在庫履歴で反映を確認する。</li>
+    </ol>
+    <div class="box box-hint">
+      <strong>💡 在庫欄について</strong>
+      出荷画面の在庫欄は、選択した商品とロケーションの現在庫を確認するための表示です。直接編集する欄ではありません。出荷数量を保存した結果として在庫が減ります。
+    </div>
+    <div class="box box-danger">
+      <strong>🚨 重要</strong>
+      在庫数量を超える出荷を入力しないように注意してください。ロケーション別の在庫数を事前に確認してから出荷数量を入力してください。
+    </div>
+  </section>
+
+  <!-- 5. 在庫確認 -->
+  <section class="chapter" id="stock-check">
+    <div class="chapter-head">
+      <div class="ch-no">第5章</div>
+      <h2>在庫確認</h2>
+    </div>
+    <p>在庫確認では、初期表示で商品ごとの合計在庫を確認できます。補充判定は「補充判定に含める」がONのロケーション合計と、商品マスタの補充目安を比較して判断します。</p>
+
+    <h3>在庫確認の手順</h3>
+    <ol class="steps">
+      <li>「在庫管理 → 在庫確認」を開く。</li>
+      <li>商品一覧から確認したい商品を探す（検索または一覧スクロール）。</li>
+      <li>補充目安を下回っている商品を確認する（補充対象として表示される場合）。</li>
+      <li>商品をタップすると、ロケーション別内訳・履歴・詳細情報が確認できる。</li>
+      <li>ロケーション別にばらして見る表示では、補充判定は表示しない、または無効として扱う。</li>
+    </ol>
+  </section>
+
+  <!-- 6. 在庫履歴 -->
+  <section class="chapter" id="history">
+    <div class="chapter-head">
+      <div class="ch-no">第6章</div>
+      <h2>在庫履歴</h2>
+    </div>
+    <p>在庫履歴では、入荷・出荷・移動・棚卸調整・初期在庫・CSV取込などの操作履歴を確認できます。</p>
+
+    <h3>在庫履歴で確認できること</h3>
+    <ul>
+      <li>操作日時・操作種別（入荷/出荷/移動/調整など）</li>
+      <li>商品コード・商品名</li>
+      <li>ロケーション・数量の変化</li>
+      <li>メモ</li>
+    </ul>
+
+    <div class="box box-hint">
+      <strong>💡 ヒント</strong>
+      在庫数が合わない場合は、在庫履歴を遡って操作ミスや予期しない調整がないか確認してください。
+    </div>
+  </section>
+
+  <!-- 7. ロケーション -->
+  <section class="chapter" id="location">
+    <div class="chapter-head">
+      <div class="ch-no">第7章</div>
+      <h2>ロケーションの扱い</h2>
+    </div>
+    <p>簡単版では、主に「倉庫」と「店舗」の基本ロケーションを使います。</p>
+
+    <div class="table-wrap">
+      <table>
+        <tr><th>モード</th><th>使えるロケーション</th></tr>
+        <tr><td>簡単A</td><td>倉庫のみ</td></tr>
+        <tr><td>簡単B</td><td>倉庫 + 店舗</td></tr>
+        <tr><td>簡単C</td><td>店舗のみ</td></tr>
+      </table>
+    </div>
+
+    <h3>在庫移動について</h3>
+    <p>在庫移動は、あるロケーションから別のロケーションへ在庫を移す操作です。</p>
+    <div class="box box-warn">
+      <strong>⚠ 注意</strong>
+      移動元と移動先が同じロケーションになる移動は行わないでください。ロケーションが1つだけの場合（例：簡単A）は在庫移動は不要です。入荷・出荷・修正で対応してください。
+    </div>
+    <div class="box box-hint">
+      <strong>💡 ヒント</strong>
+      詳細ロケーション（棚番号など）を使う場合は、設定を「詳細」モードにする必要があります。詳細モードはフル解放の機能を使う際に設定します。
+    </div>
+  </section>
+
+  <!-- 8. CSV -->
+  <section class="chapter" id="csv">
+    <div class="chapter-head">
+      <div class="ch-no">第8章</div>
+      <h2>CSV取込・出力</h2>
+    </div>
+    <p>在庫管理では、CSVを使って在庫データの取込・出力・バックアップができます。</p>
+
+    <div class="box box-danger">
+      <strong>🚨 重要</strong>
+      CSV取込操作はデータを大きく変更する場合があります。操作前に必ずバックアップCSVを出力してください。
+    </div>
+
+    <h3>在庫CSV仕様</h3>
+    <div class="table-wrap">
+      <table>
+        <tr><th>CSV種別</th><th>用途</th><th>主な列</th><th>必須/任意</th><th>注意点</th><th>使えるプラン</th></tr>
+        <tr>
+          <td>在庫表CSV（ロケーション列あり）</td>
+          <td>ロケーション別在庫データの取込</td>
+          <td>location、item_code、quantity、product_name</td>
+          <td>location・item_code・quantity 必須、product_name 条件付き</td>
+          <td>未登録コードには商品名列が必要</td>
+          <td>全プランで利用可（画面案内に従う）</td>
+        </tr>
+        <tr>
+          <td>在庫表CSV（ロケーション列なし）</td>
+          <td>ロケーションを指定して在庫取込</td>
+          <td>item_code、quantity、product_name</td>
+          <td>item_code・quantity 必須</td>
+          <td>取込時に取込先ロケーションを選ぶ</td>
+          <td>全プランで利用可（画面案内に従う）</td>
+        </tr>
+        <tr>
+          <td>バックアップCSV</td>
+          <td>全データのバックアップ・復元</td>
+          <td>商品、現在庫、ロケーション、品目など複数ファイル</td>
+          <td>バックアップセット全体が必要</td>
+          <td>複数ファイルに分かれる場合がある</td>
+          <td>全プランで利用可（画面案内に従う）</td>
+        </tr>
+      </table>
+    </div>
+
+    <h3>CSV列選択画面の使い方</h3>
+    <p>CSV取込時は、CSVのどの列を商品コード・商品名・数量・ロケーションとして使うか選択します。</p>
+    <ol class="steps">
+      <li>CSVファイルを選択する。</li>
+      <li>列選択画面でCSVの各列を対応する項目（商品コード・数量など）に割り当てる。</li>
+      <li>割り当て内容を確認して取込を実行する。</li>
+    </ol>
+
+    <div class="box box-warn">
+      <strong>⚠ よくあるCSVエラー</strong>
+      <ul style="margin-top:6px;">
+        <li>列数が足りない</li>
+        <li>同じ列を複数項目へ割り当てている</li>
+        <li>数量列が空または数値でない</li>
+        <li>未登録コードで商品名列が選ばれていない</li>
+        <li>ロケーション列がなく、取込先ロケーションが選ばれていない</li>
+        <li>CSVが空または取り込める行がない</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 9. 現在庫置換 -->
+  <section class="chapter" id="csv-replace">
+    <div class="chapter-head">
+      <div class="ch-no">第9章</div>
+      <h2>現在庫置換</h2>
+    </div>
+    <p>現在庫置換は、CSVの数量を現在庫として扱う取込方式です。既存の履歴は保持し、差分を調整履歴として記録します。</p>
+
+    <div class="box box-danger">
+      <strong>🚨 重要：現在庫置換は慎重に実行する</strong>
+      <ul style="margin-top:6px;">
+        <li>CSVにない在庫行の数量が0に調整される場合があります。</li>
+        <li>既存在庫データへの影響が大きいため、必ず事前バックアップを取ってください。</li>
+        <li>確認画面の内容をよく読んでから実行してください。</li>
+      </ul>
+    </div>
+
+    <h3>現在庫置換の手順</h3>
+    <ol class="steps">
+      <li>バックアップCSVを取得する（必須）。</li>
+      <li>「在庫管理 → CSV取込 → 現在庫置換」を選ぶ。</li>
+      <li>取込するCSVファイルを選択する。</li>
+      <li>列選択画面で列の割り当てを確認する。</li>
+      <li>確認画面で置換内容（差異調整の内容）をよく確認する。</li>
+      <li>問題なければ実行する。</li>
+      <li>在庫履歴で調整内容を確認する。</li>
+    </ol>
+  </section>
+
+  <!-- 10. 入荷追加 -->
+  <section class="chapter" id="csv-add">
+    <div class="chapter-head">
+      <div class="ch-no">第10章</div>
+      <h2>入荷追加</h2>
+    </div>
+    <p>入荷追加は、現在庫を残したままCSVの数量を入荷として追加する取込方式です。現在庫置換と異なり、既存在庫に数量を加算します。</p>
+
+    <div class="table-wrap">
+      <table>
+        <tr><th>取込方式</th><th>動作</th><th>用途例</th></tr>
+        <tr><td>現在庫置換</td><td>CSVの数量を現在庫として扱う。差分を調整履歴に記録</td><td>棚卸後の在庫修正・初期登録</td></tr>
+        <tr><td>入荷追加</td><td>CSVの数量を入荷として現在庫に加算する</td><td>一括入荷時の在庫追加</td></tr>
+      </table>
+    </div>
+
+    <div class="box box-hint">
+      <strong>💡 ヒント</strong>
+      「初めて在庫を登録する」場合は現在庫置換、「既存在庫に追加する」場合は入荷追加を使います。間違えないように確認してから実行してください。
+    </div>
+  </section>
+
+  <!-- 11. 注意事項 -->
+  <section class="chapter" id="notes">
+    <div class="chapter-head">
+      <div class="ch-no">第11章</div>
+      <h2>注意事項</h2>
+    </div>
+    <div class="box box-warn">
+      <strong>⚠ 詳細ロケーション使用時の設定</strong>
+      詳細ロケーションを使う場合は、設定を「詳細」モードにする必要があります。簡単A/B/Cのままでは詳細ロケーションが表示されません。
+    </div>
+    <div class="box box-warn">
+      <strong>⚠ 操作前にロケーションと数量を確認</strong>
+      入荷・出荷・移動・CSV取込は即時在庫に反映されます。ロケーションと数量を確認してから操作してください。
+    </div>
+    <div class="box box-danger">
+      <strong>🚨 CSV操作前のバックアップ</strong>
+      現在庫置換・入荷追加・バックアップ復元などのCSV操作前には必ずバックアップを取得してください。
+    </div>
+  </section>
+
+  <!-- 12. おすすめ運用 -->
+  <section class="chapter" id="tips">
+    <div class="chapter-head">
+      <div class="ch-no">第12章</div>
+      <h2>おすすめ運用</h2>
+    </div>
+
+    <h3>日常的な入荷・出荷の記録</h3>
+    <ul>
+      <li>仕入れの都度、入荷で数量を登録する。</li>
+      <li>販売・出庫の都度、出荷で数量を記録する。</li>
+      <li>補充目安を商品マスタに登録し、在庫確認で補充タイミングを把握する。</li>
+    </ul>
+
+    <h3>定期的な在庫確認</h3>
+    <ul>
+      <li>週1回・月1回など定期的に在庫確認で在庫数を確認する。</li>
+      <li>棚卸と組み合わせて、実棚と在庫管理数の差異を定期的にチェックする。</li>
+    </ul>
+
+    <h3>定期的なバックアップ</h3>
+    <ul>
+      <li>月1回以上、バックアップCSVを出力してPCやクラウドに保存する。</li>
+    </ul>
+
+    <div class="box box-hint">
+      <strong>💡 こんな場合はフル解放を検討</strong>
+      <ul style="margin-top:6px;">
+        <li>棚卸結果を在庫管理へ自動反映したい</li>
+        <li>登録済み累計在庫を直接編集したい</li>
+        <li>商品や履歴が増えてきた</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ポイント -->
+  <div class="summary-box" id="summary">
+    <h3>📌 この章のポイント</h3>
+    <ul>
+      <li>簡単版では無料版より継続利用しやすい範囲に広がる。</li>
+      <li>入荷・出荷操作は即時在庫に反映される。操作前に数量とロケーションを確認する。</li>
+      <li>在庫履歴で入荷・出荷・移動・調整の全履歴を確認できる。</li>
+      <li>CSV取込は「現在庫置換」と「入荷追加」の2方式がある。操作前にバックアップ必須。</li>
+      <li>ロケーションは簡単A/B/Cで設定。詳細ロケーションは「詳細」モードへ切り替える。</li>
+      <li>登録済累計の直接編集はいずれかのフル解放が必要。</li>
+    </ul>
+  </div>
+
+  <div class="confirm-box" id="confirm">
+    <h3>🔍 ご利用前の確認事項</h3>
+    <ul>
+      <li>ロケーションマスタ登録は、利用できるプランとアプリ内表示を確認して操作してください。</li>
+      <li>誤入力した入荷・出荷は、在庫履歴で内容を確認し、アプリ内の案内に従って修正・逆操作・調整を行ってください。</li>
+      <li>バックアップCSVセットは、出力されたファイル一式をまとめて保管してください。</li>
+      <li>在庫移動は、移動元・移動先・数量を確認してから確定する</li>
+      <li>CSV取込の列選択・確認画面は、アプリ内の最新表示を確認してください。</li>
+    </ul>
+  </div>
+
+</div>
+
+<footer>
+  <p>Quantiventra 取扱説明書 | ⑥ 在庫管理 簡単版</p>
+  <p style="margin-top:4px;">本マニュアルの内容は予告なく変更される場合があります。最新情報はアプリ内表示を優先してください。</p>
+  <p style="margin-top:4px;"><a href="privacy_ja.html">プライバシーポリシー</a></p>
+</footer>
+
+</body>
+</html>
+
+
+

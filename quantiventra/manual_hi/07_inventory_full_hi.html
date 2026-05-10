@@ -1,0 +1,488 @@
+﻿<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quantiventra मैनुअल – इन्वेंटरी प्रबंधन फुल अनलॉक</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Noto Sans Devanagari','Noto Sans',Arial,sans-serif;font-size:15px;line-height:1.9;color:#1a2535;background:#f4f7fb;}
+a{color:#1a5fa8;text-decoration:none;}a:hover{text-decoration:underline;}
+.site-nav{background:#1a3a5c;color:#fff;padding:0;}
+.site-nav .nav-inner{max-width:960px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:stretch;}
+.site-nav a{color:#cde;padding:10px 13px;font-size:12px;display:block;border-right:1px solid #2a4a6c;white-space:nowrap;}
+.site-nav a:hover{background:#2a5090;text-decoration:none;}
+.site-nav a.active{background:#2a6cbe;color:#fff;font-weight:bold;}
+.page-header{background:linear-gradient(135deg,#1a3a5c 0%,#2a6cbe 100%);color:#fff;padding:40px 20px 30px;}
+.page-header .inner{max-width:960px;margin:0 auto;}
+.page-header .app-name{font-size:13px;opacity:.8;}
+.page-header h1{font-size:24px;font-weight:700;margin-top:6px;line-height:1.4;}
+.page-header .subtitle{font-size:14px;opacity:.85;margin-top:8px;}
+.scope-box{background:rgba(255,255,255,.15);border-left:4px solid #7ecfff;padding:12px 16px;margin-top:16px;border-radius:4px;font-size:13px;}
+.container{max-width:960px;margin:0 auto;padding:30px 16px;}
+.toc{background:#fff;border:1px solid #c8d8ec;border-radius:8px;padding:24px 28px;margin-bottom:32px;}
+.toc h2{font-size:16px;font-weight:700;color:#1a3a5c;border-bottom:2px solid #2a6cbe;padding-bottom:8px;margin-bottom:14px;}
+.toc ol{margin-left:18px;}.toc li{margin:5px 0;font-size:14px;}
+.chapter{background:#fff;border-radius:8px;box-shadow:0 1px 4px rgba(0,0,0,.08);padding:28px 28px 24px;margin-bottom:28px;}
+.chapter-head{border-left:5px solid #2a6cbe;padding-left:14px;margin-bottom:20px;}
+.chapter-head .ch-no{font-size:12px;color:#2a6cbe;font-weight:700;}
+.chapter-head h2{font-size:20px;font-weight:700;color:#1a2535;margin-top:2px;}
+h3{font-size:16px;font-weight:700;color:#1a3a5c;border-bottom:1px solid #dde8f5;padding-bottom:5px;margin:22px 0 12px;}
+h4{font-size:14px;font-weight:700;color:#2a4a6c;margin:16px 0 8px;}
+p{margin-bottom:12px;}ul,ol{margin-left:20px;margin-bottom:12px;}li{margin-bottom:5px;}
+.steps{counter-reset:step;list-style:none;margin-left:0;}
+.steps li{counter-increment:step;padding:9px 12px 9px 46px;position:relative;background:#f8fbff;border:1px solid #dde8f5;border-radius:6px;margin-bottom:6px;}
+.steps li::before{content:counter(step);position:absolute;left:12px;top:50%;transform:translateY(-50%);width:24px;height:24px;background:#2a6cbe;color:#fff;border-radius:50%;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;}
+.table-wrap{overflow-x:auto;margin-bottom:16px;}
+table{width:100%;border-collapse:collapse;font-size:13px;min-width:400px;}
+th{background:#1a3a5c;color:#fff;padding:9px 12px;text-align:left;white-space:nowrap;}
+td{padding:8px 12px;border-bottom:1px solid #dde8f5;vertical-align:top;}
+tr:nth-child(even) td{background:#f4f7fb;}
+.box{border-radius:6px;padding:13px 16px;margin:14px 0;font-size:13px;}
+.box-warn{background:#fffbe6;border-left:4px solid #f5a623;color:#7a5700;}
+.box-danger{background:#fff0f0;border-left:4px solid #d43f3f;color:#7a0000;}
+.box-hint{background:#e8f4ff;border-left:4px solid #2a6cbe;color:#0a3060;}
+.box-check{background:#f4eeff;border-left:4px solid #8c4fc8;color:#3a0070;}
+.box strong{display:block;margin-bottom:4px;}
+figure{max-width:280px;width:100%;margin:18px auto;text-align:center;}
+figure img{display:block;width:100%;max-width:280px;height:auto;margin:0 auto;border:1px solid #c8d8ec;border-radius:6px;box-shadow:0 2px 8px rgba(0,0,0,.1);}
+figcaption{font-size:12px;color:#5a7a99;margin-top:6px;}
+.diff-add{background:#e8fff0;border-left:4px solid #2a9c5c;border-radius:6px;padding:12px 16px;margin:14px 0;font-size:13px;}
+.diff-add strong{display:block;color:#1a6c3c;margin-bottom:4px;}
+.summary-box{background:linear-gradient(135deg,#e8f4ff,#f0f8ff);border:1px solid #99c8ec;border-radius:8px;padding:20px 24px;margin-top:32px;}
+.summary-box h3{border:none;color:#1a3a5c;margin-top:0;}
+.confirm-box{background:#fdf4ff;border:1px solid #c8a0e0;border-radius:8px;padding:20px 24px;margin-top:16px;}
+.confirm-box h3{border:none;color:#5a0090;margin-top:0;}
+footer{text-align:center;font-size:12px;color:#8a9aaa;padding:30px 16px;border-top:1px solid #dde8f5;margin-top:20px;}
+@media(max-width:640px){.page-header h1{font-size:18px;}.chapter{padding:20px 16px;}.site-nav a{padding:8px 9px;font-size:11px;}}
+@media print{body{background:#fff;font-size:12px;}.site-nav{display:none;}.chapter{box-shadow:none;border:1px solid #ccc;page-break-inside:avoid;}.page-header{background:#1a3a5c !important;-webkit-print-color-adjust:exact;print-color-adjust:exact;}}
+</style>
+</head>
+<body>
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a href="01_top_settings_common_hi.html">① टॉप / सेटिंग्स</a>
+    <a href="02_stocktake_free_hi.html">② स्टॉकटेक निःशुल्क</a>
+    <a href="03_stocktake_simple_hi.html">③ स्टॉकटेक बेसिक</a>
+    <a href="04_stocktake_full_hi.html">④ स्टॉकटेक फुल</a>
+    <a href="05_inventory_free_hi.html">⑤ इन्वेंटरी निःशुल्क</a>
+    <a href="06_inventory_simple_hi.html">⑥ इन्वेंटरी बेसिक</a>
+    <a href="07_inventory_full_hi.html" class="active">⑦ इन्वेंटरी फुल</a>
+  </div>
+</nav>
+<header class="page-header">
+  <div class="inner">
+    <div class="app-name">Quantiventra मैनुअल</div>
+    <h1>⑦ इन्वेंटरी प्रबंधन — फुल अनलॉक</h1>
+    <div class="subtitle">फुल अनलॉक की क्षमताएँ · मास्टर डेटा प्रबंधन · स्टॉक स्थानांतरण · स्टॉकटेक लागू करना · CSV बैकअप · व्यावहारिक कार्यप्रवाह</div>
+    <div class="scope-box">
+      <strong>इस दस्तावेज़ में शामिल विषय:</strong>
+      इन्वेंटरी फुल अनलॉक क्या सक्षम करता है / बेसिक अनलॉक से अंतर / उत्पाद मास्टर एकीकरण / श्रेणी मास्टर / स्थान मास्टर / स्टॉक स्थानांतरण / स्टॉक इतिहास / स्टॉकटेक डेटा लागू करना / CSV बैकअप और पुनर्स्थापना / इतिहास बैकअप / पुनः-आपूर्ति सीमा और मूल्य / फुल अनलॉक कार्यप्रवाह उदाहरण / महत्वपूर्ण नोट
+    </div>
+  </div>
+</header>
+<div class="container">
+  <nav class="toc">
+    <h2>विषय-सूची</h2>
+    <ol>
+      <li><a href="#overview">फुल अनलॉक का अवलोकन</a></li>
+      <li><a href="#diff">बेसिक अनलॉक से अंतर</a></li>
+      <li><a href="#master-product">उत्पाद मास्टर एकीकरण</a></li>
+      <li><a href="#master-item">श्रेणी मास्टर</a></li>
+      <li><a href="#master-location">स्थान मास्टर</a></li>
+      <li><a href="#stock-move">स्टॉक स्थानांतरण</a></li>
+      <li><a href="#stock-history">स्टॉक इतिहास</a></li>
+      <li><a href="#stocktake-reflect">स्टॉकटेक डेटा इन्वेंटरी में लागू करना</a></li>
+      <li><a href="#csv-backup">CSV बैकअप और पुनर्स्थापना</a></li>
+      <li><a href="#csv-history-backup">इतिहास बैकअप</a></li>
+      <li><a href="#reorder-price">पुनः-आपूर्ति सीमा और मूल्य</a></li>
+      <li><a href="#usecase">फुल अनलॉक कार्यप्रवाह उदाहरण</a></li>
+      <li><a href="#notes">महत्वपूर्ण नोट</a></li>
+      <li><a href="#summary">अध्याय के मुख्य बिंदु</a></li>
+      <li><a href="#confirm">पुष्टि करने योग्य बातें</a></li>
+    </ol>
+  </nav>
+
+  <section class="chapter" id="overview">
+    <div class="chapter-head"><div class="ch-no">CHAPTER 1</div><h2>फुल अनलॉक का अवलोकन</h2></div>
+    <p>इन्वेंटरी फुल अनलॉक मास्टर रिकॉर्ड, इतिहास प्रविष्टियों और निर्यात पंक्तियों की सभी सीमाएँ हटाता है, और बेसिक अनलॉक में अनुपलब्ध हर उन्नत सुविधा सक्षम करता है। मुख्य जोड़ हैं — बहु-स्थान प्रबंधन, स्थानों के बीच स्टॉक स्थानांतरण, स्टॉकटेक परिणाम सीधे इन्वेंटरी में लागू करना, और पूर्ण CSV बैकअप एवं पुनर्स्थापना।</p>
+    <div class="diff-add">
+      <strong>फुल अनलॉक से अनलॉक की गई सुविधाएँ</strong>
+      <ul>
+        <li>मास्टर रिकॉर्ड, इतिहास प्रविष्टियों या निर्यात पंक्तियों की कोई सीमा नहीं</li>
+        <li>उत्पाद मास्टर में पुनः-आपूर्ति सीमा और मूल्य फ़ील्ड</li>
+        <li>आइटम श्रेणी प्रबंधन (उत्पाद वर्गीकरण)</li>
+        <li>स्थान मास्टर दर्ज करना और प्रबंधन</li>
+        <li>स्टॉक स्थानांतरण (स्थानों के बीच मात्राएँ ले जाना)</li>
+        <li>स्टॉकटेक डेटा इन्वेंटरी में लागू करना</li>
+        <li>CSV बैकअप और पुनर्स्थापना (इन्वेंटरी शीट + पूर्ण बैकअप CSV सेट)</li>
+        <li>इतिहास बैकअप</li>
+        <li>दर्ज संचयी टोटल सीधे संपादन</li>
+        <li>कोड नियम, स्थान नियम और कैमरा स्कैन सेटिंग्स (साझा पूर्ण सेटिंग्स)</li>
+        <li>विस्तृत CSV विकल्प (कॉलम चयन और आयात मोड चयन)</li>
+      </ul>
+    </div>
+    <div class="box box-hint">
+      <strong>नोट: "फुल अनलॉक" और "फुल अनलॉक" एक ही हैं</strong>
+      इस दस्तावेज़ में "फुल अनलॉक" और "फुल संस्करण" समान अर्थ में उपयोग किए गए हैं। खरीद और प्लान विवरण के लिए, <a href="01_top_settings_common_hi.html">① टॉप और सेटिंग्स</a> में "बिलिंग प्लान" अनुभाग देखें।
+    </div>
+  </section>
+
+  <section class="chapter" id="diff">
+    <div class="chapter-head"><div class="ch-no">CHAPTER 2</div><h2>बेसिक अनलॉक से अंतर</h2></div>
+    <p>नीचे दी गई तालिका बेसिक अनलॉक (बेसिक अनलॉक) के ऊपर जोड़ी गई सुविधाओं का सारांश देती है।</p>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>सुविधा</th><th>निःशुल्क स्तर</th><th>बेसिक अनलॉक</th><th>फुल अनलॉक</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>इन्वेंटरी जाँच</td><td>✓</td><td>✓</td><td>✓</td></tr>
+          <tr><td>प्राप्ति (स्टॉक इन) / निकासी (स्टॉक आउट)</td><td>✓</td><td>✓</td><td>✓</td></tr>
+          <tr><td>मास्टर रिकॉर्ड सीमा</td><td>30</td><td>300</td><td>असीमित</td></tr>
+          <tr><td>स्टॉक स्थानांतरण</td><td>शर्तें पूरी हों तो उपयोग योग्य</td><td>शर्तें पूरी हों तो उपयोग योग्य</td><td>शर्तें पूरी हों तो उपयोग योग्य</td></tr>
+          <tr><td>स्टॉकटेक डेटा इन्वेंटरी में लागू करना</td><td>शर्तें पूरी हों तो उपयोग योग्य</td><td>शर्तें पूरी हों तो उपयोग योग्य</td><td>शर्तें पूरी हों तो उपयोग योग्य</td></tr>
+          <tr><td>श्रेणी मास्टर</td><td>✓</td><td>✓</td><td>✓ (प्रदर्शन क्रम सहित)</td></tr>
+          <tr><td>पुनः-आपूर्ति सीमा और मूल्य</td><td>✓</td><td>✓</td><td>✓</td></tr>
+          <tr><td>CSV बैकअप और पुनर्स्थापना</td><td>उपलब्ध</td><td>उपलब्ध</td><td>उपलब्ध। विस्तृत सेटिंग्स के साथ उपयोग योग्य</td></tr>
+          <tr><td>इतिहास बैकअप</td><td>✗</td><td>✗</td><td>✓</td></tr>
+          <tr><td>कोड नियम और स्थान नियम</td><td>✗</td><td>✗</td><td>✓ (साझा पूर्ण सेटिंग्स)</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="box box-hint">
+      <strong>सुझाव</strong>
+      बेसिक अनलॉक में उपलब्ध मुख्य ऑपरेशनों — प्राप्ति, निकासी, इन्वेंटरी जाँच, स्टॉक इतिहास और CSV आयात/निर्यात — के लिए <a href="06_inventory_simple_hi.html">⑥ इन्वेंटरी प्रबंधन: बेसिक अनलॉक</a> देखें। यह पृष्ठ केवल फुल अनलॉक में जोड़ी गई सुविधाएँ कवर करता है।
+    </div>
+  </section>
+
+  <section class="chapter" id="master-product">
+    <div class="chapter-head"><div class="ch-no">CHAPTER 3</div><h2>उत्पाद मास्टर एकीकरण</h2></div>
+    <p>उत्पाद मास्टर वह जगह है जहाँ आप वास्तविक उत्पाद दर्ज करते हैं जिनका स्टॉक आप प्रबंधित करते हैं। फुल अनलॉक के साथ, आप प्रत्येक उत्पाद में पुनः-आपूर्ति सीमा और मूल्य जोड़ सकते हैं।</p>
+    <h3>उत्पाद मास्टर के मुख्य फ़ील्ड</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>फ़ील्ड</th><th>विवरण</th><th>फुल अनलॉक में जोड़ा गया</th></tr></thead>
+        <tbody>
+          <tr><td>उत्पाद कोड / बारकोड</td><td>उत्पाद की अद्वितीय पहचानकर्ता</td><td>—</td></tr>
+          <tr><td>उत्पाद नाम</td><td>उत्पाद का नाम</td><td>—</td></tr>
+          <tr><td>श्रेणी</td><td>उत्पाद वर्गीकरण (श्रेणी मास्टर से चुनें)</td><td>—</td></tr>
+          <tr><td>मूल्य</td><td>उत्पाद का बिक्री या लागत मूल्य</td><td>✓</td></tr>
+          <tr><td>पुनः-आपूर्ति सीमा</td><td>न्यूनतम मात्रा सीमा, जिसे पुनः-आपूर्ति निर्णयों के संदर्भ के रूप में उपयोग किया जाता है</td><td>✓</td></tr>
+        </tbody>
+      </table>
+    </div>    <h3>उत्पाद दर्ज करना या संपादित करना</h3>
+    <ol class="steps">
+      <li>टॉप स्क्रीन से <strong>मास्टर प्रबंधन</strong> खोलें।</li>
+      <li><strong>उत्पाद मास्टर</strong> चुनें।</li>
+      <li>नई प्रविष्टि कार्ड या <strong>नया</strong> बटन टैप करें।</li>
+      <li>उत्पाद कोड, उत्पाद नाम और श्रेणी दर्ज करें। वैकल्पिक रूप से मूल्य और पुनः-आपूर्ति सीमा दर्ज करें।</li>
+      <li>दर्ज करने के लिए <strong>सहेजें</strong> टैप करें।</li>
+      <li>मौजूदा उत्पाद संपादित करने के लिए, सूची में उसकी पंक्ति खोलें, बदलाव करें और <strong>सहेजें</strong> टैप करें।</li>
+    </ol>
+    <div class="box box-hint">
+      <strong>प्राप्ति स्क्रीन से अपरिचित उत्पाद दर्ज करना</strong>
+      यदि प्राप्ति स्क्रीन पर ऐसा उत्पाद कोड दर्ज करते हैं जो मास्टर में नहीं है, तो ऐप आपको उत्पाद मास्टर नई प्रविष्टि फ़ॉर्म पर ले जाएगा। उत्पाद नाम, मूल्य और पुनः-आपूर्ति सीमा सहेजने के बाद, आप प्राप्ति स्क्रीन पर वापस आ जाते हैं और उत्पाद विवरण स्वचालित रूप से भर जाते हैं।
+    </div>
+    <div class="box box-warn">
+      <strong>नोट: उत्पाद और श्रेणियाँ भ्रमित न करें</strong>
+      <ul>
+        <li><strong>उत्पाद</strong>: एक व्यक्तिगत आइटम जो स्टॉक में है (जैसे लाल पेन, नीला पेन)</li>
+        <li><strong>श्रेणी</strong>: उत्पादों के लिए वर्गीकरण समूह (जैसे स्टेशनरी, खाद्य)</li>
+      </ul>
+      श्रेणी उत्पाद के वर्गीकरण के रूप में उत्पाद मास्टर में चुनी जाती है। श्रेणियाँ स्वयं स्टॉक नहीं रखतीं।
+    </div>
+  </section>
+
+  <section class="chapter" id="master-item">
+    <div class="chapter-head"><div class="ch-no">CHAPTER 4</div><h2>श्रेणी मास्टर</h2></div>
+    <p>आइटम श्रेणी आपके उत्पादों को व्यवस्थित करने के लिए उपयोग किए जाने वाले वर्गीकरण समूहों का प्रबंधन करती है। फुल अनलॉक में श्रेणी कोड, श्रेणी नाम और प्रदर्शन क्रम जैसे आइटम प्रबंधन फ़ील्ड संभाले जाते हैं।</p>
+    <h3>श्रेणी मास्टर के मुख्य फ़ील्ड</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>फ़ील्ड</th><th>विवरण</th></tr></thead>
+        <tbody>
+          <tr><td>श्रेणी कोड</td><td>श्रेणी की अद्वितीय पहचानकर्ता</td></tr>
+          <tr><td>श्रेणी नाम</td><td>वर्गीकरण का नाम (जैसे खाद्य, परिधान)</td></tr>
+          <tr><td>प्रदर्शन क्रम</td><td>सूची में दिखाने का क्रम</td></tr>
+          <tr><td>प्रदर्शन क्रम</td><td>सूची दृश्य में क्रम</td></tr>
+        </tbody>
+      </table>
+    </div>    <div class="box box-hint">
+      <strong>सुझाव: आइटम श्रेणी</strong>
+      आइटम श्रेणी उत्पादों को व्यवस्थित करने के लिए है। इसे POS या कर फाइलिंग के लिए कर-प्रबंधन सुविधा की तरह न समझें।
+    </div>
+    <h3>श्रेणी दर्ज करना</h3>
+    <ol class="steps">
+      <li><strong>मास्टर प्रबंधन → श्रेणी मास्टर</strong> जाएँ।</li>
+      <li>नई प्रविष्टि कार्ड या <strong>नया</strong> बटन टैप करें।</li>
+      <li>श्रेणी कोड, श्रेणी नाम और प्रदर्शन क्रम दर्ज करें।</li>
+      <li><strong>सहेजें</strong> टैप करें।</li>
+    </ol>
+  </section>
+
+  <section class="chapter" id="master-location">
+    <div class="chapter-head"><div class="ch-no">CHAPTER 5</div><h2>स्थान मास्टर</h2></div>
+    <p>स्थान मास्टर वह जगह है जहाँ आप स्टॉक संग्रहीत भौतिक स्थानों को दर्ज और प्रबंधित करते हैं। गोदाम, खुदरा फ्लोर या व्यक्तिगत शेल्फ जैसे कई स्थान दर्ज करके, आप प्रति-स्थान आधार पर इन्वेंटरी ट्रैक कर सकते हैं।</p>
+    <h3>स्थान मास्टर के मुख्य फ़ील्ड</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>फ़ील्ड</th><th>विवरण</th></tr></thead>
+        <tbody>
+          <tr><td>स्थान कोड</td><td>स्थान की अद्वितीय पहचानकर्ता</td></tr>
+          <tr><td>स्थान नाम</td><td>स्थान का नाम (जैसे गोदाम, दुकान A)</td></tr>
+          <tr><td>प्रदर्शन क्रम</td><td>सूची दृश्य में क्रम</td></tr>
+          <tr><td>पुनः-आपूर्ति जाँच में शामिल करें</td><td>सक्षम होने पर, इस स्थान का स्टॉक इन्वेंटरी जाँच स्क्रीन पर पुनः-आपूर्ति निर्णयों के लिए उपयोग किए टोटल में शामिल होता है</td></tr>
+          <tr><td>सक्रिय / निष्क्रिय</td><td>अब उपयोग में न आने वाले स्थानों को हटाए बिना निष्क्रिय किया जा सकता है</td></tr>
+        </tbody>
+      </table>
+    </div>    <div class="box box-hint">
+      <strong>डिफ़ॉल्ट स्थान</strong>
+      ऐप पहले से "गोदाम" और "दुकान" दर्ज के साथ आता है। अपने वास्तविक ऑपरेशन से मेल खाने के लिए स्थानों का नाम बदलें, संपादित करें या जोड़ें।
+    </div>
+    <h3>स्थान दर्ज करना</h3>
+    <ol class="steps">
+      <li><strong>मास्टर प्रबंधन → स्थान मास्टर</strong> जाएँ।</li>
+      <li>नई प्रविष्टि कार्ड या <strong>नया</strong> बटन टैप करें।</li>
+      <li>स्थान कोड, स्थान नाम और प्रदर्शन क्रम दर्ज करें।</li>
+      <li>आवश्यकतानुसार <strong>पुनः-आपूर्ति जाँच में शामिल करें</strong> चालू या बंद करें। नई प्रविष्टियाँ डिफ़ॉल्ट रूप से चालू होती हैं।</li>
+      <li><strong>सहेजें</strong> टैप करें।</li>
+    </ol>
+    <div class="box box-hint">
+      <strong>"पुनः-आपूर्ति जाँच में शामिल करें" सेटिंग के बारे में</strong>
+      इन्वेंटरी जाँच स्क्रीन पर पुनः-आपूर्ति जाँच केवल उन स्थानों का स्टॉक जोड़ती है जहाँ यह टॉगल चालू है। सभी सक्रिय स्थानों को एक बार में चालू करने के लिए <strong>सभी सक्रिय स्थान शामिल करें</strong> बटन उपयोग करें।
+    </div>
+    <div class="box box-warn">
+      <strong>नोट: स्थान निष्क्रिय करना बनाम हटाना</strong>
+      जब कोई स्थान अब आवश्यक नहीं, तो हटाने के बजाय उसे <strong>निष्क्रिय</strong> करना अनुशंसित है। रिकॉर्ड हटाने या ओवरराइट करने से पहले बैकअप निर्यात करें और इन्वेंटरी पर प्रभाव की समीक्षा करें।
+    </div>
+  </section>
+
+  <section class="chapter" id="stock-move">
+    <div class="chapter-head"><div class="ch-no">CHAPTER 6</div><h2>स्टॉक स्थानांतरण</h2></div>
+    <p>स्टॉक स्थानांतरण एक लोकेशन से दूसरी लोकेशन में स्टॉक मात्रा ले जाता है। यह सुविधा उत्पाद, स्टॉक और दो या अधिक लोकेशन जैसी आवश्यक शर्तें पूरी होने पर उपयोग की जाती है।</p>    <h3>स्टॉक स्थानांतरण कैसे करें</h3>
+    <ol class="steps">
+      <li>इन्वेंटरी प्रबंधन मेनू से <strong>स्टॉक स्थानांतरण</strong> खोलें।</li>
+      <li><strong>स्रोत स्थान</strong> (जहाँ से स्थानांतरित हो रहा है) चुनें।</li>
+      <li><strong>गंतव्य स्थान</strong> (जहाँ स्थानांतरित हो रहा है) चुनें।</li>
+      <li>बारकोड स्कैन करके या नाम से खोजकर लक्ष्य उत्पाद खोजें।</li>
+      <li>स्थानांतरित करने की मात्रा दर्ज करें।</li>
+      <li>विवरण देखें और <strong>पुष्टि करें</strong> टैप करें।</li>
+    </ol>
+    <div class="box box-danger">
+      <strong>महत्वपूर्ण: कभी भी एक ही स्थान पर स्थानांतरण न करें</strong>
+      स्रोत और गंतव्य दोनों के रूप में एक ही स्थान चुनने से स्टॉक डेटा गलत तरीके से संसाधित होगा। हमेशा दो अलग-अलग स्थान चुनें।
+    </div>
+    <div class="box box-hint">
+      <strong>यदि केवल एक स्थान है</strong>
+      एक ही दर्ज स्थान होने पर, स्टॉक स्थानांतरण का कोई उद्देश्य नहीं है। इसके बजाय <strong>प्राप्ति (स्टॉक इन)</strong>, <strong>निकासी (स्टॉक आउट)</strong> या <strong>संपादन</strong> से मात्राएँ समायोजित करें। स्टॉक स्थानांतरण तभी सार्थक है जब दो या अधिक स्थान हों।
+    </div>
+  </section>
+
+  <section class="chapter" id="stock-history">
+    <div class="chapter-head"><div class="ch-no">CHAPTER 7</div><h2>स्टॉक इतिहास</h2></div>
+    <p>स्टॉक इतिहास आपकी इन्वेंटरी में हर बदलाव का पूर्ण रिकॉर्ड देता है। फुल अनलॉक के साथ, इतिहास प्रविष्टि सीमा हट जाती है, जिससे दीर्घकालिक रिकॉर्ड बनाए रखे जा सकते हैं।</p>
+    <h3>इतिहास में दर्ज ऑपरेशन प्रकार</h3>
+    <ul>
+      <li><strong>प्राप्ति (स्टॉक इन)</strong>: स्टॉक में प्राप्त माल</li>
+      <li><strong>निकासी (स्टॉक आउट)</strong>: स्टॉक से भेजा गया माल</li>
+      <li><strong>स्थानांतरण</strong>: स्थानों के बीच स्थानांतरित स्टॉक</li>
+      <li><strong>स्टॉकटेक समायोजन</strong>: स्टॉकटेक परिणाम लागू करने पर भिन्नता सुधार</li>
+      <li><strong>प्रारंभिक स्टॉक</strong>: प्रारंभिक दर्ज के समय सेट की गई आरंभिक मात्रा</li>
+      <li><strong>CSV आयात</strong>: CSV फ़ाइल आयात के माध्यम से अपडेट स्टॉक</li>
+    </ul>    <div class="box box-hint">
+      <strong>सुझाव: इतिहास फ़िल्टर करना</strong>
+      आप इतिहास को उत्पाद, स्थान या ऑपरेशन प्रकार से फ़िल्टर कर सकते हैं। उपलब्ध फ़िल्टर नियंत्रणों के लिए स्क्रीन पर विकल्प देखें।
+    </div>
+  </section>
+
+  <section class="chapter" id="stocktake-reflect">
+    <div class="chapter-head"><div class="ch-no">CHAPTER 8</div><h2>स्टॉकटेक डेटा इन्वेंटरी में लागू करना</h2></div>
+    <p>वास्तविक गणना (स्टॉकटेक) परिणाम इन्वेंटरी प्रबंधन मॉड्यूल में लागू करने से सिस्टम स्टॉक को वास्तविक गणना के आधार पर मिलाने में मदद मिलती है। उपयोग करते समय ऐप की पुष्टि स्क्रीन और लागू होने वाली शर्तें अवश्य जाँचें।</p>
+    <h3>लागू करने की प्रक्रिया कैसे काम करती है</h3>
+    <p>जब स्टॉकटेक परिणाम इन्वेंटरी में लागू होते हैं, तो सैद्धांतिक स्टॉक स्तर और वास्तविक गणना के बीच कोई भी भिन्नता इतिहास में <strong>स्टॉकटेक समायोजन</strong> प्रविष्टि के रूप में दर्ज होती है। यह एक साथ इन्वेंटरी को वास्तविक गणना मात्रा में अपडेट करता है और समायोजन का ट्रेस करने योग्य रिकॉर्ड संरक्षित करता है।</p>
+    <div class="box box-check">
+      <strong>लागू करने की शर्तें और समीक्षा</strong>
+      केवल तभी लागू करें जब पुष्टि स्क्रीन की शर्तें पूरी हों। आगे बढ़ने से पहले प्रभावित स्थानों, समायोजन विवरण और बैकअप CSV की समीक्षा करें।
+    </div>
+    <div class="box box-danger">
+      <strong>महत्वपूर्ण: लागू करने से पहले बैकअप लें</strong>
+      स्टॉकटेक डेटा लागू करने से इन्वेंटरी मात्राएँ ओवरराइट हो जाती हैं। यह ऑपरेशन चलाने से पहले हमेशा CSV बैकअप निर्यात करें। लागू करने के बाद पूर्ववत करने की क्षमता सीमित हो सकती है।
+    </div>
+  </section>
+
+  <section class="chapter" id="csv-backup">
+    <div class="chapter-head"><div class="ch-no">CHAPTER 9</div><h2>CSV बैकअप और पुनर्स्थापना</h2></div>
+    <p>फुल अनलॉक तीन निर्यात प्रकार प्रदान करता है: एक इन्वेंटरी शीट CSV, एक पूर्ण बैकअप CSV सेट, और एक इतिहास बैकअप। क्योंकि पुनर्स्थापना और प्रतिस्थापन ऑपरेशन आपके डेटा में व्यापक बदलाव करते हैं, निष्पादित करने से पहले सावधानीपूर्वक सत्यापन आवश्यक है।</p>
+    <h3>CSV प्रकार और उनके उपयोग</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>CSV प्रकार</th><th>उद्देश्य</th><th>मुख्य सामग्री</th><th>उपलब्ध में</th><th>नोट</th></tr></thead>
+        <tbody>
+          <tr><td>इन्वेंटरी शीट CSV</td><td>वर्तमान स्टॉक सूची देखना और पुनः आयात करना</td><td>स्थान, उत्पाद कोड, उत्पाद नाम, मात्रा</td><td>बेसिक अनलॉक और उससे ऊपर</td><td>स्थान कॉलम न हो तो आयात के दौरान लक्ष्य स्थान चुनें</td></tr>
+          <tr><td>पूर्ण बैकअप CSV सेट</td><td>पूर्ण डेटासेट बैकअप और पुनर्स्थापना</td><td>उत्पाद, वर्तमान स्टॉक, प्राप्ति/निकासी/स्थानांतरण/समायोजन इतिहास, स्थान, श्रेणियाँ</td><td>फुल अनलॉक</td><td>कई फ़ाइलों के रूप में निर्यात हो सकता है</td></tr>
+          <tr><td>इतिहास बैकअप</td><td>समय के साथ स्टॉक परिवर्तन की समीक्षा के लिए बैकअप</td><td>इन्वेंटरी शीट + पूर्ण ऑपरेशन इतिहास</td><td>फुल अनलॉक</td><td>इतिहास CSV फिर से आयात करने से पहले आयात स्क्रीन की समीक्षा करें</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>CSV बैकअप या पुनर्स्थापना चलाने से पहले, ऐप की स्क्रीन पर दिख रहे निर्यात प्रकार, चुनी गई फ़ाइलें और पुष्टि संदेशों की जाँच करें।</p>
+    <h3>पूर्ण बैकअप CSV सेट निर्यात करना</h3>
+    <ol class="steps">
+      <li>सेटिंग्स स्क्रीन या मुख्य मेनू से <strong>CSV आयात / निर्यात</strong> खोलें।</li>
+      <li><strong>पूर्ण बैकअप CSV सेट</strong> चुनें।</li>
+      <li>गंतव्य फ़ोल्डर चुनें (स्क्रीन पर दिए निर्देशों का पालन करें)।</li>
+      <li><strong>निर्यात</strong> टैप करें और पूर्णता संदेश पुष्टि करें।</li>
+    </ol>
+    <h3>CSV बैकअप से पुनर्स्थापित करना</h3>
+    <ol class="steps">
+      <li><strong>CSV आयात / निर्यात → पुनर्स्थापना</strong> या <strong>CSV आयात</strong> जाएँ।</li>
+      <li>बैकअप CSV फ़ाइल चुनें।</li>
+      <li>कॉलम मैपिंग पुष्टि करें (ऐप इसे स्वचालित रूप से पहचान सकता है)।</li>
+      <li>पुष्टि स्क्रीन ध्यान से देखें, फिर <strong>चलाएँ</strong> टैप करें।</li>
+    </ol>
+    <div class="box box-danger">
+      <strong>महत्वपूर्ण: पुनर्स्थापना या प्रतिस्थापन से पहले हमेशा वर्तमान डेटा का बैकअप लें</strong>
+      CSV पुनर्स्थापना या वर्तमान स्टॉक प्रतिस्थापन ऑपरेशन आपकी मौजूदा इन्वेंटरी डेटा ओवरराइट करता है। आगे बढ़ने से पहले वर्तमान इन्वेंटरी शीट CSV निर्यात और सहेज लें।
+    </div>
+    <h3>वर्तमान स्टॉक प्रतिस्थापन</h3>
+    <p>वर्तमान स्टॉक प्रतिस्थापन आयातित CSV में मूल्यों के साथ वर्तमान इन्वेंटरी मात्राएँ ओवरराइट करता है। मौजूदा इतिहास संरक्षित रहता है, लेकिन अंतर <strong>समायोजन</strong> इतिहास प्रविष्टि के रूप में दर्ज होता है। CSV में न आने वाले किसी भी इन्वेंटरी पंक्ति की मात्रा 0 पर सेट हो सकती है, इसलिए आयात से पहले हमेशा CSV सामग्री पुष्टि करें।</p>
+    <div class="box box-danger">
+      <strong>वर्तमान स्टॉक प्रतिस्थापन अतिरिक्त सावधानी से उपयोग करें</strong>
+      CSV में अनुपस्थित उत्पाद या स्थानों का स्टॉक 0 पर सेट हो सकता है। आयात से पहले, हमेशा पुष्टि करें कि CSV में सही उत्पाद और स्थान हैं।
+    </div>
+  </section>
+
+  <section class="chapter" id="csv-history-backup">
+    <div class="chapter-head"><div class="ch-no">CHAPTER 10</div><h2>इतिहास बैकअप</h2></div>
+    <p>इतिहास बैकअप एक ऑपरेशन में इन्वेंटरी शीट और स्टॉक परिवर्तनों का पूर्ण रिकॉर्ड — प्राप्ति, निकासी, स्थानांतरण, समायोजन और अधिक — निर्यात करता है। इसका उपयोग तब करें जब आपको बाद में स्टॉक परिवर्तनों की ऑडिट या ट्रेस करने की आवश्यकता हो।</p>
+    <ul>
+      <li>इन्वेंटरी शीट CSV (वर्तमान स्टॉक मात्राएँ)</li>
+      <li>पूर्ण ऑपरेशन इतिहास (प्राप्ति, निकासी, स्थानांतरण, स्टॉकटेक समायोजन, CSV आयात)</li>
+    </ul>
+    <div class="box box-check">
+      <strong>इतिहास बैकअप CSV पुनः आयात करना</strong>
+      इतिहास बैकअप फिर से आयात करने से पहले चयनित फ़ाइल, आयात मोड और ऐप की पुष्टि स्क्रीन की समीक्षा करें।
+    </div>
+    <div class="box box-hint">
+      <strong>ऑपरेशनल सुझाव</strong>
+      नियमित रूप से — साप्ताहिक या मासिक — इतिहास बैकअप चलाना मतलब है कि कुछ गलत होने पर, आप ट्रेस कर सकते हैं कि समय के साथ आपके स्टॉक स्तर कैसे बदले और अधिक सटीक रूप से पुनर्प्राप्त कर सकते हैं।
+    </div>
+  </section>
+
+  <section class="chapter" id="reorder-price">
+    <div class="chapter-head"><div class="ch-no">CHAPTER 11</div><h2>पुनः-आपूर्ति सीमा, मूल्य और आइटम श्रेणी</h2></div>
+    <h3>पुनः-आपूर्ति सीमा</h3>
+    <p>उत्पाद मास्टर में पुनः-आपूर्ति सीमा सेट करने से आपको एक संदर्भ सीमा मिलती है: जब स्टॉक इस मान से नीचे जाता है, तो आप एक नज़र में देख सकते हैं कि पुनः-आपूर्ति की आवश्यकता है। यह स्टॉक पुनः-आपूर्ति के समय को प्रबंधित करने में मदद करने वाला संकेतक है।</p>
+    <div class="box box-check">
+      <strong>इन्वेंटरी जाँच स्क्रीन पर पुनः-आपूर्ति जाँच</strong>
+      इन्वेंटरी जाँच स्क्रीन डिफ़ॉल्ट रूप से प्रति उत्पाद टोटल प्रदर्शित करती है। पुनः-आपूर्ति जाँच सभी स्थानों का संयुक्त स्टॉक (जहाँ <strong>पुनः-आपूर्ति जाँच में शामिल करें</strong> सक्षम है) उत्पाद की पुनः-आपूर्ति सीमा से तुलना करती है। अलग-अलग स्थान के अनुसार स्टॉक देखते समय, पुनः-आपूर्ति जाँच नहीं दिखती या निष्क्रिय मानी जाती है।
+    </div>
+    <div class="box box-check">
+      <strong>पुनः-आपूर्ति से संबंधित संकेत</strong>
+      मौजूदा सेटिंग में पुनः-आपूर्ति सीमा और संबंधित संकेत कैसे दिखते हैं, यह देखने के लिए इन्वेंटरी जाँच स्क्रीन को संदर्भ के रूप में उपयोग करें।
+    </div>
+    <h3>मूल्य</h3>
+    <p>प्रत्येक उत्पाद के लिए उत्पाद मास्टर में मूल्य दर्ज किया जा सकता है। इन्वेंटरी के कुल मूल्य की गणना करते समय या रिपोर्ट तैयार करते समय इसे संदर्भित किया जाता है। मूल्य से जुड़े मानों को व्यावसायिक रिकॉर्ड में उपयोग करने से पहले ऐप में उनका प्रदर्शन और निर्यात किए गए CSV देखें।</p>
+    <h3>आइटम श्रेणी</h3>
+    <p>आइटम श्रेणी उत्पादों को वर्गीकृत करने के लिए उपयोग की जाती है। उत्पाद को उचित श्रेणी से जोड़ने पर सूची और खोज व्यवस्थित रखना आसान होता है।</p>
+    <div class="box box-warn">
+      <strong>ध्यान दें</strong>
+      मूल्य और आइटम श्रेणी फ़ील्ड इस ऐप के भीतर प्रबंधन सहायता के लिए हैं। औपचारिक लेखांकन या कर फाइलिंग के निर्णय आवश्यकतानुसार अलग से पुष्टि करें।
+    </div>
+  </section>
+
+  <section class="chapter" id="usecase">
+    <div class="chapter-head"><div class="ch-no">CHAPTER 12</div><h2>फुल अनलॉक कार्यप्रवाह उदाहरण</h2></div>
+    <h3>उदाहरण 1: दो स्थान प्रबंधित करना — गोदाम और दुकान</h3>
+    <ol class="steps">
+      <li>स्थान मास्टर में "गोदाम" और "दुकान A" दर्ज करें।</li>
+      <li>उत्पाद मास्टर में अपने उत्पाद दर्ज करें और गोदाम पर आरंभिक स्टॉक सेट करें।</li>
+      <li>दुकान को पुनः-आपूर्ति की आवश्यकता होने पर, गोदाम से दुकान A में स्टॉक ले जाने के लिए <strong>स्टॉक स्थानांतरण</strong> उपयोग करें।</li>
+      <li>दुकान पर बिक्री के बाद, <strong>निकासी (स्टॉक आउट)</strong> का उपयोग करके कमी दर्ज करें।</li>
+      <li>नियमित रूप से स्टॉकटेक करें और सिस्टम स्टॉक को वास्तविक गणना से मेल खाने के लिए <strong>स्टॉकटेक डेटा लागू करें</strong> उपयोग करें।</li>
+      <li>मासिक रूप से <strong>इतिहास बैकअप</strong> निर्यात करें और संग्रहीत करें।</li>
+    </ol>
+    <h3>उदाहरण 2: नियमित स्टॉकटेक चक्र</h3>
+    <ol class="steps">
+      <li>महीने के अंत में, स्टॉकटेक ऐप (स्टॉकटेक फुल स्तर) से वास्तविक गणना दर्ज करें।</li>
+      <li>वास्तविक गणना परिणाम अंतिम रूप दें।</li>
+      <li>भिन्नताओं को इन्वेंटरी मॉड्यूल में पुश करने के लिए <strong>स्टॉकटेक डेटा लागू करें</strong> उपयोग करें।</li>
+      <li>बदलाव पुष्टि करने के लिए स्टॉक इतिहास में <strong>स्टॉकटेक समायोजन</strong> प्रविष्टियाँ देखें।</li>
+      <li>पूर्ण बैकअप CSV सेट निर्यात और सहेजें।</li>
+    </ol>
+    <div class="box box-hint">
+      <strong>सुझाव: स्टॉकटेक एकीकरण</strong>
+      स्टॉकटेक फुल स्तर के विस्तृत निर्देशों के लिए, <a href="04_stocktake_full_hi.html">④ स्टॉकटेक: फुल अनलॉक</a> देखें।
+    </div>
+  </section>
+
+  <section class="chapter" id="notes">
+    <div class="chapter-head"><div class="ch-no">CHAPTER 13</div><h2>महत्वपूर्ण नोट</h2></div>
+    <div class="box box-danger">
+      <strong>CSV वर्तमान स्टॉक प्रतिस्थापन</strong>
+      वर्तमान स्टॉक प्रतिस्थापन CSV में मूल्यों के साथ आपकी इन्वेंटरी मात्राएँ ओवरराइट करता है। CSV में शामिल न आने वाले आइटमों का स्टॉक 0 पर सेट हो सकता है। <strong>यह ऑपरेशन चलाने से पहले हमेशा बैकअप CSV निर्यात करें।</strong>
+    </div>
+    <div class="box box-danger">
+      <strong>स्टॉकटेक डेटा लागू करना</strong>
+      स्टॉकटेक डेटा लागू करने से आपकी इन्वेंटरी मात्राएँ फिर से लिखी जाती हैं और पूर्ववत करने की क्षमता सीमित हो सकती है। <strong>यह ऑपरेशन चलाने से पहले हमेशा बैकअप CSV निर्यात करें।</strong>
+    </div>
+    <div class="box box-danger">
+      <strong>मास्टर रिकॉर्ड हटाना या ओवरराइट करना</strong>
+      उत्पाद मास्टर या स्थान मास्टर से प्रविष्टियाँ हटाने से आपकी इन्वेंटरी डेटा प्रभावित हो सकती है। रिकॉर्ड अब आवश्यक न होने पर, हटाने के बजाय उन्हें <strong>निष्क्रिय</strong> करने पर विचार करें और बड़े प्रभाव वाले बदलावों से पहले बैकअप CSV रखें।
+    </div>
+    <div class="box box-warn">
+      <strong>स्टॉक स्थानांतरण: स्रोत और गंतव्य अलग होने चाहिए</strong>
+      स्टॉक स्थानांतरण में स्रोत और गंतव्य दोनों के रूप में कभी भी एक ही स्थान न चुनें। ऐसा करने से अनपेक्षित डेटा बदलाव हो सकते हैं।
+    </div>
+    <div class="box box-hint">
+      <strong>निकासी स्क्रीन पर स्टॉक फ़ील्ड</strong>
+      निकासी स्क्रीन पर दिखाई स्टॉक मात्रा केवल संदर्भ के लिए है — यह वर्तमान स्टॉक स्तर प्रदर्शित करती है और संपादन योग्य नहीं है। निकासी मात्रा सहेजने के परिणामस्वरूप चुने स्थान का स्टॉक घटता है।
+    </div>
+    <div class="box box-warn">
+      <strong>मूल्य निर्धारण और खरीद की शर्तें</strong>
+      फुल अनलॉक खरीद मूल्य और बिक्री शर्तों के लिए, Google Play पर लिस्टिंग देखें। इस दस्तावेज़ में कोई मूल्य निर्धारण जानकारी शामिल नहीं है।
+    </div>
+    <div class="box box-hint">
+      <strong>ऑपरेशनल सिद्धांत</strong>
+      <ul>
+        <li>इन्वेंटरी में बड़े पैमाने पर बदलाव करने वाले किसी भी ऑपरेशन (प्रतिस्थापन, लागू करना, हटाना) से पहले हमेशा बैकअप लें।</li>
+        <li>CSV आयात के दौरान, निष्पादित करने से पहले पूर्वावलोकन या पुष्टि स्क्रीन देखें।</li>
+        <li>यदि केवल एक स्थान है, तो स्टॉक स्थानांतरण के बजाय प्राप्ति, निकासी या संपादन उपयोग करें।</li>
+      </ul>
+    </div>
+  </section>
+
+  <div class="summary-box" id="summary">
+    <h3>📌 अध्याय के मुख्य बिंदु</h3>
+    <ul>
+      <li>फुल अनलॉक रिकॉर्ड और इतिहास सीमाएँ बढ़ाता या हटाता है, और पुनः-आपूर्ति सीमा, मूल्य, आइटम श्रेणी, विस्तृत लोकेशन प्रबंधन, विस्तृत नियम और CSV बैकअप जैसी उन्नत सेटिंग्स उपयोग करने देता है।</li>
+      <li>तीन प्रकार के मास्टर डेटा मिलकर काम करते हैं: उत्पाद मास्टर (स्टॉक में रखे आइटम), श्रेणी मास्टर (वर्गीकरण समूह), और स्थान मास्टर (भंडारण स्थान)।</li>
+      <li>स्टॉक स्थानांतरण केवल दो अलग-अलग स्थानों के बीच मान्य है; स्रोत और गंतव्य के रूप में एक ही स्थान कभी न उपयोग करें।</li>
+      <li>स्टॉकटेक डेटा लागू करने से वास्तविक गणना सिस्टम इन्वेंटरी के साथ सिंक होती है; भिन्नताएँ स्टॉकटेक समायोजन इतिहास प्रविष्टियों के रूप में दर्ज होती हैं।</li>
+      <li>वर्तमान स्टॉक प्रतिस्थापन, स्टॉकटेक डेटा लागू करना या हटाने जैसे अपरिवर्तनीय ऑपरेशन से पहले हमेशा बैकअप लें।</li>
+      <li>नियमित (साप्ताहिक या मासिक) आधार पर इतिहास बैकअप चलाने से अपुनर्प्राप्य डेटा हानि का जोखिम कम होता है।</li>
+    </ul>
+  </div>
+
+  <div class="confirm-box" id="confirm">
+    <h3>उपयोग से पहले नोट्स</h3>
+    <ul>
+      <li>स्टॉकटेक डेटा लागू करने की सटीक शर्तें (समय, कई स्थानों का प्रबंधन, पूर्ववत व्यवहार)</li>
+      <li>इतिहास बैकअप CSV पुनः आयात करके इन्वेंटरी पुनर्स्थापित करने की प्रक्रिया और व्यवहार</li>
+      <li>स्टॉक पुनः-आपूर्ति सीमा से नीचे जाने पर अलर्ट या सूचना दिखाई देती है या नहीं, और कैसे व्यवहार करती है</li>
+      <li>मूल्यों के लिए मुद्रा सेटिंग और राउंडिंग विधि</li>
+      <li>क्या उत्पाद और स्थान मास्टर रिकॉर्ड हटाए जा सकते हैं, और हटाए गए रिकॉर्ड पुनर्स्थापित किए जा सकते हैं या नहीं</li>
+      <li>फुल अनलॉक खरीद मूल्य और बिक्री शर्तें (Google Play पर पुष्टि करें)</li>
+      <li>क्या पुष्टि किए स्टॉक स्थानांतरण को पूर्ववत किया जा सकता है</li>
+    </ul>
+  </div>
+</div>
+<footer>
+  Quantiventra मैनुअल ⑦ इन्वेंटरी प्रबंधन: फुल अनलॉक &nbsp;/&nbsp; नवीनतम जानकारी के लिए हमेशा ऐप की स्क्रीन देखें।
+  <p style="margin-top:4px;"><a href="privacy_hi.html">गोपनीयता नीति</a></p>
+</footer>
+</body>
+</html>
+
+
+

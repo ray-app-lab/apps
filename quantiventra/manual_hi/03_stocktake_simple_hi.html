@@ -1,0 +1,291 @@
+﻿<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quantiventra मैनुअल – स्टॉकटेक बेसिक संस्करण</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Noto Sans Devanagari','Noto Sans',Arial,sans-serif;font-size:15px;line-height:1.9;color:#1a2535;background:#f4f7fb;}
+a{color:#1a5fa8;text-decoration:none;}a:hover{text-decoration:underline;}
+.site-nav{background:#1a3a5c;color:#fff;padding:0;}
+.site-nav .nav-inner{max-width:960px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:stretch;}
+.site-nav a{color:#cde;padding:10px 13px;font-size:12px;display:block;border-right:1px solid #2a4a6c;white-space:nowrap;}
+.site-nav a:hover{background:#2a5090;text-decoration:none;}
+.site-nav a.active{background:#2a6cbe;color:#fff;font-weight:bold;}
+.page-header{background:linear-gradient(135deg,#1a3a5c 0%,#2a6cbe 100%);color:#fff;padding:40px 20px 30px;}
+.page-header .inner{max-width:960px;margin:0 auto;}
+.page-header .app-name{font-size:13px;opacity:.8;}
+.page-header h1{font-size:24px;font-weight:700;margin-top:6px;line-height:1.4;}
+.page-header .subtitle{font-size:14px;opacity:.85;margin-top:8px;}
+.scope-box{background:rgba(255,255,255,.15);border-left:4px solid #7ecfff;padding:12px 16px;margin-top:16px;border-radius:4px;font-size:13px;}
+.container{max-width:960px;margin:0 auto;padding:30px 16px;}
+.toc{background:#fff;border:1px solid #c8d8ec;border-radius:8px;padding:24px 28px;margin-bottom:32px;}
+.toc h2{font-size:16px;font-weight:700;color:#1a3a5c;border-bottom:2px solid #2a6cbe;padding-bottom:8px;margin-bottom:14px;}
+.toc ol{margin-left:18px;}.toc li{margin:5px 0;font-size:14px;}
+.chapter{background:#fff;border-radius:8px;box-shadow:0 1px 4px rgba(0,0,0,.08);padding:28px 28px 24px;margin-bottom:28px;}
+.chapter-head{border-left:5px solid #2a6cbe;padding-left:14px;margin-bottom:20px;}
+.chapter-head .ch-no{font-size:12px;color:#2a6cbe;font-weight:700;}
+.chapter-head h2{font-size:20px;font-weight:700;color:#1a2535;margin-top:2px;}
+h3{font-size:16px;font-weight:700;color:#1a3a5c;border-bottom:1px solid #dde8f5;padding-bottom:5px;margin:22px 0 12px;}
+p{margin-bottom:12px;}ul,ol{margin-left:20px;margin-bottom:12px;}li{margin-bottom:5px;}
+.steps{counter-reset:step;list-style:none;margin-left:0;}
+.steps li{counter-increment:step;padding:9px 12px 9px 46px;position:relative;background:#f8fbff;border:1px solid #dde8f5;border-radius:6px;margin-bottom:6px;}
+.steps li::before{content:counter(step);position:absolute;left:12px;top:50%;transform:translateY(-50%);width:24px;height:24px;background:#2a6cbe;color:#fff;border-radius:50%;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;}
+.table-wrap{overflow-x:auto;margin-bottom:16px;}
+table{width:100%;border-collapse:collapse;font-size:13px;min-width:380px;}
+th{background:#1a3a5c;color:#fff;padding:9px 12px;text-align:left;white-space:nowrap;}
+td{padding:8px 12px;border-bottom:1px solid #dde8f5;vertical-align:top;}
+tr:nth-child(even) td{background:#f4f7fb;}
+.box{border-radius:6px;padding:13px 16px;margin:14px 0;font-size:13px;}
+.box-warn{background:#fffbe6;border-left:4px solid #f5a623;color:#7a5700;}
+.box-danger{background:#fff0f0;border-left:4px solid #d43f3f;color:#7a0000;}
+.box-hint{background:#e8f4ff;border-left:4px solid #2a6cbe;color:#0a3060;}
+.box-check{background:#f4eeff;border-left:4px solid #8c4fc8;color:#3a0070;}
+.box strong{display:block;margin-bottom:4px;}
+figure{max-width:280px;width:100%;margin:18px auto;text-align:center;}
+figure img{display:block;width:100%;max-width:280px;height:auto;margin:0 auto;border:1px solid #c8d8ec;border-radius:6px;box-shadow:0 2px 8px rgba(0,0,0,.1);}
+figcaption{font-size:12px;color:#5a7a99;margin-top:6px;}
+.diff-add{background:#e8fff0;border-left:4px solid #2a9c5c;border-radius:6px;padding:12px 16px;margin:14px 0;font-size:13px;}
+.diff-add strong{display:block;color:#1a6c3c;margin-bottom:4px;}
+.summary-box{background:linear-gradient(135deg,#e8f4ff,#f0f8ff);border:1px solid #99c8ec;border-radius:8px;padding:20px 24px;margin-top:32px;}
+.summary-box h3{border:none;color:#1a3a5c;margin-top:0;}
+.confirm-box{background:#fdf4ff;border:1px solid #c8a0e0;border-radius:8px;padding:20px 24px;margin-top:16px;}
+.confirm-box h3{border:none;color:#5a0090;margin-top:0;}
+footer{text-align:center;font-size:12px;color:#8a9aaa;padding:30px 16px;border-top:1px solid #dde8f5;margin-top:20px;}
+@media(max-width:640px){.page-header h1{font-size:18px;}.chapter{padding:20px 16px;}.site-nav a{padding:8px 9px;font-size:11px;}}
+@media print{body{background:#fff;font-size:12px;}.site-nav{display:none;}.chapter{box-shadow:none;border:1px solid #ccc;page-break-inside:avoid;}.page-header{background:#1a3a5c !important;-webkit-print-color-adjust:exact;print-color-adjust:exact;}}
+</style>
+</head>
+<body>
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a href="01_top_settings_common_hi.html">① टॉप / सेटिंग्स</a>
+    <a href="02_stocktake_free_hi.html">② स्टॉकटेक निःशुल्क</a>
+    <a href="03_stocktake_simple_hi.html" class="active">③ स्टॉकटेक बेसिक</a>
+    <a href="04_stocktake_full_hi.html">④ स्टॉकटेक फुल</a>
+    <a href="05_inventory_free_hi.html">⑤ इन्वेंटरी निःशुल्क</a>
+    <a href="06_inventory_simple_hi.html">⑥ इन्वेंटरी बेसिक</a>
+    <a href="07_inventory_full_hi.html">⑦ इन्वेंटरी फुल</a>
+  </div>
+</nav>
+<header class="page-header">
+  <div class="inner">
+    <div class="app-name">Quantiventra मैनुअल</div>
+    <h1>③ स्टॉकटेक — बेसिक अनलॉक</h1>
+    <div class="subtitle">जोड़ी गई सुविधाएँ, निःशुल्क संस्करण से अंतर, सरल मोड A/B/C, चरण-दर-चरण निर्देश और महत्वपूर्ण बातें</div>
+    <div class="scope-box">
+      <strong>इस पृष्ठ में शामिल विषय:</strong>
+      बेसिक अनलॉक में जोड़ी गई सुविधाएँ / निःशुल्क संस्करण से अंतर / सरल मोड A/B/C / बुनियादी स्थान (गोदाम/दुकान) / चरण-दर-चरण कार्यप्रवाह / महत्वपूर्ण बातें / निःशुल्क संस्करण से अपग्रेड के लाभ
+    </div>
+  </div>
+</header>
+<div class="container">
+  <nav class="toc">
+    <h2>विषय-सूची</h2>
+    <ol>
+      <li><a href="#overview">बेसिक अनलॉक का अवलोकन</a></li>
+      <li><a href="#diff">निःशुल्क संस्करण से अंतर</a></li>
+      <li><a href="#mode">सरल मोड A / B / C</a></li>
+      <li><a href="#location">बुनियादी स्थान प्रबंधन</a></li>
+      <li><a href="#howto">स्टॉकटेक चरण-दर-चरण (बेसिक अनलॉक)</a></li>
+      <li><a href="#merit">बेसिक अनलॉक में क्या बेहतर होता है</a></li>
+      <li><a href="#cannot">बेसिक अनलॉक में अभी भी क्या नहीं किया जा सकता</a></li>
+      <li><a href="#notes">महत्वपूर्ण बातें</a></li>
+      <li><a href="#upgrade">निःशुल्क संस्करण से बेसिक अनलॉक में अपग्रेड क्यों करें</a></li>
+      <li><a href="#summary">अध्याय के मुख्य बिंदु</a></li>
+      <li><a href="#confirm">उपयोग से पहले ध्यान देने योग्य बातें</a></li>
+    </ol>
+  </nav>
+
+  <section class="chapter" id="overview">
+    <div class="chapter-head"><div class="ch-no">अध्याय 1</div><h2>बेसिक अनलॉक का अवलोकन</h2></div>
+    <p>स्टॉकटेक बेसिक संस्करण में मास्टर रिकॉर्ड, स्टॉकटेक इतिहास और निर्यात रिकॉर्ड की सीमाएँ बढ़ जाती हैं, साथ ही स्क्रीन रोटेशन लॉक भी उपयोग किया जा सकता है।</p>
+    <p>बुनियादी स्टॉकटेक कार्यप्रवाह निःशुल्क संस्करण जैसा ही है। बढ़ी हुई सीमाओं के कारण कार्यस्थल पर लंबे समय तक लगातार उपयोग करना आसान हो जाता है।</p>    <h3>बेसिक अनलॉक की सीमाएँ</h3>
+    <div class="table-wrap">
+      <table>
+        <tr><th>विषय</th><th>निःशुल्क संस्करण</th><th>बेसिक अनलॉक</th></tr>
+        <tr><td>मास्टर रिकॉर्ड</td><td>30 तक</td><td>300 तक</td></tr>
+        <tr><td>स्टॉकटेक इतिहास रिकॉर्ड</td><td>30 तक</td><td>1,000 तक</td></tr>
+        <tr><td>निर्यात रिकॉर्ड</td><td>30 तक</td><td>300 तक</td></tr>
+        <tr><td>स्क्रीन रोटेशन लॉक</td><td>✗</td><td>○</td></tr>
+        <tr><td>विस्तृत नियम सेटिंग</td><td>✗</td><td>✗（फुल अनलॉक आवश्यक）</td></tr>
+      </table>
+    </div>
+  </section>
+
+  <section class="chapter" id="diff">
+    <div class="chapter-head"><div class="ch-no">अध्याय 2</div><h2>निःशुल्क संस्करण से अंतर</h2></div>
+    <div class="diff-add">
+      <strong>✅ बेसिक अनलॉक में क्या जोड़ा या बढ़ाया जाता है</strong>
+      <ul style="margin-top:6px;">
+        <li>मास्टर रिकॉर्ड सीमा 30 → 300 तक बढ़ी</li>
+        <li>स्टॉकटेक इतिहास सीमा 30 → 1,000 तक बढ़ी</li>
+        <li>निर्यात सीमा 30 → 300 तक बढ़ी</li>
+        <li>स्क्रीन रोटेशन लॉक उपलब्ध हो जाता है</li>
+        <li>कार्यस्थल पर लगातार काम करना आसान</li>
+      </ul>
+    </div>
+    <div class="box box-hint">
+      <strong>💡 मुख्य बिंदु</strong>
+      बेसिक अनलॉक <strong>विस्तारित सीमाएँ</strong> और <strong>स्क्रीन रोटेशन लॉकिंग</strong> जोड़ता है। स्टॉकटेक कार्यप्रवाह निःशुल्क संस्करण जैसा ही है। विस्तृत नियम सेटिंग के लिए फुल अनलॉक आवश्यक है।
+    </div>
+  </section>
+
+  <section class="chapter" id="mode">
+    <div class="chapter-head"><div class="ch-no">अध्याय 3</div><h2>सरल मोड A / B / C</h2></div>
+    <p>स्टॉकटेक सेटिंग्स में <strong>सरल A</strong>, <strong>सरल B</strong> या <strong>सरल C</strong> में से एक चुनें। चुना मोड स्टॉकटेक और अन्य कार्यप्रवाह के दौरान कौन से स्थान विकल्प दिखाई देंगे, यह तय करता है।</p>
+    <div class="table-wrap">
+      <table>
+        <tr><th>मोड</th><th>दिखाए जाने वाले स्थान</th><th>उदाहरण उपयोग</th></tr>
+        <tr><td><strong>सरल A</strong></td><td>केवल गोदाम</td><td>एक गोदाम में कार्य</td></tr>
+        <tr><td><strong>सरल B</strong></td><td>गोदाम + दुकान</td><td>गोदाम और दुकान दोनों का स्टॉकटेक</td></tr>
+        <tr><td><strong>सरल C</strong></td><td>केवल दुकान</td><td>एक दुकान में कार्य</td></tr>
+      </table>
+    </div>
+    <h3>मोड कैसे सेट करें</h3>
+    <ol class="steps">
+      <li><strong>सेटिंग्स → स्टॉकटेक सेटिंग्स</strong> जाएँ।</li>
+      <li>वह मोड चुनें जो आप उपयोग करना चाहते हैं (सरल A / सरल B / सरल C / विस्तृत)।</li>
+      <li>सेटिंग्स सहेजें और स्टॉकटेक स्क्रीन पर वापस जाएँ।</li>
+    </ol>
+    <div class="box box-warn">
+      <strong>⚠ ध्यान दें</strong>
+      फुल अनलॉक सक्रिय होने पर भी, मोड अभी भी सरल A/B/C होने पर केवल सरल स्थान विकल्प दिखेंगे। सभी दर्ज स्थानों का उपयोग करने के लिए <strong>विस्तृत</strong> मोड पर स्विच करें।
+    </div>
+    <div class="box box-hint">
+      <strong>💡 सुझाव</strong>
+      अनिश्चित हों तो <strong>सरल B (गोदाम + दुकान)</strong> से शुरू करें। डिफ़ॉल्ट स्थानों और नमूना डेटा के नाम डिवाइस की प्राथमिक भाषा के अनुसार बनाए जाते हैं।
+    </div>
+  </section>
+
+  <section class="chapter" id="location">
+    <div class="chapter-head"><div class="ch-no">अध्याय 4</div><h2>बुनियादी स्थान प्रबंधन</h2></div>
+    <p>बेसिक अनलॉक "गोदाम" और "दुकान" को बुनियादी स्थान के रूप में उपयोग करता है। वास्तविक प्रदर्शन नाम डिवाइस की प्राथमिक भाषा से मेल खाते बनाए जाते हैं।</p>
+    <h3>स्टॉकटेक के दौरान स्थान चयन</h3>
+    <p>स्टॉकटेक के दौरान स्थान विकल्प आपके सेट मोड (सरल A/B/C) से निर्धारित होते हैं, इनपुट न्यूनतम और कार्यप्रवाह सुचारू रखते हुए।</p>
+    <h3>विस्तृत स्थानों से अंतर</h3>
+    <div class="table-wrap">
+      <table>
+        <tr><th>विषय</th><th>सरल मोड (A/B/C)</th><th>विस्तृत मोड (फुल अनलॉक)</th></tr>
+        <tr><td>स्थान विकल्प</td><td>निश्चित विकल्प: गोदाम और/या दुकान</td><td>लोकेशन मास्टर में दर्ज सभी स्थान</td></tr>
+        <tr><td>सेटअप की जटिलता</td><td>सरल</td><td>विस्तृत सेटिंग आवश्यक</td></tr>
+        <tr><td>आवश्यक प्लान</td><td>निःशुल्क संस्करण या उससे ऊपर</td><td>फुल अनलॉक（मोड को “विस्तृत” पर बदलें）</td></tr>
+      </table>
+    </div>
+  </section>
+
+  <section class="chapter" id="howto">
+    <div class="chapter-head"><div class="ch-no">अध्याय 5</div><h2>स्टॉकटेक चरण-दर-चरण (बेसिक अनलॉक)</h2></div>
+    <h3>शुरू करने से सहेजने तक</h3>
+    <ol class="steps">
+      <li><strong>सेटिंग्स → स्टॉकटेक सेटिंग्स</strong> के अंतर्गत पुष्टि करें कि आप कौन सा सरल मोड (A/B/C) उपयोग कर रहे हैं।</li>
+      <li>मुख्य स्क्रीन पर <strong>स्टॉकटेक</strong> टैप करें।</li>
+      <li>बारकोड स्कैन करें या उत्पाद कोड दर्ज करें।</li>
+      <li>उत्पाद नाम पुष्टि करें (कोड पंजीकृत न होने पर दर्ज करें)।</li>
+      <li>जहाँ स्टॉक गिना वह स्थान (गोदाम, दुकान आदि) चुनें।</li>
+      <li>शारीरिक रूप से गिनी मात्रा दर्ज करें।</li>
+      <li>वैकल्पिक मेमो दर्ज करें।</li>
+      <li>प्रविष्टि दर्ज करने के लिए <strong>सहेजें</strong> टैप करें।</li>
+      <li>अगला उत्पाद स्कैन करें और चरण 3–8 दोहराएँ।</li>
+      <li>सभी उत्पाद दर्ज होने के बाद, पूरा स्टॉकटेक इतिहास देखें।</li>
+    </ol>    <div class="box box-danger">
+      <strong>🚨 महत्वपूर्ण</strong>
+      सहेजने से पहले हमेशा मात्रा और स्थान पुष्टि करें। गलत स्थान पर मात्रा दर्ज करने से इन्वेंटरी विसंगतियाँ होंगी।
+    </div>
+  </section>
+
+  <section class="chapter" id="merit">
+    <div class="chapter-head"><div class="ch-no">अध्याय 6</div><h2>बेसिक अनलॉक में क्या बेहतर होता है</h2></div>
+    <h3>स्क्रीन रोटेशन लॉक से कार्यस्थल पर काम आसान होता है</h3>
+    <p>फ़ोन को तिरछा पकड़ने पर भी स्क्रीन अपने-आप नहीं घूमती। बारकोड स्कैन करते हुए मात्रा दर्ज करने जैसे कार्यस्थल के काम में यह उपयोगी है।</p>
+    <h3>1,000-रिकॉर्ड इतिहास दीर्घकालिक स्टॉकटेक का समर्थन करता है</h3>
+    <p>इतिहास की सीमा 30 से बढ़कर 1,000 रिकॉर्ड हो जाती है, इसलिए मासिक स्टॉकटेक रिकॉर्ड भी लंबे समय तक रखे जा सकते हैं।</p>
+    <h3>300 उत्पादों तक का मास्टर मध्यम आकार के कार्य के लिए</h3>
+    <p>30 से 300 उत्पादों तक वाली छोटी या मध्यम आकार की दुकानों और गोदामों में निरंतर उपयोग के लिए उपयुक्त है।</p>
+  </section>
+
+  <section class="chapter" id="cannot">
+    <div class="chapter-head"><div class="ch-no">अध्याय 7</div><h2>बेसिक अनलॉक में अभी भी क्या नहीं किया जा सकता</h2></div>
+    <div class="table-wrap">
+      <table>
+        <tr><th>सुविधा</th><th>आवश्यक प्लान</th></tr>
+        <tr><td>विस्तृत कोड नियम सेटिंग्स</td><td>स्टॉकटेक फुल संस्करण</td></tr>
+        <tr><td>विस्तृत स्थान नियम सेटिंग्स</td><td>स्टॉकटेक फुल संस्करण</td></tr>
+        <tr><td>विस्तृत कैमरा स्कैन सेटिंग</td><td>स्टॉकटेक फुल संस्करण</td></tr>
+        <tr><td>विस्तारित CSV निर्यात</td><td>स्टॉकटेक फुल संस्करण</td></tr>
+        <tr><td>300 से अधिक मास्टर रिकॉर्ड</td><td>स्टॉकटेक फुल संस्करण</td></tr>
+        <tr><td>स्टॉकटेक परिणामों को इन्वेंटरी में लागू करने वाली कार्रवाई</td><td>इन्वेंटरी प्रबंधन की पुष्टि स्क्रीन के अनुसार</td></tr>
+      </table>
+    </div>
+    <div class="box box-hint">
+      <strong>💡 सुझाव</strong>
+      विस्तृत स्थान प्रबंधन की आवश्यकता हो तो फुल अनलॉक में अपग्रेड पर विचार करें।
+    </div>
+  </section>
+
+  <section class="chapter" id="notes">
+    <div class="chapter-head"><div class="ch-no">अध्याय 8</div><h2>महत्वपूर्ण बातें</h2></div>
+    <div class="box box-warn">
+      <strong>⚠ स्टॉकटेक मोड सेटिंग जाँचें</strong>
+      फुल अनलॉक सक्रिय होने पर भी, मोड तब तक सरल A/B/C पर रहता है जब तक आप बदलते नहीं। विस्तृत स्थानों के लिए <strong>विस्तृत</strong> मोड पर स्विच करें।
+    </div>
+    <div class="box box-danger">
+      <strong>🚨 मूल्य निर्धारण और खरीद की शर्तें</strong>
+      वर्तमान मूल्य और धनवापसी की शर्तों के लिए हमेशा Google Play Store जाँचें — यह मैनुअल निश्चित मूल्य नहीं बताता।
+    </div>
+  </section>
+
+  <section class="chapter" id="upgrade">
+    <div class="chapter-head"><div class="ch-no">अध्याय 9</div><h2>निःशुल्क संस्करण से बेसिक अनलॉक में अपग्रेड क्यों करें</h2></div>
+    <div class="table-wrap">
+      <table>
+        <tr><th>विषय</th><th>निःशुल्क संस्करण</th><th>→ बेसिक अनलॉक</th></tr>
+        <tr><td>मास्टर रिकॉर्ड</td><td>30 तक</td><td>300 तक（लगभग 10 गुना）</td></tr>
+        <tr><td>स्टॉकटेक इतिहास</td><td>30 तक</td><td>1,000 तक（30 से अधिक गुना）</td></tr>
+        <tr><td>निर्यात रिकॉर्ड</td><td>30 तक</td><td>300 तक（लगभग 10 गुना）</td></tr>
+        <tr><td>स्क्रीन रोटेशन लॉक</td><td>उपलब्ध नहीं</td><td>उपलब्ध — कार्यस्थल के काम में उपयोगी</td></tr>
+        <tr><td>काम की निरंतरता</td><td>सीमा तक पहुँचने पर काम रुक सकता है</td><td>मध्यम से दीर्घकालिक उपयोग के लिए अधिक उपयुक्त</td></tr>
+      </table>
+    </div>
+    <div class="box box-hint">
+      <strong>💡 इन स्थितियों में बेसिक अनलॉक पर विचार करें</strong>
+      <ul style="margin-top:6px;">
+        <li>30 से अधिक उत्पाद रखते हैं</li>
+        <li>मासिक स्टॉकटेक रिकॉर्ड दीर्घकालिक बनाए रखना चाहते हैं</li>
+        <li>कार्यस्थल पर काम करते समय लॉक स्क्रीन ओरिएंटेशन चाहते हैं</li>
+        <li>300 से कम उत्पाद हैं और स्टॉकटेक जारी रखना चाहते हैं</li>
+      </ul>
+    </div>
+  </section>
+
+  <div class="summary-box" id="summary">
+    <h3>📌 अध्याय के मुख्य बिंदु</h3>
+    <ul>
+      <li>बेसिक अनलॉक की सीमाएँ बढ़ाता है: 300 मास्टर रिकॉर्ड, 1,000 इतिहास रिकॉर्ड, 300 निर्यात रिकॉर्ड तक।</li>
+      <li>स्क्रीन रोटेशन लॉकिंग उपलब्ध होती है, कार्यस्थल पर काम के दौरान आराम बेहतर होता है।</li>
+      <li>स्टॉकटेक मोड सरल A (केवल गोदाम), सरल B (गोदाम + दुकान), या सरल C (केवल दुकान) से चुना जाता है।</li>
+      <li>विस्तृत नियम सेटिंग के लिए फुल अनलॉक आवश्यक है — बेसिक में उपलब्ध नहीं।</li>
+      <li>कार्यप्रवाह निःशुल्क संस्करण जैसा: स्कैन करें → मात्रा दर्ज करें → सहेजें → इतिहास देखें।</li>
+    </ul>
+  </div>
+
+  <div class="confirm-box" id="confirm">
+    <h3>🔍 उपयोग से पहले ध्यान देने योग्य बातें</h3>
+    <ul>
+      <li>स्टॉकटेक परिणामों को इन्वेंटरी में लागू करते समय, इन्वेंटरी प्रबंधन की पुष्टि स्क्रीन और शर्तों को ध्यान से देखें।</li>
+      <li>मास्टर रिकॉर्ड 300 के करीब पहुँचने पर, पहले डेटा निर्यात करें और फुल अनलॉक में अपग्रेड पर विचार करें।</li>
+      <li>CSV निर्यात की कॉलम संरचना के लिए, ऐप में दिखाई गई जानकारी और वास्तविक निर्यात फ़ाइल को प्राथमिकता दें।</li>
+    </ul>
+  </div>
+</div>
+
+<footer>
+  <p>Quantiventra मैनुअल | ③ स्टॉकटेक बेसिक संस्करण</p>
+  <p style="margin-top:4px;">इस मैनुअल की सामग्री बिना पूर्व सूचना के बदली जा सकती है। नवीनतम जानकारी के लिए ऐप में दिखाई गई जानकारी को प्राथमिकता दें।</p>
+  <p style="margin-top:4px;"><a href="privacy_hi.html">गोपनीयता नीति</a></p>
+</footer>
+</body>
+</html>
+
+

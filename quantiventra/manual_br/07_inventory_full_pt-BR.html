@@ -1,0 +1,379 @@
+﻿<!DOCTYPE html>
+
+<html lang="pt-BR">
+<head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Quantiventra – Gestão de Estoque – Versão Completa</title>
+<style>*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;font-size:15px;line-height:1.8;color:#1a2535;background:#f4f7fb;}
+a{color:#1a5fa8;text-decoration:none;}a:hover{text-decoration:underline;}
+.site-nav{background:#1a3a5c;color:#fff;padding:0;}.site-nav .nav-inner{max-width:960px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:stretch;}
+.site-nav a{color:#cde;padding:10px 13px;font-size:12px;display:block;border-right:1px solid #2a4a6c;white-space:nowrap;}
+.site-nav a:hover{background:#2a5090;text-decoration:none;}.site-nav a.active{background:#2a6cbe;color:#fff;font-weight:bold;}
+.page-header{background:linear-gradient(135deg,#1a3a5c 0%,#2a6cbe 100%);color:#fff;padding:40px 20px 30px;}
+.page-header .inner{max-width:960px;margin:0 auto;}.page-header .app-name{font-size:13px;opacity:.8;}
+.page-header h1{font-size:22px;font-weight:700;margin-top:6px;line-height:1.4;}.page-header .subtitle{font-size:14px;opacity:.85;margin-top:8px;}
+.scope-box{background:rgba(255,255,255,.15);border-left:4px solid #7ecfff;padding:12px 16px;margin-top:16px;border-radius:4px;font-size:13px;}
+.container{max-width:960px;margin:0 auto;padding:30px 16px;}
+.toc{background:#fff;border:1px solid #c8d8ec;border-radius:8px;padding:24px 28px;margin-bottom:32px;}
+.toc h2{font-size:16px;font-weight:700;color:#1a3a5c;border-bottom:2px solid #2a6cbe;padding-bottom:8px;margin-bottom:14px;}
+.toc ol{margin-left:18px;}.toc li{margin:5px 0;font-size:14px;}
+.chapter{background:#fff;border-radius:8px;box-shadow:0 1px 4px rgba(0,0,0,.08);padding:28px 28px 24px;margin-bottom:28px;}
+.chapter-head{border-left:5px solid #2a6cbe;padding-left:14px;margin-bottom:20px;}
+.chapter-head .ch-no{font-size:12px;color:#2a6cbe;font-weight:700;}.chapter-head h2{font-size:20px;font-weight:700;color:#1a2535;margin-top:2px;}
+h3{font-size:16px;font-weight:700;color:#1a3a5c;border-bottom:1px solid #dde8f5;padding-bottom:5px;margin:22px 0 12px;}
+h4{font-size:14px;font-weight:700;color:#2a4a6c;margin:16px 0 8px;}
+p{margin-bottom:12px;}ul,ol{margin-left:20px;margin-bottom:12px;}li{margin-bottom:5px;}
+.steps{counter-reset:step;list-style:none;margin-left:0;}
+.steps li{counter-increment:step;padding:9px 12px 9px 46px;position:relative;background:#f8fbff;border:1px solid #dde8f5;border-radius:6px;margin-bottom:6px;}
+.steps li::before{content:counter(step);position:absolute;left:12px;top:50%;transform:translateY(-50%);width:24px;height:24px;background:#2a6cbe;color:#fff;border-radius:50%;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;}
+.table-wrap{overflow-x:auto;margin-bottom:16px;}
+table{width:100%;border-collapse:collapse;font-size:13px;min-width:380px;}
+th{background:#1a3a5c;color:#fff;padding:9px 12px;text-align:left;white-space:nowrap;}
+td{padding:8px 12px;border-bottom:1px solid #dde8f5;vertical-align:top;}tr:nth-child(even) td{background:#f4f7fb;}
+code{font-family:'Courier New',monospace;background:rgba(0,80,160,.08);color:#004080;padding:2px 6px;border-radius:3px;font-size:12px;}
+.box{border-radius:6px;padding:13px 16px;margin:14px 0;font-size:13px;}
+.box-warn{background:#fffbe6;border-left:4px solid #f5a623;color:#7a5700;}
+.box-danger{background:#fff0f0;border-left:4px solid #d43f3f;color:#7a0000;}
+.box-hint{background:#e8f4ff;border-left:4px solid #2a6cbe;color:#0a3060;}
+.box-check{background:#f4eeff;border-left:4px solid #8c4fc8;color:#3a0070;}
+.box strong{display:block;margin-bottom:4px;}
+figure{max-width:280px;width:100%;margin:18px auto;text-align:center;}
+figure img{display:block;width:100%;max-width:280px;height:auto;margin:0 auto;border:1px solid #c8d8ec;border-radius:6px;box-shadow:0 2px 8px rgba(0,0,0,.1);}
+figcaption{font-size:12px;color:#5a7a99;margin-top:6px;}
+.img-pending{display:flex;align-items:center;justify-content:center;max-width:280px;width:100%;box-sizing:border-box;background:#e8eef5;border:2px dashed #99b8d8;border-radius:6px;height:160px;color:#5a7a99;font-size:13px;margin:18px auto;}
+.diff-add{background:#e8fff0;border-left:4px solid #2a9c5c;border-radius:6px;padding:12px 16px;margin:14px 0;font-size:13px;}
+.diff-add strong{display:block;color:#1a6c3c;margin-bottom:4px;}
+.flow-box{background:#f4f7fb;border:1px solid #c8d8ec;border-radius:8px;padding:20px;margin:16px 0;}
+.flow-box h4{color:#1a3a5c;margin-top:0;}
+.flow-arrow{text-align:center;font-size:20px;color:#2a6cbe;margin:4px 0;}
+.flow-step{background:#fff;border:1px solid #c8d8ec;border-radius:6px;padding:10px 16px;margin:4px 0;font-size:13px;}
+.flow-step strong{color:#1a3a5c;}
+.summary-box{background:linear-gradient(135deg,#e8f4ff,#f0f8ff);border:1px solid #99c8ec;border-radius:8px;padding:20px 24px;margin-top:32px;}
+.summary-box h3{border:none;color:#1a3a5c;margin-top:0;}
+.confirm-box{background:#fdf4ff;border:1px solid #c8a0e0;border-radius:8px;padding:20px 24px;margin-top:16px;}
+.confirm-box h3{border:none;color:#5a0090;margin-top:0;}
+.check{color:#2e7d32;font-weight:700;}.cross{color:#c62828;}
+th.pro-col{background:#5a2a8c;}
+.feature-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px;margin:16px 0;}
+.feature-card{background:#f4f7fb;border:1px solid #c8d8ec;border-radius:8px;padding:16px;}
+.feature-card h4{color:#1a3a5c;margin-top:0;margin-bottom:6px;font-size:14px;}
+.feature-card p{font-size:13px;margin:0;color:#3a5a7a;}
+.feature-card.pro-card{background:#f4eeff;border-color:#c8a0e0;}
+.feature-card.pro-card h4{color:#5a2a8c;}
+.trouble{border:1px solid #c8d8ec;border-radius:8px;margin:14px 0;overflow:hidden;}
+.trouble-q{background:#eef6fd;padding:13px 18px;font-weight:700;font-size:14px;color:#1a3a5c;display:flex;align-items:flex-start;gap:10px;}
+.trouble-q::before{content:'Q';background:#2a6cbe;color:#fff;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900;flex-shrink:0;margin-top:1px;}
+.trouble-a{padding:13px 18px 14px 50px;font-size:13.5px;border-top:1px solid #c8d8ec;line-height:1.9;}
+.trouble-a ul{margin-left:16px;}
+.legal-block{background:#f5f5f5;border:1px solid #ddd;border-radius:8px;padding:20px 24px;font-size:12.5px;color:#444;line-height:1.9;margin:14px 0;}
+.legal-block h4{font-size:13px;color:#333;margin:18px 0 6px;border-bottom:1px solid #ddd;padding-bottom:4px;}
+.legal-block h4:first-child{margin-top:0;}
+footer{text-align:center;font-size:12px;color:#8a9aaa;padding:30px 16px;border-top:1px solid #dde8f5;margin-top:20px;}
+@media(max-width:640px){.page-header h1{font-size:18px;}.chapter{padding:20px 16px;}.site-nav a{padding:8px 9px;font-size:11px;}}
+@media print{body{background:#fff;font-size:12px;}.site-nav{display:none;}.chapter{box-shadow:none;border:1px solid #ccc;page-break-inside:avoid;}.page-header{background:#1a3a5c !important;-webkit-print-color-adjust:exact;print-color-adjust:exact;}}
+</style></head>
+<body>
+<nav class="site-nav"><div class="nav-inner">
+<a href="01_top_settings_common_pt-BR.html">① Início / Configurações</a>
+<a href="02_stocktake_free_pt-BR.html">② Inventário físico: gratuito</a>
+<a href="03_stocktake_simple_pt-BR.html">③ Inventário físico: padrão</a>
+<a href="04_stocktake_full_pt-BR.html">④ Inventário físico: completo</a>
+<a href="05_inventory_free_pt-BR.html">⑤ Gestão de estoque: gratuita</a>
+<a href="06_inventory_simple_pt-BR.html">⑥ Gestão de estoque: padrão</a>
+<a class="active" href="07_inventory_full_pt-BR.html">⑦ Gestão de estoque: completa</a>
+</div></nav>
+<header class="page-header"><div class="inner">
+<div class="app-name">Manual do Quantiventra</div>
+<h1>⑦ Gestão de estoque — Versão Completa (Plano Completo)</h1>
+<div class="subtitle">Funcionalidades da versão Completa · Cadastros · Transferência de estoque · Aplicação de inventário · Backup CSV · Fluxos práticos</div>
+<div class="scope-box"><strong>Tópicos abordados:</strong> Novidades do Plano Completo / Diferenças do Padrão / Cadastro de produtos / Cadastro de categorias / Cadastro de localizações / Transferência de estoque / Histórico / Aplicação de inventário ao estoque / Backup e restauração CSV / Backup de histórico / Ponto de reposição / Preço / Exemplos de fluxo / Observações importantes</div>
+</div></header>
+<div class="container">
+<nav class="toc"><h2>Índice</h2><ol>
+<li><a href="#overview">Visão geral da versão Completa (Plano Completo)</a></li>
+<li><a href="#diff">Diferenças em relação à versão Padrão</a></li>
+<li><a href="#master-product">Integração com o Cadastro de produtos</a></li>
+<li><a href="#master-item">Cadastro de categorias</a></li>
+<li><a href="#master-location">Cadastro de localizações</a></li>
+<li><a href="#stock-move">Transferência de estoque</a></li>
+<li><a href="#stock-history">Histórico de estoque</a></li>
+<li><a href="#stocktake-reflect">Aplicação de dados de inventário ao estoque</a></li>
+<li><a href="#csv-backup">Backup e restauração CSV</a></li>
+<li><a href="#csv-history-backup">Backup de histórico</a></li>
+<li><a href="#supplier-code">Dados adicionais do produto</a></li><li><a href="#reorder-price">Ponto de reposição e preço</a></li>
+<li><a href="#usecase">Exemplos de fluxo de trabalho — versão Completa</a></li>
+<li><a href="#notes">Observações importantes</a></li>
+<li><a href="#summary">Pontos-chave do capítulo</a></li>
+<li><a href="#confirm">Notas antes de usar</a></li>
+</ol></nav>
+<section class="chapter" id="overview">
+<div class="chapter-head"><div class="ch-no">CAPÍTULO 1</div><h2>Visão geral da versão Completa (Plano Completo)</h2></div>
+<p>O Plano Completo de Gestão de estoque remove todos os limites de registros de cadastro, entradas de histórico e linhas de exportação, e ativa todas as funcionalidades avançadas não disponíveis na versão Padrão. Os principais acréscimos incluem: gerenciamento de múltiplas localizações (depósito, loja etc.), transferência de estoque entre localizações, aplicação direta dos resultados do inventário ao estoque e backup/restauração completo em CSV.</p>
+<div class="diff-add">
+<strong>Funcionalidades desbloqueadas pelo Plano Completo</strong>
+<ul>
+<li>Registros de cadastro, entradas de histórico e linhas de exportação ilimitados</li><li>Campos de ponto de reposição e preço no Cadastro de produtos</li>
+<li>Campos de ponto de reposição e preço no Cadastro de produtos</li>
+<li>Cadastro de categorias (gerenciamento de classificação de produtos)</li>
+<li>Cadastro e gerenciamento do Cadastro de localizações</li>
+<li>Transferência de estoque (mover quantidades entre localizações)</li>
+<li>Aplicação de dados de inventário ao estoque</li>
+<li>Backup e restauração CSV (planilha de estoque + conjunto completo de CSV de backup)</li>
+<li>Backup de histórico</li>
+<li>Edição direta do total acumulado registrado</li>
+<li>Regras de código, regras de localização e configurações de câmera (configurações compartilhadas da versão Completa)</li>
+<li>Opções CSV expandidas (seleção de colunas e seleção de modo de importação)</li>
+</ul>
+</div>
+<div class="box box-hint"><strong>Observação: "Plano Completo" e "versão Completa" têm o mesmo significado</strong>Neste documento, "Plano Completo" e "versão Completa" são usados de forma intercambiável. Para detalhes de compra, consulte a seção "Visão geral dos planos" em <a href="01_top_settings_common_pt-BR.html">① Início e Configurações</a>.</div>
+</section>
+<section class="chapter" id="diff">
+<div class="chapter-head"><div class="ch-no">CAPÍTULO 2</div><h2>Diferenças em relação à versão Padrão</h2></div>
+<div class="table-wrap"><table>
+<thead><tr><th>Funcionalidade</th><th>Gratuito</th><th>Padrão</th><th>Completo</th></tr></thead>
+<tbody>
+<tr><td>Consulta de estoque</td><td>✓</td><td>✓</td><td>✓</td></tr>
+<tr><td>Entrada / Saída</td><td>✗</td><td>✓</td><td>✓</td></tr>
+<tr><td>Limite de registros de cadastro</td><td>30</td><td>300</td><td>Ilimitado</td></tr>
+<tr><td>Transferência de estoque</td><td>✗</td><td>✗</td><td>✓</td></tr>
+<tr><td>Aplicação de dados de inventário ao estoque</td><td>✗</td><td>✗</td><td>✓</td></tr>
+<tr><td>Cadastro de categorias</td><td>✗</td><td>✗</td><td>✓</td></tr><tr><td>Dados adicionais do produto</td><td>✗</td><td>✗</td><td>✓</td></tr>
+<tr><td>Ponto de reposição e preço</td><td>✗</td><td>✗</td><td>✓</td></tr>
+<tr><td>Backup e restauração CSV</td><td>✗</td><td>Limitado</td><td>✓ (conjunto completo)</td></tr>
+<tr><td>Backup de histórico</td><td>✗</td><td>✗</td><td>✓</td></tr>
+<tr><td>Regras de código e localização</td><td>✗</td><td>✗</td><td>✓ (configurações compartilhadas Completo)</td></tr>
+</tbody>
+</table></div>
+<div class="box box-hint"><strong>Dica</strong>Para as operações principais da versão Padrão — entrada, saída, consulta de estoque, histórico e importação/exportação CSV — consulte <a href="06_inventory_simple_pt-BR.html">⑥ Gestão de estoque: Padrão</a>. Esta página cobre apenas as funcionalidades adicionadas pela versão Completa.</div>
+</section>
+<section class="chapter" id="master-product">
+<div class="chapter-head"><div class="ch-no">CAPÍTULO 3</div><h2>Integração com o Cadastro de produtos</h2></div>
+<p>O Cadastro de produtos é onde você cadastra os produtos reais cujo estoque gerencia. Com o Plano Completo, você pode adicionar ponto de reposição, preço e outros dados de gestão por produto.</p>
+<h3>Campos-chave do Cadastro de produtos</h3>
+<div class="table-wrap"><table>
+<thead><tr><th>Campo</th><th>Descrição</th><th>Adicionado na versão Completa</th></tr></thead>
+<tbody>
+<tr><td>Código do produto / Código de barras</td><td>Identificador único do produto</td><td>—</td></tr>
+<tr><td>Nome do produto</td><td>Nome do produto</td><td>—</td></tr>
+<tr><td>Categoria</td><td>Classificação do produto (selecionada do Cadastro de categorias)</td><td>—</td></tr>
+<tr><td>Preço</td><td>Preço de venda ou custo do produto</td><td>✓</td></tr>
+<tr><td>Ponto de reposição</td><td>Quantidade mínima que aciona o aviso de reabastecimento</td><td>✓</td></tr>
+<tr><td>Dados adicionais</td><td>Campos exibidos no app para complementar a gestão do produto</td><td>✓</td></tr></tbody>
+</table></div><h3>Cadastrar ou editar um produto</h3>
+<ol class="steps">
+<li>Na Tela Inicial, abra <strong>Gerenciamento de cadastros</strong>.</li>
+<li>Selecione <strong>Cadastro de produtos</strong>.</li>
+<li>Toque no cartão de novo item ou no botão <strong>Novo</strong>.</li>
+<li>Insira o código do produto, o nome e a categoria. Opcionalmente, insira preço e ponto de reposição.</li>
+<li>Toque em <strong>Salvar</strong> para cadastrar.</li>
+<li>Para editar um produto existente, abra-o na lista, faça as alterações e toque em <strong>Salvar</strong>.</li>
+</ol>
+<div class="box box-hint"><strong>Cadastrar produto desconhecido pela tela de Entrada</strong>Se você inserir um código de produto não cadastrado na tela de Entrada, o app o leva ao formulário de novo item do Cadastro de produtos. Após salvar o nome, o preço e o ponto de reposição, você retorna à tela de Entrada com os detalhes do produto preenchidos automaticamente.</div>
+<div class="box box-warn"><strong>Atenção: não confunda Produto e Categoria</strong>
+<ul>
+<li><strong>Produto</strong>: item individual em estoque (ex.: Caneta vermelha, Caneta azul)</li>
+<li><strong>Categoria</strong>: grupo de classificação de produtos (ex.: Papelaria, Alimentos)</li>
+</ul>
+      A categoria é selecionada no Cadastro de produtos como classificação do produto. A própria categoria não possui estoque.
+    </div>
+</section>
+<section class="chapter" id="master-item">
+<div class="chapter-head"><div class="ch-no">CAPÍTULO 4</div><h2>Cadastro de categorias</h2></div>
+<p>O Cadastro de categorias gerencia os grupos de classificação usados para organizar os produtos. As categorias ajudam a filtrar e organizar o Cadastro de produtos.</p>
+<div class="table-wrap"><table>
+<tr><th>Campo</th><th>Descrição</th></tr>
+<tr><td>Código de categoria</td><td>Identificador único da categoria</td></tr>
+<tr><td>Nome da categoria</td><td>Nome da classificação (ex.: Alimentos, Vestuário)</td></tr>
+<tr><td>Classificação</td><td>Grupo usado para organizar produtos na lista e no cadastro</td></tr>
+<tr><td>Ordem de exibição</td><td>Ordem de classificação na visualização em lista</td></tr>
+</table></div><h3>Cadastrar uma categoria</h3>
+<ol class="steps">
+<li>Vá em <strong>Gerenciamento de cadastros → Cadastro de categorias</strong>.</li>
+<li>Toque no cartão de novo item ou no botão <strong>Novo</strong>.</li>
+<li>Insira o código, o nome e a ordem de exibição.</li>
+<li>Toque em <strong>Salvar</strong>.</li>
+</ol>
+<div class="box box-hint"><strong>Dica: categorias</strong>Use categorias para agrupar produtos de forma consistente e facilitar a conferência do cadastro.</div>
+</section>
+<section class="chapter" id="master-location">
+<div class="chapter-head"><div class="ch-no">CAPÍTULO 5</div><h2>Cadastro de localizações</h2></div>
+<p>O Cadastro de localizações é onde você cadastra e gerencia os locais físicos de armazenamento do estoque. Cadastrando múltiplas localizações — como depósito, loja ou prateleiras individuais — você pode rastrear o estoque por localização.</p>
+<div class="table-wrap"><table>
+<tr><th>Campo</th><th>Descrição</th></tr>
+<tr><td>Código de localização</td><td>Identificador único da localização</td></tr>
+<tr><td>Nome da localização</td><td>Nome da localização (ex.: Depósito, Loja A)</td></tr>
+<tr><td>Ordem de exibição</td><td>Ordem de classificação na visualização em lista</td></tr>
+<tr><td>Incluir no cálculo de reposição</td><td>Se ativado, o estoque desta localização é incluído no total usado para decisões de reposição na Consulta de estoque</td></tr>
+<tr><td>Ativo / Inativo</td><td>Localizações que não estão mais em uso podem ser desativadas sem excluí-las</td></tr>
+</table></div><div class="box box-hint"><strong>Localizações padrão</strong>O app vem com "Depósito" e "Loja" já cadastradas. Renomeie-as, edite-as ou adicione novas de acordo com suas operações reais.</div>
+<h3>Cadastrar uma localização</h3>
+<ol class="steps">
+<li>Vá em <strong>Gerenciamento de cadastros → Cadastro de localizações</strong>.</li>
+<li>Toque no cartão de novo item ou no botão <strong>Novo</strong>.</li>
+<li>Insira o código, o nome e a ordem de exibição.</li>
+<li>Ative ou desative <strong>Incluir no cálculo de reposição</strong> conforme necessário. Novos itens têm este campo ativado por padrão.</li>
+<li>Toque em <strong>Salvar</strong>.</li>
+</ol>
+<div class="box box-hint"><strong>Sobre a configuração "Incluir no cálculo de reposição"</strong>O cálculo de reposição na Consulta de estoque contabiliza apenas o estoque das localizações com este interruptor ativado. Use o botão <strong>Incluir todas as localizações ativas no cálculo</strong> para ativar todas de uma vez.</div>
+<div class="box box-warn"><strong>Atenção: desativar vs. excluir uma localização</strong>Quando uma localização não for mais necessária, recomenda-se <strong>desativá-la</strong> em vez de excluí-la. Antes de excluir ou sobrescrever registros, exporte um backup e revise o impacto no estoque.</div>
+</section>
+<section class="chapter" id="stock-move">
+<div class="chapter-head"><div class="ch-no">CAPÍTULO 6</div><h2>Transferência de estoque</h2></div>
+<p>A transferência de estoque move uma quantidade específica de estoque de uma localização para outra. Disponível apenas na versão Completa.</p><h3>Como realizar uma transferência de estoque</h3>
+<ol class="steps">
+<li>No menu Gestão de estoque, abra <strong>Transferência de estoque</strong>.</li>
+<li>Selecione a <strong>localização de origem</strong> (de onde o estoque sairá).</li>
+<li>Selecione a <strong>localização de destino</strong> (para onde o estoque irá).</li>
+<li>Encontre o produto desejado lendo o código de barras ou pesquisando pelo nome.</li>
+<li>Insira a quantidade a transferir.</li>
+<li>Revise os detalhes e toque em <strong>Confirmar</strong>.</li>
+</ol>
+<div class="box box-danger"><strong>Importante: nunca transfira entre a mesma localização</strong>Selecionar a mesma localização como origem e destino causará processamento incorreto dos dados de estoque. Sempre selecione duas localizações diferentes.</div>
+<div class="box box-hint"><strong>Com apenas uma localização</strong>Com apenas uma localização cadastrada, a transferência não faz sentido. Use <strong>Entrada</strong>, <strong>Saída</strong> ou <strong>Edição</strong> para ajustar quantidades. A transferência só faz sentido com duas ou mais localizações.</div>
+</section>
+<section class="chapter" id="stock-history">
+<div class="chapter-head"><div class="ch-no">CAPÍTULO 7</div><h2>Histórico de estoque</h2></div>
+<p>O Histórico de estoque fornece um registro completo de cada variação de estoque. Com o Plano Completo, o limite de entradas de histórico é removido, permitindo manter registros de longo prazo.</p>
+<h3>Tipos de operações registradas no histórico</h3>
+<ul>
+<li><strong>Entrada</strong>: Mercadorias recebidas no estoque</li>
+<li><strong>Saída</strong>: Mercadorias expedidas do estoque</li>
+<li><strong>Transferência</strong>: Estoque movido entre localizações</li>
+<li><strong>Ajuste de inventário</strong>: Correção de diferenças ao aplicar resultados do inventário</li>
+<li><strong>Estoque inicial</strong>: Quantidade de abertura definida no cadastro inicial</li>
+<li><strong>Importação CSV</strong>: Estoque atualizado via arquivo CSV</li>
+</ul></section>
+<section class="chapter" id="stocktake-reflect">
+<div class="chapter-head"><div class="ch-no">CAPÍTULO 8</div><h2>Aplicação de dados de inventário ao estoque</h2></div>
+<p>Aplicar os resultados do inventário físico (contagem física) ao módulo de Gestão de estoque alinha o estoque do sistema com o estoque físico nas prateleiras. Disponível apenas na versão Completa.</p>
+<p>Quando os resultados do inventário são aplicados, as eventuais diferenças entre os níveis de estoque teórico e as quantidades contadas são registradas como entradas de <strong>Ajuste de inventário</strong> no histórico, atualizando simultaneamente o estoque para os valores reais e preservando um registro rastreável dos ajustes.</p>
+<div class="box box-check"><strong>Condições de aplicação e revisão</strong>A aplicação deve ser executada somente quando as condições da tela de confirmação estiverem atendidas. Revise as localizações afetadas, os detalhes do ajuste e o CSV de backup antes de prosseguir.</div>
+<div class="box box-danger"><strong>Importante: sempre faça backup antes de aplicar</strong>A aplicação de dados de inventário sobrescreve as quantidades de estoque. Antes de executar esta operação, sempre exporte um CSV de backup. A capacidade de desfazer após a aplicação pode ser limitada.</div>
+</section>
+<section class="chapter" id="csv-backup">
+<div class="chapter-head"><div class="ch-no">CAPÍTULO 9</div><h2>Backup e restauração CSV</h2></div>
+<p>O Plano Completo oferece três tipos de exportação: planilha de estoque CSV, conjunto completo de CSV de backup e backup de histórico. Como as operações de restauração e substituição fazem alterações abrangentes nos dados, verificá-las cuidadosamente antes de prosseguir é essencial.</p>
+<h3>Tipos de CSV e seus usos</h3>
+<div class="table-wrap"><table>
+<thead><tr><th>Tipo de CSV</th><th>Finalidade</th><th>Conteúdo principal</th><th>Disponível em</th><th>Observações</th></tr></thead>
+<tbody>
+<tr><td>Planilha de estoque CSV</td><td>Revisar e reimportar a lista de estoque atual</td><td>Localização, código do produto, nome do produto, quantidade</td><td>Padrão ou superior</td><td>Sem coluna de localização, selecionar localização de destino na importação</td></tr>
+<tr><td>Conjunto completo de CSV de backup</td><td>Backup e restauração do conjunto completo de dados</td><td>Produtos, estoque atual, histórico de entrada/saída/transferência/ajuste, localizações, categorias</td><td>Completo</td><td>Pode ser exportado em múltiplos arquivos</td></tr>
+<tr><td>Backup de histórico</td><td>Backup para revisão posterior das movimentações de estoque</td><td>Planilha de estoque + histórico completo de operações</td><td>Completo</td><td>Revise a tela de importação antes de reimportar o CSV de histórico</td></tr>
+</tbody>
+</table></div><h3>Exportar o conjunto completo de CSV de backup</h3>
+<ol class="steps">
+<li>Na tela Configurações ou no menu principal, abra <strong>Importação/Exportação CSV</strong>.</li>
+<li>Selecione <strong>Conjunto completo de CSV de backup</strong>.</li>
+<li>Selecione a pasta de destino (siga as instruções na tela).</li>
+<li>Toque em <strong>Exportar</strong> e confirme a mensagem de conclusão.</li>
+</ol>
+<h3>Restaurar a partir de um CSV de backup</h3>
+<ol class="steps">
+<li>Vá em <strong>Importação/Exportação CSV → Restaurar</strong> ou <strong>Importar CSV</strong>.</li>
+<li>Selecione o arquivo CSV de backup.</li>
+<li>Confirme o mapeamento de colunas (o app pode detectá-lo automaticamente).</li>
+<li>Leia atentamente a tela de confirmação, depois toque em <strong>Executar</strong>.</li>
+</ol>
+<div class="box box-danger"><strong>Importante: sempre faça backup dos dados atuais antes de restaurar ou substituir</strong>A restauração CSV ou Substituição do estoque atual sobrescreve os dados de estoque existentes. Antes de prosseguir, sempre exporte e salve a planilha de estoque CSV atual.</div>
+<h3>Substituir estoque atual</h3>
+<p>Substituir estoque atual sobrescreve as quantidades de estoque atuais com os valores do CSV importado. O histórico existente é preservado, mas as diferenças são registradas como entradas de histórico de <strong>ajuste</strong>. Linhas de estoque não presentes no CSV podem ser zeradas para 0 — sempre verifique o conteúdo do CSV antes de importar.</p>
+<div class="box box-danger"><strong>Use Substituir estoque atual com extrema cautela</strong>Produtos ou localizações não presentes no CSV podem ter o estoque zerado para 0. Antes de importar, confirme que o CSV contém o conjunto correto de produtos e localizações.</div>
+</section>
+<section class="chapter" id="csv-history-backup">
+<div class="chapter-head"><div class="ch-no">CAPÍTULO 10</div><h2>Backup de histórico</h2></div>
+<p>O backup de histórico exporta em uma única operação tanto a planilha de estoque quanto o registro completo das movimentações — entradas, saídas, transferências, ajustes etc. — útil para auditorias posteriores ou rastreamento de variações de estoque ao longo do tempo.</p>
+<ul>
+<li>Planilha de estoque CSV (quantidades de estoque atuais)</li>
+<li>Histórico completo de operações (entradas, saídas, transferências, ajustes de inventário, importações CSV)</li>
+</ul>
+<div class="box box-check"><strong>Reimportação do CSV de backup de histórico</strong>Antes de reimportar um backup de histórico, confira o arquivo selecionado, o modo de importação e a tela de confirmação do app.</div>
+<div class="box box-hint"><strong>Dica operacional</strong>Executar o backup de histórico regularmente — semanal ou mensalmente — significa que, em caso de problemas, você pode rastrear exatamente como os níveis de estoque mudaram ao longo do tempo e restaurar com mais precisão.</div>
+</section>
+<section class="chapter" id="supplier-code">
+<div class="chapter-head"><div class="ch-no">CAPÍTULO 11</div><h2>Dados adicionais do produto</h2></div>
+<p>O Plano Completo permite usar mais informações do Cadastro de produtos para organizar a gestão de estoque. Use os campos exibidos no app conforme a necessidade da sua operação.</p>
+<h3>Exemplos de uso</h3>
+<ul>
+<li>Registrar informações úteis para identificar e agrupar produtos.</li>
+<li>Consultar produtos com mais facilidade nas telas de estoque.</li>
+<li>Exportar os dados de cadastro em CSV conforme as opções disponíveis no app.</li>
+</ul>
+<div class="box box-hint"><strong>💡 Dica</strong>Mantenha os códigos e nomes consistentes para facilitar a conferência e a exportação de dados.</div>
+</section>
+<section class="chapter" id="reorder-price">
+<div class="chapter-head"><div class="ch-no">CAPÍTULO 12</div><h2>Ponto de reposição e preço</h2></div>
+<h3>Ponto de reposição</h3>
+<p>Definir um ponto de reposição no Cadastro de produtos fornece um valor de referência: quando o estoque cair abaixo deste valor, você pode identificar de relance que o reabastecimento é necessário. É um indicador para gerenciar o momento do reabastecimento.</p>
+<div class="box box-check"><strong>Cálculo de reposição na Consulta de estoque</strong>A Consulta de estoque exibe por padrão os totais por produto. O cálculo de reposição compara o total de estoque combinado de todas as localizações com "Incluir no cálculo de reposição" ativado com o ponto de reposição do produto. Ao visualizar o estoque de uma única localização individualmente, o cálculo de reposição não é exibida ou é considerada inativa.</div>
+<div class="box box-check"><strong>Indicações de reposição</strong>Use a tela de consulta de estoque como referência para ver como os pontos de reposição e os avisos relacionados aparecem com as configurações atuais.</div>
+<h3>Preço</h3>
+<p>É possível registrar um preço para cada produto no Cadastro de produtos. O preço é consultado para calcular o valor total do estoque ou gerar relatórios. Antes de usar valores relacionados a preços em registros operacionais, revise a exibição no app e os CSVs exportados.</p>
+<h3>Combinação com categorias</h3>
+<p>Ao associar produtos a categorias, fica mais fácil organizar o cadastro e revisar listas por tipo de produto.</p>
+<div class="box box-warn"><strong>Atenção</strong>As informações de preço e os cálculos relacionados são recursos do app. Confirme separadamente se são adequados para os registros comerciais da sua operação.</div>
+</section>
+<section class="chapter" id="usecase">
+<div class="chapter-head"><div class="ch-no">CAPÍTULO 13</div><h2>Exemplos de fluxo de trabalho — versão Completa</h2></div>
+<h3>Exemplo 1: Gerenciamento de duas localizações — Depósito e Loja</h3>
+<ol class="steps">
+<li>Cadastre "Depósito" e "Loja A" no Cadastro de localizações.</li>
+<li>Cadastre os produtos no Cadastro de produtos e defina o estoque inicial no Depósito.</li>
+<li>Quando a loja precisar de reabastecimento, use <strong>Transferência de estoque</strong> para mover o estoque do Depósito para a Loja A.</li>
+<li>Após as vendas na loja, registre a redução via <strong>Saída</strong>.</li>
+<li>Periodicamente, realize o inventário físico e use <strong>Aplicar dados de inventário</strong> para alinhar o estoque do sistema com as contagens reais.</li>
+<li>Mensalmente, exporte o <strong>Backup de histórico</strong> e arquive.</li>
+</ol>
+<h3>Exemplo 2: Ciclo de inventário periódico</h3>
+<ol class="steps">
+<li>No fim do mês, insira as contagens reais com o app Inventário físico (versão Completa).</li>
+<li>Confirme os resultados da contagem física.</li>
+<li>Use <strong>Aplicar dados de inventário</strong> para transferir as diferenças ao módulo de estoque.</li>
+<li>Revise as entradas de <strong>Ajuste de inventário</strong> no Histórico de estoque para confirmar as alterações.</li>
+<li>Exporte e salve o conjunto completo de CSV de backup.</li>
+</ol>
+<div class="box box-hint"><strong>Dica: integração com inventário</strong>Para o guia detalhado sobre a versão Completa do inventário físico, consulte <a href="04_stocktake_full_pt-BR.html">④ Inventário físico: versão Completa</a>.</div>
+</section>
+<section class="chapter" id="notes">
+<div class="chapter-head"><div class="ch-no">CAPÍTULO 14</div><h2>Observações importantes</h2></div>
+<div class="box box-danger"><strong>Substituição via CSV do estoque atual</strong>Substituir estoque atual sobrescreve as quantidades de estoque com os valores do CSV. Produtos não presentes no CSV podem ter o estoque zerado para 0. <strong>Antes desta operação, sempre exporte um CSV de backup.</strong></div>
+<div class="box box-danger"><strong>Aplicação de dados de inventário</strong>A aplicação de dados de inventário reescreve as quantidades de estoque. Se uma aplicação concluída pode ser desfeita deve ser confirmado. <strong>Antes desta operação, sempre exporte um CSV de backup.</strong></div>
+<div class="box box-danger"><strong>Exclusão ou sobrescrita de registros de cadastro</strong>Excluir itens do Cadastro de produtos ou do Cadastro de localizações pode afetar os dados de estoque. Quando um registro não for mais necessário, considere <strong>desativá-lo</strong> em vez de excluí-lo e mantenha um CSV de backup antes de alterações de grande impacto.</div>
+<div class="box box-warn"><strong>Transferência de estoque: origem e destino devem ser diferentes</strong>Nunca selecione a mesma localização como origem e destino em uma transferência. Pode causar alterações inesperadas nos dados.</div>
+<div class="box box-hint"><strong>Campo de estoque na tela de Saída</strong>O estoque exibido na tela de Saída é apenas para referência — exibe o nível de estoque atual e não é editável. Salvar a quantidade de saída reduz o estoque da localização selecionada.</div>
+<div class="box box-warn"><strong>Preços e condições de compra</strong>Para preços de compra e condições de venda do Plano Completo, consulte a listagem no Google Play. Este documento não inclui informações de preço.</div>
+<div class="box box-hint">
+<strong>Princípios operacionais</strong>
+<ul>
+<li>Antes de operações que fazem alterações de grande impacto no estoque (substituição, aplicação, exclusão), sempre faça backup.</li>
+<li>Na importação CSV, leia a tela de prévia ou confirmação antes de executar.</li>
+<li>Com apenas uma localização, use Entrada, Saída ou Edição em vez de Transferência de estoque.</li>
+</ul>
+</div>
+</section>
+<div class="summary-box" id="summary">
+<h3>📌 Pontos-chave do capítulo</h3>
+<ul><li>O Plano Completo também permite usar dados adicionais do produto para organizar a gestão de estoque.</li>
+<li>O Plano Completo remove todos os limites de registros e histórico, e ativa ponto de reposição, preço, Cadastro de categorias, gerenciamento de localizações, transferência de estoque, aplicação de inventário e backup CSV.</li>
+<li>Três tipos de cadastros trabalham em conjunto: Cadastro de produtos (itens em estoque), Cadastro de categorias (grupos de classificação) e Cadastro de localizações (locais de armazenamento).</li>
+<li>A transferência de estoque só é válida entre duas localizações diferentes — nunca use a mesma localização como origem e destino.</li>
+<li>A aplicação de dados de inventário sincroniza a contagem física com o estoque do sistema. As diferenças são registradas como entradas de ajuste de inventário no histórico.</li>
+<li>Antes de operações irreversíveis como Substituir estoque atual, Aplicar dados de inventário ou exclusão, sempre faça backup.</li>
+<li>Executar o backup de histórico regularmente (semanal ou mensalmente) reduz o risco de dados irrecuperáveis.</li>
+</ul>
+</div>
+<div class="confirm-box" id="confirm">
+<h3>Notas antes de usar</h3>
+<ul>
+<li>Condições exatas de aplicação de dados de inventário (momento, tratamento de múltiplas localizações, comportamento de desfazer)</li>
+<li>Procedimento e comportamento da restauração de estoque por reimportação do CSV de backup de histórico</li>
+<li>Se alertas ou notificações são acionados quando o estoque cai abaixo do ponto de reposição, e como funcionam</li>
+<li>Configuração de moeda e método de arredondamento para preços</li>
+<li>Se registros do Cadastro de produtos e localizações podem ser excluídos, e se excluídos podem ser restaurados</li>
+<li>Preço de compra e condições de venda do Plano Completo no Google Play</li>
+<li>Antes de confirmar uma transferência de estoque, revise se origem e destino são diferentes e se a quantidade está correta</li>
+</ul>
+</div>
+</div>
+<footer>Manual do Quantiventra · As informações mais recentes devem ser confirmadas nas telas do app.<p style="margin-top:4px;"><a href="privacy_pt-BR.html">Política de Privacidade</a></p></footer>
+</body></html>

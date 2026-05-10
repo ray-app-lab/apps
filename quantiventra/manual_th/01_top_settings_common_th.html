@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="th">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quantiventra – หน้าจอหลัก การตั้งค่า และการดำเนินการทั่วไป</title>
+<style>*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Sarabun','Noto Sans Thai',Thonburi,sans-serif;font-size:15px;line-height:1.9;color:#1a2535;background:#f4f7fb;}
+a{color:#1a5fa8;text-decoration:none;}a:hover{text-decoration:underline;}
+.site-nav{background:#1a3a5c;color:#fff;padding:0;}.site-nav .nav-inner{max-width:960px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:stretch;}
+.site-nav a{color:#cde;padding:10px 13px;font-size:12px;display:block;border-right:1px solid #2a4a6c;white-space:nowrap;}
+.site-nav a:hover{background:#2a5090;text-decoration:none;}.site-nav a.active{background:#2a6cbe;color:#fff;font-weight:bold;}
+.page-header{background:linear-gradient(135deg,#1a3a5c 0%,#2a6cbe 100%);color:#fff;padding:40px 20px 30px;}
+.page-header .inner{max-width:960px;margin:0 auto;}.page-header .app-name{font-size:13px;opacity:.8;}
+.page-header h1{font-size:22px;font-weight:700;margin-top:6px;line-height:1.6;}.page-header .subtitle{font-size:14px;opacity:.85;margin-top:8px;}
+.scope-box{background:rgba(255,255,255,.15);border-left:4px solid #7ecfff;padding:12px 16px;margin-top:16px;border-radius:4px;font-size:13px;}
+.play-section{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.3);border-radius:10px;padding:22px 28px;margin-top:24px;display:flex;align-items:center;gap:28px;flex-wrap:wrap;}
+.play-qr-wrap{flex-shrink:0;text-align:center;}
+.play-qr-frame{width:130px;height:130px;border:3px solid rgba(255,255,255,.7);border-radius:10px;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.95);position:relative;overflow:hidden;}
+.play-qr-frame img{width:100%;height:100%;object-fit:contain;display:block;}
+.play-qr-corner{pointer-events:none;position:absolute;width:16px;height:16px;border-color:#2a6cbe;border-style:solid;border-width:0;}
+.play-qr-corner.tl{top:5px;left:5px;border-top-width:3px;border-left-width:3px;border-radius:3px 0 0 0;}
+.play-qr-corner.tr{top:5px;right:5px;border-top-width:3px;border-right-width:3px;border-radius:0 3px 0 0;}
+.play-qr-corner.bl{bottom:5px;left:5px;border-bottom-width:3px;border-left-width:3px;border-radius:0 0 0 3px;}
+.play-qr-corner.br{bottom:5px;right:5px;border-bottom-width:3px;border-right-width:3px;border-radius:0 0 3px 0;}
+.play-qr-label{font-size:10px;color:rgba(255,255,255,.8);margin-top:6px;letter-spacing:.05em;}
+.play-info h3{font-size:16px;font-weight:700;color:#fff;margin-bottom:4px;}
+.play-info p{font-size:12px;color:rgba(255,255,255,.75);margin-bottom:10px;}
+.play-badge{display:inline-block;text-decoration:none;}
+.play-badge img{display:block;height:44px;width:auto;max-width:180px;}.container{max-width:960px;margin:0 auto;padding:30px 16px;}
+.toc{background:#fff;border:1px solid #c8d8ec;border-radius:8px;padding:24px 28px;margin-bottom:32px;}
+.toc h2{font-size:16px;font-weight:700;color:#1a3a5c;border-bottom:2px solid #2a6cbe;padding-bottom:8px;margin-bottom:14px;}
+.toc ol{margin-left:18px;}.toc li{margin:5px 0;font-size:14px;}
+.chapter{background:#fff;border-radius:8px;box-shadow:0 1px 4px rgba(0,0,0,.08);padding:28px 28px 24px;margin-bottom:28px;}
+.chapter-head{border-left:5px solid #2a6cbe;padding-left:14px;margin-bottom:20px;}
+.chapter-head .ch-no{font-size:12px;color:#2a6cbe;font-weight:700;}.chapter-head h2{font-size:20px;font-weight:700;color:#1a2535;margin-top:2px;}
+h3{font-size:16px;font-weight:700;color:#1a3a5c;border-bottom:1px solid #dde8f5;padding-bottom:5px;margin:22px 0 12px;}
+h4{font-size:14px;font-weight:700;color:#2a4a6c;margin:16px 0 8px;}
+p{margin-bottom:12px;}ul,ol{margin-left:20px;margin-bottom:12px;}li{margin-bottom:5px;}
+.steps{counter-reset:step;list-style:none;margin-left:0;}
+.steps li{counter-increment:step;padding:9px 12px 9px 46px;position:relative;background:#f8fbff;border:1px solid #dde8f5;border-radius:6px;margin-bottom:6px;}
+.steps li::before{content:counter(step);position:absolute;left:12px;top:50%;transform:translateY(-50%);width:24px;height:24px;background:#2a6cbe;color:#fff;border-radius:50%;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;}
+.table-wrap{overflow-x:auto;margin-bottom:16px;}
+table{width:100%;border-collapse:collapse;font-size:13px;min-width:380px;}
+th{background:#1a3a5c;color:#fff;padding:9px 12px;text-align:left;white-space:nowrap;}
+td{padding:8px 12px;border-bottom:1px solid #dde8f5;vertical-align:top;}tr:nth-child(even) td{background:#f4f7fb;}
+code{font-family:'Courier New',monospace;background:rgba(0,80,160,.08);color:#004080;padding:2px 6px;border-radius:3px;font-size:12px;}
+.box{border-radius:6px;padding:13px 16px;margin:14px 0;font-size:13px;}
+.box-warn{background:#fffbe6;border-left:4px solid #f5a623;color:#7a5700;}
+.box-danger{background:#fff0f0;border-left:4px solid #d43f3f;color:#7a0000;}
+.box-hint{background:#e8f4ff;border-left:4px solid #2a6cbe;color:#0a3060;}
+.box-check{background:#f4eeff;border-left:4px solid #8c4fc8;color:#3a0070;}
+.box strong{display:block;margin-bottom:4px;}
+figure{max-width:280px;width:100%;margin:18px auto;text-align:center;}
+figure img{display:block;width:100%;max-width:280px;height:auto;margin:0 auto;border:1px solid #c8d8ec;border-radius:6px;box-shadow:0 2px 8px rgba(0,0,0,.1);}
+figcaption{font-size:12px;color:#5a7a99;margin-top:6px;}
+.img-pending{display:flex;align-items:center;justify-content:center;max-width:280px;width:100%;box-sizing:border-box;background:#e8eef5;border:2px dashed #99b8d8;border-radius:6px;height:160px;color:#5a7a99;font-size:13px;margin:18px auto;}
+.diff-add{background:#e8fff0;border-left:4px solid #2a9c5c;border-radius:6px;padding:12px 16px;margin:14px 0;font-size:13px;}
+.diff-add strong{display:block;color:#1a6c3c;margin-bottom:4px;}
+.flow-box{background:#f4f7fb;border:1px solid #c8d8ec;border-radius:8px;padding:20px;margin:16px 0;}
+.flow-box h4{color:#1a3a5c;margin-top:0;}
+.flow-arrow{text-align:center;font-size:20px;color:#2a6cbe;margin:4px 0;}
+.flow-step{background:#fff;border:1px solid #c8d8ec;border-radius:6px;padding:10px 16px;margin:4px 0;font-size:13px;}
+.flow-step strong{color:#1a3a5c;}
+.summary-box{background:linear-gradient(135deg,#e8f4ff,#f0f8ff);border:1px solid #99c8ec;border-radius:8px;padding:20px 24px;margin-top:32px;}
+.summary-box h3{border:none;color:#1a3a5c;margin-top:0;}
+.confirm-box{background:#fdf4ff;border:1px solid #c8a0e0;border-radius:8px;padding:20px 24px;margin-top:16px;}
+.confirm-box h3{border:none;color:#5a0090;margin-top:0;}
+.check{color:#2e7d32;font-weight:700;}.cross{color:#c62828;}
+th.pro-col{background:#5a2a8c;}
+.feature-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px;margin:16px 0;}
+.feature-card{background:#f4f7fb;border:1px solid #c8d8ec;border-radius:8px;padding:16px;}
+.feature-card h4{color:#1a3a5c;margin-top:0;margin-bottom:6px;font-size:14px;}
+.feature-card p{font-size:13px;margin:0;color:#3a5a7a;}
+.feature-card.pro-card{background:#f4eeff;border-color:#c8a0e0;}
+.feature-card.pro-card h4{color:#5a2a8c;}
+.trouble{border:1px solid #c8d8ec;border-radius:8px;margin:14px 0;overflow:hidden;}
+.trouble-q{background:#eef6fd;padding:13px 18px;font-weight:700;font-size:14px;color:#1a3a5c;display:flex;align-items:flex-start;gap:10px;}
+.trouble-q::before{content:'Q';background:#2a6cbe;color:#fff;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900;flex-shrink:0;margin-top:1px;}
+.trouble-a{padding:13px 18px 14px 50px;font-size:13.5px;border-top:1px solid #c8d8ec;line-height:1.9;}
+.trouble-a ul{margin-left:16px;}
+.legal-block{background:#f5f5f5;border:1px solid #ddd;border-radius:8px;padding:20px 24px;font-size:12.5px;color:#444;line-height:1.9;margin:14px 0;}
+.legal-block h4{font-size:13px;color:#333;margin:18px 0 6px;border-bottom:1px solid #ddd;padding-bottom:4px;}
+.legal-block h4:first-child{margin-top:0;}
+footer{text-align:center;font-size:12px;color:#8a9aaa;padding:30px 16px;border-top:1px solid #dde8f5;margin-top:20px;}
+@media(max-width:640px){.page-header h1{font-size:18px;}.chapter{padding:20px 16px;}.site-nav a{padding:8px 9px;font-size:11px;}}
+@media print{body{background:#fff;font-size:12px;}.site-nav{display:none;}.chapter{box-shadow:none;border:1px solid #ccc;page-break-inside:avoid;}.page-header{background:#1a3a5c !important;-webkit-print-color-adjust:exact;print-color-adjust:exact;}}
+</style></head>
+<body>
+<nav class="site-nav"><div class="nav-inner">
+  <a href="01_top_settings_common_th.html" class="active">① หน้าจอหลัก / การตั้งค่า</a>
+  <a href="02_stocktake_free_th.html">② ตรวจนับ ฟรี</a>
+  <a href="03_stocktake_simple_th.html">③ ตรวจนับ มาตรฐาน</a>
+  <a href="04_stocktake_full_th.html">④ ตรวจนับ ครบวงจร</a>
+  <a href="05_inventory_free_th.html">⑤ สต็อก ฟรี</a>
+  <a href="06_inventory_simple_th.html">⑥ สต็อก มาตรฐาน</a>
+  <a href="07_inventory_full_th.html">⑦ สต็อก ครบวงจร</a>
+</div></nav>
+<header class="page-header"><div class="inner">
+  <div class="app-name">คู่มือ Quantiventra — ฉบับภาษาไทย</div>
+  <h1>① หน้าจอหลัก · การตั้งค่า · การดำเนินการทั่วไป</h1>
+  <div class="subtitle">ภาพรวมแอป ข้อกำหนดระบบ การตั้งค่า สิทธิ์ แผน ข้อมูลตัวอย่าง อภิธานศัพท์ และข้อความทางกฎหมาย</div>
+  <div class="scope-box"><strong>หัวข้อที่ครอบคลุมในหน้านี้:</strong> Quantiventra คืออะไร / ข้อกำหนดระบบและสิทธิ์ / การติดตั้งและการใช้งานครั้งแรก / การจัดเก็บข้อมูล / ความแตกต่างระหว่างการตรวจนับสต็อกและการจัดการสต็อก / คู่มือเริ่มต้น / หน้าจอหลัก / การตั้งค่า / ภาษา / ภาพรวมแผน / ข้อมูลตัวอย่าง / การแก้ไขปัญหา / อภิธานศัพท์ / ข้อกำหนดทางกฎหมาย</div>
+</div></header>
+<div class="container">
+  <nav class="toc"><h2>สารบัญ</h2><ol>
+    <li><a href="#about">Quantiventra คืออะไร?</a></li>
+    <li><a href="#environment">ข้อกำหนดระบบและสิทธิ์</a></li>
+    <li><a href="#install">การติดตั้งและการใช้งานครั้งแรก</a></li>
+    <li><a href="#storage">การจัดเก็บข้อมูล</a></li>
+    <li><a href="#diff">การตรวจนับสต็อกและการจัดการสต็อก</a></li>
+    <li><a href="#start">คู่มือเริ่มต้นสำหรับผู้ใช้ใหม่</a></li>
+    <li><a href="#top-screen">หน้าจอหลัก</a></li>
+    <li><a href="#settings">หน้าจอการตั้งค่า</a></li>
+    <li><a href="#language">การตั้งค่าภาษา</a></li>
+    <li><a href="#billing">ภาพรวมแผน</a></li>
+    <li><a href="#sample">ข้อมูลตัวอย่าง</a></li>
+    <li><a href="#trouble">การแก้ไขปัญหา</a></li>
+    <li><a href="#glossary">อภิธานศัพท์</a></li>
+    <li><a href="#legal">ข้อกำหนดและข้อจำกัดความรับผิด</a></li>
+    <li><a href="#summary">สรุปประเด็นสำคัญของบท</a></li>
+    <li><a href="#confirm">หมายเหตุก่อนใช้งาน</a></li>
+  </ol></nav>
+
+  <section class="chapter" id="about">
+    <div class="chapter-head"><div class="ch-no">บทที่ 1</div><h2>Quantiventra คืออะไร?</h2></div>
+    <p><strong>Quantiventra</strong> มาจากการรวมคำว่า "<em>Quantity</em>" (จำนวน) และ "<em>Inventory</em>" (สินค้าคงคลัง) เป็นแอป Android ที่ทำให้การตรวจนับสต็อกและการจัดการสต็อกง่ายขึ้นด้วยการสแกนบาร์โค้ดผ่านกล้องสมาร์ตโฟน</p>
+    <p>เพียงหันกล้องไปที่บาร์โค้ด ระบบจะรู้จักสินค้าอัตโนมัติ จากนั้นป้อนและบันทึกจำนวน — ขั้นตอนที่ใช้งานง่ายสำหรับการแปลงการตรวจนับบนกระดาษให้เป็นดิจิทัล ผลลัพธ์จัดเก็บเป็นไฟล์ CSV ที่ใช้งานได้ง่ายใน Excel หรือ Google Sheets</p>    <h3>ฟีเจอร์หลัก</h3>
+    <div class="feature-grid">
+      <div class="feature-card"><h4>📦 การนับสต็อก</h4><p>รู้จักสินค้าได้รวดเร็วผ่านการสแกนบาร์โค้ดและบันทึกจำนวนทันที เครื่องคิดเลขในตัวช่วยรวมยอดนับจากหลายตำแหน่งได้ง่าย</p></div>
+      <div class="feature-card"><h4>🗂️ การจัดการทะเบียน</h4><p>ลงทะเบียนสินค้า หมวดหมู่ และตำแหน่งเป็นข้อมูลทะเบียน รองรับการนำเข้าจำนวนมากผ่าน CSV</p></div>
+      <div class="feature-card"><h4>📍 การจัดการตำแหน่ง</h4><p>ลงทะเบียนตำแหน่งจัดเก็บหลายแห่ง เช่น คลังสินค้า ร้านค้า ชั้นวาง และจัดการสต็อกตามตำแหน่ง กำหนดได้ว่าตำแหน่งใดรวมในการประเมินการเติมสต็อก</p></div>
+      <div class="feature-card"><h4>📊 นำเข้า/ส่งออก CSV</h4><p>ส่งออกรายการสต็อก ข้อมูลสำรอง และประวัติเป็น CSV เพื่อเปิด ตรวจสอบ หรือรวบรวมต่อใน Excel หรือ Google Sheets ได้สะดวก</p></div>
+      <div class="feature-card"><h4>🌐 รองรับหลายภาษา</h4><p>รองรับ 12 ภาษา รวมถึงภาษาไทย อังกฤษ ญี่ปุ่น จีน และเกาหลี เมื่อเปิดใช้งานครั้งแรก แอปจะเลือกภาษาที่รองรับตามภาษาหลักของอุปกรณ์</p></div>
+      <div class="feature-card pro-card"><h4>⭐ ฟีเจอร์เวอร์ชันครบวงจร</h4><p>ยกเลิกข้อจำกัดรายการและปลดล็อกการจัดการตำแหน่งแบบละเอียด การโอนย้ายสต็อก การนำผลตรวจนับไปใช้กับสต็อก และอื่นๆ อีกมาก</p></div>
+    </div>
+    <h3>หลักการทำงานของการสแกนกล้อง</h3>
+    <p>เมื่อบาร์โค้ดอยู่ในกรอบนำทาง (ขอบสีน้ำเงินหรือสีเหลือง) ตรงกลางหน้าจอ แอปจะยืนยันอัตโนมัติหลังจากตรวจพบ <strong>โค้ดเดิมต่อเนื่องกัน 3 เฟรม</strong> กลไกการยืนยัน 3 ครั้งนี้ป้องกันการอ่านผิดพลาดพร้อมยังคงความน่าเชื่อถือในการรับรู้</p>
+    <div class="box box-hint"><strong>💡 หากบาร์โค้ดไม่ถูกอ่าน</strong>บาร์โค้ดต้องอยู่ <strong>ภายในกรอบนำทางทั้งหมด</strong> โค้ดที่อยู่นอกกรอบจะไม่ถูกตรวจจับ ปรับตำแหน่งกล้องจนกว่าบาร์โค้ดทั้งหมดจะอยู่ในกรอบ</div>
+  </section>
+
+  <section class="chapter" id="environment">
+    <div class="chapter-head"><div class="ch-no">บทที่ 2</div><h2>ข้อกำหนดระบบและสิทธิ์</h2></div>
+    <div class="table-wrap"><table>
+      <tr><th>รายการ</th><th>ข้อกำหนด</th></tr>
+      <tr><td>ระบบปฏิบัติการ</td><td>Android 8.0 (Oreo / API 26) ขึ้นไป</td></tr>
+      <tr><td>กล้อง</td><td>กล้องที่มีระบบโฟกัสอัตโนมัติ (จำเป็น)</td></tr>
+      <tr><td>พื้นที่จัดเก็บ</td><td>พื้นที่ว่างในหน่วยความจำภายในอย่างน้อย 10 MB (แนะนำ)</td></tr>
+      <tr><td>สิทธิ์ที่จำเป็น</td><td>กล้อง (จำเป็น)</td></tr>
+      <tr><td>อินเทอร์เน็ต</td><td>งานประจำ เช่น ตรวจนับ จัดการสต็อก และบันทึกข้อมูล ทำได้บนอุปกรณ์เป็นหลัก การซื้อ การกู้คืนการซื้อ การเปิด Google Play และลิงก์ภายนอกบางรายการอาจต้องใช้อินเทอร์เน็ต</td></tr>
+      <tr><td>Google Play Services</td><td>จำเป็นสำหรับการซื้อและกู้คืนแผน</td></tr>
+    </table></div>
+    <div class="box box-hint"><strong>💡 สิทธิ์จัดเก็บข้อมูล</strong>แอปจัดเก็บข้อมูลใน <strong>พื้นที่จัดเก็บส่วนตัวของแอป</strong> ใน Android ไม่จำเป็นต้องมีสิทธิ์จัดเก็บข้อมูล การแลกเปลี่ยนข้อมูลทำผ่านฟังก์ชันนำเข้า ส่งออก และแชร์ของแอป</div>
+  </section>
+
+  <section class="chapter" id="install">
+    <div class="chapter-head"><div class="ch-no">บทที่ 3</div><h2>การติดตั้งและการใช้งานครั้งแรก</h2></div>
+    <ol class="steps">
+      <li>ค้นหา "Quantiventra" ใน Google Play Store แล้วแตะ <strong>ติดตั้ง</strong></li>
+      <li>เปิดแอปโดยแตะไอคอน เมื่อขออนุญาตกล้อง แตะ <strong>อนุญาต</strong></li>
+      <li>หากมีการแจ้งเตือนข้อมูลตัวอย่าง เลือก <strong>สร้าง</strong> หรือ <strong>ข้าม</strong></li>
+      <li>โฟลเดอร์ข้อมูลแอปถูกสร้างอัตโนมัติในหน่วยความจำภายใน</li>
+      <li>เมื่อหน้าจอหลักปรากฏ การตั้งค่าเริ่มต้นเสร็จสมบูรณ์</li>
+    </ol>
+    <div class="box box-warn"><strong>⚠ หากปฏิเสธสิทธิ์กล้อง</strong>การสแกนบาร์โค้ดจะไม่สามารถใช้งานได้ เปิดใช้ใหม่ได้ที่: <strong>การตั้งค่า → แอป → Quantiventra → สิทธิ์ → กล้อง → เปิดใช้</strong></div>
+    <h3>หลังเปลี่ยนอุปกรณ์</h3>
+    <ol class="steps">
+      <li>บนอุปกรณ์เดิม ให้ส่งออกหรือแชร์ข้อมูลจาก <strong>การตั้งค่า → ส่งออก</strong> หรือ <strong>การตั้งค่า → แชร์</strong></li>
+      <li>ลงชื่อเข้าใช้อุปกรณ์ใหม่ด้วยบัญชี Google เดิมที่ใช้ซื้อแผน</li>
+      <li>ติดตั้ง Quantiventra จาก Google Play</li>
+      <li>แตะ <strong>การตั้งค่า → กู้คืนการซื้อ</strong> เพื่อกู้คืนแผนที่ซื้อไว้</li>
+      <li>นำเข้าไฟล์ CSV ทะเบียนที่สำรองไว้ผ่าน <strong>การตั้งค่า → นำเข้า CSV ทะเบียน</strong></li>
+    </ol>
+    <div class="box box-danger"><strong>🚨 ระวังการถอนการติดตั้ง</strong>การถอนการติดตั้งแอปจะลบข้อมูลทั้งหมดในหน่วยความจำภายใน สร้างนิสัยสำรองข้อมูลเป็นประจำผ่าน <strong>ส่งออก</strong> หรือ <strong>แชร์</strong></div>
+  </section>
+
+  <section class="chapter" id="storage">
+    <div class="chapter-head"><div class="ch-no">บทที่ 4</div><h2>การจัดเก็บข้อมูล</h2></div>
+    <p>ข้อมูลแอปถูกจัดเก็บในพื้นที่ส่วนตัวของแอปบนอุปกรณ์ ไม่ควรแก้ไขโดยตรงผ่านตัวจัดการไฟล์ ใช้ฟังก์ชันแชร์และส่งออกของแอปเพื่อเข้าถึงหรือสำรองข้อมูล</p>
+    <div class="table-wrap"><table>
+      <tr><th>หมวดหมู่</th><th>เนื้อหา</th><th>เวลาที่อัปเดต</th></tr>
+      <tr><td>ข้อมูลทะเบียน</td><td>ข้อมูลหลักของสินค้า หมวดหมู่ ตำแหน่ง ฯลฯ</td><td>เมื่อเพิ่ม แก้ไข หรือปิดการใช้งานรายการ</td></tr>
+      <tr><td>ประวัติตรวจนับและสต็อก</td><td>บันทึกการตรวจนับ รับเข้า จ่ายออก โอนย้าย นำเข้า CSV ฯลฯ</td><td>เมื่อบันทึกหรือนำเข้ารายการ</td></tr>
+      <tr><td>การตั้งค่าแอป</td><td>ภาษา การสแกน กฎโค้ด การตั้งค่าตำแหน่ง ฯลฯ</td><td>เมื่อเปลี่ยนการตั้งค่า</td></tr>
+    </table></div>
+    <h3>วิธีเปิดไฟล์ CSV ใน Excel</h3>
+    <p>ไฟล์ CSV จะถูกบันทึกโดยใช้ UTF-8 หากต้องการเปิดใน Excel แนะนำให้นำเข้าผ่านเมนูข้อมูลแทนการดับเบิลคลิกเปิดไฟล์โดยตรง</p>
+    <ol class="steps">
+      <li>เปิด Excel แล้วเลือก <strong>ข้อมูล → จากข้อความ/CSV</strong></li>
+      <li>เลือกไฟล์ CSV ที่ส่งออกจาก Quantiventra</li>
+      <li>เลือกการเข้ารหัสเป็น <strong>Unicode (UTF-8)</strong></li>
+      <li>ตรวจสอบตัวอย่างข้อมูล แล้วกด <strong>โหลด</strong></li>
+    </ol>
+    <div class="box box-warn"><strong>⚠ อย่าเปิด CSV ด้วยการดับเบิลคลิกหากตัวอักษรเพี้ยน</strong>การเปิดโดยตรงอาจทำให้ตัวอักษรไทยหรือภาษาต่างประเทศแสดงผิดพลาด ควรนำเข้าผ่านเมนูข้อมูลของ Excel</div>
+    <h3>ขั้นตอนการสำรองข้อมูลที่แนะนำ</h3>
+    <ol class="steps">
+      <li>แตะ <strong>การตั้งค่า → ส่งออก (เลือกโฟลเดอร์)</strong></li>
+      <li>สร้างและเลือกโฟลเดอร์สำรองในโฟลเดอร์เอกสารของอุปกรณ์ เช่น <code>Quantiventra_backup_20250401</code></li>
+      <li>การสำรองเสร็จสมบูรณ์เมื่อบันทึกไฟล์ CSV ประวัติและข้อมูลทะเบียนแล้ว</li>
+      <li>เพื่อความปลอดภัยยิ่งขึ้น คัดลอกไฟล์ไปยัง PC ผ่าน Google Drive หรือสาย USB</li>
+    </ol>
+  </section>
+
+  <section class="chapter" id="diff">
+    <div class="chapter-head"><div class="ch-no">บทที่ 5</div><h2>การตรวจนับสต็อกและการจัดการสต็อก</h2></div>
+    <div class="table-wrap"><table>
+      <tr><th>รายการ</th><th>การตรวจนับสต็อก</th><th>การจัดการสต็อก</th></tr>
+      <tr><td>วัตถุประสงค์</td><td>นับและบันทึกจำนวนจริง</td><td>ติดตามการเปลี่ยนแปลงสต็อกผ่านการรับเข้า จ่ายออก และโอนย้าย</td></tr>
+      <tr><td>ขั้นตอนการทำงาน</td><td>สแกน → ป้อนจำนวน → บันทึก → ยืนยัน</td><td>รับเข้า/จ่ายออก/โอนย้าย → บันทึก → ดูประวัติ</td></tr>
+      <tr><td>การใช้งานทั่วไป</td><td>ตรวจนับรายเดือน ปลายปี หรือตรวจสอบเฉพาะกิจ</td><td>จัดการรับเข้า จ่ายออก โอนย้ายประจำวัน</td></tr>
+      <tr><td>ผลกระทบต่อสต็อก</td><td>ใช้กับสต็อกหลังยืนยัน (เวอร์ชันครบวงจร)</td><td>สะท้อนทันทีทุกการดำเนินการ</td></tr>
+      <tr><td>หน้าจอที่เกี่ยวข้อง</td><td>หน้าจอตรวจนับสต็อก และประวัติการตรวจนับ</td><td>ตรวจสอบสต็อก รับเข้า จ่ายออก โอนย้าย และประวัติสต็อก</td></tr>
+    </table></div>
+    <div class="box box-warn"><strong>⚠ ข้อควรระวัง</strong>การตรวจนับสต็อกและการจัดการสต็อกเป็นโมดูลที่แยกจากกัน การป้อนจำนวนในการตรวจนับ <strong>ไม่</strong>เปลี่ยนสต็อก เว้นแต่จะเรียกใช้การดำเนินการ "นำไปใช้กับสต็อก" (ฟีเจอร์เวอร์ชันครบวงจร) ไม่ควรสับสนระหว่างสองโมดูล</div>
+  </section>
+
+  <section class="chapter" id="start">
+    <div class="chapter-head"><div class="ch-no">บทที่ 6</div><h2>คู่มือเริ่มต้นสำหรับผู้ใช้ใหม่</h2></div>
+    <h3>ขั้นตอนที่ 1: ฝึกกับข้อมูลตัวอย่าง</h3>
+    <ol class="steps">
+      <li>เปิดแอป หากมีการแจ้งเตือนข้อมูลตัวอย่าง เลือก <strong>สร้าง</strong></li>
+      <li>จากหน้าหลัก เปิด <strong>การจัดการสต็อก</strong> และตรวจสอบระดับสต็อกตัวอย่าง</li>
+      <li>เปิด <strong>การตรวจนับสต็อก</strong> และลองสแกนบาร์โค้ดพร้อมป้อนจำนวน</li>
+      <li>ลองส่งออกไฟล์ CSV</li>
+      <li>ก่อนเริ่มการดำเนินงานจริง ลบข้อมูลตัวอย่าง (จากหน้าการตั้งค่า)</li>
+    </ol>
+    <h3>ขั้นตอนที่ 2: ลงทะเบียนสินค้าในทะเบียน</h3>
+    <ol class="steps">
+      <li>จากหน้าหลัก เปิด <strong>การจัดการทะเบียน</strong></li>
+      <li>ไปที่ <strong>ทะเบียนสินค้า</strong> สร้างรายการใหม่ และป้อนรหัสและชื่อสินค้า</li>
+      <li>ตั้งหมวดหมู่ ราคา และเกณฑ์เติมสต็อกตามต้องการ</li>
+      <li>ลงทะเบียนคลังสินค้า ร้านค้า ฯลฯ ใน <strong>ทะเบียนตำแหน่ง</strong> (แนะนำสำหรับเวอร์ชันมาตรฐานขึ้นไป)</li>
+    </ol>
+    <div class="box box-hint"><strong>💡 เคล็ดลับ</strong>แนะนำให้ทำความคุ้นเคยกับข้อมูลตัวอย่างก่อนป้อนข้อมูลสินค้าจริง</div>
+  </section>
+
+  <section class="chapter" id="top-screen">
+    <div class="chapter-head"><div class="ch-no">บทที่ 7</div><h2>หน้าจอหลัก</h2></div>
+    <div class="table-wrap"><table>
+      <tr><th>จุดเข้าถึง</th><th>คำอธิบาย</th></tr>
+      <tr><td>การตรวจนับสต็อก</td><td>เปิดหน้าจอตรวจนับเพื่อสแกนสินค้าและบันทึกจำนวนจริง</td></tr>
+      <tr><td>การจัดการสต็อก</td><td>เข้าถึงการตรวจสอบสต็อก รับเข้า จ่ายออก โอนย้าย และประวัติสต็อก</td></tr>
+      <tr><td>การจัดการทะเบียน</td><td>จัดการข้อมูลทะเบียนสินค้า หมวดหมู่ และตำแหน่ง</td></tr>
+      <tr><td>การตั้งค่า</td><td>ภาษา การตั้งค่าตรวจนับ CSV ข้อมูลตัวอย่าง การซื้อแผน เอกสารทางกฎหมาย ฯลฯ</td></tr>
+      <tr><td>ช่วยเหลือ</td><td>เปิดคู่มือหรือหน้าช่วยเหลือสำหรับตรวจสอบวิธีใช้งาน</td></tr>
+    </table></div>
+    <div class="box box-warn"><strong>⚠ ข้อควรระวัง</strong>การดำเนินการจัดการสต็อกขณะมีข้อมูลตรวจนับที่ยังไม่ได้ยืนยันอาจทำให้เกิดความไม่สอดคล้อง แนะนำให้ทำการตรวจนับให้เสร็จสิ้นก่อนเปลี่ยนแปลงสต็อก</div>
+  </section>
+
+  <section class="chapter" id="settings">
+    <div class="chapter-head"><div class="ch-no">บทที่ 8</div><h2>หน้าจอการตั้งค่า</h2></div>    <h3>การนำเข้า/ส่งออกข้อมูล</h3>
+    <div class="table-wrap"><table>
+      <tr><th>การดำเนินการ</th><th>คำอธิบาย</th><th>ใช้ได้ใน</th></tr>
+      <tr><td>นำเข้า CSV ทะเบียน</td><td>โหลดไฟล์ CSV ภายนอกเป็นข้อมูลทะเบียน (ทับข้อมูลที่มีอยู่)</td><td>ทุกแผน</td></tr>
+      <tr><td>แชร์ (อีเมล ฯลฯ)</td><td>ส่ง CSV ประวัติและทะเบียนไปยังแอปอื่น</td><td>ทุกแผน</td></tr>
+      <tr><td>ส่งออก (เลือกโฟลเดอร์)</td><td>บันทึก CSV ประวัติและทะเบียนไปยังโฟลเดอร์ที่เลือก</td><td>ทุกแผน</td></tr>
+      <tr><td>ล้างประวัติทั้งหมด</td><td>ลบและรีเซ็ตประวัติการสแกนทั้งหมด</td><td>ทุกแผน (ยกเลิกไม่ได้)</td></tr>
+      <tr><td>รีเซ็ตยอดรวมทะเบียน</td><td>รีเซ็ตยอดรวมสะสมที่ลงทะเบียนไว้ทั้งหมดเป็น 0</td><td>ปลดล็อกครบวงจร (ยกเลิกไม่ได้)</td></tr>
+    </table></div>
+    <h3>การตั้งค่าทั่วไป</h3>
+    <div class="table-wrap"><table>
+      <tr><th>การตั้งค่า</th><th>คำอธิบาย</th><th>ใช้ได้ใน</th></tr>
+      <tr><td>ภาษาแสดงผล</td><td>เลือกภาษาที่แสดงในแอป</td><td>ทุกแผน บางภาษาต้องปลดล็อก</td></tr>
+      <tr><td>ล็อคการหมุนหน้าจอ</td><td>คงแนวหน้าจอไว้ แม้จะเอียงอุปกรณ์ระหว่างทำงาน</td><td>แผนมาตรฐานขึ้นไป</td></tr>
+      <tr><td>สร้างข้อมูลตัวอย่าง</td><td>สร้างข้อมูลฝึกหัดสำหรับลองใช้งานก่อนเริ่มงานจริง</td><td>ทุกแผน</td></tr>
+      <tr><td>ลบข้อมูลตัวอย่าง</td><td>ลบข้อมูลตัวอย่างเป็นชุด</td><td>ทุกแผน</td></tr>
+      <tr><td>กู้คืนการซื้อ</td><td>กู้คืนแผนที่เคยซื้อผ่าน Google Play</td><td>ทุกแผน</td></tr>
+      <tr><td>เอกสารทางกฎหมาย</td><td>เปิดข้อกำหนดการใช้งาน นโยบายความเป็นส่วนตัว และเอกสารที่เกี่ยวข้อง</td><td>ทุกแผน</td></tr>
+    </table></div>
+    <h3>โหมดการตรวจนับ</h3>
+    <div class="table-wrap"><table>
+      <tr><th>โหมด</th><th>คำอธิบาย</th><th>ตำแหน่งที่ใช้ได้</th></tr>
+      <tr><td>แบบละเอียด</td><td>ใช้ตำแหน่งทั้งหมดที่ลงทะเบียนในทะเบียนตำแหน่ง</td><td>ทุกตำแหน่งที่ลงทะเบียน</td></tr>
+      <tr><td>แบบง่าย A</td><td>ตรวจนับเฉพาะคลังสินค้า</td><td>คลังสินค้าเท่านั้น</td></tr>
+      <tr><td>แบบง่าย B</td><td>ตรวจนับทั้งคลังสินค้าและร้านค้า</td><td>คลังสินค้า + ร้านค้า</td></tr>
+      <tr><td>แบบง่าย C</td><td>ตรวจนับเฉพาะร้านค้า</td><td>ร้านค้าเท่านั้น</td></tr>
+    </table></div>
+    <div class="box box-warn"><strong>⚠ ข้อควรระวัง</strong>แม้จะเปิดใช้งานปลดล็อกครบวงจรแล้ว หากโหมดยังเป็นแบบง่าย A/B/C จะเห็นเฉพาะตัวเลือกตำแหน่งแบบง่าย เปลี่ยนเป็นโหมด <strong>แบบละเอียด</strong> เพื่อใช้ตำแหน่งแบบละเอียด</div>
+    <h3>การตั้งค่าการอ่านด้วยกล้อง (ปลดล็อกครบวงจร)</h3>
+    <p>ตั้งค่าประเภทโค้ดที่ใช้สแกนสำหรับสินค้าและตำแหน่งได้ การปิดประเภทโค้ดที่ไม่ได้ใช้ช่วยลดโอกาสอ่านผิดในหน้างาน</p>
+    <div class="table-wrap"><table>
+      <tr><th>ประเภท</th><th>ค่าเริ่มต้นสำหรับสินค้า</th><th>ค่าเริ่มต้นสำหรับตำแหน่ง</th><th>ตัวอย่างการใช้งาน</th></tr>
+      <tr><td>CODE39</td><td><span class="check">✓ เปิด</span></td><td><span class="check">✓ เปิด</span></td><td>ชิ้นส่วนอุตสาหกรรม รหัสภายใน</td></tr>
+      <tr><td>CODE128</td><td><span class="check">✓ เปิด</span></td><td><span class="check">✓ เปิด</span></td><td>รหัสโลจิสติกส์</td></tr>
+      <tr><td>EAN13</td><td><span class="check">✓ เปิด</span></td><td><span class="check">✓ เปิด</span></td><td>สินค้าทั่วไปในร้านค้า</td></tr>
+      <tr><td>QRCODE</td><td><span class="check">✓ เปิด</span></td><td><span class="check">✓ เปิด</span></td><td>คิวอาร์โค้ดของสินค้าและตำแหน่ง</td></tr>
+    </table></div>
+    <h3>กฎโค้ด / กฎตำแหน่ง (ปลดล็อกครบวงจร)</h3>
+    <p>กำหนดชนิดอักขระ ความยาวขั้นต่ำและสูงสุดของรหัสภายใน รวมถึงความยาวสูงสุดของรหัสตำแหน่งได้ ใช้เมื่อองค์กรมีรูปแบบรหัสสินค้า หรือรหัสตำแหน่งของตนเอง</p>
+    <h3>การกู้คืนการซื้อ</h3>
+    <p>ใช้สำหรับกู้คืนแผนที่เคยซื้อผ่าน Google Play หากฟีเจอร์ที่ซื้อไว้ไม่แสดงผล ให้ตรวจสอบว่าลงชื่อเข้าใช้ด้วยบัญชี Google เดิมและมีการเชื่อมต่ออินเทอร์เน็ตก่อนลองอีกครั้ง</p>
+    <div class="box box-danger"><strong>🚨 ล้างประวัติ/รีเซ็ตยอดรวมไม่สามารถยกเลิกได้</strong>"ล้างประวัติทั้งหมด" และ "รีเซ็ตยอดรวมทะเบียน" ไม่สามารถย้อนกลับได้ ก่อนดำเนินการ สำรองข้อมูลผ่าน <strong>ส่งออก</strong> เสมอ</div>
+  </section>
+
+  <section class="chapter" id="language">
+    <div class="chapter-head"><div class="ch-no">บทที่ 9</div><h2>การตั้งค่าภาษา</h2></div>
+    <p>เลือกภาษาแสดงผลของแอปได้ที่ <strong>การตั้งค่า → ภาษา</strong> เมื่อใช้งานครั้งแรก แอปอาจเลือกภาษาที่รองรับตามภาษาหลักของอุปกรณ์โดยอัตโนมัติ หลังจากผู้ใช้เลือกภาษาในแอปแล้ว การตั้งค่านั้นจะถูกใช้เป็นหลัก</p>
+    <h3>ภาษาที่รองรับ (12 ภาษา)</h3>
+    <div class="table-wrap"><table>
+      <thead><tr><th>รหัส</th><th>ภาษา</th><th>ฟรี</th><th class="pro-col">ปลดล็อกทุกภาษา</th></tr></thead>
+      <tbody>
+        <tr><td><code>ja</code></td><td>ญี่ปุ่น</td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
+        <tr><td><code>en</code></td><td>อังกฤษ</td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
+        <tr><td><code>zh</code></td><td>จีนตัวย่อ</td><td>เฉพาะเมื่อเป็นภาษาหลักของอุปกรณ์</td><td><span class="check">✓</span></td></tr>
+        <tr><td><code>tw</code></td><td>จีนตัวเต็ม</td><td>เฉพาะเมื่อเป็นภาษาหลักของอุปกรณ์</td><td><span class="check">✓</span></td></tr>
+        <tr><td><code>ko</code></td><td>เกาหลี</td><td>เฉพาะเมื่อเป็นภาษาหลักของอุปกรณ์</td><td><span class="check">✓</span></td></tr>
+        <tr><td><code>hi</code></td><td>ฮินดี</td><td>เฉพาะเมื่อเป็นภาษาหลักของอุปกรณ์</td><td><span class="check">✓</span></td></tr>
+        <tr><td><code>vi</code></td><td>เวียดนาม</td><td>เฉพาะเมื่อเป็นภาษาหลักของอุปกรณ์</td><td><span class="check">✓</span></td></tr>
+        <tr><td><code>it</code></td><td>อิตาลี</td><td>เฉพาะเมื่อเป็นภาษาหลักของอุปกรณ์</td><td><span class="check">✓</span></td></tr>
+        <tr><td><code>pt-BR</code></td><td>โปรตุเกส (บราซิล)</td><td>เฉพาะเมื่อเป็นภาษาหลักของอุปกรณ์</td><td><span class="check">✓</span></td></tr>
+        <tr><td><code>es-419</code></td><td>สเปน (ละตินอเมริกา)</td><td>เฉพาะเมื่อเป็นภาษาหลักของอุปกรณ์</td><td><span class="check">✓</span></td></tr>
+        <tr><td><code>id</code></td><td>อินโดนีเซีย</td><td>เฉพาะเมื่อเป็นภาษาหลักของอุปกรณ์</td><td><span class="check">✓</span></td></tr>
+        <tr><td><code>th</code></td><td>ไทย</td><td>เฉพาะเมื่อเป็นภาษาหลักของอุปกรณ์</td><td><span class="check">✓</span></td></tr>
+      </tbody>
+    </table></div>
+    <div class="box box-hint"><strong>💡 เกี่ยวกับการเลือกภาษาอัตโนมัติ</strong>หากภาษาหลักของอุปกรณ์อยู่ในกลุ่มภาษาที่รองรับ แอปอาจเริ่มต้นด้วยภาษานั้นโดยอัตโนมัติ หลังจากเลือกภาษาในแอปแล้ว การตั้งค่าภาษาที่เลือกไว้จะถูกใช้เป็นหลัก</div>
+  </section>
+
+  <section class="chapter" id="billing">
+    <div class="chapter-head"><div class="ch-no">บทที่ 10</div><h2>ภาพรวมแผน</h2></div>
+    <div class="box box-danger"><strong>🚨 สำคัญ</strong>ราคา ภาษี เงื่อนไขการซื้อ และเงื่อนไขการคืนเงินถูกกำหนดโดยเนื้อหาที่แสดงบน Google Play — คู่มือนี้ไม่ระบุตัวเลขที่แน่นอน ตรวจสอบรายการ Google Play ก่อนซื้อเสมอ</div>
+    <h3>การเปรียบเทียบฟีเจอร์</h3>
+    <div class="table-wrap"><table>
+      <thead><tr><th>ฟีเจอร์ / ข้อจำกัด</th><th>ฟรี</th><th>ตรวจนับมาตรฐาน</th><th>ตรวจนับครบวงจร</th><th>สต็อกมาตรฐาน</th><th>สต็อกครบวงจร</th></tr></thead>
+      <tbody>
+        <tr><td>รายการทะเบียน</td><td>สูงสุด 30</td><td>สูงสุด 300</td><td><span class="check">ไม่จำกัด</span></td><td>สูงสุด 300</td><td><span class="check">ไม่จำกัด</span></td></tr>
+        <tr><td>รายการประวัติ</td><td>สูงสุด 30</td><td>สูงสุด 1,000</td><td><span class="check">ไม่จำกัด</span></td><td>สูงสุด 1,000</td><td><span class="check">ไม่จำกัด</span></td></tr>
+        <tr><td>รายการที่ส่งออก</td><td>สูงสุด 30</td><td>สูงสุด 300</td><td><span class="check">ไม่จำกัด</span></td><td>สูงสุด 300</td><td><span class="check">ไม่จำกัด</span></td></tr>
+        <tr><td>ล็อคการหมุนหน้าจอ</td><td><span class="cross">✗</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
+        <tr><td>กฎโค้ด/ตำแหน่งแบบละเอียด</td><td><span class="cross">✗</span></td><td><span class="cross">✗</span></td><td><span class="check">✓</span></td><td><span class="cross">✗</span></td><td><span class="check">✓</span></td></tr>
+        <tr><td>ส่งออก CSV แบบขยาย</td><td><span class="cross">✗</span></td><td><span class="cross">✗</span></td><td><span class="check">✓</span></td><td><span class="cross">✗</span></td><td><span class="check">✓</span></td></tr>
+        <tr><td>โอนย้ายสต็อกและนำตรวจนับไปใช้</td><td><span class="cross">✗</span></td><td><span class="cross">✗</span></td><td><span class="cross">✗</span></td><td><span class="cross">✗</span></td><td><span class="check">✓</span></td></tr>
+        <tr><td>ครบ 12 ภาษา</td><td><span class="cross">✗</span></td><td colspan="4">ซื้อปลดล็อกทุกภาษาแยกต่างหาก</td></tr>
+      </tbody>
+    </table></div>
+    <h3>แพ็กเกจและการปลดล็อกทุกภาษา</h3>
+    <div class="table-wrap"><table>
+      <tr><th>แผน</th><th>เนื้อหา</th></tr>
+      <tr><td>แพ็กเกจมาตรฐาน</td><td>ตรวจนับมาตรฐาน + สต็อกมาตรฐาน</td></tr>
+      <tr><td>แพ็กเกจครบวงจร</td><td>ตรวจนับครบวงจร + สต็อกครบวงจร</td></tr>
+      <tr><td>ปลดล็อกทุกภาษา</td><td>เปิดใช้ภาษาแสดงผลทั้งหมดที่รองรับ นอกเหนือจากภาษาพื้นฐาน</td></tr>
+    </table></div>
+    <h3>วิธีซื้อแผน</h3>
+    <ol class="steps">
+      <li>แตะ <strong>การตั้งค่า → แผน</strong> หรือปุ่มซื้อในแอป</li>
+      <li>หน้าจอการซื้อของ Google Play จะเปิดขึ้น</li>
+      <li>ตรวจสอบราคาและเงื่อนไขบน Google Play แล้วดำเนินการชำระเงิน</li>
+      <li>เมื่อการซื้อเสร็จสมบูรณ์ แผนจะถูกเปิดใช้งานในแอป</li>
+    </ol>
+    <h3>กู้คืนการซื้อหลังเปลี่ยนอุปกรณ์</h3>
+    <ol class="steps">
+      <li>ลงชื่อเข้าใช้อุปกรณ์ใหม่ด้วยบัญชี Google เดิม</li>
+      <li>ติดตั้งและเปิดแอป</li>
+      <li>แตะ <strong>การตั้งค่า → กู้คืนการซื้อ</strong></li>
+      <li>เมื่อ Google Play ยืนยันการซื้อแล้ว ฟีเจอร์ของแผนจะเปิดใช้งานอีกครั้ง</li>
+    </ol>
+  </section>
+
+  <section class="chapter" id="sample">
+    <div class="chapter-head"><div class="ch-no">บทที่ 11</div><h2>ข้อมูลตัวอย่าง</h2></div>
+    <p>ข้อมูลตัวอย่างเป็นข้อมูลฝึกหัดเพื่อสำรวจ Quantiventra ก่อนเริ่มการดำเนินงานจริง ประกอบด้วยสินค้าตัวอย่างประมาณ 10 รายการ หมวดหมู่ตัวอย่าง และตำแหน่งพื้นฐาน "คลังสินค้า" และ "ร้านค้า"</p>    <h3>เนื้อหาของข้อมูลตัวอย่าง</h3>
+    <ul>
+      <li>สินค้าตัวอย่างประมาณ 10 รายการ</li>
+      <li>หมวดหมู่ตัวอย่าง</li>
+      <li>ตำแหน่งพื้นฐาน เช่น คลังสินค้าและร้านค้า</li>
+      <li>สต็อกตัวอย่างและประวัติตรวจนับตัวอย่าง</li>
+    </ul>
+    <h3>สร้างข้อมูลตัวอย่าง</h3>
+    <ol class="steps">
+      <li>เมื่อใช้งานครั้งแรก หากมีการแจ้งเตือน เลือก <strong>สร้าง</strong></li>
+      <li>หรือไปที่ <strong>การตั้งค่า → สร้างข้อมูลตัวอย่าง</strong></li>
+    </ol>
+    <h3>ลบข้อมูลตัวอย่าง</h3>
+    <ol class="steps">
+      <li>ไปที่ <strong>การตั้งค่า → ลบข้อมูลตัวอย่าง</strong></li>
+      <li>ตรวจสอบสิ่งที่จะถูกลบ (สินค้า สต็อก หมวดหมู่ และประวัติตรวจนับตัวอย่าง)</li>
+      <li>ยืนยันและดำเนินการลบ</li>
+    </ol>
+    <div class="box box-hint"><strong>💡 หลังลบข้อมูลตัวอย่าง</strong>ตำแหน่งพื้นฐานหรือข้อมูลจริงที่คุณสร้างเองอาจยังคงอยู่ โปรดตรวจสอบหน้าจอที่เกี่ยวข้องหลังลบข้อมูลตัวอย่าง</div>
+    <div class="box box-danger"><strong>🚨 สำคัญ</strong>ลบข้อมูลตัวอย่างก่อนเริ่มการดำเนินงานจริงเสมอ ตรวจสอบว่าไม่มีข้อมูลจริงปะปนก่อนลบ</div>
+  </section>
+
+  <section class="chapter" id="trouble">
+    <div class="chapter-head"><div class="ch-no">บทที่ 12</div><h2>การแก้ไขปัญหา</h2></div>
+    <div class="trouble"><div class="trouble-q">บาร์โค้ดไม่สแกน / กล้องไม่ตอบสนอง</div>
+    <div class="trouble-a"><ul>
+      <li>ตรวจสอบว่าสวิตช์กล้อง (บนขวา) เปิดอยู่</li>
+      <li>บาร์โค้ดต้องอยู่ <strong>ภายในกรอบนำทางทั้งหมด</strong> — โค้ดที่อยู่นอกกรอบจะไม่ถูกตรวจจับ</li>
+      <li>ในการตั้งค่า (ปลดล็อกครบวงจร) ตรวจสอบว่าประเภทการสแกน (CODE39, EAN13 ฯลฯ) ตรงกับโค้ดที่กำลังสแกน</li>
+      <li>หากบาร์โค้ดเสียหายหรือสกปรก ให้ป้อนด้วยตนเอง</li>
+    </ul></div></div>
+    <div class="trouble"><div class="trouble-q">ชื่อสินค้าไม่ปรากฏหลังนำเข้า CSV ทะเบียน</div>
+    <div class="trouble-a"><ul>
+      <li>ตรวจสอบว่า CSV เข้ารหัสเป็น UTF-8 (Shift-JIS จะทำให้ตัวอักษรเสีย)</li>
+      <li>ตรวจสอบรูปแบบแถวส่วนหัว: <code>barcode,name,theoretical_stock,actual_stock_total</code></li>
+      <li>หากชื่อสินค้ามีเครื่องหมายจุลภาค ให้ล้อมด้วยเครื่องหมายคำพูด: เช่น <code>"สกรู M6, สแตนเลส"</code></li>
+    </ul></div></div>
+    <div class="trouble"><div class="trouble-q">ฟีเจอร์แผนที่ซื้อไม่สามารถใช้งานได้</div>
+    <div class="trouble-a"><ul>
+      <li>แตะ <strong>การตั้งค่า → กู้คืนการซื้อ</strong></li>
+      <li>ตรวจสอบว่าลงชื่อเข้าใช้ด้วยบัญชี Google ที่ใช้ซื้อ</li>
+      <li>ตรวจสอบการเชื่อมต่ออินเทอร์เน็ตแล้วลองใหม่ (การยืนยันการซื้อต้องใช้เครือข่าย)</li>
+    </ul></div></div>
+    <div class="trouble"><div class="trouble-q">ข้อมูลหายไปหลังเปลี่ยนอุปกรณ์</div>
+    <div class="trouble-a"><ul>
+      <li>ข้อมูลจัดเก็บในหน่วยความจำภายในของแอปและจะหายเมื่อถอนการติดตั้งหรือเปลี่ยนอุปกรณ์</li>
+      <li>แนะนำอย่างยิ่งให้สำรองข้อมูลเป็นประจำผ่าน <strong>ส่งออก</strong> หรือ <strong>แชร์</strong></li>
+      <li>หากมีข้อมูลสำรอง สามารถกู้คืนผ่าน <strong>นำเข้า CSV ทะเบียน</strong></li>
+    </ul></div></div>
+    <div class="trouble"><div class="trouble-q">บันทึกไม่ได้ / มีข้อความว่าบันทึกล้มเหลว</div>
+    <div class="trouble-a"><ul>
+      <li>ตรวจสอบว่าอุปกรณ์มีพื้นที่ว่างเพียงพอ</li>
+      <li>หากรหัสสินค้าและชื่อสินค้าว่างทั้งคู่ จะไม่สามารถบันทึกได้</li>
+      <li>ปิดแอปแล้วเปิดใหม่ จากนั้นลองบันทึกอีกครั้ง</li>
+    </ul></div></div>
+    <div class="trouble"><div class="trouble-q">แชร์หรือส่งออกแล้วไม่พบไฟล์</div>
+    <div class="trouble-a"><ul>
+      <li>หากยังไม่มีประวัติ รายงานที่ส่งออกอาจว่างเปล่า ให้บันทึกรายการอย่างน้อยหนึ่งรายการก่อน</li>
+      <li>เมื่อส่งออก ให้เลือกโฟลเดอร์ปลายทางในหน้าต่างเลือกโฟลเดอร์ให้ครบถ้วน</li>
+      <li>ตรวจสอบว่าแอปปลายทาง เช่น อีเมล หรือแอปจัดการไฟล์ พร้อมใช้งาน</li>
+    </ul></div></div>
+    <div class="trouble"><div class="trouble-q">จำนวนสต็อกไม่ตรงกัน</div>
+    <div class="trouble-a"><ul>
+      <li>ตรวจสอบประวัติสต็อกสำหรับรายการรับเข้า จ่ายออก โอนย้าย และการปรับจากการตรวจนับ</li>
+      <li>หากเคยนำเข้า CSV แบบแทนที่สต็อกปัจจุบัน รายการที่ไม่มีใน CSV อาจถูกตั้งค่าเป็น 0</li>
+      <li>เปรียบเทียบกับไฟล์สำรอง CSV ล่าสุดหากมีข้อสงสัย</li>
+    </ul></div></div>
+    <div class="trouble"><div class="trouble-q">ไม่เห็นตำแหน่งที่ต้องการ</div>
+    <div class="trouble-a"><ul>
+      <li>ตรวจสอบว่าโหมดตรวจนับยังเป็นแบบง่าย A/B/C อยู่หรือไม่ หากต้องการใช้ตำแหน่งละเอียด ให้เปลี่ยนเป็นโหมดแบบละเอียด</li>
+      <li>ตรวจสอบในทะเบียนตำแหน่งว่าตำแหน่งนั้นถูกปิดใช้งานหรือไม่</li>
+    </ul></div></div>
+    <div class="trouble"><div class="trouble-q">หน้าจอหมุนระหว่างทำงาน</div>
+    <div class="trouble-a"><ul>
+      <li>หากใช้แผนมาตรฐานขึ้นไป ให้เปิด <strong>ล็อคการหมุนหน้าจอ</strong> ในการตั้งค่า</li>
+      <li>หากใช้เวอร์ชันฟรี ให้ใช้การล็อคการหมุนของระบบอุปกรณ์</li>
+    </ul></div></div>
+    <h3>ตารางอาการแบบย่อ</h3>
+    <div class="table-wrap"><table>
+      <tr><th>อาการ</th><th>สาเหตุที่เป็นไปได้</th><th>สิ่งที่ควรตรวจสอบ</th></tr>
+      <tr><td>จำนวนสต็อกผิด</td><td>ป้อนผิด นำเข้า CSV หรือใช้ผลตรวจนับ</td><td>ตรวจสอบประวัติสต็อกและไฟล์สำรอง</td></tr>
+      <tr><td>ไม่พบสินค้า</td><td>สะกดผิด ยังไม่ลงทะเบียน หรือถูกปิดใช้งาน</td><td>ตรวจสอบทะเบียนสินค้า</td></tr>
+      <tr><td>ไม่พบตำแหน่ง</td><td>โหมดแบบง่าย หรือปิดใช้งานตำแหน่ง</td><td>ตรวจสอบโหมดและทะเบียนตำแหน่ง</td></tr>
+      <tr><td>นำเข้า CSV ไม่สำเร็จ</td><td>คอลัมน์ขาดหาย หรือจำนวนไม่ใช่ตัวเลข</td><td>ตรวจสอบคอลัมน์และเนื้อหา CSV</td></tr>
+      <tr><td>การซื้อไม่สะท้อน</td><td>บัญชี Google ไม่ตรง หรือเครือข่ายมีปัญหา</td><td>กู้คืนการซื้อและตรวจสอบอินเทอร์เน็ต</td></tr>
+    </table></div>
+  </section>
+
+  <section class="chapter" id="glossary">
+    <div class="chapter-head"><div class="ch-no">บทที่ 13</div><h2>อภิธานศัพท์</h2></div>
+    <div class="table-wrap"><table>
+      <thead><tr><th>คำศัพท์</th><th>ความหมาย</th></tr></thead>
+      <tbody>
+        <tr><td>การตรวจนับสต็อก</td><td>การนับและบันทึกจำนวนสินค้าจริงในสถานที่</td></tr>
+        <tr><td>จำนวนที่นับจริง</td><td>จำนวนที่นับได้จริงในสถานที่</td></tr>
+        <tr><td>สต็อกตามทฤษฎี</td><td>จำนวนสต็อกที่ระบบคำนวณได้</td></tr>
+        <tr><td>ส่วนต่าง / ความคลาดเคลื่อน</td><td>ความแตกต่างระหว่างจำนวนที่นับจริงกับสต็อกตามทฤษฎี</td></tr>
+        <tr><td>สินค้า</td><td>รายการสินค้าที่มีสต็อก</td></tr>
+        <tr><td>หมวดหมู่</td><td>กลุ่มที่ใช้จัดหมวดหมู่สินค้า</td></tr>
+        <tr><td>ตำแหน่ง</td><td>สถานที่จัดเก็บสต็อก (เช่น คลังสินค้า ร้านค้า ชั้นวาง)</td></tr>
+        <tr><td>รวมในการพิจารณาเติมสต็อก</td><td>การตั้งค่าที่ให้นำสต็อกของตำแหน่งนี้ไปรวมในยอดอ้างอิงสำหรับการพิจารณาเติมสต็อก</td></tr>
+        <tr><td>สต็อก / จำนวนที่มี</td><td>จำนวนที่มีอยู่ในปัจจุบัน</td></tr>
+        <tr><td>รับสินค้าเข้า</td><td>การดำเนินการที่เพิ่มสต็อก</td></tr>
+        <tr><td>จ่ายสินค้าออก</td><td>การดำเนินการที่ลดสต็อก</td></tr>
+        <tr><td>โอนย้ายสต็อก</td><td>ย้ายสต็อกจากตำแหน่งหนึ่งไปยังอีกตำแหน่ง (เวอร์ชันครบวงจร)</td></tr>
+        <tr><td>ประวัติสต็อก</td><td>บันทึกการดำเนินการรับเข้า จ่ายออก โอนย้าย และการปรับสต็อก</td></tr>
+        <tr><td>เกณฑ์เติมสต็อก</td><td>จำนวนอ้างอิงสำหรับพิจารณาว่าสต็อกเริ่มต่ำและควรตรวจสอบการเติมสต็อกหรือไม่</td></tr>
+        <tr><td>รหัสสินค้า</td><td>รหัสภายในสำหรับระบุสินค้า</td></tr>
+        <tr><td>ยอดรวมสะสมที่ลงทะเบียน</td><td>ยอดรวมสะสมของจำนวนที่บันทึกไว้จนถึงปัจจุบัน</td></tr>
+        <tr><td>CSV</td><td>ไฟล์ข้อความที่คั่นด้วยเครื่องหมายจุลภาค เปิดได้ในแอปสเปรดชีต</td></tr>
+        <tr><td>ข้อมูลสำรอง</td><td>ข้อมูลที่บันทึกไว้สำหรับการกู้คืนหรืออ้างอิง</td></tr>
+        <tr><td>แทนที่สต็อกปัจจุบัน</td><td>โหมดนำเข้า CSV ที่จำนวนในไฟล์กลายเป็นสต็อกปัจจุบันใหม่</td></tr>
+        <tr><td>เพิ่มเป็นรับสินค้าเข้า</td><td>โหมดนำเข้า CSV ที่จำนวนในไฟล์ถูกเพิ่มเข้าสต็อกปัจจุบันเป็นการรับสินค้าเข้า</td></tr>
+        <tr><td>ยืนยันจำนวนที่นับจริง</td><td>การดำเนินการที่ทำให้ผลการตรวจนับเป็นบันทึกอย่างเป็นทางการ (เวอร์ชันครบวงจร)</td></tr>
+        <tr><td>ข้อมูลทะเบียน</td><td>ฐานข้อมูลที่จัดการบันทึกหลักของสินค้า หมวดหมู่ และตำแหน่ง</td></tr>
+      </tbody>
+    </table></div>
+  </section>
+
+  <section class="chapter" id="legal">
+    <div class="chapter-head"><div class="ch-no">บทที่ 14</div><h2>ข้อกำหนดและข้อจำกัดความรับผิด</h2></div>
+    <div class="legal-block">
+      <h4>■ ข้อกำหนดการใช้งาน</h4>
+      <p>การดาวน์โหลดหรือใช้แอปนี้ถือว่าคุณยอมรับข้อกำหนดต่อไปนี้ อนุญาตให้ใช้แอปนี้เพื่อการจัดการสต็อกและสินค้าคงคลังทั้งส่วนบุคคลและองค์กร ห้ามทำวิศวกรรมย้อนกลับ การแยกส่วนประกอบ การดัดแปลง หรือการเผยแพร่แอปซ้ำ</p>
+      <p><strong>ข้อมูลผู้ใช้:</strong> ข้อมูลการทำงานที่แอปนี้สร้างขึ้น เช่น CSV ทะเบียน CSV ประวัติ และไฟล์การตั้งค่า จะถูกจัดเก็บบนอุปกรณ์ของผู้ใช้เป็นหลัก การสื่อสารกับ Google Play อาจเกิดขึ้นเมื่อจำเป็นสำหรับการตรวจสอบหรือกู้คืนการซื้อแผน</p>
+      <p><strong>การซื้อแผน:</strong> การซื้อแผนทั้งหมดดำเนินการผ่านระบบชำระเงิน Google Play การคืนเงินเป็นไปตามนโยบายการคืนเงินของ Google Play</p>
+      <h4>■ ข้อจำกัดความรับผิด</h4>
+      <p>แอปนี้ให้บริการ "ตามสภาพที่เป็น" ผู้พัฒนาไม่รับผิดชอบต่อความเสียหายใดๆ ที่เกิดจากการใช้งานหรือไม่สามารถใช้งานแอปได้ รวมถึงการสูญหายของข้อมูล การหยุดชะงักทางธุรกิจ หรือความเสียหายทั้งทางตรงและทางอ้อมอื่นๆ</p>
+      <p>ผู้ใช้รับผิดชอบในการตรวจสอบความถูกต้องและครบถ้วนของข้อมูล CSV ที่สร้างโดยแอปนี้ ผู้พัฒนาไม่รับผิดชอบต่อความไม่สอดคล้องของข้อมูลอันเกิดจากข้อผิดพลาดในการสแกนหรือการป้อนข้อมูล</p>
+      <h4>■ นโยบายความเป็นส่วนตัว</h4>
+      <p>แอปนี้ไม่เก็บรวบรวมหรือใช้ข้อมูลส่วนบุคคลเพื่อวัตถุประสงค์ของแอป กล้องใช้เฉพาะสำหรับสแกนบาร์โค้ดและคิวอาร์โค้ด ไม่มีการบันทึกหรือจัดเก็บวิดีโอ</p>
+      <h4>■ ลิขสิทธิ์</h4>
+      <p>ลิขสิทธิ์ © Quantiventra สงวนสิทธิ์ทั้งหมด เนื้อหาทั้งหมดในแอปและคู่มือนี้เป็นทรัพย์สินของผู้พัฒนา</p>
+      <h4>■ การเปลี่ยนแปลงข้อกำหนด</h4>
+      <p>ข้อกำหนดเหล่านี้อาจเปลี่ยนแปลงได้โดยไม่แจ้งล่วงหน้า ข้อกำหนดที่อัปเดตมีผลบังคับใช้เมื่อเผยแพร่บน Google Play Store หรือการแจ้งเตือนในแอป</p>
+    </div>
+  </section>
+
+  <div class="summary-box" id="summary">
+    <h3>📌 สรุปประเด็นสำคัญของบท</h3>
+    <ul>
+      <li>Quantiventra = Quantity + Inventory ยืนยันหลังตรวจพบโค้ดเดิมต่อเนื่องกัน 3 เฟรม ป้องกันการอ่านผิดพลาด</li>
+      <li>ต้องใช้ Android 8.0+ และกล้องที่มีโฟกัสอัตโนมัติ ไม่ต้องใช้สิทธิ์จัดเก็บข้อมูล งานหลักทำได้ภายในอุปกรณ์ โดยการซื้อ การกู้คืนการซื้อ การเปิด Google Play และลิงก์ภายนอกบางรายการอาจต้องใช้อินเทอร์เน็ต</li>
+      <li>ข้อมูลอยู่ในหน่วยความจำภายในของแอป — การถอนการติดตั้งจะลบทุกอย่าง สำรองข้อมูลเป็นประจำผ่านส่งออก</li>
+      <li>การตรวจนับสต็อกและการจัดการสต็อกเป็นโมดูลแยก — การป้อนจำนวนในการตรวจนับไม่เปลี่ยนสต็อกจนกว่าจะยืนยัน</li>
+      <li>ก่อนเริ่มการดำเนินงานจริง ฝึกกับข้อมูลตัวอย่างแล้วลบออก</li>
+      <li>ราคาแผน ดูที่ Google Play — คู่มือนี้ไม่ระบุตัวเลขที่แน่นอน</li>
+      <li>ก่อนการดำเนินการขนาดใหญ่ (แทนที่ CSV นำตรวจนับไปใช้ ลบ รีเซ็ต) สำรองข้อมูลเสมอ</li>
+    </ul>
+  </div>
+  <div class="confirm-box" id="confirm">
+    <h3>🔍 ข้อควรตรวจสอบก่อนใช้งานจริง</h3>
+    <ul>
+      <li>ตรวจสอบราคา ภาษี และเงื่อนไขการคืนเงินจากหน้ารายการใน Google Play ก่อนซื้อแผน</li>
+      <li>ทดลองสร้าง ส่งออก และนำเข้า CSV ด้วยข้อมูลตัวอย่างก่อนใช้ข้อมูลจริง</li>
+      <li>ตั้งค่าภาษา โหมดตำแหน่ง และการสแกนให้เหมาะกับการทำงานของหน้างาน</li>
+      <li>สำรองข้อมูลก่อนลบ รีเซ็ต นำเข้าแบบแทนที่ หรือใช้ผลตรวจนับกับสต็อก</li>
+    </ul>
+  </div>
+</div>
+<footer>คู่มือ Quantiventra · ข้อมูลล่าสุดดูได้จากหน้าจอแอป<p style="margin-top:4px;"><a href="privacy_th.html">นโยบายความเป็นส่วนตัว</a></p></footer>
+</body></html>

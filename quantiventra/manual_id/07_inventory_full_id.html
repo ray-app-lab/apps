@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="id">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quantiventra – Manajemen Stok – Versi Lengkap</title>
+<style>*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;font-size:15px;line-height:1.8;color:#1a2535;background:#f4f7fb;}
+a{color:#1a5fa8;text-decoration:none;}a:hover{text-decoration:underline;}
+.site-nav{background:#1a3a5c;color:#fff;padding:0;}.site-nav .nav-inner{max-width:960px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:stretch;}
+.site-nav a{color:#cde;padding:10px 13px;font-size:12px;display:block;border-right:1px solid #2a4a6c;white-space:nowrap;}
+.site-nav a:hover{background:#2a5090;text-decoration:none;}.site-nav a.active{background:#2a6cbe;color:#fff;font-weight:bold;}
+.page-header{background:linear-gradient(135deg,#1a3a5c 0%,#2a6cbe 100%);color:#fff;padding:40px 20px 30px;}
+.page-header .inner{max-width:960px;margin:0 auto;}.page-header .app-name{font-size:13px;opacity:.8;}
+.page-header h1{font-size:22px;font-weight:700;margin-top:6px;line-height:1.4;}.page-header .subtitle{font-size:14px;opacity:.85;margin-top:8px;}
+.scope-box{background:rgba(255,255,255,.15);border-left:4px solid #7ecfff;padding:12px 16px;margin-top:16px;border-radius:4px;font-size:13px;}
+.container{max-width:960px;margin:0 auto;padding:30px 16px;}
+.toc{background:#fff;border:1px solid #c8d8ec;border-radius:8px;padding:24px 28px;margin-bottom:32px;}
+.toc h2{font-size:16px;font-weight:700;color:#1a3a5c;border-bottom:2px solid #2a6cbe;padding-bottom:8px;margin-bottom:14px;}
+.toc ol{margin-left:18px;}.toc li{margin:5px 0;font-size:14px;}
+.chapter{background:#fff;border-radius:8px;box-shadow:0 1px 4px rgba(0,0,0,.08);padding:28px 28px 24px;margin-bottom:28px;}
+.chapter-head{border-left:5px solid #2a6cbe;padding-left:14px;margin-bottom:20px;}
+.chapter-head .ch-no{font-size:12px;color:#2a6cbe;font-weight:700;}.chapter-head h2{font-size:20px;font-weight:700;color:#1a2535;margin-top:2px;}
+h3{font-size:16px;font-weight:700;color:#1a3a5c;border-bottom:1px solid #dde8f5;padding-bottom:5px;margin:22px 0 12px;}
+h4{font-size:14px;font-weight:700;color:#2a4a6c;margin:16px 0 8px;}
+p{margin-bottom:12px;}ul,ol{margin-left:20px;margin-bottom:12px;}li{margin-bottom:5px;}
+.steps{counter-reset:step;list-style:none;margin-left:0;}
+.steps li{counter-increment:step;padding:9px 12px 9px 46px;position:relative;background:#f8fbff;border:1px solid #dde8f5;border-radius:6px;margin-bottom:6px;}
+.steps li::before{content:counter(step);position:absolute;left:12px;top:50%;transform:translateY(-50%);width:24px;height:24px;background:#2a6cbe;color:#fff;border-radius:50%;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;}
+.table-wrap{overflow-x:auto;margin-bottom:16px;}
+table{width:100%;border-collapse:collapse;font-size:13px;min-width:380px;}
+th{background:#1a3a5c;color:#fff;padding:9px 12px;text-align:left;white-space:nowrap;}
+td{padding:8px 12px;border-bottom:1px solid #dde8f5;vertical-align:top;}tr:nth-child(even) td{background:#f4f7fb;}
+code{font-family:'Courier New',monospace;background:rgba(0,80,160,.08);color:#004080;padding:2px 6px;border-radius:3px;font-size:12px;}
+.box{border-radius:6px;padding:13px 16px;margin:14px 0;font-size:13px;}
+.box-warn{background:#fffbe6;border-left:4px solid #f5a623;color:#7a5700;}
+.box-danger{background:#fff0f0;border-left:4px solid #d43f3f;color:#7a0000;}
+.box-hint{background:#e8f4ff;border-left:4px solid #2a6cbe;color:#0a3060;}
+.box-check{background:#f4eeff;border-left:4px solid #8c4fc8;color:#3a0070;}
+.box strong{display:block;margin-bottom:4px;}
+figure{max-width:280px;width:100%;margin:18px auto;text-align:center;}
+figure img{display:block;width:100%;max-width:280px;height:auto;margin:0 auto;border:1px solid #c8d8ec;border-radius:6px;box-shadow:0 2px 8px rgba(0,0,0,.1);}
+figcaption{font-size:12px;color:#5a7a99;margin-top:6px;}
+.img-pending{display:flex;align-items:center;justify-content:center;max-width:280px;width:100%;box-sizing:border-box;background:#e8eef5;border:2px dashed #99b8d8;border-radius:6px;height:160px;color:#5a7a99;font-size:13px;margin:18px auto;}
+.diff-add{background:#e8fff0;border-left:4px solid #2a9c5c;border-radius:6px;padding:12px 16px;margin:14px 0;font-size:13px;}
+.diff-add strong{display:block;color:#1a6c3c;margin-bottom:4px;}
+.flow-box{background:#f4f7fb;border:1px solid #c8d8ec;border-radius:8px;padding:20px;margin:16px 0;}
+.flow-box h4{color:#1a3a5c;margin-top:0;}
+.flow-arrow{text-align:center;font-size:20px;color:#2a6cbe;margin:4px 0;}
+.flow-step{background:#fff;border:1px solid #c8d8ec;border-radius:6px;padding:10px 16px;margin:4px 0;font-size:13px;}
+.flow-step strong{color:#1a3a5c;}
+.summary-box{background:linear-gradient(135deg,#e8f4ff,#f0f8ff);border:1px solid #99c8ec;border-radius:8px;padding:20px 24px;margin-top:32px;}
+.summary-box h3{border:none;color:#1a3a5c;margin-top:0;}
+.confirm-box{background:#fdf4ff;border:1px solid #c8a0e0;border-radius:8px;padding:20px 24px;margin-top:16px;}
+.confirm-box h3{border:none;color:#5a0090;margin-top:0;}
+.check{color:#2e7d32;font-weight:700;}.cross{color:#c62828;}
+th.pro-col{background:#5a2a8c;}
+.feature-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px;margin:16px 0;}
+.feature-card{background:#f4f7fb;border:1px solid #c8d8ec;border-radius:8px;padding:16px;}
+.feature-card h4{color:#1a3a5c;margin-top:0;margin-bottom:6px;font-size:14px;}
+.feature-card p{font-size:13px;margin:0;color:#3a5a7a;}
+.feature-card.pro-card{background:#f4eeff;border-color:#c8a0e0;}
+.feature-card.pro-card h4{color:#5a2a8c;}
+.trouble{border:1px solid #c8d8ec;border-radius:8px;margin:14px 0;overflow:hidden;}
+.trouble-q{background:#eef6fd;padding:13px 18px;font-weight:700;font-size:14px;color:#1a3a5c;display:flex;align-items:flex-start;gap:10px;}
+.trouble-q::before{content:'Q';background:#2a6cbe;color:#fff;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900;flex-shrink:0;margin-top:1px;}
+.trouble-a{padding:13px 18px 14px 50px;font-size:13.5px;border-top:1px solid #c8d8ec;line-height:1.9;}
+.trouble-a ul{margin-left:16px;}
+.legal-block{background:#f5f5f5;border:1px solid #ddd;border-radius:8px;padding:20px 24px;font-size:12.5px;color:#444;line-height:1.9;margin:14px 0;}
+.legal-block h4{font-size:13px;color:#333;margin:18px 0 6px;border-bottom:1px solid #ddd;padding-bottom:4px;}
+.legal-block h4:first-child{margin-top:0;}
+footer{text-align:center;font-size:12px;color:#8a9aaa;padding:30px 16px;border-top:1px solid #dde8f5;margin-top:20px;}
+@media(max-width:640px){.page-header h1{font-size:18px;}.chapter{padding:20px 16px;}.site-nav a{padding:8px 9px;font-size:11px;}}
+@media print{body{background:#fff;font-size:12px;}.site-nav{display:none;}.chapter{box-shadow:none;border:1px solid #ccc;page-break-inside:avoid;}.page-header{background:#1a3a5c !important;-webkit-print-color-adjust:exact;print-color-adjust:exact;}}
+</style></head>
+<body>
+<nav class="site-nav"><div class="nav-inner">
+  <a href="01_top_settings_common_id.html">① Beranda / Pengaturan</a>
+  <a href="02_stocktake_free_id.html">② Stok Opname Gratis</a>
+  <a href="03_stocktake_simple_id.html">③ Stok Opname Standar</a>
+  <a href="04_stocktake_full_id.html">④ Stok Opname Lengkap</a>
+  <a href="05_inventory_free_id.html">⑤ Manajemen Stok Gratis</a>
+  <a href="06_inventory_simple_id.html">⑥ Manajemen Stok Standar</a>
+  <a href="07_inventory_full_id.html" class="active">⑦ Manajemen Stok Lengkap</a>
+</div></nav>
+<header class="page-header"><div class="inner">
+  <div class="app-name">Manual Quantiventra</div>
+  <h1>⑦ Manajemen Stok — Versi Lengkap (Buka Kunci Lengkap)</h1>
+  <div class="subtitle">Fitur versi Lengkap · Manajemen katalog · Transfer stok · Penerapan inventaris · Cadangan CSV · Alur kerja praktis</div>
+  <div class="scope-box"><strong>Topik yang dibahas:</strong> Hal baru Buka Kunci Lengkap / Perbedaan dengan Standar / Katalog Produk / Katalog Kategori / Katalog Lokasi / Transfer stok / Riwayat / Penerapan inventaris ke stok / Cadangan·Pemulihan CSV / Cadangan riwayat / Acuan pengisian ulang·Harga / Contoh alur kerja / Catatan penting</div>
+</div></header>
+<div class="container">
+  <nav class="toc"><h2>Daftar Isi</h2><ol>
+    <li><a href="#overview">Ikhtisar versi Lengkap (Buka Kunci Lengkap)</a></li>
+    <li><a href="#diff">Perbedaan dengan versi Standar</a></li>
+    <li><a href="#master-product">Integrasi Katalog Produk</a></li>
+    <li><a href="#master-item">Katalog Kategori</a></li>
+    <li><a href="#master-location">Katalog Lokasi</a></li>
+    <li><a href="#stock-move">Transfer Stok</a></li>
+    <li><a href="#stock-history">Riwayat Stok</a></li>
+    <li><a href="#stocktake-reflect">Menerapkan hasil stok opname ke stok</a></li>
+    <li><a href="#csv-backup">Cadangan dan pemulihan CSV</a></li>
+    <li><a href="#csv-history-backup">Cadangan riwayat</a></li>
+    <li><a href="#reorder-price">Acuan pengisian ulang dan harga</a></li>
+    <li><a href="#usecase">Contoh alur kerja — versi Lengkap</a></li>
+    <li><a href="#notes">Catatan penting</a></li>
+    <li><a href="#summary">Poin utama bab ini</a></li>
+    <li><a href="#confirm">Hal-hal yang perlu dikonfirmasi</a></li>
+  </ol></nav>
+
+  <section class="chapter" id="overview">
+    <div class="chapter-head"><div class="ch-no">BAB 1</div><h2>Ikhtisar Versi Lengkap (Buka Kunci Lengkap)</h2></div>
+    <p>Buka Kunci Lengkap untuk stok menghapus semua batas data katalog, entri riwayat, dan baris ekspor, serta mengaktifkan semua fitur canggih yang tidak tersedia di versi Standar. Tambahan utama mencakup: manajemen multi-lokasi (gudang, toko, dll.), transfer stok antar lokasi, penerapan langsung hasil inventaris ke stok, serta cadangan/pemulihan CSV lengkap.</p>
+    <div class="diff-add">
+      <strong>Fitur yang dibuka oleh Buka Kunci Lengkap</strong>
+      <ul>
+        <li>Data katalog, entri riwayat, dan baris ekspor tidak terbatas</li>
+        <li>Kolom acuan pengisian ulang dan harga di Katalog Produk</li>
+        <li>Katalog Kategori (manajemen klasifikasi produk)</li>
+        <li>Pendaftaran dan pengelolaan Katalog Lokasi</li>
+        <li>Transfer Stok (memindahkan jumlah antar lokasi)</li>
+        <li>Menerapkan hasil stok opname ke stok</li>
+        <li>Cadangan dan pemulihan CSV (lembar stok + set CSV cadangan lengkap)</li>
+        <li>Cadangan riwayat</li>
+        <li>Pengeditan langsung total kumulatif terdaftar</li>
+        <li>Aturan kode, aturan lokasi, dan pengaturan kamera (pengaturan bersama versi Lengkap)</li>
+        <li>Opsi CSV diperluas (pemilihan kolom dan mode impor)</li>
+      </ul>
+    </div>
+    <div class="box box-hint"><strong>Catatan: "Buka Kunci Lengkap" dan "versi Lengkap" memiliki arti yang sama</strong>Dalam dokumen ini, "Buka Kunci Lengkap" dan "versi Lengkap" digunakan secara bergantian. Untuk detail pembelian, lihat bagian "Ringkasan paket" di <a href="01_top_settings_common_id.html">① Beranda &amp; Pengaturan</a>.</div>
+  </section>
+
+  <section class="chapter" id="diff">
+    <div class="chapter-head"><div class="ch-no">BAB 2</div><h2>Perbedaan dengan Versi Standar</h2></div>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Fitur</th><th>Gratis</th><th>Standar</th><th>Lengkap</th></tr></thead>
+      <tbody>
+        <tr><td>Pengecekan stok</td><td>✓</td><td>✓</td><td>✓</td></tr>
+        <tr><td>Stok masuk / keluar</td><td>✗</td><td>✓</td><td>✓</td></tr>
+        <tr><td>Batas data katalog</td><td>30</td><td>300</td><td>Tidak terbatas</td></tr>
+        <tr><td>Transfer stok</td><td>✗</td><td>✗</td><td>✓</td></tr>
+        <tr><td>Menerapkan hasil stok opname ke stok</td><td>✗</td><td>✗</td><td>✓</td></tr>
+        <tr><td>Katalog Kategori</td><td>✗</td><td>✗</td><td>✓</td></tr>
+        <tr><td>Acuan pengisian ulang dan harga</td><td>✗</td><td>✗</td><td>✓</td></tr>
+        <tr><td>Cadangan dan pemulihan CSV</td><td>✗</td><td>Terbatas</td><td>✓ (set lengkap)</td></tr>
+        <tr><td>Cadangan riwayat</td><td>✗</td><td>✗</td><td>✓</td></tr>
+        <tr><td>Aturan kode dan lokasi</td><td>✗</td><td>✗</td><td>✓ (pengaturan bersama Lengkap)</td></tr>
+      </tbody>
+    </table></div>
+    <div class="box box-hint"><strong>Tips</strong>Untuk operasi utama versi Standar — stok masuk, keluar, pengecekan stok, riwayat, dan impor/ekspor CSV — lihat <a href="06_inventory_simple_id.html">⑥ Manajemen Stok: Standar</a>. Halaman ini hanya mencakup fitur yang ditambahkan oleh versi Lengkap.</div>
+  </section>
+
+  <section class="chapter" id="master-product">
+    <div class="chapter-head"><div class="ch-no">BAB 3</div><h2>Integrasi Katalog Produk</h2></div>
+    <p>Katalog Produk adalah tempat Anda mendaftarkan produk nyata yang stoknya dikelola. Dengan Buka Kunci Lengkap, Anda dapat menambahkan acuan pengisian ulang dan harga ke setiap produk.</p>
+    <h3>Kolom kunci Katalog Produk</h3>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Kolom</th><th>Keterangan</th><th>Ditambahkan di versi Lengkap</th></tr></thead>
+      <tbody>
+        <tr><td>Kode produk / Barcode</td><td>Pengenal unik produk</td><td>—</td></tr>
+        <tr><td>Nama produk</td><td>Nama produk</td><td>—</td></tr>
+        <tr><td>Kategori</td><td>Klasifikasi produk (dipilih dari Katalog Kategori)</td><td>—</td></tr>
+        <tr><td>Harga</td><td>Harga jual atau harga pokok produk</td><td>✓</td></tr>
+        <tr><td>Acuan pengisian ulang</td><td>Jumlah acuan untuk mempertimbangkan pengisian ulang stok</td><td>✓</td></tr>
+      </tbody>
+    </table></div>    <h3>Mendaftarkan atau mengedit produk</h3>
+    <ol class="steps">
+      <li>Dari Beranda, buka <strong>Manajemen Katalog</strong>.</li>
+      <li>Pilih <strong>Katalog Produk</strong>.</li>
+      <li>Ketuk kartu item baru atau tombol <strong>Baru</strong>.</li>
+      <li>Masukkan kode produk, nama, dan kategori. Opsional masukkan harga dan acuan pengisian ulang.</li>
+      <li>Ketuk <strong>Simpan</strong> untuk mendaftarkan.</li>
+      <li>Untuk mengedit produk yang ada, buka dari daftar, lakukan perubahan, dan ketuk <strong>Simpan</strong>.</li>
+    </ol>
+    <div class="box box-hint"><strong>Mendaftarkan produk yang belum dikenal dari layar Stok Masuk</strong>Jika Anda memasukkan kode produk yang belum ada di katalog di layar Stok Masuk, aplikasi akan membawa Anda ke formulir item baru Katalog Produk. Setelah menyimpan nama produk, harga, dan acuan pengisian ulang, Anda kembali ke layar Stok Masuk dengan detail produk terisi otomatis.</div>
+    <div class="box box-warn"><strong>Perhatian: jangan mencampuradukkan Produk dan Kategori</strong>
+      <ul>
+        <li><strong>Produk</strong>: item individual dalam stok (cth. Pulpen merah, Pulpen biru)</li>
+        <li><strong>Kategori</strong>: kelompok klasifikasi produk (cth. Alat tulis, Makanan)</li>
+      </ul>
+      Kategori dipilih di Katalog Produk sebagai klasifikasi produk. Kategori itu sendiri tidak memiliki stok.
+    </div>
+  </section>
+
+  <section class="chapter" id="master-item">
+    <div class="chapter-head"><div class="ch-no">BAB 4</div><h2>Katalog Kategori</h2></div>
+    <p>Katalog Kategori mengelola kelompok klasifikasi yang digunakan untuk mengorganisir produk. Kategori membantu memfilter dan meninjau Katalog Produk.</p>
+    <div class="table-wrap"><table>
+      <tr><th>Kolom</th><th>Keterangan</th></tr>
+      <tr><td>Kode kategori</td><td>Pengenal unik kategori</td></tr>
+      <tr><td>Nama kategori</td><td>Nama klasifikasi (cth. Makanan, Pakaian)</td></tr>
+      <tr><td>Klasifikasi</td><td>Kelompok yang digunakan untuk mengorganisir produk dalam daftar dan katalog</td></tr>
+      <tr><td>Urutan tampilan</td><td>Urutan pengurutan dalam tampilan daftar</td></tr>
+    </table></div>    <h3>Mendaftarkan kategori</h3>
+    <ol class="steps">
+      <li>Buka <strong>Manajemen Katalog → Katalog Kategori</strong>.</li>
+      <li>Ketuk kartu item baru atau tombol <strong>Baru</strong>.</li>
+      <li>Masukkan kode, nama, dan urutan tampilan.</li>
+      <li>Ketuk <strong>Simpan</strong>.</li>
+    </ol>
+    <div class="box box-hint"><strong>Catatan tentang kategori</strong>Gunakan kategori secara konsisten untuk mengelompokkan produk dan memudahkan pemeriksaan katalog.</div>
+  </section>
+
+  <section class="chapter" id="master-location">
+    <div class="chapter-head"><div class="ch-no">BAB 5</div><h2>Katalog Lokasi</h2></div>
+    <p>Katalog Lokasi adalah tempat Anda mendaftarkan dan mengelola lokasi fisik penyimpanan stok. Dengan mendaftarkan beberapa lokasi — seperti gudang, toko ritel, atau rak individual — Anda dapat melacak stok per lokasi.</p>
+    <div class="table-wrap"><table>
+      <tr><th>Kolom</th><th>Keterangan</th></tr>
+      <tr><td>Kode lokasi</td><td>Pengenal unik lokasi</td></tr>
+      <tr><td>Nama lokasi</td><td>Nama lokasi (cth. Gudang, Toko A)</td></tr>
+      <tr><td>Urutan tampilan</td><td>Urutan pengurutan dalam tampilan daftar</td></tr>
+      <tr><td>Sertakan dalam pengecekan kebutuhan pengisian ulang</td><td>Jika diaktifkan, stok lokasi ini diikutkan dalam total yang digunakan untuk keputusan pengisian ulang di Pengecekan Stok</td></tr>
+      <tr><td>Aktif / Nonaktif</td><td>Lokasi yang tidak lagi digunakan dapat dinonaktifkan tanpa menghapusnya</td></tr>
+    </table></div>    <div class="box box-hint"><strong>Lokasi default</strong>Aplikasi sudah menyertakan "Gudang" dan "Toko" yang terdaftar. Ganti nama, edit, atau tambahkan lokasi baru sesuai operasi nyata Anda.</div>
+    <h3>Mendaftarkan lokasi</h3>
+    <ol class="steps">
+      <li>Buka <strong>Manajemen Katalog → Katalog Lokasi</strong>.</li>
+      <li>Ketuk kartu item baru atau tombol <strong>Baru</strong>.</li>
+      <li>Masukkan kode, nama, dan urutan tampilan.</li>
+      <li>Aktifkan atau nonaktifkan <strong>Sertakan dalam pengecekan kebutuhan pengisian ulang</strong> sesuai kebutuhan. Item baru diaktifkan secara default.</li>
+      <li>Ketuk <strong>Simpan</strong>.</li>
+    </ol>
+    <div class="box box-hint"><strong>Tentang pengaturan "Sertakan dalam pengecekan kebutuhan pengisian ulang"</strong>Pengecekan kebutuhan pengisian ulang di Pengecekan Stok hanya menghitung stok dari lokasi dengan sakelar ini diaktifkan. Gunakan tombol <strong>Sertakan semua lokasi aktif</strong> untuk mengaktifkan semuanya sekaligus.</div>
+    <div class="box box-warn"><strong>Perhatian: menonaktifkan vs menghapus lokasi</strong>Saat lokasi tidak lagi diperlukan, disarankan untuk <strong>menonaktifkan</strong>, bukan menghapusnya. Apakah penghapusan diizinkan dan apakah lokasi yang dihapus dapat dipulihkan perlu dikonfirmasi di perangkat.</div>
+  </section>
+
+  <section class="chapter" id="stock-move">
+    <div class="chapter-head"><div class="ch-no">BAB 6</div><h2>Transfer Stok</h2></div>
+    <p>Transfer Stok memindahkan jumlah stok tertentu dari satu lokasi ke lokasi lain. Hanya tersedia di versi Lengkap.</p>    <h3>Cara melakukan Transfer Stok</h3>
+    <ol class="steps">
+      <li>Di menu Manajemen Stok, buka <strong>Transfer Stok</strong>.</li>
+      <li>Pilih <strong>lokasi asal</strong> (lokasi dari mana stok akan dikeluarkan).</li>
+      <li>Pilih <strong>lokasi tujuan</strong> (lokasi yang akan menerima stok).</li>
+      <li>Temukan produk yang diinginkan dengan memindai barcode atau mencari berdasarkan nama.</li>
+      <li>Masukkan jumlah yang akan ditransfer.</li>
+      <li>Tinjau detail dan ketuk <strong>Konfirmasi</strong>.</li>
+    </ol>
+    <div class="box box-danger"><strong>Penting: jangan pernah mentransfer antara lokasi yang sama</strong>Memilih lokasi yang sama sebagai asal dan tujuan akan menyebabkan pemrosesan data stok yang salah. Selalu pilih dua lokasi yang berbeda.</div>
+    <div class="box box-hint"><strong>Dengan hanya satu lokasi</strong>Dengan hanya satu lokasi yang terdaftar, transfer stok tidak ada artinya. Gunakan <strong>Stok Masuk</strong>, <strong>Keluar</strong>, atau <strong>Edit</strong> untuk menyesuaikan jumlah. Transfer stok hanya bermakna dengan dua lokasi atau lebih.</div>
+  </section>
+
+  <section class="chapter" id="stock-history">
+    <div class="chapter-head"><div class="ch-no">BAB 7</div><h2>Riwayat Stok</h2></div>
+    <p>Riwayat Stok menyediakan catatan lengkap setiap perubahan stok. Dengan Buka Kunci Lengkap, batas entri riwayat dihapus sehingga Anda dapat menyimpan catatan jangka panjang.</p>
+    <h3>Jenis operasi yang dicatat dalam riwayat</h3>
+    <ul>
+      <li><strong>Stok masuk</strong>: Barang yang diterima ke dalam stok</li>
+      <li><strong>Stok keluar</strong>: Barang yang dikeluarkan dari stok</li>
+      <li><strong>Transfer</strong>: Stok yang dipindahkan antar lokasi</li>
+      <li><strong>Penyesuaian inventaris</strong>: Koreksi selisih saat menerapkan hasil inventaris</li>
+      <li><strong>Stok awal</strong>: Jumlah pembukaan yang ditetapkan saat pendaftaran awal</li>
+      <li><strong>Impor CSV</strong>: Stok yang diperbarui melalui file CSV</li>
+    </ul>  </section>
+
+  <section class="chapter" id="stocktake-reflect">
+    <div class="chapter-head"><div class="ch-no">BAB 8</div><h2>Menerapkan Hasil Stok Opname ke Stok</h2></div>
+    <p>Menerapkan hasil stok opname (hitungan nyata) ke modul Manajemen Stok menyelaraskan stok sistem dengan stok fisik di rak. Hanya tersedia di versi Lengkap.</p>
+    <p>Saat hasil inventaris diterapkan, selisih antara level stok teoritis dan jumlah aktual yang dihitung dicatat sebagai entri <strong>Penyesuaian inventaris</strong> di riwayat, sekaligus memperbarui stok ke nilai nyata dan menyimpan catatan penyesuaian yang dapat dilacak.</p>
+    <div class="box box-check"><strong>🔍 Perlu dikonfirmasi: kondisi penerapan dan perilaku pembatalan</strong>Kondisi tepat yang mengatur alur penerapan — termasuk kapan dapat dipicu, bagaimana beberapa lokasi ditangani, dan apakah penerapan yang sudah selesai dapat dibatalkan — perlu dikonfirmasi di perangkat nyata.</div>
+    <div class="box box-danger"><strong>Penting: selalu buat cadangan sebelum menerapkan</strong>Penerapan hasil stok opname menimpa jumlah stok. Sebelum menjalankan operasi ini, selalu ekspor CSV cadangan. Kemampuan untuk membatalkan setelah penerapan mungkin terbatas.</div>
+  </section>
+
+  <section class="chapter" id="csv-backup">
+    <div class="chapter-head"><div class="ch-no">BAB 9</div><h2>Cadangan dan Pemulihan CSV</h2></div>
+    <p>Buka Kunci Lengkap menyediakan tiga jenis ekspor: lembar stok CSV, set CSV cadangan lengkap, dan cadangan riwayat. Karena operasi pemulihan dan penggantian membuat perubahan menyeluruh pada data, memverifikasinya dengan cermat sebelum melanjutkan sangat penting.</p>
+    <h3>Jenis CSV dan penggunaannya</h3>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Jenis CSV</th><th>Tujuan</th><th>Konten utama</th><th>Tersedia di</th><th>Catatan</th></tr></thead>
+      <tbody>
+        <tr><td>Lembar stok CSV</td><td>Meninjau dan mengimpor ulang daftar stok saat ini</td><td>Lokasi, kode produk, nama produk, jumlah</td><td>Standar atau lebih tinggi</td><td>Tanpa kolom lokasi, pilih lokasi tujuan saat mengimpor</td></tr>
+        <tr><td>Set CSV cadangan lengkap</td><td>Cadangan dan pemulihan set data lengkap</td><td>Produk, stok saat ini, riwayat stok masuk/keluar/transfer/penyesuaian, lokasi, kategori</td><td>Lengkap</td><td>Dapat diekspor dalam beberapa file</td></tr>
+        <tr><td>Cadangan riwayat</td><td>Cadangan untuk peninjauan selanjutnya atas pergerakan stok</td><td>Lembar stok + riwayat operasi lengkap</td><td>Lengkap</td><td>Perilaku impor ulang CSV riwayat perlu dikonfirmasi</td></tr>
+      </tbody>
+    </table></div>    <h3>Mengekspor set CSV cadangan lengkap</h3>
+    <ol class="steps">
+      <li>Dari layar Pengaturan atau menu utama, buka <strong>Impor/Ekspor CSV</strong>.</li>
+      <li>Pilih <strong>Set CSV cadangan lengkap</strong>.</li>
+      <li>Pilih folder tujuan (ikuti petunjuk di layar).</li>
+      <li>Ketuk <strong>Ekspor</strong> dan konfirmasi pesan penyelesaian.</li>
+    </ol>
+    <h3>Memulihkan dari cadangan CSV</h3>
+    <ol class="steps">
+      <li>Buka <strong>Impor/Ekspor CSV → Pulihkan</strong> atau <strong>Impor CSV</strong>.</li>
+      <li>Pilih file CSV cadangan.</li>
+      <li>Konfirmasi pemetaan kolom (aplikasi mungkin mendeteksinya secara otomatis).</li>
+      <li>Baca layar konfirmasi dengan teliti, lalu ketuk <strong>Jalankan</strong>.</li>
+    </ol>
+    <div class="box box-danger"><strong>Penting: selalu buat cadangan data saat ini sebelum memulihkan atau mengganti</strong>Pemulihan CSV atau Ganti Stok Saat Ini akan menimpa data stok yang ada. Sebelum melanjutkan, selalu ekspor dan simpan lembar stok CSV saat ini.</div>
+    <h3>Ganti Stok Saat Ini</h3>
+    <p>Ganti Stok Saat Ini menimpa jumlah stok saat ini dengan nilai dari CSV yang diimpor. Riwayat yang ada dipertahankan, tetapi selisihnya dicatat sebagai entri riwayat <strong>penyesuaian</strong>. Baris stok yang tidak ada di CSV mungkin diatur ke 0 — selalu verifikasi isi CSV sebelum mengimpor.</p>
+    <div class="box box-danger"><strong>Gunakan Ganti Stok Saat Ini dengan sangat hati-hati</strong>Produk atau lokasi yang tidak ada di CSV mungkin memiliki stok yang diatur ke 0. Sebelum mengimpor, konfirmasi bahwa CSV berisi set produk dan lokasi yang benar.</div>
+  </section>
+
+  <section class="chapter" id="csv-history-backup">
+    <div class="chapter-head"><div class="ch-no">BAB 10</div><h2>Cadangan Riwayat</h2></div>
+    <p>Cadangan riwayat mengekspor dalam satu operasi baik lembar stok maupun catatan lengkap pergerakan — stok masuk, keluar, transfer, penyesuaian, dll. — berguna untuk audit selanjutnya atau pelacakan perubahan stok dari waktu ke waktu.</p>
+    <ul>
+      <li>Lembar stok CSV (jumlah stok saat ini)</li>
+      <li>Riwayat operasi lengkap (stok masuk, keluar, transfer, penyesuaian inventaris, impor CSV)</li>
+    </ul>
+    <div class="box box-check"><strong>🔍 Perlu dikonfirmasi: impor ulang CSV cadangan riwayat</strong>Prosedur dan perilaku pemulihan stok melalui impor ulang CSV cadangan riwayat perlu dikonfirmasi di perangkat nyata.</div>
+    <div class="box box-hint"><strong>Tips operasional</strong>Menjalankan cadangan riwayat secara rutin — mingguan atau bulanan — berarti jika ada masalah, Anda dapat melacak dengan tepat bagaimana level stok berubah dari waktu ke waktu dan memulihkan dengan lebih akurat.</div>
+  </section>
+
+  <section class="chapter" id="reorder-price">
+    <div class="chapter-head"><div class="ch-no">BAB 11</div><h2>Acuan Pengisian Ulang dan Harga</h2></div>
+    <h3>Acuan pengisian ulang</h3>
+    <p>Menetapkan acuan pengisian ulang di Katalog Produk memberikan nilai referensi: saat stok turun di bawah nilai ini, Anda dapat mengenali sekilas bahwa pengisian ulang diperlukan. Ini adalah indikator untuk mengelola waktu pengisian ulang.</p>
+    <div class="box box-check"><strong>Pengecekan kebutuhan pengisian ulang di layar Pengecekan Stok</strong>Pengecekan Stok menampilkan total per produk secara default. Pengecekan kebutuhan pengisian ulang membandingkan total stok gabungan dari semua lokasi dengan "Sertakan dalam pengecekan kebutuhan pengisian ulang" diaktifkan dengan acuan pengisian ulang produk. Saat melihat stok satu lokasi secara individual, pengecekan kebutuhan pengisian ulang tidak ditampilkan atau dianggap tidak aktif.</div>
+    <div class="box box-check"><strong>🔍 Perlu dikonfirmasi: tampilan panduan pengisian ulang</strong>Cara tampilan panduan pengisian ulang saat stok berada di bawah acuan perlu dikonfirmasi pada perangkat nyata.</div>
+    <h3>Harga</h3>
+    <p>Anda dapat mendaftarkan harga untuk setiap produk di Katalog Produk. Harga dirujuk untuk menghitung total nilai stok atau menghasilkan laporan. Detail tentang pengaturan mata uang dan metode pembulatan perlu dikonfirmasi.</p>
+    <h3>Kombinasi dengan kategori</h3>
+    <p>Dengan mengaitkan produk ke kategori, katalog lebih mudah diatur dan daftar dapat ditinjau berdasarkan jenis produk.</p>
+    <div class="box box-warn"><strong>Perhatian</strong>Informasi harga dan perhitungan terkait adalah fitur aplikasi. Pastikan secara terpisah apakah sesuai untuk catatan operasional Anda.</div>
+  </section>
+
+  <section class="chapter" id="usecase">
+    <div class="chapter-head"><div class="ch-no">BAB 12</div><h2>Contoh Alur Kerja — Versi Lengkap</h2></div>
+    <h3>Contoh 1: Mengelola dua lokasi — Gudang dan Toko</h3>
+    <ol class="steps">
+      <li>Daftarkan "Gudang" dan "Toko A" di Katalog Lokasi.</li>
+      <li>Daftarkan produk di Katalog Produk dan tetapkan stok awal di Gudang.</li>
+      <li>Saat toko membutuhkan pengisian ulang, gunakan <strong>Transfer Stok</strong> untuk memindahkan stok dari Gudang ke Toko A.</li>
+      <li>Setelah penjualan di toko, catat pengurangan melalui <strong>Stok Keluar</strong>.</li>
+      <li>Secara berkala, lakukan stok opname dan gunakan <strong>Terapkan hasil stok opname</strong> untuk menyelaraskan stok sistem dengan hitungan nyata.</li>
+      <li>Setiap bulan, ekspor <strong>Cadangan riwayat</strong> dan arsipkan.</li>
+    </ol>
+    <h3>Contoh 2: Siklus inventaris berkala</h3>
+    <ol class="steps">
+      <li>Di akhir bulan, masukkan hitungan nyata dengan aplikasi Stok Opname (versi Lengkap).</li>
+      <li>Konfirmasi hasil hitungan nyata.</li>
+      <li>Gunakan <strong>Terapkan hasil stok opname</strong> untuk mendorong selisih ke modul stok.</li>
+      <li>Tinjau entri <strong>Penyesuaian inventaris</strong> di Riwayat Stok untuk mengonfirmasi perubahan.</li>
+      <li>Ekspor dan simpan set CSV cadangan lengkap.</li>
+    </ol>
+    <div class="box box-hint"><strong>Tips: integrasi inventaris</strong>Untuk panduan detail tentang versi Lengkap stok opname, lihat <a href="04_stocktake_full_id.html">④ Stok Opname: versi Lengkap</a>.</div>
+  </section>
+
+  <section class="chapter" id="notes">
+    <div class="chapter-head"><div class="ch-no">BAB 13</div><h2>Catatan Penting</h2></div>
+    <div class="box box-danger"><strong>Ganti stok CSV saat ini</strong>Ganti Stok Saat Ini menimpa jumlah stok dengan nilai CSV. Produk yang tidak ada di CSV mungkin memiliki stok yang diatur ke 0. <strong>Sebelum operasi ini, selalu ekspor CSV cadangan.</strong></div>
+    <div class="box box-danger"><strong>Penerapan hasil stok opname</strong>Penerapan hasil stok opname menulis ulang jumlah stok. Apakah penerapan yang sudah selesai dapat dibatalkan perlu dikonfirmasi. <strong>Sebelum operasi ini, selalu ekspor CSV cadangan.</strong></div>
+    <div class="box box-danger"><strong>Penghapusan atau penimpaan data katalog</strong>Menghapus item dari Katalog Produk atau Katalog Lokasi dapat mempengaruhi data stok. Saat catatan tidak lagi diperlukan, pertimbangkan untuk <strong>menonaktifkan</strong>, bukan menghapusnya. Apakah penghapusan diizinkan dan apakah catatan yang dihapus dapat dipulihkan perlu dikonfirmasi di perangkat.</div>
+    <div class="box box-warn"><strong>Transfer Stok: asal dan tujuan harus berbeda</strong>Jangan pernah memilih lokasi yang sama sebagai asal dan tujuan dalam transfer. Dapat menyebabkan perubahan data yang tidak terduga.</div>
+    <div class="box box-hint"><strong>Kolom stok di layar Stok Keluar</strong>Stok yang ditampilkan di layar Stok Keluar hanya untuk referensi — menampilkan level stok saat ini dan tidak dapat diedit. Menyimpan jumlah keluar akan mengurangi stok lokasi yang dipilih.</div>
+    <div class="box box-warn"><strong>Harga dan ketentuan pembelian</strong>Untuk harga pembelian dan ketentuan penjualan Buka Kunci Lengkap, lihat daftar di Google Play. Dokumen ini tidak menyertakan informasi harga.</div>
+    <div class="box box-hint">
+      <strong>Prinsip operasional</strong>
+      <ul>
+        <li>Sebelum operasi yang membuat perubahan masif pada stok (penggantian, penerapan, penghapusan), selalu buat cadangan terlebih dahulu.</li>
+        <li>Saat mengimpor CSV, baca layar pratinjau atau konfirmasi sebelum menjalankan.</li>
+        <li>Dengan hanya satu lokasi, gunakan Stok Masuk, Keluar, atau Edit, bukan Transfer Stok.</li>
+      </ul>
+    </div>
+  </section>
+
+  <div class="summary-box" id="summary">
+    <h3>📌 Poin Utama Bab Ini</h3>
+    <ul>
+      <li>Buka Kunci Lengkap menghapus semua batas data dan riwayat, serta mengaktifkan acuan pengisian ulang, harga, Katalog Kategori, pengelolaan lokasi, transfer stok, penerapan inventaris, dan cadangan CSV.</li>
+      <li>Tiga jenis katalog bekerja sama: Katalog Produk (item dalam stok), Katalog Kategori (kelompok klasifikasi), Katalog Lokasi (tempat penyimpanan).</li>
+      <li>Transfer Stok hanya valid antara dua lokasi yang berbeda — jangan pernah menggunakan lokasi yang sama sebagai asal dan tujuan.</li>
+      <li>Penerapan hasil stok opname menyinkronkan hitungan nyata dengan stok sistem. Selisihnya dicatat sebagai entri penyesuaian inventaris di riwayat.</li>
+      <li>Sebelum operasi yang tidak dapat dibatalkan seperti Ganti Stok Saat Ini, Terapkan Data Inventaris, atau penghapusan, selalu buat cadangan.</li>
+      <li>Menjalankan cadangan riwayat secara rutin (mingguan atau bulanan) mengurangi risiko data yang tidak dapat dipulihkan.</li>
+    </ul>
+  </div>
+  <div class="confirm-box" id="confirm">
+    <h3>🔍 Hal-hal yang Perlu Dikonfirmasi</h3>
+    <ul>
+      <li>Kondisi tepat penerapan hasil stok opname (waktu, penanganan multi-lokasi, perilaku pembatalan)</li>
+      <li>Prosedur dan perilaku pemulihan stok melalui impor ulang CSV cadangan riwayat</li>
+      <li>Apakah indikator atau panduan dipicu saat stok turun di bawah acuan pengisian ulang, dan cara kerjanya</li>
+      <li>Pengaturan mata uang dan metode pembulatan untuk harga</li>
+      <li>Apakah catatan Katalog Produk dan Lokasi dapat dihapus, dan apakah yang dihapus dapat dipulihkan</li>
+      <li>Harga pembelian dan ketentuan penjualan Buka Kunci Lengkap (konfirmasi di Google Play)</li>
+      <li>Apakah Transfer Stok yang sudah dikonfirmasi dapat dibatalkan</li>
+    </ul>
+  </div>
+</div>
+<footer>Manual Quantiventra · Informasi terkini tersedia di layar aplikasi.<p style="margin-top:4px;"><a href="privacy_id.html">Kebijakan Privasi</a></p></footer>
+</body></html>

@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quantiventra – Gestão de estoque – Plano Padrão</title>
+<style>*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;font-size:15px;line-height:1.8;color:#1a2535;background:#f4f7fb;}
+a{color:#1a5fa8;text-decoration:none;}a:hover{text-decoration:underline;}
+.site-nav{background:#1a3a5c;color:#fff;padding:0;}.site-nav .nav-inner{max-width:960px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:stretch;}
+.site-nav a{color:#cde;padding:10px 13px;font-size:12px;display:block;border-right:1px solid #2a4a6c;white-space:nowrap;}
+.site-nav a:hover{background:#2a5090;text-decoration:none;}.site-nav a.active{background:#2a6cbe;color:#fff;font-weight:bold;}
+.page-header{background:linear-gradient(135deg,#1a3a5c 0%,#2a6cbe 100%);color:#fff;padding:40px 20px 30px;}
+.page-header .inner{max-width:960px;margin:0 auto;}.page-header .app-name{font-size:13px;opacity:.8;}
+.page-header h1{font-size:22px;font-weight:700;margin-top:6px;line-height:1.4;}.page-header .subtitle{font-size:14px;opacity:.85;margin-top:8px;}
+.scope-box{background:rgba(255,255,255,.15);border-left:4px solid #7ecfff;padding:12px 16px;margin-top:16px;border-radius:4px;font-size:13px;}
+.container{max-width:960px;margin:0 auto;padding:30px 16px;}
+.toc{background:#fff;border:1px solid #c8d8ec;border-radius:8px;padding:24px 28px;margin-bottom:32px;}
+.toc h2{font-size:16px;font-weight:700;color:#1a3a5c;border-bottom:2px solid #2a6cbe;padding-bottom:8px;margin-bottom:14px;}
+.toc ol{margin-left:18px;}.toc li{margin:5px 0;font-size:14px;}
+.chapter{background:#fff;border-radius:8px;box-shadow:0 1px 4px rgba(0,0,0,.08);padding:28px 28px 24px;margin-bottom:28px;}
+.chapter-head{border-left:5px solid #2a6cbe;padding-left:14px;margin-bottom:20px;}
+.chapter-head .ch-no{font-size:12px;color:#2a6cbe;font-weight:700;}.chapter-head h2{font-size:20px;font-weight:700;color:#1a2535;margin-top:2px;}
+h3{font-size:16px;font-weight:700;color:#1a3a5c;border-bottom:1px solid #dde8f5;padding-bottom:5px;margin:22px 0 12px;}
+h4{font-size:14px;font-weight:700;color:#2a4a6c;margin:16px 0 8px;}
+p{margin-bottom:12px;}ul,ol{margin-left:20px;margin-bottom:12px;}li{margin-bottom:5px;}
+.steps{counter-reset:step;list-style:none;margin-left:0;}
+.steps li{counter-increment:step;padding:9px 12px 9px 46px;position:relative;background:#f8fbff;border:1px solid #dde8f5;border-radius:6px;margin-bottom:6px;}
+.steps li::before{content:counter(step);position:absolute;left:12px;top:50%;transform:translateY(-50%);width:24px;height:24px;background:#2a6cbe;color:#fff;border-radius:50%;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;}
+.table-wrap{overflow-x:auto;margin-bottom:16px;}
+table{width:100%;border-collapse:collapse;font-size:13px;min-width:380px;}
+th{background:#1a3a5c;color:#fff;padding:9px 12px;text-align:left;white-space:nowrap;}
+td{padding:8px 12px;border-bottom:1px solid #dde8f5;vertical-align:top;}tr:nth-child(even) td{background:#f4f7fb;}
+code{font-family:'Courier New',monospace;background:rgba(0,80,160,.08);color:#004080;padding:2px 6px;border-radius:3px;font-size:12px;}
+.box{border-radius:6px;padding:13px 16px;margin:14px 0;font-size:13px;}
+.box-warn{background:#fffbe6;border-left:4px solid #f5a623;color:#7a5700;}
+.box-danger{background:#fff0f0;border-left:4px solid #d43f3f;color:#7a0000;}
+.box-hint{background:#e8f4ff;border-left:4px solid #2a6cbe;color:#0a3060;}
+.box-check{background:#f4eeff;border-left:4px solid #8c4fc8;color:#3a0070;}
+.box strong{display:block;margin-bottom:4px;}
+figure{max-width:280px;width:100%;margin:18px auto;text-align:center;}
+figure img{display:block;width:100%;max-width:280px;height:auto;margin:0 auto;border:1px solid #c8d8ec;border-radius:6px;box-shadow:0 2px 8px rgba(0,0,0,.1);}
+figcaption{font-size:12px;color:#5a7a99;margin-top:6px;}
+.img-pending{display:flex;align-items:center;justify-content:center;max-width:280px;width:100%;box-sizing:border-box;background:#e8eef5;border:2px dashed #99b8d8;border-radius:6px;height:160px;color:#5a7a99;font-size:13px;margin:18px auto;}
+.diff-add{background:#e8fff0;border-left:4px solid #2a9c5c;border-radius:6px;padding:12px 16px;margin:14px 0;font-size:13px;}
+.diff-add strong{display:block;color:#1a6c3c;margin-bottom:4px;}
+.flow-box{background:#f4f7fb;border:1px solid #c8d8ec;border-radius:8px;padding:20px;margin:16px 0;}
+.flow-box h4{color:#1a3a5c;margin-top:0;}
+.flow-arrow{text-align:center;font-size:20px;color:#2a6cbe;margin:4px 0;}
+.flow-step{background:#fff;border:1px solid #c8d8ec;border-radius:6px;padding:10px 16px;margin:4px 0;font-size:13px;}
+.flow-step strong{color:#1a3a5c;}
+.summary-box{background:linear-gradient(135deg,#e8f4ff,#f0f8ff);border:1px solid #99c8ec;border-radius:8px;padding:20px 24px;margin-top:32px;}
+.summary-box h3{border:none;color:#1a3a5c;margin-top:0;}
+.confirm-box{background:#fdf4ff;border:1px solid #c8a0e0;border-radius:8px;padding:20px 24px;margin-top:16px;}
+.confirm-box h3{border:none;color:#5a0090;margin-top:0;}
+.check{color:#2e7d32;font-weight:700;}.cross{color:#c62828;}
+th.pro-col{background:#5a2a8c;}
+.feature-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px;margin:16px 0;}
+.feature-card{background:#f4f7fb;border:1px solid #c8d8ec;border-radius:8px;padding:16px;}
+.feature-card h4{color:#1a3a5c;margin-top:0;margin-bottom:6px;font-size:14px;}
+.feature-card p{font-size:13px;margin:0;color:#3a5a7a;}
+.feature-card.pro-card{background:#f4eeff;border-color:#c8a0e0;}
+.feature-card.pro-card h4{color:#5a2a8c;}
+.trouble{border:1px solid #c8d8ec;border-radius:8px;margin:14px 0;overflow:hidden;}
+.trouble-q{background:#eef6fd;padding:13px 18px;font-weight:700;font-size:14px;color:#1a3a5c;display:flex;align-items:flex-start;gap:10px;}
+.trouble-q::before{content:'Q';background:#2a6cbe;color:#fff;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900;flex-shrink:0;margin-top:1px;}
+.trouble-a{padding:13px 18px 14px 50px;font-size:13.5px;border-top:1px solid #c8d8ec;line-height:1.9;}
+.trouble-a ul{margin-left:16px;}
+.legal-block{background:#f5f5f5;border:1px solid #ddd;border-radius:8px;padding:20px 24px;font-size:12.5px;color:#444;line-height:1.9;margin:14px 0;}
+.legal-block h4{font-size:13px;color:#333;margin:18px 0 6px;border-bottom:1px solid #ddd;padding-bottom:4px;}
+.legal-block h4:first-child{margin-top:0;}
+footer{text-align:center;font-size:12px;color:#8a9aaa;padding:30px 16px;border-top:1px solid #dde8f5;margin-top:20px;}
+@media(max-width:640px){.page-header h1{font-size:18px;}.chapter{padding:20px 16px;}.site-nav a{padding:8px 9px;font-size:11px;}}
+@media print{body{background:#fff;font-size:12px;}.site-nav{display:none;}.chapter{box-shadow:none;border:1px solid #ccc;page-break-inside:avoid;}.page-header{background:#1a3a5c !important;-webkit-print-color-adjust:exact;print-color-adjust:exact;}}
+</style>
+</head>
+<body>
+<nav class="site-nav"><div class="nav-inner">
+<a href="01_top_settings_common_pt-BR.html">① Início / Configurações</a>
+<a href="02_stocktake_free_pt-BR.html">② Inventário físico: gratuito</a>
+<a href="03_stocktake_simple_pt-BR.html">③ Inventário físico: padrão</a>
+<a href="04_stocktake_full_pt-BR.html">④ Inventário físico: completo</a>
+<a href="05_inventory_free_pt-BR.html">⑤ Gestão de estoque: gratuita</a>
+<a class="active" href="06_inventory_simple_pt-BR.html">⑥ Gestão de estoque: padrão</a>
+<a href="07_inventory_full_pt-BR.html">⑦ Gestão de estoque: completa</a>
+</div></nav>
+<header class="page-header"><div class="inner">
+<div class="app-name">Manual do Quantiventra</div>
+<h1>⑥ Gestão de estoque — Plano Padrão (Desbloqueio Padrão)</h1>
+<div class="subtitle">O que o Plano Padrão acrescenta, entrada, saída, consulta de estoque, histórico, importação/exportação CSV, substituição de estoque e adição como entrada</div>
+<div class="scope-box"><strong>Tópicos abordados nesta página:</strong> O que o Plano Padrão de Gestão de estoque acrescenta / Diferenças em relação ao Plano Gratuito / Entrada / Saída / Consulta de estoque / Histórico de estoque / Tratamento de localizações / Importação/exportação CSV / Substituir estoque atual / Adicionar como entrada / Observações importantes / Fluxos de trabalho recomendados</div>
+</div></header>
+<div class="container">
+<nav class="toc"><h2>Índice</h2><ol>
+<li><a href="#overview">Visão geral do Plano Padrão</a></li>
+<li><a href="#diff">Diferenças em relação ao Plano Gratuito</a></li>
+<li><a href="#receive">Entrada (recebimento)</a></li>
+<li><a href="#issue">Saída (expedição)</a></li>
+<li><a href="#stock-check">Consulta de estoque</a></li>
+<li><a href="#history">Histórico de estoque</a></li>
+<li><a href="#location">Tratamento de localizações</a></li>
+<li><a href="#csv">Importação / Exportação CSV</a></li>
+<li><a href="#csv-replace">Substituir estoque atual</a></li>
+<li><a href="#csv-add">Adicionar como entrada</a></li>
+<li><a href="#notes">Observações importantes</a></li>
+<li><a href="#tips">Fluxo de trabalho recomendado</a></li>
+<li><a href="#summary">Pontos-chave do capítulo</a></li>
+<li><a href="#confirm">Observações antes de usar</a></li>
+</ol></nav>
+
+<section class="chapter" id="overview">
+<div class="chapter-head"><div class="ch-no">CAPÍTULO 1</div><h2>Visão geral do Plano Padrão</h2></div>
+<p>O Plano Padrão de Gestão de estoque permite trabalhar com mais registros do que o Plano Gratuito. Você pode realizar com mais conforto as operações diárias de entrada, saída, consulta de estoque e histórico de estoque, e o escopo de gerenciamento de localizações também é ampliado.</p>
+<h3>Limites do Plano Padrão</h3>
+<div class="table-wrap"><table>
+<tr><th>Item</th><th>Plano Gratuito</th><th>Plano Padrão</th></tr>
+<tr><td>Registros de cadastro</td><td>Até 30</td><td>Até 300</td></tr>
+<tr><td>Registros de histórico de estoque</td><td>Até 30</td><td>Até 1.000</td></tr>
+<tr><td>Registros de exportação</td><td>Até 30</td><td>Até 300</td></tr>
+<tr><td>Bloqueio de rotação da tela</td><td>✗</td><td>○</td></tr>
+<tr><td>Cadastro de localizações</td><td>Limitado no Plano Gratuito</td><td>Disponível dentro dos limites do Plano Padrão</td></tr>
+<tr><td>Edição direta do total acumulado registrado</td><td>✗</td><td>✗ (requer Plano Completo)</td></tr>
+</table></div></section>
+
+<section class="chapter" id="diff">
+<div class="chapter-head"><div class="ch-no">CAPÍTULO 2</div><h2>Diferenças em relação ao Plano Gratuito</h2></div>
+<div class="diff-add">
+<strong>✅ O que o Plano Padrão acrescenta ou amplia</strong>
+<ul style="margin-top:6px;">
+<li>Limite de registros de cadastro ampliado de 30 → 300</li>
+<li>Limite de histórico de estoque ampliado de 30 → 1.000</li>
+<li>Limite de exportação ampliado de 30 → 300</li>
+<li>Bloqueio de rotação da tela disponível</li>
+<li>Escopo ampliado para gerenciamento de localizações</li>
+<li>Mais facilidade para manter entradas, saídas, consultas de estoque e histórico no dia a dia</li>
+</ul>
+</div>
+</section>
+
+<section class="chapter" id="receive">
+<div class="chapter-head"><div class="ch-no">CAPÍTULO 3</div><h2>Entrada (recebimento)</h2></div>
+<p>A operação de Entrada aumenta o estoque. Use-a quando mercadorias chegarem — em compras, recebimentos e transações similares.</p><h3>Procedimento de entrada</h3>
+<ol class="steps">
+<li>Acesse <strong>Gestão de estoque → Entrada</strong>.</li>
+<li>Leia um código de barras ou insira o código do produto.</li>
+<li>Confirme o nome do produto. Se o código não estiver cadastrado, prossiga para criar um novo item no Cadastro de produtos.</li>
+<li>No novo item do Cadastro de produtos, cadastre o nome do produto, o preço de venda e o ponto de reposição.</li>
+<li>Após salvar, retorne à tela de Entrada — o código e o nome do produto cadastrados serão preenchidos automaticamente.</li>
+<li>Selecione a localização de destino (depósito, loja etc.).</li>
+<li>Insira a quantidade recebida.</li>
+<li>Toque em <strong>Salvar</strong>. A quantidade será adicionada ao estoque imediatamente.</li>
+<li>Confirme a atualização na Consulta de estoque ou no Histórico de estoque.</li>
+</ol>
+<div class="box box-hint"><strong>💡 Sobre os atributos do Cadastro de produtos</strong>O preço de venda e o ponto de reposição são propriedades gerenciadas no Cadastro de produtos — eles não são inseridos a cada transação de entrada. Na tela normal de Entrada, concentre-se em informar quantidade, localização e observações.</div>
+<div class="box box-warn"><strong>⚠ Observação</strong>A entrada é refletida no estoque imediatamente. Sempre confirme a quantidade e a localização antes de salvar. Se perceber uma quantidade incorreta após salvar, revise o Histórico de estoque e siga as orientações no app para corrigir, estornar ou registrar um ajuste conforme adequado.</div>
+</section>
+
+<section class="chapter" id="issue">
+<div class="chapter-head"><div class="ch-no">CAPÍTULO 4</div><h2>Saída (expedição)</h2></div>
+<p>A operação de Saída reduz o estoque. Use-a para vendas, transferências de saída, entregas e transações similares.</p><h3>Procedimento de saída</h3>
+<ol class="steps">
+<li>Acesse <strong>Gestão de estoque → Saída</strong>.</li>
+<li>Leia um código de barras ou insira o código do produto.</li>
+<li>Confirme o nome do produto.</li>
+<li>Selecione a localização de origem (de onde o estoque sairá).</li>
+<li>Insira a quantidade de saída.</li>
+<li>Toque em <strong>Salvar</strong>. A quantidade será subtraída do estoque imediatamente.</li>
+<li>Confirme a atualização na Consulta de estoque ou no Histórico de estoque.</li>
+</ol>
+<div class="box box-hint"><strong>💡 Sobre o campo de estoque</strong>O campo de estoque na tela de Saída mostra o estoque atual do produto e da localização selecionados — é um campo de exibição, não um campo de entrada editável. O estoque diminui como resultado do salvamento da quantidade de saída.</div>
+<div class="box box-danger"><strong>🚨 Importante</strong>Não insira uma quantidade de saída superior ao estoque atual. Confira o nível de estoque por localização antes de informar a quantidade a sair.</div>
+</section>
+
+<section class="chapter" id="stock-check">
+<div class="chapter-head"><div class="ch-no">CAPÍTULO 5</div><h2>Consulta de estoque</h2></div>
+<p>A Consulta de estoque exibe inicialmente o total de estoque combinado por produto. O cálculo de reposição compara, com o ponto de reposição no Cadastro de produtos, o total de estoque de todas as localizações que tenham "Incluir no cálculo de reposição" ativado.</p><h3>Procedimento de consulta de estoque</h3>
+<ol class="steps">
+<li>Acesse <strong>Gestão de estoque → Consulta de estoque</strong>.</li>
+<li>Encontre o produto que deseja verificar (por pesquisa ou rolagem).</li>
+<li>Identifique os produtos abaixo do ponto de reposição (exibidos como itens que precisam de reposição).</li>
+<li>Toque em um produto para ver a divisão por localização, o histórico e as informações detalhadas. Na visualização de divisão por localização, o cálculo de reposição não é exibido ou é tratado como inativo.</li>
+</ol>
+</section>
+
+<section class="chapter" id="history">
+<div class="chapter-head"><div class="ch-no">CAPÍTULO 6</div><h2>Histórico de estoque</h2></div>
+<p>O Histórico de estoque exibe o registro de todas as operações de entrada, saída, transferência, ajuste de inventário físico, estoque inicial e importação CSV.</p><h3>O que é possível ver no Histórico de estoque</h3>
+<ul>
+<li>Data/hora e tipo de operação (entrada, saída, transferência, ajuste etc.)</li>
+<li>Código e nome do produto</li>
+<li>Localização e variação de quantidade</li>
+<li>Observações</li>
+</ul>
+<div class="box box-hint"><strong>💡 Dica</strong>Se as quantidades em estoque não baterem, role o Histórico de estoque para trás e verifique se houve erros de lançamento ou ajustes inesperados.</div>
+</section>
+
+<section class="chapter" id="location">
+<div class="chapter-head"><div class="ch-no">CAPÍTULO 7</div><h2>Tratamento de localizações</h2></div>
+<p>O Plano Padrão usa principalmente as localizações básicas "Depósito" e "Loja".</p>
+<div class="table-wrap"><table>
+<tr><th>Modo</th><th>Localizações disponíveis</th></tr>
+<tr><td>Simples A</td><td>Apenas depósito</td></tr>
+<tr><td>Simples B</td><td>Depósito + Loja</td></tr>
+<tr><td>Simples C</td><td>Apenas loja</td></tr>
+</table></div>
+<h3>Transferências de estoque</h3>
+<p>Uma transferência de estoque movimenta quantidades de estoque de uma localização para outra.</p>
+<div class="box box-warn"><strong>⚠ Observação</strong>Não faça transferência entre a mesma localização. Se houver apenas uma localização (por exemplo, Simples A), transferências de estoque são desnecessárias — use Entrada, Saída ou uma correção.</div>
+<div class="box box-hint"><strong>💡 Dica</strong>Para usar localizações detalhadas (por exemplo, números de prateleira), é necessário mudar para o modo <strong>Detalhado</strong> nas configurações. O modo Detalhado é usado ao acessar funcionalidades do Plano Completo.</div>
+</section>
+
+<section class="chapter" id="csv">
+<div class="chapter-head"><div class="ch-no">CAPÍTULO 8</div><h2>Importação / Exportação CSV</h2></div>
+<p>A Gestão de estoque permite importar, exportar e fazer backup de dados de estoque usando arquivos CSV.</p>
+<div class="box box-danger"><strong>🚨 Importante</strong>As operações de importação CSV podem alterar seus dados significativamente. Sempre exporte um CSV de backup antes de importar.</div>
+<h3>Especificações do CSV de estoque</h3>
+<div class="table-wrap"><table>
+<tr><th>Tipo de CSV</th><th>Finalidade</th><th>Colunas principais</th><th>Obrigatório/Opcional</th><th>Observações</th><th>Disponível em</th></tr>
+<tr><td>CSV de estoque (com coluna de localização)</td><td>Importar dados de estoque específicos por localização</td><td>location, item_code, quantity, product_name</td><td>location, item_code e quantity obrigatórios; product_name obrigatório condicionalmente</td><td>Coluna product_name obrigatória para códigos não cadastrados</td><td>Gestão de estoque padrão ou superior</td></tr>
+<tr><td>CSV de estoque (sem coluna de localização)</td><td>Importar dados de estoque para uma localização especificada</td><td>item_code, quantity, product_name</td><td>item_code e quantity obrigatórios</td><td>Selecione a localização de destino no momento da importação</td><td>Gestão de estoque padrão ou superior</td></tr>
+<tr><td>CSV de backup</td><td>Backup completo dos dados e restauração</td><td>Produtos, estoque atual, localizações, categorias — vários arquivos</td><td>Conjunto completo de backup obrigatório</td><td>Pode ser dividido em vários arquivos</td><td>Gestão de estoque padrão ou superior</td></tr>
+</table></div>
+<h3>Uso da tela de mapeamento de colunas</h3>
+<p>Ao importar um CSV, você seleciona qual coluna corresponde ao código do produto, nome do produto, quantidade, localização etc.</p>
+<ol class="steps">
+<li>Selecione o arquivo CSV.</li>
+<li>Na tela de mapeamento de colunas, associe cada coluna do CSV ao campo correspondente (código do produto, quantidade etc.).</li>
+<li>Confirme as associações e execute a importação.</li>
+</ol><div class="box box-warn">
+<strong>⚠ Erros comuns na importação CSV</strong>
+<ul style="margin-top:6px;">
+<li>Colunas obrigatórias ausentes</li>
+<li>A mesma coluna associada a mais de um campo</li>
+<li>Coluna de quantidade vazia ou não numérica</li>
+<li>Nenhuma coluna de nome do produto selecionada para códigos não cadastrados</li>
+<li>Sem coluna de localização e sem localização de destino selecionada</li>
+<li>CSV vazio ou sem linhas importáveis</li>
+</ul>
+</div></section>
+
+<section class="chapter" id="csv-replace">
+<div class="chapter-head"><div class="ch-no">CAPÍTULO 9</div><h2>Substituir estoque atual</h2></div>
+<p>Substituir estoque atual é um modo de importação CSV que trata as quantidades do arquivo como o novo estoque atual. O histórico existente é preservado, e a diferença é registrada como um lançamento de ajuste no histórico.</p>
+<div class="box box-danger">
+<strong>🚨 Importante: use Substituir estoque atual com cautela</strong>
+<ul style="margin-top:6px;">
+<li>Linhas de estoque ausentes no CSV podem ser definidas como 0.</li>
+<li>Esta operação pode afetar significativamente os dados de estoque existentes — sempre faça backup antes.</li>
+<li>Leia a tela de confirmação com atenção antes de executar.</li>
+</ul>
+</div>
+<h3>Procedimento de substituição do estoque atual</h3>
+<ol class="steps">
+<li>Exporte um CSV de backup (obrigatório).</li>
+<li>Acesse <strong>Gestão de estoque → Importar CSV → Substituir estoque atual</strong>.</li>
+<li>Selecione o arquivo CSV a importar.</li>
+<li>Confirme o mapeamento de colunas na tela de mapeamento.</li>
+<li>Na tela de confirmação, revise cuidadosamente os detalhes da substituição (conteúdo do ajuste).</li>
+<li>Se tudo estiver correto, execute a importação.</li>
+<li>Verifique os lançamentos de ajuste no Histórico de estoque.</li>
+</ol></section>
+
+<section class="chapter" id="csv-add">
+<div class="chapter-head"><div class="ch-no">CAPÍTULO 10</div><h2>Adicionar como entrada</h2></div>
+<p>Adicionar como entrada é um modo de importação CSV que adiciona as quantidades do arquivo ao estoque existente como uma transação de entrada — diferente de Substituir estoque atual, ele adiciona ao estoque atual em vez de sobrescrevê-lo.</p>
+<div class="table-wrap"><table>
+<tr><th>Modo de importação</th><th>Comportamento</th><th>Exemplo de uso</th></tr>
+<tr><td>Substituir estoque atual</td><td>Trata as quantidades do CSV como o novo estoque atual. Registra as diferenças como histórico de ajuste</td><td>Correção de estoque após inventário físico, configuração inicial</td></tr>
+<tr><td>Adicionar como entrada</td><td>Adiciona as quantidades do CSV ao estoque atual como entrada</td><td>Importação em massa de entradas</td></tr>
+</table></div>
+<div class="box box-hint"><strong>💡 Dica</strong>Use <strong>Substituir estoque atual</strong> ao configurar o estoque pela primeira vez, e <strong>Adicionar como entrada</strong> ao acrescentar itens ao estoque existente. Confirme qual modo você precisa antes de executar a importação.</div>
+</section>
+
+<section class="chapter" id="notes">
+<div class="chapter-head"><div class="ch-no">CAPÍTULO 11</div><h2>Observações importantes</h2></div>
+<div class="box box-warn"><strong>⚠ Configuração para localizações detalhadas</strong>Para usar localizações detalhadas, mude para o modo <strong>Detalhado</strong> nas configurações. As localizações detalhadas não aparecerão se você ainda estiver no modo Simples A/B/C.</div>
+<div class="box box-warn"><strong>⚠ Verifique localização e quantidade antes de agir</strong>Entrada, saída, transferências e importações CSV são refletidas no estoque imediatamente. Confirme a localização e a quantidade antes de cada operação.</div>
+<div class="box box-danger"><strong>🚨 Faça backup antes de operações CSV</strong>Sempre faça backup antes de usar Substituir estoque atual, Adicionar como entrada e operações de restauração de backup.</div>
+</section>
+
+<section class="chapter" id="tips">
+<div class="chapter-head"><div class="ch-no">CAPÍTULO 12</div><h2>Fluxo de trabalho recomendado</h2></div>
+<h3>Registre entradas e saídas diariamente</h3>
+<ul>
+<li>Registre o estoque recebido via Entrada sempre que mercadorias chegarem.</li>
+<li>Registre o estoque que saiu via Saída sempre que mercadorias saírem.</li>
+<li>Defina pontos de reposição no Cadastro de produtos e use a Consulta de estoque para monitorar o momento de reposição.</li>
+</ul>
+<h3>Verificações regulares de estoque</h3>
+<ul>
+<li>Confira as quantidades em estoque regularmente — semanalmente, mensalmente ou conforme necessário.</li>
+<li>Combine com o inventário físico para verificar periodicamente se as contagens reais correspondem aos registros de estoque.</li>
+</ul>
+<h3>Backups regulares</h3>
+<ul>
+<li>Exporte um CSV de backup pelo menos uma vez por mês e salve-o no PC ou em armazenamento na nuvem.</li>
+</ul>
+<div class="box box-hint"><strong>💡 Considere o upgrade para o Plano Completo se você…</strong>
+<ul style="margin-top:6px;">
+<li>Quer que os resultados do inventário físico atualizem o estoque automaticamente</li>
+<li>Precisa editar diretamente o total acumulado de estoque registrado</li>
+<li>Tem mais de 300 produtos</li>
+</ul>
+</div>
+</section>
+
+<div class="summary-box" id="summary">
+<h3>📌 Pontos-chave do capítulo</h3>
+<ul>
+<li>O Plano Padrão amplia os limites: até 300 registros de cadastro, 1.000 registros de histórico e 300 registros de exportação.</li>
+<li>Entradas e saídas são refletidas no estoque imediatamente — confirme quantidade e localização antes de salvar.</li>
+<li>O Histórico de estoque mostra um registro completo de todas as operações de entrada, saída, transferência e ajuste.</li>
+<li>A importação CSV tem dois modos — Substituir estoque atual e Adicionar como entrada. Sempre faça backup antes de usar qualquer um deles.</li>
+<li>As localizações são definidas pelos modos Simples A/B/C. Mude para o modo Detalhado para usar localizações detalhadas.</li>
+<li>A edição direta do total acumulado registrado requer o Plano Completo.</li>
+</ul>
+</div>
+
+<div class="confirm-box" id="confirm">
+<h3>🔍 Observações antes de usar</h3>
+<ul>
+<li>Use o Cadastro de localizações dentro das opções exibidas no app. Para gerenciar localizações detalhadas, verifique o modo atual e considere recursos do Plano Completo quando necessário.</li>
+<li>Se uma entrada ou saída foi salva incorretamente, revise o Histórico de estoque e siga as orientações no app para corrigir, estornar ou registrar um ajuste conforme adequado.</li>
+<li>Ao exportar um conjunto de CSV de backup, mantenha os arquivos gerados juntos e armazene-os com segurança.</li>
+<li>Fluxo real de operação da tela de Transferência de estoque.</li>
+<li>As telas de conferência e seleção de importação CSV foram adicionadas às seções correspondentes.</li>
+</ul>
+</div>
+</div>
+<footer>
+<p>Manual do Quantiventra | ⑥ Gestão de estoque — Plano Padrão</p>
+<p style="margin-top:4px;">Este manual pode ser atualizado sem aviso prévio. Consulte sempre a tela do app para obter as informações mais recentes.</p>
+<p style="margin-top:4px;"><a href="privacy_pt-BR.html">Política de Privacidade</a></p>
+</footer>
+</body>
+</html>

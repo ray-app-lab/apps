@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quantiventra – 库存盘点 免费版</title>
+<style>*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','Microsoft YaHei','Hiragino Sans GB',sans-serif;font-size:15px;line-height:1.9;color:#1a2535;background:#f4f7fb;}
+a{color:#1a5fa8;text-decoration:none;}a:hover{text-decoration:underline;}
+.site-nav{background:#1a3a5c;color:#fff;padding:0;}.site-nav .nav-inner{max-width:960px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:stretch;}
+.site-nav a{color:#cde;padding:10px 13px;font-size:12px;display:block;border-right:1px solid #2a4a6c;white-space:nowrap;}
+.site-nav a:hover{background:#2a5090;text-decoration:none;}.site-nav a.active{background:#2a6cbe;color:#fff;font-weight:bold;}
+.page-header{background:linear-gradient(135deg,#1a3a5c 0%,#2a6cbe 100%);color:#fff;padding:40px 20px 30px;}
+.page-header .inner{max-width:960px;margin:0 auto;}.page-header .app-name{font-size:13px;opacity:.8;}
+.page-header h1{font-size:22px;font-weight:700;margin-top:6px;line-height:1.5;}.page-header .subtitle{font-size:14px;opacity:.85;margin-top:8px;}
+.scope-box{background:rgba(255,255,255,.15);border-left:4px solid #7ecfff;padding:12px 16px;margin-top:16px;border-radius:4px;font-size:13px;}
+.container{max-width:960px;margin:0 auto;padding:30px 16px;}
+.toc{background:#fff;border:1px solid #c8d8ec;border-radius:8px;padding:24px 28px;margin-bottom:32px;}
+.toc h2{font-size:16px;font-weight:700;color:#1a3a5c;border-bottom:2px solid #2a6cbe;padding-bottom:8px;margin-bottom:14px;}
+.toc ol{margin-left:18px;}.toc li{margin:5px 0;font-size:14px;}
+.chapter{background:#fff;border-radius:8px;box-shadow:0 1px 4px rgba(0,0,0,.08);padding:28px 28px 24px;margin-bottom:28px;}
+.chapter-head{border-left:5px solid #2a6cbe;padding-left:14px;margin-bottom:20px;}
+.chapter-head .ch-no{font-size:12px;color:#2a6cbe;font-weight:700;}.chapter-head h2{font-size:20px;font-weight:700;color:#1a2535;margin-top:2px;}
+h3{font-size:16px;font-weight:700;color:#1a3a5c;border-bottom:1px solid #dde8f5;padding-bottom:5px;margin:22px 0 12px;}
+h4{font-size:14px;font-weight:700;color:#2a4a6c;margin:16px 0 8px;}
+p{margin-bottom:12px;}ul,ol{margin-left:20px;margin-bottom:12px;}li{margin-bottom:5px;}
+.steps{counter-reset:step;list-style:none;margin-left:0;}
+.steps li{counter-increment:step;padding:9px 12px 9px 46px;position:relative;background:#f8fbff;border:1px solid #dde8f5;border-radius:6px;margin-bottom:6px;}
+.steps li::before{content:counter(step);position:absolute;left:12px;top:50%;transform:translateY(-50%);width:24px;height:24px;background:#2a6cbe;color:#fff;border-radius:50%;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;}
+.table-wrap{overflow-x:auto;margin-bottom:16px;}
+table{width:100%;border-collapse:collapse;font-size:13px;min-width:380px;}
+th{background:#1a3a5c;color:#fff;padding:9px 12px;text-align:left;white-space:nowrap;}
+td{padding:8px 12px;border-bottom:1px solid #dde8f5;vertical-align:top;}tr:nth-child(even) td{background:#f4f7fb;}
+code{font-family:'Courier New',monospace;background:rgba(0,80,160,.08);color:#004080;padding:2px 6px;border-radius:3px;font-size:12px;}
+.box{border-radius:6px;padding:13px 16px;margin:14px 0;font-size:13px;}
+.box-warn{background:#fffbe6;border-left:4px solid #f5a623;color:#7a5700;}
+.box-danger{background:#fff0f0;border-left:4px solid #d43f3f;color:#7a0000;}
+.box-hint{background:#e8f4ff;border-left:4px solid #2a6cbe;color:#0a3060;}
+.box-check{background:#f4eeff;border-left:4px solid #8c4fc8;color:#3a0070;}
+.box strong{display:block;margin-bottom:4px;}
+figure{max-width:280px;width:100%;margin:18px auto;text-align:center;}
+figure img{display:block;width:100%;max-width:280px;height:auto;margin:0 auto;border:1px solid #c8d8ec;border-radius:6px;box-shadow:0 2px 8px rgba(0,0,0,.1);}
+figcaption{font-size:12px;color:#5a7a99;margin-top:6px;}
+.img-pending{display:flex;align-items:center;justify-content:center;max-width:280px;width:100%;box-sizing:border-box;background:#e8eef5;border:2px dashed #99b8d8;border-radius:6px;height:160px;color:#5a7a99;font-size:13px;margin:18px auto;}
+.diff-add{background:#e8fff0;border-left:4px solid #2a9c5c;border-radius:6px;padding:12px 16px;margin:14px 0;font-size:13px;}
+.diff-add strong{display:block;color:#1a6c3c;margin-bottom:4px;}
+.flow-box{background:#f4f7fb;border:1px solid #c8d8ec;border-radius:8px;padding:20px;margin:16px 0;}
+.flow-box h4{color:#1a3a5c;margin-top:0;}
+.flow-arrow{text-align:center;font-size:20px;color:#2a6cbe;margin:4px 0;}
+.flow-step{background:#fff;border:1px solid #c8d8ec;border-radius:6px;padding:10px 16px;margin:4px 0;font-size:13px;}
+.flow-step strong{color:#1a3a5c;}
+.summary-box{background:linear-gradient(135deg,#e8f4ff,#f0f8ff);border:1px solid #99c8ec;border-radius:8px;padding:20px 24px;margin-top:32px;}
+.summary-box h3{border:none;color:#1a3a5c;margin-top:0;}
+.confirm-box{background:#fdf4ff;border:1px solid #c8a0e0;border-radius:8px;padding:20px 24px;margin-top:16px;}
+.confirm-box h3{border:none;color:#5a0090;margin-top:0;}
+footer{text-align:center;font-size:12px;color:#8a9aaa;padding:30px 16px;border-top:1px solid #dde8f5;margin-top:20px;}
+@media(max-width:640px){.page-header h1{font-size:18px;}.chapter{padding:20px 16px;}.site-nav a{padding:8px 9px;font-size:11px;}}
+@media print{body{background:#fff;font-size:12px;}.site-nav{display:none;}.chapter{box-shadow:none;border:1px solid #ccc;page-break-inside:avoid;}.page-header{background:#1a3a5c !important;-webkit-print-color-adjust:exact;print-color-adjust:exact;}}
+</style>
+</head>
+<body>
+<nav class="site-nav"><div class="nav-inner">
+  <a href="01_top_settings_common_zh.html">① 主屏幕 / 设置</a>
+  <a href="02_stocktake_free_zh.html" class="active">② 盘点 免费版</a>
+  <a href="03_stocktake_simple_zh.html">③ 盘点 标准版</a>
+  <a href="04_stocktake_full_zh.html">④ 盘点 完整版</a>
+  <a href="05_inventory_free_zh.html">⑤ 库存 免费版</a>
+  <a href="06_inventory_simple_zh.html">⑥ 库存 标准版</a>
+  <a href="07_inventory_full_zh.html">⑦ 库存 完整版</a>
+</div></nav>
+<header class="page-header"><div class="inner">
+  <div class="app-name">Quantiventra 使用手册</div>
+  <h1>② 库存盘点 — 免费版</h1>
+  <div class="subtitle">功能说明、限制、逐步操作指南及推荐工作流程</div>
+  <div class="scope-box"><strong>本页涵盖内容：</strong>免费版盘点能做什么 / 免费版限制 / 逐步盘点操作 / 条码与数量输入 / 位置处理 / 历史记录查看 / CSV 导出限制 / 免费版无法使用的功能 / 推荐工作流程</div>
+</div></header>
+<div class="container">
+  <nav class="toc"><h2>目录</h2><ol>
+    <li><a href="#overview">免费版盘点概览</a></li>
+    <li><a href="#limits">免费版限制</a></li>
+    <li><a href="#howto">盘点操作步骤</a></li>
+    <li><a href="#input">条码、商品名称与数量输入</a></li>
+    <li><a href="#location">位置处理</a></li>
+    <li><a href="#history">查看盘点历史</a></li>
+    <li><a href="#csv">CSV 导出限制</a></li>
+    <li><a href="#cannot">免费版无法使用的功能</a></li>
+    <li><a href="#tips">免费版用户推荐工作流程</a></li>
+    <li><a href="#summary">本章要点</a></li>
+    <li><a href="#confirm">使用前注意事项</a></li>
+  </ol></nav>
+
+  <section class="chapter" id="overview">
+    <div class="chapter-head"><div class="ch-no">第1章</div><h2>免费版盘点概览</h2></div>
+    <p>库存盘点是指在现场实际清点商品数量并进行记录的操作。免费版可以用于体验基本的盘点流程。</p>
+    <p>盘点流程为：<strong>扫描商品 → 输入数量 → 保存 → 查看历史记录。</strong></p>
+    <div class="box box-hint"><strong>💡 什么是盘点？</strong>盘点记录的是您实际清点所得的数量（实际盘点数量）。这与库存管理中的入库、出库、调拨操作是独立模块，请注意区分。</div>
+
+    <h3>免费版可用的盘点功能</h3>
+    <ul>
+      <li>输入或扫描商品编码 / 条码</li>
+      <li>输入商品名称</li>
+      <li>输入实际盘点数量</li>
+      <li>输入备注</li>
+      <li>查看盘点历史记录</li>
+      <li>在免费版限制范围内保存和导出</li>
+    </ul>
+  </section>
+
+  <section class="chapter" id="limits">
+    <div class="chapter-head"><div class="ch-no">第2章</div><h2>免费版限制</h2></div>
+    <p>免费版有以下限制。</p>
+    <div class="table-wrap"><table>
+      <tr><th>项目</th><th>免费版限制</th><th>解除方式</th></tr>
+      <tr><td>主数据记录数</td><td>最多30条</td><td>标准版或完整版</td></tr>
+      <tr><td>盘点历史记录数</td><td>最多30条</td><td>标准版或完整版</td></tr>
+      <tr><td>导出记录数</td><td>最多30条</td><td>标准版或完整版</td></tr>
+      <tr><td>屏幕旋转锁定</td><td>不可用</td><td>标准版及以上</td></tr>
+      <tr><td>详细编码规则设置</td><td>不可用</td><td>完整版</td></tr>
+      <tr><td>详细位置规则设置</td><td>不可用</td><td>完整版</td></tr>
+      <tr><td>详细摄像头设置</td><td>不可用</td><td>完整版</td></tr>
+      <tr><td>扩展 CSV 导出</td><td>不可用</td><td>完整版</td></tr>
+    </table></div>
+    <div class="box box-warn"><strong>⚠ 注意</strong>达到30条记录上限后，保存或导出操作可能无法继续。接近上限时，请考虑导出CSV备份，或根据需要升级到标准版或完整版。</div>
+    <div class="box box-check"><strong>🔍 购买前请确认</strong>价格、购买条件和退款条件以 Google Play 上显示的内容为准。本手册不作价格断定。</div>
+  </section>
+
+  <section class="chapter" id="howto">
+    <div class="chapter-head"><div class="ch-no">第3章</div><h2>盘点操作步骤</h2></div>
+
+    <h3>基本盘点步骤</h3>
+    <ol class="steps">
+      <li>在主屏幕点击<strong>库存盘点</strong>。</li>
+      <li>扫描条码，或手动输入商品编码。</li>
+      <li>显示商品名称。若编码未登记，请手动输入名称。</li>
+      <li>确认或选择位置（仓库、门店等）。</li>
+      <li>输入现场实际清点到的数量。</li>
+      <li>如需要可输入备注。</li>
+      <li>点击<strong>保存</strong>，将本条记录写入盘点历史。</li>
+      <li>在盘点历史中确认记录已保存。</li>
+    </ol>
+    <div class="box box-danger"><strong>🚨 重要</strong>保存前请务必核实数量。输入错误会导致与库存数据不一致。如需修改已保存的内容，请按照应用内显示的编辑或提示流程操作。</div>
+
+    <h3>连续盘点多个商品时</h3>
+    <ol class="steps">
+      <li>保存第一个商品后，继续扫描下一个商品的条码，或手动输入商品编码。</li>
+      <li>重复商品读取、数量输入和保存的步骤。</li>
+      <li>所有商品输入完成后，在盘点历史中整体确认保存内容。</li>
+    </ol>
+
+    <div class="box box-hint"><strong>💡 提示</strong>无需在一次会话中完成全部盘点。中途关闭应用后，已保存的历史记录不会丢失。</div>
+  </section>
+
+  <section class="chapter" id="input">
+    <div class="chapter-head"><div class="ch-no">第4章</div><h2>条码、商品名称与数量输入</h2></div>
+
+    <h3>条码扫描</h3>
+    <p>启动摄像头后，将条码放入画面中的读取范围内即可自动扫描。如果无法读取，请在光线较好的位置重试，或改用手动输入。</p>
+
+    <h3>商品编码手动输入</h3>
+    <p>无法使用条码时，可以在商品编码栏中直接输入编码。若编码已登记，商品名称会自动显示。</p>
+
+    <h3>商品名称输入</h3>
+    <p>如果输入的是未登记编码，请手动输入商品名称。输入的商品名称会记录到盘点历史中。未预先登记主数据时，请注意免费版的记录数量限制。</p>
+
+    <h3>实际盘点数量输入</h3>
+    <p>请输入现场实际清点到的数量。保存前请确认商品、位置和数量是否正确。</p>
+
+    <h3>备注输入</h3>
+    <p>可以自由输入工作备注或说明。备注会与盘点历史记录一起保存。</p>
+
+    <div class="table-wrap"><table>
+      <tr><th>字段</th><th>说明</th><th>必填/可选</th></tr>
+      <tr><td>条码/商品编码</td><td>用于识别商品的编号</td><td>必填</td></tr>
+      <tr><td>商品名称</td><td>编码未登记时手动输入</td><td>有条件必填</td></tr>
+      <tr><td>位置</td><td>执行盘点的位置</td><td>取决于设置</td></tr>
+      <tr><td>实际盘点数量</td><td>实际清点所得的数量</td><td>必填</td></tr>
+      <tr><td>备注</td><td>工作备注或说明</td><td>可选</td></tr>
+    </table></div>
+    <div class="box box-warn"><strong>⚠ 注意</strong>请准确输入实际清点数量。输入错误会导致库存偏差，保存前请务必确认数字。</div>
+  </section>
+
+  <section class="chapter" id="location">
+    <div class="chapter-head"><div class="ch-no">第5章</div><h2>位置处理</h2></div>
+    <p>免费版以简单位置运用为前提。基本位置为“仓库”和“门店”。</p>
+    <div class="table-wrap"><table>
+      <tr><th>盘点模式</th><th>可用位置</th><th>使用示例</th></tr>
+      <tr><td>简单A</td><td>仅仓库</td><td>仅在仓库中管理时</td></tr>
+      <tr><td>简单B</td><td>仓库 + 门店</td><td>同时盘点仓库和门店时</td></tr>
+      <tr><td>简单C</td><td>仅门店</td><td>仅在门店中管理时</td></tr>
+    </table></div>
+    <p>盘点模式可在<strong>设置 → 盘点设置</strong>中选择。开始盘点前先选择适合业务的模式，可以让每次盘点更顺畅。</p>
+    <div class="box box-hint"><strong>💡 提示</strong>详细位置管理（如货架编号）是完整版功能。在设置中切换至<strong>详细</strong>模式后可使用。</div>
+    <div class="box box-warn"><strong>⚠ 注意</strong>即使已登记详细位置，若模式仍为简单A/B/C，详细位置也不会显示，需切换至详细模式。</div>
+  </section>
+
+  <section class="chapter" id="history">
+    <div class="chapter-head"><div class="ch-no">第6章</div><h2>查看盘点历史</h2></div>
+    <p>所有已保存的盘点条目均可在盘点历史中查看，包括保存日期时间、商品编码与名称、实际盘点数量、位置及备注。</p>
+    <div class="box box-warn"><strong>⚠ 注意</strong>免费版最多保存30条盘点历史记录。超出上限可能导致无法保存新的盘点条目。</div>
+  </section>
+
+  <section class="chapter" id="csv">
+    <div class="chapter-head"><div class="ch-no">第7章</div><h2>CSV 导出限制</h2></div>
+    <p>免费版可导出的CSV记录数存在上限。</p>
+    <div class="table-wrap"><table>
+      <tr><th>项目</th><th>免费版</th><th>标准版</th><th>完整版</th></tr>
+      <tr><td>导出记录数</td><td>最多30条</td><td>最多300条</td><td>不限</td></tr>
+      <tr><td>完整列导出</td><td>受限</td><td>受限</td><td>扩展 CSV 导出</td></tr>
+    </table></div>
+    <div class="box box-hint"><strong>💡 提示</strong>盘点CSV第一行会包含所选语言的表头。导出的CSV可以在Excel或Google Sheets中打开确认。</div>
+    <div class="box box-warn"><strong>⚠ 注意</strong>盘点汇总CSV不包含日期/时间或位置列。按位置或日期查看的详细导出是完整版功能。</div>
+  </section>
+
+  <section class="chapter" id="cannot">
+    <div class="chapter-head"><div class="ch-no">第8章</div><h2>免费版无法使用的功能</h2></div>
+    <div class="table-wrap"><table>
+      <tr><th>功能</th><th>所需套餐</th></tr>
+      <tr><td>超过30条主数据记录</td><td>盘点标准版及以上</td></tr>
+      <tr><td>超过30条历史记录</td><td>盘点标准版及以上</td></tr>
+      <tr><td>导出超过30条记录</td><td>盘点标准版及以上</td></tr>
+      <tr><td>屏幕旋转锁定</td><td>盘点标准版及以上</td></tr>
+      <tr><td>详细编码/位置规则设置</td><td>盘点完整版</td></tr>
+      <tr><td>详细摄像头扫描设置</td><td>盘点完整版</td></tr>
+      <tr><td>扩展 CSV 导出</td><td>盘点完整版</td></tr>
+      <tr><td>将盘点结果反映到库存</td><td>盘点完整版</td></tr>
+    </table></div>
+  </section>
+
+  <section class="chapter" id="tips">
+    <div class="chapter-head"><div class="ch-no">第9章</div><h2>免费版用户推荐工作流程</h2></div>
+    <p>若商品数量不超过30种，免费版足以支持持续的基本盘点。建议在历史记录接近30条上限前导出CSV，以积累记录档案。</p>
+    <div class="box box-hint"><strong>💡 升级建议</strong>当商品数量超过30种、需要长期保存月度盘点记录或需要固定屏幕方向时，建议升级至标准版解锁。</div>
+  </section>
+
+  <div class="summary-box" id="summary">
+    <h3>📌 本章要点</h3>
+    <ul>
+      <li>免费版盘点适合30种以内商品的小规模作业。</li>
+      <li>操作流程：扫描 → 输入数量 → 保存 → 查看历史。</li>
+      <li>位置通过简单A/B/C设置；详细位置需要完整版。</li>
+      <li>CSV 导出限30条，导出内容不包含日期或位置列。</li>
+      <li>接近30条上限时，请考虑导出CSV或升级到标准版/完整版。</li>
+      <li>盘点与库存管理中的入库、出库是独立操作，请勿混淆。</li>
+    </ul>
+  </div>
+  <div class="confirm-box" id="confirm">
+    <h3>🔍 使用前注意事项</h3>
+    <ul>
+      <li>保存前请确认商品编码、商品名称、位置和实际盘点数量是否正确。</li>
+      <li>如需修改已保存的盘点记录，请按照应用内显示的编辑或提示流程操作。</li>
+      <li>接近30条历史记录上限时，请提前导出CSV或考虑升级套餐。</li>
+      <li>价格、购买条件和可用功能以应用内显示和 Google Play 页面为准。</li>
+    </ul>
+  </div>
+</div>
+<footer>
+  Quantiventra 使用手册 · 最新信息请以应用内实际显示为准。
+  <p style="margin-top:4px;"><a href="privacy_zh.html">隐私政策</a></p>
+</footer>
+</body>
+</html>

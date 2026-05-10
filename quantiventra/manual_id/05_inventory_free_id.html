@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="id">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quantiventra – Manajemen Stok – Versi Gratis</title>
+<style>*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;font-size:15px;line-height:1.8;color:#1a2535;background:#f4f7fb;}
+a{color:#1a5fa8;text-decoration:none;}a:hover{text-decoration:underline;}
+.site-nav{background:#1a3a5c;color:#fff;padding:0;}.site-nav .nav-inner{max-width:960px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:stretch;}
+.site-nav a{color:#cde;padding:10px 13px;font-size:12px;display:block;border-right:1px solid #2a4a6c;white-space:nowrap;}
+.site-nav a:hover{background:#2a5090;text-decoration:none;}.site-nav a.active{background:#2a6cbe;color:#fff;font-weight:bold;}
+.page-header{background:linear-gradient(135deg,#1a3a5c 0%,#2a6cbe 100%);color:#fff;padding:40px 20px 30px;}
+.page-header .inner{max-width:960px;margin:0 auto;}.page-header .app-name{font-size:13px;opacity:.8;}
+.page-header h1{font-size:22px;font-weight:700;margin-top:6px;line-height:1.4;}.page-header .subtitle{font-size:14px;opacity:.85;margin-top:8px;}
+.scope-box{background:rgba(255,255,255,.15);border-left:4px solid #7ecfff;padding:12px 16px;margin-top:16px;border-radius:4px;font-size:13px;}
+.container{max-width:960px;margin:0 auto;padding:30px 16px;}
+.toc{background:#fff;border:1px solid #c8d8ec;border-radius:8px;padding:24px 28px;margin-bottom:32px;}
+.toc h2{font-size:16px;font-weight:700;color:#1a3a5c;border-bottom:2px solid #2a6cbe;padding-bottom:8px;margin-bottom:14px;}
+.toc ol{margin-left:18px;}.toc li{margin:5px 0;font-size:14px;}
+.chapter{background:#fff;border-radius:8px;box-shadow:0 1px 4px rgba(0,0,0,.08);padding:28px 28px 24px;margin-bottom:28px;}
+.chapter-head{border-left:5px solid #2a6cbe;padding-left:14px;margin-bottom:20px;}
+.chapter-head .ch-no{font-size:12px;color:#2a6cbe;font-weight:700;}.chapter-head h2{font-size:20px;font-weight:700;color:#1a2535;margin-top:2px;}
+h3{font-size:16px;font-weight:700;color:#1a3a5c;border-bottom:1px solid #dde8f5;padding-bottom:5px;margin:22px 0 12px;}
+h4{font-size:14px;font-weight:700;color:#2a4a6c;margin:16px 0 8px;}
+p{margin-bottom:12px;}ul,ol{margin-left:20px;margin-bottom:12px;}li{margin-bottom:5px;}
+.steps{counter-reset:step;list-style:none;margin-left:0;}
+.steps li{counter-increment:step;padding:9px 12px 9px 46px;position:relative;background:#f8fbff;border:1px solid #dde8f5;border-radius:6px;margin-bottom:6px;}
+.steps li::before{content:counter(step);position:absolute;left:12px;top:50%;transform:translateY(-50%);width:24px;height:24px;background:#2a6cbe;color:#fff;border-radius:50%;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;}
+.table-wrap{overflow-x:auto;margin-bottom:16px;}
+table{width:100%;border-collapse:collapse;font-size:13px;min-width:380px;}
+th{background:#1a3a5c;color:#fff;padding:9px 12px;text-align:left;white-space:nowrap;}
+td{padding:8px 12px;border-bottom:1px solid #dde8f5;vertical-align:top;}tr:nth-child(even) td{background:#f4f7fb;}
+code{font-family:'Courier New',monospace;background:rgba(0,80,160,.08);color:#004080;padding:2px 6px;border-radius:3px;font-size:12px;}
+.box{border-radius:6px;padding:13px 16px;margin:14px 0;font-size:13px;}
+.box-warn{background:#fffbe6;border-left:4px solid #f5a623;color:#7a5700;}
+.box-danger{background:#fff0f0;border-left:4px solid #d43f3f;color:#7a0000;}
+.box-hint{background:#e8f4ff;border-left:4px solid #2a6cbe;color:#0a3060;}
+.box-check{background:#f4eeff;border-left:4px solid #8c4fc8;color:#3a0070;}
+.box strong{display:block;margin-bottom:4px;}
+figure{max-width:280px;width:100%;margin:18px auto;text-align:center;}
+figure img{display:block;width:100%;max-width:280px;height:auto;margin:0 auto;border:1px solid #c8d8ec;border-radius:6px;box-shadow:0 2px 8px rgba(0,0,0,.1);}
+figcaption{font-size:12px;color:#5a7a99;margin-top:6px;}
+.img-pending{display:flex;align-items:center;justify-content:center;max-width:280px;width:100%;box-sizing:border-box;background:#e8eef5;border:2px dashed #99b8d8;border-radius:6px;height:160px;color:#5a7a99;font-size:13px;margin:18px auto;}
+.diff-add{background:#e8fff0;border-left:4px solid #2a9c5c;border-radius:6px;padding:12px 16px;margin:14px 0;font-size:13px;}
+.diff-add strong{display:block;color:#1a6c3c;margin-bottom:4px;}
+.flow-box{background:#f4f7fb;border:1px solid #c8d8ec;border-radius:8px;padding:20px;margin:16px 0;}
+.flow-box h4{color:#1a3a5c;margin-top:0;}
+.flow-arrow{text-align:center;font-size:20px;color:#2a6cbe;margin:4px 0;}
+.flow-step{background:#fff;border:1px solid #c8d8ec;border-radius:6px;padding:10px 16px;margin:4px 0;font-size:13px;}
+.flow-step strong{color:#1a3a5c;}
+.summary-box{background:linear-gradient(135deg,#e8f4ff,#f0f8ff);border:1px solid #99c8ec;border-radius:8px;padding:20px 24px;margin-top:32px;}
+.summary-box h3{border:none;color:#1a3a5c;margin-top:0;}
+.confirm-box{background:#fdf4ff;border:1px solid #c8a0e0;border-radius:8px;padding:20px 24px;margin-top:16px;}
+.confirm-box h3{border:none;color:#5a0090;margin-top:0;}
+.check{color:#2e7d32;font-weight:700;}.cross{color:#c62828;}
+th.pro-col{background:#5a2a8c;}
+.feature-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px;margin:16px 0;}
+.feature-card{background:#f4f7fb;border:1px solid #c8d8ec;border-radius:8px;padding:16px;}
+.feature-card h4{color:#1a3a5c;margin-top:0;margin-bottom:6px;font-size:14px;}
+.feature-card p{font-size:13px;margin:0;color:#3a5a7a;}
+.feature-card.pro-card{background:#f4eeff;border-color:#c8a0e0;}
+.feature-card.pro-card h4{color:#5a2a8c;}
+.trouble{border:1px solid #c8d8ec;border-radius:8px;margin:14px 0;overflow:hidden;}
+.trouble-q{background:#eef6fd;padding:13px 18px;font-weight:700;font-size:14px;color:#1a3a5c;display:flex;align-items:flex-start;gap:10px;}
+.trouble-q::before{content:'Q';background:#2a6cbe;color:#fff;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900;flex-shrink:0;margin-top:1px;}
+.trouble-a{padding:13px 18px 14px 50px;font-size:13.5px;border-top:1px solid #c8d8ec;line-height:1.9;}
+.trouble-a ul{margin-left:16px;}
+.legal-block{background:#f5f5f5;border:1px solid #ddd;border-radius:8px;padding:20px 24px;font-size:12.5px;color:#444;line-height:1.9;margin:14px 0;}
+.legal-block h4{font-size:13px;color:#333;margin:18px 0 6px;border-bottom:1px solid #ddd;padding-bottom:4px;}
+.legal-block h4:first-child{margin-top:0;}
+footer{text-align:center;font-size:12px;color:#8a9aaa;padding:30px 16px;border-top:1px solid #dde8f5;margin-top:20px;}
+@media(max-width:640px){.page-header h1{font-size:18px;}.chapter{padding:20px 16px;}.site-nav a{padding:8px 9px;font-size:11px;}}
+@media print{body{background:#fff;font-size:12px;}.site-nav{display:none;}.chapter{box-shadow:none;border:1px solid #ccc;page-break-inside:avoid;}.page-header{background:#1a3a5c !important;-webkit-print-color-adjust:exact;print-color-adjust:exact;}}
+</style></head>
+<body>
+<nav class="site-nav"><div class="nav-inner">
+  <a href="01_top_settings_common_id.html">① Beranda / Pengaturan</a>
+  <a href="02_stocktake_free_id.html">② Stok Opname Gratis</a>
+  <a href="03_stocktake_simple_id.html">③ Stok Opname Standar</a>
+  <a href="04_stocktake_full_id.html">④ Stok Opname Lengkap</a>
+  <a href="05_inventory_free_id.html" class="active">⑤ Manajemen Stok Gratis</a>
+  <a href="06_inventory_simple_id.html">⑥ Manajemen Stok Standar</a>
+  <a href="07_inventory_full_id.html">⑦ Manajemen Stok Lengkap</a>
+</div></nav>
+<header class="page-header"><div class="inner">
+  <div class="app-name">Manual Quantiventra</div>
+  <h1>⑤ Manajemen Stok — Versi Gratis</h1>
+  <div class="subtitle">Yang dapat dilakukan di versi gratis, batasan, pengecekan stok, hubungan dengan data master, ketersediaan stok masuk/keluar/transfer, dan alur kerja yang direkomendasikan</div>
+  <div class="scope-box"><strong>Topik yang dibahas:</strong> Hal yang dapat dilakukan Manajemen Stok versi gratis / Batasan versi gratis / Pengecekan stok / Detail stok / Hubungan dengan data master / Ketersediaan stok masuk, stok keluar, dan transfer / Batasan CSV / Yang tidak dapat dilakukan versi gratis / Alur kerja yang direkomendasikan</div>
+</div></header>
+<div class="container">
+  <nav class="toc"><h2>Daftar Isi</h2><ol>
+    <li><a href="#overview">Ikhtisar Manajemen Stok versi gratis</a></li>
+    <li><a href="#limits">Batasan versi gratis</a></li>
+    <li><a href="#stock-check">Pengecekan stok</a></li>
+    <li><a href="#stock-detail">Detail stok</a></li>
+    <li><a href="#master">Hubungan dengan data master</a></li>
+    <li><a href="#inout">Ketersediaan stok masuk, stok keluar, dan transfer</a></li>
+    <li><a href="#csv">Batasan CSV</a></li>
+    <li><a href="#cannot">Yang tidak dapat dilakukan versi gratis</a></li>
+    <li><a href="#tips">Alur kerja yang direkomendasikan untuk pengguna versi gratis</a></li>
+    <li><a href="#summary">Poin utama bab ini</a></li>
+    <li><a href="#confirm">Catatan sebelum digunakan</a></li>
+  </ol></nav>
+
+  <section class="chapter" id="overview">
+    <div class="chapter-head"><div class="ch-no">BAB 1</div><h2>Ikhtisar Manajemen Stok Versi Gratis</h2></div>
+    <p>Manajemen Stok melacak stok masuk, stok keluar, dan transfer produk agar level stok saat ini dapat tergambar secara akurat. Versi gratis memungkinkan Anda mencoba pengecekan stok dasar dan penggunaan dasar Katalog Produk.</p>
+    <p>Layar utama Manajemen Stok: Pengecekan Stok / Stok Masuk / Stok Keluar / Transfer Stok / Riwayat Stok / Impor &amp; Ekspor Data</p>
+    <div class="box box-hint"><strong>💡 Stok Opname vs. Manajemen Stok</strong>Manajemen Stok digunakan untuk mencatat transaksi harian — stok masuk, stok keluar, dan transfer — yang mengubah jumlah stok. Ini adalah modul terpisah dari Stok Opname (penghitungan fisik item). Jangan mencampuradukkan keduanya.</div>  </section>
+
+  <section class="chapter" id="limits">
+    <div class="chapter-head"><div class="ch-no">BAB 2</div><h2>Batasan Versi Gratis</h2></div>
+    <div class="table-wrap"><table>
+      <tr><th>Item</th><th>Batasan versi gratis</th><th>Cara menghapus</th></tr>
+      <tr><td>Data master</td><td>Maks. 30</td><td>Manajemen Stok Standar atau lebih tinggi</td></tr>
+      <tr><td>Catatan riwayat stok</td><td>Maks. 30</td><td>Manajemen Stok Standar atau lebih tinggi</td></tr>
+      <tr><td>Data yang diekspor</td><td>Maks. 30</td><td>Manajemen Stok Standar atau lebih tinggi</td></tr>
+      <tr><td>Pendaftaran Katalog Lokasi</td><td>Tidak tersedia atau terbatas</td><td>Manajemen Stok Standar atau lebih tinggi</td></tr>
+      <tr><td>Pengeditan langsung total kumulatif terdaftar</td><td>Tidak tersedia</td><td>Manajemen Stok Lengkap</td></tr>
+      <tr><td>Aturan kode/lokasi terperinci</td><td>Tidak tersedia</td><td>Manajemen Stok Lengkap</td></tr>
+      <tr><td>Impor/Ekspor CSV lanjutan</td><td>Terbatas (catatan dan fitur)</td><td>Manajemen Stok Lengkap</td></tr>
+    </table></div>
+    <div class="box box-warn"><strong>⚠ Catatan</strong>Jika batas 30 data tercapai, penyimpanan atau ekspor mungkin tidak dapat dilakukan. Jika Anda berencana terus menggunakan aplikasi, pertimbangkan untuk upgrade ke Standar atau Buka Kunci Lengkap sebelum mencapai batas.</div>
+  </section>
+
+  <section class="chapter" id="stock-check">
+    <div class="chapter-head"><div class="ch-no">BAB 3</div><h2>Pengecekan Stok</h2></div>
+    <p>Layar Pengecekan Stok pada awalnya menampilkan total stok gabungan per produk. Pengecekan kebutuhan pengisian ulang dihitung menggunakan total stok dari semua lokasi yang mengaktifkan "Sertakan dalam pengecekan kebutuhan pengisian ulang" di Katalog Lokasi.</p>
+    <h3>Yang Dapat Dilakukan di Pengecekan Stok</h3>
+    <ul>
+      <li>Melihat total stok gabungan saat ini untuk setiap produk</li>
+      <li>Memfilter berdasarkan nama produk atau kode produk dengan pencarian</li>
+      <li>Membandingkan titik pemesanan ulang dengan total lokasi yang disertakan untuk mengidentifikasi item yang perlu dipesan ulang</li>
+      <li>Mengetuk produk untuk membuka rincian per lokasi. Pada tampilan rincian per lokasi, pengecekan kebutuhan pengisian ulang tidak ditampilkan atau diperlakukan sebagai nonaktif</li>
+    </ul>
+
+    <h3>Prosedur Pengecekan Stok</h3>
+    <ol class="steps">
+      <li>Di layar beranda, ketuk <strong>Manajemen Stok</strong>.</li>
+      <li>Buka <strong>Pengecekan Stok</strong>.</li>
+      <li>Temukan produk yang ingin Anda periksa (gunakan pencarian atau gulir daftar).</li>
+      <li>Ketuk produk untuk melihat detail stok.</li>
+    </ol>
+  </section>
+
+  <section class="chapter" id="stock-detail">
+    <div class="chapter-head"><div class="ch-no">BAB 4</div><h2>Detail Stok</h2></div>
+    <p>Mengetuk produk di layar Pengecekan Stok akan membuka layar Detail Stok.</p>
+    <h3>Yang Dapat Dilihat di Detail Stok</h3>
+    <ul>
+      <li>Kode dan nama produk</li>
+      <li>Jumlah stok total</li>
+      <li>Rincian stok per lokasi</li>
+      <li>Titik pemesanan ulang dan harga (jika terdaftar di Katalog Produk)</li>
+      <li>Kategori</li>
+    </ul>
+  </section>
+
+  <section class="chapter" id="master">
+    <div class="chapter-head"><div class="ch-no">BAB 5</div><h2>Hubungan dengan Data Master</h2></div>
+    <p>Manajemen Stok bekerja bersama Katalog Produk, Katalog Kategori, dan Katalog Lokasi. Menjaga informasi yang akurat pada data master akan meningkatkan kualitas catatan stok Anda.</p>
+    <div class="table-wrap"><table>
+      <tr><th>Master</th><th>Peran utama</th><th>Kolom kunci</th></tr>
+      <tr><td>Katalog Produk</td><td>Mendaftarkan produk yang memiliki stok fisik</td><td>Kode produk/barcode, nama produk, kategori, harga, titik pemesanan ulang</td></tr>
+      <tr><td>Katalog Kategori</td><td>Mengelola pengelompokan yang digunakan untuk mengklasifikasikan produk</td><td>Kode kategori, nama kategori, urutan tampilan</td></tr>
+      <tr><td>Katalog Lokasi</td><td>Mengelola lokasi penyimpanan</td><td>Kode lokasi, nama lokasi, urutan tampilan, aktif/nonaktif</td></tr>
+    </table></div>
+    <div class="box box-hint"><strong>💡 Produk vs. Kategori</strong><strong>Produk</strong> adalah item individual yang memiliki stok (misalnya kaus merah ukuran M). <strong>Kategori</strong> adalah pengelompokan yang digunakan untuk mengklasifikasikan produk (misalnya Pakaian). Jangan mencampuradukkan keduanya.</div>
+    <div class="box box-warn"><strong>⚠ Lokasi di Versi Gratis</strong>Di versi gratis, fungsi yang terkait dengan lokasi mungkin terbatas. Gunakan lokasi default yang ditampilkan di aplikasi, dan ikuti layar aplikasi jika muncul pemberitahuan paket berbayar.</div>
+  </section>
+
+  <section class="chapter" id="inout">
+    <div class="chapter-head"><div class="ch-no">BAB 6</div><h2>Ketersediaan Stok Masuk, Stok Keluar, dan Transfer</h2></div>
+    <p>Di versi gratis, titik akses untuk stok masuk, stok keluar, dan transfer stok mungkin terlihat, tetapi penyimpanan aktual dan jumlah data dibatasi.</p>
+    <div class="box box-check"><strong>🔍 Ketersediaan Versi Gratis</strong>Stok masuk, stok keluar, dan transfer stok mungkin memiliki batasan di versi gratis. Ikuti panduan yang ditampilkan di aplikasi, terutama jika muncul pemberitahuan batas atau prompt paket berbayar.</div>
+
+    <h3>Panduan untuk Stok Masuk, Stok Keluar, dan Transfer di Versi Gratis</h3>
+    <ul>
+      <li>Tombol fungsi mungkin terlihat.</li>
+      <li>Saat mencoba menggunakannya, aplikasi mungkin menampilkan pemberitahuan batas.</li>
+      <li>Ikuti petunjuk yang ditampilkan di layar.</li>
+      <li>Saat melakukan stok masuk untuk kode produk yang belum terdaftar, prompt untuk membuat entri Katalog Produk baru mungkin muncul.</li>
+      <li>Kolom stok di layar Stok Keluar menampilkan stok saat ini sebagai referensi — bukan kolom input yang dapat diedit.</li>
+    </ul>
+
+    <div class="box box-hint"><strong>💡 Tips</strong>Jika Anda ingin menggunakan stok masuk, stok keluar, dan transfer secara serius, pertimbangkan untuk upgrade ke Manajemen Stok Standar atau Buka Kunci Lengkap.</div>
+  </section>
+
+  <section class="chapter" id="csv">
+    <div class="chapter-head"><div class="ch-no">BAB 7</div><h2>Batasan CSV</h2></div>
+    <p>Versi gratis membatasi jumlah data yang dapat diimpor atau diekspor sekaligus fitur yang tersedia.</p>
+    <div class="table-wrap"><table>
+      <tr><th>Item</th><th>Versi gratis</th><th>Buka Kunci Standar</th><th>Buka Kunci Lengkap</th></tr>
+      <tr><td>Data yang diekspor</td><td>Maks. 30</td><td>Maks. 300</td><td>Tidak terbatas</td></tr>
+      <tr><td>Catatan impor CSV</td><td>Terbatas</td><td>Diperluas</td><td>Diperluas</td></tr>
+      <tr><td>CSV cadangan lengkap (semua data)</td><td>Terbatas; ikuti panduan dalam aplikasi</td><td>Diperluas</td><td>○</td></tr>
+    </table></div>
+    <div class="box box-warn"><strong>⚠ Catatan</strong>Ekspor CSV terperinci adalah fitur Buka Kunci Lengkap. Versi gratis membatasi jumlah data sekaligus kolom yang tersedia.</div>
+  </section>
+
+  <section class="chapter" id="cannot">
+    <div class="chapter-head"><div class="ch-no">BAB 8</div><h2>Yang Tidak Dapat Dilakukan di Versi Gratis</h2></div>
+    <div class="table-wrap"><table>
+      <tr><th>Fitur</th><th>Paket yang diperlukan</th></tr>
+      <tr><td>Lebih dari 30 data master</td><td>Manajemen Stok Standar atau lebih tinggi</td></tr>
+      <tr><td>Lebih dari 30 data riwayat</td><td>Manajemen Stok Standar atau lebih tinggi</td></tr>
+      <tr><td>Mengekspor lebih dari 30 data</td><td>Manajemen Stok Standar atau lebih tinggi</td></tr>
+      <tr><td>Mengunci rotasi layar</td><td>Manajemen Stok Standar atau lebih tinggi</td></tr>
+      <tr><td>Pendaftaran Katalog Lokasi terperinci</td><td>Manajemen Stok Standar atau lebih tinggi</td></tr>
+      <tr><td>Pengeditan langsung total kumulatif terdaftar</td><td>Manajemen Stok Lengkap</td></tr>
+      <tr><td>Aturan kode/lokasi terperinci</td><td>Manajemen Stok Lengkap</td></tr>
+      <tr><td>Ekspor CSV lanjutan</td><td>Manajemen Stok Lengkap</td></tr>
+      <tr><td>Menerapkan data stok opname ke stok</td><td>Manajemen Stok Lengkap</td></tr>
+    </table></div>
+  </section>
+
+  <section class="chapter" id="tips">
+    <div class="chapter-head"><div class="ch-no">BAB 9</div><h2>Alur Kerja yang Direkomendasikan untuk Pengguna Versi Gratis</h2></div>
+
+    <h3>Gunakan untuk Pengecekan Stok dengan Jumlah Produk Kecil</h3>
+    <p>Jika Anda memiliki 30 produk atau kurang, versi gratis mendukung pengecekan stok berkelanjutan. Fitur ini berguna untuk memantau level stok dan memeriksa stok terhadap titik pemesanan ulang.</p>
+
+    <h3>Berlatih dengan Data Sampel</h3>
+    <p>Buat data sampel dari layar Pengaturan untuk menyiapkan produk dan data stok latihan. Sebaiknya pahami alur operasinya terlebih dahulu sebelum mendaftarkan data sungguhan.</p>
+
+    <h3>Ekspor CSV Secara Berkala untuk Membuat Catatan</h3>
+    <p>Ekspor ke CSV selama Anda masih berada dalam batas ekspor 30 data, lalu kumpulkan catatan stok Anda di PC atau spreadsheet.</p>
+
+    <h3>Rencanakan Upgrade Saat Mendekati Batas</h3>
+    <p>Ketika jumlah produk dan riwayat mendekati 30, pertimbangkan untuk upgrade ke Buka Kunci Manajemen Stok Standar.</p>
+
+    <div class="box box-hint"><strong>💡 Pertimbangkan Upgrade ke Standar Jika Anda…</strong>
+      <ul style="margin-top:6px;">
+        <li>Memiliki lebih dari 30 produk</li>
+        <li>Ingin menyimpan riwayat stok masuk dan stok keluar dalam jangka panjang</li>
+        <li>Ingin menggunakan lokasi terpisah (gudang dan toko)</li>
+      </ul>
+    </div>
+  </section>
+
+  <div class="summary-box" id="summary">
+    <h3>📌 Poin Utama Bab Ini</h3>
+    <ul>
+      <li>Manajemen Stok mencatat transaksi harian (stok masuk, stok keluar, transfer). Ini terpisah dari Stok Opname.</li>
+      <li>Versi gratis memiliki batas 30 data (master, riwayat, ekspor) — sesuai untuk penggunaan skala kecil.</li>
+      <li>Pengecekan Stok menampilkan total stok saat ini per produk, rincian per lokasi, dan item yang perlu dipesan ulang.</li>
+      <li>Manajemen Stok bekerja bersama data Katalog Produk, Katalog Kategori, dan Katalog Lokasi.</li>
+      <li>Bisa atau tidaknya stok masuk, stok keluar, dan transfer disimpan di versi gratis diatur oleh panduan dalam aplikasi.</li>
+      <li>Rencanakan upgrade ke Standar atau Buka Kunci Lengkap sebelum mendekati batas 30 data.</li>
+    </ul>
+  </div>
+
+  <div class="confirm-box" id="confirm">
+    <h3>🔍 Catatan Sebelum Digunakan</h3>
+    <ul>
+      <li>Stok masuk, stok keluar, dan transfer stok mungkin memiliki batasan di versi gratis. Ikuti pemberitahuan batas yang ditampilkan di aplikasi.</li>
+      <li>Pendaftaran Katalog Lokasi dan pengelolaan lokasi terperinci mungkin memerlukan paket berbayar yang sesuai.</li>
+      <li>Ekspor CSV cadangan di versi gratis mungkin memiliki batas jumlah data dan fitur. Jadikan layar ekspor terbaru di aplikasi sebagai acuan utama.</li>
+      <li>Menerapkan data stok opname ke stok adalah fungsi paket Lengkap. Periksa layar konfirmasi aplikasi dan ekspor cadangan sebelum menggunakannya.</li>
+      <li>Lihat gambar detail stok pada bagian detail di atas.</li>
+    </ul>
+  </div>
+</div>
+<footer>
+  <p>Manual Quantiventra | ⑤ Manajemen Stok Versi Gratis</p>
+  <p style="margin-top:4px;">Manual ini dapat diperbarui tanpa pemberitahuan sebelumnya. Selalu lihat tampilan dalam aplikasi untuk informasi terbaru.</p>
+  <p style="margin-top:4px;"><a href="privacy_id.html">Kebijakan Privasi</a></p>
+</footer>
+</body></html>

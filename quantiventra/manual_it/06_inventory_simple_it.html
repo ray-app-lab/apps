@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="it">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quantiventra – Gestione magazzino – Piano Standard</title>
+<style>*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;font-size:15px;line-height:1.8;color:#1a2535;background:#f4f7fb;}
+a{color:#1a5fa8;text-decoration:none;}a:hover{text-decoration:underline;}
+.site-nav{background:#1a3a5c;color:#fff;padding:0;}.site-nav .nav-inner{max-width:960px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:stretch;}
+.site-nav a{color:#cde;padding:10px 13px;font-size:12px;display:block;border-right:1px solid #2a4a6c;white-space:nowrap;}
+.site-nav a:hover{background:#2a5090;text-decoration:none;}.site-nav a.active{background:#2a6cbe;color:#fff;font-weight:bold;}
+.page-header{background:linear-gradient(135deg,#1a3a5c 0%,#2a6cbe 100%);color:#fff;padding:40px 20px 30px;}
+.page-header .inner{max-width:960px;margin:0 auto;}.page-header .app-name{font-size:13px;opacity:.8;}
+.page-header h1{font-size:22px;font-weight:700;margin-top:6px;line-height:1.4;}.page-header .subtitle{font-size:14px;opacity:.85;margin-top:8px;}
+.scope-box{background:rgba(255,255,255,.15);border-left:4px solid #7ecfff;padding:12px 16px;margin-top:16px;border-radius:4px;font-size:13px;}
+.container{max-width:960px;margin:0 auto;padding:30px 16px;}
+.toc{background:#fff;border:1px solid #c8d8ec;border-radius:8px;padding:24px 28px;margin-bottom:32px;}
+.toc h2{font-size:16px;font-weight:700;color:#1a3a5c;border-bottom:2px solid #2a6cbe;padding-bottom:8px;margin-bottom:14px;}
+.toc ol{margin-left:18px;}.toc li{margin:5px 0;font-size:14px;}
+.chapter{background:#fff;border-radius:8px;box-shadow:0 1px 4px rgba(0,0,0,.08);padding:28px 28px 24px;margin-bottom:28px;}
+.chapter-head{border-left:5px solid #2a6cbe;padding-left:14px;margin-bottom:20px;}
+.chapter-head .ch-no{font-size:12px;color:#2a6cbe;font-weight:700;}.chapter-head h2{font-size:20px;font-weight:700;color:#1a2535;margin-top:2px;}
+h3{font-size:16px;font-weight:700;color:#1a3a5c;border-bottom:1px solid #dde8f5;padding-bottom:5px;margin:22px 0 12px;}
+h4{font-size:14px;font-weight:700;color:#2a4a6c;margin:16px 0 8px;}
+p{margin-bottom:12px;}ul,ol{margin-left:20px;margin-bottom:12px;}li{margin-bottom:5px;}
+.steps{counter-reset:step;list-style:none;margin-left:0;}
+.steps li{counter-increment:step;padding:9px 12px 9px 46px;position:relative;background:#f8fbff;border:1px solid #dde8f5;border-radius:6px;margin-bottom:6px;}
+.steps li::before{content:counter(step);position:absolute;left:12px;top:50%;transform:translateY(-50%);width:24px;height:24px;background:#2a6cbe;color:#fff;border-radius:50%;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;}
+.table-wrap{overflow-x:auto;margin-bottom:16px;}
+table{width:100%;border-collapse:collapse;font-size:13px;min-width:380px;}
+th{background:#1a3a5c;color:#fff;padding:9px 12px;text-align:left;white-space:nowrap;}
+td{padding:8px 12px;border-bottom:1px solid #dde8f5;vertical-align:top;}tr:nth-child(even) td{background:#f4f7fb;}
+code{font-family:'Courier New',monospace;background:rgba(0,80,160,.08);color:#004080;padding:2px 6px;border-radius:3px;font-size:12px;}
+.box{border-radius:6px;padding:13px 16px;margin:14px 0;font-size:13px;}
+.box-warn{background:#fffbe6;border-left:4px solid #f5a623;color:#7a5700;}
+.box-danger{background:#fff0f0;border-left:4px solid #d43f3f;color:#7a0000;}
+.box-hint{background:#e8f4ff;border-left:4px solid #2a6cbe;color:#0a3060;}
+.box-check{background:#f4eeff;border-left:4px solid #8c4fc8;color:#3a0070;}
+.box strong{display:block;margin-bottom:4px;}
+figure{max-width:280px;width:100%;margin:18px auto;text-align:center;}
+figure img{display:block;width:100%;max-width:280px;height:auto;margin:0 auto;border:1px solid #c8d8ec;border-radius:6px;box-shadow:0 2px 8px rgba(0,0,0,.1);}
+figcaption{font-size:12px;color:#5a7a99;margin-top:6px;}
+.img-pending{display:flex;align-items:center;justify-content:center;max-width:280px;width:100%;box-sizing:border-box;background:#e8eef5;border:2px dashed #99b8d8;border-radius:6px;height:160px;color:#5a7a99;font-size:13px;margin:18px auto;}
+.diff-add{background:#e8fff0;border-left:4px solid #2a9c5c;border-radius:6px;padding:12px 16px;margin:14px 0;font-size:13px;}
+.diff-add strong{display:block;color:#1a6c3c;margin-bottom:4px;}
+.flow-box{background:#f4f7fb;border:1px solid #c8d8ec;border-radius:8px;padding:20px;margin:16px 0;}
+.flow-box h4{color:#1a3a5c;margin-top:0;}
+.flow-arrow{text-align:center;font-size:20px;color:#2a6cbe;margin:4px 0;}
+.flow-step{background:#fff;border:1px solid #c8d8ec;border-radius:6px;padding:10px 16px;margin:4px 0;font-size:13px;}
+.flow-step strong{color:#1a3a5c;}
+.summary-box{background:linear-gradient(135deg,#e8f4ff,#f0f8ff);border:1px solid #99c8ec;border-radius:8px;padding:20px 24px;margin-top:32px;}
+.summary-box h3{border:none;color:#1a3a5c;margin-top:0;}
+.confirm-box{background:#fdf4ff;border:1px solid #c8a0e0;border-radius:8px;padding:20px 24px;margin-top:16px;}
+.confirm-box h3{border:none;color:#5a0090;margin-top:0;}
+.check{color:#2e7d32;font-weight:700;}.cross{color:#c62828;}
+th.pro-col{background:#5a2a8c;}
+.feature-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px;margin:16px 0;}
+.feature-card{background:#f4f7fb;border:1px solid #c8d8ec;border-radius:8px;padding:16px;}
+.feature-card h4{color:#1a3a5c;margin-top:0;margin-bottom:6px;font-size:14px;}
+.feature-card p{font-size:13px;margin:0;color:#3a5a7a;}
+.feature-card.pro-card{background:#f4eeff;border-color:#c8a0e0;}
+.feature-card.pro-card h4{color:#5a2a8c;}
+.trouble{border:1px solid #c8d8ec;border-radius:8px;margin:14px 0;overflow:hidden;}
+.trouble-q{background:#eef6fd;padding:13px 18px;font-weight:700;font-size:14px;color:#1a3a5c;display:flex;align-items:flex-start;gap:10px;}
+.trouble-q::before{content:'Q';background:#2a6cbe;color:#fff;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900;flex-shrink:0;margin-top:1px;}
+.trouble-a{padding:13px 18px 14px 50px;font-size:13.5px;border-top:1px solid #c8d8ec;line-height:1.9;}
+.trouble-a ul{margin-left:16px;}
+.legal-block{background:#f5f5f5;border:1px solid #ddd;border-radius:8px;padding:20px 24px;font-size:12.5px;color:#444;line-height:1.9;margin:14px 0;}
+.legal-block h4{font-size:13px;color:#333;margin:18px 0 6px;border-bottom:1px solid #ddd;padding-bottom:4px;}
+.legal-block h4:first-child{margin-top:0;}
+footer{text-align:center;font-size:12px;color:#8a9aaa;padding:30px 16px;border-top:1px solid #dde8f5;margin-top:20px;}
+@media(max-width:640px){.page-header h1{font-size:18px;}.chapter{padding:20px 16px;}.site-nav a{padding:8px 9px;font-size:11px;}}
+@media print{body{background:#fff;font-size:12px;}.site-nav{display:none;}.chapter{box-shadow:none;border:1px solid #ccc;page-break-inside:avoid;}.page-header{background:#1a3a5c !important;-webkit-print-color-adjust:exact;print-color-adjust:exact;}}
+</style></head>
+<body>
+<nav class="site-nav"><div class="nav-inner">
+  <a href="01_top_settings_common_it.html">① Home / Impostazioni</a>
+  <a href="02_stocktake_free_it.html">② Inventario fisico gratuito</a>
+  <a href="03_stocktake_simple_it.html">③ Inventario fisico standard</a>
+  <a href="04_stocktake_full_it.html">④ Inventario fisico completo</a>
+  <a href="05_inventory_free_it.html">⑤ Magazzino gratuito</a>
+  <a href="06_inventory_simple_it.html" class="active">⑥ Magazzino standard</a>
+  <a href="07_inventory_full_it.html">⑦ Magazzino completo</a>
+</div></nav>
+<header class="page-header"><div class="inner">
+  <div class="app-name">Manuale Quantiventra</div>
+  <h1>⑥ Gestione magazzino — Piano Standard (Sblocco Standard)</h1>
+  <div class="subtitle">Cosa aggiunge il piano Standard, carico, scarico, consultazione scorte, storico, importazione/esportazione CSV, sostituzione scorte e aggiunta come carico</div>
+  <div class="scope-box"><strong>Argomenti trattati in questa pagina:</strong> Cosa aggiunge il Piano Standard di Gestione magazzino / Differenze rispetto al piano gratuito / Carico / Scarico / Consultazione scorte / Storico scorte / Gestione ubicazioni / Importazione ed esportazione CSV / Sostituisci scorte correnti / Aggiungi come carico / Note importanti / Flussi di lavoro consigliati</div>
+</div></header>
+<div class="container">
+  <nav class="toc"><h2>Indice</h2><ol>
+    <li><a href="#overview">Panoramica del Piano Standard</a></li>
+    <li><a href="#diff">Differenze rispetto al piano gratuito</a></li>
+    <li><a href="#receive">Carico (entrata stock)</a></li>
+    <li><a href="#issue">Scarico (uscita stock)</a></li>
+    <li><a href="#stock-check">Consultazione scorte</a></li>
+    <li><a href="#history">Storico scorte</a></li>
+    <li><a href="#location">Gestione ubicazioni</a></li>
+    <li><a href="#csv">Importazione / Esportazione CSV</a></li>
+    <li><a href="#csv-replace">Sostituisci scorte correnti</a></li>
+    <li><a href="#csv-add">Aggiungi come carico</a></li>
+    <li><a href="#notes">Note importanti</a></li>
+    <li><a href="#tips">Flusso di lavoro consigliato</a></li>
+    <li><a href="#summary">Punti chiave del capitolo</a></li>
+    <li><a href="#confirm">Note prima dell'uso</a></li>
+  </ol></nav>
+
+  <section class="chapter" id="overview">
+    <div class="chapter-head"><div class="ch-no">CAPITOLO 1</div><h2>Panoramica del Piano Standard</h2></div>
+    <p>Il Piano Standard di Gestione magazzino supporta più record rispetto al piano gratuito. Puoi gestire comodamente le operazioni quotidiane di carico, scarico, consultazione scorte e storico scorte; anche l'ambito della gestione delle ubicazioni viene ampliato.</p>
+    <h3>Limiti del Piano Standard</h3>
+    <div class="table-wrap"><table>
+      <tr><th>Elemento</th><th>Piano gratuito</th><th>Piano Standard</th></tr>
+      <tr><td>Record anagrafici</td><td>Fino a 30</td><td>Fino a 300</td></tr>
+      <tr><td>Record dello storico scorte</td><td>Fino a 30</td><td>Fino a 1.000</td></tr>
+      <tr><td>Record esportati</td><td>Fino a 30</td><td>Fino a 300</td></tr>
+      <tr><td>Blocco rotazione schermo</td><td>✗</td><td>○</td></tr>
+      <tr><td>Registrazione Anagrafica ubicazioni</td><td>Limitata nel piano gratuito</td><td>Disponibile entro i limiti del Piano Standard</td></tr>
+      <tr><td>Modifica diretta del totale cumulativo registrato</td><td>✗</td><td>✗ (richiede il Piano Completo)</td></tr>
+    </table></div>  </section>
+
+  <section class="chapter" id="diff">
+    <div class="chapter-head"><div class="ch-no">CAPITOLO 2</div><h2>Differenze rispetto al piano gratuito</h2></div>
+    <div class="diff-add">
+      <strong>✅ Cosa aggiunge o amplia il Piano Standard</strong>
+      <ul style="margin-top:6px;">
+        <li>Limite dei record anagrafici aumentato da 30 a 300</li>
+        <li>Limite dello storico scorte aumentato da 30 a 1.000</li>
+        <li>Limite di esportazione aumentato da 30 a 300</li>
+        <li>Blocco della rotazione dello schermo disponibile</li>
+        <li>Ambito della gestione delle ubicazioni ampliato</li>
+        <li>Più facile mantenere in modo continuativo carichi, scarichi, consultazioni scorte e storico quotidiani</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="chapter" id="receive">
+    <div class="chapter-head"><div class="ch-no">CAPITOLO 3</div><h2>Carico (entrata stock)</h2></div>
+    <p>L'operazione di carico aumenta le scorte. Usala quando arrivano merci, ad esempio per acquisti, ricevimento merce e transazioni simili.</p>    <h3>Procedura di carico</h3>
+    <ol class="steps">
+      <li>Vai in <strong>Gestione magazzino → Carico</strong>.</li>
+      <li>Scansiona un codice a barre o inserisci il codice prodotto.</li>
+      <li>Conferma il nome del prodotto. Se il codice non è registrato, procedi con la creazione di una nuova voce nell'Anagrafica prodotti.</li>
+      <li>Nella nuova voce dell'Anagrafica prodotti, registra il nome prodotto, il prezzo di vendita e il punto di riordino.</li>
+      <li>Dopo il salvataggio, torna alla schermata Carico: il codice prodotto e il nome registrati vengono compilati automaticamente.</li>
+      <li>Seleziona l'ubicazione di destinazione (magazzino, negozio ecc.).</li>
+      <li>Inserisci la quantità ricevuta.</li>
+      <li>Tocca <strong>Salva</strong>. La quantità viene aggiunta immediatamente alle scorte.</li>
+      <li>Conferma l'aggiornamento in Consultazione scorte o nello Storico scorte.</li>
+    </ol>
+    <div class="box box-hint"><strong>💡 Informazioni sugli attributi dell'Anagrafica prodotti</strong>Il prezzo di vendita e il punto di riordino sono proprietà gestite nell'Anagrafica prodotti: non vengono inseriti per ogni transazione di carico. Nella normale schermata Carico, concentrati su quantità, ubicazione e note.</div>
+    <div class="box box-warn"><strong>⚠ Nota</strong>Il carico viene riflesso nelle scorte immediatamente. Conferma sempre quantità e ubicazione prima di salvare. Se dopo il salvataggio noti una quantità errata, controlla lo Storico scorte e segui le indicazioni nell'app per correggere, annullare o registrare una rettifica, a seconda del caso.</div>
+  </section>
+
+  <section class="chapter" id="issue">
+    <div class="chapter-head"><div class="ch-no">CAPITOLO 4</div><h2>Scarico (uscita stock)</h2></div>
+    <p>L'operazione di scarico riduce le scorte. Usala per vendite, trasferimenti in uscita, consegne e transazioni simili.</p>    <h3>Procedura di scarico</h3>
+    <ol class="steps">
+      <li>Vai in <strong>Gestione magazzino → Scarico</strong>.</li>
+      <li>Scansiona un codice a barre o inserisci il codice prodotto.</li>
+      <li>Conferma il nome del prodotto.</li>
+      <li>Seleziona l'ubicazione di origine, cioè quella da cui esce lo stock.</li>
+      <li>Inserisci la quantità da scaricare.</li>
+      <li>Tocca <strong>Salva</strong>. La quantità viene sottratta immediatamente dalle scorte.</li>
+      <li>Conferma l'aggiornamento in Consultazione scorte o nello Storico scorte.</li>
+    </ol>
+    <div class="box box-hint"><strong>💡 Informazioni sul campo Scorte</strong>Il campo Scorte nella schermata Scarico mostra le scorte correnti per il prodotto e l'ubicazione selezionati: è un campo di visualizzazione, non un input modificabile. Le scorte diminuiscono quando salvi la quantità di scarico.</div>
+    <div class="box box-danger"><strong>🚨 Importante</strong>Non inserire una quantità di scarico superiore alle scorte correnti. Controlla il livello delle scorte per ubicazione prima di inserire la quantità da scaricare.</div>
+  </section>
+
+  <section class="chapter" id="stock-check">
+    <div class="chapter-head"><div class="ch-no">CAPITOLO 5</div><h2>Consultazione scorte</h2></div>
+    <p>La Consultazione scorte mostra inizialmente il totale combinato delle scorte per prodotto. Il controllo di riapprovvigionamento confronta il totale delle scorte di tutte le ubicazioni con "Includi nel controllo di riapprovvigionamento" attivo con il punto di riordino impostato nell'Anagrafica prodotti.</p>    <h3>Procedura di consultazione scorte</h3>
+    <ol class="steps">
+      <li>Vai in <strong>Gestione magazzino → Consultazione scorte</strong>.</li>
+      <li>Trova il prodotto che vuoi controllare, usando la ricerca o scorrendo l'elenco.</li>
+      <li>Individua i prodotti sotto il rispettivo punto di riordino, mostrati come articoli che richiedono riapprovvigionamento.</li>
+      <li>Tocca un prodotto per visualizzare il dettaglio per ubicazione, lo storico e le informazioni dettagliate. Nella vista con dettaglio per ubicazione, il controllo di riapprovvigionamento non viene mostrato oppure viene trattato come inattivo.</li>
+    </ol>
+  </section>
+
+  <section class="chapter" id="history">
+    <div class="chapter-head"><div class="ch-no">CAPITOLO 6</div><h2>Storico scorte</h2></div>
+    <p>Lo Storico scorte mostra il registro di tutte le operazioni di carico, scarico, trasferimento, rettifica da inventario fisico, scorte iniziali e importazione CSV.</p>    <h3>Cosa puoi vedere nello Storico scorte</h3>
+    <ul>
+      <li>Data/ora e tipo di operazione (carico, scarico, trasferimento, rettifica ecc.)</li>
+      <li>Codice prodotto e nome prodotto</li>
+      <li>Ubicazione e variazione della quantità</li>
+      <li>Note</li>
+    </ul>
+    <div class="box box-hint"><strong>💡 Suggerimento</strong>Se i conteggi delle scorte non tornano, scorri indietro nello Storico scorte per controllare errori di inserimento o rettifiche inattese.</div>
+  </section>
+
+  <section class="chapter" id="location">
+    <div class="chapter-head"><div class="ch-no">CAPITOLO 7</div><h2>Gestione ubicazioni</h2></div>
+    <p>Il Piano Standard usa principalmente le ubicazioni di base "Magazzino" e "Negozio".</p>
+    <div class="table-wrap"><table>
+      <tr><th>Modalità</th><th>Ubicazioni disponibili</th></tr>
+      <tr><td>Semplice A</td><td>Solo Magazzino</td></tr>
+      <tr><td>Semplice B</td><td>Magazzino + Negozio</td></tr>
+      <tr><td>Semplice C</td><td>Solo Negozio</td></tr>
+    </table></div>
+    <h3>Trasferimenti di scorte</h3>
+    <p>Un trasferimento di scorte sposta quantità di inventario da un'ubicazione a un'altra.</p>
+    <div class="box box-warn"><strong>⚠ Nota</strong>Non effettuare trasferimenti tra la stessa ubicazione. Se hai una sola ubicazione (ad esempio Semplice A), i trasferimenti di scorte non sono necessari: usa invece un carico, uno scarico o una correzione.</div>
+    <div class="box box-hint"><strong>💡 Suggerimento</strong>Per usare ubicazioni dettagliate (ad esempio numeri di scaffale), devi passare alla modalità <strong>Dettaglio</strong> nelle impostazioni. La modalità Dettaglio viene usata quando si accede alle funzionalità del Piano Completo.</div>
+  </section>
+
+  <section class="chapter" id="csv">
+    <div class="chapter-head"><div class="ch-no">CAPITOLO 8</div><h2>Importazione / Esportazione CSV</h2></div>
+    <p>La Gestione magazzino consente di importare, esportare ed eseguire il backup dei dati di stock usando file CSV.</p>
+    <div class="box box-danger"><strong>🚨 Importante</strong>Le operazioni di importazione CSV possono modificare i dati in modo significativo. Prima di importare, esporta sempre un CSV di backup.</div>
+    <h3>Specifiche CSV per le scorte</h3>
+    <div class="table-wrap"><table>
+      <tr><th>Tipo CSV</th><th>Scopo</th><th>Colonne principali</th><th>Obbligatorie/Opzionali</th><th>Note</th><th>Disponibile in</th></tr>
+      <tr><td>CSV scorte (con colonna ubicazione)</td><td>Importa dati di stock specifici per ubicazione</td><td>location, item_code, quantity, product_name</td><td>location, item_code, quantity obbligatorie; product_name obbligatoria in modo condizionale</td><td>La colonna product_name è necessaria per i codici non registrati</td><td>Gestione magazzino Standard o superiore</td></tr>
+      <tr><td>CSV scorte (senza colonna ubicazione)</td><td>Importa dati di stock per un'ubicazione specificata</td><td>item_code, quantity, product_name</td><td>item_code, quantity obbligatorie</td><td>Seleziona l'ubicazione di destinazione al momento dell'importazione</td><td>Gestione magazzino Standard o superiore</td></tr>
+      <tr><td>CSV di backup</td><td>Backup e ripristino dei dati completi</td><td>Prodotti, scorte correnti, ubicazioni, categorie — più file</td><td>Richiede il set completo di backup</td><td>Può essere suddiviso in più file</td><td>Gestione magazzino Standard o superiore</td></tr>
+    </table></div>
+    <h3>Uso della schermata di mappatura colonne</h3>
+    <p>Quando importi un CSV, selezioni quale colonna corrisponde a codice prodotto, nome prodotto, quantità, ubicazione e così via.</p>
+    <ol class="steps">
+      <li>Seleziona il file CSV.</li>
+      <li>Nella schermata di mappatura colonne, assegna ogni colonna CSV al campo corrispondente (codice prodotto, quantità ecc.).</li>
+      <li>Conferma le assegnazioni ed esegui l'importazione.</li>
+    </ol>
+    <div class="box box-warn">
+      <strong>⚠ Errori comuni nell'importazione CSV</strong>
+      <ul style="margin-top:6px;">
+        <li>Colonne obbligatorie mancanti</li>
+        <li>La stessa colonna assegnata a più di un campo</li>
+        <li>Colonna quantità vuota o non numerica</li>
+        <li>Nessuna colonna product_name selezionata per codici non registrati</li>
+        <li>Nessuna colonna ubicazione e nessuna ubicazione di destinazione selezionata</li>
+        <li>CSV vuoto o senza righe importabili</li>
+      </ul>
+    </div>  </section>
+
+  <section class="chapter" id="csv-replace">
+    <div class="chapter-head"><div class="ch-no">CAPITOLO 9</div><h2>Sostituisci scorte correnti</h2></div>
+    <p>Sostituisci scorte correnti è una modalità di importazione CSV che tratta le quantità nel file come le nuove scorte correnti. Lo storico esistente viene conservato e la differenza viene registrata come voce di rettifica nello storico.</p>
+    <div class="box box-danger">
+      <strong>🚨 Importante: usa Sostituisci scorte correnti con cautela</strong>
+      <ul style="margin-top:6px;">
+        <li>Le righe di stock non presenti nel CSV potrebbero essere impostate a 0.</li>
+        <li>Questa operazione può avere un impatto significativo sui dati di stock esistenti: esegui sempre prima un backup.</li>
+        <li>Leggi attentamente la schermata di conferma prima di eseguire l'operazione.</li>
+      </ul>
+    </div>
+    <h3>Procedura per Sostituisci scorte correnti</h3>
+    <ol class="steps">
+      <li>Esporta un CSV di backup (obbligatorio).</li>
+      <li>Vai in <strong>Gestione magazzino → Importazione CSV → Sostituisci scorte correnti</strong>.</li>
+      <li>Seleziona il file CSV da importare.</li>
+      <li>Conferma la mappatura delle colonne nella schermata di mappatura.</li>
+      <li>Nella schermata di conferma, controlla attentamente i dettagli della sostituzione (contenuto della rettifica).</li>
+      <li>Se tutto è corretto, esegui l'importazione.</li>
+      <li>Verifica le voci di rettifica nello Storico scorte.</li>
+    </ol>
+  </section>
+
+  <section class="chapter" id="csv-add">
+    <div class="chapter-head"><div class="ch-no">CAPITOLO 10</div><h2>Aggiungi come carico</h2></div>
+    <p>Aggiungi come carico è una modalità di importazione CSV che aggiunge le quantità del file allo stock esistente come transazione di carico: a differenza di Sostituisci scorte correnti, aggiunge alle scorte correnti invece di sovrascriverle.</p>
+    <div class="table-wrap"><table>
+      <tr><th>Modalità importazione</th><th>Comportamento</th><th>Esempio d'uso</th></tr>
+      <tr><td>Sostituisci scorte correnti</td><td>Tratta le quantità CSV come le nuove scorte correnti. Registra le differenze come storico di rettifica</td><td>Correzione stock dopo inventario fisico, configurazione iniziale</td></tr>
+      <tr><td>Aggiungi come carico</td><td>Aggiunge le quantità CSV alle scorte correnti come carico</td><td>Importazione massiva di carichi</td></tr>
+    </table></div>
+    <div class="box box-hint"><strong>💡 Suggerimento</strong>Usa <strong>Sostituisci scorte correnti</strong> quando configuri l'inventario per la prima volta e <strong>Aggiungi come carico</strong> quando devi aggiungere quantità allo stock esistente. Conferma quale modalità ti serve prima di eseguire l'importazione.</div>
+  </section>
+
+  <section class="chapter" id="notes">
+    <div class="chapter-head"><div class="ch-no">CAPITOLO 11</div><h2>Note importanti</h2></div>
+    <div class="box box-warn"><strong>⚠ Configurazione per ubicazioni dettagliate</strong>Per usare ubicazioni dettagliate, passa alla modalità <strong>Dettaglio</strong> nelle impostazioni. Le ubicazioni dettagliate non vengono visualizzate se stai ancora usando Semplice A/B/C.</div>
+    <div class="box box-warn"><strong>⚠ Verifica ubicazione e quantità prima di procedere</strong>Carico, scarico, trasferimenti e importazioni CSV si riflettono nelle scorte immediatamente. Conferma ubicazione e quantità prima di ogni operazione.</div>
+    <div class="box box-danger"><strong>🚨 Esegui un backup prima delle operazioni CSV</strong>Esegui sempre un backup prima di usare Sostituisci scorte correnti, Aggiungi come carico e le operazioni di ripristino da backup.</div>
+  </section>
+
+  <section class="chapter" id="tips">
+    <div class="chapter-head"><div class="ch-no">CAPITOLO 12</div><h2>Flusso di lavoro consigliato</h2></div>
+    <h3>Registra carichi e scarichi ogni giorno</h3>
+    <ul>
+      <li>Registra lo stock in entrata tramite Carico ogni volta che arrivano merci.</li>
+      <li>Registra lo stock in uscita tramite Scarico ogni volta che le merci escono.</li>
+      <li>Imposta i punti di riordino nell'Anagrafica prodotti e usa Consultazione scorte per monitorare il momento del riapprovvigionamento.</li>
+    </ul>
+    <h3>Controlli scorte regolari</h3>
+    <ul>
+      <li>Controlla regolarmente le quantità di stock: ogni settimana, ogni mese o secondo necessità.</li>
+      <li>Abbina questi controlli all'inventario fisico per verificare periodicamente che le quantità fisiche corrispondano ai record di magazzino.</li>
+    </ul>
+    <h3>Backup regolari</h3>
+    <ul>
+      <li>Esporta un CSV di backup almeno una volta al mese e salvalo sul PC o in uno spazio cloud.</li>
+    </ul>
+    <div class="box box-hint"><strong>💡 Considera l'upgrade al Piano Completo se:</strong>
+      <ul style="margin-top:6px;">
+        <li>Vuoi che i risultati dell'inventario fisico aggiornino automaticamente le scorte</li>
+        <li>Devi modificare direttamente il totale stock cumulativo registrato</li>
+        <li>Hai più di 300 prodotti</li>
+      </ul>
+    </div>
+  </section>
+
+  <div class="summary-box" id="summary">
+    <h3>📌 Punti chiave del capitolo</h3>
+    <ul>
+      <li>Il Piano Standard alza i limiti: fino a 300 record anagrafici, 1.000 record di storico e 300 record esportati.</li>
+      <li>Carico e scarico vengono riflessi nelle scorte immediatamente: conferma quantità e ubicazione prima di salvare.</li>
+      <li>Lo Storico scorte mostra il registro completo di tutte le operazioni di carico, scarico, trasferimento e rettifica.</li>
+      <li>L'importazione CSV ha due modalità: Sostituisci scorte correnti e Aggiungi come carico. Esegui sempre un backup prima di usarle.</li>
+      <li>Le ubicazioni si impostano tramite Semplice A/B/C. Passa alla modalità Dettaglio per le ubicazioni dettagliate.</li>
+      <li>La modifica diretta del totale cumulativo registrato richiede il Piano Completo.</li>
+    </ul>
+  </div>
+  <div class="confirm-box" id="confirm">
+    <h3>🔍 Note prima dell'uso</h3>
+    <ul>
+      <li>Usa l'Anagrafica ubicazioni entro le opzioni mostrate nell'app. Per la gestione di ubicazioni dettagliate, controlla la modalità attuale e valuta le funzionalità del Piano Completo quando necessario.</li>
+      <li>Se una voce di carico o scarico è stata salvata in modo errato, controlla lo Storico scorte e segui le indicazioni nell'app per correggerla, annullarla o registrare una rettifica, a seconda del caso.</li>
+      <li>Quando esporti un set CSV di backup, mantieni insieme i file generati e conservali in modo sicuro.</li>
+      <li>Controlla la schermata di trasferimento scorte nell'app prima di salvare il movimento.</li>
+      <li>Durante l'importazione CSV, controlla la mappatura colonne e la conferma finale prima di eseguire l'importazione.</li>
+    </ul>
+  </div>
+</div>
+<footer>
+  <p>Manuale Quantiventra | ⑥ Gestione magazzino Piano Standard</p>
+  <p style="margin-top:4px;">Questo manuale può essere aggiornato senza preavviso. Per le informazioni più recenti, fai sempre riferimento alle schermate dell'app.</p>
+  <p style="margin-top:4px;"><a href="privacy_it.html">Informativa sulla privacy</a></p>
+</footer>
+</body></html>

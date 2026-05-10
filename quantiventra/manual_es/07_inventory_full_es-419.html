@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="es-419">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quantiventra – Gestión de inventario – versión completa</title>
+<style>*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;font-size:15px;line-height:1.8;color:#1a2535;background:#f4f7fb;}
+a{color:#1a5fa8;text-decoration:none;}a:hover{text-decoration:underline;}
+.site-nav{background:#1a3a5c;color:#fff;padding:0;}.site-nav .nav-inner{max-width:960px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:stretch;}
+.site-nav a{color:#cde;padding:10px 13px;font-size:12px;display:block;border-right:1px solid #2a4a6c;white-space:nowrap;}
+.site-nav a:hover{background:#2a5090;text-decoration:none;}.site-nav a.active{background:#2a6cbe;color:#fff;font-weight:bold;}
+.page-header{background:linear-gradient(135deg,#1a3a5c 0%,#2a6cbe 100%);color:#fff;padding:40px 20px 30px;}
+.page-header .inner{max-width:960px;margin:0 auto;}.page-header .app-name{font-size:13px;opacity:.8;}
+.page-header h1{font-size:22px;font-weight:700;margin-top:6px;line-height:1.4;}.page-header .subtitle{font-size:14px;opacity:.85;margin-top:8px;}
+.scope-box{background:rgba(255,255,255,.15);border-left:4px solid #7ecfff;padding:12px 16px;margin-top:16px;border-radius:4px;font-size:13px;}
+.container{max-width:960px;margin:0 auto;padding:30px 16px;}
+.toc{background:#fff;border:1px solid #c8d8ec;border-radius:8px;padding:24px 28px;margin-bottom:32px;}
+.toc h2{font-size:16px;font-weight:700;color:#1a3a5c;border-bottom:2px solid #2a6cbe;padding-bottom:8px;margin-bottom:14px;}
+.toc ol{margin-left:18px;}.toc li{margin:5px 0;font-size:14px;}
+.chapter{background:#fff;border-radius:8px;box-shadow:0 1px 4px rgba(0,0,0,.08);padding:28px 28px 24px;margin-bottom:28px;}
+.chapter-head{border-left:5px solid #2a6cbe;padding-left:14px;margin-bottom:20px;}
+.chapter-head .ch-no{font-size:12px;color:#2a6cbe;font-weight:700;}.chapter-head h2{font-size:20px;font-weight:700;color:#1a2535;margin-top:2px;}
+h3{font-size:16px;font-weight:700;color:#1a3a5c;border-bottom:1px solid #dde8f5;padding-bottom:5px;margin:22px 0 12px;}
+h4{font-size:14px;font-weight:700;color:#2a4a6c;margin:16px 0 8px;}
+p{margin-bottom:12px;}ul,ol{margin-left:20px;margin-bottom:12px;}li{margin-bottom:5px;}
+.steps{counter-reset:step;list-style:none;margin-left:0;}
+.steps li{counter-increment:step;padding:9px 12px 9px 46px;position:relative;background:#f8fbff;border:1px solid #dde8f5;border-radius:6px;margin-bottom:6px;}
+.steps li::before{content:counter(step);position:absolute;left:12px;top:50%;transform:translateY(-50%);width:24px;height:24px;background:#2a6cbe;color:#fff;border-radius:50%;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;}
+.table-wrap{overflow-x:auto;margin-bottom:16px;}
+table{width:100%;border-collapse:collapse;font-size:13px;min-width:380px;}
+th{background:#1a3a5c;color:#fff;padding:9px 12px;text-align:left;white-space:nowrap;}
+td{padding:8px 12px;border-bottom:1px solid #dde8f5;vertical-align:top;}tr:nth-child(even) td{background:#f4f7fb;}
+code{font-family:'Courier New',monospace;background:rgba(0,80,160,.08);color:#004080;padding:2px 6px;border-radius:3px;font-size:12px;}
+.box{border-radius:6px;padding:13px 16px;margin:14px 0;font-size:13px;}
+.box-warn{background:#fffbe6;border-left:4px solid #f5a623;color:#7a5700;}
+.box-danger{background:#fff0f0;border-left:4px solid #d43f3f;color:#7a0000;}
+.box-hint{background:#e8f4ff;border-left:4px solid #2a6cbe;color:#0a3060;}
+.box-check{background:#f4eeff;border-left:4px solid #8c4fc8;color:#3a0070;}
+.box strong{display:block;margin-bottom:4px;}
+figure{max-width:280px;width:100%;margin:18px auto;text-align:center;}
+figure img{display:block;width:100%;max-width:280px;height:auto;margin:0 auto;border:1px solid #c8d8ec;border-radius:6px;box-shadow:0 2px 8px rgba(0,0,0,.1);}
+figcaption{font-size:12px;color:#5a7a99;margin-top:6px;}
+.img-pending{display:flex;align-items:center;justify-content:center;max-width:280px;width:100%;box-sizing:border-box;background:#e8eef5;border:2px dashed #99b8d8;border-radius:6px;height:160px;color:#5a7a99;font-size:13px;margin:18px auto;}
+.diff-add{background:#e8fff0;border-left:4px solid #2a9c5c;border-radius:6px;padding:12px 16px;margin:14px 0;font-size:13px;}
+.diff-add strong{display:block;color:#1a6c3c;margin-bottom:4px;}
+.flow-box{background:#f4f7fb;border:1px solid #c8d8ec;border-radius:8px;padding:20px;margin:16px 0;}
+.flow-box h4{color:#1a3a5c;margin-top:0;}
+.flow-arrow{text-align:center;font-size:20px;color:#2a6cbe;margin:4px 0;}
+.flow-step{background:#fff;border:1px solid #c8d8ec;border-radius:6px;padding:10px 16px;margin:4px 0;font-size:13px;}
+.flow-step strong{color:#1a3a5c;}
+.summary-box{background:linear-gradient(135deg,#e8f4ff,#f0f8ff);border:1px solid #99c8ec;border-radius:8px;padding:20px 24px;margin-top:32px;}
+.summary-box h3{border:none;color:#1a3a5c;margin-top:0;}
+.confirm-box{background:#fdf4ff;border:1px solid #c8a0e0;border-radius:8px;padding:20px 24px;margin-top:16px;}
+.confirm-box h3{border:none;color:#5a0090;margin-top:0;}
+.check{color:#2e7d32;font-weight:700;}.cross{color:#c62828;}
+th.pro-col{background:#5a2a8c;}
+.feature-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px;margin:16px 0;}
+.feature-card{background:#f4f7fb;border:1px solid #c8d8ec;border-radius:8px;padding:16px;}
+.feature-card h4{color:#1a3a5c;margin-top:0;margin-bottom:6px;font-size:14px;}
+.feature-card p{font-size:13px;margin:0;color:#3a5a7a;}
+.feature-card.pro-card{background:#f4eeff;border-color:#c8a0e0;}
+.feature-card.pro-card h4{color:#5a2a8c;}
+.trouble{border:1px solid #c8d8ec;border-radius:8px;margin:14px 0;overflow:hidden;}
+.trouble-q{background:#eef6fd;padding:13px 18px;font-weight:700;font-size:14px;color:#1a3a5c;display:flex;align-items:flex-start;gap:10px;}
+.trouble-q::before{content:'Q';background:#2a6cbe;color:#fff;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900;flex-shrink:0;margin-top:1px;}
+.trouble-a{padding:13px 18px 14px 50px;font-size:13.5px;border-top:1px solid #c8d8ec;line-height:1.9;}
+.trouble-a ul{margin-left:16px;}
+.legal-block{background:#f5f5f5;border:1px solid #ddd;border-radius:8px;padding:20px 24px;font-size:12.5px;color:#444;line-height:1.9;margin:14px 0;}
+.legal-block h4{font-size:13px;color:#333;margin:18px 0 6px;border-bottom:1px solid #ddd;padding-bottom:4px;}
+.legal-block h4:first-child{margin-top:0;}
+footer{text-align:center;font-size:12px;color:#8a9aaa;padding:30px 16px;border-top:1px solid #dde8f5;margin-top:20px;}
+@media(max-width:640px){.page-header h1{font-size:18px;}.chapter{padding:20px 16px;}.site-nav a{padding:8px 9px;font-size:11px;}}
+@media print{body{background:#fff;font-size:12px;}.site-nav{display:none;}.chapter{box-shadow:none;border:1px solid #ccc;page-break-inside:avoid;}.page-header{background:#1a3a5c !important;-webkit-print-color-adjust:exact;print-color-adjust:exact;}}
+</style></head>
+<body>
+<nav class="site-nav"><div class="nav-inner">
+  <a href="01_top_settings_common_es-419.html">① Inicio / Ajustes</a>
+  <a href="02_stocktake_free_es-419.html">② Inventario físico gratis</a>
+  <a href="03_stocktake_simple_es-419.html">③ Inventario físico estándar</a>
+  <a href="04_stocktake_full_es-419.html">④ Inventario físico completo</a>
+  <a href="05_inventory_free_es-419.html">⑤ Existencias gratis</a>
+  <a href="06_inventory_simple_es-419.html">⑥ Existencias estándar</a>
+  <a href="07_inventory_full_es-419.html" class="active">⑦ Existencias completas</a>
+</div></nav>
+<header class="page-header"><div class="inner">
+  <div class="app-name">Manual de Quantiventra</div>
+  <h1>⑦ Gestión de inventario — versión completa (Desbloqueo completo)</h1>
+  <div class="subtitle">Funcionalidades de la versión completa · Gestión de catálogos · Transferencia de existencias · Aplicación de inventario · Respaldo CSV · Flujos prácticos</div>
+  <div class="scope-box"><strong>Temas tratados:</strong> Novedades Desbloqueo completo / Diferencias con Estándar / Catálogo de productos / Catálogo de categorías / Catálogo de ubicaciones / Transferencia de existencias / Historial / Aplicar inventario físico a existencias / Respaldo·Restauración CSV / Respaldo de historial / Punto de reposición·Precio / Ejemplos de flujo / Notas importantes</div>
+</div></header>
+<div class="container">
+  <nav class="toc"><h2>Índice</h2><ol>
+    <li><a href="#overview">Descripción de la versión completa (Desbloqueo completo)</a></li>
+    <li><a href="#diff">Diferencias con la versión estándar</a></li>
+    <li><a href="#master-product">Integración con el Catálogo de productos</a></li>
+    <li><a href="#master-item">Catálogo de categorías</a></li>
+    <li><a href="#master-location">Catálogo de ubicaciones</a></li>
+    <li><a href="#stock-move">Transferencia de existencias</a></li>
+    <li><a href="#stock-history">Historial de existencias</a></li>
+    <li><a href="#stocktake-reflect">Aplicar datos del inventario físico a existencias</a></li>
+    <li><a href="#csv-backup">Respaldo y restauración CSV</a></li>
+    <li><a href="#csv-history-backup">Respaldo de historial</a></li>
+    <li><a href="#reorder-price">Punto de reposición y precio</a></li>
+    <li><a href="#usecase">Ejemplos de flujo de trabajo — versión completa</a></li>
+    <li><a href="#notes">Notas importantes</a></li>
+    <li><a href="#summary">Puntos clave del capítulo</a></li>
+    <li><a href="#confirm">Notas antes de usar</a></li>
+  </ol></nav>
+
+  <section class="chapter" id="overview">
+    <div class="chapter-head"><div class="ch-no">CAPÍTULO 1</div><h2>Descripción de la versión completa (Desbloqueo completo)</h2></div>
+    <p>El Desbloqueo completo para existencias elimina todos los límites de registros de catálogo, entradas de historial y líneas de exportación, y activa todas las funcionalidades avanzadas no disponibles en la versión estándar. Las principales adiciones incluyen: gestión de múltiples ubicaciones (bodega, tienda, etc.), transferencia de existencias entre ubicaciones, aplicación directa de los resultados del inventario a las existencias, y respaldo/restauración completo en CSV.</p>
+    <div class="diff-add">
+      <strong>Funcionalidades desbloqueadas por el Desbloqueo completo</strong>
+      <ul>
+        <li>Registros de catálogo, entradas de historial y líneas de exportación ilimitados</li>
+        <li>Campos de punto de reposición y precio en el Catálogo de productos</li>
+        <li>Catálogo de categorías (gestión de clasificación de productos)</li>
+        <li>Registro y gestión del Catálogo de ubicaciones</li>
+        <li>Transferencia de existencias (mover cantidades entre ubicaciones)</li>
+        <li>Aplicar datos del inventario físico a existencias</li>
+        <li>Respaldo y restauración CSV (hoja de existencias + conjunto completo de CSV de respaldo)</li>
+        <li>Respaldo de historial</li>
+        <li>Edición directa del total acumulado registrado</li>
+        <li>Reglas de código, reglas de ubicación y ajustes de cámara (ajustes compartidos de la versión completa)</li>
+        <li>Opciones CSV ampliadas (selección de columnas y selección de modo de importación)</li>
+      </ul>
+    </div>
+    <div class="box box-hint"><strong>Nota: "Desbloqueo completo" y "versión completa" tienen el mismo significado</strong>En este documento, "Desbloqueo completo" y "versión completa" se usan de manera intercambiable. Para detalles de compra, consulta la sección "Descripción general de planes" en <a href="01_top_settings_common_es-419.html">① Inicio y Ajustes</a>.</div>
+  </section>
+
+  <section class="chapter" id="diff">
+    <div class="chapter-head"><div class="ch-no">CAPÍTULO 2</div><h2>Diferencias con la versión estándar</h2></div>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Funcionalidad</th><th>Gratuito</th><th>Estándar</th><th>Completo</th></tr></thead>
+      <tbody>
+        <tr><td>Consulta de existencias</td><td>✓</td><td>✓</td><td>✓</td></tr>
+        <tr><td>Entrada / Salida</td><td>✗</td><td>✓</td><td>✓</td></tr>
+        <tr><td>Límite de registros de catálogo</td><td>30</td><td>300</td><td>Ilimitado</td></tr>
+        <tr><td>Transferencia de existencias</td><td>✗</td><td>✗</td><td>✓</td></tr>
+        <tr><td>Aplicar datos del inventario físico a existencias</td><td>✗</td><td>✗</td><td>✓</td></tr>
+        <tr><td>Catálogo de categorías</td><td>✗</td><td>✗</td><td>✓</td></tr>
+        <tr><td>Punto de reposición y precio</td><td>✗</td><td>✗</td><td>✓</td></tr>
+        <tr><td>Respaldo y restauración CSV</td><td>✗</td><td>Limitado</td><td>✓ (conjunto completo)</td></tr>
+        <tr><td>Respaldo de historial</td><td>✗</td><td>✗</td><td>✓</td></tr>
+        <tr><td>Reglas de código y ubicación</td><td>✗</td><td>✗</td><td>✓ (ajustes compartidos Completo)</td></tr>
+      </tbody>
+    </table></div>
+    <div class="box box-hint"><strong>Consejo</strong>Para las operaciones principales de la versión estándar — entrada, salida, consulta de existencias, historial e importación/exportación CSV — consulta <a href="06_inventory_simple_es-419.html">⑥ Gestión de inventario: Estándar</a>. Esta página cubre solo las funcionalidades añadidas por la versión completa.</div>
+  </section>
+
+  <section class="chapter" id="master-product">
+    <div class="chapter-head"><div class="ch-no">CAPÍTULO 3</div><h2>Integración con el Catálogo de productos</h2></div>
+    <p>El Catálogo de productos es donde registras los productos reales cuyas existencias gestionas. Con el Desbloqueo completo, puedes agregar punto de reposición y precio a cada producto.</p>
+    <h3>Campos clave del Catálogo de productos</h3>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Campo</th><th>Descripción</th><th>Añadido en la versión completa</th></tr></thead>
+      <tbody>
+        <tr><td>Código de producto / Código de barras</td><td>Identificador único del producto</td><td>—</td></tr>
+        <tr><td>Nombre del producto</td><td>Nombre del producto</td><td>—</td></tr>
+        <tr><td>Categoría</td><td>Clasificación del producto (seleccionada del Catálogo de categorías)</td><td>—</td></tr>
+        <tr><td>Precio</td><td>Precio de venta o costo del producto</td><td>✓</td></tr>
+        <tr><td>Punto de reposición</td><td>Cantidad mínima que activa el referencia para evaluar la reposición</td><td>✓</td></tr>
+      </tbody>
+    </table></div>    <h3>Registrar o editar un producto</h3>
+    <ol class="steps">
+      <li>Desde la pantalla de inicio, abre <strong>Gestión de catálogos</strong>.</li>
+      <li>Selecciona <strong>Catálogo de productos</strong>.</li>
+      <li>Toca la tarjeta de nuevo elemento o el botón <strong>Nuevo</strong>.</li>
+      <li>Ingresa el código del producto, el nombre y la categoría. Opcionalmente ingresa precio y punto de reposición.</li>
+      <li>Toca <strong>Guardar</strong> para registrar.</li>
+      <li>Para editar un producto existente, ábrelo en la lista, realiza los cambios y toca <strong>Guardar</strong>.</li>
+    </ol>
+    <div class="box box-hint"><strong>Registra un producto desconocido desde la pantalla de Entrada</strong>Si ingresas un código de producto que no está en el catálogo en la pantalla de Entrada, la app te lleva al formulario de nuevo elemento del Catálogo de productos. Después de guardar el nombre, el precio y el punto de reposición, regresas a la pantalla de Entrada con los detalles del producto completados automáticamente.</div>
+    <div class="box box-warn"><strong>Atención: no confundas Producto y Categoría</strong>
+      <ul>
+        <li><strong>Producto</strong>: artículo individual en existencias (ej.: Bolígrafo rojo, Bolígrafo azul)</li>
+        <li><strong>Categoría</strong>: grupo de clasificación de productos (ej.: Papelería, Alimentos)</li>
+      </ul>
+      La categoría se selecciona en el Catálogo de productos como clasificación del producto. La categoría en sí no tiene existencias.
+    </div>
+  </section>
+
+  <section class="chapter" id="master-item">
+    <div class="chapter-head"><div class="ch-no">CAPÍTULO 4</div><h2>Catálogo de categorías</h2></div>
+    <p>El Catálogo de categorías gestiona los grupos de clasificación usados para organizar los productos. Las categorías ayudan a filtrar y revisar el Catálogo de productos.</p>
+    <div class="table-wrap"><table>
+      <tr><th>Campo</th><th>Descripción</th></tr>
+      <tr><td>Código de categoría</td><td>Identificador único de la categoría</td></tr>
+      <tr><td>Nombre de categoría</td><td>Nombre de la clasificación (ej.: Alimentos, Ropa)</td></tr>
+      <tr><td>Clasificación</td><td>Grupo usado para organizar productos en listas y catálogos</td></tr>
+      <tr><td>Orden de visualización</td><td>Orden de clasificación en la vista de lista</td></tr>
+    </table></div>    <h3>Registrar una categoría</h3>
+    <ol class="steps">
+      <li>Ve a <strong>Gestión de catálogos → Catálogo de categorías</strong>.</li>
+      <li>Toca la tarjeta de nuevo elemento o el botón <strong>Nuevo</strong>.</li>
+      <li>Ingresa el código, el nombre y el orden de visualización.</li>
+      <li>Toca <strong>Guardar</strong>.</li>
+    </ol>
+    <div class="box box-hint"><strong>Nota sobre categorías</strong>Usa categorías para agrupar productos de forma consistente y facilitar la revisión del catálogo.</div>
+  </section>
+
+  <section class="chapter" id="master-location">
+    <div class="chapter-head"><div class="ch-no">CAPÍTULO 5</div><h2>Catálogo de ubicaciones</h2></div>
+    <p>El Catálogo de ubicaciones es donde registras y gestionas los lugares físicos de almacenamiento de existencias. Al registrar múltiples ubicaciones — como bodega, tienda o estantes individuales — puedes rastrear las existencias por ubicación.</p>
+    <div class="table-wrap"><table>
+      <tr><th>Campo</th><th>Descripción</th></tr>
+      <tr><td>Código de ubicación</td><td>Identificador único de la ubicación</td></tr>
+      <tr><td>Nombre de ubicación</td><td>Nombre de la ubicación (ej.: Bodega, Tienda A)</td></tr>
+      <tr><td>Orden de visualización</td><td>Orden de clasificación en la vista de lista</td></tr>
+      <tr><td>Incluir en evaluación de reposición</td><td>Si está activo, las existencias de esta ubicación se incluyen en el total usado para decisiones de reposición en la Consulta de existencias</td></tr>
+      <tr><td>Activo / Inactivo</td><td>Las ubicaciones que ya no se usan pueden desactivarse sin eliminarlas</td></tr>
+    </table></div>    <div class="box box-hint"><strong>Ubicaciones predeterminadas</strong>La app viene con "Bodega" y "Tienda" ya registradas. Renómbralas, edítalas o agrega nuevas según tus operaciones reales.</div>
+    <h3>Registrar una ubicación</h3>
+    <ol class="steps">
+      <li>Ve a <strong>Gestión de catálogos → Catálogo de ubicaciones</strong>.</li>
+      <li>Toca la tarjeta de nuevo elemento o el botón <strong>Nuevo</strong>.</li>
+      <li>Ingresa el código, el nombre y el orden de visualización.</li>
+      <li>Activa o desactiva <strong>Incluir en evaluación de reposición</strong> según sea necesario. Los nuevos elementos tienen este campo activo de manera predeterminada.</li>
+      <li>Toca <strong>Guardar</strong>.</li>
+    </ol>
+    <div class="box box-hint"><strong>Sobre la configuración "Incluir en evaluación de reposición"</strong>La evaluación de reposición en la Consulta de existencias solo contabiliza las existencias de las ubicaciones con este interruptor activo. Usa el botón <strong>Incluir todas las ubicaciones activas</strong> para activarlas todas a la vez.</div>
+    <div class="box box-warn"><strong>Atención: desactivar vs. eliminar una ubicación</strong>Cuando una ubicación ya no sea necesaria, se recomienda <strong>desactivarla</strong> en lugar de eliminarla. Antes de eliminar o sobrescribir registros, exporta un respaldo y revisa el impacto en las existencias.</div>
+  </section>
+
+  <section class="chapter" id="stock-move">
+    <div class="chapter-head"><div class="ch-no">CAPÍTULO 6</div><h2>Transferencia de existencias</h2></div>
+    <p>La transferencia de existencias mueve una cantidad específica de existencias de una ubicación a otra. Disponible solo en la versión completa.</p>    <h3>Cómo realizar una transferencia de existencias</h3>
+    <ol class="steps">
+      <li>En el menú Gestión de inventario, abre <strong>Transferencia de existencias</strong>.</li>
+      <li>Selecciona la <strong>ubicación de origen</strong> (de donde saldrán las existencias).</li>
+      <li>Selecciona la <strong>ubicación de destino</strong> (a donde llegarán las existencias).</li>
+      <li>Encuentra el producto deseado escaneando el código de barras o buscando por nombre.</li>
+      <li>Ingresa la cantidad a transferir.</li>
+      <li>Revisa los detalles y toca <strong>Confirmar</strong>.</li>
+    </ol>
+    <div class="box box-danger"><strong>Importante: nunca transfieras entre la misma ubicación</strong>Seleccionar la misma ubicación como origen y destino causará un procesamiento incorrecto de los datos de existencias. Siempre selecciona dos ubicaciones diferentes.</div>
+    <div class="box box-hint"><strong>Con una sola ubicación</strong>Con solo una ubicación registrada, la transferencia no tiene sentido. Usa <strong>Entrada</strong>, <strong>Salida</strong> o <strong>Edición</strong> para ajustar cantidades. La transferencia solo tiene sentido con dos o más ubicaciones.</div>
+  </section>
+
+  <section class="chapter" id="stock-history">
+    <div class="chapter-head"><div class="ch-no">CAPÍTULO 7</div><h2>Historial de existencias</h2></div>
+    <p>El Historial de existencias proporciona un registro completo de cada variación de existencias. Con el Desbloqueo completo, el límite de entradas de historial se elimina, permitiendo mantener registros a largo plazo.</p>
+    <h3>Tipos de operaciones registradas en el historial</h3>
+    <ul>
+      <li><strong>Entrada</strong>: Mercancías recibidas en existencias</li>
+      <li><strong>Salida</strong>: Mercancías despachadas de existencias</li>
+      <li><strong>Transferencia</strong>: Existencias movidas entre ubicaciones</li>
+      <li><strong>Ajuste de inventario</strong>: Corrección de diferencias al aplicar resultados del inventario</li>
+      <li><strong>Existencias iniciales</strong>: Cantidad de apertura establecida en el registro inicial</li>
+      <li><strong>Importación CSV</strong>: Existencias actualizadas mediante archivo CSV</li>
+    </ul>  </section>
+
+  <section class="chapter" id="stocktake-reflect">
+    <div class="chapter-head"><div class="ch-no">CAPÍTULO 8</div><h2>Aplicar datos del inventario físico a existencias</h2></div>
+    <p>Aplicar los resultados del inventario físico (conteo real) al módulo de Gestión de inventario alinea las existencias del sistema con las existencias físicamente presentes en los estantes. Disponible solo en la versión completa.</p>
+    <p>Cuando se aplican los resultados del inventario, las eventuales diferencias entre los niveles de existencias teóricos y las cantidades reales contadas se registran como entradas de <strong>Ajuste de inventario</strong> en el historial, actualizando simultáneamente las existencias a los valores reales y conservando un registro rastreable de los ajustes.</p>
+    <div class="box box-check"><strong>Condiciones de aplicación y revisión</strong>La aplicación debe ejecutarse solo cuando se cumplan las condiciones de la pantalla de confirmación. Revisa las ubicaciones afectadas, los detalles del ajuste y el CSV de respaldo antes de continuar.</div>
+    <div class="box box-danger"><strong>Importante: siempre haz respaldo antes de aplicar</strong>Aplicar datos de inventario sobreescribe las cantidades de existencias. Antes de ejecutar esta operación, siempre exporta un CSV de respaldo. La capacidad para deshacer después de la aplicación puede ser limitada.</div>
+  </section>
+
+  <section class="chapter" id="csv-backup">
+    <div class="chapter-head"><div class="ch-no">CAPÍTULO 9</div><h2>Respaldo y restauración CSV</h2></div>
+    <p>El Desbloqueo completo ofrece tres tipos de exportación: hoja de existencias CSV, conjunto completo de CSV de respaldo y respaldo de historial. Como las operaciones de restauración y reemplazo hacen cambios completos a los datos, verificarlas cuidadosamente antes de proceder es esencial.</p>
+    <h3>Tipos de CSV y sus usos</h3>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Tipo de CSV</th><th>Propósito</th><th>Contenido principal</th><th>Disponible en</th><th>Notas</th></tr></thead>
+      <tbody>
+        <tr><td>Hoja de existencias CSV</td><td>Revisar y reimportar la lista de existencias actual</td><td>Ubicación, código de producto, nombre del producto, cantidad</td><td>Estándar o superior</td><td>Sin columna de ubicación, seleccionar ubicación destino al importar</td></tr>
+        <tr><td>Conjunto completo de CSV de respaldo</td><td>Respaldo y restauración del conjunto completo de datos</td><td>Productos, existencias actuales, historial de entrada/salida/transferencia/ajuste, ubicaciones, categorías</td><td>Completo</td><td>Puede exportarse en múltiples archivos</td></tr>
+        <tr><td>Respaldo de historial</td><td>Respaldo para revisión posterior de movimientos de existencias</td><td>Hoja de existencias + historial completo de operaciones</td><td>Completo</td><td>Revisa la pantalla de importación antes de reimportar el CSV de historial</td></tr>
+      </tbody>
+    </table></div>    <h3>Exportar el conjunto completo de CSV de respaldo</h3>
+    <ol class="steps">
+      <li>Desde la pantalla de Ajustes o el menú principal, abre <strong>Importación/Exportación CSV</strong>.</li>
+      <li>Selecciona <strong>Conjunto completo de CSV de respaldo</strong>.</li>
+      <li>Selecciona la carpeta de destino (sigue las instrucciones en pantalla).</li>
+      <li>Toca <strong>Exportar</strong> y confirma el mensaje de finalización.</li>
+    </ol>
+    <h3>Restaurar desde un CSV de respaldo</h3>
+    <ol class="steps">
+      <li>Ve a <strong>Importación/Exportación CSV → Restaurar</strong> o <strong>Importar CSV</strong>.</li>
+      <li>Selecciona el archivo CSV de respaldo.</li>
+      <li>Confirma el mapeo de columnas (la app puede detectarlo automáticamente).</li>
+      <li>Lee atentamente la pantalla de confirmación, luego toca <strong>Ejecutar</strong>.</li>
+    </ol>
+    <div class="box box-danger"><strong>Importante: siempre haz respaldo de los datos actuales antes de restaurar o reemplazar</strong>La restauración CSV o el Reemplazo de existencias actuales sobreescribe los datos de existencias existentes. Antes de proceder, siempre exporta y guarda la hoja de existencias CSV actual.</div>
+    <h3>Reemplazar existencias actuales</h3>
+    <p>Reemplazar existencias actuales sobreescribe las cantidades de existencias actuales con los valores del CSV importado. El historial existente se conserva, pero las diferencias se registran como entradas de historial de <strong>ajuste</strong>. Las filas de existencias que no están en el CSV pueden quedar en 0 — siempre verifica el contenido del CSV antes de importar.</p>
+    <div class="box box-danger"><strong>Usa Reemplazar existencias actuales con extremo cuidado</strong>Los productos o ubicaciones que no están en el CSV pueden tener sus existencias en 0. Antes de importar, confirma que el CSV contiene el conjunto correcto de productos y ubicaciones.</div>
+  </section>
+
+  <section class="chapter" id="csv-history-backup">
+    <div class="chapter-head"><div class="ch-no">CAPÍTULO 10</div><h2>Respaldo de historial</h2></div>
+    <p>El respaldo de historial exporta en una sola operación tanto la hoja de existencias como el registro completo de movimientos — entradas, salidas, transferencias, ajustes, etc. — útil para auditorías posteriores o seguimiento de variaciones de existencias a lo largo del tiempo.</p>
+    <ul>
+      <li>Hoja de existencias CSV (cantidades de existencias actuales)</li>
+      <li>Historial completo de operaciones (entradas, salidas, transferencias, ajustes de inventario, importaciones CSV)</li>
+    </ul>
+    <div class="box box-check"><strong>Reimportación del CSV de respaldo de historial</strong>Antes de reimportar un respaldo de historial, revisa el archivo seleccionado, el modo de importación y la pantalla de confirmación de la app.</div>
+    <div class="box box-hint"><strong>Consejo operativo</strong>Ejecutar el respaldo de historial regularmente — semanal o mensualmente — significa que, en caso de problemas, puedes rastrear exactamente cómo cambiaron los niveles de existencias a lo largo del tiempo y restaurar con mayor precisión.</div>
+  </section>
+
+  <section class="chapter" id="reorder-price">
+    <div class="chapter-head"><div class="ch-no">CAPÍTULO 11</div><h2>Punto de reposición y precio</h2></div>
+    <h3>Punto de reposición</h3>
+    <p>Establecer un punto de reposición en el Catálogo de productos proporciona un valor de referencia: cuando las existencias caigan por debajo de este valor, puedes identificar de un vistazo que se necesita reabastecimiento. Es un indicador para gestionar los tiempos de reabastecimiento.</p>
+    <div class="box box-check"><strong>Evaluación de reposición en la Consulta de existencias</strong>La Consulta de existencias muestra de manera predeterminada los totales por producto. La evaluación de reposición compara el total de existencias combinado de todas las ubicaciones con "Incluir en evaluación de reposición" activo con el punto de reposición del producto. Al ver las existencias de una sola ubicación individualmente, la evaluación de reposición no se muestra o se considera inactiva.</div>
+    <div class="box box-check"><strong>Indicadores de reposición</strong>Usa la pantalla de consulta de existencias como referencia para ver cómo se muestran los puntos de reposición y los avisos relacionados con tus ajustes actuales.</div>
+    <h3>Precio</h3>
+    <p>Es posible registrar un precio para cada producto en el Catálogo de productos. El precio se consulta para calcular el valor total de las existencias o generar reportes. Revisa la visualización en la app y los CSV exportados antes de usar valores relacionados con precios en registros operativos.</p>
+    <h3>Combinación con categorías</h3>
+    <p>Al asociar productos con categorías, es más fácil organizar el catálogo y revisar listas por tipo de producto.</p>
+    <div class="box box-warn"><strong>Atención</strong>La información de precios y los cálculos relacionados son funciones de la app. Confirma por separado si son adecuados para los registros comerciales de tu operación.</div>
+  </section>
+
+  <section class="chapter" id="usecase">
+    <div class="chapter-head"><div class="ch-no">CAPÍTULO 12</div><h2>Ejemplos de flujo de trabajo — versión completa</h2></div>
+    <h3>Ejemplo 1: Gestión de dos ubicaciones — Bodega y Tienda</h3>
+    <ol class="steps">
+      <li>Registra "Bodega" y "Tienda A" en el Catálogo de ubicaciones.</li>
+      <li>Registra los productos en el Catálogo de productos y establece las existencias iniciales en Bodega.</li>
+      <li>Cuando la tienda necesite reabastecimiento, usa <strong>Transferencia de existencias</strong> para mover las existencias de Bodega a Tienda A.</li>
+      <li>Después de las ventas en tienda, registra la reducción mediante <strong>Salida</strong>.</li>
+      <li>Periódicamente, realiza el inventario físico y usa <strong>Aplicar datos del inventario físico</strong> para alinear las existencias del sistema con los conteos reales.</li>
+      <li>Mensualmente, exporta el <strong>Respaldo de historial</strong> y archívalo.</li>
+    </ol>
+    <h3>Ejemplo 2: Ciclo de inventario periódico</h3>
+    <ol class="steps">
+      <li>A fin de mes, ingresa los conteos reales con la app de Inventario físico (versión completa).</li>
+      <li>Confirma los resultados del conteo real.</li>
+      <li>Usa <strong>Aplicar datos de inventario</strong> para trasladar las diferencias al módulo de existencias.</li>
+      <li>Revisa las entradas de <strong>Ajuste de inventario</strong> en el Historial de existencias para confirmar los cambios.</li>
+      <li>Exporta y guarda el conjunto completo de CSV de respaldo.</li>
+    </ol>
+    <div class="box box-hint"><strong>Consejo: integración con inventario</strong>Para la guía detallada sobre la versión completa del inventario físico, consulta <a href="04_stocktake_full_es-419.html">④ Inventario físico: versión completa</a>.</div>
+  </section>
+
+  <section class="chapter" id="notes">
+    <div class="chapter-head"><div class="ch-no">CAPÍTULO 13</div><h2>Notas importantes</h2></div>
+    <div class="box box-danger"><strong>Reemplazo CSV de existencias actuales</strong>Reemplazar existencias actuales sobreescribe las cantidades de existencias con los valores CSV. Los productos que no están en el CSV pueden quedar con existencias en 0. <strong>Antes de esta operación, siempre exporta un CSV de respaldo.</strong></div>
+    <div class="box box-danger"><strong>Aplicación de datos de inventario</strong>Aplicar datos de inventario reescribe las cantidades de existencias y las reversiones pueden ser limitadas. <strong>Antes de esta operación, siempre exporta un CSV de respaldo.</strong></div>
+    <div class="box box-danger"><strong>Eliminación o sobreescritura de registros de catálogo</strong>Eliminar elementos del Catálogo de productos o del Catálogo de ubicaciones puede afectar los datos de existencias. Cuando un registro ya no sea necesario, considera <strong>desactivarlo</strong> en lugar de eliminarlo y conserva un CSV de respaldo antes de cambios de gran impacto.</div>
+    <div class="box box-warn"><strong>Transferencia de existencias: origen y destino deben ser diferentes</strong>Nunca selecciones la misma ubicación como origen y destino en una transferencia. Puede causar cambios inesperados en los datos.</div>
+    <div class="box box-hint"><strong>Campo de existencias en la pantalla de Salida</strong>Las existencias mostradas en la pantalla de Salida son solo para referencia — muestran el nivel de existencias actual y no son editables. Guardar la cantidad de salida reduce las existencias de la ubicación seleccionada.</div>
+    <div class="box box-warn"><strong>Precios y condiciones de compra</strong>Para precios de compra y condiciones de venta del Desbloqueo completo, consulta la ficha en Google Play. Este documento no incluye información de precios.</div>
+    <div class="box box-hint">
+      <strong>Principios operativos</strong>
+      <ul>
+        <li>Antes de operaciones que hacen cambios masivos a las existencias (reemplazo, aplicación, eliminación), siempre haz respaldo.</li>
+        <li>En la importación CSV, lee la pantalla de vista previa o confirmación antes de ejecutar.</li>
+        <li>Con una sola ubicación, usa Entrada, Salida o Edición en lugar de Transferencia de existencias.</li>
+      </ul>
+    </div>
+  </section>
+
+  <div class="summary-box" id="summary">
+    <h3>📌 Puntos clave del capítulo</h3>
+    <ul>
+      <li>El Desbloqueo completo elimina todos los límites de registros e historial, y activa punto de reposición, precio, Catálogo de categorías, gestión de ubicaciones, transferencia de existencias, aplicación del inventario físico y respaldo CSV.</li>
+      <li>Tres tipos de catálogos trabajan juntos: Catálogo de productos (artículos en existencias), Catálogo de categorías (grupos de clasificación), Catálogo de ubicaciones (lugares de almacenamiento).</li>
+      <li>La transferencia de existencias solo es válida entre dos ubicaciones diferentes — nunca uses la misma ubicación como origen y destino.</li>
+      <li>Aplicar los datos del inventario físico actualiza las existencias del sistema según el conteo real. Las diferencias se registran como entradas de ajuste de inventario en el historial.</li>
+      <li>Antes de operaciones irreversibles como Reemplazar existencias actuales, Aplicar datos de inventario o eliminación, siempre haz respaldo.</li>
+      <li>Ejecutar el respaldo de historial regularmente (semanal o mensualmente) reduce el riesgo de datos irrecuperables.</li>
+    </ul>
+  </div>
+  <div class="confirm-box" id="confirm">
+    <h3>Notas antes de usar</h3>
+    <ul>
+      <li>Condiciones exactas de aplicación de datos de inventario (momento, gestión de múltiples ubicaciones, comportamiento para deshacer)</li>
+      <li>Procedimiento y comportamiento de la restauración de existencias mediante reimportación del CSV de respaldo de historial</li>
+      <li>Si se muestran alertas o notificaciones cuando las existencias caen por debajo del punto de reposición, y cómo funcionan</li>
+      <li>Configuración de moneda y método de redondeo para precios</li>
+      <li>Si los registros del Catálogo de productos y ubicaciones pueden eliminarse, y si los eliminados pueden restaurarse</li>
+      <li>Precio de compra y condiciones de venta del Desbloqueo completo en Google Play</li>
+      <li>Antes de confirmar una transferencia de existencias, revisa que origen y destino sean diferentes y que la cantidad sea correcta</li>
+    </ul>
+  </div>
+</div>
+<footer>Manual de Quantiventra · La información más actualizada está disponible en las pantallas de la app.<p style="margin-top:4px;"><a href="privacy_es-419.html">Política de privacidad</a></p></footer>
+</body></html>

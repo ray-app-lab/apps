@@ -1,0 +1,529 @@
+﻿<!DOCTYPE html>
+<html lang="zh-TW">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quantiventra – 主畫面、設定與通用操作</title>
+<style>*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:-apple-system,BlinkMacSystemFont,'PingFang TC','Microsoft JhengHei','Apple LiGothic',sans-serif;font-size:15px;line-height:1.9;color:#1a2535;background:#f4f7fb;}
+a{color:#1a5fa8;text-decoration:none;}a:hover{text-decoration:underline;}
+.site-nav{background:#1a3a5c;color:#fff;padding:0;}.site-nav .nav-inner{max-width:960px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:stretch;}
+.site-nav a{color:#cde;padding:10px 13px;font-size:12px;display:block;border-right:1px solid #2a4a6c;white-space:nowrap;}
+.site-nav a:hover{background:#2a5090;text-decoration:none;}.site-nav a.active{background:#2a6cbe;color:#fff;font-weight:bold;}
+.page-header{background:linear-gradient(135deg,#1a3a5c 0%,#2a6cbe 100%);color:#fff;padding:40px 20px 30px;}
+.page-header .inner{max-width:960px;margin:0 auto;}.page-header .app-name{font-size:13px;opacity:.8;}
+.page-header h1{font-size:22px;font-weight:700;margin-top:6px;line-height:1.5;}.page-header .subtitle{font-size:14px;opacity:.85;margin-top:8px;}
+.scope-box{background:rgba(255,255,255,.15);border-left:4px solid #7ecfff;padding:12px 16px;margin-top:16px;border-radius:4px;font-size:13px;}
+.play-section{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.3);border-radius:10px;padding:22px 28px;margin-top:24px;display:flex;align-items:center;gap:28px;flex-wrap:wrap;}
+.play-qr-wrap{flex-shrink:0;text-align:center;}
+.play-qr-frame{width:130px;height:130px;border:3px solid rgba(255,255,255,.7);border-radius:10px;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.95);position:relative;overflow:hidden;}
+.play-qr-frame img{width:100%;height:100%;object-fit:contain;display:block;}
+.play-qr-corner{pointer-events:none;position:absolute;width:16px;height:16px;border-color:#2a6cbe;border-style:solid;border-width:0;}
+.play-qr-corner.tl{top:5px;left:5px;border-top-width:3px;border-left-width:3px;border-radius:3px 0 0 0;}
+.play-qr-corner.tr{top:5px;right:5px;border-top-width:3px;border-right-width:3px;border-radius:0 3px 0 0;}
+.play-qr-corner.bl{bottom:5px;left:5px;border-bottom-width:3px;border-left-width:3px;border-radius:0 0 0 3px;}
+.play-qr-corner.br{bottom:5px;right:5px;border-bottom-width:3px;border-right-width:3px;border-radius:0 0 3px 0;}
+.play-qr-label{font-size:10px;color:rgba(255,255,255,.8);margin-top:6px;letter-spacing:.05em;}
+.play-info h3{font-size:16px;font-weight:700;color:#fff;margin-bottom:4px;}
+.play-info p{font-size:12px;color:rgba(255,255,255,.75);margin-bottom:10px;}
+.play-badge{display:inline-block;text-decoration:none;}
+.play-badge img{display:block;height:44px;width:auto;max-width:180px;}.container{max-width:960px;margin:0 auto;padding:30px 16px;}
+.toc{background:#fff;border:1px solid #c8d8ec;border-radius:8px;padding:24px 28px;margin-bottom:32px;}
+.toc h2{font-size:16px;font-weight:700;color:#1a3a5c;border-bottom:2px solid #2a6cbe;padding-bottom:8px;margin-bottom:14px;}
+.toc ol{margin-left:18px;}.toc li{margin:5px 0;font-size:14px;}
+.chapter{background:#fff;border-radius:8px;box-shadow:0 1px 4px rgba(0,0,0,.08);padding:28px 28px 24px;margin-bottom:28px;}
+.chapter-head{border-left:5px solid #2a6cbe;padding-left:14px;margin-bottom:20px;}
+.chapter-head .ch-no{font-size:12px;color:#2a6cbe;font-weight:700;}.chapter-head h2{font-size:20px;font-weight:700;color:#1a2535;margin-top:2px;}
+h3{font-size:16px;font-weight:700;color:#1a3a5c;border-bottom:1px solid #dde8f5;padding-bottom:5px;margin:22px 0 12px;}
+h4{font-size:14px;font-weight:700;color:#2a4a6c;margin:16px 0 8px;}
+p{margin-bottom:12px;}ul,ol{margin-left:20px;margin-bottom:12px;}li{margin-bottom:5px;}
+.steps{counter-reset:step;list-style:none;margin-left:0;}
+.steps li{counter-increment:step;padding:9px 12px 9px 46px;position:relative;background:#f8fbff;border:1px solid #dde8f5;border-radius:6px;margin-bottom:6px;}
+.steps li::before{content:counter(step);position:absolute;left:12px;top:50%;transform:translateY(-50%);width:24px;height:24px;background:#2a6cbe;color:#fff;border-radius:50%;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;}
+.table-wrap{overflow-x:auto;margin-bottom:16px;}
+table{width:100%;border-collapse:collapse;font-size:13px;min-width:380px;}
+th{background:#1a3a5c;color:#fff;padding:9px 12px;text-align:left;white-space:nowrap;}
+td{padding:8px 12px;border-bottom:1px solid #dde8f5;vertical-align:top;}tr:nth-child(even) td{background:#f4f7fb;}
+code{font-family:'Courier New',monospace;background:rgba(0,80,160,.08);color:#004080;padding:2px 6px;border-radius:3px;font-size:12px;}
+.box{border-radius:6px;padding:13px 16px;margin:14px 0;font-size:13px;}
+.box-warn{background:#fffbe6;border-left:4px solid #f5a623;color:#7a5700;}
+.box-danger{background:#fff0f0;border-left:4px solid #d43f3f;color:#7a0000;}
+.box-hint{background:#e8f4ff;border-left:4px solid #2a6cbe;color:#0a3060;}
+.box-check{background:#f4eeff;border-left:4px solid #8c4fc8;color:#3a0070;}
+.box strong{display:block;margin-bottom:4px;}
+figure{max-width:280px;width:100%;margin:18px auto;text-align:center;}
+figure img{display:block;width:100%;max-width:280px;height:auto;margin:0 auto;border:1px solid #c8d8ec;border-radius:6px;box-shadow:0 2px 8px rgba(0,0,0,.1);}
+figcaption{font-size:12px;color:#5a7a99;margin-top:6px;}
+.img-pending{display:flex;align-items:center;justify-content:center;max-width:280px;width:100%;box-sizing:border-box;background:#e8eef5;border:2px dashed #99b8d8;border-radius:6px;height:160px;color:#5a7a99;font-size:13px;margin:18px auto;}
+.diff-add{background:#e8fff0;border-left:4px solid #2a9c5c;border-radius:6px;padding:12px 16px;margin:14px 0;font-size:13px;}
+.diff-add strong{display:block;color:#1a6c3c;margin-bottom:4px;}
+.flow-box{background:#f4f7fb;border:1px solid #c8d8ec;border-radius:8px;padding:20px;margin:16px 0;}
+.flow-box h4{color:#1a3a5c;margin-top:0;}
+.flow-arrow{text-align:center;font-size:20px;color:#2a6cbe;margin:4px 0;}
+.flow-step{background:#fff;border:1px solid #c8d8ec;border-radius:6px;padding:10px 16px;margin:4px 0;font-size:13px;}
+.flow-step strong{color:#1a3a5c;}
+.summary-box{background:linear-gradient(135deg,#e8f4ff,#f0f8ff);border:1px solid #99c8ec;border-radius:8px;padding:20px 24px;margin-top:32px;}
+.summary-box h3{border:none;color:#1a3a5c;margin-top:0;}
+.confirm-box{background:#fdf4ff;border:1px solid #c8a0e0;border-radius:8px;padding:20px 24px;margin-top:16px;}
+.confirm-box h3{border:none;color:#5a0090;margin-top:0;}
+.check{color:#2e7d32;font-weight:700;}.cross{color:#c62828;}
+th.pro-col{background:#5a2a8c;}
+.feature-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px;margin:16px 0;}
+.feature-card{background:#f4f7fb;border:1px solid #c8d8ec;border-radius:8px;padding:16px;}
+.feature-card h4{color:#1a3a5c;margin-top:0;margin-bottom:6px;font-size:14px;}
+.feature-card p{font-size:13px;margin:0;color:#3a5a7a;}
+.feature-card.pro-card{background:#f4eeff;border-color:#c8a0e0;}
+.feature-card.pro-card h4{color:#5a2a8c;}
+.trouble{border:1px solid #c8d8ec;border-radius:8px;margin:14px 0;overflow:hidden;}
+.trouble-q{background:#eef6fd;padding:13px 18px;font-weight:700;font-size:14px;color:#1a3a5c;display:flex;align-items:flex-start;gap:10px;}
+.trouble-q::before{content:'Q';background:#2a6cbe;color:#fff;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900;flex-shrink:0;margin-top:1px;}
+.trouble-a{padding:13px 18px 14px 50px;font-size:13.5px;border-top:1px solid #c8d8ec;line-height:1.9;}
+.trouble-a ul{margin-left:16px;}
+.legal-block{background:#f5f5f5;border:1px solid #ddd;border-radius:8px;padding:20px 24px;font-size:12.5px;color:#444;line-height:1.9;margin:14px 0;}
+.legal-block h4{font-size:13px;color:#333;margin:18px 0 6px;border-bottom:1px solid #ddd;padding-bottom:4px;}
+.legal-block h4:first-child{margin-top:0;}
+footer{text-align:center;font-size:12px;color:#8a9aaa;padding:30px 16px;border-top:1px solid #dde8f5;margin-top:20px;}
+@media(max-width:640px){.page-header h1{font-size:18px;}.chapter{padding:20px 16px;}.site-nav a{padding:8px 9px;font-size:11px;}}
+@media print{body{background:#fff;font-size:12px;}.site-nav{display:none;}.chapter{box-shadow:none;border:1px solid #ccc;page-break-inside:avoid;}.page-header{background:#1a3a5c !important;-webkit-print-color-adjust:exact;print-color-adjust:exact;}}
+</style></head>
+<body>
+<nav class="site-nav"><div class="nav-inner">
+  <a href="01_top_settings_common_tw.html" class="active">① 主畫面 / 設定</a>
+  <a href="02_stocktake_free_tw.html">② 盤點 免費版</a>
+  <a href="03_stocktake_simple_tw.html">③ 盤點 標準版</a>
+  <a href="04_stocktake_full_tw.html">④ 盤點 完整版</a>
+  <a href="05_inventory_free_tw.html">⑤ 庫存 免費版</a>
+  <a href="06_inventory_simple_tw.html">⑥ 庫存 標準版</a>
+  <a href="07_inventory_full_tw.html">⑦ 庫存 完整版</a>
+</div></nav>
+<header class="page-header"><div class="inner">
+  <div class="app-name">Quantiventra 使用手冊 — 繁體中文版</div>
+  <h1>① 主畫面 · 設定 · 通用操作</h1>
+  <div class="subtitle">應用程式概覽、系統需求、設定、權限、方案說明、範例資料、術語表及法律聲明</div>
+  <div class="scope-box"><strong>本頁涵蓋內容：</strong>Quantiventra 簡介 / 系統需求與權限 / 安裝與首次啟動 / 資料儲存 / 盤點與庫存管理的差異 / 快速上手 / 主畫面說明 / 設定畫面說明 / 語言設定 / 方案概覽 / 範例資料 / 疑難排解 / 術語表 / 條款與免責聲明</div>
+</div></header>
+<div class="container">
+  <nav class="toc"><h2>目錄</h2><ol>
+    <li><a href="#about">Quantiventra 是什麼？</a></li>
+    <li><a href="#environment">系統需求與權限</a></li>
+    <li><a href="#install">安裝與首次啟動</a></li>
+    <li><a href="#storage">資料儲存</a></li>
+    <li><a href="#diff">盤點與庫存管理</a></li>
+    <li><a href="#start">快速上手（新用戶指南）</a></li>
+    <li><a href="#top-screen">主畫面說明</a></li>
+    <li><a href="#settings">設定畫面說明</a></li>
+    <li><a href="#language">語言設定</a></li>
+    <li><a href="#billing">方案概覽</a></li>
+    <li><a href="#sample">範例資料</a></li>
+    <li><a href="#trouble">疑難排解</a></li>
+    <li><a href="#glossary">術語表</a></li>
+    <li><a href="#legal">條款與免責聲明</a></li>
+    <li><a href="#summary">本章重點</a></li>
+    <li><a href="#confirm">使用前檢查</a></li>
+  </ol></nav>
+
+  <section class="chapter" id="about">
+    <div class="chapter-head"><div class="ch-no">第1章</div><h2>Quantiventra 是什麼？</h2></div>
+    <p><strong>Quantiventra</strong> 是「<em>Quantity</em>」（數量）與「<em>Inventory</em>」（庫存）的組合詞。這是一款 Android 應用程式，可透過手機相機掃描條碼，協助簡化庫存盤點與庫存管理工作。</p>
+    <p>只需將相機對準條碼即可自動識別商品，輸入並儲存數量——直觀的操作流程讓紙本盤點單數位化變得簡單。結果可匯出為 CSV 檔案，方便在 Excel 或 Google 試算表中確認與彙整。</p>
+    <p>盤點、庫存管理、主資料登錄與 CSV 匯入/匯出等日常作業，通常可在裝置內完成。購買確認、購買還原、Google Play 相關操作或外部連結顯示時，可能需要網路連線。</p>    <h3>主要功能</h3>
+    <div class="feature-grid">
+      <div class="feature-card"><h4>📦 庫存盤點</h4><p>透過條碼掃描快速識別商品並即時記錄數量。內建計算機可方便地彙總多處的清點數量。</p></div>
+      <div class="feature-card"><h4>🗂️ 主資料管理</h4><p>將商品、類別及位置登錄為主資料，支援 CSV 批次匯入。</p></div>
+      <div class="feature-card"><h4>📍 位置管理</h4><p>登錄倉庫、門市、貨架等多個存放位置，按位置管理庫存，並可設定哪些位置計入補貨判斷。</p></div>
+      <div class="feature-card"><h4>📊 CSV 匯入/匯出</h4><p>以 CSV 格式匯出庫存清單、備份及歷史記錄，方便在 Excel 或 Google 試算表中彙總。</p></div>
+      <div class="feature-card"><h4>🌐 多語言支援</h4><p>支援日語、英語、中文、韓語等 12 種語言，自動配合裝置語言。</p></div>
+      <div class="feature-card pro-card"><h4>⭐ 完整版功能</h4><p>解除項目數量限制，解鎖詳細位置管理、庫存調撥、將盤點結果套用至庫存等更多功能。</p></div>
+    </div>
+    <h3>相機掃描原理</h3>
+    <p>當條碼位於畫面中央引導框（藍色或黃色邊框）內時，應用程式在<strong>連續 3 幀識別到相同碼</strong>後自動確認。三次確認機制可防止誤讀，同時確保可靠識別。</p>
+    <div class="box box-hint"><strong>💡 條碼無法識別時</strong>條碼必須<strong>完全位於</strong>引導框內。超出框外的碼無法被偵測，請調整相機位置直至條碼完全在框內。</div>
+  </section>
+
+  <section class="chapter" id="environment">
+    <div class="chapter-head"><div class="ch-no">第2章</div><h2>系統需求與權限</h2></div>
+    <div class="table-wrap"><table>
+      <tr><th>項目</th><th>需求</th></tr>
+      <tr><td>作業系統</td><td>Android 8.0 (Oreo / API 26) 以上</td></tr>
+      <tr><td>相機</td><td>自動對焦相機（必要）</td></tr>
+      <tr><td>儲存空間</td><td>建議至少 10 MB 可用內部儲存空間</td></tr>
+      <tr><td>必要權限</td><td>相機（必要）</td></tr>
+      <tr><td>網路連線</td><td>日常盤點與庫存作業通常不需要；購買確認、購買還原、Google Play 相關操作或外部連結顯示時可能需要網路</td></tr>
+      <tr><td>Google Play 服務</td><td>方案購買與還原時需要</td></tr>
+    </table></div>
+    <div class="box box-hint"><strong>💡 儲存空間權限</strong>本應用程式將資料儲存在 Android 的<strong>應用程式專屬內部儲存空間</strong>中，通常不需要額外的儲存空間權限。資料交換透過應用程式的匯入、匯出及分享功能處理。</div>
+  </section>
+
+  <section class="chapter" id="install">
+    <div class="chapter-head"><div class="ch-no">第3章</div><h2>安裝與首次啟動</h2></div>
+    <ol class="steps">
+      <li>在 Google Play 商店搜尋「Quantiventra」，點擊<strong>安裝</strong>。</li>
+      <li>點擊應用程式圖示啟動，出現相機權限請求時點擊<strong>允許</strong>。</li>
+      <li>如出現範例資料建立提示，選擇<strong>建立</strong>或<strong>略過</strong>。</li>
+      <li>應用程式資料資料夾在內部儲存空間中自動建立。</li>
+      <li>主畫面出現後，初始設定完成。</li>
+    </ol>
+    <div class="box box-warn"><strong>⚠ 拒絕相機權限時</strong>條碼掃描將無法使用。重新授權路徑：<strong>設定 → 應用程式 → Quantiventra → 權限 → 相機 → 開啟</strong>。</div>
+    <h3>更換裝置時的基本流程</h3>
+    <ol class="steps">
+      <li>在舊裝置上先透過<strong>設定 → 匯出</strong>或<strong>設定 → 分享</strong>備份資料。</li>
+      <li>在新裝置上使用購買時相同的 Google 帳號登入。</li>
+      <li>從 Google Play 安裝 Quantiventra。</li>
+      <li>開啟應用程式後，使用<strong>設定 → 還原購買記錄</strong>還原已購買的方案。</li>
+      <li>如需恢復主資料，請透過<strong>設定 → 匯入主資料 CSV</strong>載入備份的 CSV 檔案。</li>
+    </ol>
+    <div class="box box-danger"><strong>🚨 解除安裝應用程式時</strong>解除安裝應用程式會刪除內部儲存空間中的所有資料。請養成透過<strong>匯出</strong>或<strong>分享</strong>定期備份的習慣。</div>
+  </section>
+
+  <section class="chapter" id="storage">
+    <div class="chapter-head"><div class="ch-no">第4章</div><h2>資料儲存</h2></div>
+    <p>應用程式資料儲存在裝置上的應用程式專屬私有區域，請勿透過檔案管理員直接編輯。請使用應用程式的分享與匯出功能存取或備份資料。</p>
+    <div class="table-wrap"><table>
+      <tr><th>資料類別</th><th>內容</th><th>更新時機</th></tr>
+      <tr><td>主資料</td><td>商品、類別、位置等核心資料</td><td>登錄、編輯或停用項目時</td></tr>
+      <tr><td>盤點與庫存歷史記錄</td><td>盤點、入庫、出庫、調撥、CSV 匯入等記錄</td><td>儲存或匯入項目時</td></tr>
+      <tr><td>應用程式設定</td><td>語言、掃描、編碼規則、位置設定等</td><td>變更設定時</td></tr>
+    </table></div>
+    <h3>在 Excel 中開啟 CSV 的建議方式</h3>
+    <p>Quantiventra 匯出的 CSV 建議以 UTF-8 編碼開啟。若直接雙擊檔案，部分環境可能出現亂碼。</p>
+    <ol class="steps">
+      <li>開啟 Excel，選擇<strong>資料 → 從文字/CSV</strong>。</li>
+      <li>選擇要開啟的 CSV 檔案。</li>
+      <li>確認編碼為 <strong>Unicode (UTF-8)</strong>。</li>
+      <li>確認預覽內容後載入。</li>
+    </ol>
+    <div class="box box-warn"><strong>⚠ 注意</strong>若出現亂碼，請不要直接覆寫原始 CSV。請重新以 UTF-8 方式匯入，或先保留備份檔。</div>
+    <h3>建議的備份流程</h3>
+    <ol class="steps">
+      <li>點擊<strong>設定 → 匯出（選擇資料夾）</strong>。</li>
+      <li>在裝置 Documents 資料夾中建立並選擇備份資料夾，例如：<code>Quantiventra_backup_20250401</code>。</li>
+      <li>歷史記錄和主資料 CSV 檔案儲存完成後即備份成功。</li>
+      <li>如需更安全，可透過 Google 雲端硬碟或 USB 傳輸線將檔案複製到電腦。</li>
+    </ol>
+  </section>
+
+  <section class="chapter" id="diff">
+    <div class="chapter-head"><div class="ch-no">第5章</div><h2>盤點與庫存管理</h2></div>
+    <div class="table-wrap"><table>
+      <tr><th>項目</th><th>庫存盤點</th><th>庫存管理</th></tr>
+      <tr><td>用途</td><td>清點並記錄實際數量</td><td>透過入庫、出庫、調撥追蹤庫存變動</td></tr>
+      <tr><td>操作流程</td><td>掃描 → 輸入數量 → 儲存 → 確認</td><td>入庫/出庫/調撥 → 儲存 → 查看歷史</td></tr>
+      <tr><td>常見使用場景</td><td>月度盤點、年末盤點、臨時抽查</td><td>日常入庫、出庫、調撥管理</td></tr>
+      <tr><td>對庫存的影響</td><td>確認後套用至庫存（完整版）</td><td>每次操作後立即生效</td></tr>
+    </table></div>
+    <div class="box box-warn"><strong>⚠ 注意</strong>盤點與庫存管理是獨立模組。在盤點中輸入數量<strong>不會</strong>改變庫存，除非執行「套用至庫存」操作（完整版功能）。請注意區分兩個模組。</div>
+  </section>
+
+  <section class="chapter" id="start">
+    <div class="chapter-head"><div class="ch-no">第6章</div><h2>快速上手（新用戶指南）</h2></div>
+    <h3>第一步：用範例資料練習</h3>
+    <ol class="steps">
+      <li>啟動應用程式，出現範例資料建立提示時選擇<strong>建立</strong>。</li>
+      <li>從主畫面開啟<strong>庫存管理</strong>，查看範例庫存水準。</li>
+      <li>開啟<strong>庫存盤點</strong>，試掃條碼並輸入數量。</li>
+      <li>嘗試匯出 CSV 檔案。</li>
+      <li>在正式投入使用前刪除範例資料（在設定畫面操作）。</li>
+    </ol>
+    <h3>第二步：登錄商品主資料</h3>
+    <ol class="steps">
+      <li>從主畫面開啟<strong>主資料管理</strong>。</li>
+      <li>進入<strong>商品主資料</strong>，新增項目並輸入商品編號和名稱。</li>
+      <li>依需求設定類別、價格和補貨基準。</li>
+      <li>在<strong>位置主資料</strong>中登錄倉庫、門市等（建議標準版以上）。</li>
+    </ol>
+    <div class="box box-hint"><strong>💡 提示</strong>建議先用範例資料熟悉操作，再輸入實際商品資料。</div>
+  </section>
+
+  <section class="chapter" id="top-screen">
+    <div class="chapter-head"><div class="ch-no">第7章</div><h2>主畫面說明</h2></div>
+    <div class="table-wrap"><table>
+      <tr><th>入口</th><th>說明</th></tr>
+      <tr><td>庫存盤點</td><td>進入盤點介面，掃描商品並記錄實際盤點數量</td></tr>
+      <tr><td>庫存管理</td><td>存取庫存查詢、入庫、出庫、調撥及庫存歷史</td></tr>
+      <tr><td>主資料管理</td><td>管理商品、類別及位置主資料</td></tr>
+      <tr><td>設定</td><td>語言、盤點設定、CSV、範例資料、方案購買、法律文件等</td></tr>
+    </table></div>
+    <div class="box box-warn"><strong>⚠ 注意</strong>如有未確認的盤點資料，在庫存管理中操作可能導致資料不一致。建議先完成盤點確認，再進行庫存變更操作。</div>
+  </section>
+
+  <section class="chapter" id="settings">
+    <div class="chapter-head"><div class="ch-no">第8章</div><h2>設定畫面說明</h2></div>    <h3>資料匯入/匯出</h3>
+    <div class="table-wrap"><table>
+      <tr><th>操作</th><th>說明</th><th>可用版本</th></tr>
+      <tr><td>匯入主資料 CSV</td><td>將外部 CSV 檔案作為主資料載入（覆蓋現有資料）</td><td>所有版本</td></tr>
+      <tr><td>分享（電子郵件等）</td><td>將歷史記錄和主資料 CSV 傳送至其他應用程式</td><td>所有版本</td></tr>
+      <tr><td>匯出（選擇資料夾）</td><td>將歷史記錄和主資料 CSV 儲存至指定資料夾</td><td>所有版本</td></tr>
+      <tr><td>清除所有歷史記錄</td><td>刪除並重置所有掃描歷史記錄</td><td>所有版本（不可復原）</td></tr>
+      <tr><td>重置主資料累計量</td><td>將所有已登錄累計量重置為 0</td><td>完整版解鎖（不可復原）</td></tr>
+    </table></div>
+    <h3>共通設定</h3>
+    <div class="table-wrap"><table>
+      <tr><th>設定</th><th>說明</th><th>可用版本</th></tr>
+      <tr><td>顯示語言</td><td>選擇應用程式內顯示的語言。手動選擇後，應用程式會優先使用該語言。</td><td>所有版本（部分語言需全語言解鎖）</td></tr>
+      <tr><td>螢幕旋轉鎖定</td><td>在現場作業時固定畫面方向，避免拿取裝置時畫面旋轉。</td><td>標準版以上</td></tr>
+      <tr><td>建立範例資料</td><td>建立練習用商品、類別、位置與歷史資料。</td><td>所有版本</td></tr>
+      <tr><td>刪除範例資料</td><td>一次刪除練習用資料。正式使用前建議執行。</td><td>所有版本</td></tr>
+      <tr><td>還原購買記錄</td><td>使用 Google Play 檢查並還原已購買的方案。</td><td>所有版本</td></tr>
+      <tr><td>法律文件</td><td>確認使用條款、隱私權政策等文件。</td><td>所有版本</td></tr>
+    </table></div>
+    <h3>盤點模式設定</h3>
+    <div class="table-wrap"><table>
+      <tr><th>模式</th><th>說明</th><th>可用位置</th></tr>
+      <tr><td>詳細</td><td>使用位置主資料中登錄的所有位置</td><td>所有已登錄位置</td></tr>
+      <tr><td>簡單A</td><td>僅使用倉庫進行盤點</td><td>僅倉庫</td></tr>
+      <tr><td>簡單B</td><td>使用倉庫和門市進行盤點</td><td>倉庫 + 門市</td></tr>
+      <tr><td>簡單C</td><td>僅使用門市進行盤點</td><td>僅門市</td></tr>
+    </table></div>
+    <div class="box box-warn"><strong>⚠ 注意</strong>即使完整版解鎖已生效，若模式仍設為簡單A/B/C，只會顯示簡單位置選項。請切換至<strong>詳細</strong>模式以使用詳細位置。</div>
+    <h3>相機讀取設定（完整版）</h3>
+    <p>可設定商品與位置使用的條碼類型。關閉不使用的類型，有助於降低誤讀風險。</p>
+    <div class="table-wrap"><table>
+      <tr><th>類型</th><th>商品預設</th><th>位置預設</th><th>常見用途</th></tr>
+      <tr><td>CODE39</td><td><span class="check">✓ 開啟</span></td><td><span class="check">✓ 開啟</span></td><td>工業零件、內部管理碼</td></tr>
+      <tr><td>CODE128</td><td><span class="check">✓ 開啟</span></td><td><span class="check">✓ 開啟</span></td><td>物流、出貨、內部條碼</td></tr>
+      <tr><td>EAN13</td><td><span class="check">✓ 開啟</span></td><td><span class="check">✓ 開啟</span></td><td>市售商品條碼</td></tr>
+      <tr><td>QRCODE</td><td><span class="check">✓ 開啟</span></td><td><span class="check">✓ 開啟</span></td><td>QR 碼、位置碼、商品碼</td></tr>
+    </table></div>
+    <h3>編碼規則 / 位置規則（完整版）</h3>
+    <p>可設定商品編號的字元類型、最小/最大長度，以及位置代碼的長度規則。若現場使用固定格式的內部編號，可透過這些規則降低輸入錯誤與誤掃風險。</p>
+    <h3>還原購買記錄</h3>
+    <p>更換裝置、重新安裝或購買狀態未反映時，請使用<strong>設定 → 還原購買記錄</strong>。請確認已登入購買時使用的 Google 帳號，並在可連線的環境下執行。</p>
+    <div class="box box-danger"><strong>🚨 清除歷史/重置累計量無法復原</strong>「清除所有歷史記錄」和「重置主資料累計量」不可逆。執行前請務必透過<strong>匯出</strong>進行備份。</div>
+  </section>
+
+  <section class="chapter" id="language">
+    <div class="chapter-head"><div class="ch-no">第9章</div><h2>語言設定</h2></div>
+    <p>可在<strong>設定 → 語言</strong>中選擇應用程式顯示語言。首次啟動時，應用程式會自動偵測裝置語言並以該語言啟動（如支援）。</p>
+    <h3>支援的語言（12 種）</h3>
+    <div class="table-wrap"><table>
+      <thead><tr><th>代碼</th><th>語言</th><th>免費版</th><th class="pro-col">全語言解鎖</th></tr></thead>
+      <tbody>
+        <tr><td><code>ja</code></td><td>日語</td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
+        <tr><td><code>en</code></td><td>英語</td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
+        <tr><td><code>zh</code></td><td>簡體中文</td><td>僅裝置主語言時</td><td><span class="check">✓</span></td></tr>
+        <tr><td><code>tw</code></td><td>繁體中文</td><td>僅裝置主語言時</td><td><span class="check">✓</span></td></tr>
+        <tr><td><code>ko</code></td><td>韓語</td><td>僅裝置主語言時</td><td><span class="check">✓</span></td></tr>
+        <tr><td><code>hi</code></td><td>印地語</td><td>僅裝置主語言時</td><td><span class="check">✓</span></td></tr>
+        <tr><td><code>vi</code></td><td>越南語</td><td>僅裝置主語言時</td><td><span class="check">✓</span></td></tr>
+        <tr><td><code>it</code></td><td>義大利語</td><td>僅裝置主語言時</td><td><span class="check">✓</span></td></tr>
+        <tr><td><code>pt-BR</code></td><td>葡萄牙語（巴西）</td><td>僅裝置主語言時</td><td><span class="check">✓</span></td></tr>
+        <tr><td><code>es-419</code></td><td>西班牙語（拉丁美洲）</td><td>僅裝置主語言時</td><td><span class="check">✓</span></td></tr>
+        <tr><td><code>id</code></td><td>印尼語</td><td>僅裝置主語言時</td><td><span class="check">✓</span></td></tr>
+        <tr><td><code>th</code></td><td>泰語</td><td>僅裝置主語言時</td><td><span class="check">✓</span></td></tr>
+      </tbody>
+    </table></div>
+    <div class="box box-hint"><strong>💡 關於自動語言判定</strong>首次啟動時，應用程式可能會依裝置主要語言選擇可用的顯示語言。之後若在應用程式內手動選擇語言，會優先使用手動選擇的語言。</div>
+  </section>
+
+  <section class="chapter" id="billing">
+    <div class="chapter-head"><div class="ch-no">第10章</div><h2>方案概覽</h2></div>
+    <div class="box box-danger"><strong>🚨 重要</strong>價格、稅金、購買條款及退款條件以 Google Play 上顯示的內容為準——本手冊不作確定性說明。購買前請務必查看 Google Play 中的商品列表。</div>
+    <h3>功能比較</h3>
+    <div class="table-wrap"><table>
+      <thead><tr><th>功能/限制</th><th>免費版</th><th>盤點標準版</th><th>盤點完整版</th><th>庫存標準版</th><th>庫存完整版</th></tr></thead>
+      <tbody>
+        <tr><td>主資料筆數</td><td>最多30筆</td><td>最多300筆</td><td><span class="check">不限</span></td><td>最多300筆</td><td><span class="check">不限</span></td></tr>
+        <tr><td>歷史記錄筆數</td><td>最多30筆</td><td>最多1,000筆</td><td><span class="check">不限</span></td><td>最多1,000筆</td><td><span class="check">不限</span></td></tr>
+        <tr><td>匯出筆數</td><td>最多30筆</td><td>最多300筆</td><td><span class="check">不限</span></td><td>最多300筆</td><td><span class="check">不限</span></td></tr>
+        <tr><td>螢幕旋轉鎖定</td><td><span class="cross">✗</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
+        <tr><td>詳細編碼/位置規則</td><td><span class="cross">✗</span></td><td><span class="cross">✗</span></td><td><span class="check">✓</span></td><td><span class="cross">✗</span></td><td><span class="check">✓</span></td></tr>
+        <tr><td>擴充 CSV 匯出</td><td><span class="cross">✗</span></td><td><span class="cross">✗</span></td><td><span class="check">✓</span></td><td><span class="cross">✗</span></td><td><span class="check">✓</span></td></tr>
+        <tr><td>庫存調撥與盤點套用</td><td><span class="cross">✗</span></td><td><span class="cross">✗</span></td><td><span class="cross">✗</span></td><td><span class="cross">✗</span></td><td><span class="check">✓</span></td></tr>
+        <tr><td>全部 12 種語言</td><td><span class="cross">✗</span></td><td colspan="4">需另購全語言解鎖</td></tr>
+      </tbody>
+    </table></div>
+    <h3>套裝方案與全語言解鎖</h3>
+    <div class="table-wrap"><table>
+      <tr><th>方案</th><th>內容</th></tr>
+      <tr><td>標準套裝</td><td>盤點標準版 + 庫存標準版</td></tr>
+      <tr><td>完整版套裝</td><td>盤點完整版 + 庫存完整版</td></tr>
+      <tr><td>全語言解鎖</td><td>啟用日語與英語以外的支援語言選擇</td></tr>
+    </table></div>
+    <h3>購買方案的基本流程</h3>
+    <ol class="steps">
+      <li>在應用程式內開啟<strong>設定 → 方案</strong>，或點擊購買按鈕。</li>
+      <li>Google Play 的購買畫面會開啟。</li>
+      <li>確認價格、稅金、退款條件與購買內容。</li>
+      <li>完成付款後，方案通常會立即反映。</li>
+    </ol>
+    <h3>更換裝置後還原購買</h3>
+    <ol class="steps">
+      <li>在新裝置上使用購買時相同的 Google 帳號登入。</li>
+      <li>安裝並啟動 Quantiventra。</li>
+      <li>執行<strong>設定 → 還原購買記錄</strong>。</li>
+      <li>購買狀態確認後，已購買的方案會重新啟用。</li>
+    </ol>
+  </section>
+
+  <section class="chapter" id="sample">
+    <div class="chapter-head"><div class="ch-no">第11章</div><h2>範例資料</h2></div>
+    <p>範例資料是在正式使用前用於熟悉 Quantiventra 操作的練習資料，包含約 10 個範例商品、範例類別，以及「倉庫」和「門市」基本位置。</p>
+    <h3>範例資料包含的內容</h3>
+    <ul>
+      <li>約 10 個練習用商品</li>
+      <li>練習用類別</li>
+      <li>基本位置：「倉庫」與「門市」</li>
+      <li>練習用庫存數量與盤點歷史</li>
+    </ul>
+    <h3>建立範例資料</h3>
+    <ol class="steps">
+      <li>首次啟動時若出現提示，選擇<strong>建立</strong>。</li>
+      <li>也可在<strong>設定 → 建立範例資料</strong>中隨時建立。</li>
+    </ol>
+    <h3>刪除範例資料</h3>
+    <ol class="steps">
+      <li>進入<strong>設定 → 刪除範例資料</strong>。</li>
+      <li>確認將要刪除的內容（範例商品、庫存、類別及盤點歷史）。</li>
+      <li>確認並執行刪除。</li>
+    </ol>
+    <div class="box box-hint"><strong>💡 刪除後仍保留的資料</strong>「倉庫」「門市」等基本位置及您自行建立的非範例資料，可能會依應用程式內實際狀態保留。刪除前請先確認畫面上的說明。</div>
+    <div class="box box-danger"><strong>🚨 重要</strong>正式投入使用前，請務必刪除範例資料。刪除前請確認其中沒有混入實際資料。</div>
+  </section>
+
+  <section class="chapter" id="trouble">
+    <div class="chapter-head"><div class="ch-no">第12章</div><h2>疑難排解</h2></div>
+    <div class="trouble"><div class="trouble-q">條碼無法掃描 / 相機無回應</div>
+    <div class="trouble-a"><ul>
+      <li>確認相機開關（右上角）已開啟。</li>
+      <li>條碼必須<strong>完全位於</strong>引導框內——超出框外不會被偵測。</li>
+      <li>在設定（完整版）中確認掃描類型（CODE39、EAN13 等）與所掃碼的類型一致。</li>
+      <li>若條碼破損或污損，請改用手動輸入。</li>
+    </ul></div></div>
+    <div class="trouble"><div class="trouble-q">匯入主資料 CSV 後商品名稱未顯示</div>
+    <div class="trouble-a"><ul>
+      <li>確認 CSV 為 UTF-8 編碼（Shift-JIS 會導致亂碼）。</li>
+      <li>驗證標題列格式是否符合要求：<code>barcode,name,theoretical_stock,actual_stock_total</code>。</li>
+      <li>商品名稱包含逗號時，請用英文引號括起：如 <code>"M6螺絲,不鏽鋼"</code>。</li>
+    </ul></div></div>
+    <div class="trouble"><div class="trouble-q">已購方案功能無法使用</div>
+    <div class="trouble-a"><ul>
+      <li>點擊<strong>設定 → 還原購買記錄</strong>。</li>
+      <li>確認使用的是購買時所用的 Google 帳號。</li>
+      <li>確保網路連線正常後重試（驗證購買需要網路）。</li>
+    </ul></div></div>
+    <div class="trouble"><div class="trouble-q">更換裝置後資料消失</div>
+    <div class="trouble-a"><ul>
+      <li>資料儲存於應用程式內部儲存空間，解除安裝或更換裝置時會遺失。</li>
+      <li>強烈建議透過<strong>匯出</strong>或<strong>分享</strong>定期備份。</li>
+      <li>若有備份，可透過<strong>匯入主資料 CSV</strong>還原。</li>
+    </ul></div></div>
+    <div class="trouble"><div class="trouble-q">無法儲存 / 顯示儲存失敗</div>
+    <div class="trouble-a"><ul>
+      <li>確認裝置內部儲存空間仍有足夠容量。</li>
+      <li>條碼或商品編號、商品名稱、數量等必要欄位是否已輸入。</li>
+      <li>若達到免費版或標準版的記錄上限，請依畫面提示匯出資料或考慮升級方案。</li>
+      <li>關閉應用程式後重新啟動，再次確認是否可儲存。</li>
+    </ul></div></div>
+    <div class="trouble"><div class="trouble-q">分享或匯出後找不到檔案</div>
+    <div class="trouble-a"><ul>
+      <li>使用「匯出（選擇資料夾）」時，請確認最後選取的資料夾位置。</li>
+      <li>若使用「分享」，請確認目標應用程式（電子郵件、雲端硬碟等）已完成傳送或儲存。</li>
+      <li>若沒有任何歷史資料，匯出的檔案可能沒有可用內容。請先儲存至少一筆資料後再試。</li>
+    </ul></div></div>
+    <div class="trouble"><div class="trouble-q">庫存數量對不上</div>
+    <div class="trouble-a"><ul>
+      <li>先查看庫存歷史，確認入庫、出庫、調撥、CSV 匯入與盤點調整的記錄。</li>
+      <li>如果執行過「取代目前庫存」或「套用盤點結果」，請與操作前的備份 CSV 比對。</li>
+      <li>確認位置設定是否正確，特別是哪些位置計入補貨判斷。</li>
+    </ul></div></div>
+    <div class="trouble"><div class="trouble-q">位置沒有顯示</div>
+    <div class="trouble-a"><ul>
+      <li>確認目前盤點模式是否仍為簡單 A/B/C。若要使用詳細位置，請切換到<strong>詳細</strong>模式。</li>
+      <li>確認位置主資料中的位置是否已停用。</li>
+      <li>若使用免費版或標準版，請確認該功能是否屬於目前方案可用範圍。</li>
+    </ul></div></div>
+    <div class="trouble"><div class="trouble-q">畫面方向一直旋轉</div>
+    <div class="trouble-a"><ul>
+      <li>若已購買標準版以上，可在設定中啟用螢幕旋轉鎖定。</li>
+      <li>免費版可使用裝置系統的旋轉鎖定功能。</li>
+    </ul></div></div>
+    <div class="trouble"><div class="trouble-q">語言沒有切換</div>
+    <div class="trouble-a"><ul>
+      <li>請在<strong>設定 → 語言</strong>中手動選擇要使用的語言。</li>
+      <li>部分語言可能需要全語言解鎖後才能手動選擇。</li>
+      <li>選擇後若未立即反映，請重新開啟應用程式。</li>
+    </ul></div></div>
+    <h3>症狀快速對照</h3>
+    <div class="table-wrap"><table>
+      <tr><th>症狀</th><th>可能原因</th><th>確認項目</th></tr>
+      <tr><td>條碼無法讀取</td><td>光線不足、條碼污損、掃描類型不符</td><td>相機權限、掃描類型、手動輸入</td></tr>
+      <tr><td>商品找不到</td><td>主資料未登錄、搜尋條件不一致</td><td>商品主資料、CSV 匯入結果</td></tr>
+      <tr><td>位置不顯示</td><td>簡單模式、位置停用、方案限制</td><td>盤點模式、位置主資料、方案狀態</td></tr>
+      <tr><td>CSV 匯入失敗</td><td>必要欄位缺少、數量格式錯誤、編碼不符</td><td>UTF-8、標題列、欄位對應</td></tr>
+      <tr><td>購買未反映</td><td>Google 帳號不同、網路問題</td><td>還原購買記錄、登入帳號、網路連線</td></tr>
+    </table></div>
+  </section>
+
+  <section class="chapter" id="glossary">
+    <div class="chapter-head"><div class="ch-no">第13章</div><h2>術語表</h2></div>
+    <div class="table-wrap"><table>
+      <thead><tr><th>術語</th><th>定義</th></tr></thead>
+      <tbody>
+        <tr><td>庫存盤點</td><td>在現場實際清點商品數量並進行記錄的操作</td></tr>
+        <tr><td>實際盤點數量</td><td>在現場實際盤點所得的數量</td></tr>
+        <tr><td>理論庫存</td><td>系統計算得出的應有庫存數量</td></tr>
+        <tr><td>差異/盤點差</td><td>實際盤點數量與理論庫存之間的差額</td></tr>
+        <tr><td>商品</td><td>持有庫存的單個品項</td></tr>
+        <tr><td>類別</td><td>用於對商品進行分類的群組</td></tr>
+        <tr><td>位置</td><td>庫存的存放地點（如倉庫、門市、貨架）</td></tr>
+        <tr><td>計入補貨判斷</td><td>允許該位置的庫存合計參與補貨判斷的設定</td></tr>
+        <tr><td>庫存／持有數量</td><td>目前持有的數量</td></tr>
+        <tr><td>入庫</td><td>使庫存增加的操作</td></tr>
+        <tr><td>出庫</td><td>使庫存減少的操作</td></tr>
+        <tr><td>庫存調撥</td><td>將庫存從一個位置移至另一個位置（完整版）</td></tr>
+        <tr><td>庫存歷史記錄</td><td>入庫、出庫、調撥及盤點調整等操作的日誌</td></tr>
+        <tr><td>補貨基準</td><td>用於判斷庫存是否即將不足的參考數量下限</td></tr>
+        <tr><td>商品編號</td><td>用於識別商品的內部編號</td></tr>
+        <tr><td>已登錄累計量</td><td>迄今為止已儲存的累計合計數量</td></tr>
+        <tr><td>CSV</td><td>逗號分隔的文字檔案，可在試算表應用程式中開啟</td></tr>
+        <tr><td>備份</td><td>為還原或參考而儲存的資料</td></tr>
+        <tr><td>取代目前庫存</td><td>將 CSV 中的數量作為新的目前庫存載入的匯入模式</td></tr>
+        <tr><td>以入庫方式新增</td><td>將 CSV 中的數量作為入庫記錄新增至目前庫存的匯入模式</td></tr>
+        <tr><td>確認實際盤點</td><td>對盤點結果進行最終確認的操作（完整版）</td></tr>
+        <tr><td>主資料</td><td>管理商品、類別、位置等核心記錄的資料庫</td></tr>
+      </tbody>
+    </table></div>
+  </section>
+
+  <section class="chapter" id="legal">
+    <div class="chapter-head"><div class="ch-no">第14章</div><h2>條款與免責聲明</h2></div>
+    <div class="legal-block">
+      <h4>■ 使用條款</h4>
+      <p>下載或使用本應用程式即表示您同意以下條款。本應用程式允許個人和企業用於庫存管理及盤點目的。嚴禁對本應用程式進行逆向工程、反編譯、修改或再發行。</p>
+      <p><strong>使用者資料：</strong>本應用程式產生的一般作業資料（主資料 CSV、歷史記錄 CSV 及設定檔案）主要儲存在使用者裝置本機。方案驗證、購買還原等 Google Play 相關功能可能會進行必要的通訊。</p>
+      <p><strong>方案購買：</strong>所有方案購買均透過 Google Play 結帳系統處理，退款遵循 Google Play 退款政策。</p>
+      <h4>■ 免責聲明</h4>
+      <p>本應用程式「按現狀」提供。因使用或無法使用本應用程式而產生的任何損失（包括資料遺失、業務中斷等直接或間接損害），開發者概不負責。</p>
+      <p>使用者自行負責核實本應用程式產生的 CSV 資料的準確性和完整性。因掃描錯誤或輸入失誤導致的資料不一致，開發者不承擔責任。</p>
+      <h4>■ 隱私權政策</h4>
+      <p>本應用程式不會為開發者自行蒐集或使用個人資料。相機僅用於掃描條碼和 QR 碼，不錄製或儲存影片。Google Play 相關的購買確認或還原可能會依 Google Play 的機制進行通訊。</p>
+      <h4>■ 著作權</h4>
+      <p>著作權所有 © Quantiventra，保留所有權利。應用程式及本手冊中的所有內容均為開發者財產。</p>
+      <h4>■ 條款變更</h4>
+      <p>本條款可能在不另行通知的情況下發生變更。更新後的條款在 Google Play 商店或應用程式內發布後立即生效。</p>
+    </div>
+  </section>
+
+  <div class="summary-box" id="summary">
+    <h3>📌 本章重點</h3>
+    <ul>
+      <li>Quantiventra = Quantity + Inventory。連續 3 幀識別到相同碼後自動確認，防止誤讀。</li>
+      <li>需要 Android 8.0+ 及自動對焦相機；不需要儲存空間權限；日常作業通常可在裝置內完成，Google Play 相關操作或外部連結可能需要網路。</li>
+      <li>資料儲存於應用程式內部儲存空間——解除安裝會刪除全部資料，請定期匯出備份。</li>
+      <li>盤點與庫存管理是獨立模組——在盤點中輸入數量不會直接改變庫存，必須完成相應的確認與套用操作後才會反映到庫存。</li>
+      <li>CSV 匯入、取代目前庫存、套用盤點結果、刪除與重置等操作前，請務必先備份。</li>
+      <li>正式投入使用前請先用範例資料練習，使用後務必刪除。</li>
+      <li>方案價格等詳情以 Google Play 為準——本手冊不作確定性說明。</li>
+      <li>執行大規模操作前（CSV 取代、套用盤點、刪除、重置）請務必先備份。</li>
+    </ul>
+  </div>
+  <div class="confirm-box" id="confirm">
+    <h3>🔍 正式使用前的確認事項</h3>
+    <ul>
+      <li>購買前，請在 Google Play 上確認目前價格、稅金、退款條件與購買內容。</li>
+      <li>正式資料投入前，請先刪除範例資料，並確認沒有混入實際資料。</li>
+      <li>大量匯入、取代目前庫存、套用盤點結果、刪除、重置等操作前，請先匯出備份。</li>
+      <li>更換裝置或重新安裝前，請先匯出資料；購買狀態可在新裝置上透過還原購買記錄確認。</li>
+    </ul>
+  </div>
+</div>
+<footer>Quantiventra 使用手冊 · 最新資訊請以應用程式內實際顯示為準。<p style="margin-top:4px;"><a href="privacy_tw.html">隱私權政策</a></p></footer>
+</body></html>

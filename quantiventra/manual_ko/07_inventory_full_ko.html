@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quantiventra – 재고 관리 전체 버전</title>
+<style>*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:-apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo','Noto Sans KR','Malgun Gothic',sans-serif;font-size:15px;line-height:1.9;color:#1a2535;background:#f4f7fb;}
+a{color:#1a5fa8;text-decoration:none;}a:hover{text-decoration:underline;}
+.site-nav{background:#1a3a5c;color:#fff;padding:0;}.site-nav .nav-inner{max-width:960px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:stretch;}
+.site-nav a{color:#cde;padding:10px 13px;font-size:12px;display:block;border-right:1px solid #2a4a6c;white-space:nowrap;}
+.site-nav a:hover{background:#2a5090;text-decoration:none;}.site-nav a.active{background:#2a6cbe;color:#fff;font-weight:bold;}
+.page-header{background:linear-gradient(135deg,#1a3a5c 0%,#2a6cbe 100%);color:#fff;padding:40px 20px 30px;}
+.page-header .inner{max-width:960px;margin:0 auto;}.page-header .app-name{font-size:13px;opacity:.8;}
+.page-header h1{font-size:22px;font-weight:700;margin-top:6px;line-height:1.5;}.page-header .subtitle{font-size:14px;opacity:.85;margin-top:8px;}
+.scope-box{background:rgba(255,255,255,.15);border-left:4px solid #7ecfff;padding:12px 16px;margin-top:16px;border-radius:4px;font-size:13px;}
+.container{max-width:960px;margin:0 auto;padding:30px 16px;}
+.toc{background:#fff;border:1px solid #c8d8ec;border-radius:8px;padding:24px 28px;margin-bottom:32px;}
+.toc h2{font-size:16px;font-weight:700;color:#1a3a5c;border-bottom:2px solid #2a6cbe;padding-bottom:8px;margin-bottom:14px;}
+.toc ol{margin-left:18px;}.toc li{margin:5px 0;font-size:14px;}
+.chapter{background:#fff;border-radius:8px;box-shadow:0 1px 4px rgba(0,0,0,.08);padding:28px 28px 24px;margin-bottom:28px;}
+.chapter-head{border-left:5px solid #2a6cbe;padding-left:14px;margin-bottom:20px;}
+.chapter-head .ch-no{font-size:12px;color:#2a6cbe;font-weight:700;}.chapter-head h2{font-size:20px;font-weight:700;color:#1a2535;margin-top:2px;}
+h3{font-size:16px;font-weight:700;color:#1a3a5c;border-bottom:1px solid #dde8f5;padding-bottom:5px;margin:22px 0 12px;}
+h4{font-size:14px;font-weight:700;color:#2a4a6c;margin:16px 0 8px;}
+p{margin-bottom:12px;}ul,ol{margin-left:20px;margin-bottom:12px;}li{margin-bottom:5px;}
+.steps{counter-reset:step;list-style:none;margin-left:0;}
+.steps li{counter-increment:step;padding:9px 12px 9px 46px;position:relative;background:#f8fbff;border:1px solid #dde8f5;border-radius:6px;margin-bottom:6px;}
+.steps li::before{content:counter(step);position:absolute;left:12px;top:50%;transform:translateY(-50%);width:24px;height:24px;background:#2a6cbe;color:#fff;border-radius:50%;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;}
+.table-wrap{overflow-x:auto;margin-bottom:16px;}
+table{width:100%;border-collapse:collapse;font-size:13px;min-width:380px;}
+th{background:#1a3a5c;color:#fff;padding:9px 12px;text-align:left;white-space:nowrap;}
+td{padding:8px 12px;border-bottom:1px solid #dde8f5;vertical-align:top;}tr:nth-child(even) td{background:#f4f7fb;}
+code{font-family:'Courier New',monospace;background:rgba(0,80,160,.08);color:#004080;padding:2px 6px;border-radius:3px;font-size:12px;}
+.box{border-radius:6px;padding:13px 16px;margin:14px 0;font-size:13px;}
+.box-warn{background:#fffbe6;border-left:4px solid #f5a623;color:#7a5700;}
+.box-danger{background:#fff0f0;border-left:4px solid #d43f3f;color:#7a0000;}
+.box-hint{background:#e8f4ff;border-left:4px solid #2a6cbe;color:#0a3060;}
+.box-check{background:#f4eeff;border-left:4px solid #8c4fc8;color:#3a0070;}
+.box strong{display:block;margin-bottom:4px;}
+figure{max-width:280px;width:100%;margin:18px auto;text-align:center;}
+figure img{display:block;width:100%;max-width:280px;height:auto;margin:0 auto;border:1px solid #c8d8ec;border-radius:6px;box-shadow:0 2px 8px rgba(0,0,0,.1);}
+figcaption{font-size:12px;color:#5a7a99;margin-top:6px;}
+.img-pending{display:flex;align-items:center;justify-content:center;max-width:280px;width:100%;box-sizing:border-box;background:#e8eef5;border:2px dashed #99b8d8;border-radius:6px;height:160px;color:#5a7a99;font-size:13px;margin:18px auto;}
+.diff-add{background:#e8fff0;border-left:4px solid #2a9c5c;border-radius:6px;padding:12px 16px;margin:14px 0;font-size:13px;}
+.diff-add strong{display:block;color:#1a6c3c;margin-bottom:4px;}
+.flow-box{background:#f4f7fb;border:1px solid #c8d8ec;border-radius:8px;padding:20px;margin:16px 0;}
+.flow-box h4{color:#1a3a5c;margin-top:0;}
+.flow-arrow{text-align:center;font-size:20px;color:#2a6cbe;margin:4px 0;}
+.flow-step{background:#fff;border:1px solid #c8d8ec;border-radius:6px;padding:10px 16px;margin:4px 0;font-size:13px;}
+.flow-step strong{color:#1a3a5c;}
+.summary-box{background:linear-gradient(135deg,#e8f4ff,#f0f8ff);border:1px solid #99c8ec;border-radius:8px;padding:20px 24px;margin-top:32px;}
+.summary-box h3{border:none;color:#1a3a5c;margin-top:0;}
+.confirm-box{background:#fdf4ff;border:1px solid #c8a0e0;border-radius:8px;padding:20px 24px;margin-top:16px;}
+.confirm-box h3{border:none;color:#5a0090;margin-top:0;}
+.check{color:#2e7d32;font-weight:700;}.cross{color:#c62828;}
+th.pro-col{background:#5a2a8c;}
+.feature-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px;margin:16px 0;}
+.feature-card{background:#f4f7fb;border:1px solid #c8d8ec;border-radius:8px;padding:16px;}
+.feature-card h4{color:#1a3a5c;margin-top:0;margin-bottom:6px;font-size:14px;}
+.feature-card p{font-size:13px;margin:0;color:#3a5a7a;}
+.feature-card.pro-card{background:#f4eeff;border-color:#c8a0e0;}
+.feature-card.pro-card h4{color:#5a2a8c;}
+.trouble{border:1px solid #c8d8ec;border-radius:8px;margin:14px 0;overflow:hidden;}
+.trouble-q{background:#eef6fd;padding:13px 18px;font-weight:700;font-size:14px;color:#1a3a5c;display:flex;align-items:flex-start;gap:10px;}
+.trouble-q::before{content:'Q';background:#2a6cbe;color:#fff;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900;flex-shrink:0;margin-top:1px;}
+.trouble-a{padding:13px 18px 14px 50px;font-size:13.5px;border-top:1px solid #c8d8ec;line-height:1.9;}
+.trouble-a ul{margin-left:16px;}
+.legal-block{background:#f5f5f5;border:1px solid #ddd;border-radius:8px;padding:20px 24px;font-size:12.5px;color:#444;line-height:1.9;margin:14px 0;}
+.legal-block h4{font-size:13px;color:#333;margin:18px 0 6px;border-bottom:1px solid #ddd;padding-bottom:4px;}
+.legal-block h4:first-child{margin-top:0;}
+footer{text-align:center;font-size:12px;color:#8a9aaa;padding:30px 16px;border-top:1px solid #dde8f5;margin-top:20px;}
+@media(max-width:640px){.page-header h1{font-size:18px;}.chapter{padding:20px 16px;}.site-nav a{padding:8px 9px;font-size:11px;}}
+@media print{body{background:#fff;font-size:12px;}.site-nav{display:none;}.chapter{box-shadow:none;border:1px solid #ccc;page-break-inside:avoid;}.page-header{background:#1a3a5c !important;-webkit-print-color-adjust:exact;print-color-adjust:exact;}}
+</style></head>
+<body>
+<nav class="site-nav"><div class="nav-inner">
+  <a href="01_top_settings_common_ko.html">① 홈 / 설정</a>
+  <a href="02_stocktake_free_ko.html">② 실사 무료</a>
+  <a href="03_stocktake_simple_ko.html">③ 실사 표준</a>
+  <a href="04_stocktake_full_ko.html">④ 실사 전체</a>
+  <a href="05_inventory_free_ko.html">⑤ 재고 무료</a>
+  <a href="06_inventory_simple_ko.html">⑥ 재고 표준</a>
+  <a href="07_inventory_full_ko.html" class="active">⑦ 재고 전체</a>
+</div></nav>
+<header class="page-header"><div class="inner">
+  <div class="app-name">Quantiventra 매뉴얼</div>
+  <h1>⑦ 재고 관리 — 전체 버전(전체 버전 잠금 해제)</h1>
+  <div class="subtitle">전체 버전 기능 · 마스터 데이터 관리 · 재고 이동 · 실사 적용 · CSV 백업 · 실제 워크플로</div>
+  <div class="scope-box"><strong>이 페이지에서 다루는 내용:</strong>전체 버전 잠금 해제 추가 내용 / 표준 버전과의 차이 / 상품 마스터 통합 / 카테고리 마스터 / 위치 마스터 / 재고 이동 / 재고 이력 / 실사 결과 재고 반영 / CSV 백업·복원 / 이력 백업 / 보충 기준 수량·가격 / 워크플로 예시 / 중요 주의 사항</div>
+</div></header>
+<div class="container">
+  <nav class="toc"><h2>목차</h2><ol>
+    <li><a href="#overview">전체 버전(전체 버전 잠금 해제)개요</a></li>
+    <li><a href="#diff">표준 버전과의 차이</a></li>
+    <li><a href="#master-product">상품 마스터 통합</a></li>
+    <li><a href="#master-item">카테고리 마스터</a></li>
+    <li><a href="#master-location">위치 마스터</a></li>
+    <li><a href="#stock-move">재고 이동</a></li>
+    <li><a href="#stock-history">재고 이력</a></li>
+    <li><a href="#stocktake-reflect">실사 데이터를 재고에 반영</a></li>
+    <li><a href="#csv-backup">CSV 백업 및 복원</a></li>
+    <li><a href="#csv-history-backup">이력 백업</a></li>
+    <li><a href="#reorder-price">보충 기준 수량·가격</a></li>
+    <li><a href="#usecase">전체 버전 워크플로 예시</a></li>
+    <li><a href="#notes">중요 주의 사항</a></li>
+    <li><a href="#summary">이 장의 핵심 요약</a></li>
+    <li><a href="#confirm">확인이 필요한 사항</a></li>
+  </ol></nav>
+
+  <section class="chapter" id="overview">
+    <div class="chapter-head"><div class="ch-no">제1장</div><h2>전체 버전(전체 버전 잠금 해제)개요</h2></div>
+    <p>재고 전체 버전 잠금 해제는 마스터 레코드 수·이력 항목·내보내기 행수의 모든 제한을 해제하고, 표준 버전에서 사용할 수 없는 모든 고급 기능을 활성화합니다. 핵심 추가 기능은 다중 위치 관리(창고·매장 등), 위치 간 재고 이동, 실사 결과를 직접 재고에 반영, 전체 CSV 백업 및 복원입니다.</p>
+    <div class="diff-add">
+      <strong>전체 버전 잠금 해제로 잠금 해제되는 기능</strong>
+      <ul>
+        <li>마스터 레코드·이력 항목·내보내기 행수 무제한</li>
+        <li>상품 마스터의 보충 기준 수량 및 가격 필드</li>
+        <li>카테고리 마스터(상품 분류 관리)</li>
+        <li>위치 마스터 등록 및 관리</li>
+        <li>재고 이동(위치 간 수량 이동)</li>
+        <li>실사 데이터를 재고에 반영</li>
+        <li>CSV 백업 및 복원(재고 시트 + 전체 백업 CSV 세트)</li>
+        <li>이력 백업</li>
+        <li>등록 누계 직접 편집</li>
+        <li>코드 규칙·위치 규칙·카메라 스캔 설정(전체 버전 공유 설정)</li>
+        <li>확장 CSV 옵션(컬럼 선택 및 가져오기 모드 선택)</li>
+      </ul>
+    </div>
+    <div class="box box-hint"><strong>참고:「전체 버전 잠금 해제」와 「전체 버전」은 같은 의미</strong>이 문서에서 「전체 버전 잠금 해제」와 「전체 버전」은 혼용됩니다. 구매 및 플랜 세부 내용은 <a href="01_top_settings_common_ko.html">① 홈 및 설정</a>의 「플랜 개요」 섹션을 참조하세요.</div>
+  </section>
+
+  <section class="chapter" id="diff">
+    <div class="chapter-head"><div class="ch-no">제2장</div><h2>표준 버전과의 차이</h2></div>
+    <div class="table-wrap"><table>
+      <thead><tr><th>기능</th><th>무료 버전</th><th>표준 버전</th><th>전체 버전</th></tr></thead>
+      <tbody>
+        <tr><td>재고 조회</td><td>✓</td><td>✓</td><td>✓</td></tr>
+        <tr><td>입고/출고</td><td>✗</td><td>✓</td><td>✓</td></tr>
+        <tr><td>마스터 레코드 수 제한</td><td>30건</td><td>300건</td><td>무제한</td></tr>
+        <tr><td>재고 이동</td><td>✗</td><td>✗</td><td>✓</td></tr>
+        <tr><td>실사 데이터를 재고에 반영</td><td>✗</td><td>✗</td><td>✓</td></tr>
+        <tr><td>카테고리 마스터</td><td>✗</td><td>✗</td><td>✓</td></tr>
+        <tr><td>보충 기준 수량 및 가격</td><td>✗</td><td>✗</td><td>✓</td></tr>
+        <tr><td>CSV 백업 및 복원</td><td>✗</td><td>제한됨</td><td>✓(전체 세트)</td></tr>
+        <tr><td>이력 백업</td><td>✗</td><td>✗</td><td>✓</td></tr>
+        <tr><td>코드 규칙 및 위치 규칙</td><td>✗</td><td>✗</td><td>✓(전체 버전 공유 설정)</td></tr>
+      </tbody>
+    </table></div>
+    <div class="box box-hint"><strong>팁</strong>표준 버전의 핵심 작업—입고·출고·재고 조회·재고 이력·CSV 가져오기·내보내기—은 <a href="06_inventory_simple_ko.html">⑥ 재고 관리: 표준 버전</a>을 참조하세요. 이 페이지는 전체 버전에서 추가된 기능만 다룹니다.</div>
+  </section>
+
+  <section class="chapter" id="master-product">
+    <div class="chapter-head"><div class="ch-no">제3장</div><h2>상품 마스터 통합</h2></div>
+    <p>상품 마스터는 재고를 관리하는 실제 상품을 등록하는 곳입니다. 전체 버전 잠금 해제 후 각 상품에 보충 기준 수량과 가격을 추가할 수 있습니다.</p>
+    <h3>상품 마스터의 핵심 필드</h3>
+    <div class="table-wrap"><table>
+      <thead><tr><th>필드</th><th>설명</th><th>전체 버전에서 추가</th></tr></thead>
+      <tbody>
+        <tr><td>상품 코드/바코드</td><td>상품의 고유 식별자</td><td>—</td></tr>
+        <tr><td>상품명</td><td>상품 이름</td><td>—</td></tr>
+        <tr><td>카테고리</td><td>상품 분류(카테고리 마스터에서 선택)</td><td>—</td></tr>
+        <tr><td>가격</td><td>상품의 판매 가격 또는 원가</td><td>✓</td></tr>
+        <tr><td>보충 기준 수량</td><td>보충 여부를 판단할 때 참고하는 기준 수량</td><td>✓</td></tr>
+      </tbody>
+    </table></div>    <h3>상품 등록 또는 편집</h3>
+    <ol class="steps">
+      <li>홈 화면에서 <strong>마스터 관리</strong>를 엽니다.</li>
+      <li><strong>상품 마스터</strong>를 선택합니다.</li>
+      <li>새 항목 카드 또는 <strong>새로 만들기</strong> 버튼을 탭합니다.</li>
+      <li>상품 코드·이름·카테고리를 입력합니다. 선택적으로 가격과 보충 기준 수량을 입력합니다.</li>
+      <li><strong>저장</strong>을 탭해 등록합니다.</li>
+      <li>기존 상품을 편집하려면 목록에서 해당 행을 열고 변경 후 <strong>저장</strong>을 탭합니다.</li>
+    </ol>
+    <div class="box box-hint"><strong>입고 화면에서 미등록 상품 등록</strong>입고 화면에서 마스터에 없는 상품 코드를 입력하면 상품 마스터 새 항목 양식으로 이동합니다. 상품명·가격·보충 기준 수량을 저장하면 입고 화면으로 돌아오고 상품 정보가 자동으로 채워집니다.</div>
+    <div class="box box-warn"><strong>주의: 상품과 카테고리를 혼동하지 마세요</strong>
+      <ul>
+        <li><strong>상품</strong>:재고에 보유하는 개별 품목(예: 빨간 볼펜·파란 볼펜)</li>
+        <li><strong>카테고리</strong>:상품 분류 그룹(예: 문구류·식품)</li>
+      </ul>
+      카테고리는 상품 마스터에서 상품의 분류로 선택합니다. 카테고리 자체는 재고를 보유하지 않습니다.
+    </div>
+  </section>
+
+  <section class="chapter" id="master-item">
+    <div class="chapter-head"><div class="ch-no">제4장</div><h2>카테고리 마스터</h2></div>
+    <p>카테고리 마스터는 상품을 정리하기 위한 분류 그룹을 관리합니다. 카테고리를 사용하면 상품 마스터를 더 쉽게 필터링하고 확인할 수 있습니다.</p>
+    <div class="table-wrap"><table>
+      <tr><th>필드</th><th>설명</th></tr>
+      <tr><td>카테고리 코드</td><td>카테고리의 고유 식별자</td></tr>
+      <tr><td>카테고리명</td><td>분류 이름(예: 식품·의류)</td></tr>
+      <tr><td>분류</td><td>목록과 마스터에서 상품을 정리하는 데 사용하는 그룹</td></tr>
+      <tr><td>표시 순서</td><td>목록 보기에서의 정렬 순서</td></tr>
+    </table></div>    <h3>카테고리 등록</h3>
+    <ol class="steps">
+      <li><strong>마스터 관리 → 카테고리 마스터</strong>로 이동합니다.</li>
+      <li>새 항목 카드 또는 <strong>새로 만들기</strong> 버튼을 탭합니다.</li>
+      <li>카테고리 코드·카테고리명·표시 순서를 입력합니다.</li>
+      <li><strong>저장</strong>을 탭합니다.</li>
+    </ol>
+    <div class="box box-hint"><strong>팁: 카테고리</strong>카테고리를 일관되게 사용하면 상품을 묶고 마스터를 확인하기 쉽습니다.</div>
+  </section>
+
+  <section class="chapter" id="master-location">
+    <div class="chapter-head"><div class="ch-no">제5장</div><h2>위치 마스터</h2></div>
+    <p>위치 마스터는 재고를 보관하는 물리적 장소를 등록하고 관리하는 곳입니다. 창고·소매 매장·각 선반 등 여러 위치를 등록해 위치별로 재고를 추적할 수 있습니다.</p>
+    <div class="table-wrap"><table>
+      <tr><th>필드</th><th>설명</th></tr>
+      <tr><td>위치 코드</td><td>위치의 고유 식별자</td></tr>
+      <tr><td>위치명</td><td>위치 이름(예: 창고·매장 A)</td></tr>
+      <tr><td>표시 순서</td><td>목록 보기에서의 정렬 순서</td></tr>
+      <tr><td>보충 판단에 포함</td><td>활성화하면 이 위치의 재고가 재고 조회 화면의 보충 판단 합계에 포함됨</td></tr>
+      <tr><td>활성/비활성</td><td>더 이상 사용하지 않는 위치를 삭제하지 않고 비활성화 가능</td></tr>
+    </table></div>    <div class="box box-hint"><strong>기본 위치</strong>앱에는 「창고」와 「매장」이 미리 등록되어 있습니다. 실제 운영에 맞게 이름을 변경·편집하거나 위치를 추가하세요.</div>
+    <h3>위치 등록</h3>
+    <ol class="steps">
+      <li><strong>마스터 관리 → 위치 마스터</strong>로 이동합니다.</li>
+      <li>새 항목 카드 또는 <strong>새로 만들기</strong> 버튼을 탭합니다.</li>
+      <li>위치 코드·위치명·표시 순서를 입력합니다.</li>
+      <li>필요에 따라 <strong>보충 판단에 포함</strong>을 켜거나 끕니다. 새 항목은 기본으로 켜져 있습니다.</li>
+      <li><strong>저장</strong>을 탭합니다.</li>
+    </ol>
+    <div class="box box-hint"><strong>「보충 판단에 포함」 설정에 대해</strong>재고 조회 화면의 보충 판단은 이 스위치가 켜진 위치의 재고만 합산합니다. <strong>모든 활성 위치 포함</strong> 버튼을 사용하면 모든 활성 위치를 한 번에 켤 수 있습니다.</div>
+    <div class="box box-warn"><strong>주의: 위치 비활성화 vs 삭제</strong>위치가 더 이상 필요하지 않을 때는 삭제보다 <strong>비활성화</strong>를 권장합니다. 삭제 가능 여부 및 삭제된 위치 복원 가능 여부는 확인이 필요합니다.</div>
+  </section>
+
+  <section class="chapter" id="stock-move">
+    <div class="chapter-head"><div class="ch-no">제6장</div><h2>재고 이동</h2></div>
+    <p>재고 이동은 지정 수량의 재고를 한 위치에서 다른 위치로 이동합니다. 전체 버전에서만 사용 가능합니다.</p>    <h3>재고 이동 방법</h3>
+    <ol class="steps">
+      <li>재고 관리 메뉴에서 <strong>재고 이동</strong>을 엽니다.</li>
+      <li><strong>출발 위치</strong>(이동할 위치)를 선택합니다.</li>
+      <li><strong>도착 위치</strong>(이동될 위치)를 선택합니다.</li>
+      <li>바코드 스캔 또는 이름 검색으로 대상 상품을 찾습니다.</li>
+      <li>이동할 수량을 입력합니다.</li>
+      <li>내용을 확인하고 <strong>확인</strong>을 탭합니다.</li>
+    </ol>
+    <div class="box box-danger"><strong>중요: 같은 위치 간 이동은 절대 금지</strong>출발 위치와 도착 위치에 같은 위치를 선택하면 재고 데이터가 잘못 처리됩니다. 반드시 두 개의 다른 위치를 선택하세요.</div>
+    <div class="box box-hint"><strong>위치가 하나뿐인 경우</strong>등록된 위치가 하나뿐이면 재고 이동은 의미가 없습니다. 대신 <strong>입고</strong>·<strong>출고</strong> 또는 <strong>편집</strong>으로 수량을 조정하세요. 재고 이동은 위치가 둘 이상일 때만 의미가 있습니다.</div>
+  </section>
+
+  <section class="chapter" id="stock-history">
+    <div class="chapter-head"><div class="ch-no">제7장</div><h2>재고 이력</h2></div>
+    <p>재고 이력은 재고의 모든 변동에 대한 완전한 기록을 제공합니다. 전체 버전 잠금 해제 후 이력 항목 제한이 해제되어 장기 기록을 유지할 수 있습니다.</p>
+    <h3>이력에 기록되는 작업 유형</h3>
+    <ul>
+      <li><strong>입고</strong>:재고로 수령한 물건</li>
+      <li><strong>출고</strong>:재고에서 출고한 물건</li>
+      <li><strong>이동</strong>:위치 간 이동한 재고</li>
+      <li><strong>실사 조정</strong>:실사 결과 적용 시의 차이 수정</li>
+      <li><strong>기초 재고</strong>:최초 등록 시 설정한 초기 수량</li>
+      <li><strong>CSV 가져오기</strong>:CSV 파일을 통해 가져온 재고</li>
+    </ul>  </section>
+
+  <section class="chapter" id="stocktake-reflect">
+    <div class="chapter-head"><div class="ch-no">제8장</div><h2>실사 데이터를 재고에 반영</h2></div>
+    <p>실물 실사(수량 조사)결과를 재고 관리 모듈에 적용하면 시스템 재고와 선반의 실제 재고가 일치하게 됩니다. 전체 버전에서만 사용 가능합니다.</p>
+    <p>실사 결과를 재고에 반영하면 이론 재고 수준과 실제 수량 간의 차이가 이력에 <strong>실사 조정</strong> 항목으로 기록되고, 동시에 재고가 실제 수량으로 업데이트되며 추적 가능한 조정 기록이 보존됩니다.</p>
+    <div class="box box-check"><strong>적용 조건과 검토</strong>확인 화면의 조건이 충족될 때만 적용을 실행하세요. 진행 전에는 영향을 받는 위치, 조정 상세, 백업 CSV를 함께 검토하세요.</div>
+    <div class="box box-danger"><strong>중요: 적용 전 반드시 백업</strong>실사 결과 반영은 재고 수량을 덮어씁니다. 이 작업을 실행하기 전에 반드시 CSV 백업을 내보내세요. 적용 완료 후 실행 취소 기능이 제한될 수 있습니다.</div>
+  </section>
+
+  <section class="chapter" id="csv-backup">
+    <div class="chapter-head"><div class="ch-no">제9장</div><h2>CSV 백업 및 복원</h2></div>
+    <p>전체 버전 잠금 해제는 세 가지 내보내기 유형을 제공합니다: 재고 시트 CSV, 전체 백업 CSV 세트, 이력 백업. 복원 및 덮어쓰기 작업은 데이터를 대규모로 변경하므로 실행 전 신중한 확인이 필요합니다.</p>
+    <h3>CSV 유형 및 용도</h3>
+    <div class="table-wrap"><table>
+      <thead><tr><th>CSV 유형</th><th>용도</th><th>주요 내용</th><th>사용 가능 버전</th><th>비고</th></tr></thead>
+      <tbody>
+        <tr><td>재고 시트 CSV</td><td>현재 재고 목록 확인 및 재가져오기</td><td>위치·상품 코드·상품명·수량</td><td>표준 버전 이상</td><td>위치 컬럼이 없으면 가져오기 시 대상 위치 선택</td></tr>
+        <tr><td>전체 백업 CSV 세트</td><td>전체 데이터세트 백업 및 복원</td><td>상품·현재 재고·입고/출고/이동/조정 이력·위치·카테고리</td><td>전체 버전</td><td>여러 파일로 내보내질 수 있음</td></tr>
+        <tr><td>이력 백업</td><td>재고 변동 사후 검토를 위한 백업</td><td>재고 시트 + 전체 작업 이력</td><td>전체 버전</td><td>이력 CSV를 다시 가져오기 전에 가져오기 화면을 검토</td></tr>
+      </tbody>
+    </table></div>    <h3>전체 백업 CSV 세트 내보내기</h3>
+    <ol class="steps">
+      <li>설정 화면 또는 메인 메뉴에서 <strong>CSV 가져오기/내보내기</strong>를 엽니다.</li>
+      <li><strong>전체 백업 CSV 세트</strong>를 선택합니다.</li>
+      <li>대상 폴더를 선택합니다(화면 안내를 따릅니다).</li>
+      <li><strong>내보내기</strong>를 탭하고 완료 메시지를 확인합니다.</li>
+    </ol>
+    <h3>CSV 백업에서 복원</h3>
+    <ol class="steps">
+      <li><strong>CSV 가져오기/내보내기 → 복원</strong> 또는 <strong>CSV 가져오기</strong>로 이동합니다.</li>
+      <li>백업 CSV 파일을 선택합니다.</li>
+      <li>컬럼 매핑을 확인합니다(앱이 자동으로 인식할 수 있습니다).</li>
+      <li>확인 화면을 꼼꼼히 읽은 후 <strong>실행</strong>을 탭합니다.</li>
+    </ol>
+    <div class="box box-danger"><strong>중요: 복원 또는 덮어쓰기 전에 반드시 현재 데이터를 백업</strong>CSV 복원 또는 현재 재고 덮어쓰기 작업은 기존 재고 데이터를 덮어씁니다. 진행하기 전에 반드시 현재 재고 시트 CSV를 내보내고 저장하세요.</div>
+    <h3>현재 재고 덮어쓰기</h3>
+    <p>현재 재고 덮어쓰기는 가져온 CSV의 값으로 현재 재고 수량을 덮어씁니다. 기존 이력은 보존되지만 차이는 <strong>조정</strong> 이력 항목으로 기록됩니다. CSV에 없는 재고 행은 0으로 설정될 수 있으므로 가져오기 전에 반드시 CSV 내용을 확인하세요.</p>
+    <div class="box box-danger"><strong>현재 재고 덮어쓰기는 신중하게 사용</strong>CSV에 없는 상품이나 위치의 재고가 0으로 설정될 수 있습니다. 가져오기 전에 CSV에 올바른 상품과 위치가 포함되어 있는지 확인하세요.</div>
+  </section>
+
+  <section class="chapter" id="csv-history-backup">
+    <div class="chapter-head"><div class="ch-no">제10장</div><h2>이력 백업</h2></div>
+    <p>이력 백업은 재고 시트와 재고 변동의 완전한 기록—입고·출고·이동·조정 등—을 한 번의 작업으로 내보냅니다. 나중에 재고 변동을 감사하거나 추적해야 할 때 사용합니다.</p>
+    <ul>
+      <li>재고 시트 CSV(현재 재고 수량)</li>
+      <li>전체 작업 이력(입고·출고·이동·실사 조정·CSV 가져오기)</li>
+    </ul>
+    <div class="box box-check"><strong>이력 백업 CSV 재가져오기</strong>이력 백업을 다시 가져오기 전에는 선택한 파일, 가져오기 모드, 앱의 확인 화면을 검토하세요.</div>
+    <div class="box box-hint"><strong>운영 팁</strong>주별 또는 월별로 정기적으로 이력 백업을 실행하면 문제 발생 시 재고 수준이 어떻게 변화했는지 추적해 더 정확하게 복원할 수 있습니다.</div>
+  </section>
+
+  <section class="chapter" id="reorder-price">
+    <div class="chapter-head"><div class="ch-no">제11장</div><h2>보충 기준 수량·가격</h2></div>
+    <h3>보충 기준 수량</h3>
+    <p>상품 마스터에 보충 기준 수량을 설정하면 보충 판단에 사용할 기준값을 만들 수 있습니다: 재고가 이 값 아래로 떨어지면 보충을 검토해야 하는지 쉽게 판단할 수 있습니다. 보충 시점을 검토하는 데 사용하는 참고 지표입니다.</p>
+    <div class="box box-check"><strong>재고 조회 화면의 보충 판단</strong>재고 조회 화면은 기본적으로 상품별 합계를 표시합니다. 보충 판단은 <strong>보충 판단에 포함</strong>이 켜진 모든 위치의 합계 재고와 상품의 보충 기준 수량을 비교합니다. 개별 위치별 재고를 볼 때는 보충 판단이 표시되지 않거나 비활성화된 것으로 처리됩니다.</div>
+    <div class="box box-check"><strong>보충 기준 수량 관련 표시</strong>현재 설정에서 보충 기준 수량과 관련 안내가 어떻게 표시되는지는 재고 확인 화면을 기준으로 확인하세요.</div>
+    <h3>가격</h3>
+    <p>상품 마스터에서 각 상품에 가격을 등록할 수 있습니다. 재고 총 가치를 계산하거나 보고서를 작성할 때 참조됩니다. 통화 설정과 반올림 방식의 세부 내용은 확인이 필요합니다.</p>
+    <h3>카테고리와 함께 사용</h3>
+    <p>상품을 카테고리에 연결하면 마스터를 정리하고 상품 유형별로 목록을 확인하기 쉬워집니다.</p>
+    <div class="box box-warn"><strong>주의</strong>가격 정보와 관련 계산은 앱 기능입니다. 업무 기록에 적합한지는 별도로 확인해 주세요.</div>
+  </section>
+
+  <section class="chapter" id="usecase">
+    <div class="chapter-head"><div class="ch-no">제12장</div><h2>전체 버전 워크플로 예시</h2></div>
+    <h3>예시 1: 두 위치 관리—창고와 매장</h3>
+    <ol class="steps">
+      <li>위치 마스터에 「창고」와 「매장 A」를 등록합니다.</li>
+      <li>상품 마스터에 상품을 등록하고 창고에 기초 재고를 설정합니다.</li>
+      <li>매장에 보충이 필요할 때 <strong>재고 이동</strong>으로 창고에서 매장 A로 재고를 이동합니다.</li>
+      <li>매장에서 판매 후 <strong>출고</strong>로 감소분을 기록합니다.</li>
+      <li>정기적으로 실사를 실시하고 <strong>실사 결과 반영</strong>으로 시스템 재고와 실제 수량을 일치시킵니다.</li>
+      <li>매월 <strong>이력 백업</strong>을 내보내 보관합니다.</li>
+    </ol>
+    <h3>예시 2: 정기 실사 주기</h3>
+    <ol class="steps">
+      <li>월말에 실사 앱(실사 전체 버전)으로 실제 수량을 입력합니다.</li>
+      <li>실제 수량 결과를 확정합니다.</li>
+      <li><strong>실사 결과 반영</strong>으로 차이를 재고 모듈에 반영합니다.</li>
+      <li>재고 이력에서 <strong>실사 조정</strong> 항목을 확인해 변경 내용을 검증합니다.</li>
+      <li>전체 백업 CSV 세트를 내보내 저장합니다.</li>
+    </ol>
+    <div class="box box-hint"><strong>팁: 실사 통합</strong>실사 전체 버전의 상세 안내는 <a href="04_stocktake_full_ko.html">④ 재고 실사: 전체 버전</a>을 참조하세요.</div>
+  </section>
+
+  <section class="chapter" id="notes">
+    <div class="chapter-head"><div class="ch-no">제13장</div><h2>중요 주의 사항</h2></div>
+    <div class="box box-danger"><strong>CSV 현재 재고 덮어쓰기</strong>현재 재고 덮어쓰기는 CSV의 값으로 재고 수량을 덮어씁니다. CSV에 없는 상품은 재고 0으로 설정될 수 있습니다. <strong>이 작업 전에 반드시 백업 CSV를 내보내세요.</strong></div>
+    <div class="box box-danger"><strong>실사 결과 반영</strong>실사 결과 반영은 재고 수량을 재기록합니다. 완료된 적용의 실행 취소 가능 여부는 확인이 필요합니다. <strong>이 작업 전에 반드시 백업 CSV를 내보내세요.</strong></div>
+    <div class="box box-danger"><strong>마스터 레코드 삭제 또는 덮어쓰기</strong>상품 마스터나 위치 마스터에서 항목을 삭제하면 재고 데이터에 영향을 줄 수 있습니다. 레코드가 더 이상 필요하지 않을 때는 삭제보다 <strong>비활성화</strong>를 고려하세요. 삭제 가능 여부와 삭제된 레코드 복원 가능 여부는 확인이 필요합니다.</div>
+    <div class="box box-warn"><strong>재고 이동: 출발지와 도착지는 달라야 합니다</strong>재고 이동 시 출발 위치와 도착 위치에 절대 같은 위치를 선택하지 마세요. 예기치 않은 데이터 변경이 발생할 수 있습니다.</div>
+    <div class="box box-hint"><strong>출고 화면의 재고 필드</strong>출고 화면에 표시되는 재고 수량은 참조용으로 현재 재고 수준을 표시하며 편집할 수 없습니다. 출고 수량을 저장하면 선택한 위치의 재고가 감소합니다.</div>
+    <div class="box box-warn"><strong>가격 및 구매 조건</strong>전체 버전 잠금 해제의 구매 가격과 판매 조건은 Google Play 목록을 참조하세요. 이 문서에는 가격 정보가 포함되지 않습니다.</div>
+    <div class="box box-hint">
+      <strong>운영 원칙</strong>
+      <ul>
+        <li>재고에 대규모 변경을 가하는 작업(덮어쓰기·적용·삭제)전에는 반드시 백업하세요.</li>
+        <li>CSV 가져오기 시 실행 전에 미리보기 또는 확인 화면을 읽으세요.</li>
+        <li>위치가 하나뿐이면 재고 이동 대신 입고·출고 또는 편집을 사용하세요.</li>
+      </ul>
+    </div>
+  </section>
+
+  <div class="summary-box" id="summary">
+    <h3>📌 이 장의 핵심 요약</h3>
+    <ul>
+      <li>전체 버전 잠금 해제는 모든 레코드·이력 제한을 해제하고 보충 기준 수량·가격·카테고리 마스터·위치 관리·재고 이동·실사 적용·CSV 백업을 활성화합니다.</li>
+      <li>세 가지 마스터 데이터가 협력합니다: 상품 마스터(재고 보유 상품)·카테고리 마스터(분류 그룹)·위치 마스터(보관 위치).</li>
+      <li>재고 이동은 두 개의 서로 다른 위치 간에서만 유효합니다. 출발지와 도착지에 같은 위치를 절대 사용하지 마세요.</li>
+      <li>실사 결과 반영은 실제 수량을 시스템 재고와 동기화합니다. 차이는 실사 조정 이력 항목으로 기록됩니다.</li>
+      <li>현재 재고 덮어쓰기·실사 결과 반영·삭제 등 되돌릴 수 없는 작업 전에는 반드시 백업하세요.</li>
+      <li>정기적으로(주별 또는 월별)이력 백업을 실행하면 데이터 복원 불가 위험이 줄어듭니다.</li>
+    </ul>
+  </div>
+  <div class="confirm-box" id="confirm">
+    <h3>🔍 확인이 필요한 사항</h3>
+    <ul>
+      <li>실사 결과 반영의 정확한 조건(시점·다중 위치 처리·실행 취소 동작)</li>
+      <li>이력 백업 CSV 재가져오기를 통한 재고 복원 절차 및 동작</li>
+      <li>재고가 보충 기준 수량 아래로 떨어질 때 관련 표시나 안내가 제공되는지 및 동작 방식</li>
+      <li>가격의 통화 설정과 반올림 방식</li>
+      <li>상품 및 위치 마스터 레코드를 삭제할 수 있는지, 삭제된 레코드를 복원할 수 있는지</li>
+      <li>전체 버전 잠금 해제 구매 가격과 판매 조건(Google Play에서 확인)</li>
+      <li>확인된 재고 이동의 실행 취소 가능 여부</li>
+    </ul>
+  </div>
+</div>
+<footer>Quantiventra 매뉴얼 · 최신 정보는 앱 화면에서 확인하세요.<p style="margin-top:4px;"><a href="privacy_ko.html">개인정보 처리방침</a></p></footer>
+</body></html>

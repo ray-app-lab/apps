@@ -1,0 +1,548 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quantiventra – 主屏幕、设置与通用操作</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','Microsoft YaHei','Hiragino Sans GB',sans-serif;font-size:15px;line-height:1.9;color:#1a2535;background:#f4f7fb;}
+a{color:#1a5fa8;text-decoration:none;}a:hover{text-decoration:underline;}
+.site-nav{background:#1a3a5c;color:#fff;padding:0;}.site-nav .nav-inner{max-width:960px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:stretch;}
+.site-nav a{color:#cde;padding:10px 13px;font-size:12px;display:block;border-right:1px solid #2a4a6c;white-space:nowrap;}
+.site-nav a:hover{background:#2a5090;text-decoration:none;}.site-nav a.active{background:#2a6cbe;color:#fff;font-weight:bold;}
+.page-header{background:linear-gradient(135deg,#1a3a5c 0%,#2a6cbe 100%);color:#fff;padding:40px 20px 30px;}
+.page-header .inner{max-width:960px;margin:0 auto;}.page-header .app-name{font-size:13px;opacity:.8;}
+.page-header h1{font-size:22px;font-weight:700;margin-top:6px;line-height:1.5;}.page-header .subtitle{font-size:14px;opacity:.85;margin-top:8px;}
+.scope-box{background:rgba(255,255,255,.15);border-left:4px solid #7ecfff;padding:12px 16px;margin-top:16px;border-radius:4px;font-size:13px;}
+.play-section{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.3);border-radius:10px;padding:22px 28px;margin-top:24px;display:flex;align-items:center;gap:28px;flex-wrap:wrap;}
+.play-qr-wrap{flex-shrink:0;text-align:center;}
+.play-qr-frame{width:130px;height:130px;border:3px solid rgba(255,255,255,.7);border-radius:10px;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.95);position:relative;overflow:hidden;}
+.play-qr-frame img{width:100%;height:100%;object-fit:contain;display:block;}
+.play-qr-corner{pointer-events:none;position:absolute;width:16px;height:16px;border-color:#2a6cbe;border-style:solid;border-width:0;}
+.play-qr-corner.tl{top:5px;left:5px;border-top-width:3px;border-left-width:3px;border-radius:3px 0 0 0;}
+.play-qr-corner.tr{top:5px;right:5px;border-top-width:3px;border-right-width:3px;border-radius:0 3px 0 0;}
+.play-qr-corner.bl{bottom:5px;left:5px;border-bottom-width:3px;border-left-width:3px;border-radius:0 0 0 3px;}
+.play-qr-corner.br{bottom:5px;right:5px;border-bottom-width:3px;border-right-width:3px;border-radius:0 0 3px 0;}
+.play-qr-label{font-size:10px;color:rgba(255,255,255,.8);margin-top:6px;letter-spacing:.05em;}
+.play-info h3{font-size:16px;font-weight:700;color:#fff;margin-bottom:4px;}
+.play-info p{font-size:12px;color:rgba(255,255,255,.75);margin-bottom:10px;}
+.play-badge{display:inline-block;text-decoration:none;}
+.play-badge img{display:block;height:44px;width:auto;max-width:180px;}.container{max-width:960px;margin:0 auto;padding:30px 16px;}
+.toc{background:#fff;border:1px solid #c8d8ec;border-radius:8px;padding:24px 28px;margin-bottom:32px;}
+.toc h2{font-size:16px;font-weight:700;color:#1a3a5c;border-bottom:2px solid #2a6cbe;padding-bottom:8px;margin-bottom:14px;}
+.toc ol{margin-left:18px;}.toc li{margin:5px 0;font-size:14px;}
+.chapter{background:#fff;border-radius:8px;box-shadow:0 1px 4px rgba(0,0,0,.08);padding:28px 28px 24px;margin-bottom:28px;}
+.chapter-head{border-left:5px solid #2a6cbe;padding-left:14px;margin-bottom:20px;}
+.chapter-head .ch-no{font-size:12px;color:#2a6cbe;font-weight:700;}.chapter-head h2{font-size:20px;font-weight:700;color:#1a2535;margin-top:2px;}
+h3{font-size:16px;font-weight:700;color:#1a3a5c;border-bottom:1px solid #dde8f5;padding-bottom:5px;margin:22px 0 12px;}
+h4{font-size:14px;font-weight:700;color:#2a4a6c;margin:16px 0 8px;}
+p{margin-bottom:12px;}ul,ol{margin-left:20px;margin-bottom:12px;}li{margin-bottom:5px;}
+.steps{counter-reset:step;list-style:none;margin-left:0;}
+.steps li{counter-increment:step;padding:9px 12px 9px 46px;position:relative;background:#f8fbff;border:1px solid #dde8f5;border-radius:6px;margin-bottom:6px;}
+.steps li::before{content:counter(step);position:absolute;left:12px;top:50%;transform:translateY(-50%);width:24px;height:24px;background:#2a6cbe;color:#fff;border-radius:50%;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;}
+.table-wrap{overflow-x:auto;margin-bottom:16px;}
+table{width:100%;border-collapse:collapse;font-size:13px;min-width:380px;}
+th{background:#1a3a5c;color:#fff;padding:9px 12px;text-align:left;white-space:nowrap;}
+td{padding:8px 12px;border-bottom:1px solid #dde8f5;vertical-align:top;}tr:nth-child(even) td{background:#f4f7fb;}
+code{font-family:'Courier New',monospace;background:rgba(0,80,160,.08);color:#004080;padding:2px 6px;border-radius:3px;font-size:12px;}
+.box{border-radius:6px;padding:13px 16px;margin:14px 0;font-size:13px;}
+.box-warn{background:#fffbe6;border-left:4px solid #f5a623;color:#7a5700;}
+.box-danger{background:#fff0f0;border-left:4px solid #d43f3f;color:#7a0000;}
+.box-hint{background:#e8f4ff;border-left:4px solid #2a6cbe;color:#0a3060;}
+.box-check{background:#f4eeff;border-left:4px solid #8c4fc8;color:#3a0070;}
+.box strong{display:block;margin-bottom:4px;}
+figure{max-width:280px;width:100%;margin:18px auto;text-align:center;}
+figure img{display:block;width:100%;max-width:280px;height:auto;margin:0 auto;border:1px solid #c8d8ec;border-radius:6px;box-shadow:0 2px 8px rgba(0,0,0,.1);}
+figcaption{font-size:12px;color:#5a7a99;margin-top:6px;}
+.img-pending{display:flex;align-items:center;justify-content:center;max-width:280px;width:100%;box-sizing:border-box;background:#e8eef5;border:2px dashed #99b8d8;border-radius:6px;height:160px;color:#5a7a99;font-size:13px;margin:18px auto;}
+.diff-add{background:#e8fff0;border-left:4px solid #2a9c5c;border-radius:6px;padding:12px 16px;margin:14px 0;font-size:13px;}
+.diff-add strong{display:block;color:#1a6c3c;margin-bottom:4px;}
+.flow-box{background:#f4f7fb;border:1px solid #c8d8ec;border-radius:8px;padding:20px;margin:16px 0;}
+.flow-box h4{color:#1a3a5c;margin-top:0;}
+.flow-arrow{text-align:center;font-size:20px;color:#2a6cbe;margin:4px 0;}
+.flow-step{background:#fff;border:1px solid #c8d8ec;border-radius:6px;padding:10px 16px;margin:4px 0;font-size:13px;}
+.flow-step strong{color:#1a3a5c;}
+.summary-box{background:linear-gradient(135deg,#e8f4ff,#f0f8ff);border:1px solid #99c8ec;border-radius:8px;padding:20px 24px;margin-top:32px;}
+.summary-box h3{border:none;color:#1a3a5c;margin-top:0;}
+.confirm-box{background:#fdf4ff;border:1px solid #c8a0e0;border-radius:8px;padding:20px 24px;margin-top:16px;}
+.confirm-box h3{border:none;color:#5a0090;margin-top:0;}
+footer{text-align:center;font-size:12px;color:#8a9aaa;padding:30px 16px;border-top:1px solid #dde8f5;margin-top:20px;}
+@media(max-width:640px){.page-header h1{font-size:18px;}.chapter{padding:20px 16px;}.site-nav a{padding:8px 9px;font-size:11px;}}
+@media print{body{background:#fff;font-size:12px;}.site-nav{display:none;}.chapter{box-shadow:none;border:1px solid #ccc;page-break-inside:avoid;}.page-header{background:#1a3a5c !important;-webkit-print-color-adjust:exact;print-color-adjust:exact;}}
+
+.check{color:#2e7d32;font-weight:700;}.cross{color:#c62828;}
+.feature-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px;margin:16px 0;}
+.feature-card{background:#f4f7fb;border:1px solid #c8d8ec;border-radius:8px;padding:16px;}
+.feature-card h4{color:#1a3a5c;margin-top:0;margin-bottom:6px;font-size:14px;}
+.feature-card p{font-size:13px;margin:0;color:#3a5a7a;}
+.feature-card.pro-card{background:#f4eeff;border-color:#c8a0e0;}
+.feature-card.pro-card h4{color:#5a2a8c;}
+.trouble{border:1px solid #c8d8ec;border-radius:8px;margin:14px 0;overflow:hidden;}
+.trouble-q{background:#eef6fd;padding:13px 18px;font-weight:700;font-size:14px;color:#1a3a5c;display:flex;align-items:flex-start;gap:10px;}
+.trouble-q::before{content:'Q';background:#2a6cbe;color:#fff;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900;flex-shrink:0;margin-top:1px;}
+.trouble-a{padding:13px 18px 14px 50px;font-size:13.5px;border-top:1px solid #c8d8ec;line-height:1.9;}
+.trouble-a ul{margin-left:16px;}
+.legal-block{background:#f5f5f5;border:1px solid #ddd;border-radius:8px;padding:20px 24px;font-size:12.5px;color:#444;line-height:1.9;margin:14px 0;}
+.legal-block h4{font-size:13px;color:#333;margin:18px 0 6px;border-bottom:1px solid #ddd;padding-bottom:4px;}
+.legal-block h4:first-child{margin-top:0;}
+th.pro-col{background:#5a2a8c;}
+</style>
+</head>
+<body>
+<nav class="site-nav"><div class="nav-inner">
+  <a href="01_top_settings_common_zh.html" class="active">① 主屏幕 / 设置</a>
+  <a href="02_stocktake_free_zh.html">② 盘点 免费版</a>
+  <a href="03_stocktake_simple_zh.html">③ 盘点 标准版</a>
+  <a href="04_stocktake_full_zh.html">④ 盘点 完整版</a>
+  <a href="05_inventory_free_zh.html">⑤ 库存 免费版</a>
+  <a href="06_inventory_simple_zh.html">⑥ 库存 标准版</a>
+  <a href="07_inventory_full_zh.html">⑦ 库存 完整版</a>
+</div></nav>
+<header class="page-header"><div class="inner">
+  <div class="app-name">Quantiventra 使用手册 — 简体中文版</div>
+  <h1>① 主屏幕 · 设置 · 通用操作</h1>
+  <div class="subtitle">应用概览、系统要求、设置、权限、套餐说明、示例数据、术语表及法律声明</div>
+  <div class="scope-box"><strong>本页涵盖内容：</strong>
+  Quantiventra 简介 / 系统要求与权限 / 安装与首次启动 / 数据存储 / 盘点与库存管理的区别 / 快速上手 / 主屏幕说明 / 设置屏幕说明 / 语言设置 / 套餐概览 / 示例数据 / 故障排查 / 术语表 / 条款与免责声明</div>
+</div></header>
+<div class="container">
+
+  <nav class="toc"><h2>目录</h2><ol>
+    <li><a href="#about">Quantiventra是什么？</a></li>
+    <li><a href="#environment">系统要求与权限</a></li>
+    <li><a href="#install">安装与首次启动</a></li>
+    <li><a href="#storage">数据存储</a></li>
+    <li><a href="#diff">盘点与库存管理</a></li>
+    <li><a href="#start">快速上手（新用户指南）</a></li>
+    <li><a href="#top-screen">主屏幕说明</a></li>
+    <li><a href="#settings">设置屏幕说明</a></li>
+    <li><a href="#language">语言设置</a></li>
+    <li><a href="#billing">套餐概览</a></li>
+    <li><a href="#sample">示例数据</a></li>
+    <li><a href="#trouble">故障排查</a></li>
+    <li><a href="#glossary">术语表</a></li>
+    <li><a href="#legal">条款与免责声明</a></li>
+    <li><a href="#summary">本章要点</a></li>
+    <li><a href="#confirm">正式使用前的确认事项</a></li>
+  </ol></nav>
+
+  <section class="chapter" id="about">
+    <div class="chapter-head"><div class="ch-no">第1章</div><h2>Quantiventra是什么？</h2></div>
+    <p><strong>Quantiventra</strong> 是 "<em>Quantity</em>"（数量）与 "<em>Inventory</em>"（库存）的组合词。这是一款 Android 应用，通过手机摄像头扫描条码，简化库存盘点和库存管理工作。</p>
+    <p>只需将摄像头对准条码即可自动识别商品，输入并保存数量——直观的操作流程让纸质盘点单数字化变得简单。结果以 CSV 文件保存，方便在 Excel 或 Google Sheets（Google 表格）中使用。</p>
+    <p>日常盘点、库存管理、主数据管理以及 CSV 导入/导出等操作通常可在设备端完成。即使在网络不稳定的仓库、门店或后台区域，也可以继续记录和确认作业数据。购买状态确认、购买恢复、跳转 Google Play 或打开外部链接等部分功能可能需要网络连接。</p>    <h3>主要功能</h3>
+    <div class="feature-grid">
+      <div class="feature-card"><h4>📦 库存清点</h4><p>通过条码扫描快速识别商品并即时记录数量。内置计算器可方便地汇总多处的清点数量。</p></div>
+      <div class="feature-card"><h4>🗂️ 主数据管理</h4><p>将商品、类别及位置登记为主数据，支持CSV批量导入。</p></div>
+      <div class="feature-card"><h4>📍 位置管理</h4><p>登记仓库、门店、货架等多个存放位置，按位置管理库存，并可设置哪些位置计入补货参考判断。</p></div>
+      <div class="feature-card"><h4>📊 CSV 导入/导出</h4><p>以CSV格式导出库存清单、备份及历史记录，方便在Excel 或 Google Sheets（Google 表格）中汇总。</p></div>
+      <div class="feature-card"><h4>🌐 多语言支持</h4><p>支持日语、英语、中文、韩语等12种语言，自动匹配设备语言。</p></div>
+      <div class="feature-card pro-card"><h4>⭐ 完整版功能</h4><p>解除条目数量限制，解锁详细位置管理、库存调拨、将盘点结果反映到库存等更多功能。</p></div>
+    </div>
+    <h3>摄像头扫描原理</h3>
+    <p>当条码位于屏幕中央引导框（蓝色或黄色边框）内时，应用在<strong>连续3帧识别到相同码</strong>后自动确认。三次确认机制可防止误读，同时保证可靠识别。</p>
+    <div class="box box-hint"><strong>💡 条码无法识别时</strong>条码必须<strong>完全位于</strong>引导框内。超出框外的码无法被识别，请调整摄像头位置直至条码完全在框内。</div>
+  </section>
+
+  <section class="chapter" id="environment">
+    <div class="chapter-head"><div class="ch-no">第2章</div><h2>系统要求与权限</h2></div>
+    <h3>系统要求</h3>
+    <div class="table-wrap"><table>
+      <tr><th>项目</th><th>要求</th></tr>
+      <tr><td>操作系统</td><td>Android 8.0 (Oreo / API 26) 及以上</td></tr>
+      <tr><td>摄像头</td><td>自动对焦摄像头（必需）</td></tr>
+      <tr><td>存储</td><td>建议至少10 MB可用内部存储</td></tr>
+      <tr><td>必要权限</td><td>摄像头（必需）</td></tr>
+      <tr><td>网络连接</td><td>日常盘点和库存管理通常不需要联网；购买确认、购买恢复、跳转 Google Play 或打开外部链接时可能需要联网</td></tr>
+      <tr><td>Google Play 服务</td><td>套餐购买与恢复时需要</td></tr>
+    </table></div>
+    <div class="box box-hint"><strong>💡 存储权限</strong>本应用将数据保存在Android 的<strong>应用专属内部存储</strong>中，无需存储权限。数据交换通过应用的导入、导出及分享功能处理。</div>
+  </section>
+
+  <section class="chapter" id="install">
+    <div class="chapter-head"><div class="ch-no">第3章</div><h2>安装与首次启动</h2></div>
+    <ol class="steps">
+      <li>在Google Play 商店搜索"Quantiventra"，点击<strong>安装</strong>。</li>
+      <li>点击应用图标启动，出现摄像头权限请求时点击<strong>允许</strong>。</li>
+      <li>如出现示例数据创建提示，选择<strong>创建</strong>或<strong>跳过</strong>。</li>
+      <li>应用数据文件夹在内部存储中自动创建。</li>
+      <li>主屏幕出现后，初始设置完成。</li>
+    </ol>
+    <div class="box box-warn"><strong>⚠ 拒绝摄像头权限时</strong>条码扫描将无法使用。重新授权路径：<strong>设置 → 应用 → Quantiventra → 权限 → 摄像头 → 开启</strong>。</div>
+    <h3>更换设备后的迁移与购买恢复</h3>
+    <ol class="steps">
+      <li>在旧设备上，通过<strong>设置 → 导出</strong>或<strong>设置 → 分享</strong>保存需要保留的数据。</li>
+      <li>在新设备上使用购买时相同的 Google 账户登录。</li>
+      <li>从 Google Play 安装并启动 Quantiventra。</li>
+      <li>点击<strong>设置 → 恢复购买记录</strong>，恢复已购买的套餐。</li>
+      <li>如有备份 CSV，请通过<strong>导入主数据 CSV</strong>导入需要恢复的数据。</li>
+    </ol>
+    <div class="box box-danger"><strong>🚨 卸载应用时</strong>卸载应用会删除内部存储中的所有数据。请养成通过<strong>导出</strong>或<strong>分享</strong>定期备份的习惯。</div>
+  </section>
+
+  <section class="chapter" id="storage">
+    <div class="chapter-head"><div class="ch-no">第4章</div><h2>数据存储</h2></div>
+    <p>应用数据保存在设备上的应用专属私有区域，请勿通过文件管理器直接编辑。请使用应用的分享与导出功能访问或备份数据。</p>
+    <div class="table-wrap"><table>
+      <tr><th>数据类别</th><th>内容</th><th>更新时机</th></tr>
+      <tr><td>主数据</td><td>商品、类别、位置等核心数据</td><td>登记、编辑或停用条目时</td></tr>
+      <tr><td>盘点与库存历史</td><td>盘点、入库、出库、调拨、CSV 导入等记录</td><td>保存或导入条目时</td></tr>
+      <tr><td>应用设置</td><td>语言、扫描、编码规则、位置设置等</td><td>更改设置时</td></tr>
+    </table></div>
+    <h3>在 Excel 中打开 CSV 的方法</h3>
+    <p>CSV 文件以 UTF-8 格式保存。若要在 Excel 中打开，建议从 Excel 的数据导入功能读取，而不是直接双击文件。</p>
+    <ol class="steps">
+      <li>打开 Excel，选择<strong>数据</strong>选项卡。</li>
+      <li>选择<strong>从文本/CSV</strong>或同等导入功能。</li>
+      <li>选择要打开的 CSV 文件。</li>
+      <li>编码选择 <strong>Unicode (UTF-8)</strong>，确认预览无乱码后载入。</li>
+    </ol>
+    <div class="box box-warn"><strong>⚠ 注意</strong>直接双击 CSV 文件打开时，可能因编码判断错误而出现乱码。出现乱码时，请使用上述导入方式。</div>
+    <h3>建议的备份流程</h3>
+    <ol class="steps">
+      <li>点击<strong>设置 → 导出（选择文件夹）</strong>。</li>
+      <li>在设备Documents文件夹中创建并选择备份文件夹，例如：<code>Quantiventra_backup_20250401</code>。</li>
+      <li>历史记录和主数据CSV 文件保存完成后即备份成功。</li>
+      <li>如需更安全，可通过Google Drive或 USB数据线将文件复制到电脑。</li>
+    </ol>
+  </section>
+
+  <section class="chapter" id="diff">
+    <div class="chapter-head"><div class="ch-no">第5章</div><h2>盘点与库存管理</h2></div>
+    <div class="table-wrap"><table>
+      <tr><th>项目</th><th>库存盘点</th><th>库存管理</th></tr>
+      <tr><td>用途</td><td>清点并记录实际数量</td><td>通过入库、出库、调拨追踪库存变动</td></tr>
+      <tr><td>操作流程</td><td>扫描 → 输入数量 → 保存 → 确认</td><td>入库/出库/调拨 → 保存 → 查看历史</td></tr>
+      <tr><td>常见使用场景</td><td>月度盘点、年末盘点、临时抽查</td><td>日常入库、出库、调拨管理</td></tr>
+      <tr><td>对库存的影响</td><td>确认后反映到库存（完整版）</td><td>每次操作后立即生效</td></tr>
+    </table></div>
+    <div class="box box-warn"><strong>⚠ 注意</strong>盘点与库存管理是独立模块。在盘点中输入数量<strong>不会</strong>改变库存，除非执行"反映到库存"操作（完整版功能）。请注意区分两个模块。</div>
+  </section>
+
+  <section class="chapter" id="start">
+    <div class="chapter-head"><div class="ch-no">第6章</div><h2>快速上手（新用户指南）</h2></div>
+    <h3>第一步：用示例数据练习</h3>
+    <ol class="steps">
+      <li>启动应用，出现示例数据创建提示时选择<strong>创建</strong>。</li>
+      <li>从主屏幕打开<strong>库存管理</strong>，查看示例库存水平。</li>
+      <li>打开<strong>库存盘点</strong>，试扫条码并输入数量。</li>
+      <li>尝试导出CSV 文件。</li>
+      <li>在正式投入使用前删除示例数据（在设置屏幕操作）。</li>
+    </ol>
+    <h3>第二步：登记商品主数据</h3>
+    <ol class="steps">
+      <li>从主屏幕打开<strong>主数据管理</strong>。</li>
+      <li>进入<strong>商品主数据</strong>，新建条目并输入商品编码和名称。</li>
+      <li>根据需要设置类别、价格和补货参考数量。</li>
+      <li>在<strong>位置主数据</strong>中登记仓库、门店等（建议标准版及以上）。</li>
+    </ol>
+    <div class="box box-hint"><strong>💡 提示</strong>建议先用示例数据熟悉操作，再输入实际商品数据。</div>
+  </section>
+
+  <section class="chapter" id="top-screen">
+    <div class="chapter-head"><div class="ch-no">第7章</div><h2>主屏幕说明</h2></div>
+    <div class="table-wrap"><table>
+      <tr><th>入口</th><th>说明</th></tr>
+      <tr><td>库存盘点</td><td>进入盘点界面，扫描商品并记录实际清点数量</td></tr>
+      <tr><td>库存管理</td><td>访问库存查询、入库、出库、调拨及库存历史</td></tr>
+      <tr><td>主数据管理</td><td>管理商品、类别及位置主数据</td></tr>
+      <tr><td>设置</td><td>语言、盘点设置、CSV、示例数据、套餐购买、法律文件等</td></tr>
+    </table></div>
+    <div class="box box-warn"><strong>⚠ 注意</strong>如有未确认的盘点数据，在库存管理中操作可能导致数据不一致。建议先完成盘点确认，再进行库存变更操作。</div>
+  </section>
+
+  <section class="chapter" id="settings">
+    <div class="chapter-head"><div class="ch-no">第8章</div><h2>设置屏幕说明</h2></div>    <h3>数据导入/导出</h3>
+    <div class="table-wrap"><table>
+      <tr><th>操作</th><th>说明</th><th>可用版本</th></tr>
+      <tr><td>导入主数据CSV</td><td>将外部CSV 文件作为主数据载入（覆盖现有数据）</td><td>所有版本</td></tr>
+      <tr><td>分享（邮件等）</td><td>将历史记录和主数据CSV 发送至其他应用</td><td>所有版本</td></tr>
+      <tr><td>导出（选择文件夹）</td><td>将历史记录和主数据CSV保存至指定文件夹</td><td>所有版本</td></tr>
+      <tr><td>清空全部历史记录</td><td>删除并重置所有扫描历史记录</td><td>所有版本（不可撤销）</td></tr>
+      <tr><td>重置主数据累计量</td><td>将全部已登记累计量重置为0</td><td>完整版解锁（不可撤销）</td></tr>
+    </table></div>
+    <h3>共通设置</h3>
+    <div class="table-wrap"><table>
+      <thead><tr><th>设置</th><th>说明</th><th>可用版本</th></tr></thead>
+      <tbody>
+        <tr><td>显示语言</td><td>选择应用中显示的语言</td><td>所有版本（部分语言需要解锁）</td></tr>
+        <tr><td>屏幕旋转锁定</td><td>即使倾斜设备，也保持屏幕方向固定</td><td>标准版解锁以上</td></tr>
+        <tr><td>创建示例数据</td><td>创建用于练习的示例数据</td><td>所有版本</td></tr>
+        <tr><td>删除示例数据</td><td>批量删除示例数据</td><td>所有版本</td></tr>
+        <tr><td>恢复购买记录</td><td>通过 Google Play 恢复已购买的套餐</td><td>所有版本</td></tr>
+        <tr><td>法律文件</td><td>查看使用条款、隐私政策等内容</td><td>所有版本</td></tr>
+      </tbody>
+    </table></div>
+    <h3>盘点模式设置</h3>
+    <div class="table-wrap"><table>
+      <tr><th>模式</th><th>说明</th><th>可用位置</th></tr>
+      <tr><td>详细</td><td>使用位置主数据中登记的所有位置</td><td>所有已登记位置</td></tr>
+      <tr><td>简单A</td><td>仅使用仓库进行盘点</td><td>仅仓库</td></tr>
+      <tr><td>简单B</td><td>使用仓库和门店进行盘点</td><td>仓库 + 门店</td></tr>
+      <tr><td>简单C</td><td>仅使用门店进行盘点</td><td>仅门店</td></tr>
+    </table></div>
+    <div class="box box-warn"><strong>⚠ 注意</strong>即使完整版解锁已生效，若模式仍设为简单A/B/C，只会显示简单位置选项。请切换至<strong>详细</strong>模式以使用详细位置。</div>
+    <h3>摄像头读取设置（完整版解锁）</h3>
+    <p>可设置商品和位置所使用的条码类型。关闭不使用的类型，有助于减少误读。</p>
+    <div class="table-wrap"><table>
+      <thead><tr><th>类型</th><th>商品默认</th><th>位置默认</th><th>常见用途</th></tr></thead>
+      <tbody>
+        <tr><td>CODE39</td><td><span class="check">✓ 开启</span></td><td><span class="check">✓ 开启</span></td><td>工业零件、内部编码</td></tr>
+        <tr><td>CODE128</td><td><span class="check">✓ 开启</span></td><td><span class="check">✓ 开启</span></td><td>物流编码</td></tr>
+        <tr><td>EAN13</td><td><span class="check">✓ 开启</span></td><td><span class="check">✓ 开启</span></td><td>零售商品条码</td></tr>
+        <tr><td>QRCODE</td><td><span class="check">✓ 开启</span></td><td><span class="check">✓ 开启</span></td><td>商品或位置的 QR 码</td></tr>
+      </tbody>
+    </table></div>
+    <h3>编码规则 / 位置规则（完整版解锁）</h3>
+    <p>可设置商品编码或内部编码允许的字符类型、最小长度、最大长度，以及位置编码的最大长度等规则。</p>
+    <h3>恢复购买记录</h3>
+    <p>用于恢复通过 Google Play 购买过的套餐。若购买内容没有反映，请确认当前登录的是购买时使用的 Google 账户，并检查网络连接。</p>
+    <div class="box box-danger"><strong>🚨 清空历史/重置累计量无法撤销</strong>"清空全部历史记录"和"重置主数据累计量"不可逆。执行前请务必通过<strong>导出</strong>进行备份。</div>
+  </section>
+
+  <section class="chapter" id="language">
+    <div class="chapter-head"><div class="ch-no">第9章</div><h2>语言设置</h2></div>
+    <p>可在<strong>设置 → 语言</strong>中选择应用显示语言。首次启动时，应用会自动检测设备语言并以该语言启动（如支持）。</p>
+    <h3>支持的语言（12种）</h3>
+    <div class="table-wrap"><table>
+      <thead><tr><th>代码</th><th>语言</th><th>免费版</th><th class="pro-col">全语言解锁</th></tr></thead>
+      <tbody>
+        <tr><td><code>ja</code></td><td>日语</td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
+        <tr><td><code>en</code></td><td>英语</td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
+        <tr><td><code>zh</code></td><td>简体中文</td><td>仅设备主语言时</td><td><span class="check">✓</span></td></tr>
+        <tr><td><code>tw</code></td><td>繁体中文</td><td>仅设备主语言时</td><td><span class="check">✓</span></td></tr>
+        <tr><td><code>ko</code></td><td>韩语</td><td>仅设备主语言时</td><td><span class="check">✓</span></td></tr>
+        <tr><td><code>hi</code></td><td>印地语</td><td>仅设备主语言时</td><td><span class="check">✓</span></td></tr>
+        <tr><td><code>vi</code></td><td>越南语</td><td>仅设备主语言时</td><td><span class="check">✓</span></td></tr>
+        <tr><td><code>it</code></td><td>意大利语</td><td>仅设备主语言时</td><td><span class="check">✓</span></td></tr>
+        <tr><td><code>pt-BR</code></td><td>葡萄牙语（巴西）</td><td>仅设备主语言时</td><td><span class="check">✓</span></td></tr>
+        <tr><td><code>es-419</code></td><td>西班牙语（拉丁美洲）</td><td>仅设备主语言时</td><td><span class="check">✓</span></td></tr>
+        <tr><td><code>id</code></td><td>印度尼西亚语</td><td>仅设备主语言时</td><td><span class="check">✓</span></td></tr>
+        <tr><td><code>th</code></td><td>泰语</td><td>仅设备主语言时</td><td><span class="check">✓</span></td></tr>
+      </tbody>
+    </table></div>
+    <div class="box box-hint"><strong>💡 关于自动语言检测</strong>首次启动时，应用可能会根据设备主语言选择支持的显示语言。之后在应用内手动选择的语言会优先生效。</div>
+  </section>
+
+  <section class="chapter" id="billing">
+    <div class="chapter-head"><div class="ch-no">第10章</div><h2>套餐概览</h2></div>
+    <div class="box box-danger"><strong>🚨 重要</strong>价格、税金、购买条款及退款条件以Google Play 上显示的内容为准——本手册不作确定性说明。购买前请务必查看Google Play 中的商品列表。</div>
+    <h3>功能对比</h3>
+    <div class="table-wrap"><table>
+      <thead><tr><th>功能/限制</th><th>免费版</th><th>盘点标准版</th><th>盘点完整版</th><th>库存标准版</th><th>库存完整版</th></tr></thead>
+      <tbody>
+        <tr><td>主数据记录数</td><td>最多30条</td><td>最多300条</td><td><span class="check">不限</span></td><td>最多300条</td><td><span class="check">不限</span></td></tr>
+        <tr><td>历史记录数</td><td>最多30条</td><td>最多1,000条</td><td><span class="check">不限</span></td><td>最多1,000条</td><td><span class="check">不限</span></td></tr>
+        <tr><td>导出记录数</td><td>最多30条</td><td>最多300条</td><td><span class="check">不限</span></td><td>最多300条</td><td><span class="check">不限</span></td></tr>
+        <tr><td>屏幕旋转锁定</td><td><span class="cross">✗</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
+        <tr><td>详细编码/位置规则</td><td><span class="cross">✗</span></td><td><span class="cross">✗</span></td><td><span class="check">✓</span></td><td><span class="cross">✗</span></td><td><span class="check">✓</span></td></tr>
+        <tr><td>扩展 CSV 导出</td><td><span class="cross">✗</span></td><td><span class="cross">✗</span></td><td><span class="check">✓</span></td><td><span class="cross">✗</span></td><td><span class="check">✓</span></td></tr>
+        <tr><td>库存调拨与盘点应用</td><td><span class="cross">✗</span></td><td><span class="cross">✗</span></td><td><span class="cross">✗</span></td><td><span class="cross">✗</span></td><td><span class="check">✓</span></td></tr>
+        <tr><td>全部12种语言</td><td><span class="cross">✗</span></td><td colspan="4">需单独购买全语言解锁</td></tr>
+      </tbody>
+    </table></div>
+    <h3>套装套餐与全语言解锁</h3>
+    <div class="table-wrap"><table>
+      <thead><tr><th>套餐</th><th>内容</th></tr></thead>
+      <tbody>
+        <tr><td>标准套装</td><td>盘点标准版 + 库存标准版</td></tr>
+        <tr><td>完整版套装</td><td>盘点完整版 + 库存完整版</td></tr>
+        <tr><td>全语言解锁</td><td>启用日语和英语以外的其他支持语言</td></tr>
+      </tbody>
+    </table></div>
+    <h3>购买套餐的方法</h3>
+    <ol class="steps">
+      <li>在应用中打开<strong>设置 → 套餐</strong>，或点击购买按钮。</li>
+      <li>Google Play 的购买画面会打开。</li>
+      <li>完成付款后，套餐会在应用中生效。</li>
+    </ol>
+    <h3>更换设备后的购买恢复</h3>
+    <ol class="steps">
+      <li>在新设备上使用购买时相同的 Google 账户登录。</li>
+      <li>安装并启动应用。</li>
+      <li>点击<strong>设置 → 恢复购买记录</strong>。</li>
+      <li>购买状态确认后，对应套餐会重新启用。</li>
+    </ol>
+  </section>
+
+  <section class="chapter" id="sample">
+    <div class="chapter-head"><div class="ch-no">第11章</div><h2>示例数据</h2></div>
+    <p>示例数据是在正式使用前用于熟悉 Quantiventra 操作的练习数据，包含约 10 个示例商品、示例类别，以及"仓库"和"门店"基本位置。</p>    <h3>示例数据的内容</h3>
+    <ul>
+      <li>约 10 个示例商品</li>
+      <li>示例类别</li>
+      <li>基本位置："仓库"和"门店"</li>
+      <li>用于练习的库存和盘点历史</li>
+    </ul>
+    <h3>创建示例数据</h3>
+    <ol class="steps">
+      <li>首次启动时若出现提示，选择<strong>创建</strong>。</li>
+      <li>也可在<strong>设置 → 创建示例数据</strong>中随时创建。</li>
+    </ol>
+    <h3>删除示例数据</h3>
+    <ol class="steps">
+      <li>进入<strong>设置 → 删除示例数据</strong>。</li>
+      <li>确认将要删除的内容（示例商品、库存、类别及盘点历史）。</li>
+      <li>确认并执行删除。</li>
+    </ol>
+    <div class="box box-danger"><strong>🚨 重要</strong>正式投入使用前，请务必删除示例数据。删除前请确认其中没有混入实际数据。</div>
+  </section>
+
+  <section class="chapter" id="trouble">
+    <div class="chapter-head"><div class="ch-no">第12章</div><h2>故障排查</h2></div>
+    <div class="trouble"><div class="trouble-q">条码无法扫描 / 摄像头无响应</div>
+    <div class="trouble-a"><ul>
+      <li>确认摄像头开关（右上角）已开启。</li>
+      <li>条码必须<strong>完全位于</strong>引导框内——超出框外不会被识别。</li>
+      <li>在设置（完整版）中确认扫描类型（CODE39、EAN13等）与所扫码的类型一致。</li>
+      <li>若条码破损或污损，请改用手动输入。</li>
+    </ul></div></div>
+    <div class="trouble"><div class="trouble-q">导入主数据CSV后商品名称未显示</div>
+    <div class="trouble-a"><ul>
+      <li>确认CSV为UTF-8编码（Shift-JIS会导致乱码）。</li>
+      <li>验证表头行格式是否符合要求：<code>barcode,name,theoretical_stock,actual_stock_total</code>。</li>
+      <li>商品名称包含逗号时，请用英文引号括起：如 <code>"M6螺栓,不锈钢"</code>。</li>
+    </ul></div></div>
+    <div class="trouble"><div class="trouble-q">无法保存 / 出现"保存失败"提示</div>
+    <div class="trouble-a"><ul>
+      <li>检查设备是否有足够的可用存储空间。</li>
+      <li>条码和商品名称均为空时无法保存。</li>
+      <li>尝试关闭并重启应用。</li>
+    </ul></div></div>
+    <div class="trouble"><div class="trouble-q">已购套餐功能无法使用</div>
+    <div class="trouble-a"><ul>
+      <li>点击<strong>设置 → 恢复购买记录</strong>。</li>
+      <li>确认使用的是购买时所用的Google 账户。</li>
+      <li>确保网络连接正常后重试（验证购买需要网络）。</li>
+    </ul></div></div>
+    <div class="trouble"><div class="trouble-q">更换设备后数据消失</div>
+    <div class="trouble-a"><ul>
+      <li>数据保存于应用内部存储，卸载或更换设备时会丢失。</li>
+      <li>强烈建议通过<strong>导出</strong>或<strong>分享</strong>定期备份。</li>
+      <li>若有备份，可通过<strong>导入主数据 CSV</strong>恢复。</li>
+    </ul></div></div>
+    <div class="trouble"><div class="trouble-q">分享或导出后没有生成文件</div>
+    <div class="trouble-a"><ul>
+      <li>如果没有历史记录，导出的文件可能为空。请先保存至少一条记录。</li>
+      <li>执行导出时，请在系统对话框中选择目标文件夹并确认。</li>
+      <li>使用分享时，请确认目标应用（如邮件或云盘应用）已安装并可用。</li>
+    </ul></div></div>
+    <div class="trouble"><div class="trouble-q">库存数量对不上</div>
+    <div class="trouble-a"><ul>
+      <li>先在库存历史中检查入库、出库、调拨和盘点调整记录。</li>
+      <li>如果执行过 CSV 替换当前库存，请确认 CSV 中是否包含所有需要保留的商品和位置。</li>
+      <li>如果执行过盘点结果反映，请检查相关的盘点调整记录。</li>
+      <li>必要时与备份 CSV 进行对照。</li>
+    </ul></div></div>
+    <div class="trouble"><div class="trouble-q">位置不显示 / 找不到位置</div>
+    <div class="trouble-a"><ul>
+      <li>确认盘点模式是否仍为简单 A/B/C。若要使用详细位置，请切换至<strong>详细</strong>模式。</li>
+      <li>确认位置主数据中的该位置没有被停用。</li>
+    </ul></div></div>
+    <div class="trouble"><div class="trouble-q">屏幕不断旋转，难以操作</div>
+    <div class="trouble-a"><ul>
+      <li>若已解锁标准版以上，请在设置中开启<strong>屏幕旋转锁定</strong>。</li>
+      <li>免费版也可使用设备系统自带的屏幕旋转锁定。</li>
+    </ul></div></div>
+    <div class="trouble"><div class="trouble-q">语言没有变化</div>
+    <div class="trouble-a"><ul>
+      <li>在<strong>设置 → 语言</strong>中手动选择显示语言。</li>
+      <li>如果仍未变化，请重新打开应用确认显示。</li>
+      <li>不支持的设备语言会回退到默认语言。</li>
+    </ul></div></div>
+    <h3>症状快速参考</h3>
+    <div class="table-wrap"><table>
+      <thead><tr><th>症状</th><th>可能原因</th><th>建议操作</th></tr></thead>
+      <tbody>
+        <tr><td>库存数量不一致</td><td>输入错误、CSV 替换、盘点结果反映</td><td>检查库存历史和备份 CSV</td></tr>
+        <tr><td>商品找不到</td><td>未登记、搜索关键字错误、已停用</td><td>检查商品主数据</td></tr>
+        <tr><td>位置不显示</td><td>简单模式或位置被停用</td><td>检查模式设置和位置主数据</td></tr>
+        <tr><td>CSV 导入失败</td><td>列缺失、数量不是数字、编码不一致</td><td>检查列映射和 CSV 内容</td></tr>
+        <tr><td>条码无法读取</td><td>光线不足、条码污损、类型不支持</td><td>调整环境或改用手动输入</td></tr>
+        <tr><td>购买未反映</td><td>账户不同或网络问题</td><td>恢复购买记录并检查连接</td></tr>
+      </tbody>
+    </table></div>
+  </section>
+
+  <section class="chapter" id="glossary">
+    <div class="chapter-head"><div class="ch-no">第13章</div><h2>术语表</h2></div>
+    <div class="table-wrap"><table>
+      <thead><tr><th>术语</th><th>定义</th></tr></thead>
+      <tbody>
+        <tr><td>库存盘点</td><td>在现场实际清点商品数量并记录的操作</td></tr>
+        <tr><td>实际盘点数量</td><td>在现场实际清点所得的数量</td></tr>
+        <tr><td>理论库存</td><td>系统计算得出的应有库存数量</td></tr>
+        <tr><td>差异/盘点差</td><td>实际盘点数量与理论库存之间的差额</td></tr>
+        <tr><td>商品</td><td>持有库存的单个品项</td></tr>
+        <tr><td>类别</td><td>用于对商品进行分类的组别</td></tr>
+        <tr><td>位置</td><td>库存的存放地点（如仓库、门店、货架）</td></tr>
+        <tr><td>计入补货参考判断</td><td>允许该位置的库存合计参与补货参考判断的设置</td></tr>
+        <tr><td>库存／在库数量</td><td>当前持有的数量</td></tr>
+        <tr><td>入库</td><td>使库存增加的操作</td></tr>
+        <tr><td>出库</td><td>使库存减少的操作</td></tr>
+        <tr><td>库存调拨</td><td>将库存从一个位置移至另一个位置（完整版）</td></tr>
+        <tr><td>库存历史</td><td>入库、出库、调拨及盘点调整等操作的日志</td></tr>
+        <tr><td>补货参考数量</td><td>用于判断库存是否即将不足的参考数量下限</td></tr>
+        <tr><td>商品编码</td><td>用于标识商品的内部编号</td></tr>
+        <tr><td>已登记累计量</td><td>迄今为止已保存的累计合计数量</td></tr>
+        <tr><td>CSV</td><td>逗号分隔的文本文件，可在电子表格应用中打开</td></tr>
+        <tr><td>备份</td><td>为恢复或参考而保存的数据</td></tr>
+        <tr><td>替换当前库存</td><td>将CSV中的数量作为新的当前库存载入的导入模式</td></tr>
+        <tr><td>以入库方式添加</td><td>将CSV中的数量作为入库记录添加至当前库存的导入模式</td></tr>
+        <tr><td>确认实际盘点</td><td>对盘点结果进行最终确认的操作（完整版）</td></tr>
+        <tr><td>主数据</td><td>管理商品、类别、位置等核心记录的数据库</td></tr>
+      </tbody>
+    </table></div>
+  </section>
+
+  <section class="chapter" id="legal">
+    <div class="chapter-head"><div class="ch-no">第14章</div><h2>条款与免责声明</h2></div>
+    <div class="legal-block">
+      <h4>■ 使用条款</h4>
+      <p>下载或使用本应用即表示您同意以下条款。本应用允许个人和企业用于库存管理及盘点目的。严禁对本应用进行逆向工程、反编译、修改或再发行。</p>
+      <p><strong>用户数据：</strong>本应用生成的作业数据（主数据 CSV、历史记录 CSV 及设置文件）通常仅保存在用户设备本地。套餐验证等 Google Play 相关通信除外。</p>
+      <p><strong>套餐购买：</strong>所有套餐购买均通过Google Play结算系统处理，退款遵循Google Play退款政策。</p>
+      <h4>■ 免责声明</h4>
+      <p>本应用"按现状"提供。因使用或无法使用本应用而产生的任何损失（包括数据丢失、业务中断等直接或间接损害），开发者概不负责。</p>
+      <p>用户自行负责核实本应用生成的CSV数据的准确性和完整性。因扫描错误或输入失误导致的数据不一致，开发者不承担责任。</p>
+      <h4>■ 隐私政策</h4>
+      <p>本应用不收集姓名、地址、电话号码、电子邮件地址等个人信息。摄像头仅用于扫描条码和 QR 码，不录制或存储任何视频。</p>
+      <h4>■ 版权</h4>
+      <p>版权所有 © Quantiventra，保留所有权利。应用及本手册中的所有内容（文字、设计、商标等）均为开发者财产。</p>
+      <h4>■ 条款变更</h4>
+      <p>本条款可能在不另行通知的情况下发生变更。更新后的条款在Google Play 商店或应用内发布后立即生效。</p>
+    </div>
+  </section>
+
+  <div class="summary-box" id="summary">
+    <h3>📌 本章要点</h3>
+    <ul>
+      <li>Quantiventra = Quantity + Inventory。连续3帧识别到相同码后自动确认，防止误读。</li>
+      <li>需要Android 8.0+及自动对焦摄像头；无需存储权限；日常操作通常可离线使用。</li>
+      <li>数据存储于应用内部存储——卸载会删除全部数据，请定期导出备份。</li>
+      <li>盘点与库存管理是独立模块——输入盘点数量不会直接改变库存，需完成相应的确认或反映操作后才会更新。</li>
+      <li>正式投入使用前请先用示例数据练习，使用后务必删除。</li>
+      <li>套餐价格等详情以Google Play为准——本手册不作确定性说明。</li>
+      <li>排查问题时，请依次检查库存历史、主数据及设置。</li>
+      <li>执行大规模操作前（CSV 替换、反映盘点、删除、重置）请务必先备份。</li>
+    </ul>
+  </div>
+  <div class="confirm-box" id="confirm">
+    <h3>🔍 正式使用前的确认事项</h3>
+    <ul>
+      <li>购买前请在 Google Play 上确认当前价格、税费、退款条件和可购买的套餐内容。</li>
+      <li>实际运营前，请先用示例数据练习扫描、保存、导出和备份流程。</li>
+      <li>更换设备或卸载应用前，请先导出或分享需要保留的数据。</li>
+      <li>执行 CSV 替换、盘点结果反映、删除或重置等高影响操作前，请务必先备份。</li>
+      <li>可用功能会依当前套餐和应用内显示而变化，请以应用实际画面为准。</li>
+    </ul>
+  </div>
+</div>
+<footer>
+  <strong>Quantiventra</strong> — 条码盘点与库存管理应用<br>
+  版权所有 © Quantiventra，保留所有权利。<br>
+  <p style="margin-top:4px;"><a href="privacy_zh.html">隐私政策</a></p>
+</footer>
+</body>
+</html>

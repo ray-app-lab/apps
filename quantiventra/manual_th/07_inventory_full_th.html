@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="th">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quantiventra – การจัดการสต็อก – เวอร์ชันครบวงจร</title>
+<style>*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Sarabun','Noto Sans Thai',Thonburi,sans-serif;font-size:15px;line-height:1.9;color:#1a2535;background:#f4f7fb;}
+a{color:#1a5fa8;text-decoration:none;}a:hover{text-decoration:underline;}
+.site-nav{background:#1a3a5c;color:#fff;padding:0;}.site-nav .nav-inner{max-width:960px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:stretch;}
+.site-nav a{color:#cde;padding:10px 13px;font-size:12px;display:block;border-right:1px solid #2a4a6c;white-space:nowrap;}
+.site-nav a:hover{background:#2a5090;text-decoration:none;}.site-nav a.active{background:#2a6cbe;color:#fff;font-weight:bold;}
+.page-header{background:linear-gradient(135deg,#1a3a5c 0%,#2a6cbe 100%);color:#fff;padding:40px 20px 30px;}
+.page-header .inner{max-width:960px;margin:0 auto;}.page-header .app-name{font-size:13px;opacity:.8;}
+.page-header h1{font-size:22px;font-weight:700;margin-top:6px;line-height:1.6;}.page-header .subtitle{font-size:14px;opacity:.85;margin-top:8px;}
+.scope-box{background:rgba(255,255,255,.15);border-left:4px solid #7ecfff;padding:12px 16px;margin-top:16px;border-radius:4px;font-size:13px;}
+.container{max-width:960px;margin:0 auto;padding:30px 16px;}
+.toc{background:#fff;border:1px solid #c8d8ec;border-radius:8px;padding:24px 28px;margin-bottom:32px;}
+.toc h2{font-size:16px;font-weight:700;color:#1a3a5c;border-bottom:2px solid #2a6cbe;padding-bottom:8px;margin-bottom:14px;}
+.toc ol{margin-left:18px;}.toc li{margin:5px 0;font-size:14px;}
+.chapter{background:#fff;border-radius:8px;box-shadow:0 1px 4px rgba(0,0,0,.08);padding:28px 28px 24px;margin-bottom:28px;}
+.chapter-head{border-left:5px solid #2a6cbe;padding-left:14px;margin-bottom:20px;}
+.chapter-head .ch-no{font-size:12px;color:#2a6cbe;font-weight:700;}.chapter-head h2{font-size:20px;font-weight:700;color:#1a2535;margin-top:2px;}
+h3{font-size:16px;font-weight:700;color:#1a3a5c;border-bottom:1px solid #dde8f5;padding-bottom:5px;margin:22px 0 12px;}
+h4{font-size:14px;font-weight:700;color:#2a4a6c;margin:16px 0 8px;}
+p{margin-bottom:12px;}ul,ol{margin-left:20px;margin-bottom:12px;}li{margin-bottom:5px;}
+.steps{counter-reset:step;list-style:none;margin-left:0;}
+.steps li{counter-increment:step;padding:9px 12px 9px 46px;position:relative;background:#f8fbff;border:1px solid #dde8f5;border-radius:6px;margin-bottom:6px;}
+.steps li::before{content:counter(step);position:absolute;left:12px;top:50%;transform:translateY(-50%);width:24px;height:24px;background:#2a6cbe;color:#fff;border-radius:50%;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;}
+.table-wrap{overflow-x:auto;margin-bottom:16px;}
+table{width:100%;border-collapse:collapse;font-size:13px;min-width:380px;}
+th{background:#1a3a5c;color:#fff;padding:9px 12px;text-align:left;white-space:nowrap;}
+td{padding:8px 12px;border-bottom:1px solid #dde8f5;vertical-align:top;}tr:nth-child(even) td{background:#f4f7fb;}
+code{font-family:'Courier New',monospace;background:rgba(0,80,160,.08);color:#004080;padding:2px 6px;border-radius:3px;font-size:12px;}
+.box{border-radius:6px;padding:13px 16px;margin:14px 0;font-size:13px;}
+.box-warn{background:#fffbe6;border-left:4px solid #f5a623;color:#7a5700;}
+.box-danger{background:#fff0f0;border-left:4px solid #d43f3f;color:#7a0000;}
+.box-hint{background:#e8f4ff;border-left:4px solid #2a6cbe;color:#0a3060;}
+.box-check{background:#f4eeff;border-left:4px solid #8c4fc8;color:#3a0070;}
+.box strong{display:block;margin-bottom:4px;}
+figure{max-width:280px;width:100%;margin:18px auto;text-align:center;}
+figure img{display:block;width:100%;max-width:280px;height:auto;margin:0 auto;border:1px solid #c8d8ec;border-radius:6px;box-shadow:0 2px 8px rgba(0,0,0,.1);}
+figcaption{font-size:12px;color:#5a7a99;margin-top:6px;}
+.img-pending{display:flex;align-items:center;justify-content:center;max-width:280px;width:100%;box-sizing:border-box;background:#e8eef5;border:2px dashed #99b8d8;border-radius:6px;height:160px;color:#5a7a99;font-size:13px;margin:18px auto;}
+.diff-add{background:#e8fff0;border-left:4px solid #2a9c5c;border-radius:6px;padding:12px 16px;margin:14px 0;font-size:13px;}
+.diff-add strong{display:block;color:#1a6c3c;margin-bottom:4px;}
+.flow-box{background:#f4f7fb;border:1px solid #c8d8ec;border-radius:8px;padding:20px;margin:16px 0;}
+.flow-box h4{color:#1a3a5c;margin-top:0;}
+.flow-arrow{text-align:center;font-size:20px;color:#2a6cbe;margin:4px 0;}
+.flow-step{background:#fff;border:1px solid #c8d8ec;border-radius:6px;padding:10px 16px;margin:4px 0;font-size:13px;}
+.flow-step strong{color:#1a3a5c;}
+.summary-box{background:linear-gradient(135deg,#e8f4ff,#f0f8ff);border:1px solid #99c8ec;border-radius:8px;padding:20px 24px;margin-top:32px;}
+.summary-box h3{border:none;color:#1a3a5c;margin-top:0;}
+.confirm-box{background:#fdf4ff;border:1px solid #c8a0e0;border-radius:8px;padding:20px 24px;margin-top:16px;}
+.confirm-box h3{border:none;color:#5a0090;margin-top:0;}
+.check{color:#2e7d32;font-weight:700;}.cross{color:#c62828;}
+th.pro-col{background:#5a2a8c;}
+.feature-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px;margin:16px 0;}
+.feature-card{background:#f4f7fb;border:1px solid #c8d8ec;border-radius:8px;padding:16px;}
+.feature-card h4{color:#1a3a5c;margin-top:0;margin-bottom:6px;font-size:14px;}
+.feature-card p{font-size:13px;margin:0;color:#3a5a7a;}
+.feature-card.pro-card{background:#f4eeff;border-color:#c8a0e0;}
+.feature-card.pro-card h4{color:#5a2a8c;}
+.trouble{border:1px solid #c8d8ec;border-radius:8px;margin:14px 0;overflow:hidden;}
+.trouble-q{background:#eef6fd;padding:13px 18px;font-weight:700;font-size:14px;color:#1a3a5c;display:flex;align-items:flex-start;gap:10px;}
+.trouble-q::before{content:'Q';background:#2a6cbe;color:#fff;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900;flex-shrink:0;margin-top:1px;}
+.trouble-a{padding:13px 18px 14px 50px;font-size:13.5px;border-top:1px solid #c8d8ec;line-height:1.9;}
+.trouble-a ul{margin-left:16px;}
+.legal-block{background:#f5f5f5;border:1px solid #ddd;border-radius:8px;padding:20px 24px;font-size:12.5px;color:#444;line-height:1.9;margin:14px 0;}
+.legal-block h4{font-size:13px;color:#333;margin:18px 0 6px;border-bottom:1px solid #ddd;padding-bottom:4px;}
+.legal-block h4:first-child{margin-top:0;}
+footer{text-align:center;font-size:12px;color:#8a9aaa;padding:30px 16px;border-top:1px solid #dde8f5;margin-top:20px;}
+@media(max-width:640px){.page-header h1{font-size:18px;}.chapter{padding:20px 16px;}.site-nav a{padding:8px 9px;font-size:11px;}}
+@media print{body{background:#fff;font-size:12px;}.site-nav{display:none;}.chapter{box-shadow:none;border:1px solid #ccc;page-break-inside:avoid;}.page-header{background:#1a3a5c !important;-webkit-print-color-adjust:exact;print-color-adjust:exact;}}
+</style></head>
+<body>
+<nav class="site-nav"><div class="nav-inner">
+  <a href="01_top_settings_common_th.html">① หน้าหลัก / การตั้งค่า</a>
+  <a href="02_stocktake_free_th.html">② ตรวจนับ ฟรี</a>
+  <a href="03_stocktake_simple_th.html">③ ตรวจนับ มาตรฐาน</a>
+  <a href="04_stocktake_full_th.html">④ ตรวจนับ ครบวงจร</a>
+  <a href="05_inventory_free_th.html">⑤ สต็อก ฟรี</a>
+  <a href="06_inventory_simple_th.html">⑥ สต็อก มาตรฐาน</a>
+  <a href="07_inventory_full_th.html" class="active">⑦ สต็อก ครบวงจร</a>
+</div></nav>
+<header class="page-header"><div class="inner">
+  <div class="app-name">คู่มือ Quantiventra</div>
+  <h1>⑦ การจัดการสต็อก — เวอร์ชันครบวงจร (ปลดล็อกครบวงจร)</h1>
+  <div class="subtitle">ฟีเจอร์เวอร์ชันครบวงจร · การจัดการทะเบียน · โอนย้ายสต็อก · นำตรวจนับไปใช้ · สำรอง CSV · ขั้นตอนการทำงานจริง</div>
+  <div class="scope-box"><strong>หัวข้อที่ครอบคลุม:</strong> สิ่งใหม่ปลดล็อกครบวงจร / ความแตกต่างจากมาตรฐาน / ทะเบียนสินค้า / ทะเบียนหมวดหมู่ / ทะเบียนตำแหน่ง / โอนย้ายสต็อก / ประวัติ / นำตรวจนับไปใช้กับสต็อก / สำรอง·กู้คืน CSV / สำรองประวัติ / เกณฑ์เติมสต็อก·ราคา / ตัวอย่างขั้นตอน / หมายเหตุสำคัญ</div>
+</div></header>
+<div class="container">
+  <nav class="toc"><h2>สารบัญ</h2><ol>
+    <li><a href="#overview">ภาพรวมเวอร์ชันครบวงจร (ปลดล็อกครบวงจร)</a></li>
+    <li><a href="#diff">ความแตกต่างจากเวอร์ชันมาตรฐาน</a></li>
+    <li><a href="#master-product">การรวม ทะเบียนสินค้า</a></li>
+    <li><a href="#master-item">ทะเบียนหมวดหมู่</a></li>
+    <li><a href="#master-location">ทะเบียนตำแหน่ง</a></li>
+    <li><a href="#stock-move">โอนย้ายสต็อก</a></li>
+    <li><a href="#stock-history">ประวัติสต็อก</a></li>
+    <li><a href="#stocktake-reflect">การนำผลการตรวจนับไปปรับสต็อก</a></li>
+    <li><a href="#csv-backup">สำรองและกู้คืน CSV</a></li>
+    <li><a href="#csv-history-backup">สำรองประวัติ</a></li>
+    <li><a href="#reorder-price">เกณฑ์เติมสต็อกและราคา</a></li>
+    <li><a href="#usecase">ตัวอย่างขั้นตอนการทำงาน — เวอร์ชันครบวงจร</a></li>
+    <li><a href="#notes">หมายเหตุสำคัญ</a></li>
+    <li><a href="#summary">สรุปประเด็นสำคัญของบท</a></li>
+    <li><a href="#confirm">หมายเหตุก่อนใช้งาน</a></li>
+  </ol></nav>
+
+  <section class="chapter" id="overview">
+    <div class="chapter-head"><div class="ch-no">บทที่ 1</div><h2>ภาพรวมเวอร์ชันครบวงจร (ปลดล็อกครบวงจร)</h2></div>
+    <p>การปลดล็อกครบวงจรสำหรับสต็อกจะลบข้อจำกัดรายการทะเบียน รายการประวัติ และบรรทัดส่งออกทั้งหมด และเปิดใช้งานฟีเจอร์ขั้นสูงทั้งหมดที่ไม่มีในเวอร์ชันมาตรฐาน สิ่งที่เพิ่มมาหลักๆ ได้แก่: การจัดการหลายตำแหน่ง (คลังสินค้า ร้านค้า ฯลฯ) การโอนย้ายสต็อกระหว่างตำแหน่ง การนำผลการตรวจนับไปใช้กับสต็อกโดยตรง และการสำรอง/กู้คืน CSV ครบถ้วน</p>
+    <div class="diff-add">
+      <strong>ฟีเจอร์ที่ปลดล็อกครบวงจรเปิดใช้งาน</strong>
+      <ul>
+        <li>รายการทะเบียน รายการประวัติ และบรรทัดส่งออกไม่จำกัด</li>
+        <li>ฟิลด์เกณฑ์เติมสต็อกและราคาในทะเบียนสินค้า</li>
+        <li>ทะเบียนหมวดหมู่ (การจัดการการจัดหมวดหมู่สินค้า)</li>
+        <li>การลงทะเบียนและจัดการทะเบียนตำแหน่ง</li>
+        <li>โอนย้ายสต็อก (ย้ายจำนวนระหว่างตำแหน่ง)</li>
+        <li>การนำผลการตรวจนับไปปรับสต็อก</li>
+        <li>สำรองและกู้คืน CSV (แผ่นสต็อก + ชุด CSV สำรองครบถ้วน)</li>
+        <li>สำรองประวัติ</li>
+        <li>การแก้ไขยอดรวมสะสมที่ลงทะเบียนโดยตรง</li>
+        <li>กฎโค้ด กฎตำแหน่ง และการตั้งค่ากล้อง (การตั้งค่าร่วมเวอร์ชันครบวงจร)</li>
+        <li>ตัวเลือก CSV แบบขยาย (การเลือกคอลัมน์และโหมดนำเข้า)</li>
+      </ul>
+    </div>
+    <div class="box box-hint"><strong>หมายเหตุ: "ปลดล็อกครบวงจร" และ "เวอร์ชันครบวงจร" มีความหมายเดียวกัน</strong>ในเอกสารนี้ "ปลดล็อกครบวงจร" และ "เวอร์ชันครบวงจร" ใช้แทนกันได้ สำหรับรายละเอียดการซื้อ ดูส่วน "ภาพรวมแผน" ใน <a href="01_top_settings_common_th.html">① หน้าหลักและการตั้งค่า</a></div>
+  </section>
+
+  <section class="chapter" id="diff">
+    <div class="chapter-head"><div class="ch-no">บทที่ 2</div><h2>ความแตกต่างจากเวอร์ชันมาตรฐาน</h2></div>
+    <div class="table-wrap"><table>
+      <thead><tr><th>ฟีเจอร์</th><th>ฟรี</th><th>มาตรฐาน</th><th>ครบวงจร</th></tr></thead>
+      <tbody>
+        <tr><td>ตรวจสอบสต็อก</td><td>✓</td><td>✓</td><td>✓</td></tr>
+        <tr><td>รับเข้า / จ่ายออก</td><td>✗</td><td>✓</td><td>✓</td></tr>
+        <tr><td>ขีดจำกัดรายการทะเบียน</td><td>30</td><td>300</td><td>ไม่จำกัด</td></tr>
+        <tr><td>โอนย้ายสต็อก</td><td>✗</td><td>✗</td><td>✓</td></tr>
+        <tr><td>การนำผลการตรวจนับไปปรับสต็อก</td><td>✗</td><td>✗</td><td>✓</td></tr>
+        <tr><td>ทะเบียนหมวดหมู่</td><td>✗</td><td>✗</td><td>✓</td></tr>
+        <tr><td>เกณฑ์เติมสต็อกและราคา</td><td>✗</td><td>✗</td><td>✓</td></tr>
+        <tr><td>สำรองและกู้คืน CSV</td><td>✗</td><td>จำกัด</td><td>✓ (ชุดครบถ้วน)</td></tr>
+        <tr><td>สำรองประวัติ</td><td>✗</td><td>✗</td><td>✓</td></tr>
+        <tr><td>กฎโค้ดและตำแหน่ง</td><td>✗</td><td>✗</td><td>✓ (การตั้งค่าร่วมครบวงจร)</td></tr>
+      </tbody>
+    </table></div>
+    <div class="box box-hint"><strong>เคล็ดลับ</strong>สำหรับการดำเนินการหลักของเวอร์ชันมาตรฐาน — รับเข้า จ่ายออก ตรวจสอบสต็อก ประวัติ และนำเข้า/ส่งออก CSV — ดูที่ <a href="06_inventory_simple_th.html">⑥ การจัดการสต็อก: มาตรฐาน</a> หน้านี้ครอบคลุมเฉพาะฟีเจอร์ที่เพิ่มโดยเวอร์ชันครบวงจร</div>
+  </section>
+
+  <section class="chapter" id="master-product">
+    <div class="chapter-head"><div class="ch-no">บทที่ 3</div><h2>การรวมทะเบียนสินค้า</h2></div>
+    <p>ทะเบียนสินค้าคือสถานที่ลงทะเบียนสินค้าจริงที่คุณจัดการสต็อก เมื่อปลดล็อกครบวงจรแล้ว คุณสามารถเพิ่มเกณฑ์เติมสต็อกและราคาให้กับแต่ละสินค้า</p>
+    <h3>ฟิลด์สำคัญของทะเบียนสินค้า</h3>
+    <div class="table-wrap"><table>
+      <thead><tr><th>ฟิลด์</th><th>คำอธิบาย</th><th>เพิ่มในเวอร์ชันครบวงจร</th></tr></thead>
+      <tbody>
+        <tr><td>รหัสสินค้า / บาร์โค้ด</td><td>ตัวระบุเฉพาะของสินค้า</td><td>—</td></tr>
+        <tr><td>ชื่อสินค้า</td><td>ชื่อของสินค้า</td><td>—</td></tr>
+        <tr><td>หมวดหมู่</td><td>การจำแนกสินค้า (เลือกจากทะเบียนหมวดหมู่)</td><td>—</td></tr>
+        <tr><td>ราคา</td><td>ราคาขายหรือต้นทุนของสินค้า</td><td>✓</td></tr>
+        <tr><td>เกณฑ์เติมสต็อก</td><td>จำนวนอ้างอิงสำหรับพิจารณาการเติมสต็อก</td><td>✓</td></tr>
+      </tbody>
+    </table></div>    <h3>การลงทะเบียนหรือแก้ไขสินค้า</h3>
+    <ol class="steps">
+      <li>จากหน้าหลัก เปิด <strong>การจัดการทะเบียน</strong></li>
+      <li>เลือก <strong>ทะเบียนสินค้า</strong></li>
+      <li>แตะการ์ดรายการใหม่หรือปุ่ม <strong>ใหม่</strong></li>
+      <li>ป้อนรหัสสินค้า ชื่อ และหมวดหมู่ ไม่บังคับป้อนราคาและเกณฑ์เติมสต็อก</li>
+      <li>แตะ <strong>บันทึก</strong> เพื่อลงทะเบียน</li>
+      <li>เพื่อแก้ไขสินค้าที่มีอยู่ เปิดจากรายการ ทำการเปลี่ยนแปลง และแตะ <strong>บันทึก</strong></li>
+    </ol>
+    <div class="box box-hint"><strong>ลงทะเบียนสินค้าที่ยังไม่รู้จักจากหน้าจอรับสินค้าเข้า</strong>หากป้อนรหัสสินค้าที่ยังไม่มีในทะเบียนในหน้าจอรับสินค้าเข้า แอปจะนำคุณไปยังแบบฟอร์มรายการใหม่ของทะเบียนสินค้า หลังบันทึกชื่อสินค้า ราคา และเกณฑ์เติมสต็อก คุณจะกลับไปหน้าจอรับสินค้าเข้าพร้อมรายละเอียดสินค้าที่กรอกอัตโนมัติ</div>
+    <div class="box box-warn"><strong>ข้อควรระวัง: ไม่ควรสับสนระหว่างสินค้าและหมวดหมู่</strong>
+      <ul>
+        <li><strong>สินค้า</strong>: รายการสินค้าในสต็อก (เช่น ปากกาสีแดง ปากกาสีน้ำเงิน)</li>
+        <li><strong>หมวดหมู่</strong>: กลุ่มจัดหมวดหมู่สินค้า (เช่น เครื่องเขียน อาหาร)</li>
+      </ul>
+      หมวดหมู่ถูกเลือกในทะเบียนสินค้าเป็นการจัดหมวดหมู่ของสินค้า ตัวหมวดหมู่เองไม่มีสต็อก
+    </div>
+  </section>
+
+  <section class="chapter" id="master-item">
+    <div class="chapter-head"><div class="ch-no">บทที่ 4</div><h2>ทะเบียนหมวดหมู่</h2></div>
+    <p>ทะเบียนหมวดหมู่จัดการกลุ่มการจัดหมวดหมู่ที่ใช้จัดระเบียบสินค้า หมวดหมู่ช่วยให้กรองและตรวจสอบทะเบียนสินค้าได้ง่ายขึ้น</p>
+    <div class="table-wrap"><table>
+      <tr><th>ฟิลด์</th><th>คำอธิบาย</th></tr>
+      <tr><td>รหัสหมวดหมู่</td><td>ตัวระบุเฉพาะของหมวดหมู่</td></tr>
+      <tr><td>ชื่อหมวดหมู่</td><td>ชื่อการจัดหมวดหมู่ (เช่น อาหาร เสื้อผ้า)</td></tr>
+      <tr><td>การจัดหมวดหมู่</td><td>กลุ่มที่ใช้จัดระเบียบสินค้าในรายการและทะเบียน</td></tr>
+      <tr><td>ลำดับการแสดง</td><td>ลำดับการจัดเรียงในมุมมองรายการ</td></tr>
+    </table></div>    <h3>การลงทะเบียนหมวดหมู่</h3>
+    <ol class="steps">
+      <li>ไปที่ <strong>การจัดการทะเบียน → ทะเบียนหมวดหมู่</strong></li>
+      <li>แตะการ์ดรายการใหม่หรือปุ่ม <strong>ใหม่</strong></li>
+      <li>ป้อนรหัส ชื่อ และลำดับการแสดง</li>
+      <li>แตะ <strong>บันทึก</strong></li>
+    </ol>
+    <div class="box box-hint"><strong>หมายเหตุเกี่ยวกับหมวดหมู่</strong>ใช้หมวดหมู่อย่างสม่ำเสมอเพื่อจัดกลุ่มสินค้าและช่วยตรวจสอบทะเบียนได้ง่ายขึ้น</div>
+  </section>
+
+  <section class="chapter" id="master-location">
+    <div class="chapter-head"><div class="ch-no">บทที่ 5</div><h2>ทะเบียนตำแหน่ง</h2></div>
+    <p>ทะเบียนตำแหน่งคือสถานที่ลงทะเบียนและจัดการสถานที่จัดเก็บสต็อกจริง การลงทะเบียนหลายตำแหน่ง — เช่น คลังสินค้า ร้านค้า หรือชั้นวางแต่ละชั้น — ช่วยให้ติดตามสต็อกตามตำแหน่งได้</p>
+    <div class="table-wrap"><table>
+      <tr><th>ฟิลด์</th><th>คำอธิบาย</th></tr>
+      <tr><td>รหัสตำแหน่ง</td><td>ตัวระบุเฉพาะของตำแหน่ง</td></tr>
+      <tr><td>ชื่อตำแหน่ง</td><td>ชื่อตำแหน่ง (เช่น คลังสินค้า ร้านค้า A)</td></tr>
+      <tr><td>ลำดับการแสดง</td><td>ลำดับการจัดเรียงในมุมมองรายการ</td></tr>
+      <tr><td>รวมในการประเมินการเติมสต็อก</td><td>หากเปิดใช้งาน สต็อกของตำแหน่งนี้จะรวมในยอดรวมสำหรับการตัดสินใจเติมสต็อกในตรวจสอบสต็อก</td></tr>
+      <tr><td>เปิด / ปิดใช้งาน</td><td>ตำแหน่งที่ไม่ได้ใช้แล้วสามารถปิดใช้งานโดยไม่ต้องลบ</td></tr>
+    </table></div>    <div class="box box-hint"><strong>ตำแหน่งเริ่มต้น</strong>แอปมี "คลังสินค้า" และ "ร้านค้า" ลงทะเบียนไว้แล้ว เปลี่ยนชื่อ แก้ไข หรือเพิ่มตำแหน่งใหม่ตามการดำเนินงานจริงของคุณ</div>
+    <h3>การลงทะเบียนตำแหน่ง</h3>
+    <ol class="steps">
+      <li>ไปที่ <strong>การจัดการทะเบียน → ทะเบียนตำแหน่ง</strong></li>
+      <li>แตะการ์ดรายการใหม่หรือปุ่ม <strong>ใหม่</strong></li>
+      <li>ป้อนรหัส ชื่อ และลำดับการแสดง</li>
+      <li>เปิดหรือปิดใช้งาน <strong>รวมในการประเมินการเติมสต็อก</strong> ตามความจำเป็น รายการใหม่เปิดใช้งานโดยค่าเริ่มต้น</li>
+      <li>แตะ <strong>บันทึก</strong></li>
+    </ol>
+    <div class="box box-hint"><strong>เกี่ยวกับการตั้งค่า "รวมในการประเมินการเติมสต็อก"</strong>การประเมินการเติมสต็อกในตรวจสอบสต็อกนับเฉพาะสต็อกจากตำแหน่งที่เปิดสวิตช์นี้ ใช้ปุ่ม <strong>รวมตำแหน่งที่ใช้งานทั้งหมด</strong> เพื่อเปิดใช้งานทั้งหมดพร้อมกัน</div>
+    <div class="box box-warn"><strong>ข้อควรระวัง: การปิดใช้งาน vs การลบตำแหน่ง</strong>เมื่อตำแหน่งไม่จำเป็นแล้ว แนะนำให้ <strong>ปิดใช้งาน</strong> แทนการลบ ก่อนลบหรือเขียนทับรายการ ให้ส่งออกข้อมูลสำรองและตรวจสอบผลกระทบต่อสต็อก</div>
+  </section>
+
+  <section class="chapter" id="stock-move">
+    <div class="chapter-head"><div class="ch-no">บทที่ 6</div><h2>โอนย้ายสต็อก</h2></div>
+    <p>การโอนย้ายสต็อกจะย้ายจำนวนสต็อกที่ระบุจากตำแหน่งหนึ่งไปยังอีกตำแหน่ง ใช้ได้เฉพาะในเวอร์ชันครบวงจร</p>    <h3>วิธีโอนย้ายสต็อก</h3>
+    <ol class="steps">
+      <li>ในเมนูการจัดการสต็อก เปิด <strong>โอนย้ายสต็อก</strong></li>
+      <li>เลือก <strong>ตำแหน่งต้นทาง</strong> (ตำแหน่งที่สต็อกจะออกไป)</li>
+      <li>เลือก <strong>ตำแหน่งปลายทาง</strong> (ตำแหน่งที่สต็อกจะมาถึง)</li>
+      <li>ค้นหาสินค้าที่ต้องการโดยสแกนบาร์โค้ดหรือค้นหาตามชื่อ</li>
+      <li>ป้อนจำนวนที่จะโอนย้าย</li>
+      <li>ตรวจสอบรายละเอียดและแตะ <strong>ยืนยัน</strong></li>
+    </ol>
+    <div class="box box-danger"><strong>สำคัญ: ห้ามโอนย้ายระหว่างตำแหน่งเดียวกันโดยเด็ดขาด</strong>การเลือกตำแหน่งเดียวกันทั้งต้นทางและปลายทางจะทำให้การประมวลผลข้อมูลสต็อกผิดพลาด เลือกสองตำแหน่งที่แตกต่างกันเสมอ</div>
+    <div class="box box-hint"><strong>หากมีตำแหน่งเดียว</strong>หากมีตำแหน่งที่ลงทะเบียนเพียงแห่งเดียว การโอนย้ายสต็อกไม่มีความหมาย ใช้ <strong>รับเข้า</strong> <strong>จ่ายออก</strong> หรือ <strong>แก้ไข</strong> เพื่อปรับจำนวนแทน การโอนย้ายสต็อกมีความหมายเมื่อมีสองตำแหน่งขึ้นไป</div>
+  </section>
+
+  <section class="chapter" id="stock-history">
+    <div class="chapter-head"><div class="ch-no">บทที่ 7</div><h2>ประวัติสต็อก</h2></div>
+    <p>ประวัติสต็อกให้บันทึกครบถ้วนของการเปลี่ยนแปลงสต็อกทุกครั้ง เมื่อปลดล็อกครบวงจรแล้ว ขีดจำกัดรายการประวัติจะถูกลบ ช่วยให้เก็บบันทึกระยะยาวได้</p>
+    <h3>ประเภทการดำเนินการที่บันทึกในประวัติ</h3>
+    <ul>
+      <li><strong>รับสินค้าเข้า</strong>: สินค้าที่รับเข้าสต็อก</li>
+      <li><strong>จ่ายสินค้าออก</strong>: สินค้าที่จ่ายออกจากสต็อก</li>
+      <li><strong>โอนย้าย</strong>: สต็อกที่ย้ายระหว่างตำแหน่ง</li>
+      <li><strong>การปรับตรวจนับ</strong>: การแก้ไขส่วนต่างเมื่อนำผลการตรวจนับไปใช้</li>
+      <li><strong>สต็อกเริ่มต้น</strong>: จำนวนเปิดที่ตั้งในการลงทะเบียนเริ่มต้น</li>
+      <li><strong>นำเข้า CSV</strong>: สต็อกที่อัปเดตผ่านไฟล์ CSV</li>
+    </ul>  </section>
+
+  <section class="chapter" id="stocktake-reflect">
+    <div class="chapter-head"><div class="ch-no">บทที่ 8</div><h2>การนำผลการตรวจนับไปปรับสต็อก</h2></div>
+    <p>การนำผลการตรวจนับสต็อก (จำนวนที่นับจริง) ไปใช้กับโมดูลการจัดการสต็อกจะทำให้สต็อกในระบบสอดคล้องกับสต็อกที่มีอยู่จริงบนชั้นวาง ใช้ได้เฉพาะในเวอร์ชันครบวงจร</p>
+    <p>เมื่อนำผลการตรวจนับไปใช้ ส่วนต่างระหว่างระดับสต็อกตามทฤษฎีกับจำนวนที่นับจริงจะถูกบันทึกเป็นรายการ <strong>การปรับตรวจนับ</strong> ในประวัติ พร้อมอัปเดตสต็อกเป็นค่าจริงและเก็บบันทึกการปรับที่ติดตามได้</p>
+    <div class="box box-check"><strong>เงื่อนไขการนำไปใช้และการตรวจสอบ</strong>ดำเนินการนำไปใช้เฉพาะเมื่อเงื่อนไขในหน้าจอยืนยันครบถ้วน ก่อนดำเนินการ ให้ตรวจสอบตำแหน่งที่ได้รับผล รายละเอียดการปรับ และ CSV สำรองข้อมูล</div>
+    <div class="box box-danger"><strong>สำคัญ: สำรองข้อมูลเสมอก่อนนำไปใช้</strong>การนำผลการตรวจนับไปปรับสต็อกจะทับจำนวนสต็อก ก่อนดำเนินการ ส่งออก CSV สำรองข้อมูลเสมอ ความสามารถในการยกเลิกหลังนำไปใช้อาจจำกัด</div>
+  </section>
+
+  <section class="chapter" id="csv-backup">
+    <div class="chapter-head"><div class="ch-no">บทที่ 9</div><h2>สำรองและกู้คืน CSV</h2></div>
+    <p>ปลดล็อกครบวงจรให้ตัวเลือกส่งออกสามประเภท: แผ่นสต็อก CSV ชุด CSV สำรองครบถ้วน และสำรองประวัติ เนื่องจากการดำเนินการกู้คืนและแทนที่ทำให้เกิดการเปลี่ยนแปลงข้อมูลอย่างครอบคลุม การตรวจสอบอย่างละเอียดก่อนดำเนินการจึงสำคัญมาก</p>
+    <h3>ประเภท CSV และการใช้งาน</h3>
+    <div class="table-wrap"><table>
+      <thead><tr><th>ประเภท CSV</th><th>วัตถุประสงค์</th><th>เนื้อหาหลัก</th><th>ใช้ได้ใน</th><th>หมายเหตุ</th></tr></thead>
+      <tbody>
+        <tr><td>แผ่นสต็อก CSV</td><td>ตรวจสอบและนำเข้ารายการสต็อกปัจจุบันซ้ำ</td><td>ตำแหน่ง รหัสสินค้า ชื่อสินค้า จำนวน</td><td>มาตรฐานขึ้นไป</td><td>ไม่มีคอลัมน์ตำแหน่ง เลือกตำแหน่งปลายทางตอนนำเข้า</td></tr>
+        <tr><td>ชุด CSV สำรองครบถ้วน</td><td>สำรองและกู้คืนชุดข้อมูลครบถ้วน</td><td>สินค้า สต็อกปัจจุบัน ประวัติรับเข้า/จ่ายออก/โอนย้าย/ปรับ ตำแหน่ง หมวดหมู่</td><td>ครบวงจร</td><td>อาจส่งออกเป็นหลายไฟล์</td></tr>
+        <tr><td>สำรองประวัติ</td><td>สำรองเพื่อตรวจสอบการเคลื่อนไหวสต็อกในภายหลัง</td><td>แผ่นสต็อก + ประวัติการดำเนินการครบถ้วน</td><td>ครบวงจร</td><td>ตรวจสอบหน้าจอนำเข้าก่อนนำเข้า CSV ประวัติซ้ำ</td></tr>
+      </tbody>
+    </table></div>    <h3>การส่งออกชุด CSV สำรองครบถ้วน</h3>
+    <ol class="steps">
+      <li>จากหน้าจอการตั้งค่าหรือเมนูหลัก เปิด <strong>นำเข้า/ส่งออก CSV</strong></li>
+      <li>เลือก <strong>ชุด CSV สำรองครบถ้วน</strong></li>
+      <li>เลือกโฟลเดอร์ปลายทาง (ทำตามคำแนะนำบนหน้าจอ)</li>
+      <li>แตะ <strong>ส่งออก</strong> และยืนยันข้อความเสร็จสิ้น</li>
+    </ol>
+    <h3>การกู้คืนจาก CSV สำรอง</h3>
+    <ol class="steps">
+      <li>ไปที่ <strong>นำเข้า/ส่งออก CSV → กู้คืน</strong> หรือ <strong>นำเข้า CSV</strong></li>
+      <li>เลือกไฟล์ CSV สำรอง</li>
+      <li>ยืนยันการแมปคอลัมน์ (แอปอาจตรวจจับอัตโนมัติ)</li>
+      <li>อ่านหน้าจอยืนยันอย่างละเอียด จากนั้นแตะ <strong>ดำเนินการ</strong></li>
+    </ol>
+    <div class="box box-danger"><strong>สำคัญ: สำรองข้อมูลปัจจุบันเสมอก่อนกู้คืนหรือแทนที่</strong>การกู้คืน CSV หรือแทนที่สต็อกปัจจุบันจะทับข้อมูลสต็อกที่มีอยู่ ก่อนดำเนินการ ส่งออกและบันทึกแผ่นสต็อก CSV ปัจจุบันเสมอ</div>
+    <h3>แทนที่สต็อกปัจจุบัน</h3>
+    <p>แทนที่สต็อกปัจจุบันจะทับจำนวนสต็อกปัจจุบันด้วยค่าจาก CSV ที่นำเข้า ประวัติที่มีอยู่จะถูกเก็บรักษา แต่ส่วนต่างจะถูกบันทึกเป็นรายการประวัติ <strong>การปรับ</strong> แถวสต็อกที่ไม่มีใน CSV อาจถูกตั้งเป็น 0 — ตรวจสอบเนื้อหา CSV ก่อนนำเข้าเสมอ</p>
+    <div class="box box-danger"><strong>ใช้แทนที่สต็อกปัจจุบันด้วยความระมัดระวังสูง</strong>สินค้าหรือตำแหน่งที่ไม่มีใน CSV อาจมีสต็อกถูกตั้งเป็น 0 ก่อนนำเข้า ยืนยันว่า CSV มีชุดสินค้าและตำแหน่งที่ถูกต้อง</div>
+  </section>
+
+  <section class="chapter" id="csv-history-backup">
+    <div class="chapter-head"><div class="ch-no">บทที่ 10</div><h2>สำรองประวัติ</h2></div>
+    <p>การสำรองประวัติจะส่งออกทั้งแผ่นสต็อกและบันทึกครบถ้วนของการเคลื่อนไหว — รับเข้า จ่ายออก โอนย้าย การปรับ ฯลฯ — ในการดำเนินการเดียว มีประโยชน์สำหรับการตรวจสอบหรือติดตามการเปลี่ยนแปลงสต็อกในภายหลัง</p>
+    <ul>
+      <li>แผ่นสต็อก CSV (จำนวนสต็อกปัจจุบัน)</li>
+      <li>ประวัติการดำเนินการครบถ้วน (รับเข้า จ่ายออก โอนย้าย การปรับตรวจนับ นำเข้า CSV)</li>
+    </ul>
+    <div class="box box-check"><strong>การนำเข้า CSV สำรองประวัติซ้ำ</strong>ก่อนนำเข้าสำรองประวัติซ้ำ ให้ตรวจสอบไฟล์ที่เลือก โหมดนำเข้า และหน้าจอยืนยันของแอป</div>
+    <div class="box box-hint"><strong>เคล็ดลับการดำเนินงาน</strong>การสำรองประวัติเป็นประจำ — รายสัปดาห์หรือรายเดือน — หมายความว่าหากเกิดปัญหา คุณสามารถติดตามได้อย่างแม่นยำว่าระดับสต็อกเปลี่ยนแปลงอย่างไรตามเวลาและกู้คืนได้อย่างแม่นยำยิ่งขึ้น</div>
+  </section>
+
+  <section class="chapter" id="reorder-price">
+    <div class="chapter-head"><div class="ch-no">บทที่ 11</div><h2>เกณฑ์เติมสต็อกและราคา</h2></div>
+    <h3>เกณฑ์เติมสต็อก</h3>
+    <p>การตั้งเกณฑ์เติมสต็อกในทะเบียนสินค้าให้ค่าอ้างอิง: เมื่อสต็อกต่ำกว่าค่านี้ คุณสามารถระบุได้ในทันทีว่าต้องเติมสต็อก เป็นตัวชี้วัดสำหรับการจัดการเวลาการเติมสต็อก</p>
+    <div class="box box-check"><strong>การประเมินการเติมสต็อกในหน้าจอตรวจสอบสต็อก</strong>ตรวจสอบสต็อกแสดงยอดรวมต่อสินค้าโดยค่าเริ่มต้น การประเมินการเติมสต็อกเปรียบเทียบยอดรวมสต็อกรวมของตำแหน่งทั้งหมดที่เปิดใช้งาน "รวมในการประเมินการเติมสต็อก" กับเกณฑ์เติมสต็อกของสินค้า เมื่อดูสต็อกตำแหน่งเดียวแยกกัน การประเมินการเติมสต็อกจะไม่แสดงหรือถือว่าไม่ใช้งาน</div>
+    <div class="box box-check"><strong>การแสดงคำแนะนำเกี่ยวกับการเติมสต็อก</strong>ใช้หน้าจอตรวจสอบสต็อกเป็นจุดอ้างอิงเพื่อดูว่าเกณฑ์เติมสต็อกและคำแนะนำที่เกี่ยวข้องแสดงอย่างไรตามการตั้งค่าปัจจุบัน</div>
+    <h3>ราคา</h3>
+    <p>สามารถลงทะเบียนราคาสำหรับแต่ละสินค้าในทะเบียนสินค้า ราคาถูกอ้างอิงเพื่อคำนวณมูลค่าสต็อกรวมหรือสร้างรายงาน ก่อนใช้ค่าที่เกี่ยวข้องกับราคาในบันทึกการดำเนินงาน ให้ตรวจสอบการแสดงผลในแอปและไฟล์ CSV ที่ส่งออก</p>
+    <h3>การใช้ร่วมกับหมวดหมู่</h3>
+    <p>เมื่อเชื่อมโยงสินค้ากับหมวดหมู่ ทะเบียนจะเป็นระเบียบขึ้นและสามารถตรวจสอบรายการตามประเภทสินค้าได้ง่ายขึ้น</p>
+    <div class="box box-warn"><strong>ข้อควรระวัง</strong>ข้อมูลราคาและการคำนวณที่เกี่ยวข้องเป็นฟีเจอร์ของแอป โปรดตรวจสอบแยกต่างหากว่าเหมาะกับบันทึกการดำเนินงานของคุณหรือไม่</div>
+  </section>
+
+  <section class="chapter" id="usecase">
+    <div class="chapter-head"><div class="ch-no">บทที่ 12</div><h2>ตัวอย่างขั้นตอนการทำงาน — เวอร์ชันครบวงจร</h2></div>
+    <h3>ตัวอย่าง 1: การจัดการสองตำแหน่ง — คลังสินค้าและร้านค้า</h3>
+    <ol class="steps">
+      <li>ลงทะเบียน "คลังสินค้า" และ "ร้านค้า A" ในทะเบียนตำแหน่ง</li>
+      <li>ลงทะเบียนสินค้าในทะเบียนสินค้าและตั้งสต็อกเริ่มต้นในคลังสินค้า</li>
+      <li>เมื่อร้านค้าต้องการเติมสต็อก ใช้ <strong>โอนย้ายสต็อก</strong> เพื่อย้ายสต็อกจากคลังสินค้าไปยังร้านค้า A</li>
+      <li>หลังการขายในร้านค้า บันทึกการลดลงผ่าน <strong>จ่ายสินค้าออก</strong></li>
+      <li>เป็นระยะ ทำการตรวจนับสต็อกและใช้ <strong>นำผลการตรวจนับไปปรับสต็อก</strong> เพื่อทำให้สต็อกในระบบสอดคล้องกับจำนวนจริง</li>
+      <li>ทุกเดือน ส่งออก <strong>สำรองประวัติ</strong> และเก็บบันทึก</li>
+    </ol>
+    <h3>ตัวอย่าง 2: รอบการตรวจนับเป็นระยะ</h3>
+    <ol class="steps">
+      <li>ปลายเดือน ป้อนจำนวนจริงด้วยแอปตรวจนับสต็อก (เวอร์ชันครบวงจร)</li>
+      <li>ยืนยันผลการนับจริง</li>
+      <li>ใช้ <strong>นำผลการตรวจนับไปปรับสต็อก</strong> เพื่อถ่ายโอนส่วนต่างไปยังโมดูลสต็อก</li>
+      <li>ตรวจสอบรายการ <strong>การปรับตรวจนับ</strong> ในประวัติสต็อกเพื่อยืนยันการเปลี่ยนแปลง</li>
+      <li>ส่งออกและบันทึกชุด CSV สำรองครบถ้วน</li>
+    </ol>
+    <div class="box box-hint"><strong>เคล็ดลับ: การรวมกับตรวจนับ</strong>สำหรับคู่มือละเอียดเกี่ยวกับเวอร์ชันครบวงจรของการตรวจนับสต็อก ดูที่ <a href="04_stocktake_full_th.html">④ การตรวจนับสต็อก: เวอร์ชันครบวงจร</a></div>
+  </section>
+
+  <section class="chapter" id="notes">
+    <div class="chapter-head"><div class="ch-no">บทที่ 13</div><h2>หมายเหตุสำคัญ</h2></div>
+    <div class="box box-danger"><strong>การแทนที่สต็อก CSV ปัจจุบัน</strong>แทนที่สต็อกปัจจุบันจะทับจำนวนสต็อกด้วยค่า CSV สินค้าที่ไม่มีใน CSV อาจมีสต็อกถูกตั้งเป็น 0 <strong>ก่อนการดำเนินการนี้ ส่งออก CSV สำรองข้อมูลเสมอ</strong></div>
+    <div class="box box-danger"><strong>การนำผลการตรวจนับไปปรับสต็อก</strong>การนำผลการตรวจนับไปปรับสต็อกจะเขียนจำนวนสต็อกใหม่ และการย้อนกลับอาจมีข้อจำกัด <strong>ก่อนการดำเนินการนี้ ส่งออก CSV สำรองข้อมูลเสมอ</strong></div>
+    <div class="box box-danger"><strong>การลบหรือทับรายการทะเบียน</strong>การลบรายการจากทะเบียนสินค้าหรือทะเบียนตำแหน่งอาจมีผลต่อข้อมูลสต็อก เมื่อรายการไม่จำเป็นแล้ว พิจารณา <strong>ปิดใช้งาน</strong> แทนการลบ และเก็บ CSV สำรองก่อนการเปลี่ยนแปลงที่มีผลกระทบสูง</div>
+    <div class="box box-warn"><strong>โอนย้ายสต็อก: ต้นทางและปลายทางต้องต่างกัน</strong>ห้ามเลือกตำแหน่งเดียวกันทั้งต้นทางและปลายทางในการโอนย้าย อาจทำให้เกิดการเปลี่ยนแปลงข้อมูลที่ไม่คาดคิด</div>
+    <div class="box box-hint"><strong>ฟิลด์สต็อกในหน้าจอจ่ายสินค้าออก</strong>สต็อกที่แสดงในหน้าจอจ่ายสินค้าออกเป็นเพียงการอ้างอิง — แสดงระดับสต็อกปัจจุบันและไม่สามารถแก้ไขได้ การบันทึกจำนวนจ่ายออกจะลดสต็อกของตำแหน่งที่เลือก</div>
+    <div class="box box-warn"><strong>ราคาและเงื่อนไขการซื้อ</strong>สำหรับราคาการซื้อและเงื่อนไขการขายของปลดล็อกครบวงจร ดูที่รายการ Google Play เอกสารนี้ไม่รวมข้อมูลราคา</div>
+    <div class="box box-hint">
+      <strong>หลักการดำเนินงาน</strong>
+      <ul>
+        <li>ก่อนการดำเนินการที่ทำให้เกิดการเปลี่ยนแปลงขนาดใหญ่ในสต็อก (การแทนที่ การนำไปใช้ การลบ) สำรองข้อมูลเสมอ</li>
+        <li>เมื่อนำเข้า CSV อ่านหน้าจอตัวอย่างหรือยืนยันก่อนดำเนินการ</li>
+        <li>หากมีตำแหน่งเดียว ใช้รับเข้า จ่ายออก หรือแก้ไขแทนโอนย้ายสต็อก</li>
+      </ul>
+    </div>
+  </section>
+
+  <div class="summary-box" id="summary">
+    <h3>📌 สรุปประเด็นสำคัญของบท</h3>
+    <ul>
+      <li>ปลดล็อกครบวงจรลบข้อจำกัดรายการและประวัติทั้งหมด และเปิดใช้งานเกณฑ์เติมสต็อก ราคา ทะเบียนหมวดหมู่ การจัดการตำแหน่ง โอนย้ายสต็อก นำตรวจนับไปใช้ และ CSV สำรอง</li>
+      <li>ทะเบียนสามประเภททำงานร่วมกัน: ทะเบียนสินค้า (สินค้าในสต็อก) ทะเบียนหมวดหมู่ (กลุ่มจัดหมวดหมู่) ทะเบียนตำแหน่ง (สถานที่จัดเก็บ)</li>
+      <li>การโอนย้ายสต็อกใช้ได้เฉพาะระหว่างสองตำแหน่งที่ต่างกัน — ห้ามใช้ตำแหน่งเดียวกันทั้งต้นทางและปลายทาง</li>
+      <li>การนำผลการตรวจนับไปปรับสต็อกจะซิงโครไนซ์จำนวนจริงกับสต็อกในระบบ ส่วนต่างถูกบันทึกเป็นรายการปรับตรวจนับในประวัติ</li>
+      <li>ก่อนการดำเนินการที่ไม่สามารถยกเลิกได้ เช่น แทนที่สต็อกปัจจุบัน นำผลการตรวจนับไปปรับสต็อก หรือการลบ สำรองข้อมูลเสมอ</li>
+      <li>การสำรองประวัติเป็นประจำ (รายสัปดาห์หรือรายเดือน) ลดความเสี่ยงข้อมูลที่กู้คืนไม่ได้</li>
+    </ul>
+  </div>
+  <div class="confirm-box" id="confirm">
+    <h3>หมายเหตุก่อนใช้งาน</h3>
+    <ul>
+      <li>เงื่อนไขที่แน่นอนของการนำผลการตรวจนับไปปรับสต็อก (เวลา การจัดการหลายตำแหน่ง พฤติกรรมการยกเลิก)</li>
+      <li>ขั้นตอนและพฤติกรรมการกู้คืนสต็อกผ่านการนำเข้า CSV สำรองประวัติซ้ำ</li>
+      <li>มีการแสดงข้อความแนะนำหรือสัญลักษณ์เตือนเมื่อสต็อกต่ำกว่าเกณฑ์เติมสต็อกหรือไม่ และทำงานอย่างไร</li>
+      <li>การตั้งค่าสกุลเงินและวิธีการปัดเศษสำหรับราคา</li>
+      <li>สามารถลบรายการทะเบียนสินค้าและตำแหน่งได้หรือไม่ และสามารถกู้คืนรายการที่ลบได้หรือไม่</li>
+      <li>ราคาการซื้อและเงื่อนไขการขายของปลดล็อกครบวงจร (ยืนยันที่ Google Play)</li>
+      <li>สามารถยกเลิกการโอนย้ายสต็อกที่ยืนยันแล้วได้หรือไม่</li>
+    </ul>
+  </div>
+</div>
+<footer>คู่มือ Quantiventra · ข้อมูลล่าสุดดูได้จากหน้าจอแอป<p style="margin-top:4px;"><a href="privacy_th.html">นโยบายความเป็นส่วนตัว</a></p></footer>
+</body></html>

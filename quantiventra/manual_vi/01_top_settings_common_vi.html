@@ -1,0 +1,917 @@
+﻿<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quantiventra – Màn hình chính, Cài đặt &amp; Thao tác chung</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;font-size:15px;line-height:1.8;color:#1a2535;background:#f4f7fb;}
+a{color:#1a5fa8;text-decoration:none;}a:hover{text-decoration:underline;}
+.site-nav{background:#1a3a5c;color:#fff;padding:0;}
+.site-nav .nav-inner{max-width:960px;margin:0 auto;display:flex;flex-wrap:wrap;gap:0;align-items:stretch;}
+.site-nav a{color:#cde;padding:10px 13px;font-size:12px;display:block;border-right:1px solid #2a4a6c;white-space:nowrap;}
+.site-nav a:hover{background:#2a5090;text-decoration:none;}
+.site-nav a.active{background:#2a6cbe;color:#fff;font-weight:bold;}
+.page-header{background:linear-gradient(135deg,#1a3a5c 0%,#2a6cbe 100%);color:#fff;padding:40px 20px 30px;}
+.page-header .inner{max-width:960px;margin:0 auto;}
+.page-header .app-name{font-size:13px;opacity:.8;letter-spacing:.05em;}
+.page-header h1{font-size:24px;font-weight:700;margin-top:6px;line-height:1.4;}
+.page-header .subtitle{font-size:14px;opacity:.85;margin-top:8px;}
+.scope-box{background:rgba(255,255,255,.15);border-left:4px solid #7ecfff;padding:12px 16px;margin-top:16px;border-radius:4px;font-size:13px;}
+.play-section{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.3);border-radius:10px;padding:22px 28px;margin-top:24px;display:flex;align-items:center;gap:28px;flex-wrap:wrap;}
+.play-qr-wrap{flex-shrink:0;text-align:center;}
+.play-qr-frame{width:130px;height:130px;border:3px solid rgba(255,255,255,.7);border-radius:10px;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.95);position:relative;overflow:hidden;}
+.play-qr-frame img{width:100%;height:100%;object-fit:contain;display:block;}
+.play-qr-corner{pointer-events:none;position:absolute;width:16px;height:16px;border-color:#2a6cbe;border-style:solid;border-width:0;}
+.play-qr-corner.tl{top:5px;left:5px;border-top-width:3px;border-left-width:3px;border-radius:3px 0 0 0;}
+.play-qr-corner.tr{top:5px;right:5px;border-top-width:3px;border-right-width:3px;border-radius:0 3px 0 0;}
+.play-qr-corner.bl{bottom:5px;left:5px;border-bottom-width:3px;border-left-width:3px;border-radius:0 0 0 3px;}
+.play-qr-corner.br{bottom:5px;right:5px;border-bottom-width:3px;border-right-width:3px;border-radius:0 0 3px 0;}
+.play-qr-label{font-size:10px;color:rgba(255,255,255,.8);margin-top:6px;}
+.play-info h3{font-size:16px;font-weight:700;color:#fff;margin-bottom:4px;}
+.play-info p{font-size:12px;color:rgba(255,255,255,.75);margin-bottom:10px;}
+.play-badge{display:inline-block;text-decoration:none;}
+.play-badge img{display:block;height:44px;width:auto;max-width:180px;}
+.container{max-width:960px;margin:0 auto;padding:30px 16px;}
+.toc{background:#fff;border:1px solid #c8d8ec;border-radius:8px;padding:24px 28px;margin-bottom:32px;}
+.toc h2{font-size:16px;font-weight:700;color:#1a3a5c;border-bottom:2px solid #2a6cbe;padding-bottom:8px;margin-bottom:14px;}
+.toc ol{margin-left:18px;}.toc li{margin:5px 0;font-size:14px;}.toc a{color:#1a5fa8;}
+.chapter{background:#fff;border-radius:8px;box-shadow:0 1px 4px rgba(0,0,0,.08);padding:28px 28px 24px;margin-bottom:28px;}
+.chapter-head{border-left:5px solid #2a6cbe;padding-left:14px;margin-bottom:20px;}
+.chapter-head .ch-no{font-size:12px;color:#2a6cbe;font-weight:700;letter-spacing:.05em;}
+.chapter-head h2{font-size:20px;font-weight:700;color:#1a2535;margin-top:2px;}
+h3{font-size:16px;font-weight:700;color:#1a3a5c;border-bottom:1px solid #dde8f5;padding-bottom:5px;margin:22px 0 12px;}
+h4{font-size:14px;font-weight:700;color:#2a4a6c;margin:16px 0 8px;}
+p{margin-bottom:12px;}ul,ol{margin-left:20px;margin-bottom:12px;}li{margin-bottom:5px;}
+.steps{counter-reset:step;list-style:none;margin-left:0;}
+.steps li{counter-increment:step;padding:9px 12px 9px 46px;position:relative;background:#f8fbff;border:1px solid #dde8f5;border-radius:6px;margin-bottom:6px;}
+.steps li::before{content:counter(step);position:absolute;left:12px;top:50%;transform:translateY(-50%);width:24px;height:24px;background:#2a6cbe;color:#fff;border-radius:50%;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;}
+.table-wrap{overflow-x:auto;margin-bottom:16px;}
+table{width:100%;border-collapse:collapse;font-size:13px;min-width:420px;}
+th{background:#1a3a5c;color:#fff;padding:9px 12px;text-align:left;white-space:nowrap;}
+th.pro-col{background:#5a2a8c;}
+td{padding:8px 12px;border-bottom:1px solid #dde8f5;vertical-align:top;}
+tr:nth-child(even) td{background:#f4f7fb;}
+code{font-family:'Courier New',monospace;background:rgba(0,80,160,.08);color:#004080;padding:2px 6px;border-radius:3px;font-size:12px;}
+.check{color:#2e7d32;font-weight:700;}.cross{color:#c62828;}
+.box{border-radius:6px;padding:13px 16px;margin:14px 0;font-size:13px;}
+.box-warn{background:#fffbe6;border-left:4px solid #f5a623;color:#7a5700;}
+.box-danger{background:#fff0f0;border-left:4px solid #d43f3f;color:#7a0000;}
+.box-hint{background:#e8f4ff;border-left:4px solid #2a6cbe;color:#0a3060;}
+.box-check{background:#f4eeff;border-left:4px solid #8c4fc8;color:#3a0070;}
+.box-success{background:#e8f5e9;border-left:4px solid #2e7d32;color:#1b4a1e;}
+.box strong{display:block;margin-bottom:4px;}
+figure{max-width:280px;width:100%;margin:18px auto;text-align:center;}
+figure img{display:block;width:100%;max-width:280px;height:auto;margin:0 auto;border:1px solid #c8d8ec;border-radius:6px;box-shadow:0 2px 8px rgba(0,0,0,.1);}
+figcaption{font-size:12px;color:#5a7a99;margin-top:6px;}
+.feature-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px;margin:16px 0;}
+.feature-card{background:#f4f7fb;border:1px solid #c8d8ec;border-radius:8px;padding:16px;}
+.feature-card h4{color:#1a3a5c;margin-top:0;margin-bottom:6px;font-size:14px;}
+.feature-card p{font-size:13px;margin:0;color:#3a5a7a;}
+.feature-card.pro-card{background:#f4eeff;border-color:#c8a0e0;}
+.feature-card.pro-card h4{color:#5a2a8c;}
+.summary-box{background:linear-gradient(135deg,#e8f4ff,#f0f8ff);border:1px solid #99c8ec;border-radius:8px;padding:20px 24px;margin-top:32px;}
+.summary-box h3{border:none;color:#1a3a5c;margin-top:0;}
+.confirm-box{background:#fdf4ff;border:1px solid #c8a0e0;border-radius:8px;padding:20px 24px;margin-top:16px;}
+.confirm-box h3{border:none;color:#5a0090;margin-top:0;}
+.trouble{border:1px solid #c8d8ec;border-radius:8px;margin:14px 0;overflow:hidden;}
+.trouble-q{background:#eef6fd;padding:13px 18px;font-weight:700;font-size:14px;color:#1a3a5c;display:flex;align-items:flex-start;gap:10px;}
+.trouble-q::before{content:'Q';background:#2a6cbe;color:#fff;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900;flex-shrink:0;margin-top:1px;}
+.trouble-a{padding:13px 18px 14px 50px;font-size:13.5px;border-top:1px solid #c8d8ec;line-height:1.9;}
+.trouble-a ul{margin-left:16px;}
+.legal-block{background:#f5f5f5;border:1px solid #ddd;border-radius:8px;padding:20px 24px;font-size:12.5px;color:#444;line-height:1.9;margin:14px 0;}
+.legal-block h4{font-size:13px;color:#333;margin:18px 0 6px;border-bottom:1px solid #ddd;padding-bottom:4px;}
+.legal-block h4:first-child{margin-top:0;}
+footer{text-align:center;font-size:12px;color:#8a9aaa;padding:30px 16px 60px;border-top:1px solid #dde8f5;margin-top:20px;}
+.back-top{position:fixed;right:22px;bottom:28px;background:#1a3a5c;color:#fff;width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:20px;text-decoration:none;box-shadow:0 4px 14px rgba(26,58,92,.45);z-index:100;transition:transform .2s,box-shadow .2s;}
+.back-top:hover{transform:translateY(-3px);box-shadow:0 8px 22px rgba(26,58,92,.55);text-decoration:none;}
+.back-prev{position:fixed;left:18px;top:18px;z-index:200;border:1px solid rgba(255,255,255,.45);border-radius:999px;background:rgba(26,58,92,.88);color:#fff;padding:8px 14px;font:700 13px/1 sans-serif;box-shadow:0 4px 14px rgba(0,0,0,.2);cursor:pointer;text-decoration:none;}
+.back-prev:hover{background:#1a3a5c;text-decoration:none;}
+@media(max-width:640px){.page-header h1{font-size:18px;}.chapter{padding:20px 16px;}.toc{padding:16px;}.site-nav a{padding:8px 9px;font-size:11px;}.play-section{flex-direction:column;align-items:flex-start;gap:16px;}.feature-grid{grid-template-columns:1fr 1fr;}.back-prev{display:none;}}
+@media print{body{background:#fff;font-size:12px;}.site-nav,.back-top,.back-prev{display:none;}.chapter{box-shadow:none;border:1px solid #ccc;page-break-inside:avoid;}.page-header{background:#1a3a5c !important;-webkit-print-color-adjust:exact;print-color-adjust:exact;}.play-section{display:none;}}
+</style>
+</head>
+<body id="top">
+
+<a href="javascript:history.back()" class="back-prev">‹ Quay lại</a>
+
+<nav class="site-nav" aria-label="Điều hướng trang">
+  <div class="nav-inner">
+    <a href="01_top_settings_common_vi.html" class="active">① Màn hình chính / Cài đặt</a>
+    <a href="02_stocktake_free_vi.html">② Kiểm kê Miễn phí</a>
+    <a href="03_stocktake_simple_vi.html">③ Kiểm kê Tiêu chuẩn</a>
+    <a href="04_stocktake_full_vi.html">④ Kiểm kê Đầy đủ</a>
+    <a href="05_inventory_free_vi.html">⑤ Tồn kho Miễn phí</a>
+    <a href="06_inventory_simple_vi.html">⑥ Tồn kho Tiêu chuẩn</a>
+    <a href="07_inventory_full_vi.html">⑦ Tồn kho Đầy đủ</a>
+  </div>
+</nav>
+
+<header class="page-header">
+  <div class="inner">
+    <div class="app-name">Hướng dẫn sử dụng Quantiventra — Phiên bản tiếng Việt</div>
+    <h1>① Màn hình chính · Cài đặt · Thao tác chung</h1>
+    <div class="subtitle">Tổng quan ứng dụng, yêu cầu hệ thống, cài đặt, cấu hình, gói thanh toán, dữ liệu mẫu, thuật ngữ và thông báo pháp lý</div>
+<div class="scope-box">
+      <strong>Các chủ đề trong trang này:</strong>
+      Tổng quan ứng dụng / Yêu cầu hệ thống / Cài đặt &amp; Lần khởi động đầu tiên / Lưu trữ dữ liệu / Sự khác biệt giữa Kiểm kê và Quản lý tồn kho / Bắt đầu sử dụng / Màn hình chính / Màn hình Cài đặt / Cài đặt ngôn ngữ / Gói thanh toán / Dữ liệu mẫu / Xử lý sự cố / Thuật ngữ / Điều khoản &amp; Tuyên bố miễn trách
+    </div>
+  </div>
+</header>
+
+<div class="container">
+
+  <nav class="toc">
+    <h2>Mục lục</h2>
+    <ol>
+      <li><a href="#about">Quantiventra là gì?</a></li>
+      <li><a href="#environment">Yêu cầu hệ thống &amp; Quyền truy cập</a></li>
+      <li><a href="#install">Cài đặt &amp; Lần khởi động đầu tiên</a></li>
+      <li><a href="#storage">Lưu trữ dữ liệu</a></li>
+      <li><a href="#diff">Kiểm kê và Quản lý tồn kho</a></li>
+      <li><a href="#start">Bắt đầu sử dụng (Hướng dẫn cho người mới)</a></li>
+      <li><a href="#top-screen">Sử dụng Màn hình chính</a></li>
+      <li><a href="#settings">Tổng quan Màn hình Cài đặt</a></li>
+      <li><a href="#language">Cài đặt ngôn ngữ</a></li>
+      <li><a href="#billing">Tổng quan Gói thanh toán</a></li>
+      <li><a href="#sample">Dữ liệu mẫu</a></li>
+      <li><a href="#trouble">Xử lý sự cố</a></li>
+      <li><a href="#glossary">Thuật ngữ</a></li>
+      <li><a href="#legal">Điều khoản &amp; Tuyên bố miễn trách</a></li>
+      <li><a href="#summary">Điểm chính của chương</a></li>
+      <li><a href="#confirm">Lưu ý trước khi dùng chính thức</a></li>
+    </ol>
+  </nav>
+
+  <!-- Chương 1 -->
+  <section class="chapter" id="about">
+    <div class="chapter-head">
+      <div class="ch-no">CHƯƠNG 1</div>
+      <h2>Quantiventra là gì?</h2>
+    </div>
+
+    <h3>1-1. Về ứng dụng</h3>
+    <p>
+      <strong>Quantiventra</strong> là sự kết hợp của "<em>Quantity</em>" (số lượng) và "<em>Inventory</em>" (hàng tồn kho).
+      Đây là ứng dụng Android giúp đơn giản hóa việc kiểm kê và quản lý hàng tồn kho bằng cách dùng camera điện thoại quét mã vạch.
+    </p>
+    <p>
+      Chỉ cần hướng camera vào mã vạch để tự động nhận dạng sản phẩm, rồi nhập và lưu số lượng — quy trình trực quan giúp số hóa việc kiểm kê bằng giấy tờ.
+      Kết quả được lưu dưới dạng tệp CSV, dễ dàng làm việc với Excel hoặc Google Sheets.
+    </p>
+
+    <h3>1-2. Tính năng chính</h3>
+    <div class="feature-grid">
+      <div class="feature-card">
+        <h4>📦 Đếm hàng tồn kho</h4>
+        <p>Nhận dạng sản phẩm nhanh chóng bằng quét mã vạch và ghi số lượng ngay lập tức. Máy tính tích hợp giúp cộng tổng ở nhiều vị trí đơn giản hơn.</p>
+      </div>
+      <div class="feature-card">
+        <h4>🗂️ Quản lý dữ liệu danh mục</h4>
+        <p>Đăng ký sản phẩm, loại hàng và vị trí làm dữ liệu danh mục. Nhập hàng loạt qua CSV cũng được hỗ trợ.</p>
+      </div>
+      <div class="feature-card">
+        <h4>📍 Quản lý vị trí</h4>
+        <p>Đăng ký nhiều vị trí như kho, cửa hàng và kệ, quản lý tồn kho theo từng vị trí. Cũng có thể cấu hình vị trí nào được tính vào tổng dùng để xem xét bổ sung hàng.</p>
+      </div>
+      <div class="feature-card">
+        <h4>📊 Nhập / Xuất CSV</h4>
+        <p>Xuất danh sách tồn kho, bản sao lưu và lịch sử dưới dạng CSV. Dễ dàng tổng hợp trong Excel hoặc Google Sheets.</p>
+      </div>
+      <div class="feature-card">
+        <h4>🌐 Hỗ trợ đa ngôn ngữ</h4>
+        <p>Hỗ trợ 12 ngôn ngữ bao gồm tiếng Anh, tiếng Nhật, tiếng Trung và tiếng Hàn. Tự động sử dụng ngôn ngữ thiết bị nếu ngôn ngữ đó được hỗ trợ.</p>
+      </div>
+      <div class="feature-card pro-card">
+        <h4>⭐ Tính năng Mở khóa đầy đủ</h4>
+        <p>Bỏ giới hạn mục và mở khóa quản lý vị trí chi tiết, chuyển kho, áp dụng kiểm kê vào tồn kho và nhiều hơn nữa.</p>
+      </div>
+    </div>
+
+    <h3>1-3. Cách quét camera hoạt động</h3>
+    <p>
+      Khi mã vạch nằm trong khung hướng dẫn (viền xanh hoặc vàng) ở giữa màn hình,
+      ứng dụng tự động nhận dạng sau khi phát hiện <strong>cùng một mã trong 3 khung liên tiếp</strong>.
+      Cách xác nhận ba lần này ngăn đọc nhầm trong khi đảm bảo phát hiện đáng tin cậy.
+    </p>
+    <div class="box box-hint">
+      <strong>💡 Nếu mã không được nhận dạng</strong>
+      Mã vạch phải nằm <strong>hoàn toàn bên trong</strong> khung hướng dẫn. Mã nằm ngoài khung sẽ không được phát hiện.
+      Điều chỉnh vị trí camera cho đến khi mã được bao trọn trong khung.
+    </div>
+
+    <p>Ứng dụng có hai mô-đun chính — Kiểm kê và Quản lý tồn kho — cùng với quản lý dữ liệu danh mục, cài đặt và nhập/xuất CSV là các tính năng dùng chung.</p>
+  </section>
+
+  <!-- Chương 2 -->
+  <section class="chapter" id="environment">
+    <div class="chapter-head">
+      <div class="ch-no">CHƯƠNG 2</div>
+      <h2>Yêu cầu hệ thống &amp; Quyền truy cập</h2>
+    </div>
+
+    <h3>2-1. Yêu cầu hệ thống</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Mục</th><th>Yêu cầu</th></tr></thead>
+        <tbody>
+          <tr><td>Hệ điều hành</td><td>Android 8.0 (Oreo / API 26) trở lên</td></tr>
+          <tr><td>Camera</td><td>Camera lấy nét tự động (bắt buộc)</td></tr>
+          <tr><td>Bộ nhớ</td><td>Khuyến nghị ít nhất 10 MB bộ nhớ trong trống</td></tr>
+          <tr><td>Quyền bắt buộc</td><td>Camera (bắt buộc)</td></tr>
+          <tr><td>Internet</td><td>Không cần cho thao tác kiểm kê và tồn kho thông thường; có thể cần khi mua, khôi phục gói, mở Google Play hoặc mở liên kết bên ngoài</td></tr>
+          <tr><td>Google Play Services</td><td>Cần cho mua và khôi phục gói</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="box box-success">
+      <strong>✅ Có thể dùng ngoại tuyến cho nghiệp vụ chính</strong>
+      Các thao tác kiểm kê và quản lý tồn kho thông thường có thể thực hiện trên thiết bị. Một số thao tác như xác minh giao dịch mua, khôi phục gói, mở Google Play hoặc mở liên kết bên ngoài có thể cần kết nối mạng.
+    </div>
+
+    <h3>2-2. Quyền truy cập bắt buộc</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Quyền</th><th>Mục đích</th><th>Nếu từ chối</th></tr></thead>
+        <tbody>
+          <tr><td>Camera</td><td>Quét mã vạch và mã QR</td><td>Không thể quét bằng camera (chỉ nhập thủ công)</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="box box-hint">
+      <strong>💡 Quyền bộ nhớ</strong>
+      Ứng dụng này lưu dữ liệu trong <strong>bộ nhớ ứng dụng nội bộ</strong> của Android. Không cần quyền bộ nhớ.
+      Trao đổi dữ liệu được xử lý qua các chức năng Nhập, Xuất và Chia sẻ của ứng dụng.
+    </div>
+  </section>
+
+  <!-- Chương 3 -->
+  <section class="chapter" id="install">
+    <div class="chapter-head">
+      <div class="ch-no">CHƯƠNG 3</div>
+      <h2>Cài đặt &amp; Lần khởi động đầu tiên</h2>
+    </div>
+
+    <h3>3-1. Cài đặt</h3>
+    <p>Tìm kiếm "Quantiventra" trên Google Play Store, hoặc quét mã QR ở đầu trang này để đến thẳng trang cửa hàng.</p>
+
+    <ol class="steps">
+      <li>Mở Google Play Store.</li>
+      <li>Tìm kiếm "Quantiventra" hoặc quét mã QR để mở trang cửa hàng.</li>
+      <li>Nhấn <strong>Cài đặt</strong>.</li>
+    </ol>
+
+    <h3>3-2. Quy trình lần khởi động đầu tiên</h3>
+    <ol class="steps">
+      <li>Nhấn biểu tượng ứng dụng để khởi chạy.</li>
+      <li>Hộp thoại cấp quyền camera xuất hiện — nhấn <strong>Cho phép</strong>.</li>
+      <li>Nếu xuất hiện lời nhắc dữ liệu mẫu, chọn <strong>Tạo</strong> hoặc <strong>Bỏ qua</strong>.</li>
+      <li>Thư mục dữ liệu ứng dụng được tự động tạo trong bộ nhớ nội bộ.</li>
+      <li>Sau khi màn hình chính xuất hiện, thiết lập ban đầu hoàn tất.</li>
+    </ol>
+
+    <div class="box box-warn">
+      <strong>⚠ Nếu từ chối quyền Camera</strong>
+      Quét mã vạch sẽ không khả dụng.
+      Để cấp lại: <strong>Cài đặt → Ứng dụng → Quantiventra → Quyền → Camera → Bật</strong>.
+    </div>
+
+    <h3>3-3. Chuyển sang thiết bị mới</h3>
+    <ol class="steps">
+      <li>Trên thiết bị cũ, xuất hoặc chia sẻ dữ liệu qua <strong>Cài đặt → Xuất</strong> hoặc <strong>Cài đặt → Chia sẻ</strong>.</li>
+      <li>Đăng nhập tài khoản Google tương tự trên thiết bị mới.</li>
+      <li>Cài đặt Quantiventra từ Google Play.</li>
+      <li>Nhấn <strong>Cài đặt → Khôi phục giao dịch mua</strong> để khôi phục các gói đã mua.</li>
+      <li>Nhập CSV danh mục đã sao lưu qua <strong>Cài đặt → Nhập CSV danh mục</strong>.</li>
+    </ol>
+
+    <div class="box box-danger">
+      <strong>🚨 Cảnh báo: Gỡ cài đặt ứng dụng</strong>
+      Gỡ cài đặt ứng dụng sẽ xóa tất cả dữ liệu trong bộ nhớ nội bộ.
+      Thường xuyên sao lưu dữ liệu quan trọng bằng <strong>Xuất</strong> hoặc <strong>Chia sẻ</strong>.
+    </div>
+  </section>
+
+  <!-- Chương 4 -->
+  <section class="chapter" id="storage">
+    <div class="chapter-head">
+      <div class="ch-no">CHƯƠNG 4</div>
+      <h2>Lưu trữ dữ liệu</h2>
+    </div>
+
+    <p>
+      Dữ liệu ứng dụng được lưu trong khu vực riêng tư của ứng dụng trên thiết bị.
+      Không nên chỉnh sửa trực tiếp qua trình quản lý tệp. Dùng chức năng Chia sẻ và Xuất của ứng dụng để truy cập hoặc sao lưu dữ liệu.
+    </p>
+
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Danh mục</th><th>Nội dung</th><th>Khi nào cập nhật</th></tr></thead>
+        <tbody>
+          <tr><td>Dữ liệu danh mục</td><td>Dữ liệu cốt lõi cho sản phẩm, loại hàng, vị trí, v.v.</td><td>Khi mục được đăng ký, chỉnh sửa hoặc vô hiệu hóa</td></tr>
+          <tr><td>Lịch sử kiểm kê &amp; tồn kho</td><td>Hồ sơ kiểm kê, nhập hàng, xuất hàng, chuyển kho, nhập CSV, v.v.</td><td>Khi mục nhập được lưu hoặc nhập</td></tr>
+          <tr><td>Cài đặt ứng dụng</td><td>Ngôn ngữ, quét, quy tắc mã, cài đặt vị trí, v.v.</td><td>Khi cài đặt thay đổi</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Mở tệp CSV trong Excel</h3>
+    <p>Tệp CSV được lưu ở dạng UTF-8. Các bước sau được khuyến nghị để mở trong Excel.</p>
+    <ol class="steps">
+      <li>Mở Excel và vào tab <strong>Dữ liệu</strong> → <strong>Từ văn bản/CSV</strong>.</li>
+      <li>Chọn tệp CSV của bạn.</li>
+      <li>Chọn <strong>Unicode (UTF-8)</strong> làm mã hóa.</li>
+      <li>Nhấn <strong>Tải</strong>.</li>
+    </ol>
+    <div class="box box-warn">
+      <strong>⚠ Đừng nhấp đôi vào tệp CSV trực tiếp</strong>
+      Mở tệp CSV bằng cách nhấp đôi có thể dẫn đến ký tự bị hỏng. Luôn dùng phương pháp nhập qua tab <strong>Dữ liệu</strong>.
+    </div>
+
+    <h3>Quy trình sao lưu khuyến nghị</h3>
+    <ol class="steps">
+      <li>Nhấn <strong>Cài đặt → Xuất (Chọn thư mục)</strong>.</li>
+      <li>Tạo và chọn thư mục sao lưu trong thư mục Documents trên thiết bị — ví dụ: <code>Quantiventra_backup_20250401</code>.</li>
+      <li>Hoàn tất sau khi các tệp CSV lịch sử và danh mục được lưu.</li>
+      <li>Để an toàn thêm, sao chép sang máy tính qua Google Drive hoặc cáp USB.</li>
+    </ol>
+  </section>
+
+  <!-- Chương 5 -->
+  <section class="chapter" id="diff">
+    <div class="chapter-head">
+      <div class="ch-no">CHƯƠNG 5</div>
+      <h2>Kiểm kê và Quản lý tồn kho</h2>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <tr><th>Mục</th><th>Kiểm kê</th><th>Quản lý tồn kho</th></tr>
+        <tr><td>Mục đích</td><td>Đếm và ghi lại số lượng thực tế</td><td>Theo dõi thay đổi tồn kho qua nhập hàng, xuất hàng và chuyển kho</td></tr>
+        <tr><td>Quy trình</td><td>Quét → Nhập số lượng → Lưu → Hoàn tất</td><td>Nhập/Xuất/Chuyển → Lưu → Xem lịch sử</td></tr>
+        <tr><td>Sử dụng thường gặp</td><td>Kiểm kê hàng tháng, kiểm kê cuối năm, kiểm tra đột xuất</td><td>Quản lý nhập hàng, xuất hàng và chuyển kho hàng ngày</td></tr>
+        <tr><td>Ảnh hưởng đến tồn kho</td><td>Áp dụng vào tồn kho sau khi hoàn tất (Gói đầy đủ)</td><td>Phản ánh ngay lập tức với mỗi thao tác</td></tr>
+        <tr><td>Màn hình</td><td>Màn hình Kiểm kê, Lịch sử kiểm kê</td><td>Kiểm tra tồn kho, Nhập hàng, Xuất hàng, Chuyển kho, Lịch sử tồn kho</td></tr>
+      </table>
+    </div>
+    <div class="box box-warn">
+      <strong>⚠ Lưu ý</strong>
+      Kiểm kê và Quản lý tồn kho là các mô-đun riêng biệt. Nhập số lượng trong Kiểm kê KHÔNG thay đổi số tồn kho trừ khi bạn thực hiện thao tác "Áp dụng vào tồn kho" (Gói đầy đủ). Cẩn thận đừng nhầm lẫn hai mô-đun này.
+    </div>
+  </section>
+
+  <!-- Chương 6 -->
+  <section class="chapter" id="start">
+    <div class="chapter-head">
+      <div class="ch-no">CHƯƠNG 6</div>
+      <h2>Bắt đầu sử dụng (Hướng dẫn cho người mới)</h2>
+    </div>
+    <h3>Bước 1: Thử với dữ liệu mẫu</h3>
+    <ol class="steps">
+      <li>Khởi chạy ứng dụng; nếu được nhắc tạo dữ liệu mẫu, chọn <strong>Tạo</strong>.</li>
+      <li>Mở <strong>Quản lý tồn kho</strong> từ màn hình chính và kiểm tra mức tồn kho mẫu.</li>
+      <li>Mở <strong>Kiểm kê</strong> và thử quét mã vạch cùng nhập số lượng.</li>
+      <li>Thử xuất tệp CSV.</li>
+      <li>Xóa dữ liệu mẫu trước khi đưa vào hoạt động thực tế (từ màn hình Cài đặt).</li>
+    </ol>
+
+    <h3>Bước 2: Đăng ký danh mục sản phẩm</h3>
+    <ol class="steps">
+      <li>Mở <strong>Quản lý danh mục</strong> từ màn hình chính.</li>
+      <li>Vào <strong>Danh mục sản phẩm</strong>, tạo mục mới và nhập mã sản phẩm cùng tên.</li>
+      <li>Đặt loại hàng, giá và ngưỡng bổ sung hàng nếu cần.</li>
+      <li>Đăng ký kho, cửa hàng, v.v. trong <strong>Danh mục vị trí</strong> (khuyến nghị Gói tiêu chuẩn trở lên).</li>
+    </ol>
+
+    <h3>Bước 3: Bắt đầu hoạt động hàng ngày</h3>
+    <ol class="steps">
+      <li>Khi nhận hàng: vào <strong>Quản lý tồn kho → Nhập hàng</strong>, quét mã vạch và nhập số lượng.</li>
+      <li>Khi xuất hàng: vào <strong>Quản lý tồn kho → Xuất hàng</strong> và làm tương tự.</li>
+      <li>Để kiểm kê: ghi lại số liệu đếm thực tế từ <strong>Kiểm kê</strong>.</li>
+    </ol>
+
+    <div class="box box-hint">
+      <strong>💡 Mẹo</strong>
+      Thực hành với dữ liệu mẫu trước cho đến khi quen, rồi mới đăng ký sản phẩm thực tế.
+    </div>
+  </section>
+
+  <!-- Chương 7 -->
+  <section class="chapter" id="top-screen">
+    <div class="chapter-head">
+      <div class="ch-no">CHƯƠNG 7</div>
+      <h2>Sử dụng Màn hình chính</h2>
+    </div>
+    <p>Màn hình chính sau khi khởi chạy là điểm vào tất cả các tính năng chính.</p>
+
+    <div class="table-wrap">
+      <table>
+        <tr><th>Điểm vào</th><th>Mô tả</th></tr>
+        <tr><td>Kiểm kê</td><td>Mở màn hình kiểm kê để quét sản phẩm và ghi số liệu đếm thực tế</td></tr>
+        <tr><td>Quản lý tồn kho</td><td>Truy cập kiểm tra tồn kho, nhập hàng, xuất hàng, chuyển kho và lịch sử tồn kho</td></tr>
+        <tr><td>Quản lý danh mục</td><td>Quản lý dữ liệu danh mục sản phẩm, loại hàng và vị trí</td></tr>
+        <tr><td>Cài đặt</td><td>Ngôn ngữ, cài đặt kiểm kê, CSV, dữ liệu mẫu, thanh toán, tài liệu pháp lý, v.v.</td></tr>
+        <tr><td>Trợ giúp</td><td>Mở trang trợ giúp hoặc hướng dẫn sử dụng</td></tr>
+      </table>
+    </div>
+
+    <h3>Cảnh báo dữ liệu kiểm kê chưa hoàn tất</h3>
+    <p>Nếu có dữ liệu kiểm kê chưa hoàn tất, thông báo sẽ xuất hiện trên màn hình chính. Xem lại và hoàn tất trong màn hình Kiểm kê trước khi làm việc trong Quản lý tồn kho.</p>
+    <div class="box box-warn">
+      <strong>⚠ Lưu ý</strong>
+      Vận hành Quản lý tồn kho trong khi có dữ liệu kiểm kê chưa hoàn tất có thể gây ra sự không nhất quán dữ liệu. Nên hoàn tất kiểm kê trước khi thực hiện thay đổi tồn kho.
+    </div>
+  </section>
+
+  <!-- Chương 8 -->
+  <section class="chapter" id="settings">
+    <div class="chapter-head">
+      <div class="ch-no">CHƯƠNG 8</div>
+      <h2>Tổng quan Màn hình Cài đặt</h2>
+    </div>
+    <p>Màn hình Cài đặt quản lý các cài đặt toàn ứng dụng, kiểm kê, tồn kho, CSV, ngôn ngữ, thanh toán, dữ liệu mẫu và tài liệu pháp lý.</p>
+
+    <h3>Nhập / Xuất dữ liệu</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Thao tác</th><th>Mô tả</th><th>Khả dụng trong</th></tr></thead>
+        <tbody>
+          <tr><td>Nhập CSV danh mục</td><td>Tải tệp CSV bên ngoài làm dữ liệu danh mục (ghi đè lên dữ liệu hiện có)</td><td>Tất cả gói</td></tr>
+          <tr><td>Chia sẻ (Email, v.v.)</td><td>Gửi CSV lịch sử và danh mục đến ứng dụng khác</td><td>Tất cả gói</td></tr>
+          <tr><td>Xuất (Chọn thư mục)</td><td>Lưu CSV lịch sử và danh mục vào thư mục đã chọn</td><td>Tất cả gói</td></tr>
+          <tr><td>Xóa toàn bộ lịch sử</td><td>Xóa và đặt lại toàn bộ lịch sử quét</td><td>Tất cả gói (không thể hoàn tác)</td></tr>
+          <tr><td>Đặt lại tổng danh mục</td><td>Đặt lại tất cả tổng tích lũy đã đăng ký về 0</td><td>Mở khóa đầy đủ (không thể hoàn tác)</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Cài đặt chung</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Cài đặt</th><th>Mô tả</th><th>Gói</th></tr></thead>
+        <tbody>
+          <tr><td>Ngôn ngữ hiển thị</td><td>Chọn ngôn ngữ hiển thị ứng dụng</td><td>Tất cả gói (một số ngôn ngữ cần mở khóa)</td></tr>
+          <tr><td>Khóa xoay màn hình</td><td>Giữ cố định hướng màn hình khi nghiêng thiết bị</td><td>Mở khóa tiêu chuẩn trở lên</td></tr>
+          <tr><td>Tạo dữ liệu mẫu</td><td>Tạo dữ liệu mẫu để thực hành</td><td>Tất cả gói</td></tr>
+          <tr><td>Xóa dữ liệu mẫu</td><td>Xóa toàn bộ dữ liệu mẫu cùng lúc</td><td>Tất cả gói</td></tr>
+          <tr><td>Khôi phục giao dịch mua</td><td>Khôi phục các gói đã mua trước đó qua Google Play</td><td>Tất cả gói</td></tr>
+          <tr><td>Tài liệu pháp lý</td><td>Xem Điều khoản sử dụng, Chính sách bảo mật, v.v.</td><td>Tất cả gói</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Cài đặt kiểm kê</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Chế độ</th><th>Mô tả</th><th>Vị trí</th></tr></thead>
+        <tbody>
+          <tr><td>Chi tiết</td><td>Dùng tất cả vị trí đã đăng ký trong Danh mục vị trí</td><td>Tất cả vị trí đã đăng ký</td></tr>
+          <tr><td>Đơn giản A</td><td>Kiểm kê chỉ dùng kho</td><td>Chỉ kho</td></tr>
+          <tr><td>Đơn giản B</td><td>Kiểm kê dùng kho và cửa hàng</td><td>Kho + Cửa hàng</td></tr>
+          <tr><td>Đơn giản C</td><td>Kiểm kê chỉ dùng cửa hàng</td><td>Chỉ cửa hàng</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="box box-warn">
+      <strong>⚠ Lưu ý</strong>
+      Ngay cả khi Mở khóa đầy đủ đang hoạt động, nếu chế độ vẫn được đặt là Đơn giản A/B/C, bạn sẽ thấy các tùy chọn vị trí đơn giản. Chuyển sang chế độ <strong>Chi tiết</strong> để dùng vị trí chi tiết.
+    </div>
+
+    <h3>Cài đặt quét camera (Mở khóa đầy đủ)</h3>
+    <p>Cấu hình loại mã vạch nào cần quét cho sản phẩm và vị trí. Tắt các loại bạn không dùng giúp ngăn đọc nhầm.</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Loại</th><th>Mặc định (Sản phẩm)</th><th>Mặc định (Vị trí)</th><th>Sử dụng phổ biến</th></tr></thead>
+        <tbody>
+          <tr><td>CODE39</td><td><span class="check">✓ BẬT</span></td><td><span class="check">✓ BẬT</span></td><td>Linh kiện công nghiệp, mã nội bộ</td></tr>
+          <tr><td>CODE128</td><td><span class="check">✓ BẬT</span></td><td><span class="check">✓ BẬT</span></td><td>Mã logistics</td></tr>
+          <tr><td>EAN13</td><td><span class="check">✓ BẬT</span></td><td><span class="check">✓ BẬT</span></td><td>Mã vạch JAN/EAN (sản phẩm bán lẻ)</td></tr>
+          <tr><td>QRCODE</td><td><span class="check">✓ BẬT</span></td><td><span class="check">✓ BẬT</span></td><td>Mã QR (kệ, sản phẩm)</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Quy tắc mã / Quy tắc vị trí (Mở khóa đầy đủ)</h3>
+    <p>Đặt loại ký tự cho phép (chỉ chữ và số, chỉ số, hoặc không hạn chế), độ dài mã tối thiểu/tối đa và độ dài mã vị trí tối đa cho mã sản phẩm hoặc mã nội bộ.</p>
+
+    <h3>Khôi phục giao dịch mua</h3>
+    <p>Khôi phục các gói đã mua qua Google Play. Nếu không phản ánh, xác minh bạn đang đăng nhập bằng tài khoản Google đã mua và kiểm tra kết nối mạng.</p>
+
+    <div class="box box-danger">
+      <strong>🚨 Xóa lịch sử / Đặt lại tổng là không thể hoàn tác</strong>
+      "Xóa toàn bộ lịch sử" và "Đặt lại tổng danh mục" không thể hoàn tác. Luôn <strong>Xuất</strong> bản sao lưu trước khi thực hiện các thao tác này.
+    </div>
+  </section>
+
+  <!-- Chương 9 -->
+  <section class="chapter" id="language">
+    <div class="chapter-head">
+      <div class="ch-no">CHƯƠNG 9</div>
+      <h2>Cài đặt ngôn ngữ</h2>
+    </div>
+    <p>Bạn có thể chọn ngôn ngữ hiển thị trong ứng dụng tại <strong>Cài đặt → Ngôn ngữ</strong>. Khi khởi chạy, ứng dụng tự phát hiện ngôn ngữ thiết bị và bắt đầu bằng ngôn ngữ đó nếu được hỗ trợ.</p>
+
+    <h3>Các ngôn ngữ được hỗ trợ (12 ngôn ngữ)</h3>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Mã</th><th>Ngôn ngữ</th><th>Miễn phí</th><th class="pro-col">Mở khóa tất cả ngôn ngữ</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>ja</code></td><td>Tiếng Nhật</td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
+          <tr><td><code>en</code></td><td>Tiếng Anh</td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
+          <tr><td><code>zh</code></td><td>Tiếng Trung giản thể</td><td>Chỉ ngôn ngữ chính của thiết bị</td><td><span class="check">✓</span></td></tr>
+          <tr><td><code>tw</code></td><td>Tiếng Trung phồn thể</td><td>Chỉ ngôn ngữ chính của thiết bị</td><td><span class="check">✓</span></td></tr>
+          <tr><td><code>ko</code></td><td>Tiếng Hàn</td><td>Chỉ ngôn ngữ chính của thiết bị</td><td><span class="check">✓</span></td></tr>
+          <tr><td><code>hi</code></td><td>Tiếng Hindi</td><td>Chỉ ngôn ngữ chính của thiết bị</td><td><span class="check">✓</span></td></tr>
+          <tr><td><code>vi</code></td><td>Tiếng Việt</td><td>Chỉ ngôn ngữ chính của thiết bị</td><td><span class="check">✓</span></td></tr>
+          <tr><td><code>it</code></td><td>Tiếng Ý</td><td>Chỉ ngôn ngữ chính của thiết bị</td><td><span class="check">✓</span></td></tr>
+          <tr><td><code>pt-BR</code></td><td>Tiếng Bồ Đào Nha (Brazil)</td><td>Chỉ ngôn ngữ chính của thiết bị</td><td><span class="check">✓</span></td></tr>
+          <tr><td><code>es-419</code></td><td>Tiếng Tây Ban Nha (Mỹ Latinh)</td><td>Chỉ ngôn ngữ chính của thiết bị</td><td><span class="check">✓</span></td></tr>
+          <tr><td><code>id</code></td><td>Tiếng Indonesia</td><td>Chỉ ngôn ngữ chính của thiết bị</td><td><span class="check">✓</span></td></tr>
+          <tr><td><code>th</code></td><td>Tiếng Thái</td><td>Chỉ ngôn ngữ chính của thiết bị</td><td><span class="check">✓</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="box box-hint">
+      <strong>💡 Tự động phát hiện ngôn ngữ</strong>
+      Nếu ngôn ngữ thiết bị được hỗ trợ, ứng dụng khởi chạy bằng ngôn ngữ đó. Nếu không hỗ trợ, ứng dụng sẽ dùng tiếng Anh làm ngôn ngữ dự phòng.
+      Ngôn ngữ được chọn thủ công trong ứng dụng được ưu tiên hơn ngôn ngữ thiết bị.
+    </div>
+    <div class="box box-warn">
+      <strong>⚠ Lưu ý</strong>
+      Nội dung hiển thị trong ứng dụng có thể được cập nhật theo phiên bản. Với thông tin liên quan đến pháp lý, thanh toán hoặc chính sách, hãy ưu tiên nội dung đang hiển thị trong ứng dụng và trên Google Play.
+    </div>
+  </section>
+
+  <!-- Chương 10 -->
+  <section class="chapter" id="billing">
+    <div class="chapter-head">
+      <div class="ch-no">CHƯƠNG 10</div>
+      <h2>Tổng quan Gói thanh toán</h2>
+    </div>
+    <p>Quantiventra cho phép bạn dùng thử các tính năng cốt lõi miễn phí. Nếu cần thêm dung lượng hoặc chức năng, hãy mua gói phù hợp qua Google Play.</p>
+    <div class="box box-danger">
+      <strong>🚨 Quan trọng</strong>
+      Giá cả, thuế, điều khoản mua và điều kiện hoàn tiền được quy định bởi nội dung hiển thị trên Google Play — hướng dẫn này không đưa ra khẳng định dứt khoát. Luôn kiểm tra danh sách Google Play trước khi mua.
+    </div>
+
+    <h3>So sánh tính năng</h3>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Tính năng / Giới hạn</th>
+            <th>Miễn phí</th>
+            <th>Kiểm kê Tiêu chuẩn</th>
+            <th>Kiểm kê Đầy đủ</th>
+            <th>Tồn kho Tiêu chuẩn</th>
+            <th>Tồn kho Đầy đủ</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Bản ghi danh mục</td><td>Đến 30</td><td>Đến 300</td><td><span class="check">Không giới hạn</span></td><td>Đến 300</td><td><span class="check">Không giới hạn</span></td></tr>
+          <tr><td>Bản ghi lịch sử</td><td>Đến 30</td><td>Đến 1.000</td><td><span class="check">Không giới hạn</span></td><td>Đến 1.000</td><td><span class="check">Không giới hạn</span></td></tr>
+          <tr><td>Bản ghi xuất</td><td>Đến 30</td><td>Đến 300</td><td><span class="check">Không giới hạn</span></td><td>Đến 300</td><td><span class="check">Không giới hạn</span></td></tr>
+          <tr><td>Khóa xoay màn hình</td><td><span class="cross">✗</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
+          <tr><td>Cài đặt quy tắc mã/vị trí</td><td><span class="cross">✗ (chỉ mặc định)</span></td><td><span class="cross">✗</span></td><td><span class="check">✓</span></td><td><span class="cross">✗</span></td><td><span class="check">✓</span></td></tr>
+          <tr><td>Cài đặt loại quét camera</td><td><span class="cross">✗ (chỉ mặc định)</span></td><td><span class="cross">✗</span></td><td><span class="check">✓</span></td><td><span class="cross">✗</span></td><td><span class="check">✓</span></td></tr>
+          <tr><td>Xuất CSV mở rộng</td><td><span class="cross">✗</span></td><td><span class="cross">✗</span></td><td><span class="check">✓</span></td><td><span class="cross">✗</span></td><td><span class="check">✓</span></td></tr>
+          <tr><td>Chỉnh sửa trực tiếp tổng tích lũy đã đăng ký</td><td><span class="cross">✗</span></td><td><span class="cross">✗</span></td><td><span class="cross">✗</span></td><td><span class="cross">✗</span></td><td><span class="check">✓</span></td></tr>
+          <tr><td>Đặt lại hàng loạt tổng danh mục</td><td><span class="cross">✗</span></td><td><span class="cross">✗</span></td><td><span class="cross">✗</span></td><td><span class="cross">✗</span></td><td><span class="check">✓</span></td></tr>
+          <tr><td>Đăng ký danh mục vị trí</td><td><span class="cross">✗</span></td><td><span class="cross">✗</span></td><td><span class="cross">✗</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
+          <tr><td>Chuyển kho &amp; Áp dụng kiểm kê</td><td><span class="cross">✗</span></td><td><span class="cross">✗</span></td><td><span class="cross">✗</span></td><td><span class="cross">✗</span></td><td><span class="check">✓</span></td></tr>
+          <tr><td>Ngôn ngữ khả dụng</td><td>Tiếng Nhật, Anh, ngôn ngữ chính thiết bị</td><td>Tương tự</td><td>Tương tự</td><td>Tương tự</td><td>Tương tự</td></tr>
+          <tr><td>Tất cả 12 ngôn ngữ</td><td><span class="cross">✗</span></td><td colspan="4">Mua Mở khóa tất cả ngôn ngữ riêng</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Gói combo &amp; Mở khóa tất cả ngôn ngữ</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Gói</th><th>Nội dung</th></tr></thead>
+        <tbody>
+          <tr><td>Combo Tiêu chuẩn</td><td>Kiểm kê Tiêu chuẩn + Tồn kho Tiêu chuẩn</td></tr>
+          <tr><td>Combo Đầy đủ</td><td>Kiểm kê Đầy đủ + Tồn kho Đầy đủ</td></tr>
+          <tr><td>Mở khóa tất cả ngôn ngữ</td><td>Kích hoạt 10 ngôn ngữ bổ sung ngoài tiếng Nhật và Anh</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Cách mua gói</h3>
+    <ol class="steps">
+      <li>Nhấn <strong>Cài đặt → Gói thanh toán</strong> hoặc nút mua trong ứng dụng.</li>
+      <li>Màn hình mua Google Play mở ra.</li>
+      <li>Hoàn tất thanh toán — gói kích hoạt ngay lập tức.</li>
+    </ol>
+
+    <h3>Khôi phục giao dịch mua sau khi đổi thiết bị</h3>
+    <ol class="steps">
+      <li>Đăng nhập thiết bị mới bằng cùng tài khoản Google.</li>
+      <li>Cài đặt và khởi chạy ứng dụng.</li>
+      <li>Nhấn <strong>Cài đặt → Khôi phục giao dịch mua</strong>.</li>
+      <li>Sau khi xác minh, gói trở nên hoạt động.</li>
+    </ol>
+
+    <div class="box box-check">
+      <strong>Thông tin mua trên Google Play</strong>
+      Các nút mua hiển thị thông tin do Google Play cung cấp. Hãy kiểm tra giá, tính khả dụng và điều khoản hoàn tiền trực tiếp trên Google Play Store.
+    </div>
+  </section>
+
+  <!-- Chương 11 -->
+  <section class="chapter" id="sample">
+    <div class="chapter-head">
+      <div class="ch-no">CHƯƠNG 11</div>
+      <h2>Dữ liệu mẫu</h2>
+    </div>
+    <p>Dữ liệu mẫu là dữ liệu thực hành để khám phá Quantiventra trước khi bắt đầu hoạt động thực tế.</p>
+    <h3>Nội dung bao gồm</h3>
+    <ul>
+      <li>Khoảng 10 sản phẩm mẫu</li>
+      <li>Các loại hàng mẫu</li>
+      <li>Vị trí cơ bản: "Kho" và "Cửa hàng"</li>
+      <li>Lịch sử tồn kho và kiểm kê mẫu</li>
+    </ul>
+
+    <h3>Tạo dữ liệu mẫu</h3>
+    <ol class="steps">
+      <li>Chọn <strong>Tạo</strong> nếu được nhắc khi khởi chạy lần đầu.</li>
+      <li>Để tạo sau, vào <strong>Cài đặt → Tạo dữ liệu mẫu</strong>.</li>
+    </ol>
+
+    <h3>Xóa dữ liệu mẫu</h3>
+    <ol class="steps">
+      <li>Vào <strong>Cài đặt → Xóa dữ liệu mẫu</strong>.</li>
+      <li>Xem lại những gì sẽ bị xóa (sản phẩm, tồn kho, loại hàng và lịch sử kiểm kê mẫu).</li>
+      <li>Xác nhận và thực hiện xóa.</li>
+    </ol>
+
+    <div class="box box-hint">
+      <strong>💡 Những gì còn lại sau khi xóa</strong>
+      Các vị trí cơ bản "Kho" và "Cửa hàng" và mọi dữ liệu không phải mẫu bạn đã tạo sẽ vẫn còn.
+    </div>
+    <div class="box box-danger">
+      <strong>🚨 Quan trọng</strong>
+      Luôn xóa dữ liệu mẫu trước khi đưa vào hoạt động thực tế. Kiểm tra không có dữ liệu thực nào bị lẫn trước khi xóa.
+    </div>
+  </section>
+
+  <!-- Chương 12 -->
+  <section class="chapter" id="trouble">
+    <div class="chapter-head">
+      <div class="ch-no">CHƯƠNG 12</div>
+      <h2>Xử lý sự cố</h2>
+    </div>
+
+    <div class="trouble">
+      <div class="trouble-q">Mã vạch không quét được / Camera không phản hồi</div>
+      <div class="trouble-a">
+        <ul>
+          <li>Kiểm tra công tắc camera (góc trên phải) đã BẬT.</li>
+          <li>Giữ mã vạch <strong>hoàn toàn bên trong</strong> khung hướng dẫn — mã ngoài khung sẽ không được phát hiện.</li>
+          <li>Trong Cài đặt (Mở khóa đầy đủ), xác minh loại quét (CODE39, EAN13, v.v.) khớp với mã bạn đang đọc.</li>
+          <li>Nếu mã vạch bị rách hoặc bẩn, hãy dùng nhập thủ công.</li>
+          <li>Kiểm tra quyền camera: <strong>Cài đặt → Ứng dụng → Quantiventra → Quyền → Camera</strong>.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="trouble">
+      <div class="trouble-q">Tên sản phẩm không hiển thị sau khi nhập CSV danh mục</div>
+      <div class="trouble-a">
+        <ul>
+          <li>Xác nhận CSV được mã hóa UTF-8 (Shift-JIS sẽ gây ký tự bị hỏng).</li>
+          <li>Xác minh hàng tiêu đề khớp với định dạng yêu cầu: <code>barcode,name,theoretical_stock,actual_stock_total</code>.</li>
+          <li>Nếu tên sản phẩm chứa dấu phẩy, hãy đặt trong dấu ngoặc kép: ví dụ: <code>"Bu lông, M6"</code>.</li>
+          <li>Chạy lại <strong>Nhập CSV danh mục</strong>.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="trouble">
+      <div class="trouble-q">Không thể lưu / Xuất hiện thông báo "Lưu thất bại"</div>
+      <div class="trouble-a">
+        <ul>
+          <li>Kiểm tra thiết bị có đủ bộ nhớ trống.</li>
+          <li>Không thể lưu mục nhập khi không có mã vạch và không có tên sản phẩm.</li>
+          <li>Thử đóng và khởi động lại ứng dụng.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="trouble">
+      <div class="trouble-q">Chia sẻ hoặc Xuất không tạo ra tệp</div>
+      <div class="trouble-a">
+        <ul>
+          <li>Nếu có 0 bản ghi lịch sử, tệp sẽ trống — hãy lưu ít nhất một mục nhập trước.</li>
+          <li>Khi xuất, đảm bảo chọn thư mục trong hộp thoại và nhấn <strong>Chọn</strong>.</li>
+          <li>Xác nhận ứng dụng đích (ví dụ: email) đã được cài đặt.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="trouble">
+      <div class="trouble-q">Số lượng tồn kho không khớp</div>
+      <div class="trouble-a">
+        <ul>
+          <li>Xem lịch sử tồn kho để tìm bản ghi nhập hàng, xuất hàng, chuyển kho và điều chỉnh kiểm kê.</li>
+          <li>Nếu đã chạy thay thế tồn kho CSV, các mục không có trong CSV có thể đã được đặt về 0.</li>
+          <li>Nếu đã áp dụng kiểm kê, sự chênh lệch được ghi là "Điều chỉnh kiểm kê".</li>
+          <li>Đối chiếu với CSV sao lưu của bạn.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="trouble">
+      <div class="trouble-q">Vị trí không hiển thị / Không tìm thấy vị trí</div>
+      <div class="trouble-a">
+        <ul>
+          <li>Kiểm tra chế độ kiểm kê có còn đặt là Đơn giản A/B/C. Chuyển sang chế độ <strong>Chi tiết</strong> để dùng vị trí chi tiết.</li>
+          <li>Kiểm tra vị trí không bị đặt <strong>Không hoạt động</strong> trong Danh mục vị trí.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="trouble">
+      <div class="trouble-q">Tính năng gói đã mua không khả dụng</div>
+      <div class="trouble-a">
+        <ul>
+          <li>Nhấn <strong>Cài đặt → Khôi phục giao dịch mua</strong>.</li>
+          <li>Xác minh bạn đang đăng nhập bằng tài khoản Google đã dùng để mua.</li>
+          <li>Thử lại với kết nối internet hoạt động (cần để xác minh giao dịch mua).</li>
+          <li>Xác nhận bạn đang dùng phiên bản cài đặt qua Google Play Store.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="trouble">
+      <div class="trouble-q">Dữ liệu biến mất sau khi đổi thiết bị</div>
+      <div class="trouble-a">
+        <ul>
+          <li>Dữ liệu được lưu trong bộ nhớ nội bộ ứng dụng và bị mất khi gỡ cài đặt hoặc đổi thiết bị.</li>
+          <li>Rất khuyến nghị thường xuyên sao lưu dữ liệu qua <strong>Xuất</strong> hoặc <strong>Chia sẻ</strong>.</li>
+          <li>Nếu có bản sao lưu, khôi phục bằng <strong>Nhập CSV danh mục</strong>.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="trouble">
+      <div class="trouble-q">Màn hình cứ xoay, khó làm việc</div>
+      <div class="trouble-a">
+        <ul>
+          <li>Nếu có Mở khóa tiêu chuẩn trở lên: bật <strong>Cài đặt → Khóa xoay màn hình</strong>.</li>
+          <li>Nếu ở gói miễn phí: dùng khóa xoay tích hợp của thiết bị (có trong bảng thông báo).</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="trouble">
+      <div class="trouble-q">Ngôn ngữ không thay đổi được</div>
+      <div class="trouble-a">
+        <ul>
+          <li>Chọn ngôn ngữ thủ công trong <strong>Cài đặt → Ngôn ngữ</strong>.</li>
+          <li>Nếu ngôn ngữ vẫn không đổi, hãy chọn lại ngôn ngữ trực tiếp trong ứng dụng rồi mở lại ứng dụng nếu cần.</li>
+          <li>Ngôn ngữ thiết bị không được hỗ trợ sẽ mặc định là tiếng Anh.</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3>Bảng tra cứu triệu chứng nhanh</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Triệu chứng</th><th>Nguyên nhân có thể</th><th>Hành động</th></tr></thead>
+        <tbody>
+          <tr><td>Số tồn kho sai</td><td>Lỗi nhập, thay thế CSV, áp dụng kiểm kê</td><td>Kiểm tra lịch sử tồn kho</td></tr>
+          <tr><td>Không tìm thấy sản phẩm</td><td>Lỗi đánh máy khi tìm kiếm, chưa đăng ký, đã vô hiệu hóa</td><td>Kiểm tra dữ liệu danh mục</td></tr>
+          <tr><td>Vị trí không hiển thị</td><td>Cài đặt chế độ đơn giản, đã vô hiệu hóa</td><td>Kiểm tra cài đặt và danh mục</td></tr>
+          <tr><td>Nhập CSV thất bại</td><td>Thiếu cột, số lượng không phải số</td><td>Kiểm tra ánh xạ cột và nội dung CSV</td></tr>
+          <tr><td>Mã vạch không đọc được</td><td>Ánh sáng yếu, mã bẩn, loại không hỗ trợ</td><td>Thử nhập thủ công hoặc kiểm tra cài đặt</td></tr>
+          <tr><td>Giao dịch mua chưa phản ánh</td><td>Sai tài khoản, lỗi mạng</td><td>Khôi phục giao dịch mua, kiểm tra kết nối</td></tr>
+          <tr><td>Màn hình cứ xoay</td><td>Khóa xoay đang TẮT</td><td>Khóa trong cài đặt hoặc dùng khóa thiết bị</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- Chương 13 -->
+  <section class="chapter" id="glossary">
+    <div class="chapter-head">
+      <div class="ch-no">CHƯƠNG 13</div>
+      <h2>Thuật ngữ</h2>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Thuật ngữ</th><th>Định nghĩa</th></tr></thead>
+        <tbody>
+          <tr><td>Kiểm kê</td><td>Hành động đếm và ghi số lượng hàng hóa trong kho theo cách thức thực tế</td></tr>
+          <tr><td>Số đếm thực tế</td><td>Số lượng thực tế được đếm tại chỗ</td></tr>
+          <tr><td>Tồn kho lý thuyết</td><td>Số lượng tồn kho được hệ thống tính toán</td></tr>
+          <tr><td>Chênh lệch / Biến động</td><td>Sự khác biệt giữa số đếm thực tế và tồn kho lý thuyết</td></tr>
+          <tr><td>Sản phẩm</td><td>Một mặt hàng riêng lẻ có tồn kho</td></tr>
+          <tr><td>Loại hàng</td><td>Nhóm dùng để phân loại sản phẩm</td></tr>
+          <tr><td>Vị trí</td><td>Nơi lưu giữ hàng tồn kho (ví dụ: kho, cửa hàng, kệ)</td></tr>
+          <tr><td>Tính vào kiểm tra nhu cầu bổ sung</td><td>Cài đặt cho phép tổng tồn kho của vị trí này được tính vào quyết định bổ sung hàng</td></tr>
+          <tr><td>Tồn kho / Hàng tồn kho</td><td>Số lượng hiện có trong tay</td></tr>
+          <tr><td>Nhập hàng (Nhập kho)</td><td>Thao tác làm tăng tồn kho</td></tr>
+          <tr><td>Xuất hàng (Xuất kho)</td><td>Thao tác làm giảm tồn kho</td></tr>
+          <tr><td>Chuyển kho</td><td>Di chuyển tồn kho từ vị trí này sang vị trí khác (Mở khóa đầy đủ)</td></tr>
+          <tr><td>Lịch sử tồn kho</td><td>Nhật ký các thao tác nhập hàng, xuất hàng, chuyển kho và điều chỉnh kiểm kê</td></tr>
+          <tr><td>Ngưỡng bổ sung hàng</td><td>Số lượng tham chiếu để xác định khi nào tồn kho đang cạn</td></tr>
+          <tr><td>Mã sản phẩm</td><td>Mã nội bộ dùng để xác định sản phẩm</td></tr>
+          <tr><td>Tổng tích lũy đã đăng ký</td><td>Tổng số lượng tích lũy đã lưu cho đến nay</td></tr>
+          <tr><td>CSV</td><td>Tệp văn bản phân tách bằng dấu phẩy, có thể mở trong ứng dụng bảng tính</td></tr>
+          <tr><td>Sao lưu</td><td>Dữ liệu được lưu để phục hồi hoặc tham khảo</td></tr>
+          <tr><td>Thay thế tồn kho hiện tại</td><td>Chế độ nhập CSV xem số lượng trong tệp là tồn kho hiện tại mới</td></tr>
+          <tr><td>Thêm dưới dạng nhập hàng</td><td>Chế độ nhập CSV thêm số lượng trong tệp như nhập hàng</td></tr>
+          <tr><td>Xác nhận kết quả kiểm kê thực tế</td><td>Thao tác xác nhận chính thức kết quả kiểm kê (Gói đầy đủ)</td></tr>
+          <tr><td>Dữ liệu danh mục</td><td>Cơ sở dữ liệu quản lý các bản ghi cốt lõi như sản phẩm, loại hàng và vị trí</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- Chương 14 -->
+  <section class="chapter" id="legal">
+    <div class="chapter-head">
+      <div class="ch-no">CHƯƠNG 14</div>
+      <h2>Điều khoản &amp; Tuyên bố miễn trách</h2>
+    </div>
+
+    <div class="legal-block">
+      <h4>■ Điều khoản sử dụng</h4>
+      <p>Vui lòng đọc kỹ Điều khoản sử dụng sau đây trước khi sử dụng ứng dụng này. Bằng cách tải xuống hoặc sử dụng ứng dụng, bạn đồng ý với các điều khoản này.</p>
+
+      <p><strong>1. Giấy phép</strong><br>
+      Việc sử dụng ứng dụng này cho mục đích quản lý hàng tồn kho và kiểm kê được phép cho cả cá nhân và doanh nghiệp. Nghiêm cấm dịch ngược, biên dịch ngược, sửa đổi hoặc phân phối lại ứng dụng.</p>
+
+      <p><strong>2. Dữ liệu người dùng</strong><br>
+      Các dữ liệu do ứng dụng tạo ra, như CSV dữ liệu gốc, CSV lịch sử và tệp cài đặt, được lưu trên thiết bị của người dùng. Một số giao tiếp với Google Play có thể phát sinh khi xác minh giao dịch mua gói.</p>
+
+      <p><strong>3. Mua gói</strong><br>
+      Tất cả giao dịch mua gói được xử lý qua hệ thống thanh toán Google Play. Hoàn tiền tuân theo chính sách hoàn tiền của Google Play.</p>
+
+      <p><strong>4. Sử dụng bị cấm</strong><br>
+      Nghiêm cấm sử dụng ứng dụng này cho mục đích bất hợp pháp, xâm phạm quyền của bên thứ ba, hoặc cố ý tạo dữ liệu gian lận thông qua việc lạm dụng các tính năng ứng dụng.</p>
+
+      <h4>■ Tuyên bố miễn trách</h4>
+      <p>Ứng dụng này được cung cấp "NGUYÊN TRẠNG". Nhà phát triển không chịu trách nhiệm về bất kỳ thiệt hại nào phát sinh từ việc sử dụng hoặc không thể sử dụng ứng dụng, bao gồm nhưng không giới hạn mất dữ liệu, gián đoạn kinh doanh hoặc bất kỳ thiệt hại trực tiếp hoặc gián tiếp nào khác.</p>
+      <p>Người dùng có trách nhiệm xác minh tính chính xác và đầy đủ của dữ liệu CSV do ứng dụng này tạo ra. Nhà phát triển không chịu trách nhiệm về sự không nhất quán dữ liệu do lỗi quét hoặc sai sót nhập liệu.</p>
+      <p>Độ chính xác đọc mã vạch phụ thuộc vào hiệu suất camera thiết bị, tình trạng mã vạch và các yếu tố môi trường. Dùng nhập thủ công khi không thể quét.</p>
+
+      <h4>■ Chính sách bảo mật</h4>
+      <p>Ứng dụng này không thu thập, truyền hoặc sử dụng thông tin cá nhân. Các thao tác chính được xử lý trên thiết bị; một số thao tác liên quan đến Google Play, như xác minh giao dịch mua gói, có thể cần kết nối mạng.</p>
+      <p>Camera chỉ được dùng để quét mã vạch và mã QR. Không có video nào được ghi lại, lưu trữ hay truyền đi.</p>
+
+      <h4>■ Bản quyền</h4>
+      <p>Bản quyền © Quantiventra. Bảo lưu mọi quyền.</p>
+      <p>Tất cả nội dung trong ứng dụng và hướng dẫn này (văn bản, thiết kế, logo, v.v.) là tài sản của nhà phát triển.</p>
+      <p>Ứng dụng này sử dụng các thư viện mã nguồn mở, mỗi thư viện được điều chỉnh bởi giấy phép tương ứng.</p>
+
+      <h4>■ Thay đổi điều khoản</h4>
+      <p>Các điều khoản này có thể thay đổi mà không cần thông báo trước. Điều khoản cập nhật có hiệu lực khi được công bố trên Google Play Store hoặc thông báo trong ứng dụng.</p>
+    </div>
+  </section>
+
+  <div class="summary-box" id="summary">
+    <h3>📌 Điểm chính của chương</h3>
+    <ul>
+      <li>Quantiventra = Quantity + Inventory. Tự động nhận dạng mã vạch sau 3 khung khớp liên tiếp.</li>
+      <li>Yêu cầu Android 8.0+ và camera lấy nét tự động. Không cần quyền bộ nhớ. Các thao tác chính có thể thực hiện trên thiết bị; một số chức năng liên quan đến Google Play hoặc liên kết bên ngoài có thể cần internet.</li>
+      <li>Dữ liệu được lưu trong bộ nhớ ứng dụng nội bộ — thường xuyên xuất, vì gỡ cài đặt xóa tất cả.</li>
+      <li>Kiểm kê và Quản lý tồn kho là các mô-đun riêng biệt — nhập số lượng kiểm kê không thay đổi tồn kho cho đến khi hoàn tất.</li>
+      <li>Bắt đầu với dữ liệu mẫu để thực hành; xóa trước khi đưa vào hoạt động thực tế.</li>
+      <li>Kiểm tra Google Play để biết chi tiết gói thanh toán — hướng dẫn này không nêu giá dứt khoát.</li>
+      <li>Khi xử lý sự cố, kiểm tra lịch sử tồn kho, dữ liệu danh mục và cài đặt theo thứ tự đó.</li>
+      <li>Luôn sao lưu trước các thao tác lớn (thay thế CSV, áp dụng kiểm kê, xóa, đặt lại).</li>
+    </ul>
+  </div>
+
+  <div class="confirm-box" id="confirm">
+    <h3>🔍 Lưu ý trước khi dùng chính thức</h3>
+    <ul>
+      <li>Trước khi mua gói, hãy kiểm tra giá, thuế, điều khoản mua và điều kiện hoàn tiền trên Google Play.</li>
+      <li>Trước khi nhập CSV, thay thế tồn kho, xóa dữ liệu hoặc đặt lại tổng, hãy xuất bản sao lưu.</li>
+      <li>Khi đổi thiết bị hoặc gỡ cài đặt, hãy sao lưu dữ liệu CSV và khôi phục giao dịch mua bằng cùng tài khoản Google.</li>
+      <li>Trước khi vận hành thực tế, hãy kiểm tra quyền camera, ngôn ngữ hiển thị, chế độ vị trí và dữ liệu mẫu.</li>
+      <li>Nội dung và tên chức năng có thể thay đổi theo phiên bản ứng dụng. Hãy ưu tiên thông tin đang hiển thị trong ứng dụng.</li>
+    </ul>
+  </div>
+
+</div>
+
+<a href="#top" class="back-top" title="Lên đầu trang">↑</a>
+
+<footer>
+  <strong>Quantiventra</strong> — Ứng dụng Kiểm kê Mã vạch &amp; Quản lý Hàng tồn kho<br>
+  Bản quyền © Quantiventra. Bảo lưu mọi quyền.<br>
+  Nội dung hướng dẫn này có thể thay đổi mà không cần thông báo.<br>
+  <p style="margin-top:4px;"><a href="privacy_vi.html">Chính sách Bảo mật</a></p>
+</footer>
+
+</body>
+</html>

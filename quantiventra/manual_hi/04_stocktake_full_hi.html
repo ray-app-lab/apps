@@ -1,0 +1,299 @@
+﻿<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quantiventra मैनुअल – स्टॉकटेक फुल संस्करण</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Noto Sans Devanagari','Noto Sans',Arial,sans-serif;font-size:15px;line-height:1.9;color:#1a2535;background:#f4f7fb;}
+a{color:#1a5fa8;text-decoration:none;}a:hover{text-decoration:underline;}
+.site-nav{background:#1a3a5c;color:#fff;padding:0;}
+.site-nav .nav-inner{max-width:960px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:stretch;}
+.site-nav a{color:#cde;padding:10px 13px;font-size:12px;display:block;border-right:1px solid #2a4a6c;white-space:nowrap;}
+.site-nav a:hover{background:#2a5090;text-decoration:none;}
+.site-nav a.active{background:#2a6cbe;color:#fff;font-weight:bold;}
+.page-header{background:linear-gradient(135deg,#1a3a5c 0%,#2a6cbe 100%);color:#fff;padding:40px 20px 30px;}
+.page-header .inner{max-width:960px;margin:0 auto;}
+.page-header .app-name{font-size:13px;opacity:.8;}
+.page-header h1{font-size:24px;font-weight:700;margin-top:6px;line-height:1.4;}
+.page-header .subtitle{font-size:14px;opacity:.85;margin-top:8px;}
+.scope-box{background:rgba(255,255,255,.15);border-left:4px solid #7ecfff;padding:12px 16px;margin-top:16px;border-radius:4px;font-size:13px;}
+.container{max-width:960px;margin:0 auto;padding:30px 16px;}
+.toc{background:#fff;border:1px solid #c8d8ec;border-radius:8px;padding:24px 28px;margin-bottom:32px;}
+.toc h2{font-size:16px;font-weight:700;color:#1a3a5c;border-bottom:2px solid #2a6cbe;padding-bottom:8px;margin-bottom:14px;}
+.toc ol{margin-left:18px;}.toc li{margin:5px 0;font-size:14px;}
+.chapter{background:#fff;border-radius:8px;box-shadow:0 1px 4px rgba(0,0,0,.08);padding:28px 28px 24px;margin-bottom:28px;}
+.chapter-head{border-left:5px solid #2a6cbe;padding-left:14px;margin-bottom:20px;}
+.chapter-head .ch-no{font-size:12px;color:#2a6cbe;font-weight:700;}
+.chapter-head h2{font-size:20px;font-weight:700;color:#1a2535;margin-top:2px;}
+h3{font-size:16px;font-weight:700;color:#1a3a5c;border-bottom:1px solid #dde8f5;padding-bottom:5px;margin:22px 0 12px;}
+p{margin-bottom:12px;}ul,ol{margin-left:20px;margin-bottom:12px;}li{margin-bottom:5px;}
+.steps{counter-reset:step;list-style:none;margin-left:0;}
+.steps li{counter-increment:step;padding:9px 12px 9px 46px;position:relative;background:#f8fbff;border:1px solid #dde8f5;border-radius:6px;margin-bottom:6px;}
+.steps li::before{content:counter(step);position:absolute;left:12px;top:50%;transform:translateY(-50%);width:24px;height:24px;background:#2a6cbe;color:#fff;border-radius:50%;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;}
+.table-wrap{overflow-x:auto;margin-bottom:16px;}
+table{width:100%;border-collapse:collapse;font-size:13px;min-width:380px;}
+th{background:#1a3a5c;color:#fff;padding:9px 12px;text-align:left;white-space:nowrap;}
+td{padding:8px 12px;border-bottom:1px solid #dde8f5;vertical-align:top;}
+tr:nth-child(even) td{background:#f4f7fb;}
+.box{border-radius:6px;padding:13px 16px;margin:14px 0;font-size:13px;}
+.box-warn{background:#fffbe6;border-left:4px solid #f5a623;color:#7a5700;}
+.box-danger{background:#fff0f0;border-left:4px solid #d43f3f;color:#7a0000;}
+.box-hint{background:#e8f4ff;border-left:4px solid #2a6cbe;color:#0a3060;}
+.box-check{background:#f4eeff;border-left:4px solid #8c4fc8;color:#3a0070;}
+.box strong{display:block;margin-bottom:4px;}
+figure{max-width:280px;width:100%;margin:18px auto;text-align:center;}
+figure img{display:block;width:100%;max-width:280px;height:auto;margin:0 auto;border:1px solid #c8d8ec;border-radius:6px;box-shadow:0 2px 8px rgba(0,0,0,.1);}
+figcaption{font-size:12px;color:#5a7a99;margin-top:6px;}
+.diff-add{background:#e8fff0;border-left:4px solid #2a9c5c;border-radius:6px;padding:12px 16px;margin:14px 0;font-size:13px;}
+.diff-add strong{display:block;color:#1a6c3c;margin-bottom:4px;}
+.flow-box{background:#f4f7fb;border:1px solid #c8d8ec;border-radius:8px;padding:20px;margin:16px 0;}
+.flow-box h4{color:#1a3a5c;margin-top:0;}
+.flow-arrow{text-align:center;font-size:20px;color:#2a6cbe;margin:4px 0;}
+.flow-step{background:#fff;border:1px solid #c8d8ec;border-radius:6px;padding:10px 16px;margin:4px 0;font-size:13px;}
+.flow-step strong{color:#1a3a5c;}
+.summary-box{background:linear-gradient(135deg,#e8f4ff,#f0f8ff);border:1px solid #99c8ec;border-radius:8px;padding:20px 24px;margin-top:32px;}
+.summary-box h3{border:none;color:#1a3a5c;margin-top:0;}
+.confirm-box{background:#fdf4ff;border:1px solid #c8a0e0;border-radius:8px;padding:20px 24px;margin-top:16px;}
+.confirm-box h3{border:none;color:#5a0090;margin-top:0;}
+footer{text-align:center;font-size:12px;color:#8a9aaa;padding:30px 16px;border-top:1px solid #dde8f5;margin-top:20px;}
+@media(max-width:640px){.page-header h1{font-size:18px;}.chapter{padding:20px 16px;}.site-nav a{padding:8px 9px;font-size:11px;}}
+@media print{body{background:#fff;font-size:12px;}.site-nav{display:none;}.chapter{box-shadow:none;border:1px solid #ccc;page-break-inside:avoid;}.page-header{background:#1a3a5c !important;-webkit-print-color-adjust:exact;print-color-adjust:exact;}}
+</style>
+</head>
+<body>
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a href="01_top_settings_common_hi.html">① टॉप / सेटिंग्स</a>
+    <a href="02_stocktake_free_hi.html">② स्टॉकटेक निःशुल्क</a>
+    <a href="03_stocktake_simple_hi.html">③ स्टॉकटेक बेसिक</a>
+    <a href="04_stocktake_full_hi.html" class="active">④ स्टॉकटेक फुल</a>
+    <a href="05_inventory_free_hi.html">⑤ इन्वेंटरी निःशुल्क</a>
+    <a href="06_inventory_simple_hi.html">⑥ इन्वेंटरी बेसिक</a>
+    <a href="07_inventory_full_hi.html">⑦ इन्वेंटरी फुल</a>
+  </div>
+</nav>
+<header class="page-header">
+  <div class="inner">
+    <div class="app-name">Quantiventra मैनुअल</div>
+    <h1>④ स्टॉकटेक — फुल अनलॉक</h1>
+    <div class="subtitle">फुल अनलॉक में उपलब्ध सुविधाएँ, विस्तृत स्थान, वास्तविक गणना अंतिम रूप देना, इन्वेंटरी में लागू करना और व्यावहारिक कार्यप्रवाह</div>
+    <div class="scope-box">
+      <strong>इस पृष्ठ में शामिल विषय:</strong>
+      फुल अनलॉक में उपलब्ध सुविधाएँ / बेसिक से अंतर / विस्तृत स्थान सेटअप और उपयोग / विस्तृत CSV आयात/निर्यात / स्टॉकटेक इतिहास / वास्तविक गणना अंतिम रूप देना / इन्वेंटरी में लागू करना / महत्वपूर्ण नोट / फुल अनलॉक के व्यावहारिक कार्यप्रवाह
+    </div>
+  </div>
+</header>
+<div class="container">
+  <nav class="toc">
+    <h2>विषय-सूची</h2>
+    <ol>
+      <li><a href="#overview">फुल अनलॉक का अवलोकन</a></li>
+      <li><a href="#diff">बेसिक अनलॉक से अंतर</a></li>
+      <li><a href="#location">विस्तृत स्थान</a></li>
+      <li><a href="#csv">विस्तृत CSV आयात / निर्यात</a></li>
+      <li><a href="#history">स्टॉकटेक इतिहास</a></li>
+      <li><a href="#confirm-flow">वास्तविक गणना अंतिम रूप देना</a></li>
+      <li><a href="#inventory-reflect">स्टॉकटेक परिणामों को इन्वेंटरी में लागू करना</a></li>
+      <li><a href="#notes">इन्वेंटरी में लागू करने के महत्वपूर्ण नोट</a></li>
+      <li><a href="#usecase">फुल अनलॉक के व्यावहारिक कार्यप्रवाह</a></li>
+      <li><a href="#summary">अध्याय के मुख्य बिंदु</a></li>
+      <li><a href="#check">उपयोग से पहले ध्यान देने योग्य बातें</a></li>
+    </ol>
+  </nav>
+
+  <section class="chapter" id="overview">
+    <div class="chapter-head"><div class="ch-no">अध्याय 1</div><h2>फुल अनलॉक का अवलोकन</h2></div>
+    <p>स्टॉकटेक फुल संस्करण सभी रिकॉर्ड सीमाएँ हटाता है और साझा पूर्ण सेटिंग्स भी सक्षम करता है — कोड नियम, स्थान नियम, कैमरा सेटिंग्स, विस्तारित CSV आदि।</p>
+    <p>यह संस्करण बड़ी संख्या में उत्पादों के प्रबंधन और विस्तृत स्थानों पर आधारित स्टॉकटेक कार्यप्रवाह के लिए उपयुक्त है।</p>
+    <div class="diff-add">
+      <strong>✅ फुल अनलॉक में जोड़ी गई / अनलॉक की गई सुविधाएँ</strong>
+      <ul style="margin-top:6px;">
+        <li>मास्टर रिकॉर्ड, स्टॉकटेक इतिहास और निर्यात रिकॉर्ड की सीमाएँ हटती हैं</li>
+        <li>विस्तृत कोड नियम सेटिंग्स</li>
+        <li>विस्तृत स्थान नियम सेटिंग्स</li>
+        <li>विस्तृत कैमरा स्कैन सेटिंग्स</li>
+        <li>विस्तारित CSV निर्यात</li>
+        <li>विस्तृत संपादन</li>
+        <li>स्क्रीन रोटेशन लॉक(बेसिक अनलॉक से जारी सुविधा)</li>
+      </ul>
+    </div>  </section>
+
+  <section class="chapter" id="diff">
+    <div class="chapter-head"><div class="ch-no">अध्याय 2</div><h2>बेसिक अनलॉक से अंतर</h2></div>
+    <div class="table-wrap">
+      <table>
+        <tr><th>सुविधा / सेटिंग</th><th>बेसिक अनलॉक</th><th>फुल अनलॉक</th></tr>
+        <tr><td>मास्टर रिकॉर्ड</td><td>300 तक</td><td>असीमित</td></tr>
+        <tr><td>स्टॉकटेक इतिहास रिकॉर्ड</td><td>1,000 तक</td><td>असीमित</td></tr>
+        <tr><td>निर्यात रिकॉर्ड</td><td>300 तक</td><td>असीमित</td></tr>
+        <tr><td>विस्तृत कोड नियम सेटिंग्स</td><td>✗</td><td>○</td></tr>
+        <tr><td>विस्तृत स्थान नियम सेटिंग्स</td><td>✗</td><td>○</td></tr>
+        <tr><td>विस्तृत कैमरा सेटिंग्स</td><td>✗</td><td>○</td></tr>
+        <tr><td>विस्तारित CSV निर्यात</td><td>✗</td><td>○</td></tr>
+        <tr><td>विस्तृत स्थानों का उपयोग</td><td>✗ (विस्तृत मोड सेट किया जा सकता है लेकिन सुविधाएँ सीमित)</td><td>○</td></tr>
+      </table>
+    </div>
+  </section>
+
+  <section class="chapter" id="location">
+    <div class="chapter-head"><div class="ch-no">अध्याय 3</div><h2>विस्तृत स्थान</h2></div>
+    <p>फुल अनलॉक के साथ, स्थान मास्टर में दर्ज सभी स्थान स्टॉकटेक के लिए उपलब्ध हो जाते हैं। केवल गोदाम और दुकान से परे शेल्फ नंबर, मंजिलें, क्षेत्र और अन्य विस्तृत स्थान कॉन्फ़िगर कर सकते हैं।</p>
+    <h3>विस्तृत स्थान सेट करना</h3>
+    <ol class="steps">
+      <li><strong>सेटिंग्स → स्टॉकटेक सेटिंग्स</strong> जाएँ और <strong>विस्तृत</strong> मोड चुनें।</li>
+      <li><strong>मास्टर प्रबंधन → स्थान मास्टर</strong> जाएँ और आवश्यक स्थान दर्ज करें।</li>
+      <li>स्टॉकटेक स्क्रीन में, स्थान फ़ील्ड पर टैप करने से सभी दर्ज स्थान विकल्प के रूप में दिखेंगे।</li>
+    </ol>
+    <div class="box box-warn">
+      <strong>⚠ नोट</strong>
+      फुल अनलॉक सक्रिय होने पर भी, मोड अभी भी सरल A/B/C होने पर केवल सरल स्थान दिखते हैं। सभी दर्ज स्थानों का उपयोग करने के लिए <strong>विस्तृत</strong> मोड पर स्विच करें।
+    </div>
+    <div class="box box-hint">
+      <strong>💡 सुझाव</strong>
+      यदि विस्तृत स्थान दर्ज हैं लेकिन ऐप अभी भी सरल मोड में है, तो ऐप पूछ सकता है: "अधिक स्थानों के लिए विस्तृत मोड पर स्विच करें।"
+    </div>
+  </section>
+
+  <section class="chapter" id="csv">
+    <div class="chapter-head"><div class="ch-no">अध्याय 5</div><h2>विस्तारित CSV आयात / निर्यात</h2></div>
+    <p>फुल अनलॉक में स्टॉकटेक के लिए विस्तारित CSV आयात/निर्यात का उपयोग किया जा सकता है।</p>
+    <h3>स्टॉकटेक CSV आयात विनिर्देश (फुल अनलॉक)</h3>
+    <div class="table-wrap">
+      <table>
+        <tr><th>CSV प्रकार</th><th>उद्देश्य</th><th>मुख्य कॉलम</th><th>अनिवार्य/वैकल्पिक</th><th>नोट</th><th>उपलब्ध में</th></tr>
+        <tr><td>स्टॉकटेक CSV (2 कॉलम)</td><td>बुनियादी स्टॉकटेक मास्टर आयात</td><td>उत्पाद कोड, उत्पाद नाम</td><td>2 कॉलम अनिवार्य</td><td>कोई हेडर पंक्ति नहीं; डेटा पहली पंक्ति से शुरू</td><td>सभी प्लान</td></tr>
+        <tr><td>स्टॉकटेक CSV (3 कॉलम)</td><td>सैद्धांतिक स्टॉक के साथ स्टॉकटेक मास्टर आयात</td><td>उत्पाद कोड, उत्पाद नाम, सैद्धांतिक स्टॉक</td><td>3 कॉलम अनिवार्य</td><td>आयात पर वास्तविक गणना आवश्यक नहीं (0 से शुरू)</td><td>सभी प्लान</td></tr>
+      </table>
+    </div>
+    <h3>स्टॉकटेक CSV निर्यात(फुल अनलॉक)</h3>
+    <ul>
+      <li>निर्यात में पहली पंक्ति पर भाषा-विशिष्ट हेडर पंक्ति शामिल है।</li>
+      <li><code>stocktake_summary</code> CSV में तारीख, समय या स्थान कॉलम शामिल नहीं हैं।</li>
+      <li>स्थान, शेल्फ, तारीख या रिकॉर्ड द्वारा विस्तृत निर्यात इतिहास से अलग निर्यात होना अपेक्षित है (सत्यापन के अधीन)।</li>
+    </ul>
+    <div class="box box-danger">
+      <strong>🚨 महत्वपूर्ण</strong>
+      CSV आयात और निर्यात ऑपरेशन आपके डेटा को महत्वपूर्ण रूप से बदल सकते हैं। आगे बढ़ने से पहले हमेशा बैकअप लें।
+    </div>
+  </section>
+
+  <section class="chapter" id="history">
+    <div class="chapter-head"><div class="ch-no">अध्याय 6</div><h2>स्टॉकटेक इतिहास</h2></div>
+    <p>फुल अनलॉक के साथ, स्टॉकटेक इतिहास रिकॉर्ड सीमा हट जाती है। पुराना स्टॉकटेक डेटा लंबे समय तक संग्रहीत और देखा जा सकता है।</p>    <h3>इतिहास में क्या देख सकते हैं</h3>
+    <ul>
+      <li>सहेजने की तारीख/समय, उत्पाद कोड, उत्पाद नाम</li>
+      <li>वास्तविक गणना मात्रा, स्थान</li>
+      <li>मेमो (फुल अनलॉक)</li>
+      <li>अंतिम रूप देने की स्थिति (लंबित / अंतिम रूप दिया गया)</li>
+    </ul>
+  </section>
+
+  <section class="chapter" id="confirm-flow">
+    <div class="chapter-head"><div class="ch-no">अध्याय 7</div><h2>वास्तविक गणना अंतिम रूप देना</h2></div>
+    <p>फुल अनलॉक में, दर्ज किए स्टॉकटेक डेटा के लिए "वास्तविक गणना अंतिम रूप दें" क्रिया होती है। अंतिम रूप देने से स्टॉकटेक परिणाम आधिकारिक रिकॉर्ड बन जाते हैं।</p>
+    <div class="flow-box">
+      <h4>स्टॉकटेक से अंतिम रूप देने तक का प्रवाह</h4>
+      <div class="flow-step"><strong>① स्टॉकटेक डेटा दर्ज करें</strong>: बारकोड स्कैन करें → मात्रा दर्ज करें → सहेजें</div>
+      <div class="flow-arrow">↓</div>
+      <div class="flow-step"><strong>② स्टॉकटेक इतिहास देखें</strong>: सहेजी प्रविष्टियाँ पुष्टि करें और किसी भी त्रुटि को सुधारें (सुधार विधि सत्यापन के अधीन)</div>
+      <div class="flow-arrow">↓</div>
+      <div class="flow-step"><strong>③ वास्तविक गणना अंतिम रूप दें</strong>: अंतिम रूप देने की क्रिया करें</div>
+      <div class="flow-arrow">↓</div>
+      <div class="flow-step"><strong>④ इन्वेंटरी में लागू करें (वैकल्पिक)</strong>: अंतिम परिणाम इन्वेंटरी प्रबंधन में लागू करें</div>
+    </div>
+    <div class="box box-danger">
+      <strong>🚨 अंतिम रूप देने के बटन के बारे में</strong>
+      वास्तविक गणना अंतिम रूप देना एक उच्च-प्रभाव ऑपरेशन है जो इन्वेंटरी डेटा को प्रभावित करता है। अंतिम रूप देने का बटन पुष्टि विवरण के नीचे एक अलग खतरे के क्षेत्र में है — यह पहला बटन नहीं है जो आप दबाते हैं। इसे दबाने से पहले सभी विसंगतियों और प्रभावित डेटा की सावधानी से समीक्षा करें।
+    </div>
+    <div class="box box-check">
+      <strong>ℹ️ पुष्टि के बाद</strong>
+      पुष्टि करने के बाद उपलब्ध कार्रवाई के लिए ऐप स्क्रीन, स्टॉकटेक इतिहास और बैकअप CSV की सामग्री के आधार पर आगे की कार्रवाई करें। पुष्टि के बाद डेटा बदल सकता है, इसलिए सावधानी से आगे बढ़ें।
+    </div>
+    <div class="box box-danger">
+      <strong>🚨 महत्वपूर्ण</strong>
+      अंतिम रूप देने से पहले हमेशा स्टॉकटेक इतिहास की समीक्षा करें। आगे बढ़ने से पहले पुष्टि स्क्रीन के निर्देश ध्यान से पढ़ें।
+    </div>
+  </section>
+
+  <section class="chapter" id="inventory-reflect">
+    <div class="chapter-head"><div class="ch-no">अध्याय 8</div><h2>स्टॉकटेक परिणामों को इन्वेंटरी में लागू करना</h2></div>
+    <p>स्टॉकटेक परिणाम इन्वेंटरी प्रबंधन में लागू करने से स्टॉक मात्राएँ अंतिम रूप दी गई वास्तविक गणना से मेल खाने के लिए समायोजित होती हैं। विसंगतियाँ समायोजन इतिहास प्रविष्टियों के रूप में दर्ज होती हैं।</p>
+    <h3>इन्वेंटरी में लागू करें — अवलोकन</h3>
+    <ol class="steps">
+      <li>स्टॉकटेक डेटा दर्ज करें और वास्तविक गणना अंतिम रूप दें।</li>
+      <li>इन्वेंटरी में लागू करें ऑपरेशन चलाएँ।</li>
+      <li>पुष्टि स्क्रीन पर सामग्री (समायोजन विवरण) की समीक्षा करें।</li>
+      <li>पुष्टि करें और लागू करने की क्रिया निष्पादित करें।</li>
+      <li>इन्वेंटरी इतिहास में समायोजन विवरण की जाँच करें।</li>
+    </ol>
+    <div class="box box-danger">
+      <strong>🚨 महत्वपूर्ण</strong>
+      इन्वेंटरी में लागू करने से स्टॉक मात्राओं में महत्वपूर्ण बदलाव होते हैं। आगे बढ़ने से पहले हमेशा बैकअप CSV लें। निष्पादित करने से पहले पुष्टि स्क्रीन पूरी तरह पढ़ें।
+    </div>
+    <div class="box box-check">
+      <strong>ℹ️ लागू करने के बाद</strong>
+      स्टॉकटेक परिणाम लागू करने के बाद स्टॉक इतिहास, समायोजन विवरण और बैकअप CSV से बदलावों की जाँच करें। आगे की कार्रवाई करते समय ऐप स्क्रीन के निर्देशों को प्राथमिकता दें।
+    </div>
+  </section>
+
+  <section class="chapter" id="notes">
+    <div class="chapter-head"><div class="ch-no">अध्याय 9</div><h2>इन्वेंटरी में लागू करने के महत्वपूर्ण नोट</h2></div>
+    <div class="box box-danger">
+      <strong>🚨 लागू करने से पहले हमेशा बैकअप लें</strong>
+      इन्वेंटरी में लागू करने से आपके डेटा में बड़े पैमाने पर बदलाव होते हैं। पहले हमेशा बैकअप CSV निर्यात करें (<strong>सेटिंग्स → सारा डेटा निर्यात करें</strong>)।
+    </div>
+    <div class="box box-warn">
+      <strong>⚠ पुष्टि स्क्रीन पढ़ें</strong>
+      डेटा बदलने वाले किसी भी ऑपरेशन के लिए — अंतिम रूप देना, लागू करना, हटाना, रीसेट करना — निष्पादित करने से पहले पुष्टि स्क्रीन ध्यान से पढ़ें।
+    </div>
+    <div class="box box-warn">
+      <strong>⚠ मूल्य निर्धारण और खरीद की शर्तें</strong>
+      कानूनी और खरीद की शर्तों के लिए हमेशा Google Play Store जाँचें — यह मैनुअल उन्हें निश्चित रूप से नहीं बताता।
+    </div>
+  </section>
+
+  <section class="chapter" id="usecase">
+    <div class="chapter-head"><div class="ch-no">अध्याय 10</div><h2>फुल अनलॉक के व्यावहारिक कार्यप्रवाह</h2></div>
+    <h3>मासिक स्टॉकटेक कार्यप्रवाह</h3>
+    <ol class="steps">
+      <li>महीने की शुरुआत में, उत्पाद मास्टर रिफ्रेश करने के लिए स्टॉकटेक CSV आयात करें।</li>
+      <li>स्टॉकटेक सेटिंग्स को <strong>विस्तृत</strong> मोड पर सेट करें और शेल्फ- और क्षेत्र-स्तर के स्थान तैयार करें।</li>
+      <li>स्टॉकटेक करें: बारकोड स्कैन करें और वास्तविक गणना दर्ज करें।</li>
+      <li>स्टॉकटेक इतिहास में सभी प्रविष्टियाँ देखें।</li>
+      <li>सब ठीक लगे तो वास्तविक गणना अंतिम रूप दें।</li>
+      <li>इन्वेंटरी में लागू करें (बैकअप लेने के बाद)।</li>
+      <li>इन्वेंटरी इतिहास में स्टॉकटेक समायोजन प्रविष्टियाँ देखें और किसी भी विसंगति की जाँच करें।</li>
+      <li>संग्रह के लिए स्टॉकटेक परिणाम CSV निर्यात करें।</li>
+    </ol>
+  </section>
+
+  <div class="summary-box" id="summary">
+    <h3>📌 अध्याय के मुख्य बिंदु</h3>
+    <ul>
+      <li>फुल अनलॉक सभी रिकॉर्ड सीमाएँ हटाता है और विस्तृत स्थान और विस्तारित CSV सुविधाएँ सक्षम करता है।</li>
+      <li>विस्तृत स्थानों का उपयोग करने के लिए <strong>सेटिंग्स → स्टॉकटेक सेटिंग्स</strong> के अंतर्गत <strong>विस्तृत</strong> मोड पर स्विच करें।</li>
+      <li>अंतिम रूप देना → इन्वेंटरी में लागू करना प्रवाह बड़े पैमाने पर डेटा बदलाव करता है — सावधानी से आगे बढ़ें।</li>
+      <li>इन्वेंटरी में लागू करने से पहले हमेशा बैकअप CSV लें।</li>
+    </ul>
+  </div>
+
+  <div class="confirm-box" id="check">
+    <h3>🔍 उपयोग से पहले ध्यान देने योग्य बातें</h3>
+    <ul>
+      <li>वास्तविक गणना की पुष्टि करने से पहले स्टॉकटेक इतिहास, अंतर और प्रभावित डेटा की जाँच करें।</li>
+      <li>स्टॉकटेक परिणाम इन्वेंटरी में लागू करने के बाद स्टॉक इतिहास और बैकअप CSV से बदलावों की पुष्टि करें।</li>
+      <li>स्थान, तारीख या रिकॉर्ड-आधारित CSV आउटपुट का उपयोग करते समय निर्यात स्क्रीन और बनाए गए CSV की सामग्री देखें।</li>
+      <li>सहेजे गए स्टॉकटेक डेटा में सुधार करते समय ऐप में उपलब्ध संपादन प्रवाह और स्क्रीन निर्देशों का पालन करें।</li>
+    </ul>
+  </div>
+</div>
+<footer>
+  <p>Quantiventra मैनुअल | ④ स्टॉकटेक फुल स्तर</p>
+  <p style="margin-top:4px;">इस मैनुअल की सामग्री बिना पूर्व सूचना के बदली जा सकती है। नवीनतम जानकारी के लिए ऐप में दिखाई गई जानकारी को प्राथमिकता दें।</p>
+  <p style="margin-top:4px;"><a href="privacy_hi.html">गोपनीयता नीति</a></p>
+</footer>
+</body>
+</html>
+

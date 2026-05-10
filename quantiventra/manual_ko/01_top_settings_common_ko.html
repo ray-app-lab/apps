@@ -1,0 +1,479 @@
+﻿<!DOCTYPE html>
+<html lang="ko">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quantiventra – 홈 화면·설정·공통 작업</title>
+<style>*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:-apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo','Noto Sans KR','Malgun Gothic',sans-serif;font-size:15px;line-height:1.9;color:#1a2535;background:#f4f7fb;}
+a{color:#1a5fa8;text-decoration:none;}a:hover{text-decoration:underline;}
+.site-nav{background:#1a3a5c;color:#fff;padding:0;}.site-nav .nav-inner{max-width:960px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:stretch;}
+.site-nav a{color:#cde;padding:10px 13px;font-size:12px;display:block;border-right:1px solid #2a4a6c;white-space:nowrap;}
+.site-nav a:hover{background:#2a5090;text-decoration:none;}.site-nav a.active{background:#2a6cbe;color:#fff;font-weight:bold;}
+.page-header{background:linear-gradient(135deg,#1a3a5c 0%,#2a6cbe 100%);color:#fff;padding:40px 20px 30px;}
+.page-header .inner{max-width:960px;margin:0 auto;}.page-header .app-name{font-size:13px;opacity:.8;}
+.page-header h1{font-size:22px;font-weight:700;margin-top:6px;line-height:1.5;}.page-header .subtitle{font-size:14px;opacity:.85;margin-top:8px;}
+.scope-box{background:rgba(255,255,255,.15);border-left:4px solid #7ecfff;padding:12px 16px;margin-top:16px;border-radius:4px;font-size:13px;}
+.play-section{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.3);border-radius:10px;padding:22px 28px;margin-top:24px;display:flex;align-items:center;gap:28px;flex-wrap:wrap;}
+.play-qr-wrap{flex-shrink:0;text-align:center;}
+.play-qr-frame{width:130px;height:130px;border:3px solid rgba(255,255,255,.7);border-radius:10px;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.95);position:relative;overflow:hidden;}
+.play-qr-frame img{width:100%;height:100%;object-fit:contain;display:block;}
+.play-qr-corner{pointer-events:none;position:absolute;width:16px;height:16px;border-color:#2a6cbe;border-style:solid;border-width:0;}
+.play-qr-corner.tl{top:5px;left:5px;border-top-width:3px;border-left-width:3px;border-radius:3px 0 0 0;}
+.play-qr-corner.tr{top:5px;right:5px;border-top-width:3px;border-right-width:3px;border-radius:0 3px 0 0;}
+.play-qr-corner.bl{bottom:5px;left:5px;border-bottom-width:3px;border-left-width:3px;border-radius:0 0 0 3px;}
+.play-qr-corner.br{bottom:5px;right:5px;border-bottom-width:3px;border-right-width:3px;border-radius:0 0 3px 0;}
+.play-qr-label{font-size:10px;color:rgba(255,255,255,.8);margin-top:6px;letter-spacing:.05em;}
+.play-info h3{font-size:16px;font-weight:700;color:#fff;margin-bottom:4px;}
+.play-info p{font-size:12px;color:rgba(255,255,255,.75);margin-bottom:10px;}
+.play-badge{display:inline-block;text-decoration:none;}
+.play-badge img{display:block;height:44px;width:auto;max-width:180px;}.container{max-width:960px;margin:0 auto;padding:30px 16px;}
+.toc{background:#fff;border:1px solid #c8d8ec;border-radius:8px;padding:24px 28px;margin-bottom:32px;}
+.toc h2{font-size:16px;font-weight:700;color:#1a3a5c;border-bottom:2px solid #2a6cbe;padding-bottom:8px;margin-bottom:14px;}
+.toc ol{margin-left:18px;}.toc li{margin:5px 0;font-size:14px;}
+.chapter{background:#fff;border-radius:8px;box-shadow:0 1px 4px rgba(0,0,0,.08);padding:28px 28px 24px;margin-bottom:28px;}
+.chapter-head{border-left:5px solid #2a6cbe;padding-left:14px;margin-bottom:20px;}
+.chapter-head .ch-no{font-size:12px;color:#2a6cbe;font-weight:700;}.chapter-head h2{font-size:20px;font-weight:700;color:#1a2535;margin-top:2px;}
+h3{font-size:16px;font-weight:700;color:#1a3a5c;border-bottom:1px solid #dde8f5;padding-bottom:5px;margin:22px 0 12px;}
+h4{font-size:14px;font-weight:700;color:#2a4a6c;margin:16px 0 8px;}
+p{margin-bottom:12px;}ul,ol{margin-left:20px;margin-bottom:12px;}li{margin-bottom:5px;}
+.steps{counter-reset:step;list-style:none;margin-left:0;}
+.steps li{counter-increment:step;padding:9px 12px 9px 46px;position:relative;background:#f8fbff;border:1px solid #dde8f5;border-radius:6px;margin-bottom:6px;}
+.steps li::before{content:counter(step);position:absolute;left:12px;top:50%;transform:translateY(-50%);width:24px;height:24px;background:#2a6cbe;color:#fff;border-radius:50%;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;}
+.table-wrap{overflow-x:auto;margin-bottom:16px;}
+table{width:100%;border-collapse:collapse;font-size:13px;min-width:380px;}
+th{background:#1a3a5c;color:#fff;padding:9px 12px;text-align:left;white-space:nowrap;}
+td{padding:8px 12px;border-bottom:1px solid #dde8f5;vertical-align:top;}tr:nth-child(even) td{background:#f4f7fb;}
+code{font-family:'Courier New',monospace;background:rgba(0,80,160,.08);color:#004080;padding:2px 6px;border-radius:3px;font-size:12px;}
+.box{border-radius:6px;padding:13px 16px;margin:14px 0;font-size:13px;}
+.box-warn{background:#fffbe6;border-left:4px solid #f5a623;color:#7a5700;}
+.box-danger{background:#fff0f0;border-left:4px solid #d43f3f;color:#7a0000;}
+.box-hint{background:#e8f4ff;border-left:4px solid #2a6cbe;color:#0a3060;}
+.box-check{background:#f4eeff;border-left:4px solid #8c4fc8;color:#3a0070;}
+.box strong{display:block;margin-bottom:4px;}
+figure{max-width:280px;width:100%;margin:18px auto;text-align:center;}
+figure img{display:block;width:100%;max-width:280px;height:auto;margin:0 auto;border:1px solid #c8d8ec;border-radius:6px;box-shadow:0 2px 8px rgba(0,0,0,.1);}
+figcaption{font-size:12px;color:#5a7a99;margin-top:6px;}
+.img-pending{display:flex;align-items:center;justify-content:center;max-width:280px;width:100%;box-sizing:border-box;background:#e8eef5;border:2px dashed #99b8d8;border-radius:6px;height:160px;color:#5a7a99;font-size:13px;margin:18px auto;}
+.diff-add{background:#e8fff0;border-left:4px solid #2a9c5c;border-radius:6px;padding:12px 16px;margin:14px 0;font-size:13px;}
+.diff-add strong{display:block;color:#1a6c3c;margin-bottom:4px;}
+.flow-box{background:#f4f7fb;border:1px solid #c8d8ec;border-radius:8px;padding:20px;margin:16px 0;}
+.flow-box h4{color:#1a3a5c;margin-top:0;}
+.flow-arrow{text-align:center;font-size:20px;color:#2a6cbe;margin:4px 0;}
+.flow-step{background:#fff;border:1px solid #c8d8ec;border-radius:6px;padding:10px 16px;margin:4px 0;font-size:13px;}
+.flow-step strong{color:#1a3a5c;}
+.summary-box{background:linear-gradient(135deg,#e8f4ff,#f0f8ff);border:1px solid #99c8ec;border-radius:8px;padding:20px 24px;margin-top:32px;}
+.summary-box h3{border:none;color:#1a3a5c;margin-top:0;}
+.confirm-box{background:#fdf4ff;border:1px solid #c8a0e0;border-radius:8px;padding:20px 24px;margin-top:16px;}
+.confirm-box h3{border:none;color:#5a0090;margin-top:0;}
+.check{color:#2e7d32;font-weight:700;}.cross{color:#c62828;}
+th.pro-col{background:#5a2a8c;}
+.feature-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px;margin:16px 0;}
+.feature-card{background:#f4f7fb;border:1px solid #c8d8ec;border-radius:8px;padding:16px;}
+.feature-card h4{color:#1a3a5c;margin-top:0;margin-bottom:6px;font-size:14px;}
+.feature-card p{font-size:13px;margin:0;color:#3a5a7a;}
+.feature-card.pro-card{background:#f4eeff;border-color:#c8a0e0;}
+.feature-card.pro-card h4{color:#5a2a8c;}
+.trouble{border:1px solid #c8d8ec;border-radius:8px;margin:14px 0;overflow:hidden;}
+.trouble-q{background:#eef6fd;padding:13px 18px;font-weight:700;font-size:14px;color:#1a3a5c;display:flex;align-items:flex-start;gap:10px;}
+.trouble-q::before{content:'Q';background:#2a6cbe;color:#fff;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900;flex-shrink:0;margin-top:1px;}
+.trouble-a{padding:13px 18px 14px 50px;font-size:13.5px;border-top:1px solid #c8d8ec;line-height:1.9;}
+.trouble-a ul{margin-left:16px;}
+.legal-block{background:#f5f5f5;border:1px solid #ddd;border-radius:8px;padding:20px 24px;font-size:12.5px;color:#444;line-height:1.9;margin:14px 0;}
+.legal-block h4{font-size:13px;color:#333;margin:18px 0 6px;border-bottom:1px solid #ddd;padding-bottom:4px;}
+.legal-block h4:first-child{margin-top:0;}
+footer{text-align:center;font-size:12px;color:#8a9aaa;padding:30px 16px;border-top:1px solid #dde8f5;margin-top:20px;}
+@media(max-width:640px){.page-header h1{font-size:18px;}.chapter{padding:20px 16px;}.site-nav a{padding:8px 9px;font-size:11px;}}
+@media print{body{background:#fff;font-size:12px;}.site-nav{display:none;}.chapter{box-shadow:none;border:1px solid #ccc;page-break-inside:avoid;}.page-header{background:#1a3a5c !important;-webkit-print-color-adjust:exact;print-color-adjust:exact;}}
+</style></head>
+<body>
+<nav class="site-nav"><div class="nav-inner">
+  <a href="01_top_settings_common_ko.html" class="active">① 홈 / 설정</a>
+  <a href="02_stocktake_free_ko.html">② 실사 무료</a>
+  <a href="03_stocktake_simple_ko.html">③ 실사 표준</a>
+  <a href="04_stocktake_full_ko.html">④ 실사 전체</a>
+  <a href="05_inventory_free_ko.html">⑤ 재고 무료</a>
+  <a href="06_inventory_simple_ko.html">⑥ 재고 표준</a>
+  <a href="07_inventory_full_ko.html">⑦ 재고 전체</a>
+</div></nav>
+<header class="page-header"><div class="inner">
+  <div class="app-name">Quantiventra 매뉴얼 — 한국어판</div>
+  <h1>① 홈 화면 · 설정 · 공통 작업</h1>
+  <div class="subtitle">앱 개요, 시스템 요구 사항, 설정, 권한, 플랜 안내, 샘플 데이터, 용어집 및 법적 고지</div>
+  <div class="scope-box"><strong>이 페이지에서 다루는 내용:</strong> Quantiventra 소개 / 시스템 요구 사항 및 권한 / 설치와 첫 실행 / 데이터 저장 / 실사와 재고 관리의 차이 / 빠른 시작 / 홈 화면 안내 / 설정 화면 안내 / 언어 설정 / 플랜 개요 / 샘플 데이터 / 문제 해결 / 용어집 / 이용 약관 및 면책 조항</div>
+</div></header>
+<div class="container">
+  <nav class="toc"><h2>목차</h2><ol>
+    <li><a href="#about">Quantiventra란?</a></li>
+    <li><a href="#environment">시스템 요구 사항 및 권한</a></li>
+    <li><a href="#install">설치 및 첫 실행</a></li>
+    <li><a href="#storage">데이터 저장</a></li>
+    <li><a href="#diff">재고 실사와 재고 관리</a></li>
+    <li><a href="#start">빠른 시작(신규 사용자 가이드)</a></li>
+    <li><a href="#top-screen">홈 화면 안내</a></li>
+    <li><a href="#settings">설정 화면 안내</a></li>
+    <li><a href="#language">언어 설정</a></li>
+    <li><a href="#billing">플랜 개요</a></li>
+    <li><a href="#sample">샘플 데이터</a></li>
+    <li><a href="#trouble">문제 해결</a></li>
+    <li><a href="#glossary">용어집</a></li>
+    <li><a href="#legal">이용 약관 및 면책 조항</a></li>
+    <li><a href="#summary">이 장의 핵심 요약</a></li>
+    <li><a href="#confirm">확인이 필요한 사항</a></li>
+  </ol></nav>
+
+  <section class="chapter" id="about">
+    <div class="chapter-head"><div class="ch-no">제1장</div><h2>Quantiventra란?</h2></div>
+    <p><strong>Quantiventra</strong>는 「<em>Quantity</em>」(수량)와 「<em>Inventory</em>」(재고)의 합성어입니다. 스마트폰 카메라로 바코드를 스캔해 재고 실사와 재고 관리를 간편하게 해 주는 Android 앱입니다.</p>
+    <p>카메라를 바코드에 향하면 자동으로 상품을 인식하고, 수량을 입력해 저장합니다. 직관적인 조작으로 종이 실사표를 디지털화할 수 있습니다. 결과는 CSV 파일로 저장되어 Excel이나 Google Sheets에서 편리하게 활용할 수 있습니다.</p>    <h3>주요 기능</h3>
+    <div class="feature-grid">
+      <div class="feature-card"><h4>📦 재고 수량 파악</h4><p>바코드 스캔으로 상품을 빠르게 인식하고 즉시 수량을 기록합니다. 내장 계산기로 여러 위치의 수량을 손쉽게 합산할 수 있습니다.</p></div>
+      <div class="feature-card"><h4>🗂️ 마스터 데이터 관리</h4><p>상품·카테고리·위치를 마스터 데이터로 등록합니다. CSV 일괄 가져오기도 지원합니다.</p></div>
+      <div class="feature-card"><h4>📍 위치 관리</h4><p>창고·매장·선반 등 여러 보관 위치를 등록해 위치별 재고를 관리합니다. 보충 판단에 포함할 위치도 설정할 수 있습니다.</p></div>
+      <div class="feature-card"><h4>📊 CSV 가져오기/내보내기</h4><p>재고 목록·백업·이력을 CSV로 내보내 Excel이나 Google Sheets에서 집계합니다.</p></div>
+      <div class="feature-card"><h4>🌐 다국어 지원</h4><p>일본어·영어·중국어·한국어 등 12개 언어를 지원합니다. 처음 실행할 때는 기기 언어를 참고해 표시 언어가 선택되며, 이후에는 앱의 언어 설정에서 직접 선택할 수 있습니다.</p></div>
+      <div class="feature-card pro-card"><h4>⭐ 전체 버전 기능</h4><p>항목 수 제한을 해제하고 상세 위치 관리·재고 이동·실사 결과 반영 등 더 많은 기능을 잠금 해제합니다.</p></div>
+    </div>
+    <h3>카메라 스캔 원리</h3>
+    <p>화면 중앙의 가이드 프레임(파란색 또는 노란색 테두리)안에 바코드가 들어오면, <strong>연속 3프레임에서 같은 코드를 인식</strong>했을 때 자동으로 확정됩니다. 세 번 확인하는 방식으로 오인식을 방지하면서도 안정적인 인식을 보장합니다.</p>
+    <div class="box box-hint"><strong>💡 바코드가 인식되지 않을 때</strong>바코드가 가이드 프레임 <strong>안에 완전히 들어와야</strong> 합니다. 프레임 밖으로 벗어나면 인식되지 않습니다. 바코드 전체가 프레임 안에 들어오도록 카메라 위치를 조정하세요.</div>
+  </section>
+
+  <section class="chapter" id="environment">
+    <div class="chapter-head"><div class="ch-no">제2장</div><h2>시스템 요구 사항 및 권한</h2></div>
+    <div class="table-wrap"><table>
+      <tr><th>항목</th><th>요구 사항</th></tr>
+      <tr><td>운영 체제</td><td>Android 8.0(Oreo / API 26)이상</td></tr>
+      <tr><td>카메라</td><td>자동 초점 카메라(필수)</td></tr>
+      <tr><td>저장 공간</td><td>최소 10MB 이상의 내부 저장 공간 권장</td></tr>
+      <tr><td>필수 권한</td><td>카메라(필수)</td></tr>
+      <tr><td>인터넷 연결</td><td>일반적인 실사·재고 작업에는 필요하지 않음 — 구매 확인, 구매 복원, Google Play 관련 작업 또는 외부 링크 표시에는 연결이 필요할 수 있음</td></tr>
+      <tr><td>Google Play 서비스</td><td>플랜 구매 및 복원 시 필요</td></tr>
+    </table></div>
+    <div class="box box-hint"><strong>💡 저장소 권한</strong>본 앱은 Android의 <strong>앱 전용 내부 저장소</strong>에 데이터를 저장하므로 저장소 권한이 필요하지 않습니다. 데이터 교환은 앱의 가져오기·내보내기·공유 기능을 통해 처리됩니다.</div>
+  </section>
+
+  <section class="chapter" id="install">
+    <div class="chapter-head"><div class="ch-no">제3장</div><h2>설치 및 첫 실행</h2></div>
+    <ol class="steps">
+      <li>Google Play 스토어에서 「Quantiventra」를 검색하고 <strong>설치</strong>를 탭합니다.</li>
+      <li>앱 아이콘을 탭해 실행하면 카메라 권한 요청이 나타납니다. <strong>허용</strong>을 탭합니다.</li>
+      <li>샘플 데이터 생성 안내가 나타나면 <strong>생성</strong> 또는 <strong>건너뛰기</strong>를 선택합니다.</li>
+      <li>앱 데이터 폴더가 내부 저장소에 자동으로 생성됩니다.</li>
+      <li>홈 화면이 표시되면 초기 설정이 완료된 것입니다.</li>
+    </ol>
+    <div class="box box-warn"><strong>⚠ 카메라 권한을 거부한 경우</strong>바코드 스캔을 사용할 수 없습니다. 다시 허용하려면 <strong>설정 → 앱 → Quantiventra → 권한 → 카메라 → 허용</strong> 순으로 진행하세요.</div>
+    <h3>기기 변경 후 절차</h3>
+    <ol class="steps">
+      <li>이전 기기에서 <strong>설정 → 내보내기</strong> 또는 <strong>설정 → 공유</strong>를 사용해 데이터를 백업합니다.</li>
+      <li>새 기기에서 구매에 사용한 동일한 Google 계정으로 로그인합니다.</li>
+      <li>Google Play에서 Quantiventra를 설치합니다.</li>
+      <li><strong>설정 → 구매 복원</strong>을 실행해 구매한 플랜을 복원합니다.</li>
+      <li>필요한 경우 <strong>설정 → 마스터 CSV 가져오기</strong>로 백업한 CSV를 가져옵니다.</li>
+    </ol>
+    <div class="box box-danger"><strong>🚨 앱 삭제 시</strong>앱을 삭제하면 내부 저장소의 모든 데이터가 삭제됩니다. <strong>내보내기</strong> 또는 <strong>공유</strong>를 통해 정기적으로 백업하는 습관을 들이세요.</div>
+  </section>
+
+  <section class="chapter" id="storage">
+    <div class="chapter-head"><div class="ch-no">제4장</div><h2>데이터 저장</h2></div>
+    <p>앱 데이터는 기기의 앱 전용 비공개 영역에 저장됩니다. 파일 관리자로 직접 편집하지 마세요. 앱의 공유 및 내보내기 기능을 통해 데이터에 접근하거나 백업하세요.</p>
+    <div class="table-wrap"><table>
+      <tr><th>데이터 카테고리</th><th>내용</th><th>업데이트 시점</th></tr>
+      <tr><td>마스터 데이터</td><td>상품·카테고리·위치 등 핵심 데이터</td><td>항목을 등록·편집·비활성화할 때</td></tr>
+      <tr><td>실사 및 재고 이력</td><td>실사·입고·출고·이동·CSV 가져오기 등의 기록</td><td>항목을 저장하거나 가져올 때</td></tr>
+      <tr><td>앱 설정</td><td>언어·스캔·코드 규칙·위치 설정 등</td><td>설정을 변경할 때</td></tr>
+    </table></div>
+    <h3>Excel에서 CSV를 여는 방법</h3>
+    <p>CSV 파일은 UTF-8 형식으로 저장됩니다. Excel에서 열 때는 아래 절차를 권장합니다.</p>
+    <ol class="steps">
+      <li>Excel을 열고 <strong>데이터 → 텍스트/CSV에서</strong>를 선택합니다.</li>
+      <li>열려는 CSV 파일을 선택합니다.</li>
+      <li>파일 원본 또는 인코딩에서 <strong>Unicode(UTF-8)</strong>을 선택합니다.</li>
+      <li>미리보기를 확인한 뒤 <strong>로드</strong>를 실행합니다.</li>
+    </ol>
+    <div class="box box-warn"><strong>⚠ CSV를 더블 클릭해 바로 열지 마세요</strong>환경에 따라 문자가 깨질 수 있습니다. Excel의 데이터 가져오기 기능을 사용하세요.</div>
+    <h3>권장 백업 절차</h3>
+    <ol class="steps">
+      <li><strong>설정 → 내보내기(폴더 선택)</strong>를 탭합니다.</li>
+      <li>기기의 Documents 폴더에 백업 폴더를 만들고 선택합니다(예:<code>Quantiventra_backup_20250401</code>).</li>
+      <li>이력 및 마스터 데이터 CSV 파일이 저장되면 완료됩니다.</li>
+      <li>더 안전하게 보관하려면 Google 드라이브 또는 USB 케이블로 PC에 복사하세요.</li>
+    </ol>
+  </section>
+
+  <section class="chapter" id="diff">
+    <div class="chapter-head"><div class="ch-no">제5장</div><h2>재고 실사와 재고 관리</h2></div>
+    <div class="table-wrap"><table>
+      <tr><th>항목</th><th>재고 실사</th><th>재고 관리</th></tr>
+      <tr><td>목적</td><td>실제 수량을 세어 기록</td><td>입고·출고·이동으로 재고 변동을 추적</td></tr>
+      <tr><td>작업 흐름</td><td>스캔 → 수량 입력 → 저장 → 확인</td><td>입고/출고/이동 → 저장 → 이력 조회</td></tr>
+      <tr><td>주요 사용 시나리오</td><td>월별 실사·연말 재고 조사·수시 확인</td><td>일상적인 입고·출고·이동 관리</td></tr>
+      <tr><td>재고에 미치는 영향</td><td>확정 후 재고에 반영(전체 버전)</td><td>각 작업 즉시 반영</td></tr>
+    </table></div>
+    <div class="box box-warn"><strong>⚠ 주의</strong>실사와 재고 관리는 독립된 모듈입니다. 실사에서 수량을 입력해도 「재고에 반영」 작업(전체 버전)을 실행하기 전에는 재고 수량이 변경되지 않습니다. 두 모듈을 혼동하지 마세요.</div>
+  </section>
+
+  <section class="chapter" id="start">
+    <div class="chapter-head"><div class="ch-no">제6장</div><h2>빠른 시작(신규 사용자 가이드)</h2></div>
+    <h3>1단계: 샘플 데이터로 연습</h3>
+    <ol class="steps">
+      <li>앱을 실행하고 샘플 데이터 생성 안내가 나오면 <strong>생성</strong>을 선택합니다.</li>
+      <li>홈 화면에서 <strong>재고 관리</strong>를 열어 샘플 재고 현황을 확인합니다.</li>
+      <li><strong>재고 실사</strong>를 열어 바코드 스캔과 수량 입력을 시험해 봅니다.</li>
+      <li>CSV 파일 내보내기를 시도해 봅니다.</li>
+      <li>실제 운영 전에 샘플 데이터를 삭제합니다(설정 화면에서).</li>
+    </ol>
+    <h3>2단계: 상품 마스터 등록</h3>
+    <ol class="steps">
+      <li>홈 화면에서 <strong>마스터 관리</strong>를 엽니다.</li>
+      <li><strong>상품 마스터</strong>에서 새 항목을 만들고 상품 코드와 이름을 입력합니다.</li>
+      <li>필요에 따라 카테고리·가격·보충 기준 수량을 설정합니다.</li>
+      <li><strong>위치 마스터</strong>에 창고·매장 등을 등록합니다(표준 버전 이상 권장).</li>
+    </ol>
+    <div class="box box-hint"><strong>💡 팁</strong>샘플 데이터로 조작에 익숙해진 후 실제 상품 데이터를 입력하는 것을 권장합니다.</div>
+  </section>
+
+  <section class="chapter" id="top-screen">
+    <div class="chapter-head"><div class="ch-no">제7장</div><h2>홈 화면 안내</h2></div>
+    <div class="table-wrap"><table>
+      <tr><th>진입점</th><th>설명</th></tr>
+      <tr><td>재고 실사</td><td>실사 화면으로 이동해 상품을 스캔하고 실제 수량을 기록</td></tr>
+      <tr><td>재고 관리</td><td>재고 조회·입고·출고·이동·재고 이력에 접근</td></tr>
+      <tr><td>마스터 관리</td><td>상품·카테고리·위치 마스터 데이터를 관리</td></tr>
+      <tr><td>설정</td><td>언어·실사 설정·CSV·샘플 데이터·플랜 구매·법적 문서 등</td></tr>
+    </table></div>
+    <div class="box box-warn"><strong>⚠ 주의</strong>미확정 실사 데이터가 있는 상태에서 재고 관리 작업을 하면 데이터 불일치가 발생할 수 있습니다. 실사를 먼저 완료하고 재고 변경 작업을 하는 것을 권장합니다.</div>
+  </section>
+
+  <section class="chapter" id="settings">
+    <div class="chapter-head"><div class="ch-no">제8장</div><h2>설정 화면 안내</h2></div>    <h3>데이터 가져오기/내보내기</h3>
+    <div class="table-wrap"><table>
+      <tr><th>작업</th><th>설명</th><th>사용 가능 버전</th></tr>
+      <tr><td>마스터 CSV 가져오기</td><td>외부 CSV 파일을 마스터 데이터로 불러오기(기존 데이터 덮어쓰기)</td><td>전 버전</td></tr>
+      <tr><td>공유(이메일 등)</td><td>이력 및 마스터 데이터 CSV를 다른 앱으로 전송</td><td>전 버전</td></tr>
+      <tr><td>내보내기(폴더 선택)</td><td>이력 및 마스터 데이터 CSV를 선택한 폴더에 저장</td><td>전 버전</td></tr>
+      <tr><td>전체 이력 삭제</td><td>모든 스캔 이력을 삭제하고 초기화</td><td>전 버전(되돌리기 불가)</td></tr>
+      <tr><td>마스터 누계 초기화</td><td>등록된 모든 누계를 0으로 초기화</td><td>전체 버전 잠금 해제(되돌리기 불가)</td></tr>
+    </table></div>
+    <h3>공통 설정</h3>
+    <div class="table-wrap"><table>
+      <tr><th>설정</th><th>설명</th><th>사용 가능 버전</th></tr>
+      <tr><td>표시 언어</td><td>앱에 표시할 언어를 선택합니다.</td><td>전 버전(일부 언어는 별도 잠금 해제 필요)</td></tr>
+      <tr><td>화면 회전 잠금</td><td>현장 작업 중 화면 방향이 바뀌지 않도록 고정합니다.</td><td>표준 버전 이상</td></tr>
+      <tr><td>샘플 데이터 생성</td><td>연습용 상품·재고·카테고리 데이터를 생성합니다.</td><td>전 버전</td></tr>
+      <tr><td>샘플 데이터 삭제</td><td>샘플 데이터를 한 번에 삭제합니다.</td><td>전 버전</td></tr>
+      <tr><td>구매 복원</td><td>Google Play에서 구매한 플랜을 다시 확인하고 복원합니다.</td><td>전 버전</td></tr>
+      <tr><td>법적 문서</td><td>이용 약관, 개인정보 처리방침 등을 확인합니다.</td><td>전 버전</td></tr>
+    </table></div>
+    <h3>실사 모드 설정</h3>
+    <div class="table-wrap"><table>
+      <tr><th>모드</th><th>설명</th><th>사용 가능 위치</th></tr>
+      <tr><td>상세</td><td>위치 마스터에 등록된 모든 위치를 사용</td><td>등록된 모든 위치</td></tr>
+      <tr><td>간단 A</td><td>창고만 사용하여 실사</td><td>창고만</td></tr>
+      <tr><td>간단 B</td><td>창고와 매장을 사용하여 실사</td><td>창고 + 매장</td></tr>
+      <tr><td>간단 C</td><td>매장만 사용하여 실사</td><td>매장만</td></tr>
+    </table></div>
+    <div class="box box-warn"><strong>⚠ 주의</strong>전체 버전 잠금 해제가 활성화되어 있어도 모드가 간단 A/B/C로 설정되어 있으면 간단 위치 옵션만 표시됩니다. 상세 위치를 사용하려면 <strong>상세</strong> 모드로 전환하세요.</div>
+    <h3>카메라 스캔 설정(전체 버전)</h3>
+    <p>상품과 위치에 사용할 코드 종류를 설정합니다. 사용하지 않는 코드 종류를 끄면 오인식을 줄이는 데 도움이 됩니다.</p>
+    <div class="table-wrap"><table>
+      <tr><th>종류</th><th>기본값(상품)</th><th>기본값(위치)</th><th>주요 용도</th></tr>
+      <tr><td>CODE39</td><td><span class="check">✓ 켜짐</span></td><td><span class="check">✓ 켜짐</span></td><td>공업 부품, 사내 코드</td></tr>
+      <tr><td>CODE128</td><td><span class="check">✓ 켜짐</span></td><td><span class="check">✓ 켜짐</span></td><td>물류 코드</td></tr>
+      <tr><td>EAN13</td><td><span class="check">✓ 켜짐</span></td><td><span class="check">✓ 켜짐</span></td><td>일반 상품 바코드</td></tr>
+      <tr><td>QRCODE</td><td><span class="check">✓ 켜짐</span></td><td><span class="check">✓ 켜짐</span></td><td>상품 또는 위치 QR 코드</td></tr>
+    </table></div>
+    <h3>코드 규칙 / 위치 규칙(전체 버전)</h3>
+    <p>사내 상품 코드나 위치 코드에 사용할 문자 종류, 최소·최대 길이, 위치 코드 길이 제한 등을 설정할 수 있습니다.</p>
+    <h3>구매 복원</h3>
+    <p>Google Play를 통해 이미 구매한 플랜을 다시 확인합니다. 플랜이 반영되지 않으면 구매에 사용한 Google 계정과 인터넷 연결 상태를 확인하세요.</p>
+    <div class="box box-danger"><strong>🚨 이력 삭제/누계 초기화는 되돌릴 수 없습니다</strong>「전체 이력 삭제」와 「마스터 누계 초기화」는 되돌릴 수 없습니다. 실행 전에 반드시 <strong>내보내기</strong>로 백업하세요.</div>
+  </section>
+
+  <section class="chapter" id="language">
+    <div class="chapter-head"><div class="ch-no">제9장</div><h2>언어 설정</h2></div>
+    <p><strong>설정 → 언어</strong>에서 앱 표시 언어를 선택할 수 있습니다. 처음 실행 시에는 기기의 언어 설정을 기준으로 지원되는 언어가 자동으로 선택됩니다.</p>
+    <h3>지원 언어(12개)</h3>
+    <div class="table-wrap"><table>
+      <thead><tr><th>코드</th><th>언어</th><th>무료 버전</th><th class="pro-col">전체 언어 잠금 해제</th></tr></thead>
+      <tbody>
+        <tr><td><code>ja</code></td><td>일본어</td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
+        <tr><td><code>en</code></td><td>영어</td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
+        <tr><td><code>zh</code></td><td>중국어(간체)</td><td>기기 주 언어일 때만</td><td><span class="check">✓</span></td></tr>
+        <tr><td><code>tw</code></td><td>중국어(번체)</td><td>기기 주 언어일 때만</td><td><span class="check">✓</span></td></tr>
+        <tr><td><code>ko</code></td><td>한국어</td><td>기기 주 언어일 때만</td><td><span class="check">✓</span></td></tr>
+        <tr><td><code>hi</code></td><td>힌디어</td><td>기기 주 언어일 때만</td><td><span class="check">✓</span></td></tr>
+        <tr><td><code>vi</code></td><td>베트남어</td><td>기기 주 언어일 때만</td><td><span class="check">✓</span></td></tr>
+        <tr><td><code>it</code></td><td>이탈리아어</td><td>기기 주 언어일 때만</td><td><span class="check">✓</span></td></tr>
+        <tr><td><code>pt-BR</code></td><td>포르투갈어(브라질)</td><td>기기 주 언어일 때만</td><td><span class="check">✓</span></td></tr>
+        <tr><td><code>es-419</code></td><td>스페인어(라틴아메리카)</td><td>기기 주 언어일 때만</td><td><span class="check">✓</span></td></tr>
+        <tr><td><code>id</code></td><td>인도네시아어</td><td>기기 주 언어일 때만</td><td><span class="check">✓</span></td></tr>
+        <tr><td><code>th</code></td><td>태국어</td><td>기기 주 언어일 때만</td><td><span class="check">✓</span></td></tr>
+      </tbody>
+    </table></div>
+  </section>
+
+  <section class="chapter" id="billing">
+    <div class="chapter-head"><div class="ch-no">제10장</div><h2>플랜 개요</h2></div>
+    <div class="box box-danger"><strong>🚨 중요</strong>가격·세금·구매 조건·환불 조건은 Google Play에 표시된 내용을 기준으로 합니다. 이 매뉴얼은 가격을 확정적으로 명시하지 않습니다. 구매 전 반드시 Google Play 상품 목록을 확인하세요.</div>
+    <h3>기능 비교</h3>
+    <div class="table-wrap"><table>
+      <thead><tr><th>기능/제한</th><th>무료</th><th>실사 표준</th><th>실사 전체</th><th>재고 표준</th><th>재고 전체</th></tr></thead>
+      <tbody>
+        <tr><td>마스터 레코드 수</td><td>최대 30건</td><td>최대 300건</td><td><span class="check">무제한</span></td><td>최대 300건</td><td><span class="check">무제한</span></td></tr>
+        <tr><td>이력 레코드 수</td><td>최대 30건</td><td>최대 1,000건</td><td><span class="check">무제한</span></td><td>최대 1,000건</td><td><span class="check">무제한</span></td></tr>
+        <tr><td>내보내기 레코드 수</td><td>최대 30건</td><td>최대 300건</td><td><span class="check">무제한</span></td><td>최대 300건</td><td><span class="check">무제한</span></td></tr>
+        <tr><td>화면 회전 잠금</td><td><span class="cross">✗</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
+        <tr><td>상세 코드/위치 규칙</td><td><span class="cross">✗</span></td><td><span class="cross">✗</span></td><td><span class="check">✓</span></td><td><span class="cross">✗</span></td><td><span class="check">✓</span></td></tr>
+        <tr><td>확장 CSV 내보내기</td><td><span class="cross">✗</span></td><td><span class="cross">✗</span></td><td><span class="check">✓</span></td><td><span class="cross">✗</span></td><td><span class="check">✓</span></td></tr>
+        <tr><td>재고 이동 및 실사 반영</td><td><span class="cross">✗</span></td><td><span class="cross">✗</span></td><td><span class="cross">✗</span></td><td><span class="cross">✗</span></td><td><span class="check">✓</span></td></tr>
+        <tr><td>12개 전체 언어</td><td><span class="cross">✗</span></td><td colspan="4">전체 언어 잠금 해제를 별도 구매</td></tr>
+      </tbody>
+    </table></div>
+    <h3>패키지와 전체 언어 잠금 해제</h3>
+    <div class="table-wrap"><table>
+      <tr><th>플랜</th><th>내용</th></tr>
+      <tr><td>표준 패키지</td><td>실사 표준 + 재고 표준</td></tr>
+      <tr><td>전체 패키지</td><td>실사 전체 + 재고 전체</td></tr>
+      <tr><td>전체 언어 잠금 해제</td><td>일본어와 영어 외의 추가 표시 언어를 사용할 수 있게 합니다.</td></tr>
+    </table></div>
+    <h3>플랜 구매 방법</h3>
+    <ol class="steps">
+      <li><strong>설정 → 플랜</strong> 또는 구매 버튼을 엽니다.</li>
+      <li>Google Play 구매 화면이 표시됩니다.</li>
+      <li>구매를 완료하면 플랜이 앱에 반영됩니다.</li>
+    </ol>
+    <h3>기기 변경 후 구매 복원</h3>
+    <ol class="steps">
+      <li>새 기기에서 구매에 사용한 Google 계정으로 로그인합니다.</li>
+      <li>Quantiventra를 설치하고 실행합니다.</li>
+      <li><strong>설정 → 구매 복원</strong>을 실행합니다.</li>
+      <li>구매가 확인되면 플랜 기능이 다시 활성화됩니다.</li>
+    </ol>
+  </section>
+
+  <section class="chapter" id="sample">
+    <div class="chapter-head"><div class="ch-no">제11장</div><h2>샘플 데이터</h2></div>
+    <p>샘플 데이터는 실제 운영 전에 Quantiventra의 조작을 익히기 위한 연습 데이터입니다. 약 10개의 샘플 상품·샘플 카테고리와 「창고」·「매장」 기본 위치가 포함됩니다.</p>
+    <h3>샘플 데이터에 포함되는 내용</h3>
+    <ul>
+      <li>약 10개의 샘플 상품</li>
+      <li>샘플 카테고리</li>
+      <li>기본 위치 「창고」와 「매장」</li>
+      <li>연습용 재고 및 실사 이력</li>
+    </ul>
+    <h3>샘플 데이터 생성</h3>
+    <ol class="steps">
+      <li>첫 실행 시 안내가 나타나면 <strong>생성</strong>을 선택합니다.</li>
+      <li><strong>설정 → 샘플 데이터 생성</strong>에서 언제든지 생성할 수 있습니다.</li>
+    </ol>
+    <h3>샘플 데이터 삭제</h3>
+    <ol class="steps">
+      <li><strong>설정 → 샘플 데이터 삭제</strong>로 이동합니다.</li>
+      <li>삭제될 내용(샘플 상품·재고·카테고리·실사 이력)을 확인합니다.</li>
+      <li>확인 후 삭제를 실행합니다.</li>
+    </ol>
+    <div class="box box-danger"><strong>🚨 중요</strong>실제 운영을 시작하기 전에 반드시 샘플 데이터를 삭제하세요. 삭제 전 실제 데이터가 혼입되지 않았는지 확인하세요.</div>
+  </section>
+
+  <section class="chapter" id="trouble">
+    <div class="chapter-head"><div class="ch-no">제12장</div><h2>문제 해결</h2></div>
+    <div class="trouble"><div class="trouble-q">바코드가 스캔되지 않음 / 카메라가 반응하지 않음</div>
+    <div class="trouble-a"><ul>
+      <li>카메라 스위치(오른쪽 위)가 켜져 있는지 확인하세요.</li>
+      <li>바코드가 가이드 프레임 <strong>안에 완전히 들어와야</strong> 합니다. 프레임 밖으로 벗어나면 인식되지 않습니다.</li>
+      <li>설정(전체 버전)에서 스캔 유형(CODE39·EAN13 등)이 스캔하려는 코드 유형과 일치하는지 확인하세요.</li>
+      <li>바코드가 손상되거나 오염된 경우 수동 입력으로 전환하세요.</li>
+    </ul></div></div>
+    <div class="trouble"><div class="trouble-q">마스터 CSV 가져오기 후 상품명이 표시되지 않음</div>
+    <div class="trouble-a"><ul>
+      <li>CSV가 UTF-8로 인코딩되었는지 확인하세요(Shift-JIS는 글자가 깨집니다).</li>
+      <li>헤더 행 형식을 확인하세요:<code>barcode,name,theoretical_stock,actual_stock_total</code></li>
+      <li>상품명에 쉼표가 포함된 경우 큰따옴표로 감싸세요: 예 <code>"M6 볼트,스테인리스"</code></li>
+    </ul></div></div>
+    <div class="trouble"><div class="trouble-q">구매한 플랜 기능을 사용할 수 없음</div>
+    <div class="trouble-a"><ul>
+      <li><strong>설정 → 구매 복원</strong>을 탭합니다.</li>
+      <li>구매에 사용한 Google 계정으로 로그인했는지 확인하세요.</li>
+      <li>인터넷 연결 상태를 확인하고 다시 시도하세요(구매 확인에 네트워크 연결이 필요합니다).</li>
+    </ul></div></div>
+    <div class="trouble"><div class="trouble-q">기기를 교체한 후 데이터가 사라짐</div>
+    <div class="trouble-a"><ul>
+      <li>데이터는 앱 내부 저장소에 저장되므로 앱 삭제나 기기 교체 시 사라집니다.</li>
+      <li><strong>내보내기</strong> 또는 <strong>공유</strong>를 통한 정기 백업을 강력히 권장합니다.</li>
+      <li>백업이 있다면 <strong>마스터 CSV 가져오기</strong>로 복원할 수 있습니다.</li>
+    </ul></div></div>
+  </section>
+
+  <section class="chapter" id="glossary">
+    <div class="chapter-head"><div class="ch-no">제13장</div><h2>용어집</h2></div>
+    <div class="table-wrap"><table>
+      <thead><tr><th>용어</th><th>정의</th></tr></thead>
+      <tbody>
+        <tr><td>재고 실사</td><td>현장에서 실제로 상품 수량을 세어 기록하는 작업</td></tr>
+        <tr><td>실제 수량</td><td>현장에서 직접 세어 파악한 수량</td></tr>
+        <tr><td>이론 재고</td><td>시스템이 계산한 예상 재고 수량</td></tr>
+        <tr><td>차이/실사 오차</td><td>실제 수량과 이론 재고의 차이</td></tr>
+        <tr><td>상품</td><td>재고를 보유하는 개별 품목</td></tr>
+        <tr><td>카테고리</td><td>상품을 분류하기 위해 사용하는 그룹</td></tr>
+        <tr><td>위치</td><td>재고 보관 장소(창고·매장·선반 등)</td></tr>
+        <tr><td>보충 판단에 포함</td><td>해당 위치의 재고 합계를 보충 판단에 포함시키는 설정</td></tr>
+        <tr><td>재고/보유 수량</td><td>현재 보유 중인 수량</td></tr>
+        <tr><td>입고</td><td>재고를 늘리는 작업</td></tr>
+        <tr><td>출고</td><td>재고를 줄이는 작업</td></tr>
+        <tr><td>재고 이동</td><td>재고를 한 위치에서 다른 위치로 이동(전체 버전)</td></tr>
+        <tr><td>재고 이력</td><td>입고·출고·이동·실사 조정 등 작업의 로그</td></tr>
+        <tr><td>보충 기준 수량</td><td>재고 부족 여부를 판단하기 위한 참조 수량 하한값</td></tr>
+        <tr><td>상품 코드</td><td>상품을 식별하기 위한 내부 코드</td></tr>
+        <tr><td>등록 누계</td><td>지금까지 저장된 누계 합계 수량</td></tr>
+        <tr><td>CSV</td><td>쉼표로 구분된 텍스트 파일로, 스프레드시트 앱에서 열 수 있음</td></tr>
+        <tr><td>백업</td><td>복원이나 참조를 위해 저장해 둔 데이터</td></tr>
+        <tr><td>현재 재고 덮어쓰기</td><td>CSV의 수량을 새로운 현재 재고로 불러오는 가져오기 모드</td></tr>
+        <tr><td>입고로 추가</td><td>CSV의 수량을 입고 기록으로 현재 재고에 추가하는 가져오기 모드</td></tr>
+        <tr><td>실제 수량 확정</td><td>실사 결과를 최종 확정하는 작업(전체 버전)</td></tr>
+        <tr><td>마스터 데이터</td><td>상품·카테고리·위치 등 핵심 레코드를 관리하는 데이터베이스</td></tr>
+      </tbody>
+    </table></div>
+  </section>
+
+  <section class="chapter" id="legal">
+    <div class="chapter-head"><div class="ch-no">제14장</div><h2>이용 약관 및 면책 조항</h2></div>
+    <div class="legal-block">
+      <h4>■ 이용 약관</h4>
+      <p>본 앱을 다운로드하거나 사용하면 아래 약관에 동의하는 것으로 간주합니다. 본 앱은 개인 및 기업의 재고 관리·실사 목적으로의 사용을 허가합니다. 역공학·역컴파일·수정·재배포는 금지합니다.</p>
+      <p><strong>사용자 데이터:</strong> 본 앱의 일반적인 작업 데이터(마스터 CSV·이력 CSV·설정 파일)는 사용자 기기 안에 저장됩니다. 구매 확인, 구매 복원 등 Google Play와 관련된 일부 작업에서는 네트워크 통신이 발생할 수 있습니다.</p>
+      <p><strong>플랜 구매:</strong> 모든 플랜 구매는 Google Play 결제 시스템을 통해 처리되며, 환불은 Google Play 환불 정책을 따릅니다.</p>
+      <h4>■ 면책 조항</h4>
+      <p>본 앱은 「있는 그대로」 제공됩니다. 앱의 사용 또는 사용 불가로 인해 발생하는 어떠한 손해(데이터 손실·업무 중단 등 직·간접 손해 포함)에 대해서도 개발자는 책임을 지지 않습니다.</p>
+      <p>본 앱이 생성하는 CSV 데이터의 정확성 및 완전성 확인은 사용자의 책임입니다. 스캔 오류나 입력 실수로 인한 데이터 불일치에 대해 개발자는 책임을 지지 않습니다.</p>
+      <h4>■ 개인정보 처리방침</h4>
+      <p>본 앱은 앱 자체의 목적으로 개인정보를 수집하거나 이용하지 않습니다. 일반 작업 데이터는 기기 내에서 처리됩니다. 구매 확인 등 일부 기능에서는 Google Play를 통한 통신이 발생할 수 있습니다. 카메라는 바코드 및 QR코드 스캔 전용으로만 사용되며, 동영상은 녹화·저장되지 않습니다.</p>
+      <h4>■ 저작권</h4>
+      <p>Copyright © Quantiventra. 모든 권리 보유. 앱 및 본 매뉴얼의 모든 콘텐츠는 개발자의 재산입니다.</p>
+      <h4>■ 약관 변경</h4>
+      <p>본 약관은 사전 통지 없이 변경될 수 있습니다. 변경된 약관은 Google Play 스토어 또는 앱 내 공지 즉시 효력이 발생합니다.</p>
+    </div>
+  </section>
+
+  <div class="summary-box" id="summary">
+    <h3>📌 이 장의 핵심 요약</h3>
+    <ul>
+      <li>Quantiventra = Quantity + Inventory. 연속 3프레임 인식 후 자동 확정으로 오인식을 방지합니다.</li>
+      <li>Android 8.0+와 자동 초점 카메라가 필요합니다. 저장소 권한은 필요하지 않습니다. 일반적인 실사·재고 작업은 기기 안에서 처리할 수 있으며, 구매 확인·구매 복원·Google Play 또는 외부 링크 사용 시에는 인터넷이 필요할 수 있습니다.</li>
+      <li>데이터는 앱 내부 저장소에 보관되므로 앱 삭제 시 모두 사라집니다. 정기적으로 내보내기 백업하세요.</li>
+      <li>실사와 재고 관리는 독립된 모듈입니다. 실사에서 수량을 입력해도 확정 작업 전에는 재고가 변경되지 않습니다.</li>
+      <li>실제 운영 전에 샘플 데이터로 먼저 연습하고, 이후 반드시 삭제하세요.</li>
+      <li>플랜 가격 등의 세부 사항은 Google Play를 기준으로 합니다. 이 매뉴얼은 확정적인 가격을 명시하지 않습니다.</li>
+      <li>대규모 작업(CSV 덮어쓰기·실사 반영·삭제·초기화)전에는 반드시 백업하세요.</li>
+    </ul>
+  </div>
+  <div class="confirm-box" id="confirm">
+    <h3>🔍 사용 전 확인 사항</h3>
+    <ul>
+      <li>플랜 가격, 세금, 환불 조건은 Google Play에 표시되는 내용을 기준으로 확인하세요.</li>
+      <li>기기 교체 또는 앱 삭제 전에는 CSV 내보내기로 데이터를 백업하세요.</li>
+      <li>재고에 큰 영향을 주는 작업(이력 삭제, 누계 초기화, CSV 덮어쓰기, 실사 결과 반영) 전에는 반드시 백업하세요.</li>
+      <li>사용 가능한 언어와 플랜 기능은 앱 화면과 Google Play의 표시 내용을 기준으로 확인하세요.</li>
+    </ul>
+  </div>
+</div>
+<footer>Quantiventra 매뉴얼 · 최신 정보는 앱 화면에서 확인하세요.<p style="margin-top:4px;"><a href="privacy_ko.html">개인정보 처리방침</a></p></footer>
+</body></html>

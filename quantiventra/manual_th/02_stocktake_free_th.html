@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="th">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quantiventra – การตรวจนับสต็อก – เวอร์ชันฟรี</title>
+<style>*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Sarabun','Noto Sans Thai',Thonburi,sans-serif;font-size:15px;line-height:1.9;color:#1a2535;background:#f4f7fb;}
+a{color:#1a5fa8;text-decoration:none;}a:hover{text-decoration:underline;}
+.site-nav{background:#1a3a5c;color:#fff;padding:0;}.site-nav .nav-inner{max-width:960px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:stretch;}
+.site-nav a{color:#cde;padding:10px 13px;font-size:12px;display:block;border-right:1px solid #2a4a6c;white-space:nowrap;}
+.site-nav a:hover{background:#2a5090;text-decoration:none;}.site-nav a.active{background:#2a6cbe;color:#fff;font-weight:bold;}
+.page-header{background:linear-gradient(135deg,#1a3a5c 0%,#2a6cbe 100%);color:#fff;padding:40px 20px 30px;}
+.page-header .inner{max-width:960px;margin:0 auto;}.page-header .app-name{font-size:13px;opacity:.8;}
+.page-header h1{font-size:22px;font-weight:700;margin-top:6px;line-height:1.6;}.page-header .subtitle{font-size:14px;opacity:.85;margin-top:8px;}
+.scope-box{background:rgba(255,255,255,.15);border-left:4px solid #7ecfff;padding:12px 16px;margin-top:16px;border-radius:4px;font-size:13px;}
+.container{max-width:960px;margin:0 auto;padding:30px 16px;}
+.toc{background:#fff;border:1px solid #c8d8ec;border-radius:8px;padding:24px 28px;margin-bottom:32px;}
+.toc h2{font-size:16px;font-weight:700;color:#1a3a5c;border-bottom:2px solid #2a6cbe;padding-bottom:8px;margin-bottom:14px;}
+.toc ol{margin-left:18px;}.toc li{margin:5px 0;font-size:14px;}
+.chapter{background:#fff;border-radius:8px;box-shadow:0 1px 4px rgba(0,0,0,.08);padding:28px 28px 24px;margin-bottom:28px;}
+.chapter-head{border-left:5px solid #2a6cbe;padding-left:14px;margin-bottom:20px;}
+.chapter-head .ch-no{font-size:12px;color:#2a6cbe;font-weight:700;}.chapter-head h2{font-size:20px;font-weight:700;color:#1a2535;margin-top:2px;}
+h3{font-size:16px;font-weight:700;color:#1a3a5c;border-bottom:1px solid #dde8f5;padding-bottom:5px;margin:22px 0 12px;}
+h4{font-size:14px;font-weight:700;color:#2a4a6c;margin:16px 0 8px;}
+p{margin-bottom:12px;}ul,ol{margin-left:20px;margin-bottom:12px;}li{margin-bottom:5px;}
+.steps{counter-reset:step;list-style:none;margin-left:0;}
+.steps li{counter-increment:step;padding:9px 12px 9px 46px;position:relative;background:#f8fbff;border:1px solid #dde8f5;border-radius:6px;margin-bottom:6px;}
+.steps li::before{content:counter(step);position:absolute;left:12px;top:50%;transform:translateY(-50%);width:24px;height:24px;background:#2a6cbe;color:#fff;border-radius:50%;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;}
+.table-wrap{overflow-x:auto;margin-bottom:16px;}
+table{width:100%;border-collapse:collapse;font-size:13px;min-width:380px;}
+th{background:#1a3a5c;color:#fff;padding:9px 12px;text-align:left;white-space:nowrap;}
+td{padding:8px 12px;border-bottom:1px solid #dde8f5;vertical-align:top;}tr:nth-child(even) td{background:#f4f7fb;}
+code{font-family:'Courier New',monospace;background:rgba(0,80,160,.08);color:#004080;padding:2px 6px;border-radius:3px;font-size:12px;}
+.box{border-radius:6px;padding:13px 16px;margin:14px 0;font-size:13px;}
+.box-warn{background:#fffbe6;border-left:4px solid #f5a623;color:#7a5700;}
+.box-danger{background:#fff0f0;border-left:4px solid #d43f3f;color:#7a0000;}
+.box-hint{background:#e8f4ff;border-left:4px solid #2a6cbe;color:#0a3060;}
+.box-check{background:#f4eeff;border-left:4px solid #8c4fc8;color:#3a0070;}
+.box strong{display:block;margin-bottom:4px;}
+figure{max-width:280px;width:100%;margin:18px auto;text-align:center;}
+figure img{display:block;width:100%;max-width:280px;height:auto;margin:0 auto;border:1px solid #c8d8ec;border-radius:6px;box-shadow:0 2px 8px rgba(0,0,0,.1);}
+figcaption{font-size:12px;color:#5a7a99;margin-top:6px;}
+.img-pending{display:flex;align-items:center;justify-content:center;max-width:280px;width:100%;box-sizing:border-box;background:#e8eef5;border:2px dashed #99b8d8;border-radius:6px;height:160px;color:#5a7a99;font-size:13px;margin:18px auto;}
+.diff-add{background:#e8fff0;border-left:4px solid #2a9c5c;border-radius:6px;padding:12px 16px;margin:14px 0;font-size:13px;}
+.diff-add strong{display:block;color:#1a6c3c;margin-bottom:4px;}
+.flow-box{background:#f4f7fb;border:1px solid #c8d8ec;border-radius:8px;padding:20px;margin:16px 0;}
+.flow-box h4{color:#1a3a5c;margin-top:0;}
+.flow-arrow{text-align:center;font-size:20px;color:#2a6cbe;margin:4px 0;}
+.flow-step{background:#fff;border:1px solid #c8d8ec;border-radius:6px;padding:10px 16px;margin:4px 0;font-size:13px;}
+.flow-step strong{color:#1a3a5c;}
+.summary-box{background:linear-gradient(135deg,#e8f4ff,#f0f8ff);border:1px solid #99c8ec;border-radius:8px;padding:20px 24px;margin-top:32px;}
+.summary-box h3{border:none;color:#1a3a5c;margin-top:0;}
+.confirm-box{background:#fdf4ff;border:1px solid #c8a0e0;border-radius:8px;padding:20px 24px;margin-top:16px;}
+.confirm-box h3{border:none;color:#5a0090;margin-top:0;}
+.check{color:#2e7d32;font-weight:700;}.cross{color:#c62828;}
+th.pro-col{background:#5a2a8c;}
+.feature-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px;margin:16px 0;}
+.feature-card{background:#f4f7fb;border:1px solid #c8d8ec;border-radius:8px;padding:16px;}
+.feature-card h4{color:#1a3a5c;margin-top:0;margin-bottom:6px;font-size:14px;}
+.feature-card p{font-size:13px;margin:0;color:#3a5a7a;}
+.feature-card.pro-card{background:#f4eeff;border-color:#c8a0e0;}
+.feature-card.pro-card h4{color:#5a2a8c;}
+.trouble{border:1px solid #c8d8ec;border-radius:8px;margin:14px 0;overflow:hidden;}
+.trouble-q{background:#eef6fd;padding:13px 18px;font-weight:700;font-size:14px;color:#1a3a5c;display:flex;align-items:flex-start;gap:10px;}
+.trouble-q::before{content:'Q';background:#2a6cbe;color:#fff;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900;flex-shrink:0;margin-top:1px;}
+.trouble-a{padding:13px 18px 14px 50px;font-size:13.5px;border-top:1px solid #c8d8ec;line-height:1.9;}
+.trouble-a ul{margin-left:16px;}
+.legal-block{background:#f5f5f5;border:1px solid #ddd;border-radius:8px;padding:20px 24px;font-size:12.5px;color:#444;line-height:1.9;margin:14px 0;}
+.legal-block h4{font-size:13px;color:#333;margin:18px 0 6px;border-bottom:1px solid #ddd;padding-bottom:4px;}
+.legal-block h4:first-child{margin-top:0;}
+footer{text-align:center;font-size:12px;color:#8a9aaa;padding:30px 16px;border-top:1px solid #dde8f5;margin-top:20px;}
+@media(max-width:640px){.page-header h1{font-size:18px;}.chapter{padding:20px 16px;}.site-nav a{padding:8px 9px;font-size:11px;}}
+@media print{body{background:#fff;font-size:12px;}.site-nav{display:none;}.chapter{box-shadow:none;border:1px solid #ccc;page-break-inside:avoid;}.page-header{background:#1a3a5c !important;-webkit-print-color-adjust:exact;print-color-adjust:exact;}}
+</style></head>
+<body>
+<nav class="site-nav"><div class="nav-inner">
+  <a href="01_top_settings_common_th.html">① หน้าหลัก / การตั้งค่า</a>
+  <a href="02_stocktake_free_th.html" class="active">② ตรวจนับ ฟรี</a>
+  <a href="03_stocktake_simple_th.html">③ ตรวจนับ มาตรฐาน</a>
+  <a href="04_stocktake_full_th.html">④ ตรวจนับ ครบวงจร</a>
+  <a href="05_inventory_free_th.html">⑤ สต็อก ฟรี</a>
+  <a href="06_inventory_simple_th.html">⑥ สต็อก มาตรฐาน</a>
+  <a href="07_inventory_full_th.html">⑦ สต็อก ครบวงจร</a>
+</div></nav>
+<header class="page-header"><div class="inner">
+  <div class="app-name">คู่มือ Quantiventra</div>
+  <h1>② การตรวจนับสต็อก — เวอร์ชันฟรี</h1>
+  <div class="subtitle">ฟีเจอร์ ข้อจำกัด คู่มือทีละขั้นตอน และขั้นตอนการทำงานที่แนะนำ</div>
+  <div class="scope-box"><strong>หัวข้อที่ครอบคลุม:</strong> ทำอะไรได้บ้าง / ข้อจำกัดของเวอร์ชันฟรี / ตรวจนับทีละขั้นตอน / ป้อนบาร์โค้ดและจำนวน / ตำแหน่ง / ประวัติ / ข้อจำกัด CSV / ทำอะไรไม่ได้ / ขั้นตอนที่แนะนำ</div>
+</div></header>
+<div class="container">
+  <nav class="toc"><h2>สารบัญ</h2><ol>
+    <li><a href="#overview">ภาพรวมการตรวจนับสต็อกเวอร์ชันฟรี</a></li>
+    <li><a href="#limits">ข้อจำกัดของเวอร์ชันฟรี</a></li>
+    <li><a href="#howto">การตรวจนับทีละขั้นตอน</a></li>
+    <li><a href="#input">การป้อนบาร์โค้ด ชื่อสินค้า และจำนวน</a></li>
+    <li><a href="#location">การจัดการตำแหน่ง</a></li>
+    <li><a href="#history">การดูประวัติการตรวจนับ</a></li>
+    <li><a href="#csv">ข้อจำกัดการส่งออก CSV</a></li>
+    <li><a href="#cannot">สิ่งที่ทำไม่ได้ในเวอร์ชันฟรี</a></li>
+    <li><a href="#tips">ขั้นตอนการทำงานที่แนะนำสำหรับผู้ใช้เวอร์ชันฟรี</a></li>
+    <li><a href="#summary">สรุปประเด็นสำคัญของบท</a></li>
+    <li><a href="#confirm">ข้อควรทราบก่อนใช้งาน</a></li>
+  </ol></nav>
+
+  <section class="chapter" id="overview">
+    <div class="chapter-head"><div class="ch-no">บทที่ 1</div><h2>ภาพรวมการตรวจนับสต็อกเวอร์ชันฟรี</h2></div>
+    <p>การตรวจนับสต็อกคือการนับจำนวนสินค้าจริงในสถานที่และบันทึกผล เวอร์ชันฟรีช่วยให้ทดลองขั้นตอนการตรวจนับขั้นพื้นฐานได้</p>
+    <p>ขั้นตอนการตรวจนับ: <strong>สแกนสินค้า → ป้อนจำนวน → บันทึก → ตรวจสอบประวัติ</strong></p>
+    <div class="box box-hint"><strong>💡 การตรวจนับสต็อกคืออะไร?</strong>การตรวจนับบันทึกจำนวนที่คุณนับได้จริงในสถานที่ เป็นโมดูลแยกจากการดำเนินการรับเข้า จ่ายออก และโอนย้ายในการจัดการสต็อก ไม่ควรสับสนระหว่างสองโมดูล</div>  </section>
+
+  <section class="chapter" id="limits">
+    <div class="chapter-head"><div class="ch-no">บทที่ 2</div><h2>ข้อจำกัดของเวอร์ชันฟรี</h2></div>
+    <div class="table-wrap"><table>
+      <tr><th>รายการ</th><th>ข้อจำกัดของเวอร์ชันฟรี</th><th>วิธีขยายการใช้งาน</th></tr>
+      <tr><td>รายการทะเบียน</td><td>สูงสุด 30 รายการ</td><td>เวอร์ชันมาตรฐานขึ้นไป</td></tr>
+      <tr><td>รายการประวัติการตรวจนับ</td><td>สูงสุด 30 รายการ</td><td>เวอร์ชันมาตรฐานขึ้นไป</td></tr>
+      <tr><td>จำนวนรายการที่ส่งออก</td><td>สูงสุด 30 รายการ</td><td>เวอร์ชันมาตรฐานขึ้นไป</td></tr>
+      <tr><td>ล็อคการหมุนหน้าจอ</td><td>ใช้งานไม่ได้</td><td>เวอร์ชันมาตรฐานขึ้นไป</td></tr>
+      <tr><td>การตั้งค่ากฎโค้ดแบบละเอียด</td><td>ใช้งานไม่ได้</td><td>เวอร์ชันครบวงจร</td></tr>
+      <tr><td>การตั้งค่ากฎตำแหน่งแบบละเอียด</td><td>ใช้งานไม่ได้</td><td>เวอร์ชันครบวงจร</td></tr>
+      <tr><td>การตั้งค่ากล้องแบบละเอียด</td><td>ใช้งานไม่ได้</td><td>เวอร์ชันครบวงจร</td></tr>
+      <tr><td>การส่งออก CSV แบบขยาย</td><td>ใช้งานไม่ได้</td><td>เวอร์ชันครบวงจร</td></tr>
+    </table></div>
+    <div class="box box-warn"><strong>⚠ ข้อควรระวัง</strong>เมื่อถึงขีดจำกัด 30 รายการ การบันทึกหรือส่งออกอาจไม่สามารถทำได้ วางแผนอัปเกรดเป็นมาตรฐานหรือครบวงจรก่อนถึงขีดจำกัด</div>
+  </section>
+
+  <section class="chapter" id="howto">
+    <div class="chapter-head"><div class="ch-no">บทที่ 3</div><h2>การตรวจนับทีละขั้นตอน</h2></div>
+    <ol class="steps">
+      <li>จากหน้าหลัก แตะ <strong>การตรวจนับสต็อก</strong></li>
+      <li>สแกนบาร์โค้ดหรือป้อนรหัสสินค้าด้วยตนเอง</li>
+      <li>ชื่อสินค้าจะปรากฏขึ้น หากยังไม่ได้ลงทะเบียนรหัส ให้ป้อนชื่อด้วยตนเอง</li>
+      <li>ยืนยันหรือเลือกตำแหน่ง (คลังสินค้า ร้านค้า ฯลฯ)</li>
+      <li>ป้อนจำนวนที่นับได้จริง</li>
+      <li>ป้อนหมายเหตุหากจำเป็น</li>
+      <li>แตะ <strong>บันทึก</strong> เพื่อบันทึกรายการในประวัติการตรวจนับ</li>
+      <li>ตรวจสอบว่าบันทึกถูกบันทึกในประวัติการตรวจนับ</li>
+    </ol>
+    <div class="box box-danger"><strong>🚨 สำคัญ</strong>ตรวจสอบจำนวนก่อนบันทึกเสมอ ข้อผิดพลาดในการป้อนทำให้เกิดความไม่สอดคล้องกับข้อมูลสต็อก</div>
+    <div class="box box-hint"><strong>💡 เคล็ดลับ</strong>ไม่จำเป็นต้องทำการตรวจนับทั้งหมดให้เสร็จในเซสชันเดียว แม้ปิดแอประหว่างทาง ประวัติที่บันทึกไว้แล้วจะยังคงอยู่</div>
+  <h3>เมื่อตรวจนับสินค้าหลายรายการต่อเนื่อง</h3>
+    <ol class="steps">
+      <li>หลังจากบันทึกรายการแรกแล้ว ให้สแกนบาร์โค้ดของสินค้าถัดไป หรือป้อนรหัสสินค้าด้วยตนเอง</li>
+      <li>ทำซ้ำขั้นตอนการสแกน การป้อนจำนวน และการบันทึก</li>
+      <li>เมื่อป้อนครบทุกสินค้าแล้ว ให้ตรวจสอบรายการทั้งหมดในประวัติการตรวจนับ</li>
+    </ol>
+  </section>
+
+  <section class="chapter" id="input">
+    <div class="chapter-head"><div class="ch-no">บทที่ 4</div><h2>การป้อนบาร์โค้ด ชื่อสินค้า และจำนวน</h2></div>
+
+    <h3>การสแกนบาร์โค้ด</h3>
+    <p>เปิดกล้องแล้วเล็งไปที่บาร์โค้ด ระบบจะอ่านให้อัตโนมัติ หากอ่านไม่สำเร็จ ให้ลองย้ายไปบริเวณที่มีแสงเพียงพอ หรือเปลี่ยนเป็นการป้อนด้วยตนเอง</p>
+
+    <h3>การป้อนรหัสสินค้าด้วยตนเอง</h3>
+    <p>หากใช้บาร์โค้ดไม่ได้ ให้ป้อนรหัสสินค้าลงในช่องรหัสโดยตรง หากเป็นรหัสที่ลงทะเบียนไว้แล้ว ชื่อสินค้าจะแสดงโดยอัตโนมัติ</p>
+
+    <h3>การป้อนชื่อสินค้า</h3>
+    <p>หากเป็นรหัสที่ยังไม่ได้ลงทะเบียน ให้ป้อนชื่อสินค้าด้วยตนเอง ชื่อที่ป้อนจะถูกบันทึกไว้ในประวัติการตรวจนับ โปรดระวังจำนวนรายการเมื่อใช้งานโดยยังไม่ได้ลงทะเบียนข้อมูลสินค้าไว้ล่วงหน้า</p>
+
+    <h3>การป้อนจำนวนที่นับได้จริง</h3>
+    <p>ป้อนจำนวนสินค้าที่นับได้จริงเป็นตัวเลข ตรวจสอบจำนวนให้ถูกต้องก่อนบันทึกทุกครั้ง</p>
+
+    <h3>การป้อนหมายเหตุ</h3>
+    <p>สามารถป้อนบันทึกการทำงานหรือข้อสังเกตได้อย่างอิสระ หมายเหตุจะถูกบันทึกพร้อมกับรายการในประวัติการตรวจนับ</p>
+
+    <div class="table-wrap"><table>
+      <tr><th>ฟิลด์</th><th>คำอธิบาย</th><th>จำเป็น / ไม่บังคับ</th></tr>
+      <tr><td>บาร์โค้ด / รหัสสินค้า</td><td>รหัสสำหรับระบุสินค้า</td><td>จำเป็น</td></tr>
+      <tr><td>ชื่อสินค้า</td><td>ป้อนด้วยตนเองหากยังไม่ได้ลงทะเบียนรหัส</td><td>จำเป็นตามเงื่อนไข</td></tr>
+      <tr><td>ตำแหน่ง</td><td>สถานที่ที่กำลังทำการตรวจนับ</td><td>ขึ้นอยู่กับการตั้งค่า</td></tr>
+      <tr><td>จำนวนที่นับได้จริง</td><td>จำนวนที่นับได้จริง</td><td>จำเป็น</td></tr>
+      <tr><td>หมายเหตุ</td><td>บันทึกการทำงานหรือความคิดเห็น</td><td>ไม่บังคับ</td></tr>
+    </table></div>
+    <div class="box box-warn"><strong>⚠ ข้อควรระวัง</strong>ป้อนจำนวนที่นับได้จริงอย่างถูกต้อง ข้อผิดพลาดทำให้เกิดความเบี่ยงเบนของสต็อก ยืนยันตัวเลขก่อนบันทึกเสมอ</div>
+  </section>
+
+  <section class="chapter" id="location">
+    <div class="chapter-head"><div class="ch-no">บทที่ 5</div><h2>การจัดการตำแหน่ง</h2></div>
+    <div class="table-wrap"><table>
+      <tr><th>โหมดการตรวจนับ</th><th>ตำแหน่งที่ใช้ได้</th><th>ตัวอย่างการใช้งาน</th></tr>
+      <tr><td>แบบง่าย A</td><td>คลังสินค้าเท่านั้น</td><td>จัดการคลังสินค้าเดียว</td></tr>
+      <tr><td>แบบง่าย B</td><td>คลังสินค้า + ร้านค้า</td><td>ตรวจนับทั้งคลังและร้านพร้อมกัน</td></tr>
+      <tr><td>แบบง่าย C</td><td>ร้านค้าเท่านั้น</td><td>จัดการร้านค้าเดียว</td></tr>
+    </table></div>
+    <div class="box box-hint"><strong>💡 เคล็ดลับ</strong>การจัดการตำแหน่งแบบละเอียด (เช่น หมายเลขชั้นวาง) เป็นฟีเจอร์เวอร์ชันครบวงจร เปิดใช้ได้โดยเปลี่ยนเป็นโหมด <strong>แบบละเอียด</strong> ในการตั้งค่า</div>
+    <div class="box box-warn"><strong>⚠ ข้อควรระวัง</strong>แม้จะลงทะเบียนตำแหน่งแบบละเอียดแล้ว หากโหมดยังเป็นแบบง่าย A/B/C ตำแหน่งเหล่านั้นจะไม่แสดง ต้องเปลี่ยนเป็นโหมดแบบละเอียด</div>
+  </section>
+
+  <section class="chapter" id="history">
+    <div class="chapter-head"><div class="ch-no">บทที่ 6</div><h2>การดูประวัติการตรวจนับ</h2></div>
+    <p>รายการตรวจนับที่บันทึกทั้งหมดดูได้ในประวัติ ประกอบด้วยวันที่/เวลาที่บันทึก รหัสและชื่อสินค้า จำนวนที่นับได้จริง ตำแหน่ง และหมายเหตุ</p>
+    <div class="box box-warn"><strong>⚠ ข้อควรระวัง</strong>เวอร์ชันฟรีจัดเก็บประวัติการตรวจนับสูงสุด 30 รายการ การเกินขีดจำกัดอาจทำให้ไม่สามารถบันทึกรายการใหม่ได้</div>
+  </section>
+
+  <section class="chapter" id="csv">
+    <div class="chapter-head"><div class="ch-no">บทที่ 7</div><h2>ข้อจำกัดการส่งออก CSV</h2></div>
+    <div class="table-wrap"><table>
+      <tr><th>รายการ</th><th>เวอร์ชันฟรี</th><th>เวอร์ชันมาตรฐาน</th><th>เวอร์ชันครบวงจร</th></tr>
+      <tr><td>จำนวนรายการที่ส่งออก</td><td>สูงสุด 30 รายการ</td><td>สูงสุด 300 รายการ</td><td>ไม่จำกัด</td></tr>
+      <tr><td>การส่งออกทุกคอลัมน์</td><td>จำกัด</td><td>จำกัด</td><td>การส่งออก CSV แบบขยาย</td></tr>
+    </table></div>
+    <div class="box box-warn"><strong>⚠ ข้อควรระวัง</strong>CSV สรุปการตรวจนับไม่มีคอลัมน์วันที่/เวลาและตำแหน่ง การส่งออกแบบละเอียดตามตำแหน่งและวันที่เป็นฟีเจอร์เวอร์ชันครบวงจร</div>
+  </section>
+
+  <section class="chapter" id="cannot">
+    <div class="chapter-head"><div class="ch-no">บทที่ 8</div><h2>สิ่งที่ทำไม่ได้ในเวอร์ชันฟรี</h2></div>
+    <div class="table-wrap"><table>
+      <tr><th>ฟีเจอร์</th><th>แผนที่ต้องการ</th></tr>
+      <tr><td>มากกว่า 30 รายการทะเบียน</td><td>เวอร์ชันตรวจนับมาตรฐานขึ้นไป</td></tr>
+      <tr><td>มากกว่า 30 รายการประวัติ</td><td>เวอร์ชันตรวจนับมาตรฐานขึ้นไป</td></tr>
+      <tr><td>ส่งออกมากกว่า 30 รายการ</td><td>เวอร์ชันตรวจนับมาตรฐานขึ้นไป</td></tr>
+      <tr><td>ล็อคการหมุนหน้าจอ</td><td>เวอร์ชันตรวจนับมาตรฐานขึ้นไป</td></tr>
+      <tr><td>การตั้งค่ากฎโค้ด/ตำแหน่งแบบละเอียด</td><td>เวอร์ชันตรวจนับครบวงจร</td></tr>
+      <tr><td>การตั้งค่ากล้องแบบละเอียด</td><td>เวอร์ชันตรวจนับครบวงจร</td></tr>
+      <tr><td>การส่งออก CSV แบบขยาย</td><td>เวอร์ชันตรวจนับครบวงจร</td></tr>
+      <tr><td>นำผลการตรวจนับไปปรับสต็อก</td><td>เวอร์ชันตรวจนับครบวงจร</td></tr>
+    </table></div>
+  </section>
+
+  <section class="chapter" id="tips">
+    <div class="chapter-head"><div class="ch-no">บทที่ 9</div><h2>ขั้นตอนการทำงานที่แนะนำสำหรับผู้ใช้เวอร์ชันฟรี</h2></div>
+    <p>หากมีสินค้าไม่เกิน 30 รายการ เวอร์ชันฟรีเพียงพอสำหรับการตรวจนับขั้นพื้นฐานอย่างต่อเนื่อง ส่งออกเป็น CSV ก่อนถึงขีดจำกัด 30 รายการเพื่อสะสมบันทึก</p>
+    <div class="box box-hint"><strong>💡 พิจารณาอัปเกรดเป็นมาตรฐานเมื่อ:</strong>
+      <ul style="margin-top:6px;">
+        <li>มีสินค้ามากกว่า 30 รายการ</li>
+        <li>ต้องการเก็บประวัติตรวจนับรายเดือนระยะยาว</li>
+        <li>ต้องล็อคทิศทางหน้าจอขณะทำงานในสนาม</li>
+        <li>มีสินค้าจำนวนมากขึ้นและต้องการตรวจนับต่อเนื่อง</li>
+      </ul>
+    </div>
+  </section>
+
+  <div class="summary-box" id="summary">
+    <h3>📌 สรุปประเด็นสำคัญของบท</h3>
+    <ul>
+      <li>การตรวจนับเวอร์ชันฟรีเหมาะกับงานขนาดเล็กที่มีสินค้าสูงสุด 30 รายการ</li>
+      <li>ขั้นตอน: สแกน → ป้อนจำนวน → บันทึก → ตรวจสอบประวัติ</li>
+      <li>ตำแหน่งกำหนดโดยโหมดแบบง่าย A/B/C ตำแหน่งแบบละเอียดต้องใช้เวอร์ชันครบวงจร</li>
+      <li>การส่งออก CSV จำกัดที่ 30 รายการ และไม่มีคอลัมน์วันที่หรือตำแหน่ง</li>
+      <li>การตรวจนับสต็อกและการจัดการสต็อกเป็นโมดูลแยก ไม่ควรสับสน</li>
+    </ul>
+  </div>
+  <div class="confirm-box" id="confirm">
+    <h3>🔍 ข้อควรทราบก่อนใช้งาน</h3>
+    <ul>
+      <li>ก่อนบันทึก ให้ตรวจสอบรหัสสินค้า ชื่อสินค้า ตำแหน่ง และจำนวนที่นับได้จริงให้ถูกต้อง</li>
+      <li>หากต้องการแก้ไขหรือทบทวนรายการหลังบันทึก ให้ทำตามคำแนะนำที่แสดงในหน้าจอแอป</li>
+      <li>เมื่อประวัติใกล้ครบ 30 รายการ ควรส่งออก CSV หรือพิจารณาอัปเกรดเป็นเวอร์ชันมาตรฐาน/เวอร์ชันครบวงจร</li>
+      <li>ข้อมูลล่าสุดให้ยึดตามข้อความและคำแนะนำที่แสดงภายในแอป</li>
+    </ul>
+  </div>
+</div>
+<footer>คู่มือ Quantiventra · ข้อมูลล่าสุดดูได้จากหน้าจอแอป<p style="margin-top:4px;"><a href="privacy_th.html">นโยบายความเป็นส่วนตัว</a></p></footer>
+</body></html>

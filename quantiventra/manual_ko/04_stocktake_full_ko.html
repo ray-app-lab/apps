@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quantiventra – 재고 실사 전체 버전</title>
+<style>*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:-apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo','Noto Sans KR','Malgun Gothic',sans-serif;font-size:15px;line-height:1.9;color:#1a2535;background:#f4f7fb;}
+a{color:#1a5fa8;text-decoration:none;}a:hover{text-decoration:underline;}
+.site-nav{background:#1a3a5c;color:#fff;padding:0;}.site-nav .nav-inner{max-width:960px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:stretch;}
+.site-nav a{color:#cde;padding:10px 13px;font-size:12px;display:block;border-right:1px solid #2a4a6c;white-space:nowrap;}
+.site-nav a:hover{background:#2a5090;text-decoration:none;}.site-nav a.active{background:#2a6cbe;color:#fff;font-weight:bold;}
+.page-header{background:linear-gradient(135deg,#1a3a5c 0%,#2a6cbe 100%);color:#fff;padding:40px 20px 30px;}
+.page-header .inner{max-width:960px;margin:0 auto;}.page-header .app-name{font-size:13px;opacity:.8;}
+.page-header h1{font-size:22px;font-weight:700;margin-top:6px;line-height:1.5;}.page-header .subtitle{font-size:14px;opacity:.85;margin-top:8px;}
+.scope-box{background:rgba(255,255,255,.15);border-left:4px solid #7ecfff;padding:12px 16px;margin-top:16px;border-radius:4px;font-size:13px;}
+.container{max-width:960px;margin:0 auto;padding:30px 16px;}
+.toc{background:#fff;border:1px solid #c8d8ec;border-radius:8px;padding:24px 28px;margin-bottom:32px;}
+.toc h2{font-size:16px;font-weight:700;color:#1a3a5c;border-bottom:2px solid #2a6cbe;padding-bottom:8px;margin-bottom:14px;}
+.toc ol{margin-left:18px;}.toc li{margin:5px 0;font-size:14px;}
+.chapter{background:#fff;border-radius:8px;box-shadow:0 1px 4px rgba(0,0,0,.08);padding:28px 28px 24px;margin-bottom:28px;}
+.chapter-head{border-left:5px solid #2a6cbe;padding-left:14px;margin-bottom:20px;}
+.chapter-head .ch-no{font-size:12px;color:#2a6cbe;font-weight:700;}.chapter-head h2{font-size:20px;font-weight:700;color:#1a2535;margin-top:2px;}
+h3{font-size:16px;font-weight:700;color:#1a3a5c;border-bottom:1px solid #dde8f5;padding-bottom:5px;margin:22px 0 12px;}
+h4{font-size:14px;font-weight:700;color:#2a4a6c;margin:16px 0 8px;}
+p{margin-bottom:12px;}ul,ol{margin-left:20px;margin-bottom:12px;}li{margin-bottom:5px;}
+.steps{counter-reset:step;list-style:none;margin-left:0;}
+.steps li{counter-increment:step;padding:9px 12px 9px 46px;position:relative;background:#f8fbff;border:1px solid #dde8f5;border-radius:6px;margin-bottom:6px;}
+.steps li::before{content:counter(step);position:absolute;left:12px;top:50%;transform:translateY(-50%);width:24px;height:24px;background:#2a6cbe;color:#fff;border-radius:50%;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;}
+.table-wrap{overflow-x:auto;margin-bottom:16px;}
+table{width:100%;border-collapse:collapse;font-size:13px;min-width:380px;}
+th{background:#1a3a5c;color:#fff;padding:9px 12px;text-align:left;white-space:nowrap;}
+td{padding:8px 12px;border-bottom:1px solid #dde8f5;vertical-align:top;}tr:nth-child(even) td{background:#f4f7fb;}
+code{font-family:'Courier New',monospace;background:rgba(0,80,160,.08);color:#004080;padding:2px 6px;border-radius:3px;font-size:12px;}
+.box{border-radius:6px;padding:13px 16px;margin:14px 0;font-size:13px;}
+.box-warn{background:#fffbe6;border-left:4px solid #f5a623;color:#7a5700;}
+.box-danger{background:#fff0f0;border-left:4px solid #d43f3f;color:#7a0000;}
+.box-hint{background:#e8f4ff;border-left:4px solid #2a6cbe;color:#0a3060;}
+.box-check{background:#f4eeff;border-left:4px solid #8c4fc8;color:#3a0070;}
+.box strong{display:block;margin-bottom:4px;}
+figure{max-width:280px;width:100%;margin:18px auto;text-align:center;}
+figure img{display:block;width:100%;max-width:280px;height:auto;margin:0 auto;border:1px solid #c8d8ec;border-radius:6px;box-shadow:0 2px 8px rgba(0,0,0,.1);}
+figcaption{font-size:12px;color:#5a7a99;margin-top:6px;}
+.img-pending{display:flex;align-items:center;justify-content:center;max-width:280px;width:100%;box-sizing:border-box;background:#e8eef5;border:2px dashed #99b8d8;border-radius:6px;height:160px;color:#5a7a99;font-size:13px;margin:18px auto;}
+.diff-add{background:#e8fff0;border-left:4px solid #2a9c5c;border-radius:6px;padding:12px 16px;margin:14px 0;font-size:13px;}
+.diff-add strong{display:block;color:#1a6c3c;margin-bottom:4px;}
+.flow-box{background:#f4f7fb;border:1px solid #c8d8ec;border-radius:8px;padding:20px;margin:16px 0;}
+.flow-box h4{color:#1a3a5c;margin-top:0;}
+.flow-arrow{text-align:center;font-size:20px;color:#2a6cbe;margin:4px 0;}
+.flow-step{background:#fff;border:1px solid #c8d8ec;border-radius:6px;padding:10px 16px;margin:4px 0;font-size:13px;}
+.flow-step strong{color:#1a3a5c;}
+.summary-box{background:linear-gradient(135deg,#e8f4ff,#f0f8ff);border:1px solid #99c8ec;border-radius:8px;padding:20px 24px;margin-top:32px;}
+.summary-box h3{border:none;color:#1a3a5c;margin-top:0;}
+.confirm-box{background:#fdf4ff;border:1px solid #c8a0e0;border-radius:8px;padding:20px 24px;margin-top:16px;}
+.confirm-box h3{border:none;color:#5a0090;margin-top:0;}
+.check{color:#2e7d32;font-weight:700;}.cross{color:#c62828;}
+th.pro-col{background:#5a2a8c;}
+.feature-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px;margin:16px 0;}
+.feature-card{background:#f4f7fb;border:1px solid #c8d8ec;border-radius:8px;padding:16px;}
+.feature-card h4{color:#1a3a5c;margin-top:0;margin-bottom:6px;font-size:14px;}
+.feature-card p{font-size:13px;margin:0;color:#3a5a7a;}
+.feature-card.pro-card{background:#f4eeff;border-color:#c8a0e0;}
+.feature-card.pro-card h4{color:#5a2a8c;}
+.trouble{border:1px solid #c8d8ec;border-radius:8px;margin:14px 0;overflow:hidden;}
+.trouble-q{background:#eef6fd;padding:13px 18px;font-weight:700;font-size:14px;color:#1a3a5c;display:flex;align-items:flex-start;gap:10px;}
+.trouble-q::before{content:'Q';background:#2a6cbe;color:#fff;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900;flex-shrink:0;margin-top:1px;}
+.trouble-a{padding:13px 18px 14px 50px;font-size:13.5px;border-top:1px solid #c8d8ec;line-height:1.9;}
+.trouble-a ul{margin-left:16px;}
+.legal-block{background:#f5f5f5;border:1px solid #ddd;border-radius:8px;padding:20px 24px;font-size:12.5px;color:#444;line-height:1.9;margin:14px 0;}
+.legal-block h4{font-size:13px;color:#333;margin:18px 0 6px;border-bottom:1px solid #ddd;padding-bottom:4px;}
+.legal-block h4:first-child{margin-top:0;}
+footer{text-align:center;font-size:12px;color:#8a9aaa;padding:30px 16px;border-top:1px solid #dde8f5;margin-top:20px;}
+@media(max-width:640px){.page-header h1{font-size:18px;}.chapter{padding:20px 16px;}.site-nav a{padding:8px 9px;font-size:11px;}}
+@media print{body{background:#fff;font-size:12px;}.site-nav{display:none;}.chapter{box-shadow:none;border:1px solid #ccc;page-break-inside:avoid;}.page-header{background:#1a3a5c !important;-webkit-print-color-adjust:exact;print-color-adjust:exact;}}
+</style></head>
+<body>
+<nav class="site-nav"><div class="nav-inner">
+  <a href="01_top_settings_common_ko.html">① 홈 / 설정</a>
+  <a href="02_stocktake_free_ko.html">② 실사 무료</a>
+  <a href="03_stocktake_simple_ko.html">③ 실사 표준</a>
+  <a href="04_stocktake_full_ko.html" class="active">④ 실사 전체</a>
+  <a href="05_inventory_free_ko.html">⑤ 재고 무료</a>
+  <a href="06_inventory_simple_ko.html">⑥ 재고 표준</a>
+  <a href="07_inventory_full_ko.html">⑦ 재고 전체</a>
+</div></nav>
+<header class="page-header"><div class="inner">
+  <div class="app-name">Quantiventra 매뉴얼</div>
+  <h1>④ 재고 실사 — 전체 버전</h1>
+  <div class="subtitle">전체 버전에서 사용할 수 있는 기능, 상세 위치, 실사 결과 확정, 재고 반영 및 운영 예</div>
+  <div class="scope-box"><strong>이 페이지에서 다루는 내용:</strong>전체 버전에서 가능한 기능 / 표준 버전과의 차이 / 상세 위치 설정과 사용 / CSV 가져오기·내보내기 확장 / 실사 이력 / 실사 결과 확정 / 재고 반영 / 중요 주의 사항 / 전체 버전 운영 예</div>
+</div></header>
+<div class="container">
+  <nav class="toc"><h2>목차</h2><ol>
+    <li><a href="#overview">전체 버전 개요</a></li>
+    <li><a href="#diff">표준 버전과의 차이</a></li>
+    <li><a href="#location">상세 위치</a></li>
+    <li><a href="#csv">CSV 가져오기/내보내기 확장</a></li>
+    <li><a href="#history">실사 이력</a></li>
+    <li><a href="#confirm-flow">실사 결과 확정</a></li>
+    <li><a href="#reflect">실사 결과를 재고에 반영</a></li>
+    <li><a href="#notes">재고 반영 시 중요 주의 사항</a></li>
+    <li><a href="#usecase">전체 버전 운영 예</a></li>
+    <li><a href="#summary">이 장의 핵심 요약</a></li>
+    <li><a href="#check">사용 전 확인 사항</a></li>
+  </ol></nav>
+
+  <section class="chapter" id="overview">
+    <div class="chapter-head"><div class="ch-no">제1장</div><h2>전체 버전 개요</h2></div>
+    <p>재고 실사 전체 버전에서는 모든 레코드 수 제한이 해제되고, 코드 규칙·위치 규칙·카메라 설정·CSV 확장 등 공통 전체 설정을 사용할 수 있습니다.</p>
+    <p>대량 상품 관리와 상세 위치 기반 실사 업무에 적합합니다.</p>
+    <div class="diff-add">
+      <strong>✅ 전체 버전에서 추가되거나 사용할 수 있는 기능</strong>
+      <ul style="margin-top:6px;">
+        <li>마스터 데이터·실사 이력·내보내기 레코드 수 제한 해제</li>
+        <li>상세 코드 규칙 설정</li>
+        <li>상세 위치 규칙 설정</li>
+        <li>상세 카메라 스캔 설정</li>
+        <li>CSV 확장 내보내기</li>
+        <li>상세 편집</li>
+        <li>화면 회전 잠금(표준 버전 기능 포함)</li>
+      </ul>
+    </div>  </section>
+
+  <section class="chapter" id="diff">
+    <div class="chapter-head"><div class="ch-no">제2장</div><h2>표준 버전과의 차이</h2></div>
+    <div class="table-wrap"><table>
+      <tr><th>기능/설정</th><th>표준 버전</th><th>전체 버전</th></tr>
+      <tr><td>마스터 데이터 수</td><td>최대 300건</td><td>제한 없음</td></tr>
+      <tr><td>실사 이력 레코드 수</td><td>최대 1,000건</td><td>제한 없음</td></tr>
+      <tr><td>내보내기 레코드 수</td><td>최대 300건</td><td>제한 없음</td></tr>
+      <tr><td>상세 코드 규칙 설정</td><td>✗</td><td>○</td></tr>
+      <tr><td>상세 위치 규칙 설정</td><td>✗</td><td>○</td></tr>
+      <tr><td>상세 카메라 설정</td><td>✗</td><td>○</td></tr>
+      <tr><td>CSV 확장 내보내기</td><td>✗</td><td>○</td></tr>
+      <tr><td>상세 위치 사용</td><td>✗(상세 모드 설정은 가능하지만 기능 제한 있음)</td><td>○</td></tr>
+    </table></div>
+  </section>
+
+  <section class="chapter" id="location">
+    <div class="chapter-head"><div class="ch-no">제3장</div><h2>상세 위치</h2></div>
+    <p>전체 버전에서는 위치 마스터에 등록한 모든 위치를 재고 실사에서 사용할 수 있습니다. 창고·매장뿐 아니라 선반 번호, 층, 구역 등 세부 위치를 설정해 위치별로 실사할 수 있습니다.</p>
+    <h3>상세 위치 설정 방법</h3>
+    <ol class="steps">
+      <li><strong>설정 → 실사 설정</strong>으로 이동해 <strong>상세</strong> 모드를 선택합니다.</li>
+      <li><strong>마스터 관리 → 위치 마스터</strong>로 이동해 필요한 위치를 등록합니다.</li>
+      <li>실사 화면에서 위치 필드를 탭하면 등록된 모든 위치가 선택지로 표시됩니다.</li>
+    </ol>
+    <div class="box box-warn"><strong>⚠ 주의</strong>전체 버전이 활성화되어 있어도 모드가 간단 A/B/C로 설정되어 있으면 간단 위치만 표시됩니다. 등록된 모든 상세 위치를 사용하려면 <strong>상세</strong> 모드로 전환하세요.</div>
+    <div class="box box-hint"><strong>💡 팁</strong>상세 위치를 등록했는데도 표시되지 않는 경우, 현재 모드가 간단 A/B/C로 되어 있는지 확인하세요. 상세 위치를 사용하려면 상세 모드로 전환해야 합니다.</div>
+  </section>
+
+  <section class="chapter" id="csv">
+    <div class="chapter-head"><div class="ch-no">제4장</div><h2>CSV 가져오기/내보내기 확장</h2></div>
+    <p>전체 버전에서는 재고 실사 CSV 가져오기와 내보내기 확장 기능을 사용할 수 있습니다.</p>
+
+    <h3>재고 실사 CSV 가져오기 사양</h3>
+    <div class="table-wrap"><table>
+      <tr><th>CSV 종류</th><th>용도</th><th>주요 열</th><th>필수/선택</th><th>주의 사항</th><th>사용 가능 플랜</th></tr>
+      <tr><td>재고 실사 CSV(2열)</td><td>기본 실사 마스터 가져오기</td><td>상품 코드, 상품명</td><td>필수 2열</td><td>헤더 없이 첫 행부터 데이터로 처리합니다.</td><td>전체 플랜</td></tr>
+      <tr><td>재고 실사 CSV(3열)</td><td>이론 재고가 포함된 실사 마스터 가져오기</td><td>상품 코드, 상품명, 이론 재고</td><td>필수 3열</td><td>실사 수량은 가져오기 시 입력하지 않으며 0부터 시작합니다.</td><td>전체 플랜</td></tr>
+    </table></div>
+
+    <h3>재고 실사 CSV 내보내기</h3>
+    <ul>
+      <li>내보내기 파일의 첫 줄에는 선택한 언어에 맞는 헤더가 포함됩니다.</li>
+      <li><code>stocktake_summary</code>(실사 합계 CSV)에는 날짜·시간·위치 열이 포함되지 않습니다.</li>
+      <li>위치별·날짜별·명세 단위의 상세 출력은 이력 화면의 출력 항목과 생성된 CSV 파일의 내용을 확인하며 사용하세요.</li>
+    </ul>
+
+    <div class="box box-danger"><strong>🚨 중요</strong>CSV 가져오기와 내보내기는 중요한 데이터에 영향을 줄 수 있습니다. 대량 처리나 데이터 교체 전에 반드시 백업을 내보내고, 확인 화면의 내용을 꼼꼼히 확인하세요.</div>
+  </section>
+
+  <section class="chapter" id="history">
+    <div class="chapter-head"><div class="ch-no">제5장</div><h2>실사 이력</h2></div>
+    <p>전체 버전에서는 실사 이력의 건수 제한이 해제되어, 과거의 실사 데이터를 장기간 보관하고 확인할 수 있습니다.</p>
+    <div class="box box-hint"><strong>💡 이력 확인 활용</strong>실사 결과 확정이나 재고 반영 전에 이력을 검토하면, 잘못 입력한 수량이나 위치를 조기에 발견할 수 있습니다. 정기 실사 후에는 CSV로 내보내 별도로 보관하는 것을 권장합니다.</div>
+    <h3>실사 이력에서 확인할 수 있는 내용</h3>
+    <ul>
+      <li>저장 일시, 상품 코드, 상품명</li>
+      <li>실사 수량과 위치</li>
+      <li>메모</li>
+      <li>확정 상태(미확정/확정 완료)</li>
+    </ul>
+  </section>
+
+  <section class="chapter" id="confirm-flow">
+    <div class="chapter-head"><div class="ch-no">제6장</div><h2>실사 결과 확정</h2></div>
+    <p>전체 버전에서는 입력한 실사 데이터를 확정하는 작업을 실행할 수 있습니다. 확정하면 실사 결과가 공식 기록으로 취급됩니다.</p>
+    <div class="flow-box">
+      <h4>실사 입력부터 확정까지의 흐름</h4>
+      <div class="flow-step"><strong>① 실사 데이터 입력</strong>: 바코드 스캔 → 수량 입력 → 저장</div>
+      <div class="flow-arrow">↓</div>
+      <div class="flow-step"><strong>② 실사 이력 확인</strong>: 저장된 항목을 확인하고, 오류가 있으면 앱 화면의 안내에 따라 수정합니다.</div>
+      <div class="flow-arrow">↓</div>
+      <div class="flow-step"><strong>③ 실사 결과 확정</strong>: 실사 결과를 확정하는 작업을 실행합니다.</div>
+      <div class="flow-arrow">↓</div>
+      <div class="flow-step"><strong>④ 재고 반영(선택)</strong>: 확정된 실사 결과를 재고 관리에 반영합니다.</div>
+    </div>
+    <div class="box box-danger"><strong>🚨 확정 버튼에 대해</strong>실사 결과 확정은 재고 데이터에 영향을 줄 수 있는 중요한 작업입니다. 확정 버튼은 확인 내용 아래의 별도 위험 영역에 배치되며, 먼저 누르는 기본 버튼으로 취급되지 않습니다. 차이와 대상 데이터를 확인한 뒤 마지막에 실행하세요.</div>
+    <div class="box box-check"><strong>🔍 확정 후 처리</strong>확정 후 수정이나 되돌리기 가능 여부는 앱 화면의 안내와 실사 이력을 기준으로 확인하세요. 필요한 경우 백업 CSV와 출력된 이력을 함께 확인해 주세요.</div>
+    <div class="box box-danger"><strong>🚨 중요</strong>확정 전에 반드시 실사 이력의 내용을 확인하세요. 실행 전에는 확인 화면의 안내를 꼼꼼히 읽어 주세요.</div>
+  </section>
+
+  <section class="chapter" id="reflect">
+    <div class="chapter-head"><div class="ch-no">제7장</div><h2>실사 결과를 재고에 반영</h2></div>
+    <p>실사 결과를 재고 관리에 반영하면, 재고 수량이 확정된 실사 수량에 맞게 조정됩니다. 차이는 조정 이력으로 기록됩니다.</p>
+    <h3>재고 반영 절차 개요</h3>
+    <ol class="steps">
+      <li>실사 데이터를 입력하고 실사 결과를 확정합니다.</li>
+      <li>재고 반영 작업을 실행합니다.</li>
+      <li>확인 화면에서 반영 내용(차이 조정 내역)을 확인합니다.</li>
+      <li>확인 후 반영을 실행합니다.</li>
+      <li>재고 이력에서 조정 내역을 확인합니다.</li>
+    </ol>
+    <div class="box box-danger"><strong>🚨 중요</strong>재고 반영은 재고 수량을 크게 변경합니다. 실행 전에 반드시 백업 CSV를 내보내세요. 또한 반영 전 확인 화면의 내용을 꼼꼼히 읽은 뒤 실행하세요.</div>
+    <div class="box box-check"><strong>🔍 반영 후 확인</strong>재고 반영 후에는 재고 이력과 조정 내역을 확인하세요. 되돌리기나 재처리가 필요한 경우에는 앱 화면 안내와 백업 CSV를 기준으로 확인하는 것이 안전합니다.</div>
+  </section>
+
+  <section class="chapter" id="notes">
+    <div class="chapter-head"><div class="ch-no">제8장</div><h2>재고 반영 시 중요 주의 사항</h2></div>
+    <div class="box box-danger"><strong>🚨 반영 전 반드시 백업</strong>재고 반영은 데이터를 크게 변경합니다. 사전에 백업 CSV를 내보내세요(<strong>설정 → 전체 데이터 내보내기</strong>).</div>
+    <div class="box box-warn"><strong>⚠ 확인 화면을 꼼꼼히 읽기</strong>확정·반영·삭제·초기화처럼 데이터를 변경하는 작업은 실행 전에 확인 화면의 내용을 꼼꼼히 읽어 주세요.</div>
+    <div class="box box-warn"><strong>⚠ 구매 조건 확인</strong>법적 고지와 구매 조건은 Google Play Store의 표시를 확인하세요. 이 사용 설명서에서는 가격이나 조건을 단정하지 않습니다.</div>
+  </section>
+
+  <section class="chapter" id="usecase">
+    <div class="chapter-head"><div class="ch-no">제9장</div><h2>전체 버전 운영 예</h2></div>
+    <h3>월별 재고 실사 운영 예</h3>
+    <ol class="steps">
+      <li>월 초에 실사 CSV를 가져와 상품 마스터를 최신 상태로 갱신합니다.</li>
+      <li>실사 설정을 <strong>상세</strong> 모드로 전환하고 선반·구역별 위치를 준비합니다.</li>
+      <li>바코드를 스캔하면서 실사 수량을 입력하고 저장합니다.</li>
+      <li>실사 이력에서 모든 항목을 확인합니다.</li>
+      <li>문제가 없으면 실사 결과 확정을 실행합니다.</li>
+      <li>백업을 내보낸 뒤 재고 반영 작업을 실행합니다.</li>
+      <li>재고 이력에서 실사 조정 항목을 확인하고, 차이가 있으면 원인을 조사합니다.</li>
+      <li>실사 결과 CSV를 내보내 기록으로 보관합니다.</li>
+    </ol>
+  </section>
+
+  <div class="summary-box" id="summary">
+    <h3>📌 이 장의 핵심 요약</h3>
+    <ul>
+      <li>전체 버전에서는 모든 레코드 제한이 해제되며, 상세 위치와 CSV 확장 기능을 사용할 수 있습니다.</li>
+      <li>상세 위치를 사용하려면 <strong>설정 → 실사 설정</strong>에서 <strong>상세</strong> 모드로 전환하세요.</li>
+      <li>실사 결과 확정 → 재고 반영 흐름은 데이터를 크게 변경하므로 신중하게 진행하세요.</li>
+      <li>재고 반영 전에는 반드시 백업 CSV를 내보내세요.</li>
+    </ul>
+  </div>
+  <div class="confirm-box" id="check">
+    <h3>🔍 사용 전 확인 사항</h3>
+    <ul>
+      <li>실사 결과 확정과 재고 반영은 재고 수량과 이력에 영향을 주는 중요한 작업입니다. 실행 전 확인 화면의 내용을 우선해 확인하세요.</li>
+      <li>저장 후 수정이나 확정 후 처리가 필요한 경우, 앱 화면 안내와 실사 이력을 기준으로 확인하세요.</li>
+      <li>재고 반영 후에는 재고 이력과 조정 내역을 확인하고, 필요하면 백업 CSV와 비교하세요.</li>
+      <li>위치별·날짜별·명세 단위 CSV는 출력 화면과 생성된 CSV 파일의 열을 확인하며 사용하세요.</li>
+    </ul>
+  </div>
+</div>
+<footer>Quantiventra 매뉴얼 · 본 설명서는 예고 없이 변경될 수 있습니다. 최신 정보는 앱 화면을 우선해 확인하세요.<p style="margin-top:4px;"><a href="privacy_ko.html">개인정보 처리방침</a></p></footer>
+</body></html>

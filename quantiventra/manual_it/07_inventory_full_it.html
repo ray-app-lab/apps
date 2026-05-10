@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="it">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quantiventra – Gestione Magazzino – Versione Completa</title>
+<style>*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;font-size:15px;line-height:1.8;color:#1a2535;background:#f4f7fb;}
+a{color:#1a5fa8;text-decoration:none;}a:hover{text-decoration:underline;}
+.site-nav{background:#1a3a5c;color:#fff;padding:0;}.site-nav .nav-inner{max-width:960px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:stretch;}
+.site-nav a{color:#cde;padding:10px 13px;font-size:12px;display:block;border-right:1px solid #2a4a6c;white-space:nowrap;}
+.site-nav a:hover{background:#2a5090;text-decoration:none;}.site-nav a.active{background:#2a6cbe;color:#fff;font-weight:bold;}
+.page-header{background:linear-gradient(135deg,#1a3a5c 0%,#2a6cbe 100%);color:#fff;padding:40px 20px 30px;}
+.page-header .inner{max-width:960px;margin:0 auto;}.page-header .app-name{font-size:13px;opacity:.8;}
+.page-header h1{font-size:22px;font-weight:700;margin-top:6px;line-height:1.4;}.page-header .subtitle{font-size:14px;opacity:.85;margin-top:8px;}
+.scope-box{background:rgba(255,255,255,.15);border-left:4px solid #7ecfff;padding:12px 16px;margin-top:16px;border-radius:4px;font-size:13px;}
+.container{max-width:960px;margin:0 auto;padding:30px 16px;}
+.toc{background:#fff;border:1px solid #c8d8ec;border-radius:8px;padding:24px 28px;margin-bottom:32px;}
+.toc h2{font-size:16px;font-weight:700;color:#1a3a5c;border-bottom:2px solid #2a6cbe;padding-bottom:8px;margin-bottom:14px;}
+.toc ol{margin-left:18px;}.toc li{margin:5px 0;font-size:14px;}
+.chapter{background:#fff;border-radius:8px;box-shadow:0 1px 4px rgba(0,0,0,.08);padding:28px 28px 24px;margin-bottom:28px;}
+.chapter-head{border-left:5px solid #2a6cbe;padding-left:14px;margin-bottom:20px;}
+.chapter-head .ch-no{font-size:12px;color:#2a6cbe;font-weight:700;}.chapter-head h2{font-size:20px;font-weight:700;color:#1a2535;margin-top:2px;}
+h3{font-size:16px;font-weight:700;color:#1a3a5c;border-bottom:1px solid #dde8f5;padding-bottom:5px;margin:22px 0 12px;}
+h4{font-size:14px;font-weight:700;color:#2a4a6c;margin:16px 0 8px;}
+p{margin-bottom:12px;}ul,ol{margin-left:20px;margin-bottom:12px;}li{margin-bottom:5px;}
+.steps{counter-reset:step;list-style:none;margin-left:0;}
+.steps li{counter-increment:step;padding:9px 12px 9px 46px;position:relative;background:#f8fbff;border:1px solid #dde8f5;border-radius:6px;margin-bottom:6px;}
+.steps li::before{content:counter(step);position:absolute;left:12px;top:50%;transform:translateY(-50%);width:24px;height:24px;background:#2a6cbe;color:#fff;border-radius:50%;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;}
+.table-wrap{overflow-x:auto;margin-bottom:16px;}
+table{width:100%;border-collapse:collapse;font-size:13px;min-width:380px;}
+th{background:#1a3a5c;color:#fff;padding:9px 12px;text-align:left;white-space:nowrap;}
+td{padding:8px 12px;border-bottom:1px solid #dde8f5;vertical-align:top;}tr:nth-child(even) td{background:#f4f7fb;}
+code{font-family:'Courier New',monospace;background:rgba(0,80,160,.08);color:#004080;padding:2px 6px;border-radius:3px;font-size:12px;}
+.box{border-radius:6px;padding:13px 16px;margin:14px 0;font-size:13px;}
+.box-warn{background:#fffbe6;border-left:4px solid #f5a623;color:#7a5700;}
+.box-danger{background:#fff0f0;border-left:4px solid #d43f3f;color:#7a0000;}
+.box-hint{background:#e8f4ff;border-left:4px solid #2a6cbe;color:#0a3060;}
+.box-check{background:#f4eeff;border-left:4px solid #8c4fc8;color:#3a0070;}
+.box strong{display:block;margin-bottom:4px;}
+figure{max-width:280px;width:100%;margin:18px auto;text-align:center;}
+figure img{display:block;width:100%;max-width:280px;height:auto;margin:0 auto;border:1px solid #c8d8ec;border-radius:6px;box-shadow:0 2px 8px rgba(0,0,0,.1);}
+figcaption{font-size:12px;color:#5a7a99;margin-top:6px;}
+.img-pending{display:flex;align-items:center;justify-content:center;max-width:280px;width:100%;box-sizing:border-box;background:#e8eef5;border:2px dashed #99b8d8;border-radius:6px;height:160px;color:#5a7a99;font-size:13px;margin:18px auto;}
+.diff-add{background:#e8fff0;border-left:4px solid #2a9c5c;border-radius:6px;padding:12px 16px;margin:14px 0;font-size:13px;}
+.diff-add strong{display:block;color:#1a6c3c;margin-bottom:4px;}
+.flow-box{background:#f4f7fb;border:1px solid #c8d8ec;border-radius:8px;padding:20px;margin:16px 0;}
+.flow-box h4{color:#1a3a5c;margin-top:0;}
+.flow-arrow{text-align:center;font-size:20px;color:#2a6cbe;margin:4px 0;}
+.flow-step{background:#fff;border:1px solid #c8d8ec;border-radius:6px;padding:10px 16px;margin:4px 0;font-size:13px;}
+.flow-step strong{color:#1a3a5c;}
+.summary-box{background:linear-gradient(135deg,#e8f4ff,#f0f8ff);border:1px solid #99c8ec;border-radius:8px;padding:20px 24px;margin-top:32px;}
+.summary-box h3{border:none;color:#1a3a5c;margin-top:0;}
+.confirm-box{background:#fdf4ff;border:1px solid #c8a0e0;border-radius:8px;padding:20px 24px;margin-top:16px;}
+.confirm-box h3{border:none;color:#5a0090;margin-top:0;}
+.check{color:#2e7d32;font-weight:700;}.cross{color:#c62828;}
+th.pro-col{background:#5a2a8c;}
+.feature-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px;margin:16px 0;}
+.feature-card{background:#f4f7fb;border:1px solid #c8d8ec;border-radius:8px;padding:16px;}
+.feature-card h4{color:#1a3a5c;margin-top:0;margin-bottom:6px;font-size:14px;}
+.feature-card p{font-size:13px;margin:0;color:#3a5a7a;}
+.feature-card.pro-card{background:#f4eeff;border-color:#c8a0e0;}
+.feature-card.pro-card h4{color:#5a2a8c;}
+.trouble{border:1px solid #c8d8ec;border-radius:8px;margin:14px 0;overflow:hidden;}
+.trouble-q{background:#eef6fd;padding:13px 18px;font-weight:700;font-size:14px;color:#1a3a5c;display:flex;align-items:flex-start;gap:10px;}
+.trouble-q::before{content:'Q';background:#2a6cbe;color:#fff;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900;flex-shrink:0;margin-top:1px;}
+.trouble-a{padding:13px 18px 14px 50px;font-size:13.5px;border-top:1px solid #c8d8ec;line-height:1.9;}
+.trouble-a ul{margin-left:16px;}
+.legal-block{background:#f5f5f5;border:1px solid #ddd;border-radius:8px;padding:20px 24px;font-size:12.5px;color:#444;line-height:1.9;margin:14px 0;}
+.legal-block h4{font-size:13px;color:#333;margin:18px 0 6px;border-bottom:1px solid #ddd;padding-bottom:4px;}
+.legal-block h4:first-child{margin-top:0;}
+footer{text-align:center;font-size:12px;color:#8a9aaa;padding:30px 16px;border-top:1px solid #dde8f5;margin-top:20px;}
+@media(max-width:640px){.page-header h1{font-size:18px;}.chapter{padding:20px 16px;}.site-nav a{padding:8px 9px;font-size:11px;}}
+@media print{body{background:#fff;font-size:12px;}.site-nav{display:none;}.chapter{box-shadow:none;border:1px solid #ccc;page-break-inside:avoid;}.page-header{background:#1a3a5c !important;-webkit-print-color-adjust:exact;print-color-adjust:exact;}}
+</style></head>
+<body>
+<nav class="site-nav"><div class="nav-inner">
+  <a href="01_top_settings_common_it.html">① Home / Impostazioni</a>
+  <a href="02_stocktake_free_it.html">② Inventario fisico gratuito</a>
+  <a href="03_stocktake_simple_it.html">③ Inventario fisico standard</a>
+  <a href="04_stocktake_full_it.html">④ Inventario fisico completo</a>
+  <a href="05_inventory_free_it.html">⑤ Magazzino gratuito</a>
+  <a href="06_inventory_simple_it.html">⑥ Magazzino standard</a>
+  <a href="07_inventory_full_it.html" class="active">⑦ Magazzino completo</a>
+</div></nav>
+<header class="page-header"><div class="inner">
+  <div class="app-name">Manuale Quantiventra</div>
+  <h1>⑦ Gestione magazzino — Versione Completa (Sblocco completo)</h1>
+  <div class="subtitle">Funzionalità versione completa · Gestione anagrafiche · Trasferimento scorte · Applicazione inventario · Backup CSV · Flussi pratici</div>
+  <div class="scope-box"><strong>Argomenti trattati:</strong> Novità Sblocco completo / Differenze da Standard / Anagrafica prodotti / Anagrafica categorie / Anagrafica ubicazioni / Trasferimento scorte / Storico / Applicazione inventario / Backup·Ripristino CSV / Backup storico / Soglia di riordino·Prezzo / Esempi flusso / Note importanti</div>
+</div></header>
+<div class="container">
+  <nav class="toc"><h2>Indice</h2><ol>
+    <li><a href="#overview">Panoramica versione completa (Sblocco completo)</a></li>
+    <li><a href="#diff">Differenze rispetto alla versione standard</a></li>
+    <li><a href="#master-product">Integrazione Anagrafica prodotti</a></li>
+    <li><a href="#master-item">Anagrafica categorie</a></li>
+    <li><a href="#master-location">Anagrafica ubicazioni</a></li>
+    <li><a href="#stock-move">Trasferimento scorte</a></li>
+    <li><a href="#stock-history">Storico scorte</a></li>
+    <li><a href="#stocktake-reflect">Applicazione dei risultati dell'inventario fisico alle scorte</a></li>
+    <li><a href="#csv-backup">Backup e ripristino CSV</a></li>
+    <li><a href="#csv-history-backup">Backup storico</a></li>
+    <li><a href="#reorder-price">Soglia di riordino e prezzo</a></li>
+    <li><a href="#usecase">Esempi di flusso di lavoro — versione completa</a></li>
+    <li><a href="#notes">Note importanti</a></li>
+    <li><a href="#summary">Punti chiave del capitolo</a></li>
+    <li><a href="#confirm">Note prima dell'uso</a></li>
+  </ol></nav>
+
+  <section class="chapter" id="overview">
+    <div class="chapter-head"><div class="ch-no">CAPITOLO 1</div><h2>Panoramica versione completa (Sblocco completo)</h2></div>
+    <p>Lo Sblocco completo per il magazzino rimuove tutti i limiti su record anagrafici, voci storico e righe esportazione, e attiva tutte le funzionalità avanzate non disponibili nella versione standard. Le principali aggiunte includono: gestione multi-ubicazione (magazzino, negozio ecc.), trasferimento scorte tra ubicazioni, applicazione diretta dei risultati dell'inventario alle scorte, e backup/ripristino CSV completo.</p>
+    <div class="diff-add">
+      <strong>Funzionalità sbloccate dallo Sblocco completo</strong>
+      <ul>
+        <li>Record anagrafici, voci storico e righe esportazione illimitati</li>
+        <li>Campi soglia di riordino e prezzo nell'Anagrafica prodotti</li>
+        <li>Anagrafica categorie (gestione classificazione prodotti)</li>
+        <li>Registrazione e gestione Anagrafica ubicazioni</li>
+        <li>Trasferimento scorte (spostamento quantità tra ubicazioni)</li>
+        <li>Applicazione dei risultati dell'inventario fisico alle scorte</li>
+        <li>Backup e ripristino CSV (foglio scorte + set backup CSV completo)</li>
+        <li>Backup storico</li>
+        <li>Modifica diretta totale cumulativo registrato</li>
+        <li>Regole codice, regole ubicazione e impostazioni fotocamera (impostazioni condivise versione completa)</li>
+        <li>Opzioni CSV estese (selezione colonne e modalità import)</li>
+      </ul>
+    </div>
+    <div class="box box-hint"><strong>Nota: "Sblocco completo" e "versione completa" hanno lo stesso significato</strong>In questo documento "Sblocco completo" e "versione completa" sono usati in modo intercambiabile. Per i dettagli di acquisto, consulta la sezione "Panoramica piani" in <a href="01_top_settings_common_it.html">① Home e Impostazioni</a>.</div>
+  </section>
+
+  <section class="chapter" id="diff">
+    <div class="chapter-head"><div class="ch-no">CAPITOLO 2</div><h2>Differenze rispetto alla versione standard</h2></div>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Funzionalità</th><th>Gratuito</th><th>Standard</th><th>Completo</th></tr></thead>
+      <tbody>
+        <tr><td>Consultazione delle scorte</td><td>✓</td><td>✓</td><td>✓</td></tr>
+        <tr><td>Carico / Scarico</td><td>✗</td><td>✓</td><td>✓</td></tr>
+        <tr><td>Limite record anagrafici</td><td>30</td><td>300</td><td>Illimitati</td></tr>
+        <tr><td>Trasferimento scorte</td><td>✗</td><td>✗</td><td>✓</td></tr>
+        <tr><td>Applicazione dei risultati dell'inventario fisico alle scorte</td><td>✗</td><td>✗</td><td>✓</td></tr>
+        <tr><td>Anagrafica categorie</td><td>✗</td><td>✗</td><td>✓</td></tr>
+        <tr><td>Soglia di riordino e prezzo</td><td>✗</td><td>✗</td><td>✓</td></tr>
+        <tr><td>Backup e ripristino CSV</td><td>✗</td><td>Limitato</td><td>✓ (set completo)</td></tr>
+        <tr><td>Backup storico</td><td>✗</td><td>✗</td><td>✓</td></tr>
+        <tr><td>Regole codice e ubicazione</td><td>✗</td><td>✗</td><td>✓ (impostazioni condivise Completo)</td></tr>
+      </tbody>
+    </table></div>
+    <div class="box box-hint"><strong>Suggerimento</strong>Per le operazioni principali della versione standard — carico, scarico, consultazione delle scorte, storico e import/esportazione CSV — consulta <a href="06_inventory_simple_it.html">⑥ Gestione magazzino: Standard</a>. Questa pagina tratta solo le funzionalità aggiunte dalla versione completa.</div>
+  </section>
+
+  <section class="chapter" id="master-product">
+    <div class="chapter-head"><div class="ch-no">CAPITOLO 3</div><h2>Integrazione Anagrafica prodotti</h2></div>
+    <p>L'Anagrafica prodotti è dove registri i prodotti reali di cui gestisci le scorte. Con lo Sblocco completo, puoi aggiungere soglia di riordino e prezzo a ogni prodotto.</p>
+    <h3>Campi chiave dell'Anagrafica prodotti</h3>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Campo</th><th>Descrizione</th><th>Aggiunto nella versione completa</th></tr></thead>
+      <tbody>
+        <tr><td>Codice prodotto / Codice a barre</td><td>Identificatore univoco del prodotto</td><td>—</td></tr>
+        <tr><td>Nome prodotto</td><td>Nome del prodotto</td><td>—</td></tr>
+        <tr><td>Categoria</td><td>Classificazione del prodotto (selezionata dall'Anagrafica categorie)</td><td>—</td></tr>
+        <tr><td>Prezzo</td><td>Prezzo di vendita o costo del prodotto</td><td>✓</td></tr>
+        <tr><td>Soglia di riordino</td><td>Soglia di riferimento per valutare il riordino</td><td>✓</td></tr>
+      </tbody>
+    </table></div>    <h3>Registrare o modificare un prodotto</h3>
+    <ol class="steps">
+      <li>Dalla Home, apri <strong>Gestione anagrafiche</strong>.</li>
+      <li>Seleziona <strong>Anagrafica prodotti</strong>.</li>
+      <li>Tocca la scheda nuovo elemento o il pulsante <strong>Nuovo</strong>.</li>
+      <li>Inserisci codice prodotto, nome e categoria. Facoltativamente inserisci prezzo e soglia di riordino.</li>
+      <li>Tocca <strong>Salva</strong> per registrare.</li>
+      <li>Per modificare un prodotto esistente, aprilo nell'elenco, apporta le modifiche e tocca <strong>Salva</strong>.</li>
+    </ol>
+    <div class="box box-hint"><strong>Registra un prodotto sconosciuto dalla schermata Carico</strong>Se inserisci un codice prodotto non presente nelle anagrafiche nella schermata Carico, l'app ti porta al modulo di nuova voce dell'Anagrafica prodotti. Dopo aver salvato nome, prezzo e soglia di riordino, torni alla schermata Carico con i dettagli del prodotto compilati automaticamente.</div>
+    <div class="box box-warn"><strong>Attenzione: non confondere Prodotto e Categoria</strong>
+      <ul>
+        <li><strong>Prodotto</strong>: singolo articolo in magazzino (es. Penna rossa, Penna blu)</li>
+        <li><strong>Categoria</strong>: gruppo di classificazione prodotti (es. Cancelleria, Alimentari)</li>
+      </ul>
+      La categoria viene selezionata nell'Anagrafica prodotti come classificazione del prodotto. La categoria stessa non detiene scorte.
+    </div>
+  </section>
+
+  <section class="chapter" id="master-item">
+    <div class="chapter-head"><div class="ch-no">CAPITOLO 4</div><h2>Anagrafica categorie</h2></div>
+    <p>L'Anagrafica categorie gestisce i gruppi di classificazione usati per organizzare i prodotti. Le categorie aiutano a filtrare e consultare l'anagrafica prodotti.</p>
+    <div class="table-wrap"><table>
+      <tr><th>Campo</th><th>Descrizione</th></tr>
+      <tr><td>Codice categoria</td><td>Identificatore univoco della categoria</td></tr>
+      <tr><td>Nome categoria</td><td>Nome della classificazione (es. Alimentari, Abbigliamento)</td></tr>
+      <tr><td>Classificazione</td><td>Gruppo usato per organizzare prodotti in elenchi e anagrafiche</td></tr>
+      <tr><td>Ordine visualizzazione</td><td>Ordine di ordinamento nella vista elenco</td></tr>
+    </table></div>    <h3>Registrare una categoria</h3>
+    <ol class="steps">
+      <li>Vai in <strong>Gestione anagrafiche → Anagrafica categorie</strong>.</li>
+      <li>Tocca la scheda nuovo elemento o il pulsante <strong>Nuovo</strong>.</li>
+      <li>Inserisci codice, nome e ordine visualizzazione.</li>
+      <li>Tocca <strong>Salva</strong>.</li>
+    </ol>
+    <div class="box box-hint"><strong>Nota sulle categorie</strong>Usa categorie coerenti per raggruppare i prodotti e rendere più semplice il controllo dell'anagrafica.</div>
+  </section>
+
+  <section class="chapter" id="master-location">
+    <div class="chapter-head"><div class="ch-no">CAPITOLO 5</div><h2>Anagrafica ubicazioni</h2></div>
+    <p>L'Anagrafica ubicazioni è dove registri e gestisci i luoghi fisici in cui vengono conservate le scorte. Registrando più ubicazioni — come magazzino, punto vendita o singoli scaffali — puoi tracciare le scorte per ubicazione.</p>
+    <div class="table-wrap"><table>
+      <tr><th>Campo</th><th>Descrizione</th></tr>
+      <tr><td>Codice ubicazione</td><td>Identificatore univoco dell'ubicazione</td></tr>
+      <tr><td>Nome ubicazione</td><td>Nome dell'ubicazione (es. Magazzino, Negozio A)</td></tr>
+      <tr><td>Ordine visualizzazione</td><td>Ordine di ordinamento nella vista elenco</td></tr>
+      <tr><td>Includi nel riferimento per il riordino</td><td>Se attivo, le scorte di questa ubicazione vengono incluse nel totale usato come riferimento per il riordino nella Consultazione delle scorte</td></tr>
+      <tr><td>Attivo / Inattivo</td><td>Le ubicazioni non più in uso possono essere disabilitate senza eliminarle</td></tr>
+    </table></div>    <div class="box box-hint"><strong>Ubicazioni predefinite</strong>L'app viene fornita con "Magazzino" e "Negozio" già registrati. Rinominali, modificali o aggiungine altri in base alle tue operazioni reali.</div>
+    <h3>Registrare un'ubicazione</h3>
+    <ol class="steps">
+      <li>Vai in <strong>Gestione anagrafiche → Anagrafica ubicazioni</strong>.</li>
+      <li>Tocca la scheda nuovo elemento o il pulsante <strong>Nuovo</strong>.</li>
+      <li>Inserisci codice, nome e ordine visualizzazione.</li>
+      <li>Attiva o disattiva <strong>Includi nel riferimento per il riordino</strong> secondo necessità. I nuovi elementi hanno questo campo attivo per impostazione predefinita.</li>
+      <li>Tocca <strong>Salva</strong>.</li>
+    </ol>
+    <div class="box box-hint"><strong>Su "Includi nel riferimento per il riordino"</strong>Il riferimento per il riordino nella Consultazione delle scorte considera solo le scorte delle ubicazioni con questo interruttore attivo. Usa il pulsante <strong>Includi tutte le ubicazioni attive</strong> per attivarle tutte in una volta.</div>
+    <div class="box box-warn"><strong>Attenzione: disabilitare vs eliminare un'ubicazione</strong>Quando un'ubicazione non è più necessaria, si consiglia di <strong>disabilitarla</strong> anziché eliminarla. Prima di eliminare o sovrascrivere record, esporta un backup e controlla l'impatto sulle scorte.</div>
+  </section>
+
+  <section class="chapter" id="stock-move">
+    <div class="chapter-head"><div class="ch-no">CAPITOLO 6</div><h2>Trasferimento scorte</h2></div>
+    <p>Il trasferimento scorte sposta una quantità specifica di scorte da un'ubicazione a un'altra. Disponibile solo nella versione completa.</p>    <h3>Come eseguire un trasferimento scorte</h3>
+    <ol class="steps">
+      <li>Dal menu Gestione magazzino, apri <strong>Trasferimento scorte</strong>.</li>
+      <li>Seleziona l'<strong>ubicazione di origine</strong> (da dove partono le scorte).</li>
+      <li>Seleziona l'<strong>ubicazione di destinazione</strong> (dove arriveranno le scorte).</li>
+      <li>Trova il prodotto desiderato scansionando il codice a barre o cercando per nome.</li>
+      <li>Inserisci la quantità da trasferire.</li>
+      <li>Rivedi i dettagli e tocca <strong>Conferma</strong>.</li>
+    </ol>
+    <div class="box box-danger"><strong>Importante: non trasferire mai tra la stessa ubicazione</strong>Selezionare la stessa ubicazione sia come origine che come destinazione causerà un'elaborazione errata dei dati delle scorte. Seleziona sempre due ubicazioni diverse.</div>
+    <div class="box box-hint"><strong>Con una sola ubicazione</strong>Con una sola ubicazione registrata, il trasferimento non ha senso. Usa invece <strong>Carico</strong>, <strong>Scarico</strong> o <strong>Modifica</strong> per rettificare le quantità. Il trasferimento ha significato solo con due o più ubicazioni.</div>
+  </section>
+
+  <section class="chapter" id="stock-history">
+    <div class="chapter-head"><div class="ch-no">CAPITOLO 7</div><h2>Storico scorte</h2></div>
+    <p>Lo Storico scorte fornisce un registro completo di ogni variazione delle scorte. Con lo Sblocco completo, il limite di voci storico viene rimosso, permettendo di conservare record a lungo termine.</p>
+    <h3>Tipi di operazioni registrate nello storico</h3>
+    <ul>
+      <li><strong>Carico</strong>: Merci ricevute in magazzino</li>
+      <li><strong>Scarico</strong>: Merci uscite dal magazzino</li>
+      <li><strong>Trasferimento</strong>: Scorte spostate tra ubicazioni</li>
+      <li><strong>Rettifica inventario</strong>: Correzione di differenze quando si applicano i risultati dell'inventario</li>
+      <li><strong>Scorte iniziali</strong>: Quantità di apertura impostata alla registrazione iniziale</li>
+      <li><strong>Import CSV</strong>: Scorte aggiornate tramite file CSV</li>
+    </ul>  </section>
+
+  <section class="chapter" id="stocktake-reflect">
+    <div class="chapter-head"><div class="ch-no">CAPITOLO 8</div><h2>Applicazione dei risultati dell'inventario fisico alle scorte</h2></div>
+    <p>Applicare i risultati dell'inventario fisico (conteggio reale) al modulo Gestione magazzino allinea le scorte di sistema alle scorte fisicamente presenti sugli scaffali. Disponibile solo nella versione completa.</p>
+    <p>Quando si applicano i risultati dell'inventario, le eventuali differenze tra i livelli delle scorte teorici e le quantità reali contate vengono registrate come voci di <strong>Rettifica inventario</strong> nello storico, aggiornando simultaneamente le scorte ai valori reali e conservando un registro tracciabile delle rettifiche.</p>
+    <div class="box box-check"><strong>Condizioni di applicazione e revisione</strong>Esegui l'applicazione solo quando le condizioni della schermata di conferma sono soddisfatte. Prima di procedere, controlla le ubicazioni interessate, i dettagli della rettifica e il CSV di backup.</div>
+    <div class="box box-danger"><strong>Importante: fai il backup prima di applicare</strong>L'applicazione dei dati dell'inventario sovrascrive le quantità di scorte. Prima di eseguire questa operazione, esporta sempre un backup CSV. La possibilità di annullare dopo l'applicazione potrebbe essere limitata.</div>
+  </section>
+
+  <section class="chapter" id="csv-backup">
+    <div class="chapter-head"><div class="ch-no">CAPITOLO 9</div><h2>Backup e ripristino CSV</h2></div>
+    <p>Lo Sblocco completo offre tre tipi di esportazione: foglio scorte CSV, set backup CSV completo e backup storico. Poiché le operazioni di ripristino e sostituzione apportano modifiche complete ai dati, verificarle attentamente prima di procedere è essenziale.</p>
+    <h3>Tipi CSV e loro utilizzo</h3>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Tipo CSV</th><th>Scopo</th><th>Contenuto principale</th><th>Disponibile in</th><th>Note</th></tr></thead>
+      <tbody>
+        <tr><td>Foglio scorte CSV</td><td>Revisione e reimport dell'elenco scorte corrente</td><td>Ubicazione, codice prodotto, nome prodotto, quantità</td><td>Standard o superiore</td><td>Senza colonna ubicazione, seleziona ubicazione destinazione durante l'import</td></tr>
+        <tr><td>Set backup CSV completo</td><td>Backup e ripristino del set dati completo</td><td>Prodotti, scorte correnti, storico carico/scarico/trasferimento/rettifica, ubicazioni, categorie</td><td>Completo</td><td>Può essere esportato in più file</td></tr>
+        <tr><td>Backup storico</td><td>Backup per la revisione successiva delle movimentazioni di scorte</td><td>Foglio scorte + storico operazioni completo</td><td>Completo</td><td>Il comportamento del reimport CSV storico va verificato</td></tr>
+      </tbody>
+    </table></div>    <h3>Esportare il set backup CSV completo</h3>
+    <ol class="steps">
+      <li>Dalla schermata Impostazioni o dal menu principale, apri <strong>Import/Esportazione CSV</strong>.</li>
+      <li>Seleziona <strong>Set backup CSV completo</strong>.</li>
+      <li>Seleziona la cartella di destinazione (segui le istruzioni sullo schermo).</li>
+      <li>Tocca <strong>Esporta</strong> e conferma il messaggio di completamento.</li>
+    </ol>
+    <h3>Ripristinare da un backup CSV</h3>
+    <ol class="steps">
+      <li>Vai in <strong>Import/Esportazione CSV → Ripristina</strong> o <strong>Import CSV</strong>.</li>
+      <li>Seleziona il file backup CSV.</li>
+      <li>Verifica la mappatura delle colonne (l'app potrebbe rilevarlo automaticamente).</li>
+      <li>Leggi attentamente la schermata di conferma, poi tocca <strong>Esegui</strong>.</li>
+    </ol>
+    <div class="box box-danger"><strong>Importante: prima di ripristinare o sostituire, fai sempre il backup dei dati correnti</strong>Il ripristino CSV o Sostituisci scorte correnti sovrascrive i dati delle scorte esistenti. Prima di procedere, esporta e salva il foglio scorte CSV corrente.</div>
+    <h3>Sostituisci scorte correnti</h3>
+    <p>Sostituisci scorte correnti sovrascrive le quantità di scorte correnti con i valori del CSV importato. Lo storico esistente viene conservato, ma le differenze vengono registrate come voci storico di <strong>rettifica</strong>. Le righe di scorte non presenti nel CSV potrebbero essere azzerate a 0, quindi verifica sempre il contenuto del CSV prima di importare.</p>
+    <div class="box box-danger"><strong>Usa Sostituisci scorte correnti con estrema cautela</strong>I prodotti o le ubicazioni non presenti nel CSV potrebbero avere le scorte azzerate a 0. Prima di importare, conferma che il CSV contenga il set corretto di prodotti e ubicazioni.</div>
+  </section>
+
+  <section class="chapter" id="csv-history-backup">
+    <div class="chapter-head"><div class="ch-no">CAPITOLO 10</div><h2>Backup storico</h2></div>
+    <p>Il backup storico esporta in un'unica operazione sia il foglio scorte che il registro completo delle movimentazioni — carichi, scarichi, trasferimenti, rettifiche ecc. — utile per revisioni o tracciamento successivo delle variazioni di scorte.</p>
+    <ul>
+      <li>Foglio scorte CSV (quantità di scorte correnti)</li>
+      <li>Storico operazioni completo (carichi, scarichi, trasferimenti, rettifiche inventario, import CSV)</li>
+    </ul>
+    <div class="box box-check"><strong>Reimport del backup storico CSV</strong>Prima di reimportare un backup storico, controlla il file selezionato, la modalità di importazione e la schermata di conferma dell'app.</div>
+    <div class="box box-hint"><strong>Consiglio operativo</strong>Eseguire il backup storico regolarmente — ogni settimana o ogni mese — significa che in caso di problemi puoi tracciare esattamente come i livelli delle scorte sono cambiati nel tempo e ripristinare in modo più preciso.</div>
+  </section>
+
+  <section class="chapter" id="reorder-price">
+    <div class="chapter-head"><div class="ch-no">CAPITOLO 11</div><h2>Soglia di riordino e prezzo</h2></div>
+    <h3>Soglia di riordino</h3>
+    <p>Impostare un soglia di riordino nell'Anagrafica prodotti fornisce un valore di riferimento: quando le scorte scendono sotto questo valore, puoi riconoscere a colpo d'occhio che è necessario il riordino. È un indicatore per gestire i tempi di riapprovvigionamento.</p>
+    <div class="box box-check"><strong>Riferimento per il riordino nella schermata Consultazione delle scorte</strong>La Consultazione delle scorte mostra di default i totali per prodotto. Il riferimento per il riordino confronta il totale scorte combinato di tutte le ubicazioni con "Includi nel riferimento per il riordino" attivo con il soglia di riordino del prodotto. Quando si visualizzano le scorte per singola ubicazione, il riferimento per il riordino non viene mostrato o è considerato inattivo.</div>
+    <div class="box box-check"><strong>Indicazioni di riordino</strong>Usa la schermata di controllo scorte come riferimento per vedere come vengono mostrati i punti di riordino e gli avvisi correlati con le impostazioni correnti.</div>
+    <h3>Prezzo</h3>
+<p>È possibile registrare un prezzo per ogni prodotto nell'Anagrafica prodotti. Il prezzo viene consultato per calcolare il valore totale delle scorte o generare report. Prima di usare valori legati ai prezzi nei registri operativi, controlla la visualizzazione nell'app e i CSV esportati.</p>
+    <h3>Combinazione con le categorie</h3>
+    <p>Associando i prodotti alle categorie, è più facile organizzare l'anagrafica e consultare gli elenchi per tipo di prodotto.</p>
+    <div class="box box-warn"><strong>Attenzione</strong>Le informazioni di prezzo e i calcoli correlati sono funzionalità dell'app. Verifica separatamente se sono adatti ai registri operativi della tua attività.</div>
+  </section>
+
+  <section class="chapter" id="usecase">
+    <div class="chapter-head"><div class="ch-no">CAPITOLO 12</div><h2>Esempi di flusso di lavoro — versione completa</h2></div>
+    <h3>Esempio 1: Gestione due ubicazioni — Magazzino e Negozio</h3>
+    <ol class="steps">
+      <li>Registra "Magazzino" e "Negozio A" nell'Anagrafica ubicazioni.</li>
+      <li>Registra i prodotti nell'Anagrafica prodotti e imposta le scorte iniziali in Magazzino.</li>
+      <li>Quando il negozio ha bisogno di rifornimento, usa <strong>Trasferimento scorte</strong> per spostare le scorte dal Magazzino al Negozio A.</li>
+      <li>Dopo le vendite in negozio, registra la diminuzione tramite <strong>Scarico</strong>.</li>
+      <li>Periodicamente, esegui l'inventario fisico e usa <strong>Applica dati dell'inventario</strong> per allineare le scorte di sistema con i conteggi reali.</li>
+      <li>Ogni mese, esporta il <strong>Backup storico</strong> e archivialo.</li>
+    </ol>
+    <h3>Esempio 2: Ciclo inventario periodico</h3>
+    <ol class="steps">
+      <li>A fine mese, inserisci i conteggi reali con l'app Inventario fisico (versione completa).</li>
+      <li>Conferma i risultati del conteggio reale.</li>
+      <li>Usa <strong>Applica dati dell'inventario</strong> per trasferire le differenze al modulo magazzino.</li>
+      <li>Rivedi le voci di <strong>Rettifica inventario</strong> nello Storico scorte per confermare le modifiche.</li>
+      <li>Esporta e salva il set backup CSV completo.</li>
+    </ol>
+    <div class="box box-hint"><strong>Suggerimento: integrazione inventario</strong>Per la guida dettagliata sulla versione completa dell'inventario fisico, consulta <a href="04_stocktake_full_it.html">④ Inventario fisico: versione completa</a>.</div>
+  </section>
+
+  <section class="chapter" id="notes">
+    <div class="chapter-head"><div class="ch-no">CAPITOLO 13</div><h2>Note importanti</h2></div>
+    <div class="box box-danger"><strong>Sostituzione scorte CSV</strong>Sostituisci scorte correnti sovrascrive le quantità di scorte con i valori CSV. I prodotti non presenti nel CSV potrebbero essere azzerati a 0. <strong>Prima di questa operazione, esporta sempre un backup CSV.</strong></div>
+    <div class="box box-danger"><strong>Applicazione dati dell'inventario</strong>L'applicazione dei dati dell'inventario riscrive le quantità di scorte. Se un'applicazione completata può essere annullata va verificato. <strong>Prima di questa operazione, esporta sempre un backup CSV.</strong></div>
+    <div class="box box-danger"><strong>Eliminazione o sovrascrittura di record anagrafici</strong>Eliminare voci dall'Anagrafica prodotti o dall'Anagrafica ubicazioni può influire sui dati delle scorte. Quando un record non è più necessario, considera di <strong>disabilitarlo</strong> anziché eliminarlo e conserva un CSV di backup prima di modifiche ad alto impatto.</div>
+    <div class="box box-warn"><strong>Trasferimento scorte: origine e destinazione devono essere diverse</strong>Non selezionare mai la stessa ubicazione sia come origine che come destinazione in un trasferimento. Potrebbe causare modifiche inattese ai dati.</div>
+    <div class="box box-hint"><strong>Campo scorte nella schermata Scarico</strong>Le scorte visualizzate nella schermata Scarico sono solo per riferimento — mostrano il livello di scorte corrente e non sono modificabili. Salvando la quantità di scarico, le scorte dell'ubicazione selezionata si riducono.</div>
+    <div class="box box-warn"><strong>Prezzi e termini di acquisto</strong>Per prezzi di acquisto e condizioni di vendita dello Sblocco completo, consulta la scheda su Google Play. Questo documento non include informazioni sui prezzi.</div>
+    <div class="box box-hint">
+      <strong>Principi operativi</strong>
+      <ul>
+        <li>Prima di operazioni che apportano modifiche massive alle scorte (sostituzione, applicazione, eliminazione), fai sempre il backup.</li>
+        <li>Nell'import CSV, leggi la schermata di anteprima o conferma prima di eseguire.</li>
+        <li>Con una sola ubicazione, usa Carico, Scarico o Modifica invece del Trasferimento scorte.</li>
+      </ul>
+    </div>
+  </section>
+
+  <div class="summary-box" id="summary">
+    <h3>📌 Punti chiave del capitolo</h3>
+    <ul>
+      <li>Lo Sblocco completo rimuove tutti i limiti di record e storico, e attiva soglia di riordino, prezzo, Anagrafica categorie, gestione ubicazioni, trasferimento scorte, applicazione inventario e backup CSV.</li>
+      <li>Tre tipi di dati anagrafici lavorano insieme: Anagrafica prodotti (articoli in magazzino), Anagrafica categorie (gruppi di classificazione), Anagrafica ubicazioni (luoghi di stoccaggio).</li>
+      <li>Il trasferimento scorte è valido solo tra due ubicazioni diverse — non usare mai la stessa ubicazione come origine e destinazione.</li>
+      <li>L'applicazione dei dati dell'inventario sincronizza il conteggio reale con le scorte di sistema. Le differenze vengono registrate come voci di rettifica inventario nello storico.</li>
+      <li>Prima di operazioni irreversibili come Sostituisci scorte correnti, Applica dati dell'inventario o eliminazione, fai sempre il backup.</li>
+      <li>Eseguire il backup storico regolarmente (ogni settimana o ogni mese) riduce il rischio di dati irrecuperabili.</li>
+    </ul>
+  </div>
+  <div class="confirm-box" id="confirm">
+    <h3>Note prima dell'uso</h3>
+    <ul>
+      <li>Condizioni esatte di applicazione dati dell'inventario (quando, gestione multi-ubicazione, comportamento di annullamento)</li>
+      <li>Procedura e comportamento del ripristino scorte tramite reimport del backup storico CSV</li>
+      <li>Se vengono attivati avvisi o notifiche quando le scorte scendono sotto il soglia di riordino, e come funzionano</li>
+      <li>Impostazione valuta e metodo di arrotondamento per i prezzi</li>
+      <li>Se i record di Anagrafica prodotti e ubicazioni possono essere eliminati, e se quelli eliminati possono essere ripristinati</li>
+      <li>Prezzo di acquisto e condizioni di vendita dello Sblocco completo (verifica su Google Play)</li>
+      <li>Se un trasferimento scorte confermato può essere annullato</li>
+    </ul>
+  </div>
+</div>
+<footer>Manuale Quantiventra · Le informazioni più aggiornate sono disponibili nelle schermate dell'app.<p style="margin-top:4px;"><a href="privacy_it.html">Informativa sulla privacy</a></p></footer>
+</body></html>

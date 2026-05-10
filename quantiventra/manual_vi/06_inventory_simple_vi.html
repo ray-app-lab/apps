@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+
+<html lang="vi">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Quantiventra – Quản lý tồn kho – Gói Tiêu chuẩn</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;font-size:15px;line-height:1.8;color:#1a2535;background:#f4f7fb;}
+a{color:#1a5fa8;text-decoration:none;}a:hover{text-decoration:underline;}
+.site-nav{background:#1a3a5c;color:#fff;padding:0;}.site-nav .nav-inner{max-width:960px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:stretch;}
+.site-nav a{color:#cde;padding:10px 13px;font-size:12px;display:block;border-right:1px solid #2a4a6c;white-space:nowrap;}
+.site-nav a:hover{background:#2a5090;text-decoration:none;}.site-nav a.active{background:#2a6cbe;color:#fff;font-weight:bold;}
+.page-header{background:linear-gradient(135deg,#1a3a5c 0%,#2a6cbe 100%);color:#fff;padding:40px 20px 30px;}
+.page-header .inner{max-width:960px;margin:0 auto;}.page-header .app-name{font-size:13px;opacity:.8;}
+.page-header h1{font-size:24px;font-weight:700;margin-top:6px;line-height:1.4;}.page-header .subtitle{font-size:14px;opacity:.85;margin-top:8px;}
+.scope-box{background:rgba(255,255,255,.15);border-left:4px solid #7ecfff;padding:12px 16px;margin-top:16px;border-radius:4px;font-size:13px;}
+.container{max-width:960px;margin:0 auto;padding:30px 16px;}
+.toc{background:#fff;border:1px solid #c8d8ec;border-radius:8px;padding:24px 28px;margin-bottom:32px;}
+.toc h2{font-size:16px;font-weight:700;color:#1a3a5c;border-bottom:2px solid #2a6cbe;padding-bottom:8px;margin-bottom:14px;}
+.toc ol{margin-left:18px;}.toc li{margin:5px 0;font-size:14px;}
+.chapter{background:#fff;border-radius:8px;box-shadow:0 1px 4px rgba(0,0,0,.08);padding:28px 28px 24px;margin-bottom:28px;}
+.chapter-head{border-left:5px solid #2a6cbe;padding-left:14px;margin-bottom:20px;}
+.chapter-head .ch-no{font-size:12px;color:#2a6cbe;font-weight:700;}.chapter-head h2{font-size:20px;font-weight:700;color:#1a2535;margin-top:2px;}
+h3{font-size:16px;font-weight:700;color:#1a3a5c;border-bottom:1px solid #dde8f5;padding-bottom:5px;margin:22px 0 12px;}
+p{margin-bottom:12px;}ul,ol{margin-left:20px;margin-bottom:12px;}li{margin-bottom:5px;}
+.steps{counter-reset:step;list-style:none;margin-left:0;}
+.steps li{counter-increment:step;padding:9px 12px 9px 46px;position:relative;background:#f8fbff;border:1px solid #dde8f5;border-radius:6px;margin-bottom:6px;}
+.steps li::before{content:counter(step);position:absolute;left:12px;top:50%;transform:translateY(-50%);width:24px;height:24px;background:#2a6cbe;color:#fff;border-radius:50%;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;}
+.table-wrap{overflow-x:auto;margin-bottom:16px;}
+table{width:100%;border-collapse:collapse;font-size:13px;min-width:400px;}
+th{background:#1a3a5c;color:#fff;padding:9px 12px;text-align:left;white-space:nowrap;}
+td{padding:8px 12px;border-bottom:1px solid #dde8f5;vertical-align:top;}tr:nth-child(even) td{background:#f4f7fb;}
+code{font-family:'Courier New',monospace;background:rgba(0,80,160,.08);color:#004080;padding:2px 6px;border-radius:3px;font-size:12px;}
+.box{border-radius:6px;padding:13px 16px;margin:14px 0;font-size:13px;}
+.box-warn{background:#fffbe6;border-left:4px solid #f5a623;color:#7a5700;}
+.box-danger{background:#fff0f0;border-left:4px solid #d43f3f;color:#7a0000;}
+.box-hint{background:#e8f4ff;border-left:4px solid #2a6cbe;color:#0a3060;}
+.box-check{background:#f4eeff;border-left:4px solid #8c4fc8;color:#3a0070;}
+.box strong{display:block;margin-bottom:4px;}
+figure{max-width:280px;width:100%;margin:18px auto;text-align:center;}
+figure img{display:block;width:100%;max-width:280px;height:auto;margin:0 auto;border:1px solid #c8d8ec;border-radius:6px;box-shadow:0 2px 8px rgba(0,0,0,.1);}
+figcaption{font-size:12px;color:#5a7a99;margin-top:6px;}
+.diff-add{background:#e8fff0;border-left:4px solid #2a9c5c;border-radius:6px;padding:12px 16px;margin:14px 0;font-size:13px;}
+.diff-add strong{display:block;color:#1a6c3c;margin-bottom:4px;}
+.summary-box{background:linear-gradient(135deg,#e8f4ff,#f0f8ff);border:1px solid #99c8ec;border-radius:8px;padding:20px 24px;margin-top:32px;}
+.summary-box h3{border:none;color:#1a3a5c;margin-top:0;}
+.confirm-box{background:#fdf4ff;border:1px solid #c8a0e0;border-radius:8px;padding:20px 24px;margin-top:16px;}
+.confirm-box h3{border:none;color:#5a0090;margin-top:0;}
+footer{text-align:center;font-size:12px;color:#8a9aaa;padding:30px 16px;border-top:1px solid #dde8f5;margin-top:20px;}
+@media(max-width:640px){.page-header h1{font-size:18px;}.chapter{padding:20px 16px;}.site-nav a{padding:8px 9px;font-size:11px;}}
+@media print{body{background:#fff;font-size:12px;}.site-nav{display:none;}.chapter{box-shadow:none;border:1px solid #ccc;page-break-inside:avoid;}.page-header{background:#1a3a5c !important;-webkit-print-color-adjust:exact;print-color-adjust:exact;}}
+</style>
+</head>
+<body>
+<nav class="site-nav"><div class="nav-inner">
+<a href="01_top_settings_common_vi.html">① Màn hình chính / Cài đặt</a>
+<a href="02_stocktake_free_vi.html">② Kiểm kê Miễn phí</a>
+<a href="03_stocktake_simple_vi.html">③ Kiểm kê Tiêu chuẩn</a>
+<a href="04_stocktake_full_vi.html">④ Kiểm kê Đầy đủ</a>
+<a href="05_inventory_free_vi.html">⑤ Tồn kho Miễn phí</a>
+<a class="active" href="06_inventory_simple_vi.html">⑥ Tồn kho Tiêu chuẩn</a>
+<a href="07_inventory_full_vi.html">⑦ Tồn kho Đầy đủ</a>
+</div></nav>
+<header class="page-header"><div class="inner">
+<div class="app-name">Tài liệu hướng dẫn Quantiventra</div>
+<h1>⑥ Quản lý tồn kho — Gói Tiêu chuẩn (Mở khóa Tiêu chuẩn)</h1>
+<div class="subtitle">Gói Tiêu chuẩn bổ sung gì, nhập kho, xuất kho, kiểm tra tồn kho, lịch sử, nhập/xuất CSV, thay thế tồn kho và thêm dưới dạng nhập kho</div>
+<div class="scope-box"><strong>Nội dung trong trang này:</strong> Gói Tiêu chuẩn của Quản lý tồn kho bổ sung gì / Khác biệt so với Gói Miễn phí / Nhập kho / Xuất kho / Kiểm tra tồn kho / Lịch sử tồn kho / Quản lý vị trí / Nhập/xuất CSV / Thay thế tồn kho hiện tại / Thêm dưới dạng nhập kho / Lưu ý quan trọng / Quy trình khuyến nghị</div>
+</div></header>
+<div class="container">
+<nav class="toc"><h2>Mục lục</h2><ol>
+<li><a href="#overview">Tổng quan Gói Tiêu chuẩn</a></li>
+<li><a href="#diff">Khác biệt so với Gói Miễn phí</a></li>
+<li><a href="#receive">Nhập kho</a></li>
+<li><a href="#issue">Xuất kho</a></li>
+<li><a href="#stock-check">Kiểm tra tồn kho</a></li>
+<li><a href="#history">Lịch sử tồn kho</a></li>
+<li><a href="#location">Quản lý vị trí</a></li>
+<li><a href="#csv">Nhập / Xuất CSV</a></li>
+<li><a href="#csv-replace">Thay thế tồn kho hiện tại</a></li>
+<li><a href="#csv-add">Thêm dưới dạng nhập kho</a></li>
+<li><a href="#notes">Lưu ý quan trọng</a></li>
+<li><a href="#tips">Quy trình khuyến nghị</a></li>
+<li><a href="#summary">Điểm chính của chương</a></li>
+<li><a href="#confirm">Lưu ý trước khi sử dụng</a></li>
+</ol></nav>
+<section class="chapter" id="overview">
+<div class="chapter-head"><div class="ch-no">CHƯƠNG 1</div><h2>Tổng quan Gói Tiêu chuẩn</h2></div>
+<p>Gói Tiêu chuẩn của Quản lý tồn kho hỗ trợ nhiều bản ghi hơn Gói Miễn phí. Bạn có thể vận hành các thao tác hằng ngày như nhập kho, xuất kho, kiểm tra tồn kho và xem lịch sử tồn kho một cách ổn định hơn; phạm vi quản lý vị trí cũng được mở rộng.</p>
+<h3>Giới hạn của Gói Tiêu chuẩn</h3>
+<div class="table-wrap"><table>
+<tr><th>Mục</th><th>Gói Miễn phí</th><th>Gói Tiêu chuẩn</th></tr>
+<tr><td>Bản ghi dữ liệu chính</td><td>Tối đa 30</td><td>Tối đa 300</td></tr>
+<tr><td>Bản ghi lịch sử tồn kho</td><td>Tối đa 30</td><td>Tối đa 1.000</td></tr>
+<tr><td>Bản ghi xuất dữ liệu</td><td>Tối đa 30</td><td>Tối đa 300</td></tr>
+<tr><td>Khóa xoay màn hình</td><td>✗</td><td>○</td></tr>
+<tr><td>Đăng ký Danh mục vị trí</td><td>Bị giới hạn trong Gói Miễn phí</td><td>Khả dụng trong giới hạn của Gói Tiêu chuẩn</td></tr>
+<tr><td>Chỉnh sửa trực tiếp tổng lũy kế đã đăng ký</td><td>✗</td><td>✗ (yêu cầu Gói Đầy đủ)</td></tr>
+</table></div></section>
+<section class="chapter" id="diff">
+<div class="chapter-head"><div class="ch-no">CHƯƠNG 2</div><h2>Khác biệt so với Gói Miễn phí</h2></div>
+<div class="diff-add">
+<strong>✅ Mở khóa Tiêu chuẩn bổ sung hoặc mở rộng</strong>
+<ul style="margin-top:6px;">
+<li>Giới hạn bản ghi dữ liệu chính tăng từ 30 → 300</li>
+<li>Giới hạn lịch sử tồn kho tăng từ 30 → 1.000</li>
+<li>Giới hạn xuất dữ liệu tăng từ 30 → 300</li>
+<li>Có thể dùng khóa xoay màn hình</li>
+<li>Phạm vi quản lý vị trí được mở rộng</li>
+<li>Dễ duy trì liên tục các thao tác hằng ngày như nhập kho, xuất kho, kiểm tra tồn kho và xem lịch sử</li>
+</ul>
+</div>
+</section>
+<section class="chapter" id="receive">
+<div class="chapter-head"><div class="ch-no">CHƯƠNG 3</div><h2>Nhập kho</h2></div>
+<p>Thao tác nhập kho làm tăng tồn kho. Hãy dùng thao tác này khi hàng đến — ví dụ như mua hàng, nhận hàng hoặc các giao dịch tương tự.</p><h3>Quy trình nhập kho</h3>
+<ol class="steps">
+<li>Vào <strong>Quản lý tồn kho → Nhập kho</strong>.</li>
+<li>Quét mã vạch hoặc nhập mã sản phẩm.</li>
+<li>Xác nhận tên sản phẩm. Nếu mã chưa được đăng ký, tiếp tục tạo mục mới trong Danh mục sản phẩm.</li>
+<li>Trong mục Danh mục sản phẩm mới, đăng ký tên sản phẩm, giá bán và điểm đặt hàng lại.</li>
+<li>Sau khi lưu, quay lại màn hình Nhập kho — mã sản phẩm và tên sản phẩm đã đăng ký sẽ được tự động điền.</li>
+<li>Chọn vị trí đích (kho, cửa hàng, v.v.).</li>
+<li>Nhập số lượng đã nhận.</li>
+<li>Nhấn <strong>Lưu</strong>. Số lượng sẽ được cộng vào tồn kho ngay lập tức.</li>
+<li>Xác nhận cập nhật trong Kiểm tra tồn kho hoặc Lịch sử tồn kho.</li>
+</ol>
+<div class="box box-hint">
+<strong>💡 Về thuộc tính trong Danh mục sản phẩm</strong>
+  Giá bán và điểm đặt hàng lại là các thuộc tính được quản lý trong Danh mục sản phẩm — chúng không được nhập riêng cho từng giao dịch nhập kho. Trên màn hình Nhập kho thông thường, hãy tập trung nhập số lượng, vị trí và ghi chú.
+</div>
+<div class="box box-warn">
+<strong>⚠ Lưu ý</strong>
+  Thao tác nhập kho được phản ánh vào tồn kho ngay lập tức. Luôn xác nhận số lượng và vị trí trước khi lưu. Nếu nhận thấy số lượng sai sau khi lưu, hãy xem lại Lịch sử tồn kho và làm theo hướng dẫn trong ứng dụng để sửa, hoàn tác hoặc ghi nhận một điều chỉnh phù hợp.
+</div>
+</section>
+<section class="chapter" id="issue">
+<div class="chapter-head"><div class="ch-no">CHƯƠNG 4</div><h2>Xuất kho</h2></div>
+<p>Thao tác xuất kho làm giảm tồn kho. Hãy dùng thao tác này cho bán hàng, xuất chuyển ra ngoài, giao hàng và các giao dịch tương tự.</p><h3>Quy trình xuất kho</h3>
+<ol class="steps">
+<li>Vào <strong>Quản lý tồn kho → Xuất kho</strong>.</li>
+<li>Quét mã vạch hoặc nhập mã sản phẩm.</li>
+<li>Xác nhận tên sản phẩm.</li>
+<li>Chọn vị trí nguồn (nơi hàng sẽ được xuất đi).</li>
+<li>Nhập số lượng xuất kho.</li>
+<li>Nhấn <strong>Lưu</strong>. Số lượng sẽ được trừ khỏi tồn kho ngay lập tức.</li>
+<li>Xác nhận cập nhật trong Kiểm tra tồn kho hoặc Lịch sử tồn kho.</li>
+</ol>
+<div class="box box-hint">
+<strong>💡 Về trường tồn kho</strong>
+  Trường tồn kho trên màn hình Xuất kho hiển thị tồn kho hiện tại của sản phẩm và vị trí đã chọn — đây là trường hiển thị, không phải trường nhập có thể chỉnh sửa. Tồn kho giảm sau khi lưu số lượng xuất kho.
+</div>
+<div class="box box-danger">
+<strong>🚨 Quan trọng</strong>
+  Không nhập số lượng xuất kho vượt quá tồn kho hiện tại. Hãy kiểm tra mức tồn kho theo vị trí trước khi nhập số lượng cần xuất.
+</div>
+</section>
+<section class="chapter" id="stock-check">
+<div class="chapter-head"><div class="ch-no">CHƯƠNG 5</div><h2>Kiểm tra tồn kho</h2></div>
+<p>Kiểm tra tồn kho ban đầu hiển thị tổng tồn kho gộp theo từng sản phẩm. Kiểm tra bổ sung hàng so sánh tổng tồn kho của tất cả vị trí đang bật “Bao gồm trong kiểm tra bổ sung hàng” với điểm đặt hàng lại trong Danh mục sản phẩm.</p><h3>Quy trình kiểm tra tồn kho</h3>
+<ol class="steps">
+<li>Vào <strong>Quản lý tồn kho → Kiểm tra tồn kho</strong>.</li>
+<li>Tìm sản phẩm muốn kiểm tra (tìm kiếm hoặc cuộn danh sách).</li>
+<li>Xác định các sản phẩm thấp hơn điểm đặt hàng lại (được hiển thị là cần bổ sung hàng).</li>
+<li>Nhấn vào sản phẩm để xem phân tích theo từng vị trí, lịch sử và thông tin chi tiết. Trong chế độ xem phân tích theo vị trí, kiểm tra bổ sung hàng không được hiển thị hoặc được xem là không hoạt động.</li>
+</ol>
+</section>
+<section class="chapter" id="history">
+<div class="chapter-head"><div class="ch-no">CHƯƠNG 6</div><h2>Lịch sử tồn kho</h2></div>
+<p>Lịch sử tồn kho hiển thị nhật ký của tất cả thao tác nhập kho, xuất kho, chuyển kho, điều chỉnh kiểm kê, tồn kho ban đầu và nhập CSV.</p><h3>Có thể xem gì trong Lịch sử tồn kho</h3>
+<ul>
+<li>Ngày/giờ và loại thao tác (nhập kho, xuất kho, chuyển kho, điều chỉnh, v.v.)</li>
+<li>Mã sản phẩm và tên sản phẩm</li>
+<li>Vị trí và thay đổi số lượng</li>
+<li>Ghi chú</li>
+</ul>
+<div class="box box-hint">
+<strong>💡 Mẹo</strong>
+  Nếu số lượng tồn kho không khớp, hãy cuộn ngược trong Lịch sử tồn kho để kiểm tra lỗi nhập liệu hoặc điều chỉnh ngoài ý muốn.
+</div>
+</section>
+<section class="chapter" id="location">
+<div class="chapter-head"><div class="ch-no">CHƯƠNG 7</div><h2>Quản lý vị trí</h2></div>
+<p>Gói Tiêu chuẩn chủ yếu sử dụng các vị trí cơ bản là “Kho” và “Cửa hàng”.</p>
+<div class="table-wrap"><table>
+<tr><th>Chế độ</th><th>Vị trí khả dụng</th></tr>
+<tr><td>Đơn giản A</td><td>Chỉ kho</td></tr>
+<tr><td>Đơn giản B</td><td>Kho + Cửa hàng</td></tr>
+<tr><td>Đơn giản C</td><td>Chỉ cửa hàng</td></tr>
+</table></div>
+<h3>Chuyển kho</h3>
+<p>Chuyển kho di chuyển số lượng tồn kho từ vị trí này sang vị trí khác.</p>
+<div class="box box-warn">
+<strong>⚠ Lưu ý</strong>
+  Không chuyển kho giữa cùng một vị trí. Nếu chỉ có một vị trí (ví dụ: Đơn giản A), chuyển kho là không cần thiết — hãy dùng Nhập kho, Xuất kho hoặc thao tác điều chỉnh thay thế.
+</div>
+<div class="box box-hint">
+<strong>💡 Mẹo</strong>
+  Để dùng vị trí chi tiết (ví dụ: số kệ), bạn cần chuyển sang chế độ <strong>Chi tiết</strong> trong phần cài đặt. Chế độ Chi tiết được dùng khi truy cập các tính năng của Gói Đầy đủ.
+</div>
+</section>
+<section class="chapter" id="csv">
+<div class="chapter-head"><div class="ch-no">CHƯƠNG 8</div><h2>Nhập / Xuất CSV</h2></div>
+<p>Quản lý tồn kho cho phép bạn nhập, xuất và sao lưu dữ liệu tồn kho bằng tệp CSV.</p>
+<div class="box box-danger">
+<strong>🚨 Quan trọng</strong>
+  Thao tác nhập CSV có thể làm thay đổi đáng kể dữ liệu của bạn. Luôn xuất CSV sao lưu trước khi nhập.
+</div>
+<h3>Thông số CSV tồn kho</h3>
+<div class="table-wrap"><table>
+<tr><th>Loại CSV</th><th>Mục đích</th><th>Cột chính</th><th>Bắt buộc/Tùy chọn</th><th>Ghi chú</th><th>Khả dụng trong</th></tr>
+<tr><td>CSV tồn kho (có cột vị trí)</td><td>Nhập dữ liệu tồn kho theo từng vị trí</td><td>location, item_code, quantity, product_name</td><td>location, item_code, quantity bắt buộc; product_name bắt buộc có điều kiện</td><td>Cần cột product_name cho mã chưa đăng ký</td><td>Quản lý tồn kho Gói Tiêu chuẩn trở lên</td></tr>
+<tr><td>CSV tồn kho (không có cột vị trí)</td><td>Nhập dữ liệu tồn kho cho một vị trí được chỉ định</td><td>item_code, quantity, product_name</td><td>item_code, quantity bắt buộc</td><td>Chọn vị trí đích khi nhập</td><td>Quản lý tồn kho Gói Tiêu chuẩn trở lên</td></tr>
+<tr><td>CSV sao lưu</td><td>Sao lưu và khôi phục toàn bộ dữ liệu</td><td>Sản phẩm, tồn kho hiện tại, vị trí, nhóm hàng — nhiều tệp</td><td>Cần đầy đủ bộ tệp sao lưu</td><td>Có thể được chia thành nhiều tệp</td><td>Quản lý tồn kho Gói Tiêu chuẩn trở lên</td></tr>
+</table></div>
+<h3>Sử dụng màn hình ánh xạ cột</h3>
+<p>Khi nhập CSV, bạn chọn cột nào tương ứng với mã sản phẩm, tên sản phẩm, số lượng, vị trí, v.v.</p>
+<ol class="steps">
+<li>Chọn tệp CSV.</li>
+<li>Trên màn hình ánh xạ cột, gán từng cột CSV cho trường tương ứng (mã sản phẩm, số lượng, v.v.).</li>
+<li>Xác nhận việc ánh xạ và thực hiện nhập dữ liệu.</li>
+</ol>
+<div class="box box-warn">
+<strong>⚠ Lỗi nhập CSV thường gặp</strong>
+<ul style="margin-top:6px;">
+<li>Thiếu cột bắt buộc</li>
+<li>Cùng một cột được gán cho nhiều hơn một trường</li>
+<li>Cột số lượng để trống hoặc không phải là số</li>
+<li>Không chọn cột tên sản phẩm cho mã chưa đăng ký</li>
+<li>Không có cột vị trí và chưa chọn vị trí đích</li>
+<li>CSV trống hoặc không có dòng nào có thể nhập</li>
+</ul>
+</div></section>
+<section class="chapter" id="csv-replace">
+<div class="chapter-head"><div class="ch-no">CHƯƠNG 9</div><h2>Thay thế tồn kho hiện tại</h2></div>
+<p>Thay thế tồn kho hiện tại là chế độ nhập CSV coi số lượng trong tệp là tồn kho hiện tại mới. Lịch sử hiện có được giữ lại và phần chênh lệch được ghi thành một mục lịch sử điều chỉnh.</p>
+<div class="box box-danger">
+<strong>🚨 Quan trọng: Hãy thận trọng khi dùng Thay thế tồn kho hiện tại</strong>
+<ul style="margin-top:6px;">
+<li>Các dòng tồn kho không có trong CSV có thể được đặt về 0.</li>
+<li>Thao tác này có thể ảnh hưởng đáng kể đến dữ liệu tồn kho hiện có — luôn sao lưu trước.</li>
+<li>Đọc kỹ màn hình xác nhận trước khi thực hiện.</li>
+</ul>
+</div>
+<h3>Quy trình Thay thế tồn kho hiện tại</h3>
+<ol class="steps">
+<li>Xuất CSV sao lưu (bắt buộc).</li>
+<li>Vào <strong>Quản lý tồn kho → Nhập CSV → Thay thế tồn kho hiện tại</strong>.</li>
+<li>Chọn tệp CSV cần nhập.</li>
+<li>Xác nhận ánh xạ cột trên màn hình ánh xạ.</li>
+<li>Trên màn hình xác nhận, xem kỹ chi tiết thay thế (nội dung điều chỉnh).</li>
+<li>Nếu mọi thứ đều đúng, thực hiện nhập.</li>
+<li>Kiểm tra các bản ghi điều chỉnh trong Lịch sử tồn kho.</li>
+</ol>
+</section>
+<section class="chapter" id="csv-add">
+<div class="chapter-head"><div class="ch-no">CHƯƠNG 10</div><h2>Thêm dưới dạng nhập kho</h2></div>
+<p>Thêm dưới dạng nhập kho là chế độ nhập CSV cộng số lượng trong tệp vào tồn kho hiện tại như một giao dịch nhập kho — khác với Thay thế tồn kho hiện tại, chế độ này cộng thêm vào tồn kho hiện có thay vì ghi đè.</p>
+<div class="table-wrap"><table>
+<tr><th>Chế độ nhập</th><th>Hành vi</th><th>Ví dụ sử dụng</th></tr>
+<tr><td>Thay thế tồn kho hiện tại</td><td>Coi số lượng trong CSV là tồn kho hiện tại mới. Chênh lệch được ghi thành lịch sử điều chỉnh</td><td>Điều chỉnh tồn kho sau kiểm kê, thiết lập ban đầu</td></tr>
+<tr><td>Thêm dưới dạng nhập kho</td><td>Cộng số lượng trong CSV vào tồn kho hiện tại như một giao dịch nhập kho</td><td>Nhập kho hàng loạt</td></tr>
+</table></div>
+<div class="box box-hint">
+<strong>💡 Mẹo</strong>
+  Dùng <strong>Thay thế tồn kho hiện tại</strong> khi thiết lập tồn kho lần đầu, và dùng <strong>Thêm dưới dạng nhập kho</strong> khi muốn cộng thêm vào tồn kho hiện có. Hãy xác nhận đúng chế độ cần dùng trước khi chạy nhập.
+</div>
+</section>
+<section class="chapter" id="notes">
+<div class="chapter-head"><div class="ch-no">CHƯƠNG 11</div><h2>Lưu ý quan trọng</h2></div>
+<div class="box box-warn">
+<strong>⚠ Thiết lập vị trí chi tiết</strong>
+  Để dùng vị trí chi tiết, hãy chuyển sang chế độ <strong>Chi tiết</strong> trong phần cài đặt. Vị trí chi tiết sẽ không hiển thị nếu bạn vẫn đang dùng Đơn giản A/B/C.
+</div>
+<div class="box box-warn">
+<strong>⚠ Xác nhận vị trí và số lượng trước khi thao tác</strong>
+  Nhập kho, xuất kho, chuyển kho và nhập CSV được phản ánh vào tồn kho ngay lập tức. Hãy xác nhận vị trí và số lượng trước mỗi thao tác.
+</div>
+<div class="box box-danger">
+<strong>🚨 Sao lưu trước các thao tác CSV</strong>
+  Luôn sao lưu trước khi dùng Thay thế tồn kho hiện tại, Thêm dưới dạng nhập kho và các thao tác khôi phục từ bản sao lưu.
+</div>
+</section>
+<section class="chapter" id="tips">
+<div class="chapter-head"><div class="ch-no">CHƯƠNG 12</div><h2>Quy trình khuyến nghị</h2></div>
+<h3>Ghi nhận nhập kho và xuất kho hằng ngày</h3>
+<ul>
+<li>Mỗi khi hàng đến, hãy ghi nhận hàng nhập bằng Nhập kho.</li>
+<li>Mỗi khi hàng rời kho/cửa hàng, hãy ghi nhận hàng xuất bằng Xuất kho.</li>
+<li>Đặt điểm đặt hàng lại trong Danh mục sản phẩm và dùng Kiểm tra tồn kho để theo dõi thời điểm cần bổ sung hàng.</li>
+</ul>
+<h3>Kiểm tra tồn kho định kỳ</h3>
+<ul>
+<li>Kiểm tra số lượng tồn kho định kỳ — hằng tuần, hằng tháng hoặc khi cần.</li>
+<li>Kết hợp với kiểm kê thực tế để định kỳ xác nhận số lượng thực tế khớp với hồ sơ tồn kho.</li>
+</ul>
+<h3>Sao lưu định kỳ</h3>
+<ul>
+<li>Xuất CSV sao lưu ít nhất mỗi tháng một lần và lưu vào máy tính hoặc bộ nhớ đám mây.</li>
+</ul>
+<div class="box box-hint">
+<strong>💡 Cân nhắc nâng cấp lên Gói Đầy đủ nếu bạn…</strong>
+<ul style="margin-top:6px;">
+<li>Muốn kết quả kiểm kê tự động cập nhật vào tồn kho</li>
+<li>Cần chỉnh sửa trực tiếp tổng tồn kho lũy kế đã đăng ký</li>
+<li>Có hơn 300 sản phẩm</li>
+</ul>
+</div>
+</section>
+<div class="summary-box" id="summary">
+<h3>📌 Điểm chính của chương</h3>
+<ul>
+<li>Gói Tiêu chuẩn nâng giới hạn: tối đa 300 bản ghi dữ liệu chính, 1.000 bản ghi lịch sử và 300 bản ghi xuất dữ liệu.</li>
+<li>Nhập kho và xuất kho được phản ánh vào tồn kho ngay lập tức — hãy xác nhận số lượng và vị trí trước khi lưu.</li>
+<li>Lịch sử tồn kho hiển thị nhật ký đầy đủ của tất cả thao tác nhập kho, xuất kho, chuyển kho và điều chỉnh.</li>
+<li>Nhập CSV có hai chế độ — Thay thế tồn kho hiện tại và Thêm dưới dạng nhập kho. Luôn sao lưu trước khi dùng bất kỳ chế độ nào.</li>
+<li>Vị trí được thiết lập qua Đơn giản A/B/C. Hãy chuyển sang chế độ Chi tiết nếu cần dùng vị trí chi tiết.</li>
+<li>Chỉnh sửa trực tiếp tổng lũy kế đã đăng ký yêu cầu Gói Đầy đủ.</li>
+</ul>
+</div>
+<div class="confirm-box" id="confirm">
+<h3>🔍 Lưu ý trước khi sử dụng</h3>
+<ul>
+<li>Sử dụng Danh mục vị trí trong phạm vi các tùy chọn hiển thị trong ứng dụng. Nếu cần quản lý vị trí chi tiết, hãy kiểm tra chế độ hiện tại và cân nhắc các tính năng của Gói Đầy đủ khi cần.</li>
+<li>Nếu một mục nhập kho hoặc xuất kho đã lưu sai, hãy xem lại Lịch sử tồn kho và làm theo hướng dẫn trong ứng dụng để sửa, hoàn tác hoặc ghi nhận một điều chỉnh phù hợp.</li>
+<li>Khi xuất một bộ CSV sao lưu, hãy giữ các tệp được tạo cùng nhau và lưu trữ an toàn.</li>
+<li>Quy trình thao tác thực tế của màn hình Chuyển kho</li>
+<li>Màn hình xác nhận CSV tồn kho</li>
+</ul>
+</div>
+</div>
+<footer>
+<p>Tài liệu hướng dẫn Quantiventra | ⑥ Quản lý tồn kho Gói Tiêu chuẩn</p>
+<p style="margin-top:4px;">Tài liệu này có thể được cập nhật mà không cần thông báo trước. Luôn tham khảo màn hình trong ứng dụng để biết thông tin mới nhất.</p>
+<p style="margin-top:4px;"><a href="privacy_vi.html">Chính sách quyền riêng tư</a></p>
+</footer>
+</body>
+</html>

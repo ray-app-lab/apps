@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="es-419">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quantiventra – Gestión de inventario – Plan Estándar</title>
+<style>*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;font-size:15px;line-height:1.8;color:#1a2535;background:#f4f7fb;}
+a{color:#1a5fa8;text-decoration:none;}a:hover{text-decoration:underline;}
+.site-nav{background:#1a3a5c;color:#fff;padding:0;}.site-nav .nav-inner{max-width:960px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:stretch;}
+.site-nav a{color:#cde;padding:10px 13px;font-size:12px;display:block;border-right:1px solid #2a4a6c;white-space:nowrap;}
+.site-nav a:hover{background:#2a5090;text-decoration:none;}.site-nav a.active{background:#2a6cbe;color:#fff;font-weight:bold;}
+.page-header{background:linear-gradient(135deg,#1a3a5c 0%,#2a6cbe 100%);color:#fff;padding:40px 20px 30px;}
+.page-header .inner{max-width:960px;margin:0 auto;}.page-header .app-name{font-size:13px;opacity:.8;}
+.page-header h1{font-size:22px;font-weight:700;margin-top:6px;line-height:1.4;}.page-header .subtitle{font-size:14px;opacity:.85;margin-top:8px;}
+.scope-box{background:rgba(255,255,255,.15);border-left:4px solid #7ecfff;padding:12px 16px;margin-top:16px;border-radius:4px;font-size:13px;}
+.container{max-width:960px;margin:0 auto;padding:30px 16px;}
+.toc{background:#fff;border:1px solid #c8d8ec;border-radius:8px;padding:24px 28px;margin-bottom:32px;}
+.toc h2{font-size:16px;font-weight:700;color:#1a3a5c;border-bottom:2px solid #2a6cbe;padding-bottom:8px;margin-bottom:14px;}
+.toc ol{margin-left:18px;}.toc li{margin:5px 0;font-size:14px;}
+.chapter{background:#fff;border-radius:8px;box-shadow:0 1px 4px rgba(0,0,0,.08);padding:28px 28px 24px;margin-bottom:28px;}
+.chapter-head{border-left:5px solid #2a6cbe;padding-left:14px;margin-bottom:20px;}
+.chapter-head .ch-no{font-size:12px;color:#2a6cbe;font-weight:700;}.chapter-head h2{font-size:20px;font-weight:700;color:#1a2535;margin-top:2px;}
+h3{font-size:16px;font-weight:700;color:#1a3a5c;border-bottom:1px solid #dde8f5;padding-bottom:5px;margin:22px 0 12px;}
+h4{font-size:14px;font-weight:700;color:#2a4a6c;margin:16px 0 8px;}
+p{margin-bottom:12px;}ul,ol{margin-left:20px;margin-bottom:12px;}li{margin-bottom:5px;}
+.steps{counter-reset:step;list-style:none;margin-left:0;}
+.steps li{counter-increment:step;padding:9px 12px 9px 46px;position:relative;background:#f8fbff;border:1px solid #dde8f5;border-radius:6px;margin-bottom:6px;}
+.steps li::before{content:counter(step);position:absolute;left:12px;top:50%;transform:translateY(-50%);width:24px;height:24px;background:#2a6cbe;color:#fff;border-radius:50%;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;}
+.table-wrap{overflow-x:auto;margin-bottom:16px;}
+table{width:100%;border-collapse:collapse;font-size:13px;min-width:380px;}
+th{background:#1a3a5c;color:#fff;padding:9px 12px;text-align:left;white-space:nowrap;}
+td{padding:8px 12px;border-bottom:1px solid #dde8f5;vertical-align:top;}tr:nth-child(even) td{background:#f4f7fb;}
+code{font-family:'Courier New',monospace;background:rgba(0,80,160,.08);color:#004080;padding:2px 6px;border-radius:3px;font-size:12px;}
+.box{border-radius:6px;padding:13px 16px;margin:14px 0;font-size:13px;}
+.box-warn{background:#fffbe6;border-left:4px solid #f5a623;color:#7a5700;}
+.box-danger{background:#fff0f0;border-left:4px solid #d43f3f;color:#7a0000;}
+.box-hint{background:#e8f4ff;border-left:4px solid #2a6cbe;color:#0a3060;}
+.box-check{background:#f4eeff;border-left:4px solid #8c4fc8;color:#3a0070;}
+.box strong{display:block;margin-bottom:4px;}
+figure{max-width:280px;width:100%;margin:18px auto;text-align:center;}
+figure img{display:block;width:100%;max-width:280px;height:auto;margin:0 auto;border:1px solid #c8d8ec;border-radius:6px;box-shadow:0 2px 8px rgba(0,0,0,.1);}
+figcaption{font-size:12px;color:#5a7a99;margin-top:6px;}
+.img-pending{display:flex;align-items:center;justify-content:center;max-width:280px;width:100%;box-sizing:border-box;background:#e8eef5;border:2px dashed #99b8d8;border-radius:6px;height:160px;color:#5a7a99;font-size:13px;margin:18px auto;}
+.diff-add{background:#e8fff0;border-left:4px solid #2a9c5c;border-radius:6px;padding:12px 16px;margin:14px 0;font-size:13px;}
+.diff-add strong{display:block;color:#1a6c3c;margin-bottom:4px;}
+.flow-box{background:#f4f7fb;border:1px solid #c8d8ec;border-radius:8px;padding:20px;margin:16px 0;}
+.flow-box h4{color:#1a3a5c;margin-top:0;}
+.flow-arrow{text-align:center;font-size:20px;color:#2a6cbe;margin:4px 0;}
+.flow-step{background:#fff;border:1px solid #c8d8ec;border-radius:6px;padding:10px 16px;margin:4px 0;font-size:13px;}
+.flow-step strong{color:#1a3a5c;}
+.summary-box{background:linear-gradient(135deg,#e8f4ff,#f0f8ff);border:1px solid #99c8ec;border-radius:8px;padding:20px 24px;margin-top:32px;}
+.summary-box h3{border:none;color:#1a3a5c;margin-top:0;}
+.confirm-box{background:#fdf4ff;border:1px solid #c8a0e0;border-radius:8px;padding:20px 24px;margin-top:16px;}
+.confirm-box h3{border:none;color:#5a0090;margin-top:0;}
+.check{color:#2e7d32;font-weight:700;}.cross{color:#c62828;}
+th.pro-col{background:#5a2a8c;}
+.feature-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px;margin:16px 0;}
+.feature-card{background:#f4f7fb;border:1px solid #c8d8ec;border-radius:8px;padding:16px;}
+.feature-card h4{color:#1a3a5c;margin-top:0;margin-bottom:6px;font-size:14px;}
+.feature-card p{font-size:13px;margin:0;color:#3a5a7a;}
+.feature-card.pro-card{background:#f4eeff;border-color:#c8a0e0;}
+.feature-card.pro-card h4{color:#5a2a8c;}
+.trouble{border:1px solid #c8d8ec;border-radius:8px;margin:14px 0;overflow:hidden;}
+.trouble-q{background:#eef6fd;padding:13px 18px;font-weight:700;font-size:14px;color:#1a3a5c;display:flex;align-items:flex-start;gap:10px;}
+.trouble-q::before{content:'Q';background:#2a6cbe;color:#fff;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900;flex-shrink:0;margin-top:1px;}
+.trouble-a{padding:13px 18px 14px 50px;font-size:13.5px;border-top:1px solid #c8d8ec;line-height:1.9;}
+.trouble-a ul{margin-left:16px;}
+.legal-block{background:#f5f5f5;border:1px solid #ddd;border-radius:8px;padding:20px 24px;font-size:12.5px;color:#444;line-height:1.9;margin:14px 0;}
+.legal-block h4{font-size:13px;color:#333;margin:18px 0 6px;border-bottom:1px solid #ddd;padding-bottom:4px;}
+.legal-block h4:first-child{margin-top:0;}
+footer{text-align:center;font-size:12px;color:#8a9aaa;padding:30px 16px;border-top:1px solid #dde8f5;margin-top:20px;}
+@media(max-width:640px){.page-header h1{font-size:18px;}.chapter{padding:20px 16px;}.site-nav a{padding:8px 9px;font-size:11px;}}
+@media print{body{background:#fff;font-size:12px;}.site-nav{display:none;}.chapter{box-shadow:none;border:1px solid #ccc;page-break-inside:avoid;}.page-header{background:#1a3a5c !important;-webkit-print-color-adjust:exact;print-color-adjust:exact;}}
+</style>
+</head>
+<body>
+<nav class="site-nav"><div class="nav-inner">
+  <a href="01_top_settings_common_es-419.html">① Inicio / Ajustes</a>
+  <a href="02_stocktake_free_es-419.html">② Inventario físico gratis</a>
+  <a href="03_stocktake_simple_es-419.html">③ Inventario físico estándar</a>
+  <a href="04_stocktake_full_es-419.html">④ Inventario físico completo</a>
+  <a href="05_inventory_free_es-419.html">⑤ Existencias gratis</a>
+  <a href="06_inventory_simple_es-419.html" class="active">⑥ Existencias estándar</a>
+  <a href="07_inventory_full_es-419.html">⑦ Existencias completas</a>
+</div></nav>
+<header class="page-header"><div class="inner">
+  <div class="app-name">Manual de Quantiventra</div>
+  <h1>⑥ Gestión de inventario — Plan Estándar (Desbloqueo Estándar)</h1>
+  <div class="subtitle">Qué agrega el Plan Estándar, entrada, salida, consulta de existencias, historial, importación/exportación CSV, reemplazo de existencias y adición como entrada</div>
+  <div class="scope-box"><strong>Temas tratados en esta página:</strong> Qué agrega el Plan Estándar de Gestión de inventario / Diferencias con el plan gratuito / Entrada / Salida / Consulta de existencias / Historial de existencias / Manejo de ubicaciones / Importación/exportación CSV / Reemplazar existencias actuales / Agregar como entrada / Notas importantes / Flujos de trabajo recomendados</div>
+</div></header>
+<div class="container">
+  <nav class="toc"><h2>Índice</h2><ol>
+    <li><a href="#overview">Descripción general del Plan Estándar</a></li>
+    <li><a href="#diff">Diferencias con el plan gratuito</a></li>
+    <li><a href="#receive">Entrada (recepción)</a></li>
+    <li><a href="#issue">Salida (despacho)</a></li>
+    <li><a href="#stock-check">Consulta de existencias</a></li>
+    <li><a href="#history">Historial de existencias</a></li>
+    <li><a href="#location">Manejo de ubicaciones</a></li>
+    <li><a href="#csv">Importación / Exportación CSV</a></li>
+    <li><a href="#csv-replace">Reemplazar existencias actuales</a></li>
+    <li><a href="#csv-add">Agregar como entrada</a></li>
+    <li><a href="#notes">Notas importantes</a></li>
+    <li><a href="#tips">Flujo de trabajo recomendado</a></li>
+    <li><a href="#summary">Puntos clave del capítulo</a></li>
+    <li><a href="#confirm">Notas antes de usar</a></li>
+  </ol></nav>
+
+  <section class="chapter" id="overview">
+    <div class="chapter-head"><div class="ch-no">CAPÍTULO 1</div><h2>Descripción general del Plan Estándar</h2></div>
+    <p>El Plan Estándar de Gestión de inventario admite más registros que el plan gratuito. Puedes gestionar con mayor comodidad las operaciones diarias de entrada, salida, consulta de existencias e historial de existencias, y también se amplía el alcance de la gestión de ubicaciones.</p>
+
+    <h3>Límites del Plan Estándar</h3>
+    <div class="table-wrap"><table>
+      <tr><th>Elemento</th><th>Plan gratuito</th><th>Plan Estándar</th></tr>
+      <tr><td>Registros maestros</td><td>Hasta 30</td><td>Hasta 300</td></tr>
+      <tr><td>Registros de historial de existencias</td><td>Hasta 30</td><td>Hasta 1.000</td></tr>
+      <tr><td>Registros exportados</td><td>Hasta 30</td><td>Hasta 300</td></tr>
+      <tr><td>Bloqueo de rotación de pantalla</td><td>✗</td><td>○</td></tr>
+      <tr><td>Registro en el Catálogo de ubicaciones</td><td>Limitado en el plan gratuito</td><td>Disponible dentro de los límites del Plan Estándar</td></tr>
+      <tr><td>Edición directa del total acumulado registrado</td><td>✗</td><td>✗ (requiere el Plan Completo)</td></tr>
+    </table></div>  </section>
+
+  <section class="chapter" id="diff">
+    <div class="chapter-head"><div class="ch-no">CAPÍTULO 2</div><h2>Diferencias con el plan gratuito</h2></div>
+    <div class="diff-add">
+      <strong>✅ Qué agrega o amplía el Plan Estándar</strong>
+      <ul style="margin-top:6px;">
+        <li>El límite de registros maestros aumenta de 30 → 300</li>
+        <li>El límite de historial de existencias aumenta de 30 → 1.000</li>
+        <li>El límite de exportación aumenta de 30 → 300</li>
+        <li>El bloqueo de rotación de pantalla pasa a estar disponible</li>
+        <li>Se amplía el alcance de la gestión de ubicaciones</li>
+        <li>Resulta más fácil mantener entradas, salidas, consultas de existencias e historial de forma continua en el día a día</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="chapter" id="receive">
+    <div class="chapter-head"><div class="ch-no">CAPÍTULO 3</div><h2>Entrada (recepción)</h2></div>
+    <p>La operación Entrada aumenta las existencias. Úsala cuando llegan mercancías — por ejemplo, compras, recepciones y transacciones similares.</p>
+    <h3>Procedimiento de entrada</h3>
+    <ol class="steps">
+      <li>Ve a <strong>Gestión de inventario → Entrada</strong>.</li>
+      <li>Escanea un código de barras o ingresa el código del producto.</li>
+      <li>Confirma el nombre del producto. Si el código no está registrado, continúa para crear una nueva entrada en el Catálogo de productos.</li>
+      <li>En la nueva entrada del Catálogo de productos, registra el nombre del producto, el precio de venta y el punto de reposición.</li>
+      <li>Después de guardar, vuelve a la pantalla Entrada — el código y el nombre del producto registrados se completan automáticamente.</li>
+      <li>Selecciona la ubicación de destino (bodega, tienda, etc.).</li>
+      <li>Ingresa la cantidad recibida.</li>
+      <li>Toca <strong>Guardar</strong>. La cantidad se agrega a las existencias inmediatamente.</li>
+      <li>Confirma la actualización en Consulta de existencias o en Historial de existencias.</li>
+    </ol>
+    <div class="box box-hint"><strong>💡 Sobre los atributos del Catálogo de productos</strong>El precio de venta y el punto de reposición son propiedades administradas en el Catálogo de productos — no se ingresan por cada transacción de entrada. En la pantalla normal de Entrada, enfócate en ingresar la cantidad, la ubicación y la nota.</div>
+    <div class="box box-warn"><strong>⚠ Nota</strong>La entrada se refleja en las existencias inmediatamente. Siempre confirma la cantidad y la ubicación antes de guardar. Si notas una cantidad incorrecta después de guardar, revisa el Historial de existencias y sigue las indicaciones de la app para corregirla, revertirla o registrar un ajuste, según corresponda.</div>
+  </section>
+
+  <section class="chapter" id="issue">
+    <div class="chapter-head"><div class="ch-no">CAPÍTULO 4</div><h2>Salida (despacho)</h2></div>
+    <p>La operación Salida reduce las existencias. Úsala para ventas, transferencias salientes, entregas y transacciones similares.</p>
+    <h3>Procedimiento de salida</h3>
+    <ol class="steps">
+      <li>Ve a <strong>Gestión de inventario → Salida</strong>.</li>
+      <li>Escanea un código de barras o ingresa el código del producto.</li>
+      <li>Confirma el nombre del producto.</li>
+      <li>Selecciona la ubicación de origen (desde donde saldrán las existencias).</li>
+      <li>Ingresa la cantidad de salida.</li>
+      <li>Toca <strong>Guardar</strong>. La cantidad se resta de las existencias inmediatamente.</li>
+      <li>Confirma la actualización en Consulta de existencias o en Historial de existencias.</li>
+    </ol>
+    <div class="box box-hint"><strong>💡 Sobre el campo de existencias</strong>El campo de existencias en la pantalla Salida muestra las existencias actuales del producto y la ubicación seleccionados — es un campo de visualización, no un campo de entrada editable. Las existencias disminuyen como resultado de guardar la cantidad de salida.</div>
+    <div class="box box-danger"><strong>🚨 Importante</strong>No ingreses una cantidad de salida superior a las existencias actuales. Revisa el nivel de existencias por ubicación antes de ingresar la cantidad que saldrá.</div>
+  </section>
+
+  <section class="chapter" id="stock-check">
+    <div class="chapter-head"><div class="ch-no">CAPÍTULO 5</div><h2>Consulta de existencias</h2></div>
+    <p>La Consulta de existencias muestra inicialmente el total de existencias combinado por producto. La verificación de reposición compara el total de existencias de todas las ubicaciones con "Incluir en verificación de reposición" activado con el punto de reposición del Catálogo de productos.</p>
+    <h3>Procedimiento de consulta de existencias</h3>
+    <ol class="steps">
+      <li>Ve a <strong>Gestión de inventario → Consulta de existencias</strong>.</li>
+      <li>Encuentra el producto que quieres revisar (mediante búsqueda o desplazándote por la lista).</li>
+      <li>Identifica los productos que están por debajo de su punto de reposición (se muestran como productos que necesitan reposición).</li>
+      <li>Toca un producto para ver el desglose por ubicación, el historial y la información detallada. En la vista de desglose por ubicación, la verificación de reposición no se muestra o se trata como inactiva.</li>
+    </ol>
+  </section>
+
+  <section class="chapter" id="history">
+    <div class="chapter-head"><div class="ch-no">CAPÍTULO 6</div><h2>Historial de existencias</h2></div>
+    <p>El Historial de existencias muestra el registro de todas las operaciones de entrada, salida, transferencia, ajuste por inventario físico, existencias iniciales e importación CSV.</p>
+    <h3>Qué puedes ver en el Historial de existencias</h3>
+    <ul>
+      <li>Fecha/hora y tipo de operación (entrada, salida, transferencia, ajuste, etc.)</li>
+      <li>Código y nombre del producto</li>
+      <li>Ubicación y cambio de cantidad</li>
+      <li>Nota</li>
+    </ul>
+
+    <div class="box box-hint"><strong>💡 Consejo</strong>Si las cantidades de existencias no cuadran, retrocede en el Historial de existencias para revisar errores de captura o ajustes inesperados.</div>
+  </section>
+
+  <section class="chapter" id="location">
+    <div class="chapter-head"><div class="ch-no">CAPÍTULO 7</div><h2>Manejo de ubicaciones</h2></div>
+    <p>El Plan Estándar usa principalmente las ubicaciones básicas "Bodega" y "Tienda".</p>
+    <div class="table-wrap"><table>
+      <tr><th>Modo</th><th>Ubicaciones disponibles</th></tr>
+      <tr><td>Simple A</td><td>Solo bodega</td></tr>
+      <tr><td>Simple B</td><td>Bodega + Tienda</td></tr>
+      <tr><td>Simple C</td><td>Solo tienda</td></tr>
+    </table></div>
+
+    <h3>Transferencias de existencias</h3>
+    <p>Una transferencia de existencias mueve cantidades de inventario de una ubicación a otra.</p>
+    <div class="box box-warn"><strong>⚠ Nota</strong>No transfieras entre la misma ubicación. Si solo tienes una ubicación (por ejemplo, Simple A), las transferencias de existencias no son necesarias — usa Entrada, Salida o una corrección.</div>
+    <div class="box box-hint"><strong>💡 Consejo</strong>Para usar ubicaciones detalladas (por ejemplo, números de estante), debes cambiar al modo <strong>Detalle</strong> en los ajustes. El modo Detalle se usa al acceder a funciones del Plan Completo.</div>
+  </section>
+
+  <section class="chapter" id="csv">
+    <div class="chapter-head"><div class="ch-no">CAPÍTULO 8</div><h2>Importación / Exportación CSV</h2></div>
+    <p>Gestión de inventario te permite importar, exportar y respaldar datos de existencias mediante archivos CSV.</p>
+    <div class="box box-danger"><strong>🚨 Importante</strong>Las operaciones de importación CSV pueden modificar tus datos significativamente. Siempre exporta un CSV de respaldo antes de importar.</div>
+
+    <h3>Especificaciones del CSV de existencias</h3>
+    <div class="table-wrap"><table>
+      <tr><th>Tipo de CSV</th><th>Propósito</th><th>Columnas principales</th><th>Obligatorio/Opcional</th><th>Notas</th><th>Disponible en</th></tr>
+      <tr><td>CSV de existencias (con columna de ubicación)</td><td>Importar datos de existencias específicos por ubicación</td><td>location, item_code, quantity, product_name</td><td>location, item_code y quantity obligatorios; product_name obligatorio de forma condicional</td><td>La columna product_name es obligatoria para códigos no registrados</td><td>Gestión de inventario Estándar o superior</td></tr>
+      <tr><td>CSV de existencias (sin columna de ubicación)</td><td>Importar datos de existencias para una ubicación especificada</td><td>item_code, quantity, product_name</td><td>item_code y quantity obligatorios</td><td>Selecciona la ubicación de destino al importar</td><td>Gestión de inventario Estándar o superior</td></tr>
+      <tr><td>CSV de respaldo</td><td>Respaldo completo de datos y restauración</td><td>Productos, existencias actuales, ubicaciones, categorías — varios archivos</td><td>Se requiere el conjunto completo de respaldo</td><td>Puede dividirse en varios archivos</td><td>Gestión de inventario Estándar o superior</td></tr>
+    </table></div>
+
+    <h3>Uso de la pantalla de mapeo de columnas</h3>
+    <p>Al importar un CSV, seleccionas qué columna corresponde al código del producto, nombre del producto, cantidad, ubicación, etc.</p>
+    <ol class="steps">
+      <li>Selecciona el archivo CSV.</li>
+      <li>En la pantalla de mapeo de columnas, asigna cada columna del CSV a su campo correspondiente (código del producto, cantidad, etc.).</li>
+      <li>Confirma las asignaciones y ejecuta la importación.</li>
+    </ol>
+
+    <div class="box box-warn">
+      <strong>⚠ Errores comunes en la importación CSV</strong>
+      <ul style="margin-top:6px;">
+        <li>Faltan columnas obligatorias</li>
+        <li>La misma columna está asignada a más de un campo</li>
+        <li>La columna de cantidad está vacía o no es numérica</li>
+        <li>No se seleccionó una columna de nombre de producto para códigos no registrados</li>
+        <li>No hay columna de ubicación ni ubicación de destino seleccionada</li>
+        <li>El CSV está vacío o no contiene filas importables</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="chapter" id="csv-replace">
+    <div class="chapter-head"><div class="ch-no">CAPÍTULO 9</div><h2>Reemplazar existencias actuales</h2></div>
+    <p>Reemplazar existencias actuales es un modo de importación CSV que trata las cantidades del archivo como las nuevas existencias actuales. El historial existente se conserva y la diferencia se registra como una entrada de ajuste en el historial.</p>
+
+    <div class="box box-danger">
+      <strong>🚨 Importante: usa Reemplazar existencias actuales con precaución</strong>
+      <ul style="margin-top:6px;">
+        <li>Las filas de existencias que no estén en el CSV pueden configurarse en 0.</li>
+        <li>Esta operación puede afectar significativamente los datos de existencias existentes — siempre haz un respaldo primero.</li>
+        <li>Lee cuidadosamente la pantalla de confirmación antes de ejecutarla.</li>
+      </ul>
+    </div>
+
+    <h3>Procedimiento para reemplazar existencias actuales</h3>
+    <ol class="steps">
+      <li>Exporta un CSV de respaldo (obligatorio).</li>
+      <li>Ve a <strong>Gestión de inventario → Importar CSV → Reemplazar existencias actuales</strong>.</li>
+      <li>Selecciona el archivo CSV que vas a importar.</li>
+      <li>Confirma el mapeo de columnas en la pantalla de mapeo.</li>
+      <li>En la pantalla de confirmación, revisa cuidadosamente los detalles del reemplazo (contenido del ajuste).</li>
+      <li>Si todo se ve correcto, ejecuta la importación.</li>
+      <li>Verifica las entradas de ajuste en el Historial de existencias.</li>
+    </ol>
+  </section>
+
+  <section class="chapter" id="csv-add">
+    <div class="chapter-head"><div class="ch-no">CAPÍTULO 10</div><h2>Agregar como entrada</h2></div>
+    <p>Agregar como entrada es un modo de importación CSV que agrega las cantidades del archivo a las existencias existentes como una transacción de entrada — a diferencia de Reemplazar existencias actuales, suma a las existencias actuales en lugar de sobrescribirlas.</p>
+    <div class="table-wrap"><table>
+      <tr><th>Modo de importación</th><th>Comportamiento</th><th>Ejemplo de uso</th></tr>
+      <tr><td>Reemplazar existencias actuales</td><td>Trata las cantidades del CSV como las nuevas existencias actuales. Registra las diferencias como historial de ajuste</td><td>Corrección de existencias después del inventario físico, configuración inicial</td></tr>
+      <tr><td>Agregar como entrada</td><td>Agrega las cantidades del CSV a las existencias actuales como entrada</td><td>Importación masiva de entradas</td></tr>
+    </table></div>
+    <div class="box box-hint"><strong>💡 Consejo</strong>Usa <strong>Reemplazar existencias actuales</strong> al configurar el inventario por primera vez y <strong>Agregar como entrada</strong> cuando quieras sumar a las existencias existentes. Confirma cuál necesitas antes de ejecutar la importación.</div>
+  </section>
+
+  <section class="chapter" id="notes">
+    <div class="chapter-head"><div class="ch-no">CAPÍTULO 11</div><h2>Notas importantes</h2></div>
+    <div class="box box-warn"><strong>⚠ Configuración para ubicaciones detalladas</strong>Para usar ubicaciones detalladas, cambia al modo <strong>Detalle</strong> en los ajustes. Las ubicaciones detalladas no aparecerán si sigues en Simple A/B/C.</div>
+    <div class="box box-warn"><strong>⚠ Verifica ubicación y cantidad antes de operar</strong>Las entradas, salidas, transferencias e importaciones CSV se reflejan en las existencias inmediatamente. Confirma la ubicación y la cantidad antes de cada operación.</div>
+    <div class="box box-danger"><strong>🚨 Haz un respaldo antes de operaciones CSV</strong>Siempre haz un respaldo antes de Reemplazar existencias actuales, Agregar como entrada y restaurar respaldos.</div>
+  </section>
+
+  <section class="chapter" id="tips">
+    <div class="chapter-head"><div class="ch-no">CAPÍTULO 12</div><h2>Flujo de trabajo recomendado</h2></div>
+    <h3>Registra entradas y salidas todos los días</h3>
+    <ul>
+      <li>Registra las existencias entrantes mediante Entrada cada vez que llegue mercancía.</li>
+      <li>Registra las existencias salientes mediante Salida cada vez que salga mercancía.</li>
+      <li>Configura puntos de reposición en el Catálogo de productos y usa Consulta de existencias para monitorear el momento de reposición.</li>
+    </ul>
+
+    <h3>Consultas regulares de existencias</h3>
+    <ul>
+      <li>Revisa las cantidades de existencias con regularidad — semanalmente, mensualmente o según sea necesario.</li>
+      <li>Combínalo con inventarios físicos para verificar periódicamente que los conteos reales coincidan con tus registros de inventario.</li>
+    </ul>
+
+    <h3>Respaldos regulares</h3>
+    <ul>
+      <li>Exporta un CSV de respaldo al menos una vez al mes y guárdalo en tu PC o almacenamiento en la nube.</li>
+    </ul>
+
+    <div class="box box-hint"><strong>💡 Considera actualizar al Plan Completo si...</strong>
+      <ul style="margin-top:6px;">
+        <li>Quieres que los resultados del inventario físico actualicen automáticamente las existencias</li>
+        <li>Necesitas editar directamente el total acumulado registrado de existencias</li>
+        <li>Tienes más de 300 productos</li>
+      </ul>
+    </div>
+  </section>
+
+  <div class="summary-box" id="summary">
+    <h3>📌 Puntos clave del capítulo</h3>
+    <ul>
+      <li>El Plan Estándar aumenta los límites: hasta 300 registros maestros, 1.000 registros de historial y 300 registros exportados.</li>
+      <li>Las entradas y salidas se reflejan en las existencias inmediatamente — confirma la cantidad y la ubicación antes de guardar.</li>
+      <li>El Historial de existencias muestra un registro completo de todas las operaciones de entrada, salida, transferencia y ajuste.</li>
+      <li>La importación CSV tiene dos modos — Reemplazar existencias actuales y Agregar como entrada. Siempre haz un respaldo antes de usar cualquiera de los dos.</li>
+      <li>Las ubicaciones se configuran mediante Simple A/B/C. Cambia al modo Detalle para usar ubicaciones detalladas.</li>
+      <li>Editar directamente el total acumulado registrado requiere el Plan Completo.</li>
+    </ul>
+  </div>
+
+  <div class="confirm-box" id="confirm">
+    <h3>🔍 Notas antes de usar</h3>
+    <ul>
+      <li>Usa el Catálogo de ubicaciones dentro de las opciones que muestra la app. Para la gestión de ubicaciones detalladas, revisa el modo actual y considera las funciones del Plan Completo cuando sea necesario.</li>
+      <li>Si se guardó incorrectamente una entrada o salida, revisa el Historial de existencias y sigue las indicaciones de la app para corregirla, revertirla o registrar un ajuste, según corresponda.</li>
+      <li>Cuando exportes un conjunto de CSV de respaldo, mantén juntos los archivos generados y guárdalos en un lugar seguro.</li>
+      <li>Flujo operativo real de la pantalla de transferencia de existencias</li>
+      <li>Las pantallas de revisión de columnas CSV y selección del modo de importación están actualizadas con la app actual.</li>
+    </ul>
+  </div></div>
+<footer>
+  <p>Manual de Quantiventra | ⑥ Gestión de inventario Plan Estándar</p>
+  <p style="margin-top:4px;">Este manual puede actualizarse sin previo aviso. Consulta siempre la pantalla de la app para obtener la información más reciente.</p>
+  <p style="margin-top:4px;"><a href="privacy_es-419.html">Política de privacidad</a></p>
+</footer>
+</body></html>

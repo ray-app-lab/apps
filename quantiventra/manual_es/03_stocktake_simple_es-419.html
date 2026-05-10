@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="es-419">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quantiventra – Inventario físico – Versión estándar</title>
+<style>*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;font-size:15px;line-height:1.8;color:#1a2535;background:#f4f7fb;}
+a{color:#1a5fa8;text-decoration:none;}a:hover{text-decoration:underline;}
+.site-nav{background:#1a3a5c;color:#fff;padding:0;}.site-nav .nav-inner{max-width:960px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:stretch;}
+.site-nav a{color:#cde;padding:10px 13px;font-size:12px;display:block;border-right:1px solid #2a4a6c;white-space:nowrap;}
+.site-nav a:hover{background:#2a5090;text-decoration:none;}.site-nav a.active{background:#2a6cbe;color:#fff;font-weight:bold;}
+.page-header{background:linear-gradient(135deg,#1a3a5c 0%,#2a6cbe 100%);color:#fff;padding:40px 20px 30px;}
+.page-header .inner{max-width:960px;margin:0 auto;}.page-header .app-name{font-size:13px;opacity:.8;}
+.page-header h1{font-size:22px;font-weight:700;margin-top:6px;line-height:1.4;}.page-header .subtitle{font-size:14px;opacity:.85;margin-top:8px;}
+.scope-box{background:rgba(255,255,255,.15);border-left:4px solid #7ecfff;padding:12px 16px;margin-top:16px;border-radius:4px;font-size:13px;}
+.container{max-width:960px;margin:0 auto;padding:30px 16px;}
+.toc{background:#fff;border:1px solid #c8d8ec;border-radius:8px;padding:24px 28px;margin-bottom:32px;}
+.toc h2{font-size:16px;font-weight:700;color:#1a3a5c;border-bottom:2px solid #2a6cbe;padding-bottom:8px;margin-bottom:14px;}
+.toc ol{margin-left:18px;}.toc li{margin:5px 0;font-size:14px;}
+.chapter{background:#fff;border-radius:8px;box-shadow:0 1px 4px rgba(0,0,0,.08);padding:28px 28px 24px;margin-bottom:28px;}
+.chapter-head{border-left:5px solid #2a6cbe;padding-left:14px;margin-bottom:20px;}
+.chapter-head .ch-no{font-size:12px;color:#2a6cbe;font-weight:700;}.chapter-head h2{font-size:20px;font-weight:700;color:#1a2535;margin-top:2px;}
+h3{font-size:16px;font-weight:700;color:#1a3a5c;border-bottom:1px solid #dde8f5;padding-bottom:5px;margin:22px 0 12px;}
+h4{font-size:14px;font-weight:700;color:#2a4a6c;margin:16px 0 8px;}
+p{margin-bottom:12px;}ul,ol{margin-left:20px;margin-bottom:12px;}li{margin-bottom:5px;}
+.steps{counter-reset:step;list-style:none;margin-left:0;}
+.steps li{counter-increment:step;padding:9px 12px 9px 46px;position:relative;background:#f8fbff;border:1px solid #dde8f5;border-radius:6px;margin-bottom:6px;}
+.steps li::before{content:counter(step);position:absolute;left:12px;top:50%;transform:translateY(-50%);width:24px;height:24px;background:#2a6cbe;color:#fff;border-radius:50%;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;}
+.table-wrap{overflow-x:auto;margin-bottom:16px;}
+table{width:100%;border-collapse:collapse;font-size:13px;min-width:380px;}
+th{background:#1a3a5c;color:#fff;padding:9px 12px;text-align:left;white-space:nowrap;}
+td{padding:8px 12px;border-bottom:1px solid #dde8f5;vertical-align:top;}tr:nth-child(even) td{background:#f4f7fb;}
+code{font-family:'Courier New',monospace;background:rgba(0,80,160,.08);color:#004080;padding:2px 6px;border-radius:3px;font-size:12px;}
+.box{border-radius:6px;padding:13px 16px;margin:14px 0;font-size:13px;}
+.box-warn{background:#fffbe6;border-left:4px solid #f5a623;color:#7a5700;}
+.box-danger{background:#fff0f0;border-left:4px solid #d43f3f;color:#7a0000;}
+.box-hint{background:#e8f4ff;border-left:4px solid #2a6cbe;color:#0a3060;}
+.box-check{background:#f4eeff;border-left:4px solid #8c4fc8;color:#3a0070;}
+.box strong{display:block;margin-bottom:4px;}
+figure{max-width:280px;width:100%;margin:18px auto;text-align:center;}
+figure img{display:block;width:100%;max-width:280px;height:auto;margin:0 auto;border:1px solid #c8d8ec;border-radius:6px;box-shadow:0 2px 8px rgba(0,0,0,.1);}
+figcaption{font-size:12px;color:#5a7a99;margin-top:6px;}
+.img-pending{display:flex;align-items:center;justify-content:center;max-width:280px;width:100%;box-sizing:border-box;background:#e8eef5;border:2px dashed #99b8d8;border-radius:6px;height:160px;color:#5a7a99;font-size:13px;margin:18px auto;}
+.diff-add{background:#e8fff0;border-left:4px solid #2a9c5c;border-radius:6px;padding:12px 16px;margin:14px 0;font-size:13px;}
+.diff-add strong{display:block;color:#1a6c3c;margin-bottom:4px;}
+.flow-box{background:#f4f7fb;border:1px solid #c8d8ec;border-radius:8px;padding:20px;margin:16px 0;}
+.flow-box h4{color:#1a3a5c;margin-top:0;}
+.flow-arrow{text-align:center;font-size:20px;color:#2a6cbe;margin:4px 0;}
+.flow-step{background:#fff;border:1px solid #c8d8ec;border-radius:6px;padding:10px 16px;margin:4px 0;font-size:13px;}
+.flow-step strong{color:#1a3a5c;}
+.summary-box{background:linear-gradient(135deg,#e8f4ff,#f0f8ff);border:1px solid #99c8ec;border-radius:8px;padding:20px 24px;margin-top:32px;}
+.summary-box h3{border:none;color:#1a3a5c;margin-top:0;}
+.confirm-box{background:#fdf4ff;border:1px solid #c8a0e0;border-radius:8px;padding:20px 24px;margin-top:16px;}
+.confirm-box h3{border:none;color:#5a0090;margin-top:0;}
+.check{color:#2e7d32;font-weight:700;}.cross{color:#c62828;}
+th.pro-col{background:#5a2a8c;}
+.feature-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px;margin:16px 0;}
+.feature-card{background:#f4f7fb;border:1px solid #c8d8ec;border-radius:8px;padding:16px;}
+.feature-card h4{color:#1a3a5c;margin-top:0;margin-bottom:6px;font-size:14px;}
+.feature-card p{font-size:13px;margin:0;color:#3a5a7a;}
+.feature-card.pro-card{background:#f4eeff;border-color:#c8a0e0;}
+.feature-card.pro-card h4{color:#5a2a8c;}
+.trouble{border:1px solid #c8d8ec;border-radius:8px;margin:14px 0;overflow:hidden;}
+.trouble-q{background:#eef6fd;padding:13px 18px;font-weight:700;font-size:14px;color:#1a3a5c;display:flex;align-items:flex-start;gap:10px;}
+.trouble-q::before{content:'Q';background:#2a6cbe;color:#fff;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900;flex-shrink:0;margin-top:1px;}
+.trouble-a{padding:13px 18px 14px 50px;font-size:13.5px;border-top:1px solid #c8d8ec;line-height:1.9;}
+.trouble-a ul{margin-left:16px;}
+.legal-block{background:#f5f5f5;border:1px solid #ddd;border-radius:8px;padding:20px 24px;font-size:12.5px;color:#444;line-height:1.9;margin:14px 0;}
+.legal-block h4{font-size:13px;color:#333;margin:18px 0 6px;border-bottom:1px solid #ddd;padding-bottom:4px;}
+.legal-block h4:first-child{margin-top:0;}
+footer{text-align:center;font-size:12px;color:#8a9aaa;padding:30px 16px;border-top:1px solid #dde8f5;margin-top:20px;}
+@media(max-width:640px){.page-header h1{font-size:18px;}.chapter{padding:20px 16px;}.site-nav a{padding:8px 9px;font-size:11px;}}
+@media print{body{background:#fff;font-size:12px;}.site-nav{display:none;}.chapter{box-shadow:none;border:1px solid #ccc;page-break-inside:avoid;}.page-header{background:#1a3a5c !important;-webkit-print-color-adjust:exact;print-color-adjust:exact;}}
+</style></head>
+<body>
+<nav class="site-nav"><div class="nav-inner">
+  <a href="01_top_settings_common_es-419.html">① Inicio / Ajustes</a>
+  <a href="02_stocktake_free_es-419.html">② Inventario físico gratis</a>
+  <a href="03_stocktake_simple_es-419.html" class="active">③ Inventario físico estándar</a>
+  <a href="04_stocktake_full_es-419.html">④ Inventario físico completo</a>
+  <a href="05_inventory_free_es-419.html">⑤ Existencias gratis</a>
+  <a href="06_inventory_simple_es-419.html">⑥ Existencias estándar</a>
+  <a href="07_inventory_full_es-419.html">⑦ Existencias completas</a>
+</div></nav>
+<header class="page-header"><div class="inner">
+  <div class="app-name">Manual de Quantiventra</div>
+  <h1>③ Inventario físico — Versión estándar</h1>
+  <div class="subtitle">Funciones añadidas, diferencias con la versión gratuita, modos Simple A/B/C, ubicaciones simples y notas importantes</div>
+  <div class="scope-box"><strong>Temas tratados:</strong> Novedades de la versión estándar / Diferencias con la versión gratuita / Modos Simple A/B/C / Ubicaciones simples / Paso a paso / Beneficios de actualizar</div>
+</div></header>
+<div class="container">
+  <nav class="toc"><h2>Índice</h2><ol>
+    <li><a href="#overview">Descripción de la versión estándar</a></li>
+    <li><a href="#diff">Diferencias con el versión gratuita</a></li>
+    <li><a href="#mode">Modos Simple A / B / C</a></li>
+    <li>Manejo de ubicaciones básicas</li>
+    <li><a href="#howto">Inventario paso a paso (versión estándar)</a></li>
+    <li>Qué mejora con la versión estándar</li>
+    <li><a href="#cannot">Lo que aún no es posible en la versión estándar</a></li>
+    <li><a href="#notes">Notas importantes</a></li>
+    <li><a href="#upgrade">Por qué pasar del versión gratuita al estándar</a></li>
+    <li><a href="#summary">Puntos clave del capítulo</a></li>
+    <li><a href="#confirm">Notas antes de usar</a></li>
+  </ol></nav>
+
+  <section class="chapter" id="overview">
+    <div class="chapter-head"><div class="ch-no">CAPÍTULO 1</div><h2>Descripción de la versión estándar</h2></div>
+    <p>La versión estándar de inventario físico aumenta los límites de registros de catálogo, historial de inventario y exportación, y activa el bloqueo de rotación de pantalla para trabajar de forma más cómoda y continua en campo.</p>
+    <div class="table-wrap"><table>
+      <tr><th>Elemento</th><th>Versión gratuita</th><th>Versión estándar</th></tr>
+      <tr><td>Registros de catálogo</td><td>Máx. 30</td><td>Máx. 300</td></tr>
+      <tr><td>Registros de historial de inventario</td><td>Máx. 30</td><td>Máx. 1.000</td></tr>
+      <tr><td>Registros exportados</td><td>Máx. 30</td><td>Máx. 300</td></tr>
+      <tr><td>Bloqueo de rotación de pantalla</td><td>✗</td><td>○</td></tr>
+      <tr><td>Configuración de reglas detalladas</td><td>✗</td><td>✗ (requiere versión completa)</td></tr>
+    </table></div>
+  </section>
+
+  <section class="chapter" id="diff">
+    <div class="chapter-head"><div class="ch-no">CAPÍTULO 2</div><h2>Diferencias con el versión gratuita</h2></div>
+    <div class="diff-add">
+      <strong>✅ Lo que añade o amplía la versión estándar</strong>
+      <ul style="margin-top:6px;">
+        <li>Límite de registros de catálogo: de 30 → 300</li>
+        <li>Límite de historial de inventario: de 30 → 1.000</li>
+        <li>Límite de exportación: de 30 → 300</li>
+        <li>Bloqueo de rotación de pantalla disponible</li>
+        <li>Facilita el trabajo continuo en campo</li>
+      </ul>
+    </div>
+    <div class="box box-hint"><strong>💡 Punto clave</strong>La versión estándar añade <strong>límites ampliados</strong> y el <strong>bloqueo de rotación de pantalla</strong>. El flujo de inventario es idéntico al del versión gratuita. La configuración de reglas detalladas requiere el versión completa.</div>
+  </section>
+
+  <section class="chapter" id="mode">
+    <div class="chapter-head"><div class="ch-no">CAPÍTULO 3</div><h2>Modos Simple A / B / C</h2></div>
+    <p>En los ajustes de inventario físico, elige <strong>Simple A</strong>, <strong>Simple B</strong> o <strong>Simple C</strong>. El modo seleccionado determina las opciones de ubicación disponibles durante el inventario físico y otros flujos de trabajo.</p>
+    <div class="table-wrap"><table>
+      <tr><th>Modo</th><th>Ubicaciones mostradas</th><th>Ejemplo de uso</th></tr>
+      <tr><td><strong>Simple A</strong></td><td>Solo bodega</td><td>Operaciones en una sola bodega</td></tr>
+      <tr><td><strong>Simple B</strong></td><td>Bodega + Tienda</td><td>Inventario en bodega y tienda a la vez</td></tr>
+      <tr><td><strong>Simple C</strong></td><td>Solo tienda</td><td>Operaciones en una sola tienda</td></tr>
+    </table></div>
+    <div class="box box-warn"><strong>⚠ Atención</strong>Aunque el versión completa esté activo, si el modo sigue configurado como Simple A/B/C, solo verás las opciones de ubicación simples. Cambia al modo <strong>Detallado</strong> para usar ubicaciones detalladas.</div>
+  </section>
+
+
+
+  <section class="chapter" id="location">
+    <div class="chapter-head"><div class="ch-no">CAPÍTULO 4</div><h2>Manejo de ubicaciones básicas</h2></div>
+    <p>La versión estándar usa principalmente las ubicaciones básicas "Bodega" y "Tienda". El nombre real que se muestra puede variar según el idioma principal del dispositivo y los datos de ejemplo.</p>
+    <h3>Selección de ubicación durante el inventario</h3>
+    <p>Las opciones de ubicación disponibles durante el inventario dependen del modo seleccionado (Simple A/B/C). Esto reduce la cantidad de entradas manuales y ayuda a mantener un flujo de trabajo sencillo.</p>
+    <div class="table-wrap"><table>
+      <tr><th>Elemento</th><th>Modo Simple (A/B/C)</th><th>Modo Detallado (versión completa)</th></tr>
+      <tr><td>Opciones de ubicación</td><td>Opciones fijas: Bodega y/o Tienda</td><td>Todas las ubicaciones registradas en el Catálogo de ubicaciones</td></tr>
+      <tr><td>Complejidad de configuración</td><td>Baja</td><td>Requiere configuración de ubicaciones detalladas</td></tr>
+      <tr><td>Uso recomendado</td><td>Operaciones sencillas en bodega o tienda</td><td>Operaciones con estantes, áreas, pisos u otras ubicaciones específicas</td></tr>
+    </table></div>
+  </section>
+
+  <section class="chapter" id="howto">
+    <div class="chapter-head"><div class="ch-no">CAPÍTULO 5</div><h2>Inventario paso a paso (versión estándar)</h2></div>
+    <ol class="steps">
+      <li>Confirma el modo Simple en uso en <strong>Ajustes → Ajustes de inventario</strong>.</li>
+      <li>En la pantalla de inicio, toca <strong>Inventario físico</strong>.</li>
+      <li>Escanea el código de barras o ingresa el código del producto.</li>
+      <li>Confirma el nombre del producto (ingrésalo manualmente si el código no está registrado).</li>
+      <li>Selecciona la ubicación donde estás contando (bodega, tienda, etc.).</li>
+      <li>Ingresa la cantidad efectivamente contada.</li>
+      <li>Ingresa notas opcionales.</li>
+      <li>Toca <strong>Guardar</strong> para registrar el elemento.</li>
+      <li>Escanea el siguiente producto y repite los pasos 3–8.</li>
+      <li>Después de ingresar todos los productos, revisa el historial de inventario completo.</li>
+    </ol>
+    <div class="box box-danger"><strong>🚨 Importante</strong>Antes de guardar, siempre verifica la cantidad y la ubicación. Registrar una cantidad en la ubicación equivocada genera desfases en las existencias.</div>
+  </section>
+
+
+
+  <section class="chapter" id="merit">
+    <div class="chapter-head"><div class="ch-no">CAPÍTULO 6</div><h2>Qué mejora con la versión estándar</h2></div>
+    <h3>Bloqueo de rotación para trabajo en campo</h3>
+    <p>El bloqueo de rotación evita que la pantalla cambie de orientación al inclinar el teléfono, lo que facilita escanear códigos e ingresar cantidades en el lugar de trabajo.</p>
+    <h3>Historial ampliado para uso continuo</h3>
+    <p>El límite del historial aumenta de 30 a 1.000 registros, por lo que es más práctico conservar inventarios periódicos durante más tiempo.</p>
+    <h3>Catálogo de hasta 300 productos</h3>
+    <p>Es adecuado para tiendas o bodegas pequeñas y medianas que superan el límite de la versión gratuita, pero todavía no requieren la versión completa.</p>
+  </section>
+
+  <section class="chapter" id="cannot">
+    <div class="chapter-head"><div class="ch-no">CAPÍTULO 7</div><h2>Lo que aún no es posible en la versión estándar</h2></div>
+    <div class="table-wrap"><table>
+      <tr><th>Funcionalidad</th><th>Plan necesario</th></tr>
+      <tr><td>Configuración de reglas de código detalladas</td><td>Versión completa de inventario físico</td></tr>
+      <tr><td>Configuración de reglas de ubicación detalladas</td><td>Versión completa de inventario físico</td></tr>
+      <tr><td>Configuración detallada de cámara</td><td>Versión completa de inventario físico</td></tr>
+      <tr><td>Exportación CSV ampliada</td><td>Versión completa de inventario físico</td></tr>
+      <tr><td>Más de 300 registros de catálogo</td><td>Versión completa de inventario físico</td></tr>
+      <tr><td>Aplicar los resultados del inventario físico a las existencias</td><td>Versión completa de inventario físico</td></tr>
+    </table></div>
+  </section>
+
+  <section class="chapter" id="notes">
+    <div class="chapter-head"><div class="ch-no">CAPÍTULO 8</div><h2>Notas importantes</h2></div>
+    <div class="box box-warn"><strong>⚠ Verifica el modo de inventario</strong>Aunque el versión completa esté activo, el modo permanece en Simple A/B/C hasta que lo cambies. Cambia a <strong>Detallado</strong> para usar ubicaciones detalladas.</div>
+    <div class="box box-danger"><strong>🚨 Precios y condiciones de compra</strong>Siempre verifica los precios actuales y las condiciones de reembolso en Google Play Store — este manual no hace declaraciones definitivas.</div>
+  </section>
+
+  <section class="chapter" id="upgrade">
+    <div class="chapter-head"><div class="ch-no">CAPÍTULO 9</div><h2>Por qué pasar del versión gratuita al estándar</h2></div>
+    <div class="table-wrap"><table>
+      <tr><th>Elemento</th><th>Versión gratuita</th><th>→ versión estándar</th></tr>
+      <tr><td>Registros de catálogo</td><td>Máx. 30</td><td>Máx. 300 (10×)</td></tr>
+      <tr><td>Historial de inventario</td><td>Máx. 30</td><td>Máx. 1.000 (33×)</td></tr>
+      <tr><td>Registros exportados</td><td>Máx. 30</td><td>Máx. 300 (10×)</td></tr>
+      <tr><td>Bloqueo de rotación de pantalla</td><td>No disponible</td><td>Disponible — útil en campo</td></tr>
+      <tr><td>Continuidad operativa</td><td>Riesgo de interrupción por límite alcanzado</td><td>Sostenible para uso de mediano a largo plazo</td></tr>
+    </table></div>
+    <div class="box box-hint"><strong>💡 Considera el Estándar si:</strong>
+      <ul style="margin-top:6px;">
+        <li>Tienes más de 30 productos</li>
+        <li>Quieres conservar el historial mensual de inventario a largo plazo</li>
+        <li>Necesitas fijar la orientación de la pantalla durante las operaciones en campo</li>
+        <li>Tienes menos de 300 productos y quieres continuar haciendo inventarios</li>
+      </ul>
+    </div>
+  </section>
+
+  <div class="summary-box" id="summary">
+    <h3>📌 Puntos clave del capítulo</h3>
+    <ul>
+      <li>El versión estándar amplía los límites: catálogo máx. 300, historial máx. 1.000, exportación máx. 300.</li>
+      <li>El bloqueo de rotación de pantalla está disponible, mejorando la comodidad en operaciones de campo.</li>
+      <li>El modo de inventario físico se elige entre Simple A (solo bodega), B (bodega+tienda) o C (solo tienda).</li>
+      <li>La configuración de reglas detalladas requiere el versión completa — no disponible en el Estándar.</li>
+      <li>El flujo es idéntico al gratuito: Escanear → Ingresar cantidad → Guardar → Revisar historial.</li>
+    </ul>
+  </div>
+  <div class="confirm-box" id="confirm">
+    <h3>🔍 Notas antes de usar</h3>
+    <ul>
+      <li>Las funciones para aplicar resultados del inventario físico a las existencias pertenecen a la versión completa; en la versión estándar, siga la información mostrada en la app.</li>
+      <li>Antes de acercarse al límite de 300 registros de catálogo, exporte una copia de seguridad y considere la versión completa si necesita seguir ampliando los datos.</li>
+      <li>Los detalles de las columnas CSV pueden variar según la versión de la app. Revise el archivo exportado y la pantalla de la app.</li>
+    </ul>
+  </div>
+</div>
+<footer>Manual de Quantiventra · La información más actualizada está disponible en las pantallas de la app.<p style="margin-top:4px;"><a href="privacy_es-419.html">Política de privacidad</a></p></footer>
+</body></html>

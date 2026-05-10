@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quantiventra 매뉴얼 – 재고 관리 무료 플랜</title>
+<style>*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:-apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo','Noto Sans KR','Malgun Gothic',sans-serif;font-size:15px;line-height:1.9;color:#1a2535;background:#f4f7fb;}
+a{color:#1a5fa8;text-decoration:none;}a:hover{text-decoration:underline;}
+.site-nav{background:#1a3a5c;color:#fff;padding:0;}.site-nav .nav-inner{max-width:960px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:stretch;}
+.site-nav a{color:#cde;padding:10px 13px;font-size:12px;display:block;border-right:1px solid #2a4a6c;white-space:nowrap;}
+.site-nav a:hover{background:#2a5090;text-decoration:none;}.site-nav a.active{background:#2a6cbe;color:#fff;font-weight:bold;}
+.page-header{background:linear-gradient(135deg,#1a3a5c 0%,#2a6cbe 100%);color:#fff;padding:40px 20px 30px;}
+.page-header .inner{max-width:960px;margin:0 auto;}.page-header .app-name{font-size:13px;opacity:.8;}
+.page-header h1{font-size:22px;font-weight:700;margin-top:6px;line-height:1.5;}.page-header .subtitle{font-size:14px;opacity:.85;margin-top:8px;}
+.scope-box{background:rgba(255,255,255,.15);border-left:4px solid #7ecfff;padding:12px 16px;margin-top:16px;border-radius:4px;font-size:13px;}
+.container{max-width:960px;margin:0 auto;padding:30px 16px;}
+.toc{background:#fff;border:1px solid #c8d8ec;border-radius:8px;padding:24px 28px;margin-bottom:32px;}
+.toc h2{font-size:16px;font-weight:700;color:#1a3a5c;border-bottom:2px solid #2a6cbe;padding-bottom:8px;margin-bottom:14px;}
+.toc ol{margin-left:18px;}.toc li{margin:5px 0;font-size:14px;}
+.chapter{background:#fff;border-radius:8px;box-shadow:0 1px 4px rgba(0,0,0,.08);padding:28px 28px 24px;margin-bottom:28px;}
+.chapter-head{border-left:5px solid #2a6cbe;padding-left:14px;margin-bottom:20px;}
+.chapter-head .ch-no{font-size:12px;color:#2a6cbe;font-weight:700;}.chapter-head h2{font-size:20px;font-weight:700;color:#1a2535;margin-top:2px;}
+h3{font-size:16px;font-weight:700;color:#1a3a5c;border-bottom:1px solid #dde8f5;padding-bottom:5px;margin:22px 0 12px;}
+h4{font-size:14px;font-weight:700;color:#2a4a6c;margin:16px 0 8px;}
+p{margin-bottom:12px;}ul,ol{margin-left:20px;margin-bottom:12px;}li{margin-bottom:5px;}
+.steps{counter-reset:step;list-style:none;margin-left:0;}
+.steps li{counter-increment:step;padding:9px 12px 9px 46px;position:relative;background:#f8fbff;border:1px solid #dde8f5;border-radius:6px;margin-bottom:6px;}
+.steps li::before{content:counter(step);position:absolute;left:12px;top:50%;transform:translateY(-50%);width:24px;height:24px;background:#2a6cbe;color:#fff;border-radius:50%;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;}
+.table-wrap{overflow-x:auto;margin-bottom:16px;}
+table{width:100%;border-collapse:collapse;font-size:13px;min-width:380px;}
+th{background:#1a3a5c;color:#fff;padding:9px 12px;text-align:left;white-space:nowrap;}
+td{padding:8px 12px;border-bottom:1px solid #dde8f5;vertical-align:top;}tr:nth-child(even) td{background:#f4f7fb;}
+code{font-family:'Courier New',monospace;background:rgba(0,80,160,.08);color:#004080;padding:2px 6px;border-radius:3px;font-size:12px;}
+.box{border-radius:6px;padding:13px 16px;margin:14px 0;font-size:13px;}
+.box-warn{background:#fffbe6;border-left:4px solid #f5a623;color:#7a5700;}
+.box-danger{background:#fff0f0;border-left:4px solid #d43f3f;color:#7a0000;}
+.box-hint{background:#e8f4ff;border-left:4px solid #2a6cbe;color:#0a3060;}
+.box-check{background:#f4eeff;border-left:4px solid #8c4fc8;color:#3a0070;}
+.box strong{display:block;margin-bottom:4px;}
+figure{max-width:280px;width:100%;margin:18px auto;text-align:center;}
+figure img{display:block;width:100%;max-width:280px;height:auto;margin:0 auto;border:1px solid #c8d8ec;border-radius:6px;box-shadow:0 2px 8px rgba(0,0,0,.1);}
+figcaption{font-size:12px;color:#5a7a99;margin-top:6px;}
+.img-pending{display:flex;align-items:center;justify-content:center;max-width:280px;width:100%;box-sizing:border-box;background:#e8eef5;border:2px dashed #99b8d8;border-radius:6px;height:160px;color:#5a7a99;font-size:13px;margin:18px auto;}
+.diff-add{background:#e8fff0;border-left:4px solid #2a9c5c;border-radius:6px;padding:12px 16px;margin:14px 0;font-size:13px;}
+.diff-add strong{display:block;color:#1a6c3c;margin-bottom:4px;}
+.flow-box{background:#f4f7fb;border:1px solid #c8d8ec;border-radius:8px;padding:20px;margin:16px 0;}
+.flow-box h4{color:#1a3a5c;margin-top:0;}
+.flow-arrow{text-align:center;font-size:20px;color:#2a6cbe;margin:4px 0;}
+.flow-step{background:#fff;border:1px solid #c8d8ec;border-radius:6px;padding:10px 16px;margin:4px 0;font-size:13px;}
+.flow-step strong{color:#1a3a5c;}
+.summary-box{background:linear-gradient(135deg,#e8f4ff,#f0f8ff);border:1px solid #99c8ec;border-radius:8px;padding:20px 24px;margin-top:32px;}
+.summary-box h3{border:none;color:#1a3a5c;margin-top:0;}
+.confirm-box{background:#fdf4ff;border:1px solid #c8a0e0;border-radius:8px;padding:20px 24px;margin-top:16px;}
+.confirm-box h3{border:none;color:#5a0090;margin-top:0;}
+.check{color:#2e7d32;font-weight:700;}.cross{color:#c62828;}
+th.pro-col{background:#5a2a8c;}
+.feature-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px;margin:16px 0;}
+.feature-card{background:#f4f7fb;border:1px solid #c8d8ec;border-radius:8px;padding:16px;}
+.feature-card h4{color:#1a3a5c;margin-top:0;margin-bottom:6px;font-size:14px;}
+.feature-card p{font-size:13px;margin:0;color:#3a5a7a;}
+.feature-card.pro-card{background:#f4eeff;border-color:#c8a0e0;}
+.feature-card.pro-card h4{color:#5a2a8c;}
+.trouble{border:1px solid #c8d8ec;border-radius:8px;margin:14px 0;overflow:hidden;}
+.trouble-q{background:#eef6fd;padding:13px 18px;font-weight:700;font-size:14px;color:#1a3a5c;display:flex;align-items:flex-start;gap:10px;}
+.trouble-q::before{content:'Q';background:#2a6cbe;color:#fff;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900;flex-shrink:0;margin-top:1px;}
+.trouble-a{padding:13px 18px 14px 50px;font-size:13.5px;border-top:1px solid #c8d8ec;line-height:1.9;}
+.trouble-a ul{margin-left:16px;}
+.legal-block{background:#f5f5f5;border:1px solid #ddd;border-radius:8px;padding:20px 24px;font-size:12.5px;color:#444;line-height:1.9;margin:14px 0;}
+.legal-block h4{font-size:13px;color:#333;margin:18px 0 6px;border-bottom:1px solid #ddd;padding-bottom:4px;}
+.legal-block h4:first-child{margin-top:0;}
+footer{text-align:center;font-size:12px;color:#8a9aaa;padding:30px 16px;border-top:1px solid #dde8f5;margin-top:20px;}
+@media(max-width:640px){.page-header h1{font-size:18px;}.chapter{padding:20px 16px;}.site-nav a{padding:8px 9px;font-size:11px;}}
+@media print{body{background:#fff;font-size:12px;}.site-nav{display:none;}.chapter{box-shadow:none;border:1px solid #ccc;page-break-inside:avoid;}.page-header{background:#1a3a5c !important;-webkit-print-color-adjust:exact;print-color-adjust:exact;}}
+</style></head>
+<body>
+<nav class="site-nav"><div class="nav-inner">
+  <a href="01_top_settings_common_ko.html">① 홈 / 설정</a>
+  <a href="02_stocktake_free_ko.html">② 재고 실사 무료</a>
+  <a href="03_stocktake_simple_ko.html">③ 재고 실사 표준</a>
+  <a href="04_stocktake_full_ko.html">④ 재고 실사 전체</a>
+  <a href="05_inventory_free_ko.html" class="active">⑤ 재고 관리 무료</a>
+  <a href="06_inventory_simple_ko.html">⑥ 재고 관리 표준</a>
+  <a href="07_inventory_full_ko.html">⑦ 재고 관리 전체</a>
+</div></nav>
+<header class="page-header"><div class="inner">
+  <div class="app-name">Quantiventra 매뉴얼</div>
+  <h1>⑤ 재고 관리 — 무료 플랜</h1>
+  <div class="subtitle">무료 플랜에서 할 수 있는 작업, 제한 사항, 재고 조회, 마스터 데이터 연동, 입고·출고·이동 가능 여부 및 권장 워크플로</div>
+  <div class="scope-box"><strong>이 페이지에서 다루는 내용:</strong> 무료 플랜 재고 관리에서 가능한 작업 / 무료 플랜 제한 사항 / 재고 조회 / 재고 상세 / 마스터 데이터 관계 / 입고·출고·이동 가능 여부 / CSV 제한 / 무료 플랜에서 사용할 수 없는 기능 / 권장 워크플로</div>
+</div></header>
+<div class="container">
+  <nav class="toc"><h2>목차</h2><ol>
+    <li><a href="#overview">무료 플랜 재고 관리 개요</a></li>
+    <li><a href="#limits">무료 플랜 제한 사항</a></li>
+    <li><a href="#stock-check">재고 조회</a></li>
+    <li><a href="#stock-detail">재고 상세</a></li>
+    <li><a href="#master">마스터 데이터 관계</a></li>
+    <li><a href="#inout">입고, 출고 및 이동 가능 여부</a></li>
+    <li><a href="#csv">CSV 제한 사항</a></li>
+    <li><a href="#cannot">무료 플랜에서 사용할 수 없는 기능</a></li>
+    <li><a href="#tips">무료 플랜 사용자를 위한 권장 워크플로</a></li>
+    <li><a href="#summary">이 장의 핵심 요약</a></li>
+    <li><a href="#confirm">사용 전 참고 사항</a></li>
+  </ol></nav>
+
+  <section class="chapter" id="overview">
+    <div class="chapter-head"><div class="ch-no">제1장</div><h2>무료 플랜 재고 관리 개요</h2></div>
+    <p>재고 관리는 상품의 입고, 출고, 이동을 추적하여 현재 재고 수준을 정확하게 파악할 수 있도록 합니다. 무료 플랜에서는 기본적인 재고 조회와 상품 마스터의 기본 사용을 체험할 수 있습니다.</p>
+    <p>재고 관리의 주요 화면: 재고 조회 / 입고 / 출고 / 재고 이동 / 재고 이력 / 데이터 가져오기 및 내보내기</p>
+    <div class="box box-hint"><strong>💡 재고 실사 vs. 재고 관리</strong>재고 관리는 입고, 출고, 이동처럼 재고를 변동시키는 일상 거래를 기록하는 모듈입니다. 실제 품목 수량을 세는 재고 실사와는 별도의 모듈입니다. 두 기능을 혼동하지 마세요.</div>  </section>
+
+  <section class="chapter" id="limits">
+    <div class="chapter-head"><div class="ch-no">제2장</div><h2>무료 플랜 제한 사항</h2></div>
+    <div class="table-wrap"><table>
+      <tr><th>항목</th><th>무료 플랜 제한</th><th>해제 방법</th></tr>
+      <tr><td>마스터 레코드</td><td>최대 30건</td><td>재고 관리 표준 플랜 이상</td></tr>
+      <tr><td>재고 이력 레코드</td><td>최대 30건</td><td>재고 관리 표준 플랜 이상</td></tr>
+      <tr><td>내보내기 레코드</td><td>최대 30건</td><td>재고 관리 표준 플랜 이상</td></tr>
+      <tr><td>위치 마스터 등록</td><td>사용 불가 또는 제한됨</td><td>재고 관리 표준 플랜 이상</td></tr>
+      <tr><td>등록된 누적 합계 직접 편집</td><td>사용 불가</td><td>재고 관리 전체 플랜</td></tr>
+      <tr><td>상세 코드/위치 규칙</td><td>사용 불가</td><td>재고 관리 전체 플랜</td></tr>
+      <tr><td>확장 CSV 가져오기/내보내기</td><td>제한됨(레코드 및 기능)</td><td>재고 관리 전체 플랜</td></tr>
+    </table></div>
+    <div class="box box-warn"><strong>⚠ 참고</strong>30건 제한에 도달하면 저장이나 내보내기가 되지 않을 수 있습니다. 계속 앱을 사용할 계획이라면 제한에 도달하기 전에 표준 또는 전체 플랜으로 업그레이드를 검토하세요.</div>
+  </section>
+
+  <section class="chapter" id="stock-check">
+    <div class="chapter-head"><div class="ch-no">제3장</div><h2>재고 조회</h2></div>
+    <p>재고 조회 화면은 처음에 상품별 통합 재고 합계를 표시합니다. 보충 필요 여부는 위치 마스터에서 “보충 확인에 포함”이 켜져 있는 모든 위치의 총 재고를 기준으로 계산됩니다.</p>    <h3>재고 조회에서 할 수 있는 작업</h3>
+    <ul>
+      <li>각 상품의 현재 통합 재고 합계를 확인합니다.</li>
+      <li>검색으로 상품명 또는 상품 코드를 기준으로 필터링합니다.</li>
+      <li>포함 대상 위치의 총 재고와 재주문 기준을 비교하여 보충이 필요한 품목을 식별합니다.</li>
+      <li>상품을 탭해 위치별 재고 내역을 펼쳐 봅니다. 위치별 내역 화면에서는 보충 필요 여부가 표시되지 않거나 비활성 상태로 처리됩니다.</li>
+    </ul>
+    <h3>재고 조회 절차</h3>
+    <ol class="steps">
+      <li>홈 화면에서 <strong>재고 관리</strong>를 탭합니다.</li>
+      <li><strong>재고 조회</strong>를 엽니다.</li>
+      <li>확인할 상품을 찾습니다(검색하거나 목록을 스크롤).</li>
+      <li>상품을 탭해 재고 상세를 확인합니다.</li>
+    </ol>
+  </section>
+
+  <section class="chapter" id="stock-detail">
+    <div class="chapter-head"><div class="ch-no">제4장</div><h2>재고 상세</h2></div>
+    <p>재고 조회 화면에서 상품을 탭하면 재고 상세 화면이 열립니다.</p>    <h3>재고 상세에서 확인할 수 있는 항목</h3>
+    <ul>
+      <li>상품 코드 및 상품명</li>
+      <li>총 재고 수량</li>
+      <li>위치별 재고 내역</li>
+      <li>재주문 기준 및 가격(상품 마스터에 등록된 경우)</li>
+      <li>카테고리</li>
+    </ul>
+  </section>
+
+  <section class="chapter" id="master">
+    <div class="chapter-head"><div class="ch-no">제5장</div><h2>마스터 데이터 관계</h2></div>
+    <p>재고 관리는 상품 마스터, 카테고리 마스터, 위치 마스터와 함께 동작합니다. 마스터 데이터에 정확한 정보를 유지하면 재고 기록의 품질이 높아집니다.</p>
+    <div class="table-wrap"><table>
+      <tr><th>마스터</th><th>주요 역할</th><th>핵심 필드</th></tr>
+      <tr><td>상품 마스터</td><td>실물 재고를 보유하는 상품 등록</td><td>상품 코드/바코드, 상품명, 카테고리, 가격, 재주문 기준</td></tr>
+      <tr><td>카테고리 마스터</td><td>상품 분류에 사용하는 그룹 관리</td><td>카테고리 코드, 카테고리명, 표시 순서</td></tr>
+      <tr><td>위치 마스터</td><td>보관 위치 관리</td><td>위치 코드, 위치명, 표시 순서, 활성/비활성</td></tr>
+    </table></div>
+    <div class="box box-hint"><strong>💡 상품 vs. 카테고리</strong><strong>상품</strong>은 재고를 보유하는 개별 품목입니다(예: 빨간색 M 사이즈 티셔츠). <strong>카테고리</strong>는 상품을 분류하는 데 사용하는 그룹입니다(예: 의류). 두 개념을 혼동하지 마세요.</div>
+    <div class="box box-warn"><strong>⚠ 무료 플랜의 위치</strong>무료 플랜에서는 위치 관련 기능이 제한될 수 있습니다. 앱에 표시되는 기본 위치를 사용하고, 유료 플랜 안내가 표시되면 앱 화면의 안내를 따르세요.</div>
+  </section>
+
+  <section class="chapter" id="inout">
+    <div class="chapter-head"><div class="ch-no">제6장</div><h2>입고, 출고 및 이동 가능 여부</h2></div>
+    <p>무료 플랜에서는 입고, 출고, 재고 이동의 진입 버튼이 표시될 수 있지만, 실제 저장 가능 여부와 레코드 수에는 제한이 있습니다.</p>
+    <div class="box box-check"><strong>🔍 무료 플랜에서의 사용 가능 여부</strong>입고, 출고, 재고 이동에는 무료 플랜 제한이 적용될 수 있습니다. 제한 안내나 유료 플랜 안내가 표시되는 경우 앱에 표시된 지침을 따르세요.</div>
+    <h3>무료 플랜에서 입고, 출고 및 이동 사용 시 안내</h3>
+    <ul>
+      <li>기능 버튼이 표시될 수 있습니다.</li>
+      <li>사용을 시도하면 제한 안내가 표시될 수 있습니다.</li>
+      <li>화면에 표시되는 지침을 따르세요.</li>
+      <li>입고 시 등록되지 않은 상품 코드를 사용하면 새 상품 마스터 항목을 생성하라는 안내가 표시될 수 있습니다.</li>
+      <li>출고 화면의 재고 필드는 현재 재고를 참고용으로 표시합니다. 직접 편집하는 입력 필드가 아닙니다.</li>
+    </ul>
+    <div class="box box-hint"><strong>💡 팁</strong>입고, 출고, 이동을 본격적으로 사용하려면 재고 관리 표준 플랜 또는 전체 플랜으로 업그레이드하는 것을 검토하세요.</div>
+  </section>
+
+  <section class="chapter" id="csv">
+    <div class="chapter-head"><div class="ch-no">제7장</div><h2>CSV 제한 사항</h2></div>
+    <p>무료 플랜에서는 가져오기 또는 내보내기 가능한 레코드 수와 사용할 수 있는 기능이 모두 제한됩니다.</p>
+    <div class="table-wrap"><table>
+      <tr><th>항목</th><th>무료 플랜</th><th>표준 잠금 해제</th><th>전체 잠금 해제</th></tr>
+      <tr><td>내보내기 레코드</td><td>최대 30건</td><td>최대 300건</td><td>무제한</td></tr>
+      <tr><td>CSV 가져오기 레코드</td><td>제한됨</td><td>확장됨</td><td>확장됨</td></tr>
+      <tr><td>전체 백업 CSV(모든 데이터)</td><td>제한됨. 앱 내 안내를 따르세요.</td><td>확장됨</td><td>○</td></tr>
+    </table></div>
+    <div class="box box-warn"><strong>⚠ 참고</strong>상세 CSV 내보내기는 전체 잠금 해제 기능입니다. 무료 플랜에서는 레코드 수와 사용 가능한 열이 모두 제한됩니다.</div>
+  </section>
+
+  <section class="chapter" id="cannot">
+    <div class="chapter-head"><div class="ch-no">제8장</div><h2>무료 플랜에서 사용할 수 없는 기능</h2></div>
+    <div class="table-wrap"><table>
+      <tr><th>기능</th><th>필요한 플랜</th></tr>
+      <tr><td>30건을 초과하는 마스터 레코드</td><td>재고 관리 표준 플랜 이상</td></tr>
+      <tr><td>30건을 초과하는 이력 레코드</td><td>재고 관리 표준 플랜 이상</td></tr>
+      <tr><td>30건을 초과하는 레코드 내보내기</td><td>재고 관리 표준 플랜 이상</td></tr>
+      <tr><td>화면 회전 잠금</td><td>재고 관리 표준 플랜 이상</td></tr>
+      <tr><td>상세 위치 마스터 등록</td><td>재고 관리 표준 플랜 이상</td></tr>
+      <tr><td>등록된 누적 합계 직접 편집</td><td>재고 관리 전체 플랜</td></tr>
+      <tr><td>상세 코드/위치 규칙</td><td>재고 관리 전체 플랜</td></tr>
+      <tr><td>확장 CSV 내보내기</td><td>재고 관리 전체 플랜</td></tr>
+      <tr><td>재고 실사 데이터를 재고 관리에 반영</td><td>재고 관리 전체 플랜</td></tr>
+    </table></div>
+  </section>
+
+  <section class="chapter" id="tips">
+    <div class="chapter-head"><div class="ch-no">제9장</div><h2>무료 플랜 사용자를 위한 권장 워크플로</h2></div>
+    <h3>소규모 상품군의 재고 조회에 사용</h3>
+    <p>상품이 30개 이하라면 무료 플랜으로 지속적인 재고 조회를 사용할 수 있습니다. 재고 수준을 모니터링하고 재주문 기준과 비교해 확인하는 데 유용합니다.</p>
+    <h3>샘플 데이터로 연습</h3>
+    <p>설정 화면에서 샘플 데이터를 생성하여 연습용 상품과 재고 데이터를 준비하세요. 실제 데이터를 등록하기 전에 조작 방법에 익숙해지는 것을 권장합니다.</p>
+    <h3>정기적으로 CSV를 내보내 기록 축적</h3>
+    <p>아직 30건 내보내기 제한 안에 있을 때 CSV로 내보내고, PC나 스프레드시트에 재고 기록을 축적하세요.</p>
+    <h3>제한에 가까워지면 업그레이드 계획</h3>
+    <p>상품 수와 이력 건수가 30건에 가까워지면 재고 관리 표준 잠금 해제로 업그레이드하는 것을 검토하세요.</p>
+    <div class="box box-hint"><strong>💡 다음과 같은 경우 표준 플랜 업그레이드를 검토하세요</strong>
+      <ul style="margin-top:6px;">
+        <li>상품이 30개를 초과하는 경우</li>
+        <li>입고 및 출고 이력을 장기간 보관하고 싶은 경우</li>
+        <li>창고와 매장처럼 위치를 분리해 사용하고 싶은 경우</li>
+      </ul>
+    </div>
+  </section>
+
+  <div class="summary-box" id="summary">
+    <h3>📌 이 장의 핵심 요약</h3>
+    <ul>
+      <li>재고 관리는 일상 거래(입고, 출고, 이동)를 기록합니다. 재고 실사와는 별도의 모듈입니다.</li>
+      <li>무료 플랜에는 30건 제한(마스터, 이력, 내보내기)이 있으며, 소규모 사용에 적합합니다.</li>
+      <li>재고 조회는 상품별 현재 재고 합계, 위치별 내역, 보충이 필요한 품목을 표시합니다.</li>
+      <li>재고 관리는 상품, 카테고리, 위치 마스터 데이터와 함께 동작합니다.</li>
+      <li>무료 플랜에서 입고, 출고, 이동을 저장할 수 있는지는 앱 내 안내에 따라 제어됩니다.</li>
+      <li>30건 제한에 가까워지기 전에 표준 또는 전체 잠금 해제로 업그레이드할 계획을 세우세요.</li>
+    </ul>
+  </div>
+
+  <div class="confirm-box" id="confirm">
+    <h3>🔍 사용 전 참고 사항</h3>
+    <ul>
+      <li>입고, 출고, 재고 이동에는 무료 플랜 제한이 적용될 수 있습니다. 앱에 표시되는 제한 안내를 따르세요.</li>
+      <li>위치 마스터 등록과 상세 위치 관리는 해당 유료 플랜이 필요할 수 있습니다.</li>
+      <li>무료 플랜의 백업 CSV 내보내기에는 레코드 및 기능 제한이 있을 수 있습니다. 현재 앱의 내보내기 화면을 기준으로 확인하세요.</li>
+      <li>재고 실사 데이터를 재고 관리에 반영하는 기능은 전체 플랜 기능입니다. 사용하기 전에 앱의 확인 화면을 확인하고 백업을 내보내세요.</li>
+      <li>재고 상세 화면은 현재 앱의 재고 상세 표시를 기준으로 확인하세요.</li>
+    </ul>
+  </div>
+</div>
+<footer>
+  <p>Quantiventra 매뉴얼 | ⑤ 재고 관리 무료 플랜</p>
+  <p style="margin-top:4px;">이 매뉴얼은 사전 고지 없이 업데이트될 수 있습니다. 최신 정보는 항상 앱 내 표시를 확인하세요.</p>
+  <p style="margin-top:4px;"><a href="privacy_ko.html">개인정보 처리방침</a></p>
+</footer>
+</body></html>

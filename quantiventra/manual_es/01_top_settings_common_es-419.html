@@ -1,0 +1,486 @@
+﻿<!DOCTYPE html>
+<html lang="es-419">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quantiventra – Inicio, Ajustes y operaciones comunes</title>
+<style>*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;font-size:15px;line-height:1.8;color:#1a2535;background:#f4f7fb;}
+a{color:#1a5fa8;text-decoration:none;}a:hover{text-decoration:underline;}
+.site-nav{background:#1a3a5c;color:#fff;padding:0;}.site-nav .nav-inner{max-width:960px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:stretch;}
+.site-nav a{color:#cde;padding:10px 13px;font-size:12px;display:block;border-right:1px solid #2a4a6c;white-space:nowrap;}
+.site-nav a:hover{background:#2a5090;text-decoration:none;}.site-nav a.active{background:#2a6cbe;color:#fff;font-weight:bold;}
+.page-header{background:linear-gradient(135deg,#1a3a5c 0%,#2a6cbe 100%);color:#fff;padding:40px 20px 30px;}
+.page-header .inner{max-width:960px;margin:0 auto;}.page-header .app-name{font-size:13px;opacity:.8;}
+.page-header h1{font-size:22px;font-weight:700;margin-top:6px;line-height:1.4;}.page-header .subtitle{font-size:14px;opacity:.85;margin-top:8px;}
+.scope-box{background:rgba(255,255,255,.15);border-left:4px solid #7ecfff;padding:12px 16px;margin-top:16px;border-radius:4px;font-size:13px;}
+.play-section{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.3);border-radius:10px;padding:22px 28px;margin-top:24px;display:flex;align-items:center;gap:28px;flex-wrap:wrap;}
+.play-qr-wrap{flex-shrink:0;text-align:center;}
+.play-qr-frame{width:130px;height:130px;border:3px solid rgba(255,255,255,.7);border-radius:10px;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.95);position:relative;overflow:hidden;}
+.play-qr-frame img{width:100%;height:100%;object-fit:contain;display:block;}
+.play-qr-corner{pointer-events:none;position:absolute;width:16px;height:16px;border-color:#2a6cbe;border-style:solid;border-width:0;}
+.play-qr-corner.tl{top:5px;left:5px;border-top-width:3px;border-left-width:3px;border-radius:3px 0 0 0;}
+.play-qr-corner.tr{top:5px;right:5px;border-top-width:3px;border-right-width:3px;border-radius:0 3px 0 0;}
+.play-qr-corner.bl{bottom:5px;left:5px;border-bottom-width:3px;border-left-width:3px;border-radius:0 0 0 3px;}
+.play-qr-corner.br{bottom:5px;right:5px;border-bottom-width:3px;border-right-width:3px;border-radius:0 0 3px 0;}
+.play-qr-label{font-size:10px;color:rgba(255,255,255,.8);margin-top:6px;letter-spacing:.05em;}
+.play-info h3{font-size:16px;font-weight:700;color:#fff;margin-bottom:4px;}
+.play-info p{font-size:12px;color:rgba(255,255,255,.75);margin-bottom:10px;}
+.play-badge{display:inline-block;text-decoration:none;}
+.play-badge img{display:block;height:44px;width:auto;max-width:180px;}.container{max-width:960px;margin:0 auto;padding:30px 16px;}
+.toc{background:#fff;border:1px solid #c8d8ec;border-radius:8px;padding:24px 28px;margin-bottom:32px;}
+.toc h2{font-size:16px;font-weight:700;color:#1a3a5c;border-bottom:2px solid #2a6cbe;padding-bottom:8px;margin-bottom:14px;}
+.toc ol{margin-left:18px;}.toc li{margin:5px 0;font-size:14px;}
+.chapter{background:#fff;border-radius:8px;box-shadow:0 1px 4px rgba(0,0,0,.08);padding:28px 28px 24px;margin-bottom:28px;}
+.chapter-head{border-left:5px solid #2a6cbe;padding-left:14px;margin-bottom:20px;}
+.chapter-head .ch-no{font-size:12px;color:#2a6cbe;font-weight:700;}.chapter-head h2{font-size:20px;font-weight:700;color:#1a2535;margin-top:2px;}
+h3{font-size:16px;font-weight:700;color:#1a3a5c;border-bottom:1px solid #dde8f5;padding-bottom:5px;margin:22px 0 12px;}
+h4{font-size:14px;font-weight:700;color:#2a4a6c;margin:16px 0 8px;}
+p{margin-bottom:12px;}ul,ol{margin-left:20px;margin-bottom:12px;}li{margin-bottom:5px;}
+.steps{counter-reset:step;list-style:none;margin-left:0;}
+.steps li{counter-increment:step;padding:9px 12px 9px 46px;position:relative;background:#f8fbff;border:1px solid #dde8f5;border-radius:6px;margin-bottom:6px;}
+.steps li::before{content:counter(step);position:absolute;left:12px;top:50%;transform:translateY(-50%);width:24px;height:24px;background:#2a6cbe;color:#fff;border-radius:50%;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;}
+.table-wrap{overflow-x:auto;margin-bottom:16px;}
+table{width:100%;border-collapse:collapse;font-size:13px;min-width:380px;}
+th{background:#1a3a5c;color:#fff;padding:9px 12px;text-align:left;white-space:nowrap;}
+td{padding:8px 12px;border-bottom:1px solid #dde8f5;vertical-align:top;}tr:nth-child(even) td{background:#f4f7fb;}
+code{font-family:'Courier New',monospace;background:rgba(0,80,160,.08);color:#004080;padding:2px 6px;border-radius:3px;font-size:12px;}
+.box{border-radius:6px;padding:13px 16px;margin:14px 0;font-size:13px;}
+.box-warn{background:#fffbe6;border-left:4px solid #f5a623;color:#7a5700;}
+.box-danger{background:#fff0f0;border-left:4px solid #d43f3f;color:#7a0000;}
+.box-hint{background:#e8f4ff;border-left:4px solid #2a6cbe;color:#0a3060;}
+.box-check{background:#f4eeff;border-left:4px solid #8c4fc8;color:#3a0070;}
+.box strong{display:block;margin-bottom:4px;}
+figure{max-width:280px;width:100%;margin:18px auto;text-align:center;}
+figure img{display:block;width:100%;max-width:280px;height:auto;margin:0 auto;border:1px solid #c8d8ec;border-radius:6px;box-shadow:0 2px 8px rgba(0,0,0,.1);}
+figcaption{font-size:12px;color:#5a7a99;margin-top:6px;}
+.img-pending{display:flex;align-items:center;justify-content:center;max-width:280px;width:100%;box-sizing:border-box;background:#e8eef5;border:2px dashed #99b8d8;border-radius:6px;height:160px;color:#5a7a99;font-size:13px;margin:18px auto;}
+.diff-add{background:#e8fff0;border-left:4px solid #2a9c5c;border-radius:6px;padding:12px 16px;margin:14px 0;font-size:13px;}
+.diff-add strong{display:block;color:#1a6c3c;margin-bottom:4px;}
+.flow-box{background:#f4f7fb;border:1px solid #c8d8ec;border-radius:8px;padding:20px;margin:16px 0;}
+.flow-box h4{color:#1a3a5c;margin-top:0;}
+.flow-arrow{text-align:center;font-size:20px;color:#2a6cbe;margin:4px 0;}
+.flow-step{background:#fff;border:1px solid #c8d8ec;border-radius:6px;padding:10px 16px;margin:4px 0;font-size:13px;}
+.flow-step strong{color:#1a3a5c;}
+.summary-box{background:linear-gradient(135deg,#e8f4ff,#f0f8ff);border:1px solid #99c8ec;border-radius:8px;padding:20px 24px;margin-top:32px;}
+.summary-box h3{border:none;color:#1a3a5c;margin-top:0;}
+.confirm-box{background:#fdf4ff;border:1px solid #c8a0e0;border-radius:8px;padding:20px 24px;margin-top:16px;}
+.confirm-box h3{border:none;color:#5a0090;margin-top:0;}
+.check{color:#2e7d32;font-weight:700;}.cross{color:#c62828;}
+th.pro-col{background:#5a2a8c;}
+.feature-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px;margin:16px 0;}
+.feature-card{background:#f4f7fb;border:1px solid #c8d8ec;border-radius:8px;padding:16px;}
+.feature-card h4{color:#1a3a5c;margin-top:0;margin-bottom:6px;font-size:14px;}
+.feature-card p{font-size:13px;margin:0;color:#3a5a7a;}
+.feature-card.pro-card{background:#f4eeff;border-color:#c8a0e0;}
+.feature-card.pro-card h4{color:#5a2a8c;}
+.trouble{border:1px solid #c8d8ec;border-radius:8px;margin:14px 0;overflow:hidden;}
+.trouble-q{background:#eef6fd;padding:13px 18px;font-weight:700;font-size:14px;color:#1a3a5c;display:flex;align-items:flex-start;gap:10px;}
+.trouble-q::before{content:'Q';background:#2a6cbe;color:#fff;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900;flex-shrink:0;margin-top:1px;}
+.trouble-a{padding:13px 18px 14px 50px;font-size:13.5px;border-top:1px solid #c8d8ec;line-height:1.9;}
+.trouble-a ul{margin-left:16px;}
+.legal-block{background:#f5f5f5;border:1px solid #ddd;border-radius:8px;padding:20px 24px;font-size:12.5px;color:#444;line-height:1.9;margin:14px 0;}
+.legal-block h4{font-size:13px;color:#333;margin:18px 0 6px;border-bottom:1px solid #ddd;padding-bottom:4px;}
+.legal-block h4:first-child{margin-top:0;}
+footer{text-align:center;font-size:12px;color:#8a9aaa;padding:30px 16px;border-top:1px solid #dde8f5;margin-top:20px;}
+@media(max-width:640px){.page-header h1{font-size:18px;}.chapter{padding:20px 16px;}.site-nav a{padding:8px 9px;font-size:11px;}}
+@media print{body{background:#fff;font-size:12px;}.site-nav{display:none;}.chapter{box-shadow:none;border:1px solid #ccc;page-break-inside:avoid;}.page-header{background:#1a3a5c !important;-webkit-print-color-adjust:exact;print-color-adjust:exact;}}
+</style></head>
+<body>
+<nav class="site-nav"><div class="nav-inner">
+  <a href="01_top_settings_common_es-419.html" class="active">① Inicio / Ajustes</a>
+  <a href="02_stocktake_free_es-419.html">② Inventario físico gratis</a>
+  <a href="03_stocktake_simple_es-419.html">③ Inventario físico estándar</a>
+  <a href="04_stocktake_full_es-419.html">④ Inventario físico completo</a>
+  <a href="05_inventory_free_es-419.html">⑤ Gestión de existencias: gratis</a>
+  <a href="06_inventory_simple_es-419.html">⑥ Gestión de existencias: estándar</a>
+  <a href="07_inventory_full_es-419.html">⑦ Gestión de existencias: completa</a>
+</div></nav>
+<header class="page-header"><div class="inner">
+  <div class="app-name">Manual de Quantiventra — Versión en español</div>
+  <h1>① Inicio · Ajustes · Operaciones comunes</h1>
+  <div class="subtitle">Descripción de la app, requisitos del sistema, ajustes, permisos, planes, datos de ejemplo, glosario y avisos legales</div>
+  <div class="scope-box"><strong>Temas tratados en esta página:</strong> ¿Qué es Quantiventra? / Requisitos y permisos / Instalación y primer uso / Almacenamiento de datos / Diferencia entre inventario físico y gestión de existencias / Guía rápida / Pantalla de inicio / Pantalla de ajustes / Idioma / Descripción de planes / Datos de ejemplo / Resolución de problemas / Glosario / Términos legales</div>
+</div></header>
+<div class="container">
+  <nav class="toc"><h2>Índice</h2><ol>
+    <li><a href="#about">¿Qué es Quantiventra?</a></li>
+    <li><a href="#environment">Requisitos del sistema y permisos</a></li>
+    <li><a href="#install">Instalación y primer uso</a></li>
+    <li><a href="#storage">Almacenamiento de datos</a></li>
+    <li><a href="#diff">Inventario físico y gestión de existencias</a></li>
+    <li><a href="#start">Guía rápida para nuevos usuarios</a></li>
+    <li><a href="#top-screen">Pantalla de inicio</a></li>
+    <li><a href="#settings">Pantalla de ajustes</a></li>
+    <li><a href="#language">Configuración de idioma</a></li>
+    <li><a href="#billing">Descripción general de planes</a></li>
+    <li><a href="#sample">Datos de ejemplo</a></li>
+    <li><a href="#trouble">Resolución de problemas</a></li>
+    <li><a href="#glossary">Glosario</a></li>
+    <li><a href="#legal">Términos y limitación de responsabilidad</a></li>
+    <li><a href="#summary">Puntos clave del capítulo</a></li>
+    <li><a href="#confirm">Antes de usar</a></li>
+  </ol></nav>
+
+  <section class="chapter" id="about">
+    <div class="chapter-head"><div class="ch-no">CAPÍTULO 1</div><h2>¿Qué es Quantiventra?</h2></div>
+    <p><strong>Quantiventra</strong> es la combinación de "<em>Quantity</em>" (cantidad) e "<em>Inventory</em>" (inventario/existencias). Es una app Android que simplifica el inventario físico y la gestión de existencias mediante el escaneo de códigos de barras con la cámara del smartphone.</p>
+    <p>Solo tienes que apuntar la cámara a un código de barras para reconocer el producto automáticamente, luego ingresa y guarda la cantidad — un flujo intuitivo que digitaliza los recuentos en papel. Los resultados se guardan como archivos CSV, fáciles de usar en Excel o Google Sheets.</p>    <h3>Funcionalidades principales</h3>
+    <div class="feature-grid">
+      <div class="feature-card"><h4>📦 Conteo de existencias</h4><p>Reconoce productos rápidamente mediante escaneo de código de barras y registra cantidades al instante. La calculadora integrada facilita la suma de conteos de múltiples ubicaciones.</p></div>
+      <div class="feature-card"><h4>🗂️ Gestión de catálogos</h4><p>Registra productos, categorías y ubicaciones como datos de catálogo. También admite importación masiva vía CSV.</p></div>
+      <div class="feature-card"><h4>📍 Gestión de ubicaciones</h4><p>Registra bodegas, tiendas, estantes y otras ubicaciones, y consulta las existencias por ubicación. También puedes definir qué ubicaciones se toman como referencia para la reposición.</p></div>
+      <div class="feature-card"><h4>📊 Importación/Exportación CSV</h4><p>Exporta listas de existencias, respaldos e historial en formato CSV para consolidarlos en Excel o Google Sheets.</p></div>
+      <div class="feature-card"><h4>🌐 Soporte multilingüe</h4><p>Compatible con 12 idiomas, incluyendo español, inglés, japonés, chino y coreano. Puede iniciar con el idioma del dispositivo si ese idioma está disponible.</p></div>
+      <div class="feature-card pro-card"><h4>⭐ Funcionalidades versión completa</h4><p>Elimina los límites de artículos y desbloquea gestión detallada de ubicaciones, transferencias de existencias, aplicación del inventario a las existencias y mucho más.</p></div>
+    </div>
+    <h3>Cómo funciona el escaneo con cámara</h3>
+    <p>Cuando un código de barras se encuentra dentro del marco guía (borde azul o amarillo) en el centro de la pantalla, la app lo confirma automáticamente después de detectar <strong>el mismo código en 3 fotogramas consecutivos</strong>. Este mecanismo de triple confirmación previene lecturas incorrectas garantizando al mismo tiempo un reconocimiento confiable.</p>
+    <div class="box box-hint"><strong>💡 Si el código no se reconoce</strong>El código de barras debe estar <strong>completamente dentro</strong> del marco guía. Los códigos parcialmente fuera del marco no se detectan. Ajusta la posición de la cámara hasta que el código esté completamente dentro del marco.</div>
+  </section>
+
+  <section class="chapter" id="environment">
+    <div class="chapter-head"><div class="ch-no">CAPÍTULO 2</div><h2>Requisitos del sistema y permisos</h2></div>
+    <div class="table-wrap"><table>
+      <tr><th>Elemento</th><th>Requisito</th></tr>
+      <tr><td>Sistema operativo</td><td>Android 8.0 (Oreo / API 26) o superior</td></tr>
+      <tr><td>Cámara</td><td>Cámara con enfoque automático (obligatorio)</td></tr>
+      <tr><td>Almacenamiento</td><td>Mínimo 10 MB de espacio libre en almacenamiento interno (recomendado)</td></tr>
+      <tr><td>Permisos requeridos</td><td>Cámara (obligatorio)</td></tr>
+      <tr><td>Internet</td><td>No necesario para el uso habitual; algunas funciones, como compras, restauración de planes o enlaces externos, pueden requerir conexión</td></tr>
+      <tr><td>Google Play Services</td><td>Necesario para compras y restauración de planes</td></tr>
+    </table></div>
+    <div class="box box-hint"><strong>💡 Permiso de almacenamiento</strong>La app guarda los datos en el <strong>almacenamiento interno privado de la app</strong> en Android. No se requiere permiso de almacenamiento. El intercambio de datos se realiza mediante las funciones de importar, exportar y compartir de la app.</div>
+  </section>
+
+  <section class="chapter" id="install">
+    <div class="chapter-head"><div class="ch-no">CAPÍTULO 3</div><h2>Instalación y primer uso</h2></div>
+    <ol class="steps">
+      <li>Busca "Quantiventra" en Google Play Store y toca <strong>Instalar</strong>.</li>
+      <li>Abre la app tocando su ícono. Cuando aparezca la solicitud de permiso para la cámara, toca <strong>Permitir</strong>.</li>
+      <li>Si aparece el aviso de datos de ejemplo, elige <strong>Crear</strong> u <strong>Omitir</strong>.</li>
+      <li>La carpeta de datos de la app se crea automáticamente en el almacenamiento interno.</li>
+      <li>Cuando aparezca la pantalla de inicio, la configuración inicial está completa.</li>
+    </ol>
+    <div class="box box-warn"><strong>⚠ Si se niega el permiso de cámara</strong>El escaneo de códigos de barras no estará disponible. Para habilitarlo nuevamente: <strong>Ajustes → Aplicaciones → Quantiventra → Permisos → Cámara → Activar</strong>.</div>
+    <h3>Después de cambiar de dispositivo</h3>
+    <ol class="steps">
+      <li>En el dispositivo anterior, exporta o comparte los datos desde <strong>Ajustes → Exportar</strong> o <strong>Ajustes → Compartir</strong>.</li>
+      <li>En el nuevo dispositivo, inicia sesión con la misma Cuenta de Google.</li>
+      <li>Instala Quantiventra desde Google Play.</li>
+      <li>Usa <strong>Ajustes → Restaurar compras</strong> para recuperar los planes adquiridos.</li>
+      <li>Importa los CSV de catálogo guardados mediante <strong>Ajustes → Importar CSV de catálogo</strong>.</li>
+    </ol>
+    <div class="box box-danger"><strong>🚨 Atención al desinstalar</strong>Desinstalar la app elimina todos los datos del almacenamiento interno. Crea el hábito de hacer respaldos regulares mediante <strong>Exportar</strong> o <strong>Compartir</strong>.</div>
+  </section>
+
+  <section class="chapter" id="storage">
+    <div class="chapter-head"><div class="ch-no">CAPÍTULO 4</div><h2>Almacenamiento de datos</h2></div>
+    <p>Los datos de la app se guardan en el área privada de la app en el dispositivo. No los edites directamente con un administrador de archivos. Usa las funciones de Compartir y Exportar de la app para acceder a los datos o hacer respaldos.</p>
+    <div class="table-wrap"><table>
+      <tr><th>Categoría</th><th>Contenido</th><th>Cuándo se actualiza</th></tr>
+      <tr><td>Datos de catálogo</td><td>Datos principales de productos, categorías, ubicaciones, etc.</td><td>Al registrar, editar o desactivar un elemento</td></tr>
+      <tr><td>Historial de inventario y existencias</td><td>Registros de inventarios, entradas, salidas, transferencias, importación CSV, etc.</td><td>Al guardar o importar un registro</td></tr>
+      <tr><td>Ajustes de la app</td><td>Idioma, escaneo, reglas de código, configuración de ubicaciones, etc.</td><td>Al cambiar los ajustes</td></tr>
+    </table></div>
+    <h3>Cómo abrir CSV en Excel</h3>
+    <p>Los archivos CSV se guardan en UTF-8. Para evitar caracteres dañados, se recomienda importarlos desde Excel.</p>
+    <ol class="steps">
+      <li>Abre Excel y selecciona <strong>Datos → Desde texto/CSV</strong>.</li>
+      <li>Selecciona el archivo CSV.</li>
+      <li>Elige <strong>Unicode (UTF-8)</strong> como codificación.</li>
+      <li>Haz clic en <strong>Cargar</strong>.</li>
+    </ol>
+    <div class="box box-warn"><strong>⚠ No abras el CSV con doble clic</strong>Abrir el archivo directamente puede causar caracteres corruptos. Importa el archivo desde la pestaña Datos.</div>
+    <h3>Procedimiento de respaldo recomendado</h3>
+    <ol class="steps">
+      <li>Toca <strong>Ajustes → Exportar (Elegir carpeta)</strong>.</li>
+      <li>Crea y selecciona una carpeta de respaldo en la carpeta Documentos del dispositivo, ej.: <code>Quantiventra_backup_20250401</code>.</li>
+      <li>El respaldo está completo cuando se hayan guardado los archivos CSV del historial y los datos de catálogo.</li>
+      <li>Para mayor seguridad, copia los archivos a la computadora mediante Google Drive o cable USB.</li>
+    </ol>
+  </section>
+
+  <section class="chapter" id="diff">
+    <div class="chapter-head"><div class="ch-no">CAPÍTULO 5</div><h2>Inventario físico y gestión de existencias</h2></div>
+    <div class="table-wrap"><table>
+      <tr><th>Elemento</th><th>Inventario físico</th><th>Gestión de existencias</th></tr>
+      <tr><td>Propósito</td><td>Contar y registrar cantidades reales</td><td>Rastrear variaciones de existencias mediante entradas, salidas y transferencias</td></tr>
+      <tr><td>Flujo de trabajo</td><td>Escanear → Ingresar cantidad → Guardar → Confirmar</td><td>Entrada/Salida/Transferencia → Guardar → Ver historial</td></tr>
+      <tr><td>Uso común</td><td>Inventarios mensuales, inventarios de fin de año, verificaciones puntuales</td><td>Gestión diaria de entradas, salidas y transferencias</td></tr>
+      <tr><td>Impacto en existencias</td><td>Aplicado a existencias tras confirmación (versión completa)</td><td>Reflejado inmediatamente en cada operación</td></tr>
+    </table></div>
+    <div class="box box-warn"><strong>⚠ Atención</strong>El inventario físico y la gestión de existencias son módulos separados. Ingresar cantidades en el inventario <strong>no</strong> modifica las existencias, a menos que se ejecute la operación "Aplicar a existencias" (funcionalidad de la versión completa). No confundas los dos módulos.</div>
+  </section>
+
+  <section class="chapter" id="start">
+    <div class="chapter-head"><div class="ch-no">CAPÍTULO 6</div><h2>Guía rápida para nuevos usuarios</h2></div>
+    <h3>Paso 1: Practica con los datos de ejemplo</h3>
+    <ol class="steps">
+      <li>Abre la app; si aparece el aviso para crear datos de ejemplo, elige <strong>Crear</strong>.</li>
+      <li>Desde la pantalla de inicio, abre <strong>Gestión de existencias</strong> y revisa los niveles de existencias de ejemplo.</li>
+      <li>Abre <strong>Inventario físico</strong> y prueba escanear un código de barras e ingresar una cantidad.</li>
+      <li>Prueba exportar un archivo CSV.</li>
+      <li>Antes de comenzar operaciones reales, elimina los datos de ejemplo (desde la pantalla de Ajustes).</li>
+    </ol>
+    <h3>Paso 2: Registra los productos en el catálogo</h3>
+    <ol class="steps">
+      <li>Desde la pantalla de inicio, abre <strong>Gestión de catálogos</strong>.</li>
+      <li>Ve a <strong>Catálogo de productos</strong>, crea un nuevo elemento e ingresa el código y el nombre del producto.</li>
+      <li>Establece categoría, precio y punto de reposición si es necesario.</li>
+      <li>Registra bodegas, tiendas, etc. en el <strong>Catálogo de ubicaciones</strong> (recomendado para la versión estándar o superior).</li>
+    </ol>
+    <div class="box box-hint"><strong>💡 Consejo</strong>Se recomienda familiarizarse con los datos de ejemplo antes de ingresar datos reales de productos.</div>
+  </section>
+
+  <section class="chapter" id="top-screen">
+    <div class="chapter-head"><div class="ch-no">CAPÍTULO 7</div><h2>Pantalla de inicio</h2></div>
+    <div class="table-wrap"><table>
+      <tr><th>Punto de acceso</th><th>Descripción</th></tr>
+      <tr><td>Inventario físico</td><td>Abre la pantalla de inventario para escanear productos y registrar las cantidades reales</td></tr>
+      <tr><td>Gestión de existencias</td><td>Accede a consulta de existencias, entrada, salida, transferencia e historial de existencias</td></tr>
+      <tr><td>Gestión de catálogos</td><td>Administra los datos de catálogo de productos, categorías y ubicaciones</td></tr>
+      <tr><td>Ajustes</td><td>Idioma, ajustes de inventario, CSV, datos de ejemplo, compras de planes, documentos legales, etc.</td></tr>
+    </table></div>
+    <div class="box box-warn"><strong>⚠ Atención</strong>Realizar operaciones de Gestión de existencias con datos de inventario físico no confirmados puede causar inconsistencias. Se recomienda completar el inventario antes de hacer cambios en las existencias.</div>
+  </section>
+
+  <section class="chapter" id="settings">
+    <div class="chapter-head"><div class="ch-no">CAPÍTULO 8</div><h2>Pantalla de ajustes</h2></div>    <h3>Importación / Exportación de datos</h3>
+    <div class="table-wrap"><table>
+      <tr><th>Operación</th><th>Descripción</th><th>Disponible en</th></tr>
+      <tr><td>Importar CSV de catálogo</td><td>Carga un archivo CSV externo como datos de catálogo (sobreescribe los datos existentes)</td><td>Todos los planes</td></tr>
+      <tr><td>Compartir (correo, etc.)</td><td>Envía los CSV de historial y catálogo a otras apps</td><td>Todos los planes</td></tr>
+      <tr><td>Exportar (Elegir carpeta)</td><td>Guarda los CSV de historial y catálogo en la carpeta seleccionada</td><td>Todos los planes</td></tr>
+      <tr><td>Borrar todo el historial</td><td>Elimina y reinicia todo el historial de escaneos</td><td>Todos los planes (irreversible)</td></tr>
+      <tr><td>Reiniciar totales del catálogo</td><td>Restablece a 0 todos los totales acumulados registrados</td><td>Desbloqueo completo (irreversible)</td></tr>
+    </table></div>
+    <h3>Ajustes comunes</h3>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Ajuste</th><th>Descripción</th><th>Plan</th></tr></thead>
+      <tbody>
+        <tr><td>Idioma de visualización</td><td>Selecciona el idioma mostrado en la app</td><td>Todos los planes; algunos idiomas requieren desbloqueo</td></tr>
+        <tr><td>Bloqueo de rotación de pantalla</td><td>Mantiene fija la orientación de la pantalla aunque se incline el dispositivo</td><td>Plan Estándar o superior</td></tr>
+        <tr><td>Crear datos de ejemplo</td><td>Crea datos para practicar</td><td>Todos los planes</td></tr>
+        <tr><td>Eliminar datos de ejemplo</td><td>Elimina los datos de ejemplo en lote</td><td>Todos los planes</td></tr>
+        <tr><td>Restaurar compras</td><td>Restaura los planes comprados mediante Google Play</td><td>Todos los planes</td></tr>
+        <tr><td>Documentos legales</td><td>Muestra términos de uso, política de privacidad y documentos relacionados</td><td>Todos los planes</td></tr>
+      </tbody>
+    </table></div>
+    <h3>Modo de inventario</h3>
+    <div class="table-wrap"><table>
+      <tr><th>Modo</th><th>Descripción</th><th>Ubicaciones disponibles</th></tr>
+      <tr><td>Detallado</td><td>Usa todas las ubicaciones registradas en el Catálogo de ubicaciones</td><td>Todas las ubicaciones registradas</td></tr>
+      <tr><td>Simple A</td><td>Inventario solo con la bodega</td><td>Solo bodega</td></tr>
+      <tr><td>Simple B</td><td>Inventario con bodega y tienda</td><td>Bodega + Tienda</td></tr>
+      <tr><td>Simple C</td><td>Inventario solo con la tienda</td><td>Solo tienda</td></tr>
+    </table></div>
+    <div class="box box-warn"><strong>⚠ Atención</strong>Aunque el Desbloqueo completo esté activo, si el modo todavía está configurado como Simple A/B/C, solo verás las opciones de ubicación simples. Cambia al modo <strong>Detallado</strong> para usar ubicaciones detalladas.</div>
+    <h3>Ajustes de escaneo con cámara (Plan Completo)</h3>
+    <p>Permite definir los tipos de código que se leerán para productos y ubicaciones. Desactivar tipos innecesarios ayuda a reducir lecturas equivocadas.</p>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Tipo</th><th>Producto predeterminado</th><th>Ubicación predeterminada</th><th>Uso común</th></tr></thead>
+      <tbody>
+        <tr><td>CODE39</td><td><span class="check">✓ ACTIVADO</span></td><td><span class="check">✓ ACTIVADO</span></td><td>Piezas industriales y códigos internos</td></tr>
+        <tr><td>CODE128</td><td><span class="check">✓ ACTIVADO</span></td><td><span class="check">✓ ACTIVADO</span></td><td>Códigos logísticos</td></tr>
+        <tr><td>EAN13</td><td><span class="check">✓ ACTIVADO</span></td><td><span class="check">✓ ACTIVADO</span></td><td>Productos comerciales</td></tr>
+        <tr><td>QRCODE</td><td><span class="check">✓ ACTIVADO</span></td><td><span class="check">✓ ACTIVADO</span></td><td>Códigos QR de productos y ubicaciones</td></tr>
+      </tbody>
+    </table></div>
+    <h3>Reglas de código / reglas de ubicación (Plan Completo)</h3>
+    <p>Permiten configurar tipo de caracteres, longitud mínima y máxima de códigos internos, longitud máxima de códigos de ubicación y otras reglas.</p>
+    <h3>Restaurar compras</h3>
+    <p>Restaura los planes ya comprados en Google Play. Si el plan no se refleja, verifica la Cuenta de Google usada para la compra y la conexión a internet.</p>
+    <div class="box box-danger"><strong>🚨 Borrar historial / Reiniciar totales son irreversibles</strong>"Borrar todo el historial" y "Reiniciar totales del catálogo" no se pueden deshacer. Antes de ejecutarlos, crea siempre un respaldo mediante <strong>Exportar</strong>.</div>
+  </section>
+
+  <section class="chapter" id="language">
+    <div class="chapter-head"><div class="ch-no">CAPÍTULO 9</div><h2>Configuración de idioma</h2></div>
+    <p>Puedes seleccionar el idioma de visualización de la app en <strong>Ajustes → Idioma</strong>. En el primer uso, la app detecta automáticamente el idioma del dispositivo y arranca con ese idioma si está disponible.</p>
+    <h3>Idiomas admitidos (12)</h3>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Código</th><th>Idioma</th><th>Gratuito</th><th class="pro-col">Desbloqueo de todos los idiomas</th></tr></thead>
+      <tbody>
+        <tr><td><code>ja</code></td><td>Japonés</td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
+        <tr><td><code>en</code></td><td>Inglés</td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
+        <tr><td><code>zh</code></td><td>Chino simplificado</td><td>Solo si es el idioma principal del dispositivo</td><td><span class="check">✓</span></td></tr>
+        <tr><td><code>tw</code></td><td>Chino tradicional</td><td>Solo si es el idioma principal del dispositivo</td><td><span class="check">✓</span></td></tr>
+        <tr><td><code>ko</code></td><td>Coreano</td><td>Solo si es el idioma principal del dispositivo</td><td><span class="check">✓</span></td></tr>
+        <tr><td><code>hi</code></td><td>Hindi</td><td>Solo si es el idioma principal del dispositivo</td><td><span class="check">✓</span></td></tr>
+        <tr><td><code>vi</code></td><td>Vietnamita</td><td>Solo si es el idioma principal del dispositivo</td><td><span class="check">✓</span></td></tr>
+        <tr><td><code>it</code></td><td>Italiano</td><td>Solo si es el idioma principal del dispositivo</td><td><span class="check">✓</span></td></tr>
+        <tr><td><code>pt-BR</code></td><td>Portugués (Brasil)</td><td>Solo si es el idioma principal del dispositivo</td><td><span class="check">✓</span></td></tr>
+        <tr><td><code>es-419</code></td><td>Español (Latinoamérica)</td><td>Solo si es el idioma principal del dispositivo</td><td><span class="check">✓</span></td></tr>
+        <tr><td><code>id</code></td><td>Indonesio</td><td>Solo si es el idioma principal del dispositivo</td><td><span class="check">✓</span></td></tr>
+        <tr><td><code>th</code></td><td>Tailandés</td><td>Solo si es el idioma principal del dispositivo</td><td><span class="check">✓</span></td></tr>
+      </tbody>
+    </table></div>
+    <div class="box box-hint"><strong>💡 Sobre la detección automática de idioma</strong>Si el idioma principal del dispositivo es compatible, la app puede iniciar en ese idioma durante el primer uso. Si luego seleccionas un idioma manualmente en la app, esa selección tiene prioridad.</div>
+  </section>
+
+  <section class="chapter" id="billing">
+    <div class="chapter-head"><div class="ch-no">CAPÍTULO 10</div><h2>Descripción general de planes</h2></div>
+    <div class="box box-danger"><strong>🚨 Importante</strong>Los precios, impuestos, condiciones de compra y condiciones de reembolso están determinados por el contenido que aparece en Google Play — este manual no hace declaraciones definitivas. Siempre verifica la ficha en Google Play antes de comprar.</div>
+    <h3>Comparación de funcionalidades</h3>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Funcionalidad / Límite</th><th>Gratuito</th><th>Inventario Estándar</th><th>Inventario Completo</th><th>Existencias estándar</th><th>Existencias completas</th></tr></thead>
+      <tbody>
+        <tr><td>Registros de catálogo</td><td>Máx. 30</td><td>Máx. 300</td><td><span class="check">Ilimitado</span></td><td>Máx. 300</td><td><span class="check">Ilimitado</span></td></tr>
+        <tr><td>Registros de historial</td><td>Máx. 30</td><td>Máx. 1.000</td><td><span class="check">Ilimitado</span></td><td>Máx. 1.000</td><td><span class="check">Ilimitado</span></td></tr>
+        <tr><td>Registros exportados</td><td>Máx. 30</td><td>Máx. 300</td><td><span class="check">Ilimitado</span></td><td>Máx. 300</td><td><span class="check">Ilimitado</span></td></tr>
+        <tr><td>Bloqueo de rotación de pantalla</td><td><span class="cross">✗</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
+        <tr><td>Reglas de código/ubicación detalladas</td><td><span class="cross">✗</span></td><td><span class="cross">✗</span></td><td><span class="check">✓</span></td><td><span class="cross">✗</span></td><td><span class="check">✓</span></td></tr>
+        <tr><td>Exportación CSV ampliada</td><td><span class="cross">✗</span></td><td><span class="cross">✗</span></td><td><span class="check">✓</span></td><td><span class="cross">✗</span></td><td><span class="check">✓</span></td></tr>
+        <tr><td>Transferencia de existencias y aplicación de inventario</td><td><span class="cross">✗</span></td><td><span class="cross">✗</span></td><td><span class="cross">✗</span></td><td><span class="cross">✗</span></td><td><span class="check">✓</span></td></tr>
+        <tr><td>Los 12 idiomas</td><td><span class="cross">✗</span></td><td colspan="4">Comprar el Desbloqueo de todos los idiomas por separado</td></tr>
+      </tbody>
+    </table></div>
+    <h3>Paquetes y desbloqueo de todos los idiomas</h3>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Plan</th><th>Contenido</th></tr></thead>
+      <tbody>
+        <tr><td>Paquete Estándar</td><td>Inventario físico Estándar + Gestión de existencias Estándar</td></tr>
+        <tr><td>Paquete Completo</td><td>Inventario físico Completo + Gestión de existencias Completa</td></tr>
+        <tr><td>Desbloqueo de todos los idiomas</td><td>Permite usar los 10 idiomas adicionales además de japonés e inglés</td></tr>
+      </tbody>
+    </table></div>
+    <h3>Cómo comprar un plan</h3>
+    <ol class="steps">
+      <li>Toca <strong>Ajustes → Planes</strong> o el botón de compra correspondiente.</li>
+      <li>Se abrirá la pantalla de compra de Google Play.</li>
+      <li>Después de completar el pago, el plan se activará en la app.</li>
+    </ol>
+    <h3>Restaurar compras después de cambiar de dispositivo</h3>
+    <ol class="steps">
+      <li>Inicia sesión en el nuevo dispositivo con la misma Cuenta de Google.</li>
+      <li>Instala y abre la app.</li>
+      <li>Toca <strong>Ajustes → Restaurar compras</strong>.</li>
+      <li>Cuando Google Play confirme la compra, el plan se activará.</li>
+    </ol>
+    <div class="box box-check"><strong>Información de compra en Google Play</strong>Los botones de compra muestran la información proporcionada por Google Play. Consulta el precio, la disponibilidad y las condiciones de reembolso directamente en Google Play.</div>
+  </section>
+
+  <section class="chapter" id="sample">
+    <div class="chapter-head"><div class="ch-no">CAPÍTULO 11</div><h2>Datos de ejemplo</h2></div>
+    <p>Los datos de ejemplo son datos de práctica para explorar Quantiventra antes de iniciar operaciones reales. Incluyen alrededor de 10 productos de ejemplo, categorías de ejemplo y las ubicaciones básicas "Bodega" y "Tienda".</p>    <h3>Contenido de los datos de ejemplo</h3>
+    <ul>
+      <li>Alrededor de 10 productos de ejemplo</li>
+      <li>Categorías de ejemplo</li>
+      <li>Ubicaciones básicas “Bodega” y “Tienda”</li>
+      <li>Existencias e historial de inventario de ejemplo</li>
+    </ul>
+    <h3>Crear datos de ejemplo</h3>
+    <ol class="steps">
+      <li>En el primer uso, si aparece el aviso, elige <strong>Crear</strong>.</li>
+      <li>Alternativamente, ve a <strong>Ajustes → Crear datos de ejemplo</strong>.</li>
+    </ol>
+    <h3>Eliminar datos de ejemplo</h3>
+    <ol class="steps">
+      <li>Ve a <strong>Ajustes → Eliminar datos de ejemplo</strong>.</li>
+      <li>Revisa qué se eliminará (productos, existencias, categorías e historial de inventario de ejemplo).</li>
+      <li>Confirma y ejecuta la eliminación.</li>
+    </ol>
+    <div class="box box-danger"><strong>🚨 Importante</strong>Siempre elimina los datos de ejemplo antes de iniciar operaciones reales. Verifica que no haya datos reales mezclados antes de eliminar.</div>
+  </section>
+
+  <section class="chapter" id="trouble">
+    <div class="chapter-head"><div class="ch-no">CAPÍTULO 12</div><h2>Resolución de problemas</h2></div>
+    <div class="trouble"><div class="trouble-q">El código de barras no se escanea / La cámara no responde</div>
+    <div class="trouble-a"><ul>
+      <li>Verifica que el interruptor de cámara (arriba a la derecha) esté activo.</li>
+      <li>El código de barras debe estar <strong>completamente dentro</strong> del marco guía — los códigos fuera del marco no se detectan.</li>
+      <li>En los Ajustes (Desbloqueo completo), verifica que el tipo de escaneo (CODE39, EAN13, etc.) coincida con el código que estás leyendo.</li>
+      <li>Si el código de barras está dañado o sucio, usa la entrada manual.</li>
+    </ul></div></div>
+    <div class="trouble"><div class="trouble-q">El nombre del producto no aparece después de importar el CSV del catálogo</div>
+    <div class="trouble-a"><ul>
+      <li>Confirma que el CSV esté codificado en UTF-8 (Shift-JIS causará caracteres corruptos).</li>
+      <li>Verifica que la fila de encabezado corresponda al formato requerido: <code>barcode,name,theoretical_stock,actual_stock_total</code></li>
+      <li>Si el nombre del producto contiene comas, enciérralo entre comillas: ej. <code>"Tornillo M6, inox"</code></li>
+    </ul></div></div>
+    <div class="trouble"><div class="trouble-q">Las funcionalidades del plan adquirido no están disponibles</div>
+    <div class="trouble-a"><ul>
+      <li>Toca <strong>Ajustes → Restaurar compras</strong>.</li>
+      <li>Verifica que hayas iniciado sesión con la cuenta de Google usada para la compra.</li>
+      <li>Verifica la conexión a internet y vuelve a intentarlo (la verificación de la compra requiere red).</li>
+    </ul></div></div>
+    <div class="trouble"><div class="trouble-q">Los datos desaparecieron después de cambiar de dispositivo</div>
+    <div class="trouble-a"><ul>
+      <li>Los datos se guardan en el almacenamiento interno de la app y se pierden al desinstalarla o cambiar de dispositivo.</li>
+      <li>Se recomienda firmemente hacer respaldos regulares mediante <strong>Exportar</strong> o <strong>Compartir</strong>.</li>
+      <li>Si tienes un respaldo, puedes restaurarlo mediante <strong>Importar CSV de catálogo</strong>.</li>
+    </ul></div></div>
+  </section>
+
+  <section class="chapter" id="glossary">
+    <div class="chapter-head"><div class="ch-no">CAPÍTULO 13</div><h2>Glosario</h2></div>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Término</th><th>Definición</th></tr></thead>
+      <tbody>
+        <tr><td>Inventario físico</td><td>Operación de contar y registrar las cantidades reales de mercancías en el lugar</td></tr>
+        <tr><td>Cantidad real</td><td>Cantidad efectivamente contada en el lugar</td></tr>
+        <tr><td>Existencias teóricas</td><td>Cantidad de existencias calculada por el sistema</td></tr>
+        <tr><td>Diferencia / Desfase de inventario</td><td>Diferencia entre la cantidad real y las existencias teóricas</td></tr>
+        <tr><td>Producto</td><td>Artículo individual que tiene existencias</td></tr>
+        <tr><td>Categoría</td><td>Grupo usado para clasificar productos</td></tr>
+        <tr><td>Ubicación</td><td>Lugar donde se almacenan las existencias (ej.: bodega, tienda, estante)</td></tr>
+        <tr><td>Incluir en el cálculo de reposición</td><td>Configuración que permite incluir las existencias de esta ubicación en el total usado como referencia para decidir reposiciones</td></tr>
+        <tr><td>Existencias / Cantidad disponible</td><td>Cantidad actualmente disponible</td></tr>
+        <tr><td>Entrada (recepción)</td><td>Operación que aumenta las existencias</td></tr>
+        <tr><td>Salida (despacho)</td><td>Operación que reduce las existencias</td></tr>
+        <tr><td>Transferencia de existencias</td><td>Mover existencias de una ubicación a otra (versión completa)</td></tr>
+        <tr><td>Historial de existencias</td><td>Registro de operaciones de entrada, salida, transferencia y ajuste de inventario</td></tr>
+        <tr><td>Punto de reposición</td><td>Cantidad de referencia para evaluar cuándo conviene reponer existencias</td></tr>
+        <tr><td>Código de producto</td><td>Código interno usado para identificar un producto</td></tr>
+        <tr><td>Total acumulado registrado</td><td>Suma acumulada de cantidades guardadas hasta el momento</td></tr>
+        <tr><td>CSV</td><td>Archivo de texto delimitado por comas, que se puede abrir en aplicaciones de hojas de cálculo</td></tr>
+        <tr><td>Respaldo</td><td>Datos guardados para restauración o consulta</td></tr>
+        <tr><td>Reemplazar existencias actuales</td><td>Modo de importación CSV en que las cantidades del archivo se convierten en las nuevas existencias actuales</td></tr>
+        <tr><td>Agregar como entrada</td><td>Modo de importación CSV en que las cantidades del archivo se agregan a las existencias actuales como entrada</td></tr>
+        <tr><td>Confirmar conteo real</td><td>Operación que finaliza los resultados del inventario físico (versión completa)</td></tr>
+        <tr><td>Datos de catálogo</td><td>Base de datos que gestiona los registros principales de productos, categorías y ubicaciones</td></tr>
+      </tbody>
+    </table></div>
+  </section>
+
+  <section class="chapter" id="legal">
+    <div class="chapter-head"><div class="ch-no">CAPÍTULO 14</div><h2>Términos y limitación de responsabilidad</h2></div>
+    <div class="legal-block">
+      <h4>■ Términos de uso</h4>
+      <p>Al descargar o usar esta app, aceptas los siguientes términos. El uso de esta app para gestión de existencias y existencias está permitido tanto para uso personal como empresarial. Están prohibidos la ingeniería inversa, la descompilación, la modificación o la redistribución de la app.</p>
+      <p><strong>Datos del usuario:</strong> Todos los datos generados por esta app (CSV de catálogo, CSV de historial y archivos de ajustes) se almacenan exclusivamente en el dispositivo del usuario y no se transmiten a ningún servidor externo (a excepción de las comunicaciones con Google Play necesarias para la verificación de compras de planes).</p>
+      <p><strong>Compra de planes:</strong> Todas las compras de planes se procesan a través del sistema de pago de Google Play. Los reembolsos siguen la política de reembolso de Google Play.</p>
+      <h4>■ Limitación de responsabilidad</h4>
+      <p>Esta app se proporciona "tal como está". El Desarrollador no es responsable de ningún daño derivado del uso o la imposibilidad de uso de la app, incluyendo pérdida de datos, interrupción del negocio u otros daños directos o indirectos.</p>
+      <p>Los usuarios son responsables de verificar la exactitud y completitud de los datos CSV generados por esta app. El Desarrollador no es responsable de inconsistencias en los datos causadas por errores de escaneo o de ingreso.</p>
+      <h4>■ Política de privacidad</h4>
+      <p>Esta app no recopila, transmite ni usa ninguna información personal. La cámara se usa exclusivamente para la lectura de códigos de barras y QR. No se graban ni almacenan videos.</p>
+      <h4>■ Derechos de autor</h4>
+      <p>Copyright © Quantiventra. Todos los derechos reservados. Todo el contenido de la app y de este manual es propiedad del Desarrollador.</p>
+      <h4>■ Cambios en los términos</h4>
+      <p>Estos términos pueden modificarse sin previo aviso. Los términos actualizados entran en vigor al publicarse en Google Play Store o en la notificación dentro de la app.</p>
+    </div>
+  </section>
+
+  <div class="summary-box" id="summary">
+    <h3>📌 Puntos clave del capítulo</h3>
+    <ul>
+      <li>Quantiventra = Quantity + Inventory. La confirmación ocurre después de 3 fotogramas consecutivos con el mismo código, evitando lecturas incorrectas.</li>
+      <li>Requiere Android 8.0+ y cámara de enfoque automático. No requiere permiso de almacenamiento. Las tareas habituales se pueden realizar en el dispositivo; compras, restauración de compras y algunos enlaces pueden requerir internet.</li>
+      <li>Los datos se guardan en el almacenamiento interno de la app; al desinstalarla se eliminan. Haz respaldos periódicos mediante Exportar.</li>
+      <li>El inventario físico y la gestión de existencias son módulos separados: ingresar cantidades en el inventario físico no modifica las existencias hasta ejecutar la confirmación y la operación correspondiente.</li>
+      <li>Antes de comenzar operaciones reales, practica con los datos de ejemplo y luego elimínalos.</li>
+      <li>Para precios de planes consulta Google Play — este manual no hace declaraciones definitivas.</li>
+      <li>Antes de operaciones de gran impacto (reemplazo CSV, aplicación de inventario, eliminación, reinicio) siempre haz un respaldo.</li>
+    </ul>
+  </div>
+  <div class="confirm-box" id="confirm">
+    <h3>Antes de usar</h3>
+    <ul>
+      <li>Antes de usar la app, confirma los detalles actuales de los planes y las condiciones de compra en la app y en Google Play.</li>
+      <li>Precios de planes, impuestos y condiciones de reembolso (verificar en Google Play)</li>
+      <li>Idiomas específicos disponibles en el plan gratuito</li>
+      <li>Usa la configuración de escaneo de códigos de producto para productos y las reglas de código de ubicación para ubicaciones; no las mezcles.</li>
+    </ul>
+  </div>
+</div>
+<footer>Manual de Quantiventra · La información más actualizada está disponible en las pantallas de la app.<p style="margin-top:4px;"><a href="privacy_es-419.html">Política de privacidad</a></p></footer>
+</body></html>

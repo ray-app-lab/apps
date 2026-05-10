@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quantiventra – 盤點 標準版</title>
+<style>*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:-apple-system,BlinkMacSystemFont,'PingFang TC','Microsoft JhengHei','Apple LiGothic',sans-serif;font-size:15px;line-height:1.9;color:#1a2535;background:#f4f7fb;}
+a{color:#1a5fa8;text-decoration:none;}a:hover{text-decoration:underline;}
+.site-nav{background:#1a3a5c;color:#fff;padding:0;}.site-nav .nav-inner{max-width:960px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:stretch;}
+.site-nav a{color:#cde;padding:10px 13px;font-size:12px;display:block;border-right:1px solid #2a4a6c;white-space:nowrap;}
+.site-nav a:hover{background:#2a5090;text-decoration:none;}.site-nav a.active{background:#2a6cbe;color:#fff;font-weight:bold;}
+.page-header{background:linear-gradient(135deg,#1a3a5c 0%,#2a6cbe 100%);color:#fff;padding:40px 20px 30px;}
+.page-header .inner{max-width:960px;margin:0 auto;}.page-header .app-name{font-size:13px;opacity:.8;}
+.page-header h1{font-size:22px;font-weight:700;margin-top:6px;line-height:1.5;}.page-header .subtitle{font-size:14px;opacity:.85;margin-top:8px;}
+.scope-box{background:rgba(255,255,255,.15);border-left:4px solid #7ecfff;padding:12px 16px;margin-top:16px;border-radius:4px;font-size:13px;}
+.container{max-width:960px;margin:0 auto;padding:30px 16px;}
+.toc{background:#fff;border:1px solid #c8d8ec;border-radius:8px;padding:24px 28px;margin-bottom:32px;}
+.toc h2{font-size:16px;font-weight:700;color:#1a3a5c;border-bottom:2px solid #2a6cbe;padding-bottom:8px;margin-bottom:14px;}
+.toc ol{margin-left:18px;}.toc li{margin:5px 0;font-size:14px;}
+.chapter{background:#fff;border-radius:8px;box-shadow:0 1px 4px rgba(0,0,0,.08);padding:28px 28px 24px;margin-bottom:28px;}
+.chapter-head{border-left:5px solid #2a6cbe;padding-left:14px;margin-bottom:20px;}
+.chapter-head .ch-no{font-size:12px;color:#2a6cbe;font-weight:700;}.chapter-head h2{font-size:20px;font-weight:700;color:#1a2535;margin-top:2px;}
+h3{font-size:16px;font-weight:700;color:#1a3a5c;border-bottom:1px solid #dde8f5;padding-bottom:5px;margin:22px 0 12px;}
+h4{font-size:14px;font-weight:700;color:#2a4a6c;margin:16px 0 8px;}
+p{margin-bottom:12px;}ul,ol{margin-left:20px;margin-bottom:12px;}li{margin-bottom:5px;}
+.steps{counter-reset:step;list-style:none;margin-left:0;}
+.steps li{counter-increment:step;padding:9px 12px 9px 46px;position:relative;background:#f8fbff;border:1px solid #dde8f5;border-radius:6px;margin-bottom:6px;}
+.steps li::before{content:counter(step);position:absolute;left:12px;top:50%;transform:translateY(-50%);width:24px;height:24px;background:#2a6cbe;color:#fff;border-radius:50%;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;}
+.table-wrap{overflow-x:auto;margin-bottom:16px;}
+table{width:100%;border-collapse:collapse;font-size:13px;min-width:380px;}
+th{background:#1a3a5c;color:#fff;padding:9px 12px;text-align:left;white-space:nowrap;}
+td{padding:8px 12px;border-bottom:1px solid #dde8f5;vertical-align:top;}tr:nth-child(even) td{background:#f4f7fb;}
+code{font-family:'Courier New',monospace;background:rgba(0,80,160,.08);color:#004080;padding:2px 6px;border-radius:3px;font-size:12px;}
+.box{border-radius:6px;padding:13px 16px;margin:14px 0;font-size:13px;}
+.box-warn{background:#fffbe6;border-left:4px solid #f5a623;color:#7a5700;}
+.box-danger{background:#fff0f0;border-left:4px solid #d43f3f;color:#7a0000;}
+.box-hint{background:#e8f4ff;border-left:4px solid #2a6cbe;color:#0a3060;}
+.box-check{background:#f4eeff;border-left:4px solid #8c4fc8;color:#3a0070;}
+.box strong{display:block;margin-bottom:4px;}
+figure{max-width:280px;width:100%;margin:18px auto;text-align:center;}
+figure img{display:block;width:100%;max-width:280px;height:auto;margin:0 auto;border:1px solid #c8d8ec;border-radius:6px;box-shadow:0 2px 8px rgba(0,0,0,.1);}
+figcaption{font-size:12px;color:#5a7a99;margin-top:6px;}
+.img-pending{display:flex;align-items:center;justify-content:center;max-width:280px;width:100%;box-sizing:border-box;background:#e8eef5;border:2px dashed #99b8d8;border-radius:6px;height:160px;color:#5a7a99;font-size:13px;margin:18px auto;}
+.diff-add{background:#e8fff0;border-left:4px solid #2a9c5c;border-radius:6px;padding:12px 16px;margin:14px 0;font-size:13px;}
+.diff-add strong{display:block;color:#1a6c3c;margin-bottom:4px;}
+.flow-box{background:#f4f7fb;border:1px solid #c8d8ec;border-radius:8px;padding:20px;margin:16px 0;}
+.flow-box h4{color:#1a3a5c;margin-top:0;}
+.flow-arrow{text-align:center;font-size:20px;color:#2a6cbe;margin:4px 0;}
+.flow-step{background:#fff;border:1px solid #c8d8ec;border-radius:6px;padding:10px 16px;margin:4px 0;font-size:13px;}
+.flow-step strong{color:#1a3a5c;}
+.summary-box{background:linear-gradient(135deg,#e8f4ff,#f0f8ff);border:1px solid #99c8ec;border-radius:8px;padding:20px 24px;margin-top:32px;}
+.summary-box h3{border:none;color:#1a3a5c;margin-top:0;}
+.confirm-box{background:#fdf4ff;border:1px solid #c8a0e0;border-radius:8px;padding:20px 24px;margin-top:16px;}
+.confirm-box h3{border:none;color:#5a0090;margin-top:0;}
+.check{color:#2e7d32;font-weight:700;}.cross{color:#c62828;}
+th.pro-col{background:#5a2a8c;}
+.feature-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px;margin:16px 0;}
+.feature-card{background:#f4f7fb;border:1px solid #c8d8ec;border-radius:8px;padding:16px;}
+.feature-card h4{color:#1a3a5c;margin-top:0;margin-bottom:6px;font-size:14px;}
+.feature-card p{font-size:13px;margin:0;color:#3a5a7a;}
+.feature-card.pro-card{background:#f4eeff;border-color:#c8a0e0;}
+.feature-card.pro-card h4{color:#5a2a8c;}
+.trouble{border:1px solid #c8d8ec;border-radius:8px;margin:14px 0;overflow:hidden;}
+.trouble-q{background:#eef6fd;padding:13px 18px;font-weight:700;font-size:14px;color:#1a3a5c;display:flex;align-items:flex-start;gap:10px;}
+.trouble-q::before{content:'Q';background:#2a6cbe;color:#fff;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900;flex-shrink:0;margin-top:1px;}
+.trouble-a{padding:13px 18px 14px 50px;font-size:13.5px;border-top:1px solid #c8d8ec;line-height:1.9;}
+.trouble-a ul{margin-left:16px;}
+.legal-block{background:#f5f5f5;border:1px solid #ddd;border-radius:8px;padding:20px 24px;font-size:12.5px;color:#444;line-height:1.9;margin:14px 0;}
+.legal-block h4{font-size:13px;color:#333;margin:18px 0 6px;border-bottom:1px solid #ddd;padding-bottom:4px;}
+.legal-block h4:first-child{margin-top:0;}
+footer{text-align:center;font-size:12px;color:#8a9aaa;padding:30px 16px;border-top:1px solid #dde8f5;margin-top:20px;}
+@media(max-width:640px){.page-header h1{font-size:18px;}.chapter{padding:20px 16px;}.site-nav a{padding:8px 9px;font-size:11px;}}
+@media print{body{background:#fff;font-size:12px;}.site-nav{display:none;}.chapter{box-shadow:none;border:1px solid #ccc;page-break-inside:avoid;}.page-header{background:#1a3a5c !important;-webkit-print-color-adjust:exact;print-color-adjust:exact;}}
+</style></head>
+<body>
+<nav class="site-nav"><div class="nav-inner">
+  <a href="01_top_settings_common_tw.html">① 主畫面 / 設定</a>
+  <a href="02_stocktake_free_tw.html">② 盤點 免費版</a>
+  <a href="03_stocktake_simple_tw.html" class="active">③ 盤點 標準版</a>
+  <a href="04_stocktake_full_tw.html">④ 盤點 完整版</a>
+  <a href="05_inventory_free_tw.html">⑤ 庫存 免費版</a>
+  <a href="06_inventory_simple_tw.html">⑥ 庫存 標準版</a>
+  <a href="07_inventory_full_tw.html">⑦ 庫存 完整版</a>
+</div></nav>
+<header class="page-header"><div class="inner">
+  <div class="app-name">Quantiventra 使用手冊</div>
+  <h1>③ 庫存盤點 — 標準版</h1>
+  <div class="subtitle">新增功能、與免費版的差異、簡單A/B/C模式及注意事項</div>
+  <div class="scope-box"><strong>本頁涵蓋內容：</strong>標準版新增內容 / 與免費版差異 / 簡單A/B/C模式 / 逐步操作 / 升級理由</div>
+</div></header>
+<div class="container">
+  <nav class="toc"><h2>目錄</h2><ol>
+    <li><a href="#overview">標準版概覽</a></li>
+    <li><a href="#diff">與免費版的差異</a></li>
+    <li><a href="#mode">簡單A/B/C 模式</a></li>
+    <li><a href="#location">簡易位置的處理</a></li>
+    <li><a href="#howto">逐步操作（標準版）</a></li>
+    <li><a href="#merit">標準版更方便的地方</a></li>
+    <li><a href="#cannot">標準版仍無法使用的功能</a></li>
+    <li><a href="#notes">重要注意事項</a></li>
+    <li><a href="#upgrade">為何從免費版升級至標準版</a></li>
+    <li><a href="#summary">本章重點</a></li>
+    <li><a href="#confirm">使用前注意事項</a></li>
+  </ol></nav>
+
+  <section class="chapter" id="overview">
+    <div class="chapter-head"><div class="ch-no">第1章</div><h2>標準版概覽</h2></div>
+    <p>盤點標準版會提高主資料筆數、盤點歷史記錄筆數與匯出筆數的上限，並可使用螢幕旋轉鎖定功能，讓現場作業更容易持續進行。</p>
+    <div class="table-wrap"><table>
+      <tr><th>項目</th><th>免費版</th><th>標準版</th></tr>
+      <tr><td>主資料筆數</td><td>最多30筆</td><td>最多300筆</td></tr>
+      <tr><td>盤點歷史記錄筆數</td><td>最多30筆</td><td>最多1,000筆</td></tr>
+      <tr><td>匯出筆數</td><td>最多30筆</td><td>最多300筆</td></tr>
+      <tr><td>螢幕旋轉鎖定</td><td>✗</td><td>○</td></tr>
+      <tr><td>詳細規則設定</td><td>✗</td><td>✗（需完整版）</td></tr>
+    </table></div>
+  </section>
+
+  <section class="chapter" id="diff">
+    <div class="chapter-head"><div class="ch-no">第2章</div><h2>與免費版的差異</h2></div>
+    <div class="diff-add">
+      <strong>✅ 標準版新增或擴充的內容</strong>
+      <ul style="margin-top:6px;">
+        <li>主資料上限從 30 筆提升至 300 筆</li>
+        <li>盤點歷史上限從 30 筆提升至 1,000 筆</li>
+        <li>匯出上限從 30 筆提升至 300 筆</li>
+        <li>可使用螢幕旋轉鎖定功能</li>
+        <li>更容易在現場長期持續使用</li>
+      </ul>
+    </div>
+    <div class="box box-hint"><strong>💡 重點</strong>標準版新增了<strong>上限提升</strong>和<strong>螢幕旋轉鎖定</strong>。盤點操作流程與免費版相同。詳細規則設定需要完整版。</div>
+  </section>
+
+  <section class="chapter" id="mode">
+    <div class="chapter-head"><div class="ch-no">第3章</div><h2>簡單A/B/C 模式</h2></div>
+    <p>在盤點設定中選擇<strong>簡單A</strong>、<strong>簡單B</strong>或<strong>簡單C</strong>。所選模式決定了盤點及其他流程中顯示的位置選項。</p>
+    <div class="table-wrap"><table>
+      <tr><th>模式</th><th>顯示位置</th><th>使用範例</th></tr>
+      <tr><td><strong>簡單A</strong></td><td>僅倉庫</td><td>單一倉庫運營</td></tr>
+      <tr><td><strong>簡單B</strong></td><td>倉庫 + 門市</td><td>同時盤點倉庫和門市</td></tr>
+      <tr><td><strong>簡單C</strong></td><td>僅門市</td><td>單一門市運營</td></tr>
+    </table></div>
+    <div class="box box-warn"><strong>⚠ 注意</strong>即使完整版已生效，若模式仍為簡單A/B/C，將只顯示簡單位置選項。請切換至<strong>詳細</strong>模式以使用詳細位置。</div>
+  </section>
+
+
+
+  <section class="chapter" id="location">
+    <div class="chapter-head"><div class="ch-no">第4章</div><h2>簡易位置的處理</h2></div>
+    <p>標準版以簡易位置模式進行盤點。依照設定不同，可只使用倉庫、同時使用倉庫與門市，或只使用門市。這種方式適合不需要細分到貨架、區域或樓層的小型現場。</p>
+    <div class="table-wrap"><table>
+      <tr><th>模式</th><th>位置處理方式</th><th>適合情境</th></tr>
+      <tr><td>簡單A</td><td>僅記錄倉庫位置</td><td>單一倉庫或後場保管</td></tr>
+      <tr><td>簡單B</td><td>分開記錄倉庫與門市</td><td>需要同時掌握倉庫與門市數量</td></tr>
+      <tr><td>簡單C</td><td>僅記錄門市位置</td><td>只在門市進行盤點</td></tr>
+    </table></div>
+    <div class="box box-hint"><strong>💡 提示</strong>如果需要管理貨架、區域或多個詳細位置，請在完整版後切換到詳細模式，並先登錄位置主資料。</div>
+  </section>
+
+  <section class="chapter" id="howto">
+    <div class="chapter-head"><div class="ch-no">第5章</div><h2>逐步操作（標準版）</h2></div>
+    <ol class="steps">
+      <li>在<strong>設定 → 盤點設定</strong>中確認目前使用的簡單模式（A/B/C）。</li>
+      <li>在主畫面點擊<strong>庫存盤點</strong>。</li>
+      <li>掃描條碼或輸入商品編號。</li>
+      <li>確認商品名稱（未登錄編號時手動輸入）。</li>
+      <li>選擇清點位置（倉庫、門市等）。</li>
+      <li>輸入實際盤點數量。</li>
+      <li>可選輸入備註。</li>
+      <li>點擊<strong>儲存</strong>記錄本筆盤點。</li>
+      <li>掃描下一件商品，重複步驟3~8。</li>
+      <li>輸入完畢後，查看全部盤點歷史記錄。</li>
+    </ol>
+    <div class="box box-danger"><strong>🚨 重要</strong>儲存前請務必核實數量和位置。將數量記錄到錯誤位置會導致庫存偏差。</div>
+  </section>
+
+
+
+  <section class="chapter" id="merit">
+    <div class="chapter-head"><div class="ch-no">第6章</div><h2>標準版更方便的地方</h2></div>
+    <p>標準版的最大優點，是將免費版的筆數限制提高，並可使用螢幕旋轉鎖定。盤點流程本身維持簡單，因此適合商品數逐漸增加、但尚不需要完整詳細位置管理的使用者。</p>
+    <ul>
+      <li>可處理最多 300 筆主資料，適合中小規模商品清單。</li>
+      <li>盤點歷史最多可保留 1,000 筆，便於保存月度或定期盤點記錄。</li>
+      <li>匯出筆數提高至 300 筆，能更穩定地整理盤點結果。</li>
+      <li>螢幕旋轉鎖定可減少現場作業時畫面方向變動造成的操作失誤。</li>
+    </ul>
+    <div class="box box-warn"><strong>⚠ 注意</strong>標準版不包含詳細規則、擴充 CSV 或將盤點結果反映至庫存等進階功能。需要這些功能時，請考慮使用完整版。</div>
+  </section>
+
+  <section class="chapter" id="cannot">
+    <div class="chapter-head"><div class="ch-no">第7章</div><h2>標準版仍無法使用的功能</h2></div>
+    <div class="table-wrap"><table>
+      <tr><th>功能</th><th>所需方案</th></tr>
+      <tr><td>詳細編碼規則設定</td><td>盤點完整版</td></tr>
+      <tr><td>詳細位置規則設定</td><td>盤點完整版</td></tr>
+      <tr><td>詳細相機掃描設定</td><td>盤點完整版</td></tr>
+      <tr><td>擴充 CSV 匯出</td><td>盤點完整版</td></tr>
+      <tr><td>超過300筆主資料記錄</td><td>盤點完整版</td></tr>
+      <tr><td>確認盤點結果／將盤點結果反映至庫存</td><td>盤點完整版</td></tr>
+    </table></div>
+  </section>
+
+  <section class="chapter" id="notes">
+    <div class="chapter-head"><div class="ch-no">第8章</div><h2>重要注意事項</h2></div>
+    <div class="box box-warn"><strong>⚠ 確認盤點模式設定</strong>即使完整版生效，模式在您更改前仍為簡單A/B/C。若要使用詳細位置，請切換至<strong>詳細</strong>模式。</div>
+    <div class="box box-danger"><strong>🚨 價格與購買條款</strong>請始終透過 Google Play Store 確認目前價格和退款條件——本手冊不作確定性說明。</div>
+  </section>
+
+  <section class="chapter" id="upgrade">
+    <div class="chapter-head"><div class="ch-no">第9章</div><h2>為何從免費版升級至標準版</h2></div>
+    <div class="table-wrap"><table>
+      <tr><th>項目</th><th>免費版</th><th>→ 標準版</th></tr>
+      <tr><td>主資料筆數</td><td>最多30筆</td><td>最多300筆（10倍）</td></tr>
+      <tr><td>盤點歷史</td><td>最多30筆</td><td>最多1,000筆（33倍）</td></tr>
+      <tr><td>匯出筆數</td><td>最多30筆</td><td>最多300筆（10倍）</td></tr>
+      <tr><td>螢幕旋轉鎖定</td><td>不可用</td><td>可用——適合現場作業</td></tr>
+      <tr><td>作業持續性</td><td>有觸及上限而中斷的風險</td><td>更適合中長期持續使用</td></tr>
+    </table></div>
+    <div class="box box-hint"><strong>💡 升級標準版的時機</strong>
+      <ul style="margin-top:6px;">
+        <li>商品超過30種</li>
+        <li>想長期保存月度盤點歷史記錄</li>
+        <li>需要現場作業時固定螢幕方向</li>
+        <li>商品少於300種且想持續盤點</li>
+      </ul>
+    </div>
+  </section>
+
+  <div class="summary-box" id="summary">
+    <h3>📌 本章重點</h3>
+    <ul>
+      <li>標準版提升上限：主資料最多300筆、歷史最多1,000筆、匯出最多300筆。</li>
+      <li>螢幕旋轉鎖定功能可用，改善現場作業體驗。</li>
+      <li>盤點模式從簡單A（僅倉庫）、簡單B（倉庫+門市）或簡單C（僅門市）中選擇。</li>
+      <li>詳細規則設定需完整版——標準版不可用。</li>
+      <li>操作流程與免費版相同：掃描 → 輸入數量 → 儲存 → 查看歷史。</li>
+    </ul>
+  </div>
+  <div class="confirm-box" id="confirm">
+    <h3>🔍 使用前注意事項</h3>
+    <ul>
+      <li>將盤點結果反映至庫存等進階功能屬於完整版功能。使用前請在應用程式畫面確認目前方案與可用功能。</li>
+      <li>主資料接近 300 筆時，建議先匯出備份，並依畫面提示整理資料或考慮使用完整版。</li>
+      <li>CSV 匯出的欄位以實際輸出檔案和應用程式畫面為準。</li>
+    </ul>
+  </div>
+</div>
+<footer>Quantiventra 使用手冊 · 最新資訊請以應用程式內實際顯示為準。<p style="margin-top:4px;"><a href="privacy_tw.html">隱私權政策</a></p></footer>
+</body></html>

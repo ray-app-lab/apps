@@ -1,0 +1,947 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quantiventra Manual – Top Screen, Settings &amp; Common Operations (English)</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;font-size:15px;line-height:1.8;color:#1a2535;background:#f4f7fb;}
+a{color:#1a5fa8;text-decoration:none;}
+a:hover{text-decoration:underline;}
+.site-nav{background:#1a3a5c;color:#fff;padding:0;}
+.site-nav .nav-inner{max-width:960px;margin:0 auto;display:flex;flex-wrap:wrap;gap:0;align-items:stretch;}
+.site-nav a{color:#cde;padding:10px 13px;font-size:12px;display:block;border-right:1px solid #2a4a6c;white-space:nowrap;}
+.site-nav a:hover{background:#2a5090;text-decoration:none;}
+.site-nav a.active{background:#2a6cbe;color:#fff;font-weight:bold;}
+.page-header{background:linear-gradient(135deg,#1a3a5c 0%,#2a6cbe 100%);color:#fff;padding:40px 20px 30px;}
+.page-header .inner{max-width:960px;margin:0 auto;}
+.page-header .app-name{font-size:13px;opacity:.8;letter-spacing:.1em;text-transform:uppercase;}
+.page-header h1{font-size:26px;font-weight:700;margin-top:6px;line-height:1.3;}
+.page-header .subtitle{font-size:14px;opacity:.85;margin-top:8px;}
+.scope-box{background:rgba(255,255,255,.15);border-left:4px solid #7ecfff;padding:12px 16px;margin-top:16px;border-radius:4px;font-size:13px;}
+.play-section{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.3);border-radius:10px;padding:22px 28px;margin-top:24px;display:flex;align-items:center;gap:28px;flex-wrap:wrap;}
+.play-qr-wrap{flex-shrink:0;text-align:center;}
+.play-qr-frame{width:130px;height:130px;border:3px solid rgba(255,255,255,.7);border-radius:10px;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.95);position:relative;overflow:hidden;}
+.play-qr-frame img{width:100%;height:100%;object-fit:contain;display:block;}
+.play-qr-corner{pointer-events:none;position:absolute;width:16px;height:16px;border-color:#2a6cbe;border-style:solid;border-width:0;}
+.play-qr-corner.tl{top:5px;left:5px;border-top-width:3px;border-left-width:3px;border-radius:3px 0 0 0;}
+.play-qr-corner.tr{top:5px;right:5px;border-top-width:3px;border-right-width:3px;border-radius:0 3px 0 0;}
+.play-qr-corner.bl{bottom:5px;left:5px;border-bottom-width:3px;border-left-width:3px;border-radius:0 0 0 3px;}
+.play-qr-corner.br{bottom:5px;right:5px;border-bottom-width:3px;border-right-width:3px;border-radius:0 0 3px 0;}
+.play-qr-label{font-size:10px;color:rgba(255,255,255,.8);margin-top:6px;letter-spacing:.05em;}
+.play-info h3{font-size:16px;font-weight:700;color:#fff;margin-bottom:4px;}
+.play-info p{font-size:12px;color:rgba(255,255,255,.75);margin-bottom:10px;}
+.play-badge{display:inline-block;text-decoration:none;}
+.play-badge img{display:block;height:44px;width:auto;max-width:180px;}
+.container{max-width:960px;margin:0 auto;padding:30px 16px;}
+.toc{background:#fff;border:1px solid #c8d8ec;border-radius:8px;padding:24px 28px;margin-bottom:32px;}
+.toc h2{font-size:16px;font-weight:700;color:#1a3a5c;border-bottom:2px solid #2a6cbe;padding-bottom:8px;margin-bottom:14px;}
+.toc ol{margin-left:18px;}
+.toc li{margin:5px 0;font-size:14px;}
+.toc a{color:#1a5fa8;}
+.chapter{background:#fff;border-radius:8px;box-shadow:0 1px 4px rgba(0,0,0,.08);padding:28px 28px 24px;margin-bottom:28px;}
+.chapter-head{border-left:5px solid #2a6cbe;padding-left:14px;margin-bottom:20px;}
+.chapter-head .ch-no{font-size:12px;color:#2a6cbe;font-weight:700;letter-spacing:.1em;}
+.chapter-head h2{font-size:20px;font-weight:700;color:#1a2535;margin-top:2px;}
+h3{font-size:16px;font-weight:700;color:#1a3a5c;border-bottom:1px solid #dde8f5;padding-bottom:5px;margin:22px 0 12px;}
+h4{font-size:14px;font-weight:700;color:#2a4a6c;margin:16px 0 8px;}
+p{margin-bottom:12px;}
+ul,ol{margin-left:20px;margin-bottom:12px;}
+li{margin-bottom:5px;}
+.steps{counter-reset:step;list-style:none;margin-left:0;}
+.steps li{counter-increment:step;padding:9px 12px 9px 46px;position:relative;background:#f8fbff;border:1px solid #dde8f5;border-radius:6px;margin-bottom:6px;}
+.steps li::before{content:counter(step);position:absolute;left:12px;top:50%;transform:translateY(-50%);width:24px;height:24px;background:#2a6cbe;color:#fff;border-radius:50%;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;}
+.table-wrap{overflow-x:auto;margin-bottom:16px;}
+table{width:100%;border-collapse:collapse;font-size:13px;min-width:420px;}
+th{background:#1a3a5c;color:#fff;padding:9px 12px;text-align:left;white-space:nowrap;}
+th.pro-col{background:#5a2a8c;}
+td{padding:8px 12px;border-bottom:1px solid #dde8f5;vertical-align:top;}
+tr:nth-child(even) td{background:#f4f7fb;}
+code{font-family:'Courier New',monospace;background:rgba(0,80,160,.08);color:#004080;padding:2px 6px;border-radius:3px;font-size:12px;}
+.badge{display:inline-block;font-size:10px;font-weight:700;padding:2px 7px;border-radius:10px;white-space:nowrap;}
+.badge-free{background:#2e7d32;color:#fff;}
+.badge-pro{background:#5a2a8c;color:#fff;}
+.badge-req{background:#c62828;color:#fff;}
+.badge-opt{background:#607d8b;color:#fff;}
+.check{color:#2e7d32;font-weight:700;}
+.cross{color:#c62828;}
+.box{border-radius:6px;padding:13px 16px;margin:14px 0;font-size:13px;}
+.box-warn{background:#fffbe6;border-left:4px solid #f5a623;color:#7a5700;}
+.box-danger{background:#fff0f0;border-left:4px solid #d43f3f;color:#7a0000;}
+.box-hint{background:#e8f4ff;border-left:4px solid #2a6cbe;color:#0a3060;}
+.box-check{background:#f4eeff;border-left:4px solid #8c4fc8;color:#3a0070;}
+.box-success{background:#e8f5e9;border-left:4px solid #2e7d32;color:#1b4a1e;}
+.box strong{display:block;margin-bottom:4px;}
+figure{max-width:280px;width:100%;margin:18px auto;text-align:center;}
+figure img{display:block;width:100%;max-width:280px;height:auto;margin:0 auto;border:1px solid #c8d8ec;border-radius:6px;box-shadow:0 2px 8px rgba(0,0,0,.1);}
+figcaption{font-size:12px;color:#5a7a99;margin-top:6px;}
+.feature-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px;margin:16px 0;}
+.feature-card{background:#f4f7fb;border:1px solid #c8d8ec;border-radius:8px;padding:16px;}
+.feature-card h4{color:#1a3a5c;margin-top:0;margin-bottom:6px;font-size:14px;}
+.feature-card p{font-size:13px;margin:0;color:#3a5a7a;}
+.feature-card.pro-card{background:#f4eeff;border-color:#c8a0e0;}
+.feature-card.pro-card h4{color:#5a2a8c;}
+.summary-box{background:linear-gradient(135deg,#e8f4ff,#f0f8ff);border:1px solid #99c8ec;border-radius:8px;padding:20px 24px;margin-top:32px;}
+.summary-box h3{border:none;color:#1a3a5c;margin-top:0;}
+.confirm-box{background:#fdf4ff;border:1px solid #c8a0e0;border-radius:8px;padding:20px 24px;margin-top:16px;}
+.confirm-box h3{border:none;color:#5a0090;margin-top:0;}
+.trouble{border:1px solid #c8d8ec;border-radius:8px;margin:14px 0;overflow:hidden;}
+.trouble-q{background:#eef6fd;padding:13px 18px;font-weight:700;font-size:14px;color:#1a3a5c;display:flex;align-items:flex-start;gap:10px;}
+.trouble-q::before{content:'Q';background:#2a6cbe;color:#fff;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900;flex-shrink:0;margin-top:1px;}
+.trouble-a{padding:13px 18px 14px 50px;font-size:13.5px;border-top:1px solid #c8d8ec;line-height:1.9;}
+.trouble-a ul{margin-left:16px;}
+.legal-block{background:#f5f5f5;border:1px solid #ddd;border-radius:8px;padding:20px 24px;font-size:12.5px;color:#444;line-height:1.9;margin:14px 0;}
+.legal-block h4{font-size:13px;color:#333;margin:18px 0 6px;border-bottom:1px solid #ddd;padding-bottom:4px;}
+.legal-block h4:first-child{margin-top:0;}
+footer{text-align:center;font-size:12px;color:#8a9aaa;padding:30px 16px 60px;border-top:1px solid #dde8f5;margin-top:20px;}
+.back-top{position:fixed;right:22px;bottom:28px;background:#1a3a5c;color:#fff;width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:20px;text-decoration:none;box-shadow:0 4px 14px rgba(26,58,92,.45);z-index:100;transition:transform .2s,box-shadow .2s;}
+.back-top:hover{transform:translateY(-3px);box-shadow:0 8px 22px rgba(26,58,92,.55);text-decoration:none;}
+.back-prev{position:fixed;left:18px;top:18px;z-index:200;border:1px solid rgba(255,255,255,.45);border-radius:999px;background:rgba(26,58,92,.88);color:#fff;padding:8px 14px;font:700 13px/1 -apple-system,sans-serif;box-shadow:0 4px 14px rgba(0,0,0,.2);cursor:pointer;text-decoration:none;}
+.back-prev:hover{background:#1a3a5c;text-decoration:none;}
+@media(max-width:640px){
+  .page-header h1{font-size:20px;}
+  .chapter{padding:20px 16px;}
+  .toc{padding:16px;}
+  .site-nav a{padding:8px 9px;font-size:11px;}
+  .play-section{flex-direction:column;align-items:flex-start;gap:16px;}
+  .feature-grid{grid-template-columns:1fr 1fr;}
+  .back-prev{display:none;}
+}
+@media print{
+  body{background:#fff;font-size:12px;}
+  .site-nav,.back-top,.back-prev{display:none;}
+  .chapter{box-shadow:none;border:1px solid #ccc;page-break-inside:avoid;}
+  .page-header{background:#1a3a5c !important;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  a::after{content:" ("attr(href)")";font-size:10px;color:#666;}
+  .play-section{display:none;}
+}
+</style>
+</head>
+<body id="top">
+
+<a href="javascript:history.back()" class="back-prev">‹ Back</a>
+
+<nav class="site-nav" aria-label="Page navigation">
+  <div class="nav-inner">
+    <a href="01_top_settings_common_en.html" class="active">① Top / Settings</a>
+    <a href="02_stocktake_free_en.html">② Stocktake Free</a>
+    <a href="03_stocktake_simple_en.html">③ Stocktake Simple Unlock</a>
+    <a href="04_stocktake_full_en.html">④ Stocktake Full</a>
+    <a href="05_inventory_free_en.html">⑤ Inventory Free</a>
+    <a href="06_inventory_simple_en.html">⑥ Inventory Simple Unlock</a>
+    <a href="07_inventory_full_en.html">⑦ Inventory Full</a>
+  </div>
+</nav>
+
+<header class="page-header">
+  <div class="inner">
+    <div class="app-name">Quantiventra Manual — English Edition</div>
+    <h1>① Top Screen · Settings · Common Operations</h1>
+    <div class="subtitle">App overview, system requirements, installation, settings, billing plans, sample data, glossary, and legal notices</div>
+
+    <div class="scope-box">
+      <strong>Topics covered in this page:</strong>
+      App overview / System requirements / Installation &amp; first launch / Data storage / Difference between Stocktake and Inventory Management / Getting started / Top screen / Settings screen / Language settings / Billing plans / Sample data / Troubleshooting / Glossary / Terms &amp; disclaimers
+    </div>
+  </div>
+</header>
+
+<div class="container">
+
+  <nav class="toc">
+    <h2>Contents</h2>
+    <ol>
+      <li><a href="#about">What Is Quantiventra?</a></li>
+      <li><a href="#environment">System Requirements &amp; Permissions</a></li>
+      <li><a href="#install">Installation &amp; First Launch</a></li>
+      <li><a href="#storage">Data Storage</a></li>
+      <li><a href="#diff">Stocktake vs. Inventory Management</a></li>
+      <li><a href="#start">Getting Started (Beginner's Guide)</a></li>
+      <li><a href="#top-screen">Using the Top Screen</a></li>
+      <li><a href="#settings">Settings Screen Overview</a></li>
+      <li><a href="#language">Language Settings</a></li>
+      <li><a href="#billing">Billing Plans Overview</a></li>
+      <li><a href="#sample">Sample Data</a></li>
+      <li><a href="#trouble">Troubleshooting</a></li>
+      <li><a href="#glossary">Glossary</a></li>
+      <li><a href="#legal">Terms &amp; Disclaimers</a></li>
+      <li><a href="#summary">Chapter Highlights</a></li>
+      <li><a href="#confirm">Items to Verify</a></li>
+    </ol>
+  </nav>
+
+  <!-- Chapter 1 -->
+  <section class="chapter" id="about">
+    <div class="chapter-head">
+      <div class="ch-no">CHAPTER 1</div>
+      <h2>What Is Quantiventra?</h2>
+    </div>
+
+    <h3>1-1. About the App</h3>
+    <p>
+      <strong>Quantiventra</strong> is a portmanteau of "<em>Quantity</em>" and "<em>Inventory</em>."
+      It is an Android app that streamlines stocktaking and inventory management by using your smartphone camera to scan barcodes.
+    </p>
+    <p>
+      Simply point the camera at a barcode to identify a product automatically, then enter and save the quantity — an intuitive workflow that takes your paper-based stocktake digital.
+      Results are saved as CSV files, making it easy to work with Excel or Google Sheets.
+    </p>
+
+    <h3>1-2. Key Features</h3>
+    <div class="feature-grid">
+      <div class="feature-card">
+        <h4>📦 Stock Counting</h4>
+        <p>Quickly identify products by barcode scan and record quantities instantly. The built-in calculator makes tallying multiple locations simple.</p>
+      </div>
+      <div class="feature-card">
+        <h4>🗂️ Master Data Management</h4>
+        <p>Register products, categories, and locations as master data. Bulk import via CSV is also supported.</p>
+      </div>
+      <div class="feature-card">
+        <h4>📍 Location Management</h4>
+        <p>Register multiple locations such as warehouses, stores, and shelves, and manage stock by location. You can also configure which locations count toward replenishment calculations.</p>
+      </div>
+      <div class="feature-card">
+        <h4>📊 CSV Import / Export</h4>
+        <p>Export stock lists, backups, and history as CSV. Easy to aggregate in Excel or Google Sheets.</p>
+      </div>
+      <div class="feature-card">
+        <h4>🌐 Multilingual Support</h4>
+        <p>Supports 12 languages including English, Japanese, Chinese, and Korean. Automatically matches your device language.</p>
+      </div>
+      <div class="feature-card pro-card">
+        <h4>⭐ Full Unlock Features</h4>
+        <p>Removes capacity limits and enables detailed rules, extended CSV settings, Location Master management, and other advanced configuration options. P</p>
+      </div>
+    </div>
+
+    <h3>1-3. How Camera Scanning Works</h3>
+    <p>
+      When a barcode falls within the guide frame (a blue or yellow outline) displayed in the center of the screen,
+      the app auto-recognizes it after detecting <strong>the same code in 3 consecutive frames</strong>.
+      This triple-confirmation approach prevents misreads while ensuring reliable detection.
+    </p>
+    <div class="box box-hint">
+      <strong>💡 If a code isn't being recognized</strong>
+      The barcode must fit <strong>entirely inside</strong> the guide frame. Codes outside the frame will not be detected.
+      Adjust the camera position until the code is fully contained within the frame.
+    </div>
+
+    <p>The app has two main modules — Stocktake and Inventory Management — with master data management, settings, and CSV import/export as shared features.</p>
+  </section>
+
+  <!-- Chapter 2 -->
+  <section class="chapter" id="environment">
+    <div class="chapter-head">
+      <div class="ch-no">CHAPTER 2</div>
+      <h2>System Requirements &amp; Permissions</h2>
+    </div>
+
+    <h3>2-1. System Requirements</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Item</th><th>Requirement</th></tr></thead>
+        <tbody>
+          <tr><td>OS</td><td>Android 8.0 (Oreo / API 26) or later</td></tr>
+          <tr><td>Camera</td><td>Autofocus camera (required)</td></tr>
+          <tr><td>Storage</td><td>At least 10 MB of free internal storage recommended</td></tr>
+          <tr><td>Required permission</td><td>Camera (required)</td></tr>
+          <tr><td>Internet</td><td>Not required for routine stocktake and inventory work. Purchase verification, purchase restoration, store navigation, and external links may require a network connection.</td></tr>
+          <tr><td>Google Play Services</td><td>Required for plan purchase and restore</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="box box-success">
+      <strong>✅ Routine Work Can Be Done Offline</strong>
+      Routine stocktake and inventory management work can be performed without an internet connection, making it easier to keep working in factories, warehouses, stores, and other areas with unstable connectivity. Purchase verification, restoration, store navigation, and external links may require a network connection.
+    </div>
+
+    <h3>2-2. Required Permissions</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Permission</th><th>Purpose</th><th>If Denied</th></tr></thead>
+        <tbody>
+          <tr><td>Camera</td><td>Barcode and QR code scanning</td><td>Camera scanning unavailable (manual entry only)</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="box box-hint">
+      <strong>💡 Storage Permission</strong>
+      This app stores data in Android's <strong>internal app storage</strong>. No storage permission is required.
+      Data exchange is handled through the app's Import, Export, and Share functions.
+    </div>
+  </section>
+
+  <!-- Chapter 3 -->
+  <section class="chapter" id="install">
+    <div class="chapter-head">
+      <div class="ch-no">CHAPTER 3</div>
+      <h2>Installation &amp; First Launch</h2>
+    </div>
+
+    <h3>3-1. Installation</h3>
+    <p>Search for "Quantiventra" on the Google Play Store, or scan the QR code at the top of this page to go directly to the store listing.</p>
+
+    <ol class="steps">
+      <li>Open the Google Play Store.</li>
+      <li>Search for "Quantiventra" or scan the QR code to open the store page.</li>
+      <li>Tap <strong>Install</strong>.</li>
+    </ol>
+
+    <h3>3-2. First Launch Flow</h3>
+    <ol class="steps">
+      <li>Tap the app icon to launch.</li>
+      <li>A camera permission dialog appears — tap <strong>Allow</strong>.</li>
+      <li>If a sample data prompt appears, choose <strong>Create</strong> or <strong>Skip</strong>.</li>
+      <li>The app's data folder is automatically created in internal storage.</li>
+      <li>Once the top screen appears, initial setup is complete.</li>
+    </ol>
+
+    <div class="box box-warn">
+      <strong>⚠ If You Deny Camera Permission</strong>
+      Barcode scanning will be unavailable.
+      To grant it later: Device <strong>Settings → Apps → Quantiventra → Permissions → Camera → Enable</strong>.
+    </div>
+
+    <h3>3-3. Transferring to a New Device</h3>
+    <ol class="steps">
+      <li>On your old device, export or share your data via <strong>Settings → Export</strong> or <strong>Settings → Share</strong>.</li>
+      <li>Sign in to the new device with the same Google account.</li>
+      <li>Install Quantiventra from Google Play.</li>
+      <li>Tap <strong>Settings → Restore Purchases</strong> to restore purchased plans.</li>
+      <li>Import your backed-up master CSV via <strong>Settings → Import Master CSV</strong>.</li>
+    </ol>
+
+    <div class="box box-danger">
+      <strong>🚨 Warning: Uninstalling the App</strong>
+      Uninstalling the app deletes all data in internal storage.
+      Back up important data regularly using <strong>Export</strong> or <strong>Share</strong>.
+    </div>
+  </section>
+
+  <!-- Chapter 4 -->
+  <section class="chapter" id="storage">
+    <div class="chapter-head">
+      <div class="ch-no">CHAPTER 4</div>
+      <h2>Data Storage</h2>
+    </div>
+
+    <p>
+      App data is stored in the app's private area on your device.
+      It is not intended to be edited directly via a file manager. Use the app's Share and Export functions to access or back up your data.
+    </p>
+
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Category</th><th>Content</th><th>When Updated</th></tr></thead>
+        <tbody>
+          <tr><td>Master data</td><td>Core data for products, categories, locations, etc.</td><td>When items are registered, edited, or deactivated</td></tr>
+          <tr><td>Stocktake &amp; inventory history</td><td>Records of stocktakes, receiving, shipping, stock transfers, CSV imports, etc.</td><td>When entries are saved or imported</td></tr>
+          <tr><td>App settings</td><td>Language, scanning, code rules, location settings, etc.</td><td>When settings are changed</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Opening a CSV in Excel</h3>
+    <p>CSV files are saved in UTF-8. The following steps are recommended for opening them in Excel.</p>
+    <ol class="steps">
+      <li>Open Excel and go to the <strong>Data</strong> tab → <strong>From Text/CSV</strong>.</li>
+      <li>Select your CSV file.</li>
+      <li>Choose <strong>Unicode (UTF-8)</strong> as the encoding.</li>
+      <li>Click <strong>Load</strong>.</li>
+    </ol>
+    <div class="box box-warn">
+      <strong>⚠ Don't Double-Click the CSV File Directly</strong>
+      Opening a CSV by double-clicking may result in garbled characters. Always use the <strong>Data</strong> tab import method.
+    </div>
+
+    <h3>Recommended Backup Procedure</h3>
+    <ol class="steps">
+      <li>Tap <strong>Settings → Export (Select Folder)</strong>.</li>
+      <li>Create and select a backup folder in your device's Documents folder — e.g., <code>inventory_backup_20250401</code>.</li>
+      <li>Done once the history and master CSVs are saved.</li>
+      <li>For extra safety, copy to a PC via Google Drive or USB cable.</li>
+    </ol>
+  </section>
+
+  <!-- Chapter 5 -->
+  <section class="chapter" id="diff">
+    <div class="chapter-head">
+      <div class="ch-no">CHAPTER 5</div>
+      <h2>Stocktake vs. Inventory Management</h2>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <tr><th>Item</th><th>Stocktake</th><th>Inventory Management</th></tr>
+        <tr><td>Purpose</td><td>Count and record actual quantities</td><td>Track stock changes via receiving, shipping, and transfers</td></tr>
+        <tr><td>Workflow</td><td>Scan → Enter qty → Save → Finalize</td><td>Receive/Ship/Transfer → Save → Review history</td></tr>
+        <tr><td>Typical use</td><td>Monthly counts, year-end inventory, spot checks</td><td>Daily receiving, shipping, and transfer management</td></tr>
+        <tr><td>Effect on stock</td><td>Applied to inventory after finalization (Full Unlock)</td><td>Reflected immediately with each operation</td></tr>
+        <tr><td>Screens</td><td>Stocktake screen, Stocktake history</td><td>Stock check, Receive, Ship, Transfer, Inventory history</td></tr>
+      </table>
+    </div>
+    <div class="box box-warn">
+      <strong>⚠ Note</strong>
+      Stocktake and Inventory Management are separate modules. Entering a quantity in Stocktake does NOT change inventory numbers unless you perform the "Apply to Inventory" action (Full Unlock). Be careful not to confuse the two.
+    </div>
+  </section>
+
+  <!-- Chapter 6 -->
+  <section class="chapter" id="start">
+    <div class="chapter-head">
+      <div class="ch-no">CHAPTER 6</div>
+      <h2>Getting Started (Beginner's Guide)</h2>
+    </div>
+    <h3>Step 1: Try It with Sample Data</h3>
+    <ol class="steps">
+      <li>Launch the app; if prompted to create sample data, choose <strong>Create</strong>.</li>
+      <li>Open <strong>Inventory Management</strong> from the top screen and check sample stock levels.</li>
+      <li>Open <strong>Stocktake</strong> and try barcode scanning and quantity entry.</li>
+      <li>Try exporting a CSV.</li>
+      <li>Delete sample data before going live (from the Settings screen).</li>
+    </ol>
+
+    <h3>Step 2: Register Your Product Master</h3>
+    <ol class="steps">
+      <li>Open <strong>Master Management</strong> from the top screen.</li>
+      <li>Go to <strong>Product Master</strong>, create a new entry, and enter a product code and name.</li>
+      <li>Set a category, price, and reorder point as needed.</li>
+      <li>Register warehouses, stores, etc. in the <strong>Location Master</strong> when your plan and in-app screen allow it.</li>
+    </ol>
+
+    <h3>Step 3: Start Daily Operations</h3>
+    <ol class="steps">
+      <li>When receiving stock: go to <strong>Inventory Management → Receive</strong>, scan the barcode, and enter the quantity.</li>
+      <li>When shipping: go to <strong>Inventory Management → Ship</strong> and follow the same process.</li>
+      <li>For stocktaking: record physical counts from <strong>Stocktake</strong>.</li>
+    </ol>
+
+    <div class="box box-hint">
+      <strong>💡 Tip</strong>
+      Practice with sample data first until you're comfortable, then register your actual products.
+    </div>
+  </section>
+
+  <!-- Chapter 7 -->
+  <section class="chapter" id="top-screen">
+    <div class="chapter-head">
+      <div class="ch-no">CHAPTER 7</div>
+      <h2>Using the Top Screen</h2>
+    </div>
+    <p>The top screen after launch is the entry point to all main features.</p>
+
+    <div class="table-wrap">
+      <table>
+        <tr><th>Entry Point</th><th>Description</th></tr>
+        <tr><td>Stocktake</td><td>Open the stocktake screen to scan products and record physical counts</td></tr>
+        <tr><td>Inventory Management</td><td>Access stock checking, receiving, shipping, transfers, and inventory history</td></tr>
+        <tr><td>Master Management</td><td>Manage product, category, and location master data</td></tr>
+        <tr><td>Settings</td><td>Language, stocktake settings, CSV, sample data, billing, legal documents, etc.</td></tr>
+        <tr><td>Help</td><td>Open the manual or help page</td></tr>
+      </table>
+    </div>
+
+    <h3>Pending Stocktake Data Warning</h3>
+    <p>If there is unfinalized stocktake data, a notice will appear on the top screen. Review and finalize it in the Stocktake screen before working in Inventory Management.</p>
+    <div class="box box-warn">
+      <strong>⚠ Note</strong>
+      Operating Inventory Management while unfinalized stocktake data exists may cause data inconsistencies. It is recommended to finalize your stocktake before making inventory changes.
+    </div>
+  </section>
+
+  <!-- Chapter 8 -->
+  <section class="chapter" id="settings">
+    <div class="chapter-head">
+      <div class="ch-no">CHAPTER 8</div>
+      <h2>Settings Screen Overview</h2>
+    </div>
+    <p>The Settings screen manages app-wide settings, stocktake, inventory, CSV, language, billing, sample data, and legal documents.</p>
+
+    <h3>Data Import / Export</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Action</th><th>Description</th><th>Available In</th></tr></thead>
+        <tbody>
+          <tr><td>Import Master CSV</td><td>Load an external CSV file as master data (overwrites existing)</td><td>All plans</td></tr>
+          <tr><td>Share (Email, etc.)</td><td>Send history and master CSVs to another app</td><td>All plans</td></tr>
+          <tr><td>Export (Select Folder)</td><td>Save history and master CSVs to a chosen folder</td><td>All plans</td></tr>
+          <tr><td>Clear All History</td><td>Delete and reset all scan history</td><td>All plans (irreversible)</td></tr>
+          <tr><td>Reset Master Totals</td><td>Reset all registered cumulative totals to 0</td><td>Any Full Unlock (irreversible)</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>General Settings</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Setting</th><th>Description</th><th>Plan</th></tr></thead>
+        <tbody>
+          <tr><td>Display Language</td><td>Select the app display language</td><td>All plans (some languages require unlock)</td></tr>
+          <tr><td>Lock Screen Rotation</td><td>Keep the screen orientation fixed even when tilting the device</td><td>Simple Unlock or above for the target feature</td></tr>
+          <tr><td>Create Sample Data</td><td>Generate sample data for practice</td><td>All plans</td></tr>
+          <tr><td>Delete Sample Data</td><td>Delete all sample data at once</td><td>All plans</td></tr>
+          <tr><td>Restore Purchases</td><td>Restore previously purchased plans via Google Play</td><td>All plans</td></tr>
+          <tr><td>Legal Documents</td><td>View Terms of Use, Privacy Policy, etc.</td><td>All plans</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Stocktake Settings</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Mode</th><th>Description</th><th>Locations</th></tr></thead>
+        <tbody>
+          <tr><td>Detail</td><td>Use all locations registered in the Location Master</td><td>All registered locations</td></tr>
+          <tr><td>Simple A</td><td>Stocktake using warehouse only</td><td>Warehouse only</td></tr>
+          <tr><td>Simple B</td><td>Stocktake using warehouse and store</td><td>Warehouse + Store</td></tr>
+          <tr><td>Simple C</td><td>Stocktake using store only</td><td>Store only</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="box box-warn">
+      <strong>⚠ Note</strong>
+      Even with Full Unlock active, if the mode is still set to Simple A/B/C, you will see simple location options. Switch to <strong>Detail</strong> mode to use detailed locations.
+    </div>
+
+    <h3>Product Barcode Scan Settings</h3>
+    <p>Product barcode formats are configured in a separate Product Barcode Scan Settings form. Product barcode settings are handled separately from location-code rules. Turning off formats you do not use can help reduce misreads.</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Plan</th><th>Product barcode formats</th><th>Availability</th><th>Notes</th></tr></thead>
+        <tbody>
+          <tr><td>Free</td><td>EAN-13 / EAN-8 / UPC-A / UPC-E / Code39 / Code128</td><td>Always enabled</td><td>The standard six formats cannot be changed.</td></tr>
+          <tr><td>Simple Unlock</td><td>Choose from the standard six formats</td><td>Selectable</td><td>QR is not selectable in Simple Unlock.</td></tr>
+          <tr><td>Full Unlock</td><td>Core six formats plus QR</td><td>Selectable</td><td>Use only the formats you actually need.</td></tr>
+          <tr><td>Location codes</td><td>Configured separately</td><td>Follow the location-code rule screen</td><td>Do not mix product barcode settings with location-code rules.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Code Rules / Location Rules (Full Unlock)</h3>
+    <p>Set allowed character types, minimum/maximum product-code length, and maximum location-code length. Product-code rules and location-code rules should be checked separately.</p>
+
+    <h3>Restore Purchases</h3>
+    <p>Restores plans purchased through Google Play. Purchase rights can be restored with the same Google account. Device data is not transferred automatically, so use CSV backup or export when changing devices. Purchases cannot be transferred to a different Google account.</p>
+
+    <div class="box box-danger">
+      <strong>🚨 Clear History / Reset Totals Are Irreversible</strong>
+      "Clear All History" and "Reset Master Totals" cannot be undone. Always <strong>Export</strong> a backup before running these actions.
+    </div>
+  </section>
+
+  <!-- Chapter 9 -->
+  <section class="chapter" id="language">
+    <div class="chapter-head">
+      <div class="ch-no">CHAPTER 9</div>
+      <h2>Language Settings</h2>
+    </div>
+    <p>You can select the display language within the app under <strong>Settings → Language</strong>. On launch, the app auto-detects your device language and starts in that language if supported.</p>
+
+    <h3>Supported Languages (12 total)</h3>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Code</th><th>Language</th><th>Free</th><th class="pro-col">All Languages Unlock</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>ja</code></td><td>Japanese</td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
+          <tr><td><code>en</code></td><td>English</td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
+          <tr><td><code>zh</code></td><td>Simplified Chinese</td><td>Device primary language only</td><td><span class="check">✓</span></td></tr>
+          <tr><td><code>tw</code></td><td>Traditional Chinese</td><td>Device primary language only</td><td><span class="check">✓</span></td></tr>
+          <tr><td><code>ko</code></td><td>Korean</td><td>Device primary language only</td><td><span class="check">✓</span></td></tr>
+          <tr><td><code>hi</code></td><td>Hindi</td><td>Device primary language only</td><td><span class="check">✓</span></td></tr>
+          <tr><td><code>vi</code></td><td>Vietnamese</td><td>Device primary language only</td><td><span class="check">✓</span></td></tr>
+          <tr><td><code>it</code></td><td>Italian</td><td>Device primary language only</td><td><span class="check">✓</span></td></tr>
+          <tr><td><code>pt-BR</code></td><td>Portuguese (Brazil)</td><td>Device primary language only</td><td><span class="check">✓</span></td></tr>
+          <tr><td><code>es-419</code></td><td>Spanish (Latin America)</td><td>Device primary language only</td><td><span class="check">✓</span></td></tr>
+          <tr><td><code>id</code></td><td>Indonesian</td><td>Device primary language only</td><td><span class="check">✓</span></td></tr>
+          <tr><td><code>th</code></td><td>Thai</td><td>Device primary language only</td><td><span class="check">✓</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="box box-hint">
+      <strong>💡 Auto Language Detection</strong>
+      If your device language is supported, the app launches in that language. If not supported, it falls back to English.
+      A language selected manually within the app takes priority over the device language.
+    </div>
+    <div class="box box-warn">
+      <strong>⚠ Note</strong>
+      Some translations in the additional 10 languages have not been reviewed by professional native speakers. For legal and billing-related text, always rely on what is shown on-screen.
+    </div>
+  </section>
+
+  <!-- Chapter 10 -->
+  <section class="chapter" id="billing">
+    <div class="chapter-head">
+      <div class="ch-no">CHAPTER 10</div>
+      <h2>Billing Plans Overview</h2>
+    </div>
+    <p>Quantiventra lets you try the core features for free. If you need more capacity or functionality, purchase the relevant plan through Google Play.</p>
+    <div class="box box-danger">
+      <strong>🚨 Important</strong>
+      Pricing, taxes, purchase terms, and refund conditions are governed by what is shown on Google Play — this manual does not make definitive claims. Always check the Google Play listing before purchasing.
+    </div>
+
+    <h3>Feature Comparison</h3>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Feature / Limit</th>
+            <th>Free</th>
+            <th>Stocktake Simple Unlock</th>
+            <th>Stocktake Full</th>
+            <th>Inventory Simple Unlock</th>
+            <th>Inventory Full</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Master records</td><td>Up to 30</td><td>Up to 300</td><td><span class="check">Unlimited</span></td><td>Follow the in-app display</td><td>Follow the in-app display</td></tr>
+          <tr><td>History records</td><td>Up to 30</td><td>Up to 1,000</td><td><span class="check">Unlimited</span></td><td>Available</td><td>Available</td></tr>
+          <tr><td>Export records</td><td>Up to 30</td><td>Up to 300</td><td><span class="check">Unlimited</span></td><td>Follow the in-app guidance</td><td>Follow the in-app guidance</td></tr>
+          <tr><td>Lock screen rotation</td><td><span class="cross">✗</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
+          <tr><td>Code / location rule settings</td><td><span class="cross">✗ (defaults only)</span></td><td><span class="cross">✗</span></td><td><span class="check">✓</span></td><td><span class="cross">✗</span></td><td><span class="check">✓</span></td></tr>
+          <tr><td>Product barcode scan settings</td><td>Core six always enabled</td><td>Core six selectable</td><td>Core six + QR selectable</td><td>Core six selectable</td><td>Core six + QR selectable</td></tr>
+          <tr><td>Extended CSV export</td><td><span class="cross">✗</span></td><td><span class="cross">✗</span></td><td><span class="check">✓</span></td><td><span class="cross">✗</span></td><td><span class="check">✓</span></td></tr>
+          <tr><td>Direct edit of registered cumulative total</td><td>Not available</td><td>Not available</td><td>Available</td><td>Not available</td><td>Available</td></tr>
+          <tr><td>Bulk reset of master totals</td><td>Not available</td><td>Not available</td><td>Available</td><td>Not available</td><td>Available</td></tr>
+          <tr><td>Location master registration</td><td>Not available</td><td>Not available</td><td>Available</td><td>Available</td><td>Available</td></tr>
+          <tr><td>Stock transfer &amp; stocktake apply</td><td>Follow app guidance</td><td>Follow app guidance</td><td>Follow app guidance</td><td>Follow app guidance</td><td>Follow app guidance</td></tr>
+          <tr><td>Languages available</td><td>Japanese, English, device primary</td><td>Same</td><td>Same</td><td>Same</td><td>Same</td></tr>
+          <tr><td>All supported display languages</td><td>Not included</td><td colspan="4">Purchase All Languages Unlock separately</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Bundle Plans &amp; All Languages Unlock</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Plan</th><th>Contents</th></tr></thead>
+        <tbody>
+          <tr><td>Simple Bundle</td><td>Stocktake Simple Unlock + Inventory Simple Unlock</td></tr>
+          <tr><td>Full Bundle</td><td>Stocktake Full + Inventory Full</td></tr>
+          <tr><td>All Languages Unlock</td><td>Enables the additional supported display languages</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>How to Purchase a Plan</h3>
+    <ol class="steps">
+      <li>Tap <strong>Settings → Billing Plans</strong> or a purchase button within the app.</li>
+      <li>The Google Play purchase screen opens.</li>
+      <li>Complete payment — the plan activates immediately.</li>
+    </ol>
+
+    <h3>Restoring Purchases After a Device Change</h3>
+    <ol class="steps">
+      <li>Sign in to the new device with the same Google account.</li>
+      <li>Install and launch the app.</li>
+      <li>Tap <strong>Settings → Restore Purchases</strong>.</li>
+      <li>Once verified, the plan becomes active.</li>
+    </ol>
+
+    <div class="box box-check">
+      <strong>🔍 To Verify</strong>
+      Purchase buttons should display the current price from Google Play. Confirm pricing, availability, and refund terms on Google Play. This manual does not list fixed prices.
+    </div>
+  </section>
+
+  <!-- Chapter 11 -->
+  <section class="chapter" id="sample">
+    <div class="chapter-head">
+      <div class="ch-no">CHAPTER 11</div>
+      <h2>Sample Data</h2>
+    </div>
+    <p>Sample data is practice data for exploring Quantiventra before you start real operations.</p>
+
+    <h3>What's Included</h3>
+    <ul>
+      <li>Approximately 10 sample products</li>
+      <li>Sample categories</li>
+      <li>Basic locations: "Warehouse" and "Store"</li>
+      <li>Sample inventory and stocktake history</li>
+    </ul>
+
+    <h3>Creating Sample Data</h3>
+    <ol class="steps">
+      <li>Choose <strong>Create</strong> if prompted on first launch.</li>
+      <li>To create later, go to <strong>Settings → Create Sample Data</strong>.</li>
+    </ol>
+
+    <h3>Deleting Sample Data</h3>
+    <ol class="steps">
+      <li>Go to <strong>Settings → Delete Sample Data</strong>.</li>
+      <li>Review what will be deleted (sample products, stock, categories, and stocktake history).</li>
+      <li>Confirm and execute deletion.</li>
+    </ol>
+
+    <div class="box box-hint">
+      <strong>💡 What Remains After Deletion</strong>
+      The basic locations "Warehouse" and "Store" and any non-sample data you have created will remain.
+    </div>
+    <div class="box box-danger">
+      <strong>🚨 Important</strong>
+      Always delete sample data before going live. Check that no real data is mixed in before deleting.
+    </div>
+  </section>
+
+  <!-- Chapter 12 -->
+  <section class="chapter" id="trouble">
+    <div class="chapter-head">
+      <div class="ch-no">CHAPTER 12</div>
+      <h2>Troubleshooting</h2>
+    </div>
+
+    <div class="trouble">
+      <div class="trouble-q">Barcode not scanning / camera not responding</div>
+      <div class="trouble-a">
+        <ul>
+          <li>Check that the camera switch (top-right) is turned ON.</li>
+          <li>Keep the barcode <strong>fully inside</strong> the guide frame — codes outside the frame will not be detected.</li>
+          <li>In Product Barcode Scan Settings, verify that the enabled formats match the product barcodes you actually use.</li>
+          <li>If the barcode is torn or dirty, use manual entry instead.</li>
+          <li>Verify camera permission: <strong>Settings → Apps → Quantiventra → Permissions → Camera</strong>.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="trouble">
+      <div class="trouble-q">Product names not showing after importing master CSV</div>
+      <div class="trouble-a">
+        <ul>
+          <li>Confirm the CSV is encoded in UTF-8 (Shift-JIS will cause garbled text).</li>
+          <li>Verify the header row matches the required format: <code>barcode,name,theoretical_stock,actual_stock_total</code>.</li>
+          <li>If a product name contains a comma, enclose it in double quotes: e.g., <code>"Bolt, M6"</code>.</li>
+          <li>Re-run <strong>Import Master CSV</strong>.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="trouble">
+      <div class="trouble-q">Cannot save / "Save failed" message appears</div>
+      <div class="trouble-a">
+        <ul>
+          <li>Check that your device has sufficient free storage.</li>
+          <li>You cannot save an entry with no barcode and no product name entered.</li>
+          <li>Try closing and restarting the app.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="trouble">
+      <div class="trouble-q">Share or Export produces no file</div>
+      <div class="trouble-a">
+        <ul>
+          <li>If there are 0 history records, the file will be empty — save at least one entry first.</li>
+          <li>When exporting, make sure to select a folder in the dialog and tap <strong>Select</strong>.</li>
+          <li>Confirm the target app (e.g., email) is installed.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="trouble">
+      <div class="trouble-q">Stock quantities don't match</div>
+      <div class="trouble-a">
+        <ul>
+          <li>Review inventory history for receiving, shipping, transfer, and stocktake adjustment records.</li>
+          <li>If you ran a CSV stock replace, items not in the CSV may have been set to 0.</li>
+          <li>If stocktake apply was run, discrepancies are recorded as "Stocktake Adjustment."</li>
+          <li>Cross-reference with your backup CSV.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="trouble">
+      <div class="trouble-q">Locations not showing / can't find a location</div>
+      <div class="trouble-a">
+        <ul>
+          <li>Check whether the stocktake mode is still set to Simple A/B/C. Switch to <strong>Detail</strong> mode to use detailed locations.</li>
+          <li>Check that the location is not set to <strong>Inactive</strong> in the Location Master.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="trouble">
+      <div class="trouble-q">Purchased plan features not available</div>
+      <div class="trouble-a">
+        <ul>
+          <li>Tap <strong>Settings → Restore Purchases</strong>.</li>
+          <li>Verify you are signed in with the Google account used for the purchase.</li>
+          <li>Try again with a working internet connection (required to verify purchases).</li>
+          <li>Confirm you are using the version installed via the Google Play Store.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="trouble">
+      <div class="trouble-q">Data disappeared after changing devices</div>
+      <div class="trouble-a">
+        <ul>
+          <li>Data is stored in the app's internal storage and is lost when the app is uninstalled or the device is changed.</li>
+          <li>It is strongly recommended to back up your data regularly via <strong>Export</strong> or <strong>Share</strong>.</li>
+          <li>If you have a backup, restore it using <strong>Import Master CSV</strong>.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="trouble">
+      <div class="trouble-q">Screen keeps rotating, making work difficult</div>
+      <div class="trouble-a">
+        <ul>
+          <li>If you have Simple Unlock or above: enable <strong>Settings → Lock Screen Rotation</strong>.</li>
+          <li>If on the free tier: use your device's built-in rotation lock (available from the notification panel).</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="trouble">
+      <div class="trouble-q">Language won't change</div>
+      <div class="trouble-a">
+        <ul>
+          <li>Manually select a language in <strong>Settings → Language</strong>.</li>
+          <li>Check the selected app language and your device language settings.</li>
+          <li>Unsupported device languages will default to English.</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3>Quick Symptom Reference</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Symptom</th><th>Likely Cause</th><th>Action</th></tr></thead>
+        <tbody>
+          <tr><td>Wrong stock count</td><td>Input error, CSV replace, stocktake apply</td><td>Check inventory history</td></tr>
+          <tr><td>Product not found</td><td>Typo in search, unregistered, deactivated</td><td>Check master data</td></tr>
+          <tr><td>Location not shown</td><td>Simple mode setting, deactivated</td><td>Check settings and master</td></tr>
+          <tr><td>CSV import fails</td><td>Missing columns, non-numeric quantity</td><td>Check column mapping and CSV content</td></tr>
+          <tr><td>Barcode not reading</td><td>Poor light, dirty code, unsupported type</td><td>Try manual entry or check settings</td></tr>
+          <tr><td>Purchase not reflected</td><td>Wrong account, network issue</td><td>Restore purchases, check connection</td></tr>
+          <tr><td>Screen keeps rotating</td><td>Rotation lock is OFF</td><td>Lock in settings or use device lock</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- Chapter 13 -->
+  <section class="chapter" id="glossary">
+    <div class="chapter-head">
+      <div class="ch-no">CHAPTER 13</div>
+      <h2>Glossary</h2>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Term</th><th>Definition</th></tr></thead>
+        <tbody>
+          <tr><td>Stocktake</td><td>The act of physically counting and recording the quantity of goods in stock</td></tr>
+          <tr><td>Physical count</td><td>The actual quantity counted on the floor</td></tr>
+          <tr><td>Theoretical stock</td><td>The stock quantity calculated by the system</td></tr>
+          <tr><td>Discrepancy / Variance</td><td>The difference between the physical count and theoretical stock</td></tr>
+          <tr><td>Product</td><td>An individual item that holds inventory</td></tr>
+          <tr><td>Category</td><td>A grouping used to classify products</td></tr>
+          <tr><td>Location</td><td>A place where stock is held (e.g., warehouse, store, shelf)</td></tr>
+          <tr><td>Include in replenishment check</td><td>A setting that includes a location's stock in the total used for replenishment decisions</td></tr>
+          <tr><td>Stock / Inventory</td><td>The current quantity on hand</td></tr>
+          <tr><td>Receiving (Stock In)</td><td>An operation that increases stock</td></tr>
+          <tr><td>Shipping (Stock Out)</td><td>An operation that decreases stock</td></tr>
+          <tr><td>Stock Transfer</td><td>Moving stock from one location to another when the required products, stock, and locations are available</td></tr>
+          <tr><td>Inventory History</td><td>A log of receiving, shipping, transfer, and stocktake adjustment operations</td></tr>
+          <tr><td>Reorder Point</td><td>A reference quantity used to judge when stock is running low</td></tr>
+          <tr><td>Product Code</td><td>An internal code used to identify a product</td></tr>
+          <tr><td>Registered Cumulative Total</td><td>The accumulated total quantity saved to date</td></tr>
+          <tr><td>CSV</td><td>A comma-separated text file that can be opened in spreadsheet applications</td></tr>
+          <tr><td>Backup</td><td>Data saved for recovery or reference purposes</td></tr>
+          <tr><td>Replace Current Stock</td><td>A CSV import mode that treats the file's quantities as the new current stock</td></tr>
+          <tr><td>Add as Stock-In</td><td>A CSV import mode that adds the file's quantities as receiving</td></tr>
+          <tr><td>Specified Stocktake Date Basis</td><td>A method that recalculates stock from a past stocktake date as the baseline</td></tr>
+          <tr><td>Finalize Physical Count</td><td>The action of confirming a stocktake result (Full Unlock)</td></tr>
+          <tr><td>Master data</td><td>A database managing core records such as products, categories, and locations</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- Chapter 14 -->
+  <section class="chapter" id="legal">
+    <div class="chapter-head">
+      <div class="ch-no">CHAPTER 14</div>
+      <h2>Terms &amp; Disclaimers</h2>
+    </div>
+
+    <div class="legal-block">
+      <h4>■ Terms of Use</h4>
+      <p>Please read the following Terms of Use carefully before using this app. By downloading or using the app, you agree to these terms.</p>
+
+      <p><strong>1. License</strong><br>
+      Use of this app for inventory management and stocktaking purposes is permitted for both individuals and businesses. Reverse engineering, decompiling, modifying, or redistributing the app is prohibited.</p>
+
+      <p><strong>2. User Data</strong><br>
+      Business data generated by this app (master CSVs, history CSVs, and settings files) is handled on the user's device during normal operations. The app does not send that business data to external servers. Network communication may occur for Google Play purchase verification and related store functions.</p>
+
+      <p><strong>3. Plan Purchases</strong><br>
+      All plan purchases are processed through Google Play billing. Refunds are subject to Google Play's refund policy.</p>
+
+      <p><strong>4. Prohibited Uses</strong><br>
+      Using this app for illegal purposes, infringing on the rights of third parties, or deliberately generating fraudulent data through misuse of app features is prohibited.</p>
+
+      <h4>■ Disclaimer</h4>
+      <p>This app is provided "AS IS." The developer assumes no liability for any damages arising from the use or inability to use the app, including but not limited to data loss, business interruption, or any other direct or indirect damages.</p>
+      <p>Users are responsible for verifying the accuracy and completeness of CSV data generated by this app. The developer is not responsible for data inconsistencies caused by scan errors or input mistakes.</p>
+      <p>Barcode reading accuracy varies depending on the device's camera performance, the condition of the barcode, and environmental factors. Use manual entry when scanning is not possible.</p>
+
+      <h4>■ Privacy Policy</h4>
+      <p>This app does not collect, transmit, or use personal information such as names, addresses, phone numbers, or email addresses. Routine app operations are handled on the device; purchase verification, purchase restoration, store navigation, and external links may require network communication.</p>
+      <p>The camera is used solely for scanning barcodes and QR codes. No video is recorded, saved, or transmitted.</p>
+
+      <h4>■ Copyright</h4>
+      <p>Copyright © Quantiventra. All Rights Reserved.</p>
+      <p>All content in this app and manual (text, design, logos, etc.) is the property of the developer.</p>
+      <p>This app uses open-source libraries, each governed by its respective license.</p>
+
+      <h4>■ Changes to Terms</h4>
+      <p>These terms may be changed without prior notice. Updated terms take effect upon publication on the Google Play Store or notification within the app.</p>
+    </div>
+  </section>
+
+  <div class="summary-box" id="summary">
+    <h3>📌 Chapter Highlights</h3>
+    <ul>
+      <li>Quantiventra = Quantity + Inventory. Auto-recognizes barcodes after 3 consecutive matching frames.</li>
+      <li>Requires Android 8.0+ and an autofocus camera. No storage permission is needed. Routine work can be done offline; store-related functions may require a network connection.</li>
+      <li>Data is stored in internal app storage — export regularly, as uninstalling deletes everything.</li>
+      <li>Stocktake and Inventory Management are separate modules — entering stocktake quantities does not change inventory until finalized.</li>
+      <li>Start with sample data for practice; delete it before going live.</li>
+      <li>Check Google Play for billing plan details — this manual does not state prices definitively.</li>
+      <li>When troubleshooting, check inventory history, master data, and settings in that order.</li>
+      <li>Always back up before major operations (CSV replace, stocktake apply, delete, reset).</li>
+    </ul>
+  </div>
+
+  <div class="confirm-box" id="confirm">
+    <h3>🔍 Items to Verify</h3>
+    <ul>
+      <li>Before using the app, confirm the latest plan details and purchase terms in the app and on Google Play.</li>
+      <li>Check the current in-app guidance before finalizing stocktake data, applying stocktake data to inventory, resetting totals, or importing CSV files.</li>
+      <li>Use Product Barcode Scan Settings for product barcodes and location-code rules for locations; do not mix the two.</li>
+      <li>When changing devices, restore purchases with the same Google account and export or back up device data separately.</li>
+      <li>For help and legal information, use the links shown in the current app.</li>
+    </ul>
+  </div>
+
+</div>
+
+<a href="#top" class="back-top" title="Back to top">↑</a>
+
+<footer>
+  <strong>Quantiventra</strong> — Barcode Stocktake &amp; Inventory Management App<br>
+  Copyright © Quantiventra. All Rights Reserved.<br>
+  The contents of this manual are subject to change without notice.<br>
+  <span style="font-size:11px;opacity:.6;">Always refer to the latest in-app display.</span>
+  <p style="margin-top:4px;"><a href="privacy_en.html">Privacy Policy</a></p>
+</footer>
+
+</body>
+</html>

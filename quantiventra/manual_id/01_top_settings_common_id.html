@@ -1,0 +1,412 @@
+﻿<!DOCTYPE html>
+<html lang="id">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quantiventra – Beranda, Pengaturan & Operasi Umum</title>
+<style>*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;font-size:15px;line-height:1.8;color:#1a2535;background:#f4f7fb;}
+a{color:#1a5fa8;text-decoration:none;}a:hover{text-decoration:underline;}
+.site-nav{background:#1a3a5c;color:#fff;padding:0;}.site-nav .nav-inner{max-width:960px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:stretch;}
+.site-nav a{color:#cde;padding:10px 13px;font-size:12px;display:block;border-right:1px solid #2a4a6c;white-space:nowrap;}
+.site-nav a:hover{background:#2a5090;text-decoration:none;}.site-nav a.active{background:#2a6cbe;color:#fff;font-weight:bold;}
+.page-header{background:linear-gradient(135deg,#1a3a5c 0%,#2a6cbe 100%);color:#fff;padding:40px 20px 30px;}
+.page-header .inner{max-width:960px;margin:0 auto;}.page-header .app-name{font-size:13px;opacity:.8;}
+.page-header h1{font-size:22px;font-weight:700;margin-top:6px;line-height:1.4;}.page-header .subtitle{font-size:14px;opacity:.85;margin-top:8px;}
+.scope-box{background:rgba(255,255,255,.15);border-left:4px solid #7ecfff;padding:12px 16px;margin-top:16px;border-radius:4px;font-size:13px;}
+.play-section{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.3);border-radius:10px;padding:22px 28px;margin-top:24px;display:flex;align-items:center;gap:28px;flex-wrap:wrap;}
+.play-qr-wrap{flex-shrink:0;text-align:center;}
+.play-qr-frame{width:130px;height:130px;border:3px solid rgba(255,255,255,.7);border-radius:10px;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.95);position:relative;overflow:hidden;}
+.play-qr-frame img{width:100%;height:100%;object-fit:contain;display:block;}
+.play-qr-corner{pointer-events:none;position:absolute;width:16px;height:16px;border-color:#2a6cbe;border-style:solid;border-width:0;}
+.play-qr-corner.tl{top:5px;left:5px;border-top-width:3px;border-left-width:3px;border-radius:3px 0 0 0;}
+.play-qr-corner.tr{top:5px;right:5px;border-top-width:3px;border-right-width:3px;border-radius:0 3px 0 0;}
+.play-qr-corner.bl{bottom:5px;left:5px;border-bottom-width:3px;border-left-width:3px;border-radius:0 0 0 3px;}
+.play-qr-corner.br{bottom:5px;right:5px;border-bottom-width:3px;border-right-width:3px;border-radius:0 0 3px 0;}
+.play-qr-label{font-size:10px;color:rgba(255,255,255,.8);margin-top:6px;letter-spacing:.05em;}
+.play-info h3{font-size:16px;font-weight:700;color:#fff;margin-bottom:4px;}
+.play-info p{font-size:12px;color:rgba(255,255,255,.75);margin-bottom:10px;}
+.play-badge{display:inline-block;text-decoration:none;}
+.play-badge img{display:block;height:44px;width:auto;max-width:180px;}.container{max-width:960px;margin:0 auto;padding:30px 16px;}
+.toc{background:#fff;border:1px solid #c8d8ec;border-radius:8px;padding:24px 28px;margin-bottom:32px;}
+.toc h2{font-size:16px;font-weight:700;color:#1a3a5c;border-bottom:2px solid #2a6cbe;padding-bottom:8px;margin-bottom:14px;}
+.toc ol{margin-left:18px;}.toc li{margin:5px 0;font-size:14px;}
+.chapter{background:#fff;border-radius:8px;box-shadow:0 1px 4px rgba(0,0,0,.08);padding:28px 28px 24px;margin-bottom:28px;}
+.chapter-head{border-left:5px solid #2a6cbe;padding-left:14px;margin-bottom:20px;}
+.chapter-head .ch-no{font-size:12px;color:#2a6cbe;font-weight:700;}.chapter-head h2{font-size:20px;font-weight:700;color:#1a2535;margin-top:2px;}
+h3{font-size:16px;font-weight:700;color:#1a3a5c;border-bottom:1px solid #dde8f5;padding-bottom:5px;margin:22px 0 12px;}
+h4{font-size:14px;font-weight:700;color:#2a4a6c;margin:16px 0 8px;}
+p{margin-bottom:12px;}ul,ol{margin-left:20px;margin-bottom:12px;}li{margin-bottom:5px;}
+.steps{counter-reset:step;list-style:none;margin-left:0;}
+.steps li{counter-increment:step;padding:9px 12px 9px 46px;position:relative;background:#f8fbff;border:1px solid #dde8f5;border-radius:6px;margin-bottom:6px;}
+.steps li::before{content:counter(step);position:absolute;left:12px;top:50%;transform:translateY(-50%);width:24px;height:24px;background:#2a6cbe;color:#fff;border-radius:50%;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;}
+.table-wrap{overflow-x:auto;margin-bottom:16px;}
+table{width:100%;border-collapse:collapse;font-size:13px;min-width:380px;}
+th{background:#1a3a5c;color:#fff;padding:9px 12px;text-align:left;white-space:nowrap;}
+td{padding:8px 12px;border-bottom:1px solid #dde8f5;vertical-align:top;}tr:nth-child(even) td{background:#f4f7fb;}
+code{font-family:'Courier New',monospace;background:rgba(0,80,160,.08);color:#004080;padding:2px 6px;border-radius:3px;font-size:12px;}
+.box{border-radius:6px;padding:13px 16px;margin:14px 0;font-size:13px;}
+.box-warn{background:#fffbe6;border-left:4px solid #f5a623;color:#7a5700;}
+.box-danger{background:#fff0f0;border-left:4px solid #d43f3f;color:#7a0000;}
+.box-hint{background:#e8f4ff;border-left:4px solid #2a6cbe;color:#0a3060;}
+.box-check{background:#f4eeff;border-left:4px solid #8c4fc8;color:#3a0070;}
+.box strong{display:block;margin-bottom:4px;}
+figure{max-width:280px;width:100%;margin:18px auto;text-align:center;}
+figure img{display:block;width:100%;max-width:280px;height:auto;margin:0 auto;border:1px solid #c8d8ec;border-radius:6px;box-shadow:0 2px 8px rgba(0,0,0,.1);}
+figcaption{font-size:12px;color:#5a7a99;margin-top:6px;}
+.img-pending{display:flex;align-items:center;justify-content:center;max-width:280px;width:100%;box-sizing:border-box;background:#e8eef5;border:2px dashed #99b8d8;border-radius:6px;height:160px;color:#5a7a99;font-size:13px;margin:18px auto;}
+.diff-add{background:#e8fff0;border-left:4px solid #2a9c5c;border-radius:6px;padding:12px 16px;margin:14px 0;font-size:13px;}
+.diff-add strong{display:block;color:#1a6c3c;margin-bottom:4px;}
+.flow-box{background:#f4f7fb;border:1px solid #c8d8ec;border-radius:8px;padding:20px;margin:16px 0;}
+.flow-box h4{color:#1a3a5c;margin-top:0;}
+.flow-arrow{text-align:center;font-size:20px;color:#2a6cbe;margin:4px 0;}
+.flow-step{background:#fff;border:1px solid #c8d8ec;border-radius:6px;padding:10px 16px;margin:4px 0;font-size:13px;}
+.flow-step strong{color:#1a3a5c;}
+.summary-box{background:linear-gradient(135deg,#e8f4ff,#f0f8ff);border:1px solid #99c8ec;border-radius:8px;padding:20px 24px;margin-top:32px;}
+.summary-box h3{border:none;color:#1a3a5c;margin-top:0;}
+.confirm-box{background:#fdf4ff;border:1px solid #c8a0e0;border-radius:8px;padding:20px 24px;margin-top:16px;}
+.confirm-box h3{border:none;color:#5a0090;margin-top:0;}
+.check{color:#2e7d32;font-weight:700;}.cross{color:#c62828;}
+th.pro-col{background:#5a2a8c;}
+.feature-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px;margin:16px 0;}
+.feature-card{background:#f4f7fb;border:1px solid #c8d8ec;border-radius:8px;padding:16px;}
+.feature-card h4{color:#1a3a5c;margin-top:0;margin-bottom:6px;font-size:14px;}
+.feature-card p{font-size:13px;margin:0;color:#3a5a7a;}
+.feature-card.pro-card{background:#f4eeff;border-color:#c8a0e0;}
+.feature-card.pro-card h4{color:#5a2a8c;}
+.trouble{border:1px solid #c8d8ec;border-radius:8px;margin:14px 0;overflow:hidden;}
+.trouble-q{background:#eef6fd;padding:13px 18px;font-weight:700;font-size:14px;color:#1a3a5c;display:flex;align-items:flex-start;gap:10px;}
+.trouble-q::before{content:'Q';background:#2a6cbe;color:#fff;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900;flex-shrink:0;margin-top:1px;}
+.trouble-a{padding:13px 18px 14px 50px;font-size:13.5px;border-top:1px solid #c8d8ec;line-height:1.9;}
+.trouble-a ul{margin-left:16px;}
+.legal-block{background:#f5f5f5;border:1px solid #ddd;border-radius:8px;padding:20px 24px;font-size:12.5px;color:#444;line-height:1.9;margin:14px 0;}
+.legal-block h4{font-size:13px;color:#333;margin:18px 0 6px;border-bottom:1px solid #ddd;padding-bottom:4px;}
+.legal-block h4:first-child{margin-top:0;}
+footer{text-align:center;font-size:12px;color:#8a9aaa;padding:30px 16px;border-top:1px solid #dde8f5;margin-top:20px;}
+@media(max-width:640px){.page-header h1{font-size:18px;}.chapter{padding:20px 16px;}.site-nav a{padding:8px 9px;font-size:11px;}}
+@media print{body{background:#fff;font-size:12px;}.site-nav{display:none;}.chapter{box-shadow:none;border:1px solid #ccc;page-break-inside:avoid;}.page-header{background:#1a3a5c !important;-webkit-print-color-adjust:exact;print-color-adjust:exact;}}
+</style></head>
+<body>
+<nav class="site-nav"><div class="nav-inner">
+  <a href="01_top_settings_common_id.html" class="active">① Beranda / Pengaturan</a>
+  <a href="02_stocktake_free_id.html">② Stok Opname Gratis</a>
+  <a href="03_stocktake_simple_id.html">③ Stok Opname Standar</a>
+  <a href="04_stocktake_full_id.html">④ Stok Opname Lengkap</a>
+  <a href="05_inventory_free_id.html">⑤ Manajemen Stok Gratis</a>
+  <a href="06_inventory_simple_id.html">⑥ Manajemen Stok Standar</a>
+  <a href="07_inventory_full_id.html">⑦ Manajemen Stok Lengkap</a>
+</div></nav>
+<header class="page-header"><div class="inner">
+  <div class="app-name">Manual Quantiventra — Versi Bahasa Indonesia</div>
+  <h1>① Beranda · Pengaturan · Operasi Umum</h1>
+  <div class="subtitle">Ikhtisar aplikasi, persyaratan sistem, pengaturan, izin, paket, data contoh, glosarium, dan catatan hukum</div>
+  <div class="scope-box"><strong>Topik yang dibahas di halaman ini:</strong> Apa itu Quantiventra / Persyaratan sistem & izin / Instalasi & pertama kali digunakan / Penyimpanan data / Perbedaan stok opname dan manajemen stok / Panduan cepat / Halaman Beranda / Halaman Pengaturan / Bahasa / Ringkasan paket / Data contoh / Pemecahan masalah / Glosarium / Syarat hukum</div>
+</div></header>
+<div class="container">
+  <nav class="toc"><h2>Daftar Isi</h2><ol>
+    <li><a href="#about">Apa itu Quantiventra?</a></li>
+    <li><a href="#environment">Persyaratan sistem &amp; izin</a></li>
+    <li><a href="#install">Instalasi &amp; pertama kali digunakan</a></li>
+    <li><a href="#storage">Penyimpanan data</a></li>
+    <li><a href="#diff">Stok Opname vs Manajemen Stok</a></li>
+    <li><a href="#start">Panduan cepat untuk pengguna baru</a></li>
+    <li><a href="#top-screen">Halaman Beranda</a></li>
+    <li><a href="#settings">Halaman Pengaturan</a></li>
+    <li><a href="#language">Pengaturan bahasa</a></li>
+    <li><a href="#billing">Ringkasan paket</a></li>
+    <li><a href="#sample">Data contoh</a></li>
+    <li><a href="#trouble">Pemecahan masalah</a></li>
+    <li><a href="#glossary">Glosarium</a></li>
+    <li><a href="#legal">Syarat penggunaan dan penafian</a></li>
+    <li><a href="#summary">Poin utama bab ini</a></li>
+    <li><a href="#confirm">Hal-hal yang perlu dikonfirmasi</a></li>
+  </ol></nav>
+
+  <section class="chapter" id="about">
+    <div class="chapter-head"><div class="ch-no">BAB 1</div><h2>Apa itu Quantiventra?</h2></div>
+    <p><strong>Quantiventra</strong> adalah gabungan dari "<em>Quantity</em>" (jumlah) dan "<em>Inventory</em>" (inventaris/stok). Ini adalah aplikasi Android yang menyederhanakan stok opname dan manajemen stok melalui pemindaian barcode dengan kamera smartphone. Pekerjaan rutin seperti pencatatan stok opname, manajemen stok, pengelolaan katalog, serta impor dan ekspor CSV dapat dilakukan di perangkat. Beberapa fungsi, seperti verifikasi pembelian, pemulihan pembelian, Google Play, dan tautan eksternal, dapat memerlukan koneksi internet.</p>
+    <p>Cukup arahkan kamera ke barcode untuk mengenali produk secara otomatis, lalu masukkan dan simpan jumlahnya — alur yang intuitif untuk mendigitalisasi pencatatan inventaris berbasis kertas. Hasilnya disimpan sebagai file CSV yang mudah digunakan di Excel atau Google Sheets.</p>    <h3>Fitur Utama</h3>
+    <div class="feature-grid">
+      <div class="feature-card"><h4>📦 Penghitungan Stok</h4><p>Kenali produk dengan cepat melalui pemindaian barcode dan catat jumlah secara langsung. Kalkulator bawaan memudahkan penjumlahan hitungan dari berbagai lokasi.</p></div>
+      <div class="feature-card"><h4>🗂️ Manajemen Katalog</h4><p>Daftarkan produk, kategori, dan lokasi sebagai data katalog. Mendukung impor massal via CSV.</p></div>
+      <div class="feature-card"><h4>📍 Manajemen Lokasi</h4><p>Daftarkan beberapa lokasi penyimpanan seperti gudang, toko, dan rak, lalu kelola stok per lokasi. Anda juga dapat mengatur lokasi mana yang diperhitungkan dalam pengecekan kebutuhan pengisian ulang.</p></div>
+      <div class="feature-card"><h4>📊 Impor/Ekspor CSV</h4><p>Ekspor daftar stok, cadangan, dan riwayat dalam format CSV untuk dirangkum di Excel atau Google Sheets.</p></div>
+      <div class="feature-card"><h4>🌐 Dukungan Multibahasa</h4><p>Mendukung 12 bahasa termasuk Indonesia, Inggris, Jepang, Cina, dan Korea. Menyesuaikan bahasa perangkat secara otomatis.</p></div>
+      <div class="feature-card pro-card"><h4>⭐ Fitur Versi Lengkap</h4><p>Hapus batas item dan buka kunci manajemen lokasi detail, transfer stok, penerapan inventaris ke stok, dan banyak lagi.</p></div>
+    </div>
+    <h3>Cara Kerja Pemindaian Kamera</h3>
+    <p>Ketika barcode berada di dalam bingkai panduan (tepi biru atau kuning) di tengah layar, aplikasi mengonfirmasi secara otomatis setelah mendeteksi <strong>kode yang sama selama 3 frame berturut-turut</strong>. Mekanisme konfirmasi tiga kali ini mencegah pembacaan yang salah sekaligus memastikan pengenalan yang andal.</p>
+    <div class="box box-hint"><strong>💡 Jika barcode tidak terbaca</strong>Barcode harus <strong>berada sepenuhnya di dalam</strong> bingkai panduan. Kode yang sebagian berada di luar bingkai tidak akan terdeteksi. Sesuaikan posisi kamera hingga barcode seluruhnya masuk ke dalam bingkai.</div>
+  </section>
+
+  <section class="chapter" id="environment">
+    <div class="chapter-head"><div class="ch-no">BAB 2</div><h2>Persyaratan Sistem &amp; Izin</h2></div>
+    <div class="table-wrap"><table>
+      <tr><th>Item</th><th>Persyaratan</th></tr>
+      <tr><td>Sistem operasi</td><td>Android 8.0 (Oreo / API 26) atau lebih baru</td></tr>
+      <tr><td>Kamera</td><td>Kamera dengan autofokus (wajib)</td></tr>
+      <tr><td>Penyimpanan</td><td>Minimal 10 MB ruang bebas di penyimpanan internal (disarankan)</td></tr>
+      <tr><td>Izin yang diperlukan</td><td>Kamera (wajib)</td></tr>
+      <tr><td>Internet</td><td>Tidak diperlukan untuk pekerjaan rutin di aplikasi — koneksi internet dapat diperlukan untuk pembelian, pemulihan paket, Google Play, atau tautan eksternal</td></tr>
+      <tr><td>Google Play Services</td><td>Diperlukan untuk pembelian dan pemulihan paket</td></tr>
+    </table></div>
+    <div class="box box-hint"><strong>💡 Izin penyimpanan</strong>Aplikasi menyimpan data di <strong>penyimpanan internal privat aplikasi</strong> di Android. Izin penyimpanan tidak diperlukan. Pertukaran data dilakukan melalui fungsi impor, ekspor, dan berbagi milik aplikasi.</div>
+  </section>
+
+  <section class="chapter" id="install">
+    <div class="chapter-head"><div class="ch-no">BAB 3</div><h2>Instalasi &amp; Pertama Kali Digunakan</h2></div>
+    <ol class="steps">
+      <li>Cari "Quantiventra" di Google Play Store dan ketuk <strong>Instal</strong>.</li>
+      <li>Buka aplikasi dengan mengetuk ikonnya. Saat permintaan izin kamera muncul, ketuk <strong>Izinkan</strong>.</li>
+      <li>Jika muncul prompt data contoh, pilih <strong>Buat</strong> atau <strong>Lewati</strong>.</li>
+      <li>Folder data aplikasi dibuat secara otomatis di penyimpanan internal.</li>
+      <li>Setelah halaman Beranda muncul, pengaturan awal selesai.</li>
+    </ol>
+    <div class="box box-warn"><strong>⚠ Jika izin kamera ditolak</strong>Pemindaian barcode tidak akan tersedia. Untuk mengaktifkannya kembali: <strong>Pengaturan → Aplikasi → Quantiventra → Izin → Kamera → Aktifkan</strong>.</div>
+    <div class="box box-danger"><strong>🚨 Perhatian saat menghapus instalasi</strong>Menghapus instalasi aplikasi akan menghapus semua data di penyimpanan internal. Biasakan membuat cadangan secara rutin melalui <strong>Ekspor</strong> atau <strong>Bagikan</strong>.</div>
+  </section>
+
+  <section class="chapter" id="storage">
+    <div class="chapter-head"><div class="ch-no">BAB 4</div><h2>Penyimpanan Data</h2></div>
+    <p>Data aplikasi tersimpan di area privat aplikasi pada perangkat. Jangan mengeditnya langsung melalui pengelola file. Gunakan fungsi Bagikan dan Ekspor di aplikasi untuk mengakses atau mencadangkan data.</p>
+    <div class="table-wrap"><table>
+      <tr><th>Kategori</th><th>Konten</th><th>Kapan diperbarui</th></tr>
+      <tr><td>Data katalog</td><td>Data utama produk, kategori, lokasi, dll.</td><td>Saat item didaftarkan, diedit, atau dinonaktifkan</td></tr>
+      <tr><td>Riwayat inventaris &amp; stok</td><td>Catatan stok opname, stok masuk, stok keluar, transfer, impor CSV, dan data terkait lainnya.</td><td>Saat item disimpan atau diimpor</td></tr>
+      <tr><td>Pengaturan aplikasi</td><td>Bahasa, pemindaian, aturan kode, pengaturan lokasi, dll.</td><td>Saat pengaturan diubah</td></tr>
+    </table></div>
+    <h3>Prosedur Cadangan yang Disarankan</h3>
+    <ol class="steps">
+      <li>Ketuk <strong>Pengaturan → Ekspor (Pilih Folder)</strong>.</li>
+      <li>Buat dan pilih folder cadangan di folder Dokumen perangkat, cth. <code>Quantiventra_backup_20250401</code>.</li>
+      <li>Cadangan selesai saat file CSV riwayat dan data katalog telah tersimpan.</li>
+      <li>Untuk keamanan lebih, salin file ke PC melalui Google Drive atau kabel USB.</li>
+    </ol>
+  </section>
+
+  <section class="chapter" id="diff">
+    <div class="chapter-head"><div class="ch-no">BAB 5</div><h2>Stok Opname vs Manajemen Stok</h2></div>
+    <div class="table-wrap"><table>
+      <tr><th>Item</th><th>Stok Opname</th><th>Manajemen Stok</th></tr>
+      <tr><td>Tujuan</td><td>Menghitung dan mencatat jumlah aktual</td><td>Melacak perubahan stok melalui stok masuk, keluar, dan transfer</td></tr>
+      <tr><td>Alur kerja</td><td>Pindai → Input jumlah → Simpan → Konfirmasi</td><td>Stok masuk/keluar/transfer → Simpan → Lihat riwayat</td></tr>
+      <tr><td>Penggunaan umum</td><td>Inventaris bulanan, akhir tahun, pengecekan mendadak</td><td>Pengelolaan stok masuk, keluar, dan transfer harian</td></tr>
+      <tr><td>Dampak pada stok</td><td>Diterapkan ke stok setelah konfirmasi (versi Lengkap)</td><td>Langsung tercermin di setiap operasi</td></tr>
+    </table></div>
+    <div class="box box-warn"><strong>⚠ Perhatian</strong>Stok Opname dan Manajemen Stok adalah modul yang terpisah. Memasukkan jumlah di stok opname <strong>tidak</strong> mengubah stok, kecuali operasi "Terapkan ke Stok" dijalankan (fitur versi Lengkap). Jangan mencampuradukkan kedua modul ini.</div>
+  </section>
+
+  <section class="chapter" id="start">
+    <div class="chapter-head"><div class="ch-no">BAB 6</div><h2>Panduan Cepat untuk Pengguna Baru</h2></div>
+    <h3>Langkah 1: Berlatih dengan data contoh</h3>
+    <ol class="steps">
+      <li>Buka aplikasi; jika muncul prompt data contoh, pilih <strong>Buat</strong>.</li>
+      <li>Dari Beranda, buka <strong>Manajemen Stok</strong> dan periksa level stok contoh.</li>
+      <li>Buka <strong>Stok Opname</strong> dan coba memindai barcode serta memasukkan jumlah.</li>
+      <li>Coba ekspor file CSV.</li>
+      <li>Sebelum mulai operasi nyata, hapus data contoh (dari halaman Pengaturan).</li>
+    </ol>
+    <h3>Langkah 2: Daftarkan produk di katalog</h3>
+    <ol class="steps">
+      <li>Dari Beranda, buka <strong>Manajemen Katalog</strong>.</li>
+      <li>Buka <strong>Katalog Produk</strong>, buat item baru, dan masukkan kode dan nama produk.</li>
+      <li>Atur kategori, harga, dan acuan pengisian ulang stok sesuai kebutuhan.</li>
+      <li>Daftarkan gudang, toko, dll. di <strong>Katalog Lokasi</strong> (disarankan untuk versi Standar ke atas).</li>
+    </ol>
+    <div class="box box-hint"><strong>💡 Tips</strong>Disarankan untuk terlebih dahulu familiar dengan data contoh sebelum memasukkan data produk nyata.</div>
+  </section>
+
+  <section class="chapter" id="top-screen">
+    <div class="chapter-head"><div class="ch-no">BAB 7</div><h2>Halaman Beranda</h2></div>
+    <div class="table-wrap"><table>
+      <tr><th>Titik akses</th><th>Keterangan</th></tr>
+      <tr><td>Stok Opname</td><td>Membuka layar inventaris untuk memindai produk dan mencatat jumlah aktual</td></tr>
+      <tr><td>Manajemen Stok</td><td>Mengakses pengecekan stok, stok masuk, stok keluar, transfer, dan riwayat stok</td></tr>
+      <tr><td>Manajemen Katalog</td><td>Mengelola data katalog produk, kategori, dan lokasi</td></tr>
+      <tr><td>Pengaturan</td><td>Bahasa, pengaturan inventaris, CSV, data contoh, pembelian paket, dokumen hukum, dll.</td></tr>
+    </table></div>
+    <div class="box box-warn"><strong>⚠ Perhatian</strong>Menjalankan operasi Manajemen Stok saat ada data inventaris yang belum dikonfirmasi dapat menyebabkan inkonsistensi. Disarankan untuk menyelesaikan inventaris terlebih dahulu sebelum melakukan perubahan stok.</div>
+  </section>
+
+  <section class="chapter" id="settings">
+    <div class="chapter-head"><div class="ch-no">BAB 8</div><h2>Halaman Pengaturan</h2></div>    <h3>Impor / Ekspor Data</h3>
+    <div class="table-wrap"><table>
+      <tr><th>Operasi</th><th>Keterangan</th><th>Tersedia di</th></tr>
+      <tr><td>Impor CSV Katalog</td><td>Memuat file CSV eksternal sebagai data katalog (menimpa data yang ada)</td><td>Semua paket</td></tr>
+      <tr><td>Bagikan (email, dll.)</td><td>Mengirim CSV riwayat dan katalog ke aplikasi lain</td><td>Semua paket</td></tr>
+      <tr><td>Ekspor (Pilih Folder)</td><td>Menyimpan CSV riwayat dan katalog ke folder yang dipilih</td><td>Semua paket</td></tr>
+      <tr><td>Hapus Semua Riwayat</td><td>Menghapus dan mereset semua riwayat pemindaian</td><td>Semua paket (tidak dapat dibatalkan)</td></tr>
+      <tr><td>Reset Total Katalog</td><td>Mereset semua total kumulatif yang terdaftar ke 0</td><td>Buka Kunci Lengkap (tidak dapat dibatalkan)</td></tr>
+    </table></div>
+    <h3>Mode Inventaris</h3>
+    <div class="table-wrap"><table>
+      <tr><th>Mode</th><th>Keterangan</th><th>Lokasi yang tersedia</th></tr>
+      <tr><td>Detail</td><td>Menggunakan semua lokasi yang terdaftar di Katalog Lokasi</td><td>Semua lokasi terdaftar</td></tr>
+      <tr><td>Sederhana A</td><td>Inventaris hanya dengan gudang</td><td>Gudang saja</td></tr>
+      <tr><td>Sederhana B</td><td>Inventaris dengan gudang dan toko</td><td>Gudang + Toko</td></tr>
+      <tr><td>Sederhana C</td><td>Inventaris hanya dengan toko</td><td>Toko saja</td></tr>
+    </table></div>
+    <div class="box box-warn"><strong>⚠ Perhatian</strong>Meskipun Buka Kunci Lengkap sudah aktif, jika mode masih Sederhana A/B/C, Anda hanya akan melihat opsi lokasi sederhana. Ganti ke mode <strong>Detail</strong> untuk menggunakan lokasi detail.</div>
+    <div class="box box-danger"><strong>🚨 Hapus Riwayat / Reset Total tidak dapat dibatalkan</strong>"Hapus Semua Riwayat" dan "Reset Total Katalog" tidak dapat diurungkan. Sebelum menjalankannya, selalu buat cadangan melalui <strong>Ekspor</strong>.</div>
+  </section>
+
+  <section class="chapter" id="language">
+    <div class="chapter-head"><div class="ch-no">BAB 9</div><h2>Pengaturan Bahasa</h2></div>
+    <p>Anda dapat memilih bahasa tampilan aplikasi di <strong>Pengaturan → Bahasa</strong>. Saat pertama kali digunakan, aplikasi secara otomatis mendeteksi bahasa perangkat dan memulai dengan bahasa tersebut jika didukung.</p>
+    <h3>Bahasa yang Didukung (12)</h3>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Kode</th><th>Bahasa</th><th>Gratis</th><th class="pro-col">Buka Kunci Semua Bahasa</th></tr></thead>
+      <tbody>
+        <tr><td><code>ja</code></td><td>Jepang</td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
+        <tr><td><code>en</code></td><td>Inggris</td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
+        <tr><td><code>zh</code></td><td>Tionghoa (Sederhana)</td><td>Hanya jika bahasa utama perangkat</td><td><span class="check">✓</span></td></tr>
+        <tr><td><code>tw</code></td><td>Tionghoa (Tradisional)</td><td>Hanya jika bahasa utama perangkat</td><td><span class="check">✓</span></td></tr>
+        <tr><td><code>ko</code></td><td>Korea</td><td>Hanya jika bahasa utama perangkat</td><td><span class="check">✓</span></td></tr>
+        <tr><td><code>hi</code></td><td>Hindi</td><td>Hanya jika bahasa utama perangkat</td><td><span class="check">✓</span></td></tr>
+        <tr><td><code>vi</code></td><td>Vietnam</td><td>Hanya jika bahasa utama perangkat</td><td><span class="check">✓</span></td></tr>
+        <tr><td><code>it</code></td><td>Italia</td><td>Hanya jika bahasa utama perangkat</td><td><span class="check">✓</span></td></tr>
+        <tr><td><code>pt-BR</code></td><td>Portugis (Brasil)</td><td>Hanya jika bahasa utama perangkat</td><td><span class="check">✓</span></td></tr>
+        <tr><td><code>es-419</code></td><td>Spanyol (Amerika Latin)</td><td>Hanya jika bahasa utama perangkat</td><td><span class="check">✓</span></td></tr>
+        <tr><td><code>id</code></td><td>Indonesia</td><td>Hanya jika bahasa utama perangkat</td><td><span class="check">✓</span></td></tr>
+        <tr><td><code>th</code></td><td>Thai</td><td>Hanya jika bahasa utama perangkat</td><td><span class="check">✓</span></td></tr>
+      </tbody>
+    </table></div>
+  </section>
+
+  <section class="chapter" id="billing">
+    <div class="chapter-head"><div class="ch-no">BAB 10</div><h2>Ringkasan Paket</h2></div>
+    <div class="box box-danger"><strong>🚨 Penting</strong>Harga, pajak, syarat pembelian, dan ketentuan pengembalian dana mengikuti informasi yang ditampilkan di Google Play — manual ini tidak menetapkan harga atau ketentuan tersebut. Selalu periksa daftar di Google Play sebelum membeli.</div>
+    <h3>Perbandingan Fitur</h3>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Fitur / Batas</th><th>Gratis</th><th>Stok Opname Standar</th><th>Stok Opname Lengkap</th><th>Stok Standar</th><th>Stok Lengkap</th></tr></thead>
+      <tbody>
+        <tr><td>Data katalog</td><td>Maks. 30</td><td>Maks. 300</td><td><span class="check">Tidak terbatas</span></td><td>Maks. 300</td><td><span class="check">Tidak terbatas</span></td></tr>
+        <tr><td>Data riwayat</td><td>Maks. 30</td><td>Maks. 1.000</td><td><span class="check">Tidak terbatas</span></td><td>Maks. 1.000</td><td><span class="check">Tidak terbatas</span></td></tr>
+        <tr><td>Data yang diekspor</td><td>Maks. 30</td><td>Maks. 300</td><td><span class="check">Tidak terbatas</span></td><td>Maks. 300</td><td><span class="check">Tidak terbatas</span></td></tr>
+        <tr><td>Kunci rotasi layar</td><td><span class="cross">✗</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
+        <tr><td>Aturan kode/lokasi detail</td><td><span class="cross">✗</span></td><td><span class="cross">✗</span></td><td><span class="check">✓</span></td><td><span class="cross">✗</span></td><td><span class="check">✓</span></td></tr>
+        <tr><td>Ekspor CSV diperluas</td><td><span class="cross">✗</span></td><td><span class="cross">✗</span></td><td><span class="check">✓</span></td><td><span class="cross">✗</span></td><td><span class="check">✓</span></td></tr>
+        <tr><td>Transfer stok &amp; penerapan hasil stok opname</td><td><span class="cross">✗</span></td><td><span class="cross">✗</span></td><td><span class="cross">✗</span></td><td><span class="cross">✗</span></td><td><span class="check">✓</span></td></tr>
+        <tr><td>Semua 12 bahasa</td><td><span class="cross">✗</span></td><td colspan="4">Beli Buka Kunci Semua Bahasa secara terpisah</td></tr>
+      </tbody>
+    </table></div>
+  </section>
+
+  <section class="chapter" id="sample">
+    <div class="chapter-head"><div class="ch-no">BAB 11</div><h2>Data Contoh</h2></div>
+    <p>Data contoh adalah data latihan untuk menjelajahi Quantiventra sebelum memulai operasi nyata. Mencakup sekitar 10 produk contoh, kategori contoh, dan lokasi dasar "Gudang" dan "Toko".</p>
+    <h3>Membuat Data Contoh</h3>
+    <ol class="steps">
+      <li>Saat pertama kali digunakan, jika muncul prompt, pilih <strong>Buat</strong>.</li>
+      <li>Atau, buka <strong>Pengaturan → Buat Data Contoh</strong>.</li>
+    </ol>
+    <h3>Menghapus Data Contoh</h3>
+    <ol class="steps">
+      <li>Buka <strong>Pengaturan → Hapus Data Contoh</strong>.</li>
+      <li>Tinjau apa yang akan dihapus (produk, stok, kategori, dan riwayat stok opname contoh).</li>
+      <li>Konfirmasi dan jalankan penghapusan.</li>
+    </ol>
+    <div class="box box-danger"><strong>🚨 Penting</strong>Selalu hapus data contoh sebelum memulai operasi nyata. Pastikan tidak ada data nyata yang tercampur sebelum menghapus.</div>
+  </section>
+
+  <section class="chapter" id="trouble">
+    <div class="chapter-head"><div class="ch-no">BAB 12</div><h2>Pemecahan Masalah</h2></div>
+    <div class="trouble"><div class="trouble-q">Barcode tidak terpindai / Kamera tidak merespons</div>
+    <div class="trouble-a"><ul>
+      <li>Pastikan tombol kamera (kanan atas) sudah diaktifkan.</li>
+      <li>Barcode harus <strong>sepenuhnya berada di dalam</strong> bingkai panduan — kode yang berada di luar bingkai tidak akan terdeteksi.</li>
+      <li>Di Pengaturan (Buka Kunci Lengkap), pastikan jenis pemindaian (CODE39, EAN13, dll.) sesuai dengan kode yang Anda pindai.</li>
+      <li>Jika barcode rusak atau kotor, gunakan input manual.</li>
+    </ul></div></div>
+    <div class="trouble"><div class="trouble-q">Nama produk tidak muncul setelah mengimpor CSV katalog</div>
+    <div class="trouble-a"><ul>
+      <li>Pastikan CSV dikodekan dalam UTF-8 (Shift-JIS akan menyebabkan karakter rusak).</li>
+      <li>Periksa format baris header: <code>barcode,name,theoretical_stock,actual_stock_total</code></li>
+      <li>Jika nama produk mengandung koma, bungkus dengan tanda kutip: cth. <code>"Baut M6, stainless"</code></li>
+    </ul></div></div>
+    <div class="trouble"><div class="trouble-q">Fitur paket yang dibeli tidak tersedia</div>
+    <div class="trouble-a"><ul>
+      <li>Ketuk <strong>Pengaturan → Pulihkan Pembelian</strong>.</li>
+      <li>Pastikan Anda masuk dengan akun Google yang digunakan untuk pembelian.</li>
+      <li>Periksa koneksi internet dan coba lagi (verifikasi pembelian memerlukan jaringan).</li>
+    </ul></div></div>
+    <div class="trouble"><div class="trouble-q">Data hilang setelah mengganti perangkat</div>
+    <div class="trouble-a"><ul>
+      <li>Data tersimpan di penyimpanan internal aplikasi dan akan hilang jika aplikasi dihapus atau perangkat diganti.</li>
+      <li>Sangat disarankan untuk membuat cadangan rutin melalui <strong>Ekspor</strong> atau <strong>Bagikan</strong>.</li>
+      <li>Jika ada cadangan, Anda dapat memulihkannya melalui <strong>Impor CSV Katalog</strong>.</li>
+    </ul></div></div>
+  </section>
+
+  <section class="chapter" id="glossary">
+    <div class="chapter-head"><div class="ch-no">BAB 13</div><h2>Glosarium</h2></div>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Istilah</th><th>Definisi</th></tr></thead>
+      <tbody>
+        <tr><td>Stok opname</td><td>Operasi menghitung dan mencatat jumlah barang nyata di lokasi</td></tr>
+        <tr><td>Jumlah aktual</td><td>Jumlah yang dihitung secara langsung di lokasi</td></tr>
+        <tr><td>Stok teoritis</td><td>Jumlah stok yang dihitung oleh sistem</td></tr>
+        <tr><td>Selisih / Deviasi inventaris</td><td>Perbedaan antara jumlah aktual dan stok teoritis</td></tr>
+        <tr><td>Produk</td><td>Item individual yang memiliki stok</td></tr>
+        <tr><td>Kategori</td><td>Kelompok yang digunakan untuk mengklasifikasikan produk</td></tr>
+        <tr><td>Lokasi</td><td>Tempat penyimpanan stok (cth. gudang, toko, rak)</td></tr>
+        <tr><td>Sertakan dalam acuan pengisian ulang stok</td><td>Pengaturan yang memungkinkan stok di lokasi ini ikut dihitung sebagai acuan keputusan pengisian ulang stok</td></tr>
+        <tr><td>Stok / Jumlah tersedia</td><td>Jumlah yang saat ini tersedia</td></tr>
+        <tr><td>Stok masuk (penerimaan)</td><td>Operasi yang meningkatkan stok</td></tr>
+        <tr><td>Stok keluar (pengiriman)</td><td>Operasi yang mengurangi stok</td></tr>
+        <tr><td>Transfer stok</td><td>Memindahkan stok dari satu lokasi ke lokasi lain (versi Lengkap)</td></tr>
+        <tr><td>Riwayat stok</td><td>Log operasi stok masuk, keluar, transfer, dan penyesuaian inventaris</td></tr>
+        <tr><td>Acuan pengisian ulang stok</td><td>Jumlah referensi untuk menentukan kapan stok hampir habis</td></tr>
+        <tr><td>Kode produk</td><td>Kode internal yang digunakan untuk mengidentifikasi produk</td></tr>
+        <tr><td>Total kumulatif terdaftar</td><td>Jumlah kumulatif dari jumlah yang disimpan hingga saat ini</td></tr>
+        <tr><td>CSV</td><td>File teks yang dipisahkan koma, dapat dibuka di aplikasi spreadsheet</td></tr>
+        <tr><td>Cadangan</td><td>Data yang disimpan untuk pemulihan atau referensi</td></tr>
+        <tr><td>Ganti stok saat ini</td><td>Mode impor CSV di mana jumlah dalam file menjadi stok saat ini yang baru</td></tr>
+        <tr><td>Tambah sebagai stok masuk</td><td>Mode impor CSV di mana jumlah dalam file ditambahkan ke stok saat ini sebagai stok masuk</td></tr>
+        <tr><td>Konfirmasi jumlah aktual</td><td>Operasi yang menyelesaikan hasil stok opname (versi Lengkap)</td></tr>
+        <tr><td>Data katalog</td><td>Basis data yang mengelola catatan utama produk, kategori, dan lokasi</td></tr>
+      </tbody>
+    </table></div>
+  </section>
+
+  <section class="chapter" id="legal">
+    <div class="chapter-head"><div class="ch-no">BAB 14</div><h2>Syarat Penggunaan dan Penafian</h2></div>
+    <div class="legal-block">
+      <h4>■ Syarat Penggunaan</h4>
+      <p>Dengan mengunduh atau menggunakan aplikasi ini, Anda menyetujui syarat-syarat berikut. Penggunaan aplikasi ini untuk stok opname dan manajemen stok diizinkan baik untuk penggunaan pribadi maupun bisnis. Rekayasa balik, dekompilasi, modifikasi, atau redistribusi aplikasi dilarang.</p>
+      <p><strong>Data pengguna:</strong> Semua data yang dihasilkan aplikasi ini (CSV katalog, CSV riwayat, dan file pengaturan) hanya disimpan di perangkat pengguna dan tidak dikirimkan ke server eksternal milik pengembang (kecuali komunikasi dengan Google Play yang diperlukan untuk verifikasi pembelian paket).</p>
+      <p><strong>Pembelian paket:</strong> Semua pembelian paket diproses melalui sistem pembayaran Google Play. Pengembalian dana mengikuti kebijakan pengembalian dana Google Play.</p>
+      <h4>■ Penafian</h4>
+      <p>Aplikasi ini disediakan "apa adanya". Pengembang tidak bertanggung jawab atas kerusakan apa pun yang timbul dari penggunaan atau ketidakmampuan menggunakan aplikasi, termasuk kehilangan data, gangguan bisnis, atau kerusakan langsung maupun tidak langsung lainnya.</p>
+      <p>Pengguna bertanggung jawab untuk memverifikasi keakuratan dan kelengkapan data CSV yang dihasilkan aplikasi ini. Pengembang tidak bertanggung jawab atas inkonsistensi data akibat kesalahan pemindaian atau input.</p>
+      <h4>■ Kebijakan Privasi</h4>
+      <p>Aplikasi ini tidak mengumpulkan atau menggunakan informasi pribadi seperti nama, alamat, nomor telepon, atau alamat email. Kamera hanya digunakan untuk memindai barcode dan QR code. Tidak ada video yang direkam atau disimpan. Komunikasi dengan Google Play dapat terjadi saat verifikasi pembelian atau pemulihan pembelian.</p>
+      <h4>■ Hak Cipta</h4>
+      <p>Hak Cipta © Quantiventra. Semua hak dilindungi. Semua konten dalam aplikasi dan manual ini adalah milik Pengembang.</p>
+      <h4>■ Perubahan Syarat</h4>
+      <p>Syarat ini dapat diubah tanpa pemberitahuan sebelumnya. Syarat yang diperbarui berlaku efektif saat diterbitkan di Google Play Store atau notifikasi dalam aplikasi.</p>
+    </div>
+  </section>
+
+  <div class="summary-box" id="summary">
+    <h3>📌 Poin Utama Bab Ini</h3>
+    <ul>
+      <li>Quantiventra = Quantity + Inventory. Konfirmasi terjadi setelah 3 frame berturut-turut dengan kode yang sama, mencegah pembacaan yang salah.</li>
+      <li>Memerlukan Android 8.0+ dan kamera autofokus. Tidak perlu izin penyimpanan. Pekerjaan rutin dapat dilakukan di perangkat; pembelian, pemulihan pembelian, Google Play, dan tautan eksternal dapat memerlukan internet.</li>
+      <li>Data disimpan di penyimpanan internal aplikasi — menghapus instalasi akan menghapus data tersebut. Buat cadangan rutin melalui Ekspor.</li>
+      <li>Stok Opname dan Manajemen Stok adalah modul terpisah — memasukkan jumlah di stok opname tidak mengubah stok hingga konfirmasi dilakukan.</li>
+      <li>Sebelum operasi nyata, berlatihlah dengan data contoh lalu hapus data tersebut.</li>
+      <li>Untuk harga paket, lihat Google Play — manual ini tidak menetapkan harga atau ketentuan tersebut.</li>
+      <li>Sebelum operasi besar (penggantian CSV, penerapan inventaris, penghapusan, reset) selalu buat cadangan terlebih dahulu.</li>
+    </ul>
+  </div>
+  <div class="confirm-box" id="confirm">
+    <h3>🔍 Catatan sebelum digunakan</h3>
+    <ul>
+      <li>Harga paket, pajak, ketersediaan, dan ketentuan pengembalian dana harus selalu diperiksa di Google Play sebelum membeli.</li>
+      <li>Sebelum menjalankan operasi besar seperti impor CSV, penggantian stok, penghapusan data, atau reset, buat cadangan data terlebih dahulu.</li>
+      <li>Fitur yang tersedia dapat berbeda menurut paket. Jika paket yang dibeli belum aktif, gunakan <strong>Pengaturan → Pulihkan Pembelian</strong>.</li>
+      <li>Untuk pekerjaan rutin, data diproses di perangkat. Beberapa fungsi seperti pembelian, pemulihan pembelian, Google Play, atau tautan eksternal dapat memerlukan internet.</li>
+    </ul>
+  </div>
+</div>
+<footer>Manual Quantiventra · Informasi terkini tersedia di layar aplikasi.<p style="margin-top:4px;"><a href="privacy_id.html">Kebijakan Privasi</a></p></footer>
+</body></html>

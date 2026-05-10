@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="id">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quantiventra – Stok Opname – Versi Gratis</title>
+<style>*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;font-size:15px;line-height:1.8;color:#1a2535;background:#f4f7fb;}
+a{color:#1a5fa8;text-decoration:none;}a:hover{text-decoration:underline;}
+.site-nav{background:#1a3a5c;color:#fff;padding:0;}.site-nav .nav-inner{max-width:960px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:stretch;}
+.site-nav a{color:#cde;padding:10px 13px;font-size:12px;display:block;border-right:1px solid #2a4a6c;white-space:nowrap;}
+.site-nav a:hover{background:#2a5090;text-decoration:none;}.site-nav a.active{background:#2a6cbe;color:#fff;font-weight:bold;}
+.page-header{background:linear-gradient(135deg,#1a3a5c 0%,#2a6cbe 100%);color:#fff;padding:40px 20px 30px;}
+.page-header .inner{max-width:960px;margin:0 auto;}.page-header .app-name{font-size:13px;opacity:.8;}
+.page-header h1{font-size:22px;font-weight:700;margin-top:6px;line-height:1.4;}.page-header .subtitle{font-size:14px;opacity:.85;margin-top:8px;}
+.scope-box{background:rgba(255,255,255,.15);border-left:4px solid #7ecfff;padding:12px 16px;margin-top:16px;border-radius:4px;font-size:13px;}
+.container{max-width:960px;margin:0 auto;padding:30px 16px;}
+.toc{background:#fff;border:1px solid #c8d8ec;border-radius:8px;padding:24px 28px;margin-bottom:32px;}
+.toc h2{font-size:16px;font-weight:700;color:#1a3a5c;border-bottom:2px solid #2a6cbe;padding-bottom:8px;margin-bottom:14px;}
+.toc ol{margin-left:18px;}.toc li{margin:5px 0;font-size:14px;}
+.chapter{background:#fff;border-radius:8px;box-shadow:0 1px 4px rgba(0,0,0,.08);padding:28px 28px 24px;margin-bottom:28px;}
+.chapter-head{border-left:5px solid #2a6cbe;padding-left:14px;margin-bottom:20px;}
+.chapter-head .ch-no{font-size:12px;color:#2a6cbe;font-weight:700;}.chapter-head h2{font-size:20px;font-weight:700;color:#1a2535;margin-top:2px;}
+h3{font-size:16px;font-weight:700;color:#1a3a5c;border-bottom:1px solid #dde8f5;padding-bottom:5px;margin:22px 0 12px;}
+h4{font-size:14px;font-weight:700;color:#2a4a6c;margin:16px 0 8px;}
+p{margin-bottom:12px;}ul,ol{margin-left:20px;margin-bottom:12px;}li{margin-bottom:5px;}
+.steps{counter-reset:step;list-style:none;margin-left:0;}
+.steps li{counter-increment:step;padding:9px 12px 9px 46px;position:relative;background:#f8fbff;border:1px solid #dde8f5;border-radius:6px;margin-bottom:6px;}
+.steps li::before{content:counter(step);position:absolute;left:12px;top:50%;transform:translateY(-50%);width:24px;height:24px;background:#2a6cbe;color:#fff;border-radius:50%;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;}
+.table-wrap{overflow-x:auto;margin-bottom:16px;}
+table{width:100%;border-collapse:collapse;font-size:13px;min-width:380px;}
+th{background:#1a3a5c;color:#fff;padding:9px 12px;text-align:left;white-space:nowrap;}
+td{padding:8px 12px;border-bottom:1px solid #dde8f5;vertical-align:top;}tr:nth-child(even) td{background:#f4f7fb;}
+code{font-family:'Courier New',monospace;background:rgba(0,80,160,.08);color:#004080;padding:2px 6px;border-radius:3px;font-size:12px;}
+.box{border-radius:6px;padding:13px 16px;margin:14px 0;font-size:13px;}
+.box-warn{background:#fffbe6;border-left:4px solid #f5a623;color:#7a5700;}
+.box-danger{background:#fff0f0;border-left:4px solid #d43f3f;color:#7a0000;}
+.box-hint{background:#e8f4ff;border-left:4px solid #2a6cbe;color:#0a3060;}
+.box-check{background:#f4eeff;border-left:4px solid #8c4fc8;color:#3a0070;}
+.box strong{display:block;margin-bottom:4px;}
+figure{max-width:280px;width:100%;margin:18px auto;text-align:center;}
+figure img{display:block;width:100%;max-width:280px;height:auto;margin:0 auto;border:1px solid #c8d8ec;border-radius:6px;box-shadow:0 2px 8px rgba(0,0,0,.1);}
+figcaption{font-size:12px;color:#5a7a99;margin-top:6px;}
+.img-pending{display:flex;align-items:center;justify-content:center;max-width:280px;width:100%;box-sizing:border-box;background:#e8eef5;border:2px dashed #99b8d8;border-radius:6px;height:160px;color:#5a7a99;font-size:13px;margin:18px auto;}
+.diff-add{background:#e8fff0;border-left:4px solid #2a9c5c;border-radius:6px;padding:12px 16px;margin:14px 0;font-size:13px;}
+.diff-add strong{display:block;color:#1a6c3c;margin-bottom:4px;}
+.flow-box{background:#f4f7fb;border:1px solid #c8d8ec;border-radius:8px;padding:20px;margin:16px 0;}
+.flow-box h4{color:#1a3a5c;margin-top:0;}
+.flow-arrow{text-align:center;font-size:20px;color:#2a6cbe;margin:4px 0;}
+.flow-step{background:#fff;border:1px solid #c8d8ec;border-radius:6px;padding:10px 16px;margin:4px 0;font-size:13px;}
+.flow-step strong{color:#1a3a5c;}
+.summary-box{background:linear-gradient(135deg,#e8f4ff,#f0f8ff);border:1px solid #99c8ec;border-radius:8px;padding:20px 24px;margin-top:32px;}
+.summary-box h3{border:none;color:#1a3a5c;margin-top:0;}
+.confirm-box{background:#fdf4ff;border:1px solid #c8a0e0;border-radius:8px;padding:20px 24px;margin-top:16px;}
+.confirm-box h3{border:none;color:#5a0090;margin-top:0;}
+.check{color:#2e7d32;font-weight:700;}.cross{color:#c62828;}
+th.pro-col{background:#5a2a8c;}
+.feature-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px;margin:16px 0;}
+.feature-card{background:#f4f7fb;border:1px solid #c8d8ec;border-radius:8px;padding:16px;}
+.feature-card h4{color:#1a3a5c;margin-top:0;margin-bottom:6px;font-size:14px;}
+.feature-card p{font-size:13px;margin:0;color:#3a5a7a;}
+.feature-card.pro-card{background:#f4eeff;border-color:#c8a0e0;}
+.feature-card.pro-card h4{color:#5a2a8c;}
+.trouble{border:1px solid #c8d8ec;border-radius:8px;margin:14px 0;overflow:hidden;}
+.trouble-q{background:#eef6fd;padding:13px 18px;font-weight:700;font-size:14px;color:#1a3a5c;display:flex;align-items:flex-start;gap:10px;}
+.trouble-q::before{content:'Q';background:#2a6cbe;color:#fff;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900;flex-shrink:0;margin-top:1px;}
+.trouble-a{padding:13px 18px 14px 50px;font-size:13.5px;border-top:1px solid #c8d8ec;line-height:1.9;}
+.trouble-a ul{margin-left:16px;}
+.legal-block{background:#f5f5f5;border:1px solid #ddd;border-radius:8px;padding:20px 24px;font-size:12.5px;color:#444;line-height:1.9;margin:14px 0;}
+.legal-block h4{font-size:13px;color:#333;margin:18px 0 6px;border-bottom:1px solid #ddd;padding-bottom:4px;}
+.legal-block h4:first-child{margin-top:0;}
+footer{text-align:center;font-size:12px;color:#8a9aaa;padding:30px 16px;border-top:1px solid #dde8f5;margin-top:20px;}
+@media(max-width:640px){.page-header h1{font-size:18px;}.chapter{padding:20px 16px;}.site-nav a{padding:8px 9px;font-size:11px;}}
+@media print{body{background:#fff;font-size:12px;}.site-nav{display:none;}.chapter{box-shadow:none;border:1px solid #ccc;page-break-inside:avoid;}.page-header{background:#1a3a5c !important;-webkit-print-color-adjust:exact;print-color-adjust:exact;}}
+</style></head>
+<body>
+<nav class="site-nav"><div class="nav-inner">
+  <a href="01_top_settings_common_id.html">① Beranda / Pengaturan</a>
+  <a href="02_stocktake_free_id.html" class="active">② Stok Opname Versi Gratis</a>
+  <a href="03_stocktake_simple_id.html">③ Stok Opname Versi Standar</a>
+  <a href="04_stocktake_full_id.html">④ Stok Opname Lengkap</a>
+  <a href="05_inventory_free_id.html">⑤ Stok Gratis</a>
+  <a href="06_inventory_simple_id.html">⑥ Stok Standar</a>
+  <a href="07_inventory_full_id.html">⑦ Stok Lengkap</a>
+</div></nav>
+<header class="page-header"><div class="inner">
+  <div class="app-name">Manual Quantiventra</div>
+  <h1>② Stok Opname — Versi Gratis</h1>
+  <div class="subtitle">Fitur, batasan, panduan langkah demi langkah, dan alur kerja yang direkomendasikan</div>
+  <div class="scope-box"><strong>Topik yang dibahas:</strong> Apa yang bisa dilakukan / Batasan versi gratis / Stok opname langkah demi langkah / Input barcode & jumlah / Lokasi / Riwayat / Batasan CSV / Yang tidak bisa dilakukan / Alur yang direkomendasikan</div>
+</div></header>
+<div class="container">
+  <nav class="toc"><h2>Daftar Isi</h2><ol>
+    <li><a href="#overview">Ikhtisar stok opname versi gratis</a></li>
+    <li><a href="#limits">Batasan versi gratis</a></li>
+    <li><a href="#howto">Stok opname langkah demi langkah</a></li>
+    <li><a href="#input">Input barcode, nama produk, dan jumlah</a></li>
+    <li><a href="#location">Pengelolaan lokasi</a></li>
+    <li><a href="#history">Melihat riwayat stok opname</a></li>
+    <li><a href="#csv">Batasan ekspor CSV</a></li>
+    <li><a href="#cannot">Yang tidak bisa dilakukan di versi gratis</a></li>
+    <li><a href="#tips">Alur kerja yang direkomendasikan untuk pengguna gratis</a></li>
+    <li><a href="#summary">Poin utama bab ini</a></li>
+    <li><a href="#confirm">Catatan sebelum digunakan</a></li>
+  </ol></nav>
+
+  <section class="chapter" id="overview">
+    <div class="chapter-head"><div class="ch-no">BAB 1</div><h2>Ikhtisar Stok Opname Versi Gratis</h2></div>
+    <p>Stok opname adalah operasi menghitung jumlah barang nyata di lokasi dan mencatatnya. Versi gratis memungkinkan Anda mencoba alur stok opname dasar.</p>
+    <p>Alur stok opname: <strong>Pindai produk → Input jumlah → Simpan → Periksa riwayat.</strong></p>
+    <div class="box box-hint"><strong>💡 Apa itu stok opname?</strong>Stok opname mencatat jumlah yang Anda hitung secara langsung (jumlah nyata). Ini adalah modul yang terpisah dari operasi stok masuk, keluar, dan transfer di Manajemen Stok — jangan mencampuradukkan keduanya.</div>
+
+    <h3>Fitur stok opname versi gratis</h3>
+    <ul>
+      <li>Input atau pemindaian kode produk / barcode</li>
+      <li>Input nama produk</li>
+      <li>Input jumlah aktual</li>
+      <li>Input catatan</li>
+      <li>Melihat riwayat stok opname</li>
+      <li>Menyimpan dan mengekspor dalam batas versi gratis</li>
+    </ul>
+</section>
+
+  <section class="chapter" id="limits">
+    <div class="chapter-head"><div class="ch-no">BAB 2</div><h2>Batasan Versi Gratis</h2></div>
+    <div class="table-wrap"><table>
+      <tr><th>Item</th><th>Batasan versi gratis</th><th>Cara menghapus</th></tr>
+      <tr><td>Data katalog</td><td>Maks. 30</td><td>Versi Standar atau lebih tinggi</td></tr>
+      <tr><td>Catatan riwayat stok opname</td><td>Maks. 30</td><td>Versi Standar atau lebih tinggi</td></tr>
+      <tr><td>Catatan yang diekspor</td><td>Maks. 30</td><td>Versi Standar atau lebih tinggi</td></tr>
+      <tr><td>Kunci rotasi layar</td><td>Tidak tersedia</td><td>Versi Standar atau lebih tinggi</td></tr>
+      <tr><td>Pengaturan aturan kode detail</td><td>Tidak tersedia</td><td>Versi Lengkap</td></tr>
+      <tr><td>Pengaturan aturan lokasi detail</td><td>Tidak tersedia</td><td>Versi Lengkap</td></tr>
+      <tr><td>Pengaturan kamera detail</td><td>Tidak tersedia</td><td>Versi Lengkap</td></tr>
+      <tr><td>Ekspor CSV diperluas</td><td>Tidak tersedia</td><td>Versi Lengkap</td></tr>
+    </table></div>
+    <div class="box box-warn"><strong>⚠ Perhatian</strong>Setelah mencapai batas 30 catatan, penyimpanan atau ekspor mungkin tidak tersedia. Pertimbangkan untuk beralih ke Versi Standar atau Versi Lengkap sebelum mencapai batas.</div>
+  </section>
+
+  <section class="chapter" id="howto">
+    <div class="chapter-head"><div class="ch-no">BAB 3</div><h2>Stok Opname Langkah demi Langkah</h2></div>
+    <ol class="steps">
+      <li>Di halaman Beranda, ketuk <strong>Stok Opname</strong>.</li>
+      <li>Pindai barcode atau masukkan kode produk secara manual.</li>
+      <li>Nama produk ditampilkan. Jika kode belum terdaftar, masukkan nama secara manual.</li>
+      <li>Konfirmasi atau pilih lokasi (gudang, toko, dll.).</li>
+      <li>Masukkan jumlah yang dihitung langsung.</li>
+      <li>Masukkan catatan jika diperlukan.</li>
+      <li>Ketuk <strong>Simpan</strong> untuk mencatat item ini di riwayat stok opname.</li>
+      <li>Periksa apakah catatan sudah tersimpan di riwayat stok opname.</li>
+    </ol>
+    <div class="box box-danger"><strong>🚨 Penting</strong>Selalu verifikasi jumlah sebelum menyimpan. Kesalahan input menyebabkan inkonsistensi dengan data stok.</div>
+    <div class="box box-hint"><strong>💡 Tips</strong>Tidak perlu menyelesaikan seluruh stok opname dalam satu sesi. Meskipun aplikasi ditutup di tengah jalan, semua riwayat yang sudah disimpan tetap terjaga.</div>
+</section>
+
+  <section class="chapter" id="input">
+    <div class="chapter-head"><div class="ch-no">BAB 4</div><h2>Input Barcode, Nama Produk, dan Jumlah</h2></div>
+
+    <h3>Pemindaian barcode</h3>
+    <p>Buka kamera lalu arahkan ke barcode. Aplikasi akan membacanya secara otomatis. Jika pemindaian gagal, coba di tempat yang lebih terang atau gunakan input manual.</p>
+
+    <h3>Input kode produk secara manual</h3>
+    <p>Jika barcode tidak dapat digunakan, masukkan kode produk langsung ke kolom kode. Untuk kode yang sudah terdaftar, nama produk akan ditampilkan otomatis.</p>
+
+    <h3>Input nama produk</h3>
+    <p>Jika kode belum terdaftar, masukkan nama produk secara manual. Nama yang dimasukkan akan tercatat dalam riwayat stok opname. Perhatikan batas jumlah catatan jika bekerja tanpa data katalog yang sudah terdaftar.</p>
+
+    <h3>Input jumlah aktual</h3>
+    <p>Masukkan jumlah yang benar-benar dihitung di lokasi sebagai angka.</p>
+
+    <h3>Input catatan</h3>
+    <p>Anda dapat menulis catatan kerja atau komentar secara bebas. Catatan ini akan disimpan bersama riwayat stok opname.</p>
+
+    <div class="table-wrap"><table>
+      <tr><th>Kolom</th><th>Keterangan</th><th>Wajib / Opsional</th></tr>
+      <tr><td>Barcode / Kode produk</td><td>Kode yang digunakan untuk mengidentifikasi produk</td><td>Wajib</td></tr>
+      <tr><td>Nama produk</td><td>Dimasukkan secara manual jika kode belum terdaftar</td><td>Wajib secara kondisional</td></tr>
+      <tr><td>Lokasi</td><td>Tempat stok opname dilakukan</td><td>Tergantung pengaturan</td></tr>
+      <tr><td>Jumlah aktual</td><td>Jumlah yang benar-benar dihitung</td><td>Wajib</td></tr>
+      <tr><td>Catatan</td><td>Catatan kerja atau komentar</td><td>Opsional</td></tr>
+    </table></div>
+    <div class="box box-warn"><strong>⚠ Perhatian</strong>Masukkan jumlah yang benar-benar dihitung dengan akurat. Kesalahan input dapat menyebabkan selisih stok. Selalu konfirmasi angka sebelum menyimpan.</div>
+  </section>
+
+  <section class="chapter" id="location">
+    <div class="chapter-head"><div class="ch-no">BAB 5</div><h2>Pengelolaan Lokasi</h2></div>
+    <div class="table-wrap"><table>
+      <tr><th>Mode stok opname</th><th>Lokasi yang tersedia</th><th>Contoh penggunaan</th></tr>
+      <tr><td>Sederhana A</td><td>Gudang saja</td><td>Pengelolaan satu gudang</td></tr>
+      <tr><td>Sederhana B</td><td>Gudang + Toko</td><td>Stok Opname di gudang dan toko sekaligus</td></tr>
+      <tr><td>Sederhana C</td><td>Toko saja</td><td>Pengelolaan satu toko</td></tr>
+    </table></div>
+    <div class="box box-hint"><strong>💡 Tips</strong>Manajemen lokasi detail (cth. nomor rak) adalah fitur Versi Lengkap. Aktifkan dengan beralih ke mode <strong>Detail</strong> di pengaturan.</div>
+    <div class="box box-warn"><strong>⚠ Perhatian</strong>Meskipun lokasi detail sudah terdaftar, lokasi tersebut tidak akan muncul jika mode masih Sederhana A/B/C. Perlu beralih ke mode Detail.</div>
+  </section>
+
+  <section class="chapter" id="history">
+    <div class="chapter-head"><div class="ch-no">BAB 6</div><h2>Melihat Riwayat Stok Opname</h2></div>
+    <p>Semua item stok opname yang tersimpan dapat dilihat di riwayat: tanggal/waktu penyimpanan, kode dan nama produk, jumlah nyata, lokasi, dan catatan.</p>
+    <div class="box box-warn"><strong>⚠ Perhatian</strong>Versi gratis menyimpan maksimal 30 catatan di riwayat stok opname. Melebihi batas dapat mencegah penyimpanan item stok opname baru.</div>
+  </section>
+
+  <section class="chapter" id="csv">
+    <div class="chapter-head"><div class="ch-no">BAB 7</div><h2>Batasan Ekspor CSV</h2></div>
+    <div class="table-wrap"><table>
+      <tr><th>Item</th><th>Versi gratis</th><th>Versi Standar</th><th>Versi Lengkap</th></tr>
+      <tr><td>Catatan yang diekspor</td><td>Maks. 30</td><td>Maks. 300</td><td>Tidak terbatas</td></tr>
+      <tr><td>Ekspor kolom lengkap</td><td>Terbatas</td><td>Terbatas</td><td>Ekspor CSV diperluas</td></tr>
+    </table></div>
+    <div class="box box-warn"><strong>⚠ Perhatian</strong>CSV ringkasan stok opname tidak menyertakan kolom tanggal/waktu atau lokasi. Ekspor detail per lokasi dan tanggal adalah fitur versi Lengkap.</div>
+  </section>
+
+  <section class="chapter" id="cannot">
+    <div class="chapter-head"><div class="ch-no">BAB 8</div><h2>Yang Tidak Bisa Dilakukan di Versi Gratis</h2></div>
+    <div class="table-wrap"><table>
+      <tr><th>Fitur</th><th>Paket yang diperlukan</th></tr>
+      <tr><td>Lebih dari 30 data katalog</td><td>Stok Opname Versi Standar atau lebih tinggi</td></tr>
+      <tr><td>Lebih dari 30 catatan riwayat</td><td>Stok Opname Versi Standar atau lebih tinggi</td></tr>
+      <tr><td>Ekspor lebih dari 30 catatan</td><td>Stok Opname Versi Standar atau lebih tinggi</td></tr>
+      <tr><td>Kunci rotasi layar</td><td>Stok Opname Versi Standar atau lebih tinggi</td></tr>
+      <tr><td>Pengaturan aturan kode/lokasi detail</td><td>Stok Opname Versi Lengkap</td></tr>
+      <tr><td>Pengaturan kamera detail</td><td>Stok Opname Versi Lengkap</td></tr>
+      <tr><td>Ekspor CSV diperluas</td><td>Stok Opname Versi Lengkap</td></tr>
+      <tr><td>Menerapkan hasil stok opname ke stok</td><td>Stok Opname Versi Lengkap</td></tr>
+    </table></div>
+  </section>
+
+  <section class="chapter" id="tips">
+    <div class="chapter-head"><div class="ch-no">BAB 9</div><h2>Alur Kerja yang Direkomendasikan untuk Pengguna Gratis</h2></div>
+    <p>Dengan 30 produk atau kurang, versi gratis sudah cukup untuk stok opname dasar yang berkelanjutan. Ekspor ke CSV sebelum mendekati batas 30 catatan riwayat untuk mengarsipkan catatan Anda.</p>
+    <div class="box box-hint"><strong>💡 Pertimbangkan peningkatan ke Standar jika:</strong>
+      <ul style="margin-top:6px;">
+        <li>Anda memiliki lebih dari 30 produk</li>
+        <li>Ingin menyimpan riwayat stok opname bulanan jangka panjang</li>
+        <li>Perlu mengunci orientasi layar saat bekerja di lapangan</li>
+        <li>Memiliki kurang dari 300 produk dan ingin terus melakukan stok opname</li>
+      </ul>
+    </div>
+  </section>
+
+  <div class="summary-box" id="summary">
+    <h3>📌 Poin Utama Bab Ini</h3>
+    <ul>
+      <li>Stok opname versi gratis cocok untuk operasi kecil dengan maksimal 30 item.</li>
+      <li>Alurnya: Pindai → Input jumlah → Simpan → Periksa riwayat.</li>
+      <li>Lokasi dikonfigurasi dengan mode Sederhana A/B/C. Lokasi detail memerlukan Versi Lengkap.</li>
+      <li>Ekspor CSV terbatas 30 catatan dan tidak menyertakan kolom tanggal atau lokasi.</li>
+      <li>Jika mendekati batas 30 catatan, pertimbangkan untuk beralih ke Versi Standar atau Versi Lengkap.</li>
+      <li>Stok Opname dan Manajemen Stok adalah modul terpisah — jangan dicampuradukkan.</li>
+    </ul>
+  </div>
+  <div class="confirm-box" id="confirm">
+    <h3>🔍 Catatan sebelum digunakan</h3>
+    <ul>
+      <li>Pastikan kode produk, nama produk, lokasi, dan jumlah sudah benar sebelum menyimpan.</li>
+      <li>Jika perlu mengubah data setelah disimpan, ikuti panduan yang tampil di layar aplikasi.</li>
+      <li>Jika mendekati batas 30 catatan, ekspor CSV atau pertimbangkan untuk beralih ke Versi Standar atau Versi Lengkap.</li>
+      <li>Untuk harga, ketersediaan, dan syarat pembelian, ikuti informasi yang tampil di Google Play.</li>
+    </ul>
+  </div>
+</div>
+<footer>Manual Quantiventra · Informasi terkini tersedia di layar aplikasi.<p style="margin-top:4px;"><a href="privacy_id.html">Kebijakan Privasi</a></p></footer>
+</body></html>

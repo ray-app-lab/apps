@@ -1,0 +1,402 @@
+﻿<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quantiventra मैनुअल – स्टॉकटेक निःशुल्क संस्करण</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Noto Sans Devanagari','Noto Sans',Arial,sans-serif;font-size:15px;line-height:1.9;color:#1a2535;background:#f4f7fb;}
+a{color:#1a5fa8;text-decoration:none;}
+a:hover{text-decoration:underline;}
+.site-nav{background:#1a3a5c;color:#fff;padding:0;}
+.site-nav .nav-inner{max-width:960px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:stretch;}
+.site-nav a{color:#cde;padding:10px 13px;font-size:12px;display:block;border-right:1px solid #2a4a6c;white-space:nowrap;}
+.site-nav a:hover{background:#2a5090;text-decoration:none;}
+.site-nav a.active{background:#2a6cbe;color:#fff;font-weight:bold;}
+.page-header{background:linear-gradient(135deg,#1a3a5c 0%,#2a6cbe 100%);color:#fff;padding:40px 20px 30px;}
+.page-header .inner{max-width:960px;margin:0 auto;}
+.page-header .app-name{font-size:13px;opacity:.8;}
+.page-header h1{font-size:24px;font-weight:700;margin-top:6px;line-height:1.4;}
+.page-header .subtitle{font-size:14px;opacity:.85;margin-top:8px;}
+.scope-box{background:rgba(255,255,255,.15);border-left:4px solid #7ecfff;padding:12px 16px;margin-top:16px;border-radius:4px;font-size:13px;}
+.container{max-width:960px;margin:0 auto;padding:30px 16px;}
+.toc{background:#fff;border:1px solid #c8d8ec;border-radius:8px;padding:24px 28px;margin-bottom:32px;}
+.toc h2{font-size:16px;font-weight:700;color:#1a3a5c;border-bottom:2px solid #2a6cbe;padding-bottom:8px;margin-bottom:14px;}
+.toc ol{margin-left:18px;}
+.toc li{margin:5px 0;font-size:14px;}
+.chapter{background:#fff;border-radius:8px;box-shadow:0 1px 4px rgba(0,0,0,.08);padding:28px 28px 24px;margin-bottom:28px;}
+.chapter-head{border-left:5px solid #2a6cbe;padding-left:14px;margin-bottom:20px;}
+.chapter-head .ch-no{font-size:12px;color:#2a6cbe;font-weight:700;}
+.chapter-head h2{font-size:20px;font-weight:700;color:#1a2535;margin-top:2px;}
+h3{font-size:16px;font-weight:700;color:#1a3a5c;border-bottom:1px solid #dde8f5;padding-bottom:5px;margin:22px 0 12px;}
+h4{font-size:14px;font-weight:700;color:#2a4a6c;margin:16px 0 8px;}
+p{margin-bottom:12px;}
+ul,ol{margin-left:20px;margin-bottom:12px;}
+li{margin-bottom:5px;}
+.steps{counter-reset:step;list-style:none;margin-left:0;}
+.steps li{counter-increment:step;padding:9px 12px 9px 46px;position:relative;background:#f8fbff;border:1px solid #dde8f5;border-radius:6px;margin-bottom:6px;}
+.steps li::before{content:counter(step);position:absolute;left:12px;top:50%;transform:translateY(-50%);width:24px;height:24px;background:#2a6cbe;color:#fff;border-radius:50%;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;}
+.table-wrap{overflow-x:auto;margin-bottom:16px;}
+table{width:100%;border-collapse:collapse;font-size:13px;min-width:380px;}
+th{background:#1a3a5c;color:#fff;padding:9px 12px;text-align:left;white-space:nowrap;}
+td{padding:8px 12px;border-bottom:1px solid #dde8f5;vertical-align:top;}
+tr:nth-child(even) td{background:#f4f7fb;}
+.box{border-radius:6px;padding:13px 16px;margin:14px 0;font-size:13px;}
+.box-warn{background:#fffbe6;border-left:4px solid #f5a623;color:#7a5700;}
+.box-danger{background:#fff0f0;border-left:4px solid #d43f3f;color:#7a0000;}
+.box-hint{background:#e8f4ff;border-left:4px solid #2a6cbe;color:#0a3060;}
+.box-check{background:#f4eeff;border-left:4px solid #8c4fc8;color:#3a0070;}
+.box strong{display:block;margin-bottom:4px;}
+figure{max-width:280px;width:100%;margin:18px auto;text-align:center;}
+figure img{display:block;width:100%;max-width:280px;height:auto;margin:0 auto;border:1px solid #c8d8ec;border-radius:6px;box-shadow:0 2px 8px rgba(0,0,0,.1);}
+figcaption{font-size:12px;color:#5a7a99;margin-top:6px;}
+.summary-box{background:linear-gradient(135deg,#e8f4ff,#f0f8ff);border:1px solid #99c8ec;border-radius:8px;padding:20px 24px;margin-top:32px;}
+.summary-box h3{border:none;color:#1a3a5c;margin-top:0;}
+.confirm-box{background:#fdf4ff;border:1px solid #c8a0e0;border-radius:8px;padding:20px 24px;margin-top:16px;}
+.confirm-box h3{border:none;color:#5a0090;margin-top:0;}
+footer{text-align:center;font-size:12px;color:#8a9aaa;padding:30px 16px;border-top:1px solid #dde8f5;margin-top:20px;}
+@media(max-width:640px){
+  .page-header h1{font-size:18px;}
+  .chapter{padding:20px 16px;}
+  .site-nav a{padding:8px 9px;font-size:11px;}
+}
+@media print{
+  body{background:#fff;font-size:12px;}
+  .site-nav{display:none;}
+  .chapter{box-shadow:none;border:1px solid #ccc;page-break-inside:avoid;}
+  .page-header{background:#1a3a5c !important;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+}
+</style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a href="01_top_settings_common_hi.html">① टॉप / सेटिंग्स</a>
+    <a href="02_stocktake_free_hi.html" class="active">② स्टॉकटेक निःशुल्क</a>
+    <a href="03_stocktake_simple_hi.html">③ स्टॉकटेक बेसिक</a>
+    <a href="04_stocktake_full_hi.html">④ स्टॉकटेक फुल</a>
+    <a href="05_inventory_free_hi.html">⑤ इन्वेंटरी निःशुल्क</a>
+    <a href="06_inventory_simple_hi.html">⑥ इन्वेंटरी बेसिक</a>
+    <a href="07_inventory_full_hi.html">⑦ इन्वेंटरी फुल</a>
+  </div>
+</nav>
+
+<header class="page-header">
+  <div class="inner">
+    <div class="app-name">Quantiventra मैनुअल</div>
+    <h1>② स्टॉकटेक — निःशुल्क संस्करण</h1>
+    <div class="subtitle">क्या कर सकते हैं, सीमाएँ, चरण-दर-चरण निर्देश और अनुशंसित कार्यप्रवाह</div>
+    <div class="scope-box">
+      <strong>इस पृष्ठ में शामिल विषय:</strong>
+      निःशुल्क संस्करण स्टॉकटेक क्या कर सकता है / निःशुल्क संस्करण की सीमाएँ / चरण-दर-चरण स्टॉकटेक कार्यप्रवाह / बारकोड, उत्पाद नाम और मात्रा प्रविष्टि / स्थान का उपयोग / इतिहास समीक्षा / CSV निर्यात सीमाएँ / निःशुल्क संस्करण में उपलब्ध नहीं सुविधाएँ / अनुशंसित कार्यप्रवाह
+    </div>
+  </div>
+</header>
+
+<div class="container">
+
+  <nav class="toc">
+    <h2>विषय-सूची</h2>
+    <ol>
+      <li><a href="#overview">निःशुल्क संस्करण में स्टॉकटेक का अवलोकन</a></li>
+      <li><a href="#limits">निःशुल्क संस्करण की सीमाएँ</a></li>
+      <li><a href="#howto">चरण-दर-चरण स्टॉकटेक निर्देश</a></li>
+      <li><a href="#barcode">बारकोड, उत्पाद नाम और मात्रा प्रविष्टि</a></li>
+      <li><a href="#location">स्थान का उपयोग</a></li>
+      <li><a href="#history">स्टॉकटेक इतिहास देखना</a></li>
+      <li><a href="#csv">CSV निर्यात सीमाएँ</a></li>
+      <li><a href="#cannot">निःशुल्क संस्करण में उपलब्ध नहीं सुविधाएँ</a></li>
+      <li><a href="#tips">निःशुल्क संस्करण उपयोगकर्ताओं के लिए अनुशंसित कार्यप्रवाह</a></li>
+      <li><a href="#summary">अध्याय के मुख्य बिंदु</a></li>
+      <li><a href="#confirm">उपयोग से पहले ध्यान देने योग्य बातें</a></li>
+    </ol>
+  </nav>
+
+  <section class="chapter" id="overview">
+    <div class="chapter-head">
+      <div class="ch-no">अध्याय 1</div>
+      <h2>निःशुल्क संस्करण में स्टॉकटेक का अवलोकन</h2>
+    </div>
+    <p>स्टॉकटेक माल को शारीरिक रूप से गिनने और मात्राएँ दर्ज करने की प्रक्रिया है। निःशुल्क संस्करण आपको बुनियादी स्टॉकटेक कार्यप्रवाह आज़माने देता है।</p>
+    <p>स्टॉकटेक प्रवाह है: <strong>उत्पाद स्कैन करें → मात्रा दर्ज करें → सहेजें → इतिहास देखें।</strong></p>
+
+    <div class="box box-hint">
+      <strong>💡 स्टॉकटेक क्या है?</strong>
+      स्टॉकटेक वह मात्रा दर्ज करता है जो आपने व्यक्तिगत रूप से गिनी (वास्तविक गणना)। यह इन्वेंटरी प्रबंधन की प्राप्ति, माल भेजने और स्थानांतरण सुविधाओं से अलग ऑपरेशन है — इन्हें भ्रमित न करें।
+    </div>
+
+    <h3>निःशुल्क संस्करण में उपलब्ध स्टॉकटेक सुविधाएँ</h3>
+    <ul>
+      <li>उत्पाद कोड / बारकोड दर्ज करें या स्कैन करें</li>
+      <li>उत्पाद नाम दर्ज करें</li>
+      <li>वास्तविक गणना मात्रा दर्ज करें</li>
+      <li>मेमो / नोट्स दर्ज करें</li>
+      <li>स्टॉकटेक इतिहास देखें</li>
+      <li>निःशुल्क संस्करण सीमा के भीतर सहेजें और निर्यात करें</li>
+    </ul>
+  </section>
+
+  <section class="chapter" id="limits">
+    <div class="chapter-head">
+      <div class="ch-no">अध्याय 2</div>
+      <h2>निःशुल्क संस्करण की सीमाएँ</h2>
+    </div>
+    <p>निःशुल्क संस्करण पर निम्नलिखित प्रतिबंध लागू होते हैं।</p>
+    <div class="table-wrap">
+      <table>
+        <tr><th>विषय</th><th>निःशुल्क संस्करण सीमा</th><th>सीमा हटाने का तरीका</th></tr>
+        <tr><td>मास्टर डेटा रिकॉर्ड</td><td>30 तक</td><td>बेसिक या फुल संस्करण</td></tr>
+        <tr><td>स्टॉकटेक इतिहास रिकॉर्ड</td><td>30 तक</td><td>बेसिक या फुल संस्करण</td></tr>
+        <tr><td>निर्यात किए जाने वाले रिकॉर्ड</td><td>30 तक</td><td>बेसिक या फुल संस्करण</td></tr>
+        <tr><td>स्क्रीन रोटेशन लॉक</td><td>उपलब्ध नहीं</td><td>बेसिक अनलॉक या उससे ऊपर</td></tr>
+        <tr><td>विस्तृत कोड नियम</td><td>उपलब्ध नहीं</td><td>फुल अनलॉक</td></tr>
+        <tr><td>विस्तृत स्थान नियम</td><td>उपलब्ध नहीं</td><td>फुल अनलॉक</td></tr>
+        <tr><td>विस्तृत कैमरा सेटिंग्स</td><td>उपलब्ध नहीं</td><td>फुल अनलॉक</td></tr>
+        <tr><td>विस्तृत CSV निर्यात</td><td>उपलब्ध नहीं</td><td>फुल अनलॉक</td></tr>
+      </table>
+    </div>
+    <div class="box box-warn">
+      <strong>⚠ नोट</strong>
+      30 रिकॉर्ड की सीमा तक पहुँचने पर सहेजना या निर्यात करना उपलब्ध नहीं हो सकता। सीमा आने से पहले बेसिक या फुल संस्करण में अपग्रेड करने की योजना बनाएँ।
+    </div>
+    <div class="box box-check">
+      <strong>🔍 कीमत और खरीद शर्तें</strong>
+      वर्तमान मूल्य और खरीद की शर्तों के लिए Google Play देखें। यह मैनुअल निश्चित मूल्य नहीं बताता।
+    </div>
+  </section>
+
+  <section class="chapter" id="howto">
+    <div class="chapter-head">
+      <div class="ch-no">अध्याय 3</div>
+      <h2>चरण-दर-चरण स्टॉकटेक निर्देश</h2>
+    </div>
+
+    <h3>बुनियादी स्टॉकटेक कार्यप्रवाह</h3>
+    <ol class="steps">
+      <li>मुख्य स्क्रीन पर <strong>स्टॉकटेक</strong> टैप करें।</li>
+      <li>बारकोड स्कैन करें, या उत्पाद कोड मैन्युअल रूप से दर्ज करें।</li>
+      <li>उत्पाद नाम दिखाई देता है। यदि कोड दर्ज नहीं है, तो नाम मैन्युअल रूप से दर्ज करें।</li>
+      <li>स्थान (गोदाम, दुकान आदि) पुष्टि करें या चुनें।</li>
+      <li>शारीरिक रूप से गिनी मात्रा दर्ज करें।</li>
+      <li>आवश्यकतानुसार मेमो दर्ज करें।</li>
+      <li><strong>सहेजें</strong> टैप करके प्रविष्टि स्टॉकटेक इतिहास में दर्ज करें।</li>
+      <li>स्टॉकटेक इतिहास में सहेजी गई प्रविष्टि की जाँच करें।</li>
+    </ol>
+
+    <div class="box box-danger">
+      <strong>🚨 महत्वपूर्ण</strong>
+      सहेजने से पहले हमेशा मात्रा की जाँच करें। गलत मात्रा दर्ज करने से इन्वेंटरी के आँकड़ों में अंतर आ सकता है। यदि बाद में संशोधन की आवश्यकता हो, तो ऐप की स्क्रीन पर दिखाए गए विकल्पों और निर्देशों के अनुसार आगे बढ़ें।
+    </div>
+
+    <h3>क्रमिक रूप से कई उत्पाद गिनना</h3>
+    <ol class="steps">
+      <li>पहला आइटम सहेजने के बाद, अगले उत्पाद का बारकोड स्कैन करें (या कोड दर्ज करें)।</li>
+      <li>चरण 2–7 दोहराएँ।</li>
+      <li>सभी उत्पाद दर्ज होने के बाद, पूरा स्टॉकटेक इतिहास देखें।</li>
+    </ol>
+
+    <div class="box box-hint">
+      <strong>💡 सुझाव</strong>
+      स्टॉकटेक एक ही सत्र में पूरा करना ज़रूरी नहीं। ऐप बंद कर दें और सारा सहेजा इतिहास बना रहेगा।
+    </div>
+  </section>
+
+  <section class="chapter" id="barcode">
+    <div class="chapter-head">
+      <div class="ch-no">अध्याय 4</div>
+      <h2>बारकोड, उत्पाद नाम और मात्रा प्रविष्टि</h2>
+    </div>
+
+    <h3>बारकोड स्कैनिंग</h3>
+    <p>कैमरा लॉन्च करें और बारकोड पर रखें — स्वचालित स्कैन होगा। स्कैन विफल होने पर अच्छी रोशनी वाली जगह जाएँ या मैन्युअल प्रविष्टि पर स्विच करें।</p>
+
+    <h3>मैन्युअल उत्पाद कोड प्रविष्टि</h3>
+    <p>बारकोड उपलब्ध न होने पर, कोड फ़ील्ड में सीधे उत्पाद कोड टाइप करें। दर्ज कोड के लिए उत्पाद नाम स्वचालित रूप से भर जाता है।</p>
+
+    <h3>उत्पाद नाम प्रविष्टि</h3>
+    <p>दर्ज नहीं किए गए कोड के लिए उत्पाद नाम मैन्युअल रूप से दर्ज करें। दर्ज किया गया नाम स्टॉकटेक इतिहास में सहेजा जाता है। मास्टर डेटा में पहले से दर्ज किए बिना काम करते समय रिकॉर्ड सीमा का ध्यान रखें।</p>
+
+    <h3>वास्तविक गणना मात्रा प्रविष्टि</h3>
+    <p>शारीरिक रूप से गिनी गई मात्रा को संख्यात्मक मान के रूप में दर्ज करें। सहेजने से पहले दर्ज की गई संख्या की जाँच करें।</p>
+
+    <div class="box box-warn">
+      <strong>⚠ नोट</strong>
+      वह सटीक मात्रा दर्ज करें जो आपने गिनी। गलत प्रविष्टि से इन्वेंटरी में अंतर पैदा हो सकता है। सहेजने से पहले हमेशा संख्या की जाँच करें।
+    </div>
+
+    <h3>मेमो / नोट्स दर्ज करना</h3>
+    <p>कार्य नोट या टिप्पणियाँ स्वतंत्र रूप से दर्ज कर सकते हैं। वे स्टॉकटेक इतिहास प्रविष्टि के साथ दर्ज होती हैं।</p>
+
+    <div class="table-wrap">
+      <table>
+        <tr><th>फ़ील्ड</th><th>विवरण</th><th>अनिवार्य / वैकल्पिक</th></tr>
+        <tr><td>बारकोड / उत्पाद कोड</td><td>उत्पाद पहचानने के लिए उपयोग किया कोड</td><td>अनिवार्य</td></tr>
+        <tr><td>उत्पाद नाम</td><td>कोड दर्ज नहीं होने पर दर्ज किया जाता है</td><td>सशर्त अनिवार्य</td></tr>
+        <tr><td>स्थान</td><td>जहाँ स्टॉकटेक किया जा रहा है</td><td>सेटिंग्स पर निर्भर</td></tr>
+        <tr><td>वास्तविक गणना मात्रा</td><td>वास्तव में गिनी गई मात्रा</td><td>अनिवार्य</td></tr>
+        <tr><td>मेमो</td><td>नोट या टिप्पणियाँ</td><td>वैकल्पिक</td></tr>
+      </table>
+    </div>
+  </section>
+
+  <section class="chapter" id="location">
+    <div class="chapter-head">
+      <div class="ch-no">अध्याय 5</div>
+      <h2>स्थान का उपयोग</h2>
+    </div>
+    <p>निःशुल्क संस्करण सरलीकृत स्थान सेटअप उपयोग करता है। डिफ़ॉल्ट स्थान "गोदाम" और "दुकान" हैं।</p>
+
+    <h3>सरल मोड के अनुसार स्थान</h3>
+    <div class="table-wrap">
+      <table>
+        <tr><th>स्टॉकटेक मोड</th><th>उपलब्ध स्थान</th><th>उदाहरण उपयोग</th></tr>
+        <tr><td>सरल A</td><td>केवल गोदाम</td><td>एक गोदाम प्रबंधित करना</td></tr>
+        <tr><td>सरल B</td><td>गोदाम + दुकान</td><td>गोदाम और दुकान दोनों का स्टॉकटेक</td></tr>
+        <tr><td>सरल C</td><td>केवल दुकान</td><td>एक दुकान प्रबंधित करना</td></tr>
+      </table>
+    </div>
+
+    <p><strong>सेटिंग्स → स्टॉकटेक सेटिंग्स</strong> के अंतर्गत मोड चुनें। शुरुआत से पहले सही मोड चुनने से स्टॉकटेक कार्यप्रवाह सुचारू होता है।</p>
+
+    <div class="box box-hint">
+      <strong>💡 सुझाव</strong>
+      विस्तृत स्थान का उपयोग (जैसे शेल्फ नंबर) फुल अनलॉक सुविधा है। इसे सेटिंग्स में <strong>विस्तृत</strong> मोड पर स्विच करके सक्षम करें।
+    </div>
+    <div class="box box-warn">
+      <strong>⚠ नोट</strong>
+      विस्तृत स्थान दर्ज होने पर भी, मोड अभी भी सरल A/B/C होने पर वे दिखाई नहीं देंगे। विस्तृत मोड पर स्विच करना आवश्यक है।
+    </div>
+  </section>
+
+  <section class="chapter" id="history">
+    <div class="chapter-head">
+      <div class="ch-no">अध्याय 6</div>
+      <h2>स्टॉकटेक इतिहास देखना</h2>
+    </div>
+    <p>सभी सहेजी स्टॉकटेक प्रविष्टियाँ स्टॉकटेक इतिहास में देखी जा सकती हैं।</p>
+
+    <h3>इतिहास में क्या देख सकते हैं</h3>
+    <ul>
+      <li>सहेजने की तारीख और समय</li>
+      <li>उत्पाद कोड और नाम</li>
+      <li>दर्ज वास्तविक गणना मात्रा</li>
+      <li>स्थान</li>
+      <li>मेमो</li>
+    </ul>
+
+    <h3>निःशुल्क संस्करण इतिहास सीमा</h3>
+    <p>निःशुल्क संस्करण 30 स्टॉकटेक इतिहास रिकॉर्ड तक संग्रहीत करता है। सीमा तक पहुँचने पर, स्क्रीन पर दिए निर्देशों का पालन करें। निरंतर उपयोग के लिए बेसिक (1,000 रिकॉर्ड तक) या फुल अनलॉक (असीमित) में अपग्रेड पर विचार करें।</p>
+
+    <div class="box box-warn">
+      <strong>⚠ नोट</strong>
+      निःशुल्क संस्करण इतिहास 30 रिकॉर्ड पर सीमित करता है। सीमा से आगे बढ़ने पर नई स्टॉकटेक प्रविष्टियाँ सहेजना संभव नहीं हो सकता।
+    </div>
+  </section>
+
+  <section class="chapter" id="csv">
+    <div class="chapter-head">
+      <div class="ch-no">अध्याय 7</div>
+      <h2>CSV निर्यात सीमाएँ</h2>
+    </div>
+    <p>निःशुल्क संस्करण CSV में निर्यात किए जा सकने वाले रिकॉर्ड की संख्या सीमित करता है।</p>
+
+    <div class="table-wrap">
+      <table>
+        <tr><th>विषय</th><th>निःशुल्क संस्करण</th><th>बेसिक अनलॉक</th><th>फुल अनलॉक</th></tr>
+        <tr><td>निर्यात किए जाने वाले रिकॉर्ड</td><td>30 तक</td><td>300 तक</td><td>असीमित</td></tr>
+        <tr><td>पूर्ण कॉलम निर्यात</td><td>सीमित</td><td>सीमित</td><td>विस्तृत CSV निर्यात</td></tr>
+      </table>
+    </div>
+
+    <div class="box box-hint">
+      <strong>💡 सुझाव</strong>
+      स्टॉकटेक CSV में पहली पंक्ति पर भाषा-विशिष्ट हेडर पंक्ति शामिल है। निर्यात किए CSV Excel या Google Sheets में खोले और देखे जा सकते हैं।
+    </div>
+    <div class="box box-warn">
+      <strong>⚠ नोट</strong>
+      स्टॉकटेक सारांश CSV में तारीख/समय या स्थान कॉलम शामिल नहीं हैं। स्थान-विशिष्ट और तारीख-विशिष्ट विस्तृत निर्यात फुल अनलॉक सुविधाएँ हैं।
+    </div>
+  </section>
+
+  <section class="chapter" id="cannot">
+    <div class="chapter-head">
+      <div class="ch-no">अध्याय 8</div>
+      <h2>निःशुल्क संस्करण में उपलब्ध नहीं सुविधाएँ</h2>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <tr><th>सुविधा</th><th>आवश्यक प्लान</th></tr>
+        <tr><td>30 से अधिक मास्टर डेटा रिकॉर्ड</td><td>स्टॉकटेक बेसिक संस्करण या उससे ऊपर</td></tr>
+        <tr><td>30 से अधिक इतिहास रिकॉर्ड</td><td>स्टॉकटेक बेसिक संस्करण या उससे ऊपर</td></tr>
+        <tr><td>30 से अधिक रिकॉर्ड निर्यात</td><td>स्टॉकटेक बेसिक संस्करण या उससे ऊपर</td></tr>
+        <tr><td>स्क्रीन रोटेशन लॉक</td><td>स्टॉकटेक बेसिक संस्करण या उससे ऊपर</td></tr>
+        <tr><td>विस्तृत कोड नियम सेटिंग्स</td><td>स्टॉकटेक फुल संस्करण</td></tr>
+        <tr><td>विस्तृत स्थान नियम सेटिंग्स</td><td>स्टॉकटेक फुल संस्करण</td></tr>
+        <tr><td>विस्तृत कैमरा स्कैन सेटिंग्स</td><td>स्टॉकटेक फुल संस्करण</td></tr>
+        <tr><td>विस्तृत CSV निर्यात</td><td>स्टॉकटेक फुल संस्करण</td></tr>
+        <tr><td>स्टॉकटेक परिणाम को इन्वेंटरी में लागू करने वाली कार्रवाई</td><td>ऊपरी प्लान (ऐप स्क्रीन और Google Play पर दिखाई गई जानकारी की पुष्टि करें)</td></tr>
+      </table>
+    </div>
+  </section>
+
+  <section class="chapter" id="tips">
+    <div class="chapter-head">
+      <div class="ch-no">अध्याय 9</div>
+      <h2>निःशुल्क संस्करण उपयोगकर्ताओं के लिए अनुशंसित कार्यप्रवाह</h2>
+    </div>
+
+    <h3>छोटे पैमाने के ऑपरेशन के लिए सर्वोत्तम</h3>
+    <p>यदि आपके पास 30 या कम उत्पाद हैं, तो निःशुल्क संस्करण निरंतर बुनियादी स्टॉकटेक के लिए पर्याप्त है।</p>
+
+    <h3>रिकॉर्ड बनाने के लिए नियमित रूप से CSV निर्यात करें</h3>
+    <p>30-रिकॉर्ड इतिहास सीमा तक पहुँचने से पहले CSV निर्यात करें। इससे आपके रिकॉर्ड PC या स्प्रेडशीट प्रारूप में जमा होते हैं।</p>
+
+    <h3>पहले से सरल मोड (A/B/C) सेट करें</h3>
+    <p>शुरू करने से पहले <strong>सेटिंग्स → स्टॉकटेक सेटिंग्स</strong> के अंतर्गत सही मोड (<strong>सरल A/B/C</strong>) चुनें। इससे प्रत्येक स्टॉकटेक सत्र सुचारू होता है।</p>
+
+    <h3>सीमा के करीब पहुँचने पर अपग्रेड की योजना बनाएँ</h3>
+    <p>जब मास्टर और इतिहास रिकॉर्ड 30 के करीब पहुँचें, बेसिक अनलॉक में अपग्रेड पर विचार करें। सीमा तक पहुँचने पर सहेजना या निर्यात करना रुक सकता है।</p>
+
+    <div class="box box-hint">
+      <strong>💡 सुझाव</strong>
+      वास्तविक उत्पाद दर्ज करने से पहले नमूना डेटा (सेटिंग्स से बनाएँ) से अभ्यास करें।
+    </div>
+  </section>
+
+  <div class="summary-box" id="summary">
+    <h3>📌 अध्याय के मुख्य बिंदु</h3>
+    <ul>
+      <li>निःशुल्क संस्करण स्टॉकटेक 30 आइटम तक छोटे पैमाने के ऑपरेशन के लिए उपयुक्त है।</li>
+      <li>कार्यप्रवाह है: स्कैन करें → मात्रा दर्ज करें → सहेजें → इतिहास देखें।</li>
+      <li>स्थान सरल A/B/C से सेट होते हैं। विस्तृत स्थानों के लिए फुल अनलॉक आवश्यक है।</li>
+      <li>CSV निर्यात 30 रिकॉर्ड तक सीमित है। निर्यात फ़ाइलों में तारीख या स्थान कॉलम शामिल नहीं होते।</li>
+      <li>30-रिकॉर्ड सीमा के करीब पहुँचने पर बेसिक या फुल संस्करण में अपग्रेड पर विचार करें।</li>
+      <li>स्टॉकटेक इन्वेंटरी प्रबंधन की प्राप्ति और माल भेजने से अलग है — दोनों को भ्रमित न करें।</li>
+    </ul>
+  </div>
+
+  <div class="confirm-box" id="confirm">
+    <h3>🔍 उपयोग से पहले ध्यान देने योग्य बातें</h3>
+    <ul>
+      <li>स्टॉकटेक परिणाम को इन्वेंटरी में लागू करने वाली कार्रवाई ऊपरी सुविधा है। उपलब्ध सीमा के लिए ऐप स्क्रीन और Google Play पर दिखाई गई जानकारी की पुष्टि करें।</li>
+      <li>सहेजने के बाद प्रविष्टि में बदलाव करना हो तो ऐप की स्क्रीन पर दिखाए गए विकल्पों और निर्देशों का पालन करें।</li>
+      <li>इतिहास रिकॉर्ड की सीमा 30 है। सीमा के करीब पहुँचने पर CSV निर्यात करें या बेसिक / फुल संस्करण में अपग्रेड करने पर विचार करें।</li>
+      <li>मूल्य, खरीद शर्तें और उपलब्ध सुविधाएँ Google Play तथा ऐप स्क्रीन पर दिखाए गए नवीनतम विवरण के अनुसार जाँचें।</li>
+    </ul>
+  </div>
+
+</div>
+
+<footer>
+  <p>Quantiventra मैनुअल | ② स्टॉकटेक निःशुल्क संस्करण</p>
+  <p style="margin-top:4px;">सामग्री उपलब्ध दस्तावेज़ीकरण पर आधारित है। नवीनतम जानकारी के लिए हमेशा ऐप की स्क्रीन देखें।</p>
+  <p style="margin-top:4px;"><a href="privacy_hi.html">गोपनीयता नीति</a></p>
+</footer>
+
+</body>
+</html>
+
+
+

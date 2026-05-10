@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+<head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Quantiventra – Inventário Físico – Versão Completa</title>
+<style>*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;font-size:15px;line-height:1.8;color:#1a2535;background:#f4f7fb;}
+a{color:#1a5fa8;text-decoration:none;}a:hover{text-decoration:underline;}
+.site-nav{background:#1a3a5c;color:#fff;padding:0;}.site-nav .nav-inner{max-width:960px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:stretch;}
+.site-nav a{color:#cde;padding:10px 13px;font-size:12px;display:block;border-right:1px solid #2a4a6c;white-space:nowrap;}
+.site-nav a:hover{background:#2a5090;text-decoration:none;}.site-nav a.active{background:#2a6cbe;color:#fff;font-weight:bold;}
+.page-header{background:linear-gradient(135deg,#1a3a5c 0%,#2a6cbe 100%);color:#fff;padding:40px 20px 30px;}
+.page-header .inner{max-width:960px;margin:0 auto;}.page-header .app-name{font-size:13px;opacity:.8;}
+.page-header h1{font-size:22px;font-weight:700;margin-top:6px;line-height:1.4;}.page-header .subtitle{font-size:14px;opacity:.85;margin-top:8px;}
+.scope-box{background:rgba(255,255,255,.15);border-left:4px solid #7ecfff;padding:12px 16px;margin-top:16px;border-radius:4px;font-size:13px;}
+.container{max-width:960px;margin:0 auto;padding:30px 16px;}
+.toc{background:#fff;border:1px solid #c8d8ec;border-radius:8px;padding:24px 28px;margin-bottom:32px;}
+.toc h2{font-size:16px;font-weight:700;color:#1a3a5c;border-bottom:2px solid #2a6cbe;padding-bottom:8px;margin-bottom:14px;}
+.toc ol{margin-left:18px;}.toc li{margin:5px 0;font-size:14px;}
+.chapter{background:#fff;border-radius:8px;box-shadow:0 1px 4px rgba(0,0,0,.08);padding:28px 28px 24px;margin-bottom:28px;}
+.chapter-head{border-left:5px solid #2a6cbe;padding-left:14px;margin-bottom:20px;}
+.chapter-head .ch-no{font-size:12px;color:#2a6cbe;font-weight:700;}.chapter-head h2{font-size:20px;font-weight:700;color:#1a2535;margin-top:2px;}
+h3{font-size:16px;font-weight:700;color:#1a3a5c;border-bottom:1px solid #dde8f5;padding-bottom:5px;margin:22px 0 12px;}
+h4{font-size:14px;font-weight:700;color:#2a4a6c;margin:16px 0 8px;}
+p{margin-bottom:12px;}ul,ol{margin-left:20px;margin-bottom:12px;}li{margin-bottom:5px;}
+.steps{counter-reset:step;list-style:none;margin-left:0;}
+.steps li{counter-increment:step;padding:9px 12px 9px 46px;position:relative;background:#f8fbff;border:1px solid #dde8f5;border-radius:6px;margin-bottom:6px;}
+.steps li::before{content:counter(step);position:absolute;left:12px;top:50%;transform:translateY(-50%);width:24px;height:24px;background:#2a6cbe;color:#fff;border-radius:50%;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;}
+.table-wrap{overflow-x:auto;margin-bottom:16px;}
+table{width:100%;border-collapse:collapse;font-size:13px;min-width:380px;}
+th{background:#1a3a5c;color:#fff;padding:9px 12px;text-align:left;white-space:nowrap;}
+td{padding:8px 12px;border-bottom:1px solid #dde8f5;vertical-align:top;}tr:nth-child(even) td{background:#f4f7fb;}
+code{font-family:'Courier New',monospace;background:rgba(0,80,160,.08);color:#004080;padding:2px 6px;border-radius:3px;font-size:12px;}
+.box{border-radius:6px;padding:13px 16px;margin:14px 0;font-size:13px;}
+.box-warn{background:#fffbe6;border-left:4px solid #f5a623;color:#7a5700;}
+.box-danger{background:#fff0f0;border-left:4px solid #d43f3f;color:#7a0000;}
+.box-hint{background:#e8f4ff;border-left:4px solid #2a6cbe;color:#0a3060;}
+.box-check{background:#f4eeff;border-left:4px solid #8c4fc8;color:#3a0070;}
+.box strong{display:block;margin-bottom:4px;}
+figure{max-width:280px;width:100%;margin:18px auto;text-align:center;}
+figure img{display:block;width:100%;max-width:280px;height:auto;margin:0 auto;border:1px solid #c8d8ec;border-radius:6px;box-shadow:0 2px 8px rgba(0,0,0,.1);}
+figcaption{font-size:12px;color:#5a7a99;margin-top:6px;}
+.img-pending{display:flex;align-items:center;justify-content:center;max-width:280px;width:100%;box-sizing:border-box;background:#e8eef5;border:2px dashed #99b8d8;border-radius:6px;height:160px;color:#5a7a99;font-size:13px;margin:18px auto;}
+.diff-add{background:#e8fff0;border-left:4px solid #2a9c5c;border-radius:6px;padding:12px 16px;margin:14px 0;font-size:13px;}
+.diff-add strong{display:block;color:#1a6c3c;margin-bottom:4px;}
+.flow-box{background:#f4f7fb;border:1px solid #c8d8ec;border-radius:8px;padding:20px;margin:16px 0;}
+.flow-box h4{color:#1a3a5c;margin-top:0;}
+.flow-arrow{text-align:center;font-size:20px;color:#2a6cbe;margin:4px 0;}
+.flow-step{background:#fff;border:1px solid #c8d8ec;border-radius:6px;padding:10px 16px;margin:4px 0;font-size:13px;}
+.flow-step strong{color:#1a3a5c;}
+.summary-box{background:linear-gradient(135deg,#e8f4ff,#f0f8ff);border:1px solid #99c8ec;border-radius:8px;padding:20px 24px;margin-top:32px;}
+.summary-box h3{border:none;color:#1a3a5c;margin-top:0;}
+.confirm-box{background:#fdf4ff;border:1px solid #c8a0e0;border-radius:8px;padding:20px 24px;margin-top:16px;}
+.confirm-box h3{border:none;color:#5a0090;margin-top:0;}
+.check{color:#2e7d32;font-weight:700;}.cross{color:#c62828;}
+th.pro-col{background:#5a2a8c;}
+.feature-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px;margin:16px 0;}
+.feature-card{background:#f4f7fb;border:1px solid #c8d8ec;border-radius:8px;padding:16px;}
+.feature-card h4{color:#1a3a5c;margin-top:0;margin-bottom:6px;font-size:14px;}
+.feature-card p{font-size:13px;margin:0;color:#3a5a7a;}
+.feature-card.pro-card{background:#f4eeff;border-color:#c8a0e0;}
+.feature-card.pro-card h4{color:#5a2a8c;}
+.trouble{border:1px solid #c8d8ec;border-radius:8px;margin:14px 0;overflow:hidden;}
+.trouble-q{background:#eef6fd;padding:13px 18px;font-weight:700;font-size:14px;color:#1a3a5c;display:flex;align-items:flex-start;gap:10px;}
+.trouble-q::before{content:'Q';background:#2a6cbe;color:#fff;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900;flex-shrink:0;margin-top:1px;}
+.trouble-a{padding:13px 18px 14px 50px;font-size:13.5px;border-top:1px solid #c8d8ec;line-height:1.9;}
+.trouble-a ul{margin-left:16px;}
+.legal-block{background:#f5f5f5;border:1px solid #ddd;border-radius:8px;padding:20px 24px;font-size:12.5px;color:#444;line-height:1.9;margin:14px 0;}
+.legal-block h4{font-size:13px;color:#333;margin:18px 0 6px;border-bottom:1px solid #ddd;padding-bottom:4px;}
+.legal-block h4:first-child{margin-top:0;}
+footer{text-align:center;font-size:12px;color:#8a9aaa;padding:30px 16px;border-top:1px solid #dde8f5;margin-top:20px;}
+@media(max-width:640px){.page-header h1{font-size:18px;}.chapter{padding:20px 16px;}.site-nav a{padding:8px 9px;font-size:11px;}}
+@media print{body{background:#fff;font-size:12px;}.site-nav{display:none;}.chapter{box-shadow:none;border:1px solid #ccc;page-break-inside:avoid;}.page-header{background:#1a3a5c !important;-webkit-print-color-adjust:exact;print-color-adjust:exact;}}
+</style></head>
+<body>
+<nav class="site-nav"><div class="nav-inner">
+<a href="01_top_settings_common_pt-BR.html">① Início / Configurações</a>
+<a href="02_stocktake_free_pt-BR.html">② Inventário físico: gratuito</a>
+<a href="03_stocktake_simple_pt-BR.html">③ Inventário físico: padrão</a>
+<a class="active" href="04_stocktake_full_pt-BR.html">④ Inventário físico: completo</a>
+<a href="05_inventory_free_pt-BR.html">⑤ Gestão de estoque: gratuita</a>
+<a href="06_inventory_simple_pt-BR.html">⑥ Gestão de estoque: padrão</a>
+<a href="07_inventory_full_pt-BR.html">⑦ Gestão de estoque: completa</a>
+</div></nav>
+<header class="page-header"><div class="inner">
+<div class="app-name">Manual do Quantiventra</div>
+<h1>④ Inventário físico — Versão Completa (Versão Completa)</h1>
+<div class="subtitle">Novidades da versão Completa, localizações detalhadas, confirmação de contagem, aplicação ao estoque e fluxos práticos</div>
+<div class="scope-box"><strong>Tópicos abordados:</strong> Novidades do Versão Completa / Diferenças do Padrão / Localizações detalhadas / CSV expandido / Histórico / Confirmar contagem física / Aplicar ao estoque / Observações / Fluxo prático</div>
+</div></header>
+<div class="container">
+<nav class="toc"><h2>Índice</h2><ol>
+<li><a href="#overview">Visão geral da versão Completa</a></li>
+<li><a href="#diff">Diferenças em relação à versão Padrão</a></li>
+<li><a href="#location">Localizações detalhadas</a></li><li><a href="#csv">Importação/Exportação CSV expandida</a></li>
+<li><a href="#history">Histórico de inventário</a></li>
+<li><a href="#confirm-flow">Confirmar contagem física</a></li>
+<li><a href="#inventory-reflect">Aplicar resultados do inventário físico ao estoque</a></li>
+<li><a href="#notes">Observações importantes sobre a aplicação ao estoque</a></li>
+<li><a href="#usecase">Fluxo de trabalho prático — versão Completa</a></li>
+<li><a href="#summary">Pontos-chave do capítulo</a></li>
+<li><a href="#check">Observações antes do uso</a></li>
+</ol></nav>
+<section class="chapter" id="overview">
+<div class="chapter-head"><div class="ch-no">CAPÍTULO 1</div><h2>Visão geral da versão Completa</h2></div>
+<p>O Versão Completa de Inventário físico remove todos os limites de registros e ativa as configurações completas compartilhadas — regras de código, regras de localização, configurações de câmera, CSV expandido e mais. Suporta gerenciamento de grande volume de produtos e fluxos de inventário físico por localização detalhada.</p>
+<div class="diff-add">
+<strong>✅ O que o Versão Completa adiciona / desbloqueia</strong>
+<ul style="margin-top:6px;">
+<li>Remoção dos limites de registros de cadastro, histórico e exportação</li>
+<li>Configurações detalhadas de regras de código</li>
+<li>Configurações detalhadas de regras de localização</li>
+<li>Configurações detalhadas de câmera</li>
+<li>Exportação CSV expandida</li>
+<li>Edição detalhada</li>
+<li>Bloqueio de rotação de tela (herdado do Versão Padrão)</li>
+</ul>
+</div></section>
+<section class="chapter" id="diff">
+<div class="chapter-head"><div class="ch-no">CAPÍTULO 2</div><h2>Diferenças em relação à versão Padrão</h2></div>
+<div class="table-wrap"><table>
+<tr><th>Funcionalidade / Configuração</th><th>Versão Padrão</th><th>Versão Completa</th></tr>
+<tr><td>Registros de cadastro</td><td>Máx. 300</td><td>Ilimitado</td></tr>
+<tr><td>Registros de histórico de inventário físico</td><td>Máx. 1.000</td><td>Ilimitado</td></tr>
+<tr><td>Registros de exportação</td><td>Máx. 300</td><td>Ilimitado</td></tr>
+<tr><td>Configurações detalhadas de regras de código</td><td>✗</td><td>○</td></tr>
+<tr><td>Configurações detalhadas de regras de localização</td><td>✗</td><td>○</td></tr>
+<tr><td>Configurações detalhadas de câmera</td><td>✗</td><td>○</td></tr>
+<tr><td>Exportação CSV expandida</td><td>✗</td><td>○</td></tr>
+<tr><td>Uso de localizações detalhadas</td><td>✗ (modo Detalhado pode ser configurado, mas com funcionalidade limitada)</td><td>○</td></tr>
+</table></div>
+</section>
+<section class="chapter" id="location">
+<div class="chapter-head"><div class="ch-no">CAPÍTULO 3</div><h2>Localizações detalhadas</h2></div>
+<p>Com o Versão Completa, todas as localizações cadastradas no Cadastro de localizações ficam disponíveis para o inventário. Você pode configurar números de prateleira, andares, áreas e outras localizações detalhadas além de depósito e loja.</p>
+<h3>Como configurar localizações detalhadas</h3>
+<ol class="steps">
+<li>Vá em <strong>Configurações → Configurações de inventário</strong> e selecione o modo <strong>Detalhado</strong>.</li>
+<li>Vá em <strong>Gerenciamento de cadastros → Cadastro de localizações</strong> e cadastre as localizações necessárias.</li>
+<li>Na tela de inventário, toque no campo de localização para ver todas as localizações cadastradas.</li>
+</ol>
+<div class="box box-warn"><strong>⚠ Atenção</strong>Mesmo com o Versão Completa ativo, se o modo ainda for Simples A/B/C, apenas localizações simples serão exibidas. Mude para o modo <strong>Detalhado</strong> para usar todas as localizações cadastradas.</div>
+</section>
+<section class="chapter" id="csv">
+<div class="chapter-head"><div class="ch-no">CAPÍTULO 4</div><h2>Importação / Exportação CSV expandida</h2></div>
+<p>Na versão Completa, o inventário físico conta com opções ampliadas de importação e exportação CSV. Elas ajudam a preparar cadastros, revisar resultados e arquivar dados de inventário físico com mais flexibilidade.</p>
+<h3>Especificações de importação CSV do inventário físico</h3>
+<div class="table-wrap"><table>
+<tr><th>Tipo de CSV</th><th>Finalidade</th><th>Colunas principais</th><th>Obrigatório / Opcional</th><th>Observações</th><th>Disponível em</th></tr>
+<tr><td>CSV de inventário (2 colunas)</td><td>Importação básica do cadastro de inventário</td><td>Código do produto, nome do produto</td><td>2 colunas obrigatórias</td><td>Sem cabeçalho; os dados começam na primeira linha</td><td>Todos os planos</td></tr>
+<tr><td>CSV de inventário (3 colunas)</td><td>Importação com estoque teórico</td><td>Código do produto, nome do produto, estoque teórico</td><td>3 colunas obrigatórias</td><td>A quantidade contada não é necessária na importação; começa em 0</td><td>Todos os planos</td></tr></table></div>
+<h3>Exportação CSV do inventário físico</h3>
+<ul>
+<li>Os arquivos exportados incluem uma linha de cabeçalho no idioma selecionado.</li>
+<li>O CSV <code>stocktake_summary</code> não inclui colunas de data, hora ou localização.</li>
+<li>Para exportações detalhadas por localização, data ou item individual, verifique as opções de saída disponíveis no histórico e o conteúdo do arquivo exportado.</li></ul>
+<div class="box box-danger"><strong>🚨 Importante</strong>Importações e exportações CSV podem afetar dados importantes. Antes de qualquer operação de grande impacto, exporte um backup.</div>
+</section>
+<section class="chapter" id="history">
+<div class="chapter-head"><div class="ch-no">CAPÍTULO 5</div><h2>Histórico de inventário físico</h2></div>
+<p>Na versão Completa, o limite de registros do histórico de inventário físico é removido. Assim, é possível manter e revisar dados de inventário físico anteriores por um período mais longo.</p><h3>O que pode ser consultado no histórico</h3>
+<ul>
+<li>Data e hora de salvamento, código do produto e nome do produto</li>
+<li>Quantidade contada e localização</li>
+<li>Observações</li>
+<li>Status da confirmação: pendente ou confirmado</li>
+</ul>
+</section>
+<section class="chapter" id="confirm-flow">
+<div class="chapter-head"><div class="ch-no">CAPÍTULO 6</div><h2>Confirmar contagem física</h2></div>
+<p>Na versão Completa, a operação "Confirmar contagem física" está disponível para os dados de inventário físico inseridos. Confirmar torna os resultados do inventário um registro oficial.</p>
+<div class="flow-box">
+<h4>Fluxo do inventário até a confirmação</h4>
+<div class="flow-step"><strong>① Inserção de dados de inventário físico</strong>: Ler código de barras → Inserir quantidade → Salvar</div>
+<div class="flow-arrow">↓</div>
+<div class="flow-step"><strong>② Revisão do histórico de inventário físico</strong>: Verificar itens salvos e corrigir erros conforme as opções disponíveis na tela</div>
+<div class="flow-arrow">↓</div>
+<div class="flow-step"><strong>③ Confirmar contagem física</strong>: Executar a operação de confirmação</div>
+<div class="flow-arrow">↓</div>
+<div class="flow-step"><strong>④ Aplicar ao estoque (opcional)</strong>: Aplicar resultados confirmados à Gestão de estoque</div>
+</div>
+<div class="box box-danger"><strong>🚨 Sobre o botão Confirmar</strong>Confirmar a contagem física é uma operação de alto impacto que afeta os dados de estoque. O botão Confirmar fica em uma zona de risco separada abaixo dos detalhes de confirmação — não é o primeiro botão que você toca. Antes de tocar, revise cuidadosamente todas as diferenças e os dados afetados.</div>
+<div class="box box-danger"><strong>🚨 Importante</strong>Antes de confirmar, sempre revise o histórico de inventário físico. Antes de prosseguir, leia atentamente as instruções na tela de confirmação.</div>
+<div class="box box-hint"><strong>💡 Depois da confirmação</strong>Se precisar revisar informações após confirmar a contagem física, verifique as opções disponíveis na tela, o histórico de inventário físico e os arquivos de backup antes de prosseguir.</div></section>
+<section class="chapter" id="inventory-reflect">
+<div class="chapter-head"><div class="ch-no">CAPÍTULO 7</div><h2>Aplicar resultados do inventário físico ao estoque</h2></div>
+<p>Aplicar os resultados do inventário físico à Gestão de estoque ajusta as quantidades de estoque para corresponder à contagem física confirmada. As diferenças são registradas como entradas de ajuste no histórico.</p>
+<ol class="steps">
+<li>Insira os dados de inventário físico e confirme a contagem física.</li>
+<li>Execute a operação "Aplicar ao estoque".</li>
+<li>Revise o conteúdo (detalhes dos ajustes) na tela de confirmação.</li>
+<li>Após confirmar, execute a aplicação.</li>
+<li>Verifique os detalhes dos ajustes no histórico de estoque.</li>
+</ol>
+<div class="box box-danger"><strong>🚨 Importante</strong>Aplicar ao estoque faz alterações significativas nas quantidades. Antes de prosseguir, sempre exporte um CSV de backup. Leia atentamente a tela de confirmação antes de executar.</div>
+<div class="box box-hint"><strong>💡 Depois da aplicação ao estoque</strong>Após aplicar os resultados ao estoque, confira o histórico de estoque e compare com o CSV de backup para revisar os ajustes realizados.</div>
+</section>
+<section class="chapter" id="notes">
+<div class="chapter-head"><div class="ch-no">CAPÍTULO 8</div><h2>Observações importantes sobre a aplicação ao estoque</h2></div>
+<div class="box box-danger"><strong>🚨 Sempre faça backup antes de aplicar</strong>Aplicar ao estoque faz alterações em grande escala nos dados. Exporte previamente um CSV de backup (<strong>Configurações → Exportar todos os dados</strong>).</div>
+<div class="box box-warn"><strong>⚠ Leia a tela de confirmação</strong>Para qualquer operação que altera dados — confirmação, aplicação, exclusão, reset — leia atentamente a tela de confirmação antes de executar.</div>
+</section>
+<section class="chapter" id="usecase">
+<div class="chapter-head"><div class="ch-no">CAPÍTULO 9</div><h2>Fluxo de trabalho prático — versão Completa</h2></div>
+<h3>Fluxo de inventário mensal</h3>
+<ol class="steps">
+<li>No início do mês, importe o CSV de inventário físico para atualizar o cadastro de produtos.</li>
+<li>Configure as configurações de inventário para o modo <strong>Detalhado</strong> e prepare localizações por prateleira e área.</li>
+<li>Execute o inventário: leia os códigos de barras e insira as quantidades contadas.</li>
+<li>Revise todos os itens no histórico de inventário físico.</li>
+<li>Se tudo estiver correto, execute a Confirmação de contagem física.</li>
+<li>Após o backup, execute a operação Aplicar ao estoque.</li>
+<li>Verifique as entradas de ajuste de inventário no histórico de estoque e investigue quaisquer diferenças.</li>
+<li>Exporte o CSV dos resultados do inventário para arquivamento.</li>
+</ol>
+</section>
+<div class="summary-box" id="summary">
+<h3>📌 Pontos-chave do capítulo</h3>
+<ul>
+<li>O Versão Completa remove todos os limites de registros e ativa localizações detalhadas e CSV expandido.</li>
+<li>Para usar localizações detalhadas, mude para o modo <strong>Detalhado</strong> em <strong>Configurações → Configurações de inventário</strong>.</li>
+<li>O fluxo Confirmar → Aplicar ao estoque faz alterações de grande impacto nos dados — prossiga com cuidado.</li>
+<li>Antes de aplicar ao estoque, sempre exporte um CSV de backup.</li>
+</ul>
+</div>
+<div class="confirm-box" id="check">
+<h3>🔍 Observações antes do uso</h3>
+<ul>
+<li>Se precisar revisar dados após a Confirmação de contagem física, consulte as opções disponíveis na tela e o histórico de inventário físico.</li>
+<li>Depois de aplicar os resultados ao estoque, confira o histórico de estoque e compare com o CSV de backup.</li>
+<li>Para exportações detalhadas por localização, data ou item, verifique as opções de saída disponíveis e o conteúdo do arquivo exportado.</li>
+<li>Ao editar dados de inventário físico já salvos, confirme o status da contagem e siga as mensagens exibidas no app.</li>
+</ul>
+</div>
+</div>
+<footer>Manual do Quantiventra · O conteúdo deste manual pode ser alterado sem aviso prévio. As informações exibidas no app têm prioridade.<p style="margin-top:4px;"><a href="privacy_pt-BR.html">Política de Privacidade</a></p></footer>
+</body></html>

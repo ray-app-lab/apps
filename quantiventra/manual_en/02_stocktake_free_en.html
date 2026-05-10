@@ -1,0 +1,399 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quantiventra Manual – Stocktake Free Tier</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;font-size:15px;line-height:1.8;color:#1a2535;background:#f4f7fb;}
+a{color:#1a5fa8;text-decoration:none;}
+a:hover{text-decoration:underline;}
+.site-nav{background:#1a3a5c;color:#fff;padding:0;}
+.site-nav .nav-inner{max-width:960px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:stretch;}
+.site-nav a{color:#cde;padding:10px 13px;font-size:12px;display:block;border-right:1px solid #2a4a6c;white-space:nowrap;}
+.site-nav a:hover{background:#2a5090;text-decoration:none;}
+.site-nav a.active{background:#2a6cbe;color:#fff;font-weight:bold;}
+.page-header{background:linear-gradient(135deg,#1a3a5c 0%,#2a6cbe 100%);color:#fff;padding:40px 20px 30px;}
+.page-header .inner{max-width:960px;margin:0 auto;}
+.page-header .app-name{font-size:13px;opacity:.8;letter-spacing:.1em;}
+.page-header h1{font-size:26px;font-weight:700;margin-top:6px;line-height:1.3;}
+.page-header .subtitle{font-size:14px;opacity:.85;margin-top:8px;}
+.scope-box{background:rgba(255,255,255,.15);border-left:4px solid #7ecfff;padding:12px 16px;margin-top:16px;border-radius:4px;font-size:13px;}
+.container{max-width:960px;margin:0 auto;padding:30px 16px;}
+.toc{background:#fff;border:1px solid #c8d8ec;border-radius:8px;padding:24px 28px;margin-bottom:32px;}
+.toc h2{font-size:16px;font-weight:700;color:#1a3a5c;border-bottom:2px solid #2a6cbe;padding-bottom:8px;margin-bottom:14px;}
+.toc ol{margin-left:18px;}
+.toc li{margin:5px 0;font-size:14px;}
+.chapter{background:#fff;border-radius:8px;box-shadow:0 1px 4px rgba(0,0,0,.08);padding:28px 28px 24px;margin-bottom:28px;}
+.chapter-head{border-left:5px solid #2a6cbe;padding-left:14px;margin-bottom:20px;}
+.chapter-head .ch-no{font-size:12px;color:#2a6cbe;font-weight:700;letter-spacing:.1em;}
+.chapter-head h2{font-size:20px;font-weight:700;color:#1a2535;margin-top:2px;}
+h3{font-size:16px;font-weight:700;color:#1a3a5c;border-bottom:1px solid #dde8f5;padding-bottom:5px;margin:22px 0 12px;}
+h4{font-size:14px;font-weight:700;color:#2a4a6c;margin:16px 0 8px;}
+p{margin-bottom:12px;}
+ul,ol{margin-left:20px;margin-bottom:12px;}
+li{margin-bottom:5px;}
+.steps{counter-reset:step;list-style:none;margin-left:0;}
+.steps li{counter-increment:step;padding:9px 12px 9px 46px;position:relative;background:#f8fbff;border:1px solid #dde8f5;border-radius:6px;margin-bottom:6px;}
+.steps li::before{content:counter(step);position:absolute;left:12px;top:50%;transform:translateY(-50%);width:24px;height:24px;background:#2a6cbe;color:#fff;border-radius:50%;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;}
+.table-wrap{overflow-x:auto;margin-bottom:16px;}
+table{width:100%;border-collapse:collapse;font-size:13px;min-width:380px;}
+th{background:#1a3a5c;color:#fff;padding:9px 12px;text-align:left;white-space:nowrap;}
+td{padding:8px 12px;border-bottom:1px solid #dde8f5;vertical-align:top;}
+tr:nth-child(even) td{background:#f4f7fb;}
+.box{border-radius:6px;padding:13px 16px;margin:14px 0;font-size:13px;}
+.box-warn{background:#fffbe6;border-left:4px solid #f5a623;color:#7a5700;}
+.box-danger{background:#fff0f0;border-left:4px solid #d43f3f;color:#7a0000;}
+.box-hint{background:#e8f4ff;border-left:4px solid #2a6cbe;color:#0a3060;}
+.box-check{background:#f4eeff;border-left:4px solid #8c4fc8;color:#3a0070;}
+.box strong{display:block;margin-bottom:4px;}
+figure{max-width:280px;width:100%;margin:18px auto;text-align:center;}
+figure img{display:block;width:100%;max-width:280px;height:auto;margin:0 auto;border:1px solid #c8d8ec;border-radius:6px;box-shadow:0 2px 8px rgba(0,0,0,.1);}
+figcaption{font-size:12px;color:#5a7a99;margin-top:6px;}
+.summary-box{background:linear-gradient(135deg,#e8f4ff,#f0f8ff);border:1px solid #99c8ec;border-radius:8px;padding:20px 24px;margin-top:32px;}
+.summary-box h3{border:none;color:#1a3a5c;margin-top:0;}
+.confirm-box{background:#fdf4ff;border:1px solid #c8a0e0;border-radius:8px;padding:20px 24px;margin-top:16px;}
+.confirm-box h3{border:none;color:#5a0090;margin-top:0;}
+footer{text-align:center;font-size:12px;color:#8a9aaa;padding:30px 16px;border-top:1px solid #dde8f5;margin-top:20px;}
+@media(max-width:640px){
+  .page-header h1{font-size:20px;}
+  .chapter{padding:20px 16px;}
+  .site-nav a{padding:8px 9px;font-size:11px;}
+}
+@media print{
+  body{background:#fff;font-size:12px;}
+  .site-nav{display:none;}
+  .chapter{box-shadow:none;border:1px solid #ccc;page-break-inside:avoid;}
+  .page-header{background:#1a3a5c !important;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+}
+</style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a href="01_top_settings_common_en.html">① Top / Settings</a>
+    <a href="02_stocktake_free_en.html" class="active">② Stocktake Free</a>
+    <a href="03_stocktake_simple_en.html">③ Stocktake Simple Unlock</a>
+    <a href="04_stocktake_full_en.html">④ Stocktake Full</a>
+    <a href="05_inventory_free_en.html">⑤ Inventory Free</a>
+    <a href="06_inventory_simple_en.html">⑥ Inventory Simple Unlock</a>
+    <a href="07_inventory_full_en.html">⑦ Inventory Full</a>
+  </div>
+</nav>
+
+<header class="page-header">
+  <div class="inner">
+    <div class="app-name">Quantiventra Manual</div>
+    <h1>② Stocktake — Free Tier</h1>
+    <div class="subtitle">What you can do, limitations, step-by-step instructions, and recommended workflows</div>
+    <div class="scope-box">
+      <strong>Topics covered in this page:</strong>
+      What the free tier stocktake can do / Free tier limits / Step-by-step stocktake workflow / Barcode, product name &amp; quantity entry / Handling locations / Reviewing history / CSV export limits / What the free tier cannot do / Recommended workflows
+    </div>
+  </div>
+</header>
+
+<div class="container">
+
+  <nav class="toc">
+    <h2>Contents</h2>
+    <ol>
+      <li><a href="#overview">Free Tier Stocktake Overview</a></li>
+      <li><a href="#limits">Free Tier Limits</a></li>
+      <li><a href="#howto">Step-by-Step Stocktake Instructions</a></li>
+      <li><a href="#barcode">Barcode, Product Name &amp; Quantity Entry</a></li>
+      <li><a href="#location">Handling Locations</a></li>
+      <li><a href="#history">Reviewing Stocktake History</a></li>
+      <li><a href="#csv">CSV Export Limits</a></li>
+      <li><a href="#cannot">What the Free Tier Cannot Do</a></li>
+      <li><a href="#tips">Recommended Workflow for Free Tier Users</a></li>
+      <li><a href="#summary">Chapter Highlights</a></li>
+      <li><a href="#confirm">Notes Before Use</a></li>
+    </ol>
+  </nav>
+
+  <section class="chapter" id="overview">
+    <div class="chapter-head">
+      <div class="ch-no">CHAPTER 1</div>
+      <h2>Free Tier Stocktake Overview</h2>
+    </div>
+    <p>Stocktaking is the process of physically counting goods and recording the quantities. The free tier lets you try out the basic stocktake workflow.</p>
+    <p>The stocktake flow is: <strong>Scan a product → Enter quantity → Save → Review history.</strong></p>
+
+    <div class="box box-hint">
+      <strong>💡 What Is Stocktaking?</strong>
+      Stocktaking records the quantity you actually counted in person (the physical count). It is a separate operation from Inventory Management's receiving, shipping, and transfer functions — do not confuse the two.
+    </div>
+
+    <h3>What You Can Do in the Free Tier</h3>
+    <ul>
+      <li>Enter or scan a product code / barcode</li>
+      <li>Enter a product name</li>
+      <li>Enter the physical count quantity</li>
+      <li>Enter a memo / note</li>
+      <li>Review stocktake history</li>
+      <li>Save and export within the free tier limit</li>
+    </ul>
+  </section>
+
+  <section class="chapter" id="limits">
+    <div class="chapter-head">
+      <div class="ch-no">CHAPTER 2</div>
+      <h2>Free Tier Limits</h2>
+    </div>
+    <p>The following restrictions apply to the free tier.</p>
+    <div class="table-wrap">
+      <table>
+        <tr><th>Item</th><th>Free Tier Limit</th><th>How to Remove</th></tr>
+        <tr><td>Master records</td><td>Up to 30</td><td>Simple or Full Unlock</td></tr>
+        <tr><td>Stocktake history records</td><td>Up to 30</td><td>Simple or Full Unlock</td></tr>
+        <tr><td>Export records</td><td>Up to 30</td><td>Simple or Full Unlock</td></tr>
+        <tr><td>Lock screen rotation</td><td>Unavailable</td><td>Simple Unlock or above</td></tr>
+        <tr><td>Detailed code rules</td><td>Unavailable</td><td>Full Unlock</td></tr>
+        <tr><td>Detailed location rules</td><td>Unavailable</td><td>Full Unlock</td></tr>
+        <tr><td>Detailed camera settings</td><td>Unavailable</td><td>Full Unlock</td></tr>
+        <tr><td>Extended CSV export</td><td>Unavailable</td><td>Full Unlock</td></tr>
+      </table>
+    </div>
+    <div class="box box-warn">
+      <strong>⚠ Note</strong>
+      Once you reach the 30-record limit, saving or exporting may become unavailable. Plan to upgrade to Simple or Full Unlock before you hit the ceiling.
+    </div>
+    <div class="box box-check">
+      <strong>ℹ️ Before Purchasing</strong>
+      Check Google Play for current pricing and purchase terms. This manual does not state prices definitively.
+    </div>
+  </section>
+
+  <section class="chapter" id="howto">
+    <div class="chapter-head">
+      <div class="ch-no">CHAPTER 3</div>
+      <h2>Step-by-Step Stocktake Instructions</h2>
+    </div>
+
+    <h3>Basic Stocktake Workflow</h3>
+    <ol class="steps">
+      <li>Tap <strong>Stocktake</strong> on the top screen.</li>
+      <li>Scan a barcode, or manually enter the product code.</li>
+      <li>The product name appears. If the code is unregistered, enter the name manually.</li>
+      <li>Confirm or select a location (warehouse, store, etc.).</li>
+      <li>Enter the physically counted quantity.</li>
+      <li>Enter an optional memo if needed.</li>
+      <li>Tap <strong>Save</strong> to record the entry in stocktake history.</li>
+      <li>Confirm the saved entry in stocktake history.</li>
+    </ol>
+
+    <div class="box box-danger">
+      <strong>🚨 Important</strong>
+      Always verify the quantity before saving. Entry errors may lead to discrepancies with inventory figures. If you need to correct a saved entry, follow the guidance shown in the app or enter the item again as needed.
+    </div>
+
+    <h3>Counting Multiple Products in Sequence</h3>
+    <ol class="steps">
+      <li>After saving the first item, scan the next product's barcode (or enter the code).</li>
+      <li>Repeat steps 2–7.</li>
+      <li>Once all products have been entered, review the full stocktake history.</li>
+    </ol>
+
+    <div class="box box-hint">
+      <strong>💡 Tip</strong>
+      You don't need to complete the stocktake in one session. Even if you close the app mid-count, all saved history is retained.
+    </div>
+  </section>
+
+  <section class="chapter" id="barcode">
+    <div class="chapter-head">
+      <div class="ch-no">CHAPTER 4</div>
+      <h2>Barcode, Product Name &amp; Quantity Entry</h2>
+    </div>
+
+    <h3>Barcode Scanning</h3>
+    <p>Launch the camera and hold it over a barcode to scan automatically. If scanning fails, move to a well-lit area or switch to manual entry.</p>
+
+    <h3>Manual Product Code Entry</h3>
+    <p>If a barcode is unavailable, type the product code directly into the code field. For registered codes, the product name fills in automatically.</p>
+
+    <h3>Product Name Entry</h3>
+    <p>For unregistered codes, enter the product name manually. The entered name is recorded in stocktake history. Be mindful of record limits when operating without master registration.</p>
+
+    <h3>Physical Count Quantity Entry</h3>
+    <p>Enter the quantity you physically counted as a numeric value.</p>
+
+    <div class="box box-warn">
+      <strong>⚠ Note</strong>
+      Enter the exact quantity you counted. Entry errors cause inventory discrepancies. Always confirm the number before saving.
+    </div>
+
+    <h3>Memo Entry</h3>
+    <p>You can freely enter work notes or remarks. They are recorded alongside the stocktake history entry.</p>
+
+    <div class="table-wrap">
+      <table>
+        <tr><th>Field</th><th>Description</th><th>Required / Optional</th></tr>
+        <tr><td>Barcode / Product Code</td><td>Code used to identify the product</td><td>Required</td></tr>
+        <tr><td>Product Name</td><td>Entered when the code is unregistered</td><td>Conditionally required</td></tr>
+        <tr><td>Location</td><td>Where the stocktake is being performed</td><td>Depends on settings</td></tr>
+        <tr><td>Physical Count Quantity</td><td>The quantity actually counted</td><td>Required</td></tr>
+        <tr><td>Memo</td><td>Notes or remarks</td><td>Optional</td></tr>
+      </table>
+    </div>
+  </section>
+
+  <section class="chapter" id="location">
+    <div class="chapter-head">
+      <div class="ch-no">CHAPTER 5</div>
+      <h2>Handling Locations</h2>
+    </div>
+    <p>The free tier uses a simplified location setup. The default locations are "Warehouse" and "Store."</p>
+
+    <h3>Locations by Simple Mode</h3>
+    <div class="table-wrap">
+      <table>
+        <tr><th>Stocktake Mode</th><th>Available Locations</th><th>Example Use</th></tr>
+        <tr><td>Simple A</td><td>Warehouse only</td><td>Managing a single warehouse</td></tr>
+        <tr><td>Simple B</td><td>Warehouse + Store</td><td>Stocktaking both warehouse and store</td></tr>
+        <tr><td>Simple C</td><td>Store only</td><td>Managing a single store</td></tr>
+      </table>
+    </div>
+
+    <p>Select the mode under <strong>Settings → Stocktake Settings</strong>. Choosing the right mode before you start streamlines the stocktake workflow.</p>
+
+    <div class="box box-hint">
+      <strong>💡 Tip</strong>
+      Detailed location management (e.g., shelf numbers) is a Full Unlock feature. Enable it by switching to <strong>Detail</strong> mode in settings.
+    </div>
+    <div class="box box-warn">
+      <strong>⚠ Note</strong>
+      Even if detailed locations are registered, they won't appear if the mode is still set to Simple A/B/C. You need to switch to Detail mode.
+    </div>
+  </section>
+
+  <section class="chapter" id="history">
+    <div class="chapter-head">
+      <div class="ch-no">CHAPTER 6</div>
+      <h2>Reviewing Stocktake History</h2>
+    </div>
+    <p>All saved stocktake entries can be reviewed in Stocktake History.</p>
+
+    <h3>What You Can See in History</h3>
+    <ul>
+      <li>Date and time saved</li>
+      <li>Product code and name</li>
+      <li>Physical count quantity entered</li>
+      <li>Location</li>
+      <li>Memo</li>
+    </ul>
+
+    <h3>Free Tier History Limit</h3>
+    <p>The free tier stores up to 30 stocktake history records. If you reach the limit, follow the on-screen guidance. For ongoing use, consider upgrading to Simple Unlock (up to 1,000 records) or Full Unlock (unlimited).</p>
+
+    <div class="box box-warn">
+      <strong>⚠ Note</strong>
+      The free tier caps history at 30 records. Exceeding the limit may prevent new stocktake entries from being saved.
+    </div>
+  </section>
+
+  <section class="chapter" id="csv">
+    <div class="chapter-head">
+      <div class="ch-no">CHAPTER 7</div>
+      <h2>CSV Export Limits</h2>
+    </div>
+    <p>The free tier limits the number of records that can be exported to CSV.</p>
+
+    <div class="table-wrap">
+      <table>
+        <tr><th>Item</th><th>Free Tier</th><th>Simple Unlock</th><th>Full Unlock</th></tr>
+        <tr><td>Export records</td><td>Up to 30</td><td>Up to 300</td><td>Unlimited</td></tr>
+        <tr><td>Full column export</td><td>Limited</td><td>Limited</td><td>Extended CSV export</td></tr>
+      </table>
+    </div>
+
+    <div class="box box-hint">
+      <strong>💡 Tip</strong>
+      Stocktake CSVs include a language-specific header row. Exported CSVs can be opened and reviewed in Excel or Google Sheets.
+    </div>
+    <div class="box box-warn">
+      <strong>⚠ Note</strong>
+      The stocktake summary CSV does not include date/time or location columns. Location-specific and date-specific detailed exports are Full Unlock features.
+    </div>
+  </section>
+
+  <section class="chapter" id="cannot">
+    <div class="chapter-head">
+      <div class="ch-no">CHAPTER 8</div>
+      <h2>What the Free Tier Cannot Do</h2>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <tr><th>Feature</th><th>Required Plan</th></tr>
+        <tr><td>More than 30 master records</td><td>Stocktake Simple Unlock or above</td></tr>
+        <tr><td>More than 30 history records</td><td>Stocktake Simple Unlock or above</td></tr>
+        <tr><td>Export more than 30 records</td><td>Stocktake Simple Unlock or above</td></tr>
+        <tr><td>Lock screen rotation</td><td>Stocktake Simple Unlock or above</td></tr>
+        <tr><td>Detailed code rule settings</td><td>Stocktake Full Unlock</td></tr>
+        <tr><td>Detailed location rule settings</td><td>Stocktake Full Unlock</td></tr>
+        <tr><td>Detailed camera scan settings</td><td>Stocktake Full Unlock</td></tr>
+        <tr><td>Extended CSV export</td><td>Stocktake Full Unlock</td></tr>
+        <tr><td>Apply stocktake results to inventory</td><td>Stocktake Full Unlock</td></tr>
+      </table>
+    </div>
+  </section>
+
+  <section class="chapter" id="tips">
+    <div class="chapter-head">
+      <div class="ch-no">CHAPTER 9</div>
+      <h2>Recommended Workflow for Free Tier Users</h2>
+    </div>
+
+    <h3>Best for Small-Scale Operations</h3>
+    <p>If you have 30 or fewer products, the free tier is sufficient for ongoing basic stocktaking.</p>
+
+    <h3>Export CSVs Regularly to Build a Record</h3>
+    <p>Export to CSV before you approach the 30-record history limit. This accumulates your records in PC or spreadsheet format.</p>
+
+    <h3>Set Your Simple Mode (A/B/C) in Advance</h3>
+    <p>Choose the right mode (<strong>Simple A/B/C</strong>) under <strong>Settings → Stocktake Settings</strong> before starting. This makes each stocktake session smoother.</p>
+
+    <h3>Plan to Upgrade When Approaching the Limit</h3>
+    <p>As your master and history records approach 30, consider upgrading to Simple Unlock. Hitting the limit may prevent saving or exporting.</p>
+
+    <div class="box box-hint">
+      <strong>💡 Tip</strong>
+      Practice with the sample data (create it from Settings) before registering your real products.
+    </div>
+  </section>
+
+  <div class="summary-box" id="summary">
+    <h3>📌 Chapter Highlights</h3>
+    <ul>
+      <li>The free tier stocktake is suited for small-scale operations with up to 30 items.</li>
+      <li>The workflow is: Scan → Enter quantity → Save → Review history.</li>
+      <li>Locations are set via Simple A/B/C. Detailed locations require Full Unlock.</li>
+      <li>CSV export is limited to 30 records. Exported files do not include date or location columns.</li>
+      <li>When approaching the 30-record limit, export your records or consider upgrading to Simple or Full Unlock.</li>
+      <li>Stocktaking is separate from Inventory Management operations such as receiving and shipping — do not mix them up.</li>
+    </ul>
+  </div>
+
+  <div class="confirm-box" id="confirm">
+    <h3>Notes Before Use</h3>
+    <ul>
+      <li>Before saving, check the product code, product name, location, and quantity shown on the screen.</li>
+      <li>If you are approaching the 30-record limit, export your records or consider upgrading to Simple or Full Unlock.</li>
+      <li>When a save, export, or limit-related message appears, follow the guidance shown in the app.</li>
+      <li>For current purchase conditions and plan availability, check Google Play and the in-app display.</li>
+    </ul>
+  </div>
+
+</div>
+
+<footer>
+  <p>Quantiventra Manual | ② Stocktake Free Tier</p>
+  <p style="margin-top:4px;">Content is based on available documentation. Always refer to in-app displays for the latest information.</p>
+  <p style="margin-top:4px;"><a href="privacy_en.html">Privacy Policy</a></p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quantiventra – Quản lý Tồn kho Gói miễn phí</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;font-size:15px;line-height:1.8;color:#1a2535;background:#f4f7fb;}
+a{color:#1a5fa8;text-decoration:none;}a:hover{text-decoration:underline;}
+.site-nav{background:#1a3a5c;color:#fff;padding:0;}.site-nav .nav-inner{max-width:960px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:stretch;}
+.site-nav a{color:#cde;padding:10px 13px;font-size:12px;display:block;border-right:1px solid #2a4a6c;white-space:nowrap;}
+.site-nav a:hover{background:#2a5090;text-decoration:none;}.site-nav a.active{background:#2a6cbe;color:#fff;font-weight:bold;}
+.page-header{background:linear-gradient(135deg,#1a3a5c 0%,#2a6cbe 100%);color:#fff;padding:40px 20px 30px;}
+.page-header .inner{max-width:960px;margin:0 auto;}.page-header .app-name{font-size:13px;opacity:.8;}
+.page-header h1{font-size:24px;font-weight:700;margin-top:6px;line-height:1.4;}.page-header .subtitle{font-size:14px;opacity:.85;margin-top:8px;}
+.scope-box{background:rgba(255,255,255,.15);border-left:4px solid #7ecfff;padding:12px 16px;margin-top:16px;border-radius:4px;font-size:13px;}
+.container{max-width:960px;margin:0 auto;padding:30px 16px;}
+.toc{background:#fff;border:1px solid #c8d8ec;border-radius:8px;padding:24px 28px;margin-bottom:32px;}
+.toc h2{font-size:16px;font-weight:700;color:#1a3a5c;border-bottom:2px solid #2a6cbe;padding-bottom:8px;margin-bottom:14px;}
+.toc ol{margin-left:18px;}.toc li{margin:5px 0;font-size:14px;}
+.chapter{background:#fff;border-radius:8px;box-shadow:0 1px 4px rgba(0,0,0,.08);padding:28px 28px 24px;margin-bottom:28px;}
+.chapter-head{border-left:5px solid #2a6cbe;padding-left:14px;margin-bottom:20px;}
+.chapter-head .ch-no{font-size:12px;color:#2a6cbe;font-weight:700;}.chapter-head h2{font-size:20px;font-weight:700;color:#1a2535;margin-top:2px;}
+h3{font-size:16px;font-weight:700;color:#1a3a5c;border-bottom:1px solid #dde8f5;padding-bottom:5px;margin:22px 0 12px;}
+p{margin-bottom:12px;}ul,ol{margin-left:20px;margin-bottom:12px;}li{margin-bottom:5px;}
+.steps{counter-reset:step;list-style:none;margin-left:0;}
+.steps li{counter-increment:step;padding:9px 12px 9px 46px;position:relative;background:#f8fbff;border:1px solid #dde8f5;border-radius:6px;margin-bottom:6px;}
+.steps li::before{content:counter(step);position:absolute;left:12px;top:50%;transform:translateY(-50%);width:24px;height:24px;background:#2a6cbe;color:#fff;border-radius:50%;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;}
+.table-wrap{overflow-x:auto;margin-bottom:16px;}
+table{width:100%;border-collapse:collapse;font-size:13px;min-width:380px;}
+th{background:#1a3a5c;color:#fff;padding:9px 12px;text-align:left;white-space:nowrap;}
+td{padding:8px 12px;border-bottom:1px solid #dde8f5;vertical-align:top;}tr:nth-child(even) td{background:#f4f7fb;}
+.box{border-radius:6px;padding:13px 16px;margin:14px 0;font-size:13px;}
+.box-warn{background:#fffbe6;border-left:4px solid #f5a623;color:#7a5700;}
+.box-danger{background:#fff0f0;border-left:4px solid #d43f3f;color:#7a0000;}
+.box-hint{background:#e8f4ff;border-left:4px solid #2a6cbe;color:#0a3060;}
+.box-check{background:#f4eeff;border-left:4px solid #8c4fc8;color:#3a0070;}
+.box strong{display:block;margin-bottom:4px;}
+figure{max-width:280px;width:100%;margin:18px auto;text-align:center;}
+figure img{display:block;width:100%;max-width:280px;height:auto;margin:0 auto;border:1px solid #c8d8ec;border-radius:6px;box-shadow:0 2px 8px rgba(0,0,0,.1);}
+figcaption{font-size:12px;color:#5a7a99;margin-top:6px;}
+.summary-box{background:linear-gradient(135deg,#e8f4ff,#f0f8ff);border:1px solid #99c8ec;border-radius:8px;padding:20px 24px;margin-top:32px;}
+.summary-box h3{border:none;color:#1a3a5c;margin-top:0;}
+.confirm-box{background:#fdf4ff;border:1px solid #c8a0e0;border-radius:8px;padding:20px 24px;margin-top:16px;}
+.confirm-box h3{border:none;color:#5a0090;margin-top:0;}
+footer{text-align:center;font-size:12px;color:#8a9aaa;padding:30px 16px;border-top:1px solid #dde8f5;margin-top:20px;}
+@media(max-width:640px){.page-header h1{font-size:18px;}.chapter{padding:20px 16px;}.site-nav a{padding:8px 9px;font-size:11px;}}
+@media print{body{background:#fff;font-size:12px;}.site-nav{display:none;}.chapter{box-shadow:none;border:1px solid #ccc;page-break-inside:avoid;}.page-header{background:#1a3a5c !important;-webkit-print-color-adjust:exact;print-color-adjust:exact;}}
+</style>
+</head>
+<body>
+<nav class="site-nav"><div class="nav-inner">
+  <a href="01_top_settings_common_vi.html">① Màn hình chính / Cài đặt</a>
+  <a href="02_stocktake_free_vi.html">② Kiểm kê Miễn phí</a>
+  <a href="03_stocktake_simple_vi.html">③ Kiểm kê Tiêu chuẩn</a>
+  <a href="04_stocktake_full_vi.html">④ Kiểm kê Đầy đủ</a>
+  <a href="05_inventory_free_vi.html" class="active">⑤ Tồn kho Miễn phí</a>
+  <a href="06_inventory_simple_vi.html">⑥ Tồn kho Tiêu chuẩn</a>
+  <a href="07_inventory_full_vi.html">⑦ Tồn kho Đầy đủ</a>
+</div></nav>
+<header class="page-header"><div class="inner">
+  <div class="app-name">Hướng dẫn sử dụng Quantiventra</div>
+  <h1>⑤ Quản lý Tồn kho — Gói miễn phí</h1>
+  <div class="subtitle">Gói miễn phí có thể làm gì, giới hạn, kiểm tra tồn kho, liên kết dữ liệu danh mục, khả năng nhập/xuất hàng và quy trình khuyến nghị</div>
+  <div class="scope-box"><strong>Chủ đề trong trang này:</strong>
+  Quản lý tồn kho gói miễn phí có thể làm gì / Giới hạn gói miễn phí / Kiểm tra tồn kho / Chi tiết tồn kho / Quan hệ dữ liệu danh mục / Khả năng nhập hàng, xuất hàng và chuyển kho / Giới hạn CSV / Gói miễn phí không thể làm gì / Quy trình khuyến nghị</div>
+</div></header>
+<div class="container">
+
+  <nav class="toc"><h2>Mục lục</h2><ol>
+    <li><a href="#overview">Tổng quan Quản lý tồn kho Gói miễn phí</a></li>
+    <li><a href="#limits">Giới hạn Gói miễn phí</a></li>
+    <li><a href="#stock-check">Kiểm tra tồn kho</a></li>
+    <li><a href="#stock-detail">Chi tiết tồn kho</a></li>
+    <li><a href="#master">Quan hệ dữ liệu danh mục</a></li>
+    <li><a href="#inout">Khả năng nhập hàng, xuất hàng và chuyển kho</a></li>
+    <li><a href="#csv">Giới hạn CSV</a></li>
+    <li><a href="#cannot">Gói miễn phí không thể làm gì</a></li>
+    <li><a href="#tips">Quy trình khuyến nghị cho người dùng Gói miễn phí</a></li>
+    <li><a href="#summary">Điểm chính của chương</a></li>
+    <li><a href="#confirm">Lưu ý trước khi dùng</a></li>
+  </ol></nav>
+
+  <section class="chapter" id="overview">
+    <div class="chapter-head"><div class="ch-no">CHAPTER 1</div><h2>Tổng quan Quản lý tồn kho Gói miễn phí</h2></div>
+    <p>Quản lý tồn kho ghi nhận các hoạt động nhập hàng, xuất hàng và chuyển kho để bạn nắm được chính xác mức tồn kho hiện tại. Gói miễn phí cho phép bạn khám phá kiểm tra tồn kho cơ bản và làm quen với dữ liệu sản phẩm cơ bản.</p>
+    <p>Các màn hình chính trong Quản lý tồn kho: Kiểm tra tồn kho / Nhập hàng / Xuất hàng / Chuyển kho / Lịch sử tồn kho / Nhập &amp; Xuất dữ liệu</p>
+    <div class="box box-hint">
+      <strong>💡 Kiểm kê và Quản lý tồn kho khác nhau thế nào?</strong>
+      Quản lý tồn kho dùng để ghi lại các giao dịch hàng ngày — nhập hàng, xuất hàng và chuyển kho — làm thay đổi tồn kho. Đây là mô-đun riêng biệt so với Kiểm kê (đếm hàng vật lý). Đừng nhầm lẫn hai mô-đun này.
+    </div>  </section>
+
+  <section class="chapter" id="limits">
+    <div class="chapter-head"><div class="ch-no">CHAPTER 2</div><h2>Giới hạn Gói miễn phí</h2></div>
+    <div class="table-wrap"><table>
+      <tr><th>Mục</th><th>Giới hạn Gói miễn phí</th><th>Cách xóa giới hạn</th></tr>
+      <tr><td>Bản ghi danh mục</td><td>Đến 30</td><td>Tồn kho Tiêu chuẩn trở lên</td></tr>
+      <tr><td>Bản ghi lịch sử tồn kho</td><td>Đến 30</td><td>Tồn kho Tiêu chuẩn trở lên</td></tr>
+      <tr><td>Bản ghi xuất</td><td>Đến 30</td><td>Tồn kho Tiêu chuẩn trở lên</td></tr>
+      <tr><td>Đăng ký Danh mục vị trí</td><td>Không khả dụng hoặc giới hạn</td><td>Tồn kho Tiêu chuẩn trở lên</td></tr>
+      <tr><td>Chỉnh sửa trực tiếp tổng tích lũy đã đăng ký</td><td>Không khả dụng</td><td>Mở khóa tồn kho đầy đủ</td></tr>
+      <tr><td>Quy tắc mã / vị trí chi tiết</td><td>Không khả dụng</td><td>Mở khóa tồn kho đầy đủ</td></tr>
+      <tr><td>Nhập / Xuất CSV mở rộng</td><td>Giới hạn (bản ghi và tính năng)</td><td>Mở khóa tồn kho đầy đủ</td></tr>
+    </table></div>
+    <div class="box box-warn"><strong>⚠ Lưu ý</strong>Khi đạt giới hạn 30 bản ghi, việc lưu hoặc xuất có thể không khả dụng. Lên kế hoạch nâng cấp lên Tiêu chuẩn hoặc Mở khóa đầy đủ trước khi đạt giới hạn.</div>
+  </section>
+
+  <section class="chapter" id="stock-check">
+    <div class="chapter-head"><div class="ch-no">CHAPTER 3</div><h2>Kiểm tra tồn kho</h2></div>
+    <p>Màn hình Kiểm tra tồn kho ban đầu hiển thị tổng tồn kho kết hợp theo từng sản phẩm. Kiểm tra nhu cầu bổ sung được tính bằng tổng tồn kho của tất cả vị trí có bật "Tính vào kiểm tra nhu cầu bổ sung" trong Danh mục vị trí.</p>    <h3>Những gì bạn có thể làm trong Kiểm tra tồn kho</h3>
+    <ul>
+      <li>Xem tổng tồn kho kết hợp hiện tại cho từng sản phẩm</li>
+      <li>Lọc theo tên hoặc mã sản phẩm bằng tìm kiếm</li>
+      <li>So sánh ngưỡng bổ sung hàng với tổng vị trí được tính để xác định các mặt hàng cần bổ sung</li>
+      <li>Nhấn vào sản phẩm để xem phân tích theo từng vị trí</li>
+    </ul>
+    <h3>Quy trình kiểm tra tồn kho</h3>
+    <ol class="steps">
+      <li>Nhấn <strong>Quản lý tồn kho</strong> trên màn hình chính.</li>
+      <li>Mở <strong>Kiểm tra tồn kho</strong>.</li>
+      <li>Tìm sản phẩm muốn kiểm tra (tìm kiếm hoặc cuộn qua danh sách).</li>
+      <li>Nhấn vào sản phẩm để xem chi tiết tồn kho.</li>
+    </ol>
+  </section>
+
+  <section class="chapter" id="stock-detail">
+    <div class="chapter-head"><div class="ch-no">CHAPTER 4</div><h2>Chi tiết tồn kho</h2></div>
+    <p>Nhấn vào sản phẩm trong màn hình Kiểm tra tồn kho sẽ mở màn hình Chi tiết tồn kho.</p>    <h3>Những gì bạn có thể thấy trong Chi tiết tồn kho</h3>
+    <ul>
+      <li>Mã sản phẩm và tên</li>
+      <li>Tổng số lượng tồn kho</li>
+      <li>Phân tích tồn kho theo vị trí</li>
+      <li>Ngưỡng bổ sung hàng và giá (nếu đã đăng ký trong Danh mục sản phẩm)</li>
+      <li>Loại hàng</li>
+    </ul>
+  </section>
+
+  <section class="chapter" id="master">
+    <div class="chapter-head"><div class="ch-no">CHAPTER 5</div><h2>Quan hệ dữ liệu danh mục</h2></div>
+    <p>Quản lý tồn kho hoạt động kết hợp với Danh mục sản phẩm, Danh mục loại hàng và Danh mục vị trí. Giữ thông tin chính xác trong dữ liệu danh mục giúp cải thiện chất lượng hồ sơ tồn kho của bạn.</p>
+    <div class="table-wrap"><table>
+      <tr><th>Danh mục</th><th>Vai trò chính</th><th>Trường chính</th></tr>
+      <tr><td>Danh mục sản phẩm</td><td>Đăng ký sản phẩm lưu giữ tồn kho vật lý</td><td>Mã sản phẩm/mã vạch, tên sản phẩm, loại hàng, giá, ngưỡng bổ sung hàng</td></tr>
+      <tr><td>Danh mục loại hàng</td><td>Quản lý nhóm dùng để phân loại sản phẩm</td><td>Mã loại hàng, tên loại hàng, thứ tự hiển thị</td></tr>
+      <tr><td>Danh mục vị trí</td><td>Quản lý vị trí lưu trữ</td><td>Mã vị trí, tên vị trí, thứ tự hiển thị, hoạt động/không hoạt động</td></tr>
+    </table></div>
+    <div class="box box-hint">
+      <strong>💡 Sản phẩm và Loại hàng khác nhau thế nào?</strong>
+      <strong>Sản phẩm</strong> là mặt hàng riêng lẻ có tồn kho (ví dụ: Áo phông, màu đỏ, cỡ M). <strong>Loại hàng</strong> là nhóm dùng để phân loại sản phẩm (ví dụ: Quần áo). Đừng nhầm lẫn hai khái niệm này.
+    </div>
+    <div class="box box-warn">
+      <strong>⚠ Vị trí trong Gói miễn phí</strong>
+      Gói miễn phí có thể dùng các vị trí cơ bản như "Kho" và "Cửa hàng". Nếu cần đăng ký vị trí chi tiết hoặc quản lý thêm vị trí, hãy cân nhắc Tồn kho Tiêu chuẩn trở lên.
+    </div>
+  </section>
+
+  <section class="chapter" id="inout">
+    <div class="chapter-head"><div class="ch-no">CHAPTER 6</div><h2>Khả năng nhập hàng, xuất hàng và chuyển kho</h2></div>
+    <p>Trong gói miễn phí, các nút nhập hàng, xuất hàng và chuyển kho có thể hiển thị, nhưng việc lưu thực tế và số bản ghi bị giới hạn.</p>
+    <div class="box box-check">
+      <strong>Phạm vi sử dụng của Gói miễn phí</strong>
+      Phạm vi lưu nhập hàng, xuất hàng và chuyển kho trong gói miễn phí, cũng như giới hạn bản ghi, được hướng dẫn trong ứng dụng. Khi đạt giới hạn, lời nhắc thanh toán sẽ xuất hiện.
+    </div>
+    <h3>Hướng dẫn cho nhập hàng, xuất hàng &amp; chuyển kho trong Gói miễn phí</h3>
+    <ul>
+      <li>Các nút chức năng có thể hiển thị.</li>
+      <li>Cố gắng dùng chúng có thể hiển thị thông báo giới hạn.</li>
+      <li>Làm theo hướng dẫn hiển thị trên màn hình.</li>
+      <li>Khi nhận mã sản phẩm chưa đăng ký, có thể xuất hiện lời nhắc tạo mục mới trong Danh mục sản phẩm.</li>
+      <li>Trường tồn kho trên màn hình xuất hàng hiển thị tồn kho hiện tại để tham khảo — đây không phải trường nhập có thể chỉnh sửa.</li>
+    </ul>
+    <div class="box box-hint"><strong>💡 Mẹo</strong>Nếu muốn dùng nhập hàng, xuất hàng và chuyển kho nghiêm túc, hãy cân nhắc nâng cấp lên Tồn kho Tiêu chuẩn hoặc Mở khóa đầy đủ.</div>
+  </section>
+
+  <section class="chapter" id="csv">
+    <div class="chapter-head"><div class="ch-no">CHAPTER 7</div><h2>Giới hạn CSV</h2></div>
+    <p>Gói miễn phí giới hạn cả số bản ghi có thể nhập hoặc xuất lẫn các tính năng khả dụng.</p>
+    <div class="table-wrap"><table>
+      <tr><th>Mục</th><th>Gói miễn phí</th><th>Mở khóa tiêu chuẩn</th><th>Mở khóa đầy đủ</th></tr>
+      <tr><td>Bản ghi xuất</td><td>Đến 30</td><td>Đến 300</td><td>Không giới hạn</td></tr>
+      <tr><td>Bản ghi nhập CSV</td><td>Giới hạn</td><td>Mở rộng</td><td>Mở rộng</td></tr>
+      <tr><td>Sao lưu CSV đầy đủ (tất cả dữ liệu)</td><td>Có thể dùng; làm theo hướng dẫn trong ứng dụng</td><td>Mở rộng</td><td>○</td></tr>
+    </table></div>
+    <div class="box box-warn"><strong>⚠ Lưu ý</strong>Xuất CSV chi tiết là tính năng Mở khóa đầy đủ. Gói miễn phí giới hạn cả số bản ghi lẫn cột khả dụng.</div>
+  </section>
+
+  <section class="chapter" id="cannot">
+    <div class="chapter-head"><div class="ch-no">CHAPTER 8</div><h2>Gói miễn phí không thể làm gì</h2></div>
+    <div class="table-wrap"><table>
+      <tr><th>Tính năng</th><th>Gói cần thiết</th></tr>
+      <tr><td>Hơn 30 bản ghi danh mục</td><td>Tồn kho Tiêu chuẩn trở lên</td></tr>
+      <tr><td>Hơn 30 bản ghi lịch sử</td><td>Tồn kho Tiêu chuẩn trở lên</td></tr>
+      <tr><td>Xuất hơn 30 bản ghi</td><td>Tồn kho Tiêu chuẩn trở lên</td></tr>
+      <tr><td>Khóa xoay màn hình</td><td>Tồn kho Tiêu chuẩn trở lên</td></tr>
+      <tr><td>Đăng ký Danh mục vị trí chi tiết</td><td>Tồn kho Tiêu chuẩn trở lên</td></tr>
+      <tr><td>Chỉnh sửa trực tiếp tổng tích lũy đã đăng ký</td><td>Mở khóa tồn kho đầy đủ</td></tr>
+      <tr><td>Quy tắc mã / vị trí chi tiết</td><td>Mở khóa tồn kho đầy đủ</td></tr>
+      <tr><td>Xuất CSV mở rộng</td><td>Mở khóa tồn kho đầy đủ</td></tr>
+      <tr><td>Áp dụng dữ liệu kiểm kê vào tồn kho</td><td>Làm theo màn hình xác nhận và điều kiện trong ứng dụng</td></tr>
+    </table></div>
+  </section>
+
+  <section class="chapter" id="tips">
+    <div class="chapter-head"><div class="ch-no">CHAPTER 9</div><h2>Quy trình khuyến nghị cho người dùng Gói miễn phí</h2></div>
+    <h3>Phù hợp nhất cho hoạt động quy mô nhỏ</h3>
+    <p>Nếu bạn có 30 sản phẩm trở xuống, gói miễn phí hỗ trợ kiểm tra tồn kho liên tục. Hữu ích để theo dõi mức tồn kho và kiểm tra ngưỡng bổ sung hàng.</p>
+    <h3>Thực hành với dữ liệu mẫu</h3>
+    <p>Tạo dữ liệu mẫu từ màn hình Cài đặt. Khuyến nghị làm quen với các thao tác trước khi nhập dữ liệu thực tế.</p>
+    <h3>Thường xuyên xuất CSV để tạo hồ sơ</h3>
+    <p>Xuất sang CSV khi vẫn còn trong giới hạn 30 bản ghi xuất, và tích lũy hồ sơ tồn kho trên máy tính hoặc bảng tính.</p>
+    <h3>Lên kế hoạch nâng cấp khi gần đạt giới hạn</h3>
+    <p>Khi số bản ghi danh mục và lịch sử gần đạt 30, hãy cân nhắc nâng cấp lên Mở khóa tồn kho Tiêu chuẩn.</p>
+    <div class="box box-hint"><strong>💡 Cân nhắc nâng cấp lên Tiêu chuẩn nếu bạn…</strong>
+      <ul style="margin-top:6px;">
+        <li>Có hơn 30 sản phẩm</li>
+        <li>Muốn lưu lịch sử nhập hàng và xuất hàng lâu dài</li>
+        <li>Muốn dùng vị trí riêng biệt (kho và cửa hàng)</li>
+      </ul>
+    </div>
+  </section>
+
+  <div class="summary-box" id="summary">
+    <h3>📌 Điểm chính của chương</h3>
+    <ul>
+      <li>Quản lý tồn kho ghi lại các giao dịch hàng ngày (nhập hàng, xuất hàng, chuyển kho). Đây là mô-đun riêng biệt với Kiểm kê.</li>
+      <li>Gói miễn phí có giới hạn 30 bản ghi (danh mục, lịch sử, xuất) — phù hợp cho quy mô nhỏ.</li>
+      <li>Kiểm tra tồn kho hiển thị tổng tồn kho hiện tại theo sản phẩm, phân tích theo vị trí và các mặt hàng cần bổ sung.</li>
+      <li>Quản lý tồn kho hoạt động kết hợp với dữ liệu Danh mục sản phẩm, loại hàng và vị trí.</li>
+      <li>Nhập hàng, xuất hàng và chuyển kho trong gói miễn phí được kiểm soát bởi hướng dẫn trong ứng dụng.</li>
+      <li>Lên kế hoạch nâng cấp lên Tiêu chuẩn hoặc Mở khóa đầy đủ trước khi chạm giới hạn 30 bản ghi.</li>
+    </ul>
+  </div>
+
+  <div class="confirm-box" id="confirm">
+    <h3>Lưu ý trước khi dùng</h3>
+    <ul>
+      <li>Khi lưu nhập hàng, xuất hàng hoặc chuyển kho, hãy làm theo hướng dẫn trong ứng dụng về phạm vi sử dụng và giới hạn bản ghi.</li>
+      <li>Nếu cần đăng ký vị trí chi tiết, hãy cân nhắc Tồn kho Tiêu chuẩn trở lên.</li>
+      <li>Trước khi dùng sao lưu CSV, hãy xem phạm vi xuất và hướng dẫn trong ứng dụng.</li>
+      <li>Khi áp dụng dữ liệu kiểm kê vào tồn kho, hãy xem màn hình xác nhận và điều kiện áp dụng.</li>
+    </ul>
+  </div>
+</div>
+<footer>
+  <p>Hướng dẫn sử dụng Quantiventra | ⑤ Quản lý Tồn kho Gói miễn phí</p>
+  <p style="margin-top:4px;">Nội dung dựa trên tài liệu hiện có. Luôn tham khảo màn hình trong ứng dụng để biết thông tin mới nhất.</p>
+  <p style="margin-top:4px;"><a href="privacy_vi.html">Chính sách Bảo mật</a></p>
+</footer>
+</body>
+</html>

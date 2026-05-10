@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="es-419">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quantiventra – Inventario físico – Plan gratuito</title>
+<style>*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;font-size:15px;line-height:1.8;color:#1a2535;background:#f4f7fb;}
+a{color:#1a5fa8;text-decoration:none;}a:hover{text-decoration:underline;}
+.site-nav{background:#1a3a5c;color:#fff;padding:0;}.site-nav .nav-inner{max-width:960px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:stretch;}
+.site-nav a{color:#cde;padding:10px 13px;font-size:12px;display:block;border-right:1px solid #2a4a6c;white-space:nowrap;}
+.site-nav a:hover{background:#2a5090;text-decoration:none;}.site-nav a.active{background:#2a6cbe;color:#fff;font-weight:bold;}
+.page-header{background:linear-gradient(135deg,#1a3a5c 0%,#2a6cbe 100%);color:#fff;padding:40px 20px 30px;}
+.page-header .inner{max-width:960px;margin:0 auto;}.page-header .app-name{font-size:13px;opacity:.8;}
+.page-header h1{font-size:22px;font-weight:700;margin-top:6px;line-height:1.4;}.page-header .subtitle{font-size:14px;opacity:.85;margin-top:8px;}
+.scope-box{background:rgba(255,255,255,.15);border-left:4px solid #7ecfff;padding:12px 16px;margin-top:16px;border-radius:4px;font-size:13px;}
+.container{max-width:960px;margin:0 auto;padding:30px 16px;}
+.toc{background:#fff;border:1px solid #c8d8ec;border-radius:8px;padding:24px 28px;margin-bottom:32px;}
+.toc h2{font-size:16px;font-weight:700;color:#1a3a5c;border-bottom:2px solid #2a6cbe;padding-bottom:8px;margin-bottom:14px;}
+.toc ol{margin-left:18px;}.toc li{margin:5px 0;font-size:14px;}
+.chapter{background:#fff;border-radius:8px;box-shadow:0 1px 4px rgba(0,0,0,.08);padding:28px 28px 24px;margin-bottom:28px;}
+.chapter-head{border-left:5px solid #2a6cbe;padding-left:14px;margin-bottom:20px;}
+.chapter-head .ch-no{font-size:12px;color:#2a6cbe;font-weight:700;}.chapter-head h2{font-size:20px;font-weight:700;color:#1a2535;margin-top:2px;}
+h3{font-size:16px;font-weight:700;color:#1a3a5c;border-bottom:1px solid #dde8f5;padding-bottom:5px;margin:22px 0 12px;}
+h4{font-size:14px;font-weight:700;color:#2a4a6c;margin:16px 0 8px;}
+p{margin-bottom:12px;}ul,ol{margin-left:20px;margin-bottom:12px;}li{margin-bottom:5px;}
+.steps{counter-reset:step;list-style:none;margin-left:0;}
+.steps li{counter-increment:step;padding:9px 12px 9px 46px;position:relative;background:#f8fbff;border:1px solid #dde8f5;border-radius:6px;margin-bottom:6px;}
+.steps li::before{content:counter(step);position:absolute;left:12px;top:50%;transform:translateY(-50%);width:24px;height:24px;background:#2a6cbe;color:#fff;border-radius:50%;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;}
+.table-wrap{overflow-x:auto;margin-bottom:16px;}
+table{width:100%;border-collapse:collapse;font-size:13px;min-width:380px;}
+th{background:#1a3a5c;color:#fff;padding:9px 12px;text-align:left;white-space:nowrap;}
+td{padding:8px 12px;border-bottom:1px solid #dde8f5;vertical-align:top;}tr:nth-child(even) td{background:#f4f7fb;}
+code{font-family:'Courier New',monospace;background:rgba(0,80,160,.08);color:#004080;padding:2px 6px;border-radius:3px;font-size:12px;}
+.box{border-radius:6px;padding:13px 16px;margin:14px 0;font-size:13px;}
+.box-warn{background:#fffbe6;border-left:4px solid #f5a623;color:#7a5700;}
+.box-danger{background:#fff0f0;border-left:4px solid #d43f3f;color:#7a0000;}
+.box-hint{background:#e8f4ff;border-left:4px solid #2a6cbe;color:#0a3060;}
+.box-check{background:#f4eeff;border-left:4px solid #8c4fc8;color:#3a0070;}
+.box strong{display:block;margin-bottom:4px;}
+figure{max-width:280px;width:100%;margin:18px auto;text-align:center;}
+figure img{display:block;width:100%;max-width:280px;height:auto;margin:0 auto;border:1px solid #c8d8ec;border-radius:6px;box-shadow:0 2px 8px rgba(0,0,0,.1);}
+figcaption{font-size:12px;color:#5a7a99;margin-top:6px;}
+.img-pending{display:flex;align-items:center;justify-content:center;max-width:280px;width:100%;box-sizing:border-box;background:#e8eef5;border:2px dashed #99b8d8;border-radius:6px;height:160px;color:#5a7a99;font-size:13px;margin:18px auto;}
+.diff-add{background:#e8fff0;border-left:4px solid #2a9c5c;border-radius:6px;padding:12px 16px;margin:14px 0;font-size:13px;}
+.diff-add strong{display:block;color:#1a6c3c;margin-bottom:4px;}
+.flow-box{background:#f4f7fb;border:1px solid #c8d8ec;border-radius:8px;padding:20px;margin:16px 0;}
+.flow-box h4{color:#1a3a5c;margin-top:0;}
+.flow-arrow{text-align:center;font-size:20px;color:#2a6cbe;margin:4px 0;}
+.flow-step{background:#fff;border:1px solid #c8d8ec;border-radius:6px;padding:10px 16px;margin:4px 0;font-size:13px;}
+.flow-step strong{color:#1a3a5c;}
+.summary-box{background:linear-gradient(135deg,#e8f4ff,#f0f8ff);border:1px solid #99c8ec;border-radius:8px;padding:20px 24px;margin-top:32px;}
+.summary-box h3{border:none;color:#1a3a5c;margin-top:0;}
+.confirm-box{background:#fdf4ff;border:1px solid #c8a0e0;border-radius:8px;padding:20px 24px;margin-top:16px;}
+.confirm-box h3{border:none;color:#5a0090;margin-top:0;}
+.check{color:#2e7d32;font-weight:700;}.cross{color:#c62828;}
+th.pro-col{background:#5a2a8c;}
+.feature-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px;margin:16px 0;}
+.feature-card{background:#f4f7fb;border:1px solid #c8d8ec;border-radius:8px;padding:16px;}
+.feature-card h4{color:#1a3a5c;margin-top:0;margin-bottom:6px;font-size:14px;}
+.feature-card p{font-size:13px;margin:0;color:#3a5a7a;}
+.feature-card.pro-card{background:#f4eeff;border-color:#c8a0e0;}
+.feature-card.pro-card h4{color:#5a2a8c;}
+.trouble{border:1px solid #c8d8ec;border-radius:8px;margin:14px 0;overflow:hidden;}
+.trouble-q{background:#eef6fd;padding:13px 18px;font-weight:700;font-size:14px;color:#1a3a5c;display:flex;align-items:flex-start;gap:10px;}
+.trouble-q::before{content:'Q';background:#2a6cbe;color:#fff;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900;flex-shrink:0;margin-top:1px;}
+.trouble-a{padding:13px 18px 14px 50px;font-size:13.5px;border-top:1px solid #c8d8ec;line-height:1.9;}
+.trouble-a ul{margin-left:16px;}
+.legal-block{background:#f5f5f5;border:1px solid #ddd;border-radius:8px;padding:20px 24px;font-size:12.5px;color:#444;line-height:1.9;margin:14px 0;}
+.legal-block h4{font-size:13px;color:#333;margin:18px 0 6px;border-bottom:1px solid #ddd;padding-bottom:4px;}
+.legal-block h4:first-child{margin-top:0;}
+footer{text-align:center;font-size:12px;color:#8a9aaa;padding:30px 16px;border-top:1px solid #dde8f5;margin-top:20px;}
+@media(max-width:640px){.page-header h1{font-size:18px;}.chapter{padding:20px 16px;}.site-nav a{padding:8px 9px;font-size:11px;}}
+@media print{body{background:#fff;font-size:12px;}.site-nav{display:none;}.chapter{box-shadow:none;border:1px solid #ccc;page-break-inside:avoid;}.page-header{background:#1a3a5c !important;-webkit-print-color-adjust:exact;print-color-adjust:exact;}}
+</style></head>
+<body>
+<nav class="site-nav"><div class="nav-inner">
+  <a href="01_top_settings_common_es-419.html">① Inicio / Ajustes</a>
+  <a href="02_stocktake_free_es-419.html" class="active">② Inventario físico gratis</a>
+  <a href="03_stocktake_simple_es-419.html">③ Inventario físico estándar</a>
+  <a href="04_stocktake_full_es-419.html">④ Inventario físico completo</a>
+  <a href="05_inventory_free_es-419.html">⑤ Existencias gratis</a>
+  <a href="06_inventory_simple_es-419.html">⑥ Existencias estándar</a>
+  <a href="07_inventory_full_es-419.html">⑦ Existencias completas</a>
+</div></nav>
+<header class="page-header"><div class="inner">
+  <div class="app-name">Manual de Quantiventra</div>
+  <h1>② Inventario físico — Plan gratuito</h1>
+  <div class="subtitle">Funcionalidades, límites, guía paso a paso y flujo de trabajo recomendado</div>
+  <div class="scope-box"><strong>Temas tratados:</strong> Qué puede hacer el inventario gratuito / Límites / Inventario paso a paso / Ingreso de código y cantidad / Ubicaciones / Historial / Límites CSV / Lo que no es posible / Flujo recomendado</div>
+</div></header>
+<div class="container">
+  <nav class="toc"><h2>Índice</h2><ol>
+    <li><a href="#overview">Descripción del inventario físico gratuito</a></li>
+    <li><a href="#limits">Límites del plan gratuito</a></li>
+    <li><a href="#howto">Inventario paso a paso</a></li>
+    <li><a href="#input">Ingreso de código de barras, nombre y cantidad</a></li>
+    <li><a href="#location">Gestión de ubicaciones</a></li>
+    <li><a href="#history">Consulta del historial de inventario</a></li>
+    <li><a href="#csv">Límites de exportación CSV</a></li>
+    <li><a href="#cannot">Lo que no es posible en el plan gratuito</a></li>
+    <li><a href="#tips">Flujo de trabajo recomendado para usuarios gratuitos</a></li>
+    <li><a href="#summary">Puntos clave del capítulo</a></li>
+    <li><a href="#confirm">Notas antes de usar</a></li>
+  </ol></nav>
+
+  <section class="chapter" id="overview">
+    <div class="chapter-head"><div class="ch-no">CAPÍTULO 1</div><h2>Descripción del inventario físico gratuito</h2></div>
+    <p>El inventario físico consiste en contar en el lugar las mercancías reales y registrar sus cantidades. El plan gratuito permite probar el flujo básico de inventario físico.</p>
+    <p>El flujo de trabajo es: <strong>Escanear producto → Ingresar cantidad → Guardar → Revisar historial.</strong></p>
+    <div class="box box-hint"><strong>💡 ¿Qué es el inventario físico?</strong>El inventario físico registra las cantidades que contaste efectivamente en el lugar. Es un módulo separado de las operaciones de entrada, salida y transferencia de la gestión de existencias; no los confundas.</div>
+
+    <h3>Funcionalidades disponibles en el plan gratuito</h3>
+    <ul>
+      <li>Ingreso o lectura de código de producto / código de barras</li>
+      <li>Ingreso del nombre del producto</li>
+      <li>Ingreso de la cantidad efectivamente contada</li>
+      <li>Ingreso de notas u observaciones</li>
+      <li>Consulta del historial de inventario físico</li>
+      <li>Guardado y exportación dentro del límite del plan gratuito</li>
+    </ul>  </section>
+
+  <section class="chapter" id="limits">
+    <div class="chapter-head"><div class="ch-no">CAPÍTULO 2</div><h2>Límites del plan gratuito</h2></div>
+    <p>El plan gratuito tiene los siguientes límites.</p>
+    <div class="table-wrap"><table>
+      <tr><th>Elemento</th><th>Límite del plan gratuito</th><th>Cómo eliminarlo</th></tr>
+      <tr><td>Registros de catálogo</td><td>Máx. 30</td><td>Plan de inventario físico estándar o superior</td></tr>
+      <tr><td>Registros de historial de inventario físico</td><td>Máx. 30</td><td>Plan de inventario físico estándar o superior</td></tr>
+      <tr><td>Registros exportados</td><td>Máx. 30</td><td>Plan de inventario físico estándar o superior</td></tr>
+      <tr><td>Bloqueo de rotación de pantalla</td><td>No disponible</td><td>Plan estándar o superior</td></tr>
+      <tr><td>Reglas detalladas de código</td><td>No disponible</td><td>Plan completo</td></tr>
+      <tr><td>Reglas detalladas de ubicación</td><td>No disponible</td><td>Plan completo</td></tr>
+      <tr><td>Ajustes detallados de cámara</td><td>No disponible</td><td>Plan completo</td></tr>
+      <tr><td>Exportación CSV ampliada</td><td>No disponible</td><td>Plan completo</td></tr>
+    </table></div>
+    <div class="box box-warn"><strong>⚠ Atención</strong>Al alcanzar el límite de 30 registros, es posible que no puedas guardar ni exportar. Considera actualizar al plan estándar o completo antes de llegar al límite.</div>
+    <div class="box box-check"><strong>🔍 Nota</strong>Los precios y las condiciones de compra deben consultarse en Google Play. Este manual no indica precios de forma definitiva.</div>
+  </section>
+
+  <section class="chapter" id="howto">
+    <div class="chapter-head"><div class="ch-no">CAPÍTULO 3</div><h2>Inventario paso a paso</h2></div>
+
+    <h3>Flujo básico de inventario físico</h3>
+    <ol class="steps">
+      <li>En la pantalla de inicio, toca <strong>Inventario físico</strong>.</li>
+      <li>Escanea el código de barras o ingresa manualmente el código del producto.</li>
+      <li>Aparece el nombre del producto. Si el código no está registrado, ingresa el nombre manualmente.</li>
+      <li>Confirma o selecciona la ubicación (bodega, tienda, etc.).</li>
+      <li>Ingresa la cantidad efectivamente contada.</li>
+      <li>Ingresa notas si es necesario.</li>
+      <li>Toca <strong>Guardar</strong> para registrar este elemento en el historial de inventario físico.</li>
+      <li>Verifica el contenido guardado en el historial de inventario físico.</li>
+    </ol>
+    <div class="box box-danger"><strong>🚨 Importante</strong>Siempre verifica la cantidad antes de guardar. Los errores de ingreso pueden causar diferencias con los datos de existencias.</div>
+
+    <h3>Varios productos en secuencia</h3>
+    <ol class="steps">
+      <li>Después de guardar el primer elemento, escanea el código de barras del siguiente producto o ingresa su código manualmente.</li>
+      <li>Repite el ingreso del producto, la cantidad y el guardado.</li>
+      <li>Cuando termines todos los productos, revisa el conjunto en el historial de inventario físico.</li>
+    </ol>
+    <div class="box box-hint"><strong>💡 Consejo</strong>No es necesario completar todo el inventario en una sola sesión. Aunque cierres la app a mitad del trabajo, el historial que ya fue guardado se conserva.</div>  </section>
+
+  <section class="chapter" id="input">
+    <div class="chapter-head"><div class="ch-no">CAPÍTULO 4</div><h2>Ingreso de código de barras, nombre y cantidad</h2></div>
+
+    <h3>Lectura de código de barras</h3>
+    <p>Al abrir la cámara y apuntar al código de barras, la app lo lee automáticamente. Si la lectura falla, prueba en un lugar más iluminado o usa el ingreso manual.</p>
+
+    <h3>Ingreso manual del código del producto</h3>
+    <p>Cuando no puedas usar un código de barras, ingresa el código directamente en el campo de código del producto. Si el código ya está registrado, el nombre del producto se completa automáticamente.</p>
+
+    <h3>Ingreso del nombre del producto</h3>
+    <p>Para códigos no registrados, ingresa el nombre del producto manualmente. El nombre ingresado se registra en el historial de inventario físico. Ten en cuenta el límite de registros si trabajas sin registrar previamente los productos en el catálogo.</p>
+
+    <h3>Ingreso de la cantidad contada</h3>
+    <p>Ingresa como valor numérico la cantidad que contaste efectivamente en el lugar.</p>
+
+    <div class="box box-warn"><strong>⚠ Atención</strong>Ingresa con precisión la cantidad efectivamente contada. Los errores de ingreso generan diferencias en las existencias. Siempre confirma el número antes de guardar.</div>
+
+    <h3>Notas</h3>
+    <p>Puedes usar este campo para apuntes de trabajo o comentarios. Las notas se guardan junto con el registro del historial.</p>
+
+    <div class="table-wrap"><table>
+      <tr><th>Campo</th><th>Descripción</th><th>Obligatorio / Opcional</th></tr>
+      <tr><td>Código de barras / Código de producto</td><td>Código usado para identificar el producto</td><td>Obligatorio</td></tr>
+      <tr><td>Nombre del producto</td><td>Ingresar si el código no está registrado</td><td>Condicionalmente obligatorio</td></tr>
+      <tr><td>Ubicación</td><td>Dónde se realiza el inventario físico</td><td>Depende de los ajustes</td></tr>
+      <tr><td>Cantidad contada</td><td>Cantidad efectivamente contada</td><td>Obligatorio</td></tr>
+      <tr><td>Notas</td><td>Apuntes de trabajo o comentarios</td><td>Opcional</td></tr>
+    </table></div>
+  </section>
+
+  <section class="chapter" id="location">
+    <div class="chapter-head"><div class="ch-no">CAPÍTULO 5</div><h2>Gestión de ubicaciones</h2></div>
+    <p>El plan gratuito está pensado para una gestión simple de ubicaciones. Las ubicaciones básicas son "Bodega" y "Tienda".</p>
+
+    <h3>Ubicaciones por modo simple</h3>
+    <div class="table-wrap"><table>
+      <tr><th>Modo de inventario físico</th><th>Ubicaciones disponibles</th><th>Ejemplo de uso</th></tr>
+      <tr><td>Simple A</td><td>Solo bodega</td><td>Gestionar una sola bodega</td></tr>
+      <tr><td>Simple B</td><td>Bodega + Tienda</td><td>Realizar inventario físico en bodega y tienda</td></tr>
+      <tr><td>Simple C</td><td>Solo tienda</td><td>Gestionar una sola tienda</td></tr>
+    </table></div>
+
+    <p>Selecciona el modo en <strong>Ajustes → Ajustes de inventario físico</strong>. Definir el modo adecuado antes de empezar hace que el trabajo de inventario sea más fluido.</p>
+    <div class="box box-hint"><strong>💡 Consejo</strong>La gestión detallada de ubicaciones, como números de estante, es una funcionalidad del plan completo. Para usarla, cambia al modo <strong>Detallado</strong> en los ajustes.</div>
+    <div class="box box-warn"><strong>⚠ Atención</strong>Aunque haya ubicaciones detalladas registradas, no aparecerán si el modo sigue siendo Simple A/B/C. Debes cambiar al modo Detallado.</div>
+  </section>
+
+  <section class="chapter" id="history">
+    <div class="chapter-head"><div class="ch-no">CAPÍTULO 6</div><h2>Consulta del historial de inventario</h2></div>
+    <p>Los datos de inventario físico guardados se pueden consultar desde el historial de inventario.</p>
+
+    <h3>Qué puedes revisar en el historial</h3>
+    <ul>
+      <li>Fecha y hora de guardado</li>
+      <li>Código y nombre del producto</li>
+      <li>Cantidad contada ingresada</li>
+      <li>Ubicación</li>
+      <li>Notas</li>
+    </ul>
+
+    <h3>Límite de historial del plan gratuito</h3>
+    <p>El plan gratuito guarda hasta 30 registros de historial de inventario físico. Si alcanzas el límite, sigue las indicaciones de la pantalla. Para uso continuo, considera actualizar al plan estándar o completo.</p>
+    <div class="box box-warn"><strong>⚠ Atención</strong>El plan gratuito tiene un límite de 30 registros de historial. Al superar el límite, es posible que no puedas guardar nuevos datos de inventario físico.</div>
+  </section>
+
+  <section class="chapter" id="csv">
+    <div class="chapter-head"><div class="ch-no">CAPÍTULO 7</div><h2>Límites de exportación CSV</h2></div>
+    <p>El plan gratuito limita la cantidad de registros que se pueden exportar a CSV.</p>
+    <div class="table-wrap"><table>
+      <tr><th>Elemento</th><th>Plan gratuito</th><th>Plan estándar</th><th>Plan completo</th></tr>
+      <tr><td>Registros exportados</td><td>Máx. 30</td><td>Máx. 300</td><td>Ilimitado</td></tr>
+      <tr><td>Exportación de columnas completas</td><td>Limitada</td><td>Limitada</td><td>Exportación CSV ampliada</td></tr>
+    </table></div>
+    <div class="box box-hint"><strong>💡 Consejo</strong>El CSV de inventario físico incluye una fila de encabezado en el idioma seleccionado. Puedes abrir el archivo en Excel o Google Sheets para revisar los resultados.</div>
+    <div class="box box-warn"><strong>⚠ Atención</strong>El CSV de resumen de inventario físico no incluye columnas de fecha/hora ni de ubicación. La exportación detallada por ubicación y por fecha es una funcionalidad del plan completo.</div>
+  </section>
+
+  <section class="chapter" id="cannot">
+    <div class="chapter-head"><div class="ch-no">CAPÍTULO 8</div><h2>Lo que no es posible en el plan gratuito</h2></div>
+    <div class="table-wrap"><table>
+      <tr><th>Funcionalidad</th><th>Plan necesario</th></tr>
+      <tr><td>Registrar más de 30 datos de catálogo</td><td>Inventario físico estándar o superior</td></tr>
+      <tr><td>Guardar más de 30 registros de historial</td><td>Inventario físico estándar o superior</td></tr>
+      <tr><td>Exportar más de 30 registros</td><td>Inventario físico estándar o superior</td></tr>
+      <tr><td>Bloqueo de rotación de pantalla</td><td>Inventario físico estándar o superior</td></tr>
+      <tr><td>Reglas detalladas de código</td><td>Inventario físico completo</td></tr>
+      <tr><td>Reglas detalladas de ubicación</td><td>Inventario físico completo</td></tr>
+      <tr><td>Ajustes detallados de cámara</td><td>Inventario físico completo</td></tr>
+      <tr><td>Exportación CSV ampliada</td><td>Inventario físico completo</td></tr>
+      <tr><td>Aplicar resultados del inventario físico a las existencias</td><td>Inventario físico completo</td></tr>
+    </table></div>
+  </section>
+
+  <section class="chapter" id="tips">
+    <div class="chapter-head"><div class="ch-no">CAPÍTULO 9</div><h2>Flujo de trabajo recomendado para usuarios gratuitos</h2></div>
+
+    <h3>Uso en operaciones pequeñas</h3>
+    <p>Si trabajas con 30 productos o menos, el plan gratuito puede cubrir el flujo básico de inventario físico.</p>
+
+    <h3>Exporta CSV con regularidad</h3>
+    <p>Antes de acercarte al límite de 30 registros de historial, exporta los datos a CSV para conservarlos en una computadora o en una hoja de cálculo.</p>
+
+    <h3>Define con anticipación el modo Simple A/B/C</h3>
+    <p>Selecciona el modo adecuado en <strong>Ajustes → Ajustes de inventario físico</strong> antes de empezar. Esto hace que cada sesión de inventario sea más fluida.</p>
+
+    <h3>Considera actualizar cuando te acerques al límite</h3>
+    <p>Cuando los registros de catálogo o historial se acerquen a 30, considera actualizar al plan estándar o completo. Al alcanzar el límite, es posible que no puedas guardar o exportar.</p>
+
+    <div class="box box-hint"><strong>💡 Consejo</strong>Practica primero con los datos de ejemplo, que puedes crear desde Ajustes, antes de registrar tus productos reales.</div>
+  </section>
+
+  <div class="summary-box" id="summary">
+    <h3>📌 Puntos clave del capítulo</h3>
+    <ul>
+      <li>El inventario físico gratuito es adecuado para operaciones pequeñas con hasta 30 artículos.</li>
+      <li>El flujo es: Escanear → Ingresar cantidad → Guardar → Revisar historial.</li>
+      <li>Las ubicaciones se configuran con los modos Simple A/B/C. Las ubicaciones detalladas requieren el plan completo.</li>
+      <li>La exportación CSV está limitada a 30 registros y no incluye columnas de fecha ni de ubicación.</li>
+      <li>Cuando te acerques al límite de 30 registros, considera actualizar al plan estándar o completo.</li>
+      <li>El inventario físico es un trabajo separado de la entrada y salida de existencias. No los confundas.</li>
+    </ul>
+  </div>
+  <div class="confirm-box" id="confirm">
+    <h3>🔍 Notas antes de usar</h3>
+    <ul>
+      <li>Antes de guardar, verifica el producto, la ubicación y la cantidad ingresada.</li>
+      <li>Si necesitas corregir un registro guardado, sigue las indicaciones de la pantalla de la app.</li>
+      <li>Cuando te acerques al límite de 30 registros, exporta el CSV o considera actualizar el plan.</li>
+      <li>Para precios, condiciones de compra y disponibilidad de funciones, consulta Google Play y las pantallas de la app.</li>
+    </ul>
+  </div>
+</div>
+<footer>Manual de Quantiventra · La información más actualizada está disponible en las pantallas de la app.<p style="margin-top:4px;"><a href="privacy_es-419.html">Política de privacidad</a></p></footer>
+</body></html>

@@ -1,0 +1,940 @@
+﻿<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quantiventra उपयोगकर्ता मार्गदर्शिका – मुख्य स्क्रीन, सेटिंग्स और सामान्य संचालन</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Noto Sans Devanagari','Noto Sans',Arial,sans-serif;font-size:15px;line-height:1.9;color:#1a2535;background:#f4f7fb;}
+a{color:#1a5fa8;text-decoration:none;}
+a:hover{text-decoration:underline;}
+.site-nav{background:#1a3a5c;color:#fff;padding:0;}
+.site-nav .nav-inner{max-width:960px;margin:0 auto;display:flex;flex-wrap:wrap;gap:0;align-items:stretch;}
+.site-nav a{color:#cde;padding:10px 13px;font-size:12px;display:block;border-right:1px solid #2a4a6c;white-space:nowrap;}
+.site-nav a:hover{background:#2a5090;text-decoration:none;}
+.site-nav a.active{background:#2a6cbe;color:#fff;font-weight:bold;}
+.page-header{background:linear-gradient(135deg,#1a3a5c 0%,#2a6cbe 100%);color:#fff;padding:40px 20px 30px;}
+.page-header .inner{max-width:960px;margin:0 auto;}
+.page-header .app-name{font-size:13px;opacity:.8;letter-spacing:.05em;}
+.page-header h1{font-size:24px;font-weight:700;margin-top:6px;line-height:1.4;}
+.page-header .subtitle{font-size:14px;opacity:.85;margin-top:8px;}
+.scope-box{background:rgba(255,255,255,.15);border-left:4px solid #7ecfff;padding:12px 16px;margin-top:16px;border-radius:4px;font-size:13px;}
+.play-section{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.3);border-radius:10px;padding:22px 28px;margin-top:24px;display:flex;align-items:center;gap:28px;flex-wrap:wrap;}
+.play-qr-wrap{flex-shrink:0;text-align:center;}
+.play-qr-frame{width:130px;height:130px;border:3px solid rgba(255,255,255,.7);border-radius:10px;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.95);position:relative;overflow:hidden;}
+.play-qr-frame img{width:100%;height:100%;object-fit:contain;display:block;}
+.play-qr-corner{pointer-events:none;position:absolute;width:16px;height:16px;border-color:#2a6cbe;border-style:solid;border-width:0;}
+.play-qr-corner.tl{top:5px;left:5px;border-top-width:3px;border-left-width:3px;border-radius:3px 0 0 0;}
+.play-qr-corner.tr{top:5px;right:5px;border-top-width:3px;border-right-width:3px;border-radius:0 3px 0 0;}
+.play-qr-corner.bl{bottom:5px;left:5px;border-bottom-width:3px;border-left-width:3px;border-radius:0 0 0 3px;}
+.play-qr-corner.br{bottom:5px;right:5px;border-bottom-width:3px;border-right-width:3px;border-radius:0 0 3px 0;}
+.play-qr-label{font-size:10px;color:rgba(255,255,255,.8);margin-top:6px;}
+.play-info h3{font-size:16px;font-weight:700;color:#fff;margin-bottom:4px;}
+.play-info p{font-size:12px;color:rgba(255,255,255,.75);margin-bottom:10px;}
+.play-badge{display:inline-block;text-decoration:none;}
+.play-badge img{display:block;height:44px;width:auto;max-width:180px;}
+.container{max-width:960px;margin:0 auto;padding:30px 16px;}
+.toc{background:#fff;border:1px solid #c8d8ec;border-radius:8px;padding:24px 28px;margin-bottom:32px;}
+.toc h2{font-size:16px;font-weight:700;color:#1a3a5c;border-bottom:2px solid #2a6cbe;padding-bottom:8px;margin-bottom:14px;}
+.toc ol{margin-left:18px;}
+.toc li{margin:5px 0;font-size:14px;}
+.toc a{color:#1a5fa8;}
+.chapter{background:#fff;border-radius:8px;box-shadow:0 1px 4px rgba(0,0,0,.08);padding:28px 28px 24px;margin-bottom:28px;}
+.chapter-head{border-left:5px solid #2a6cbe;padding-left:14px;margin-bottom:20px;}
+.chapter-head .ch-no{font-size:12px;color:#2a6cbe;font-weight:700;letter-spacing:.05em;}
+.chapter-head h2{font-size:20px;font-weight:700;color:#1a2535;margin-top:2px;}
+h3{font-size:16px;font-weight:700;color:#1a3a5c;border-bottom:1px solid #dde8f5;padding-bottom:5px;margin:22px 0 12px;}
+h4{font-size:14px;font-weight:700;color:#2a4a6c;margin:16px 0 8px;}
+p{margin-bottom:12px;}
+ul,ol{margin-left:20px;margin-bottom:12px;}
+li{margin-bottom:5px;}
+.steps{counter-reset:step;list-style:none;margin-left:0;}
+.steps li{counter-increment:step;padding:9px 12px 9px 46px;position:relative;background:#f8fbff;border:1px solid #dde8f5;border-radius:6px;margin-bottom:6px;}
+.steps li::before{content:counter(step);position:absolute;left:12px;top:50%;transform:translateY(-50%);width:24px;height:24px;background:#2a6cbe;color:#fff;border-radius:50%;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;}
+.table-wrap{overflow-x:auto;margin-bottom:16px;}
+table{width:100%;border-collapse:collapse;font-size:13px;min-width:420px;}
+th{background:#1a3a5c;color:#fff;padding:9px 12px;text-align:left;white-space:nowrap;}
+th.pro-col{background:#5a2a8c;}
+td{padding:8px 12px;border-bottom:1px solid #dde8f5;vertical-align:top;}
+tr:nth-child(even) td{background:#f4f7fb;}
+code{font-family:'Courier New',monospace;background:rgba(0,80,160,.08);color:#004080;padding:2px 6px;border-radius:3px;font-size:12px;}
+.badge{display:inline-block;font-size:10px;font-weight:700;padding:2px 7px;border-radius:10px;white-space:nowrap;}
+.badge-free{background:#2e7d32;color:#fff;}
+.badge-pro{background:#5a2a8c;color:#fff;}
+.check{color:#2e7d32;font-weight:700;}
+.cross{color:#c62828;}
+.box{border-radius:6px;padding:13px 16px;margin:14px 0;font-size:13px;}
+.box-warn{background:#fffbe6;border-left:4px solid #f5a623;color:#7a5700;}
+.box-danger{background:#fff0f0;border-left:4px solid #d43f3f;color:#7a0000;}
+.box-hint{background:#e8f4ff;border-left:4px solid #2a6cbe;color:#0a3060;}
+.box-check{background:#f4eeff;border-left:4px solid #8c4fc8;color:#3a0070;}
+.box-success{background:#e8f5e9;border-left:4px solid #2e7d32;color:#1b4a1e;}
+.box strong{display:block;margin-bottom:4px;}
+figure{max-width:280px;width:100%;margin:18px auto;text-align:center;}
+figure img{display:block;width:100%;max-width:280px;height:auto;margin:0 auto;border:1px solid #c8d8ec;border-radius:6px;box-shadow:0 2px 8px rgba(0,0,0,.1);}
+figcaption{font-size:12px;color:#5a7a99;margin-top:6px;}
+.feature-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px;margin:16px 0;}
+.feature-card{background:#f4f7fb;border:1px solid #c8d8ec;border-radius:8px;padding:16px;}
+.feature-card h4{color:#1a3a5c;margin-top:0;margin-bottom:6px;font-size:14px;}
+.feature-card p{font-size:13px;margin:0;color:#3a5a7a;}
+.feature-card.pro-card{background:#f4eeff;border-color:#c8a0e0;}
+.feature-card.pro-card h4{color:#5a2a8c;}
+.summary-box{background:linear-gradient(135deg,#e8f4ff,#f0f8ff);border:1px solid #99c8ec;border-radius:8px;padding:20px 24px;margin-top:32px;}
+.summary-box h3{border:none;color:#1a3a5c;margin-top:0;}
+.confirm-box{background:#fdf4ff;border:1px solid #c8a0e0;border-radius:8px;padding:20px 24px;margin-top:16px;}
+.confirm-box h3{border:none;color:#5a0090;margin-top:0;}
+.trouble{border:1px solid #c8d8ec;border-radius:8px;margin:14px 0;overflow:hidden;}
+.trouble-q{background:#eef6fd;padding:13px 18px;font-weight:700;font-size:14px;color:#1a3a5c;display:flex;align-items:flex-start;gap:10px;}
+.trouble-q::before{content:'Q';background:#2a6cbe;color:#fff;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900;flex-shrink:0;margin-top:1px;}
+.trouble-a{padding:13px 18px 14px 50px;font-size:13.5px;border-top:1px solid #c8d8ec;line-height:1.9;}
+.trouble-a ul{margin-left:16px;}
+.legal-block{background:#f5f5f5;border:1px solid #ddd;border-radius:8px;padding:20px 24px;font-size:12.5px;color:#444;line-height:1.9;margin:14px 0;}
+.legal-block h4{font-size:13px;color:#333;margin:18px 0 6px;border-bottom:1px solid #ddd;padding-bottom:4px;}
+.legal-block h4:first-child{margin-top:0;}
+footer{text-align:center;font-size:12px;color:#8a9aaa;padding:30px 16px 60px;border-top:1px solid #dde8f5;margin-top:20px;}
+.back-top{position:fixed;right:22px;bottom:28px;background:#1a3a5c;color:#fff;width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:20px;text-decoration:none;box-shadow:0 4px 14px rgba(26,58,92,.45);z-index:100;transition:transform .2s,box-shadow .2s;}
+.back-top:hover{transform:translateY(-3px);box-shadow:0 8px 22px rgba(26,58,92,.55);text-decoration:none;}
+.back-prev{position:fixed;left:18px;top:18px;z-index:200;border:1px solid rgba(255,255,255,.45);border-radius:999px;background:rgba(26,58,92,.88);color:#fff;padding:8px 14px;font:700 13px/1 sans-serif;box-shadow:0 4px 14px rgba(0,0,0,.2);cursor:pointer;text-decoration:none;}
+.back-prev:hover{background:#1a3a5c;text-decoration:none;}
+@media(max-width:640px){
+  .page-header h1{font-size:18px;}
+  .chapter{padding:20px 16px;}
+  .toc{padding:16px;}
+  .site-nav a{padding:8px 9px;font-size:11px;}
+  .play-section{flex-direction:column;align-items:flex-start;gap:16px;}
+  .feature-grid{grid-template-columns:1fr 1fr;}
+  .back-prev{display:none;}
+}
+@media print{
+  body{background:#fff;font-size:12px;}
+  .site-nav,.back-top,.back-prev{display:none;}
+  .chapter{box-shadow:none;border:1px solid #ccc;page-break-inside:avoid;}
+  .page-header{background:#1a3a5c !important;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  .play-section{display:none;}
+}
+</style>
+</head>
+<body id="top">
+
+<a href="javascript:history.back()" class="back-prev">‹ वापस</a>
+
+<nav class="site-nav" aria-label="पृष्ठ नेविगेशन">
+  <div class="nav-inner">
+    <a href="01_top_settings_common_hi.html" class="active">① मुख्य / सेटिंग्स</a>
+    <a href="02_stocktake_free_hi.html">② स्टॉकटेक निःशुल्क</a>
+    <a href="03_stocktake_simple_hi.html">③ स्टॉकटेक बेसिक</a>
+    <a href="04_stocktake_full_hi.html">④ स्टॉकटेक फुल</a>
+    <a href="05_inventory_free_hi.html">⑤ इन्वेंटरी निःशुल्क</a>
+    <a href="06_inventory_simple_hi.html">⑥ इन्वेंटरी बेसिक</a>
+    <a href="07_inventory_full_hi.html">⑦ इन्वेंटरी फुल</a>
+  </div>
+</nav>
+
+<header class="page-header">
+  <div class="inner">
+    <div class="app-name">Quantiventra उपयोगकर्ता मार्गदर्शिका — हिंदी संस्करण</div>
+    <h1>① मुख्य स्क्रीन · सेटिंग्स · सामान्य संचालन</h1>
+    <div class="subtitle">ऐप का अवलोकन, सिस्टम आवश्यकताएँ, इंस्टॉलेशन, सेटिंग्स, खरीद प्लान, नमूना डेटा, शब्दावली और कानूनी नोटिस</div>
+<div class="scope-box">
+      <strong>इस पृष्ठ में शामिल विषय:</strong>
+      ऐप का अवलोकन / सिस्टम आवश्यकताएँ / इंस्टॉलेशन और पहली बार लॉन्च / डेटा संग्रहण / स्टॉकटेक और इन्वेंटरी प्रबंधन का अंतर / शुरुआत कैसे करें / मुख्य स्क्रीन / सेटिंग्स स्क्रीन / भाषा सेटिंग्स / खरीद प्लान / नमूना डेटा / समस्या निवारण / शब्दावली / नियम और अस्वीकरण
+    </div>
+  </div>
+</header>
+
+<div class="container">
+
+  <nav class="toc">
+    <h2>विषय-सूची</h2>
+    <ol>
+      <li><a href="#about">Quantiventra क्या है?</a></li>
+      <li><a href="#environment">सिस्टम आवश्यकताएँ और अनुमतियाँ</a></li>
+      <li><a href="#install">इंस्टॉलेशन और पहली बार लॉन्च</a></li>
+      <li><a href="#storage">डेटा संग्रहण</a></li>
+      <li><a href="#diff">स्टॉकटेक और इन्वेंटरी प्रबंधन का अंतर</a></li>
+      <li><a href="#start">शुरुआत कैसे करें (शुरुआती गाइड)</a></li>
+      <li><a href="#top-screen">मुख्य स्क्रीन का उपयोग</a></li>
+      <li><a href="#settings">सेटिंग्स स्क्रीन का अवलोकन</a></li>
+      <li><a href="#language">भाषा सेटिंग्स</a></li>
+      <li><a href="#billing">खरीद प्लान का अवलोकन</a></li>
+      <li><a href="#sample">नमूना डेटा</a></li>
+      <li><a href="#trouble">समस्या निवारण</a></li>
+      <li><a href="#glossary">शब्दावली</a></li>
+      <li><a href="#legal">नियम और अस्वीकरण</a></li>
+      <li><a href="#summary">अध्याय के मुख्य बिंदु</a></li>
+      <li><a href="#confirm">पुष्टि करने योग्य बातें</a></li>
+    </ol>
+  </nav>
+
+  <!-- अध्याय 1 -->
+  <section class="chapter" id="about">
+    <div class="chapter-head">
+      <div class="ch-no">अध्याय 1</div>
+      <h2>Quantiventra क्या है?</h2>
+    </div>
+
+    <h3>1-1. ऐप के बारे में</h3>
+    <p>
+      <strong>Quantiventra</strong> "<em>Quantity</em>" और "<em>Inventory</em>" का संयोजन है।
+      यह एक Android ऐप है जो आपके स्मार्टफोन कैमरे से बारकोड स्कैन करके स्टॉकटेक और इन्वेंटरी प्रबंधन को सरल बनाता है।
+    </p>
+    <p>
+      बस बारकोड पर कैमरा लक्ष्य करें — उत्पाद स्वचालित रूप से पहचाना जाता है, फिर मात्रा दर्ज करें और सहेजें।
+      यह सहज कार्यप्रवाह कागज़ आधारित स्टॉकटेक को डिजिटल बनाता है।
+      परिणाम CSV फ़ाइलों के रूप में सहेजे जाते हैं, जिससे Excel या Google Sheets में काम करना आसान होता है।
+    </p>
+
+    <h3>1-2. मुख्य विशेषताएँ</h3>
+    <div class="feature-grid">
+      <div class="feature-card">
+        <h4>📦 स्टॉकटेक</h4>
+        <p>बारकोड स्कैन से उत्पाद तुरंत पहचानें और मात्रा दर्ज करें। अंतर्निहित कैलकुलेटर से कई स्थानों की गिनती जोड़ना आसान होता है।</p>
+      </div>
+      <div class="feature-card">
+        <h4>🗂️ मास्टर डेटा प्रबंधन</h4>
+        <p>उत्पाद, श्रेणियाँ और स्थान मास्टर डेटा के रूप में दर्ज करें। CSV के माध्यम से बल्क आयात भी समर्थित है।</p>
+      </div>
+      <div class="feature-card">
+        <h4>📍 स्थान प्रबंधन</h4>
+        <p>गोदाम, दुकान और शेल्फ जैसे कई स्थान दर्ज करें और स्थान के आधार पर स्टॉक प्रबंधित करें। यह भी तय करें कि किन स्थानों का स्टॉक पुनःपूर्ति के निर्णय में शामिल किया जाए।</p>
+      </div>
+      <div class="feature-card">
+        <h4>📊 CSV आयात / निर्यात</h4>
+        <p>स्टॉक सूचियाँ, बैकअप और इतिहास CSV के रूप में निर्यात करें। Excel या Google Sheets में आगे जाँचना और व्यवस्थित करना आसान है।</p>
+      </div>
+      <div class="feature-card">
+        <h4>🌐 बहुभाषी समर्थन</h4>
+        <p>अंग्रेज़ी, जापानी, चीनी और कोरियाई सहित 12 भाषाओं का समर्थन। डिवाइस की भाषा के अनुसार स्वचालित रूप से मिलान करता है।</p>
+      </div>
+      <div class="feature-card pro-card">
+        <h4>⭐ फुल अनलॉक की सुविधाएँ</h4>
+        <p>आइटम सीमाएँ हटाता है और विस्तृत नियम, CSV विस्तार सेटिंग्स, स्थान मास्टर प्रबंधन और अधिक सूक्ष्म संचालन सेटिंग्स अनलॉक करता है।</p>
+      </div>
+    </div>
+
+    <h3>1-3. कैमरा स्कैनिंग कैसे काम करती है</h3>
+    <p>
+      जब कोई बारकोड स्क्रीन के केंद्र में दिखाए गए गाइड फ्रेम (नीली या पीली रूपरेखा) के भीतर आता है,
+      तो ऐप <strong>लगातार 3 फ्रेम में एक ही कोड देखने</strong> के बाद उसे स्वचालित रूप से पुष्टि करता है।
+      यह तीन-बार पुष्टि की विधि गलत स्कैन को रोकती है और विश्वसनीय पहचान सुनिश्चित करती है।
+    </p>
+    <div class="box box-hint">
+      <strong>💡 यदि कोड पहचाना नहीं जा रहा</strong>
+      बारकोड को गाइड फ्रेम के <strong>पूरी तरह अंदर</strong> होना चाहिए। फ्रेम के बाहर के कोड नहीं पहचाने जाएँगे।
+      कैमरे की स्थिति तब तक समायोजित करें जब तक कोड पूरी तरह फ्रेम के भीतर न आ जाए।
+    </div>
+
+    <p>ऐप में दो मुख्य मॉड्यूल हैं — स्टॉकटेक और इन्वेंटरी प्रबंधन — साथ ही मास्टर डेटा प्रबंधन, सेटिंग्स और CSV आयात/निर्यात साझा सुविधाएँ हैं।</p>
+  </section>
+
+  <!-- अध्याय 2 -->
+  <section class="chapter" id="environment">
+    <div class="chapter-head">
+      <div class="ch-no">अध्याय 2</div>
+      <h2>सिस्टम आवश्यकताएँ और अनुमतियाँ</h2>
+    </div>
+
+    <h3>2-1. सिस्टम आवश्यकताएँ</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>विषय</th><th>आवश्यकता</th></tr></thead>
+        <tbody>
+          <tr><td>OS</td><td>Android 8.0 (Oreo / API 26) या उससे ऊपर</td></tr>
+          <tr><td>कैमरा</td><td>ऑटोफोकस कैमरा (अनिवार्य)</td></tr>
+          <tr><td>संग्रहण</td><td>कम से कम 10 MB खाली आंतरिक संग्रहण अनुशंसित</td></tr>
+          <tr><td>अनिवार्य अनुमति</td><td>कैमरा (अनिवार्य)</td></tr>
+          <tr><td>इंटरनेट</td><td>सामान्य स्टॉकटेक/इन्वेंटरी कार्यों के लिए आवश्यक नहीं; खरीद सत्यापन, खरीदारी बहाल करना, Google Play या बाहरी लिंक के लिए आवश्यक हो सकता है</td></tr>
+          <tr><td>Google Play Services</td><td>प्लान खरीद और पुनर्स्थापना के लिए आवश्यक</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="box box-success">
+      <strong>✅ सामान्य कार्य डिवाइस पर</strong>
+      सामान्य स्टॉकटेक और इन्वेंटरी प्रबंधन कार्य डिवाइस पर किए जा सकते हैं। खरीद सत्यापन, खरीदारी बहाल करना, Google Play या बाहरी लिंक खोलने जैसी कुछ सुविधाओं के लिए इंटरनेट आवश्यक हो सकता है।
+    </div>
+
+    <h3>2-2. अनिवार्य अनुमतियाँ</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>अनुमति</th><th>उद्देश्य</th><th>अस्वीकार करने पर</th></tr></thead>
+        <tbody>
+          <tr><td>कैमरा</td><td>बारकोड और QR कोड स्कैनिंग</td><td>कैमरा स्कैनिंग उपलब्ध नहीं (केवल मैन्युअल प्रविष्टि)</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="box box-hint">
+      <strong>💡 संग्रहण अनुमति</strong>
+      यह ऐप Android के <strong>आंतरिक ऐप संग्रहण</strong> में डेटा संग्रहीत करता है। संग्रहण अनुमति की आवश्यकता नहीं है।
+      डेटा आदान-प्रदान ऐप के आयात, निर्यात और साझा कार्यों के माध्यम से होता है।
+    </div>
+  </section>
+
+  <!-- अध्याय 3 -->
+  <section class="chapter" id="install">
+    <div class="chapter-head">
+      <div class="ch-no">अध्याय 3</div>
+      <h2>इंस्टॉलेशन और पहली बार लॉन्च</h2>
+    </div>
+
+    <h3>3-1. इंस्टॉलेशन</h3>
+    <p>Google Play Store पर "Quantiventra" खोजें, या सीधे स्टोर लिस्टिंग पर जाने के लिए इस पृष्ठ के शीर्ष पर QR कोड स्कैन करें।</p>
+
+    <ol class="steps">
+      <li>Google Play Store खोलें।</li>
+      <li>"Quantiventra" खोजें या स्टोर पृष्ठ खोलने के लिए QR कोड स्कैन करें।</li>
+      <li><strong>इंस्टॉल</strong> पर टैप करें।</li>
+    </ol>
+
+    <h3>3-2. पहली बार लॉन्च का प्रवाह</h3>
+    <ol class="steps">
+      <li>ऐप आइकन टैप करके लॉन्च करें।</li>
+      <li>कैमरा अनुमति डायलॉग आता है — <strong>अनुमति दें</strong> पर टैप करें।</li>
+      <li>यदि नमूना डेटा का प्रॉम्प्ट आए, तो <strong>बनाएँ</strong> या <strong>छोड़ें</strong> चुनें।</li>
+      <li>ऐप का डेटा फ़ोल्डर आंतरिक संग्रहण में स्वचालित रूप से बनाया जाता है।</li>
+      <li>मुख्य स्क्रीन दिखने के बाद प्रारंभिक सेटअप पूर्ण है।</li>
+    </ol>
+
+    <div class="box box-warn">
+      <strong>⚠ यदि कैमरा अनुमति अस्वीकार करें</strong>
+      बारकोड स्कैनिंग उपलब्ध नहीं होगी।
+      बाद में अनुमति देने के लिए: डिवाइस <strong>सेटिंग्स → ऐप्स → Quantiventra → अनुमतियाँ → कैमरा → सक्षम करें</strong>।
+    </div>
+
+    <h3>3-3. नए डिवाइस में स्थानांतरण</h3>
+    <ol class="steps">
+      <li>पुराने डिवाइस पर <strong>सेटिंग्स → निर्यात</strong> या <strong>सेटिंग्स → साझा करें</strong> से डेटा निर्यात या साझा करें।</li>
+      <li>नए डिवाइस में उसी Google खाते से साइन इन करें।</li>
+      <li>Google Play से Quantiventra इंस्टॉल करें।</li>
+      <li>खरीदे गए प्लान पुनर्स्थापित करने के लिए <strong>सेटिंग्स → खरीदारी बहाल करें</strong> टैप करें।</li>
+      <li><strong>सेटिंग्स → मास्टर CSV आयात करें</strong> से बैकअप किया हुआ मास्टर CSV आयात करें।</li>
+    </ol>
+
+    <div class="box box-danger">
+      <strong>🚨 चेतावनी: ऐप अनइंस्टॉल करना</strong>
+      ऐप अनइंस्टॉल करने से आंतरिक संग्रहण का सारा डेटा हट जाता है।
+      महत्वपूर्ण डेटा का नियमित रूप से <strong>निर्यात</strong> या <strong>साझा करें</strong> से बैकअप लें।
+    </div>
+  </section>
+
+  <!-- अध्याय 4 -->
+  <section class="chapter" id="storage">
+    <div class="chapter-head">
+      <div class="ch-no">अध्याय 4</div>
+      <h2>डेटा संग्रहण</h2>
+    </div>
+
+    <p>
+      ऐप का डेटा आपके डिवाइस पर ऐप के निजी क्षेत्र में संग्रहीत होता है।
+      फ़ाइल प्रबंधक से इसे सीधे संपादित करना अपेक्षित नहीं है। ऐप के साझा करें और निर्यात कार्यों का उपयोग करके डेटा एक्सेस या बैकअप करें।
+    </p>
+
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>श्रेणी</th><th>सामग्री</th><th>कब अपडेट होता है</th></tr></thead>
+        <tbody>
+          <tr><td>मास्टर डेटा</td><td>उत्पाद, श्रेणियाँ, स्थान आदि के मूल डेटा</td><td>आइटम दर्ज, संपादित या निष्क्रिय करने पर</td></tr>
+          <tr><td>स्टॉकटेक और इन्वेंटरी इतिहास</td><td>स्टॉकटेक, प्राप्ति, निकासी, स्टॉक स्थानांतरण, CSV आयात आदि के रिकॉर्ड</td><td>प्रविष्टियाँ सहेजने या आयात करने पर</td></tr>
+          <tr><td>ऐप सेटिंग्स</td><td>भाषा, स्कैनिंग, कोड नियम, स्थान सेटिंग्स आदि</td><td>सेटिंग्स बदलने पर</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Excel में CSV खोलना</h3>
+    <p>CSV फ़ाइलें UTF-8 में सहेजी जाती हैं। Excel में खोलने के लिए निम्नलिखित चरण अनुशंसित हैं।</p>
+    <ol class="steps">
+      <li>Excel खोलें और <strong>डेटा</strong> टैब → <strong>टेक्स्ट/CSV से</strong> जाएँ।</li>
+      <li>अपनी CSV फ़ाइल चुनें।</li>
+      <li>एन्कोडिंग के रूप में <strong>Unicode (UTF-8)</strong> चुनें।</li>
+      <li><strong>लोड करें</strong> पर क्लिक करें।</li>
+    </ol>
+    <div class="box box-warn">
+      <strong>⚠ CSV फ़ाइल सीधे डबल-क्लिक न करें</strong>
+      डबल-क्लिक करके CSV खोलने से वर्ण टूटे हुए दिख सकते हैं। हमेशा <strong>डेटा</strong> टैब आयात विधि का उपयोग करें।
+    </div>
+
+    <h3>अनुशंसित बैकअप प्रक्रिया</h3>
+    <ol class="steps">
+      <li><strong>सेटिंग्स → निर्यात (फ़ोल्डर चुनें)</strong> टैप करें।</li>
+      <li>डिवाइस के Documents फ़ोल्डर में एक बैकअप फ़ोल्डर बनाएँ और चुनें — जैसे <code>Quantiventra_backup_20250401</code>।</li>
+      <li>इतिहास और मास्टर CSV सहेज जाने के बाद पूर्ण।</li>
+      <li>अतिरिक्त सुरक्षा के लिए Google Drive या USB केबल से PC पर कॉपी करें।</li>
+    </ol>
+  </section>
+
+  <!-- अध्याय 5 -->
+  <section class="chapter" id="diff">
+    <div class="chapter-head">
+      <div class="ch-no">अध्याय 5</div>
+      <h2>स्टॉकटेक और इन्वेंटरी प्रबंधन का अंतर</h2>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <tr><th>विषय</th><th>स्टॉकटेक</th><th>इन्वेंटरी प्रबंधन</th></tr>
+        <tr><td>उद्देश्य</td><td>वास्तविक मात्राएँ गिनें और दर्ज करें</td><td>प्राप्ति, निकासी और स्थानांतरण से स्टॉक परिवर्तन ट्रैक करें</td></tr>
+        <tr><td>कार्यप्रवाह</td><td>स्कैन → मात्रा दर्ज करें → सहेजें → अंतिम रूप दें</td><td>प्राप्ति/निकासी/स्थानांतरण → सहेजें → इतिहास देखें</td></tr>
+        <tr><td>सामान्य उपयोग</td><td>मासिक स्टॉकटेक, वार्षिक स्टॉकटेक, स्पॉट जाँच</td><td>दैनिक प्राप्ति, निकासी और स्थानांतरण प्रबंधन</td></tr>
+        <tr><td>स्टॉक पर प्रभाव</td><td>स्टॉकटेक अकेले वर्तमान स्टॉक को सीधे नहीं बदलता। अंतिम रूप देने के बाद, इन्वेंटरी प्रबंधन की पुष्टि स्क्रीन से लागू किया जा सकने वाला मामला हो सकता है</td><td>प्रत्येक ऑपरेशन के साथ तुरंत परिलक्षित</td></tr>
+        <tr><td>स्क्रीन</td><td>स्टॉकटेक स्क्रीन, स्टॉकटेक इतिहास</td><td>स्टॉक जाँच, प्राप्ति, निकासी, स्थानांतरण, इन्वेंटरी इतिहास</td></tr>
+      </table>
+    </div>
+    <div class="box box-warn">
+      <strong>⚠ ध्यान दें</strong>
+      स्टॉकटेक और इन्वेंटरी प्रबंधन अलग-अलग मॉड्यूल हैं। स्टॉकटेक में मात्रा दर्ज करना इन्वेंटरी की मात्रा नहीं बदलता जब तक आप अंतिम रूप देने और लागू करने की कार्रवाई न करें। दोनों को भ्रमित न करें।
+    </div>
+  </section>
+
+  <!-- अध्याय 6 -->
+  <section class="chapter" id="start">
+    <div class="chapter-head">
+      <div class="ch-no">अध्याय 6</div>
+      <h2>शुरुआत कैसे करें (शुरुआती गाइड)</h2>
+    </div>
+    <h3>चरण 1: नमूना डेटा से आज़माएँ</h3>
+    <ol class="steps">
+      <li>ऐप लॉन्च करें; यदि नमूना डेटा बनाने का प्रॉम्प्ट आए, तो <strong>बनाएँ</strong> चुनें।</li>
+      <li>मुख्य स्क्रीन से <strong>इन्वेंटरी प्रबंधन</strong> खोलें और नमूना स्टॉक स्तर देखें।</li>
+      <li><strong>स्टॉकटेक</strong> खोलें और बारकोड स्कैनिंग और मात्रा प्रविष्टि आज़माएँ।</li>
+      <li>CSV निर्यात करने की कोशिश करें।</li>
+      <li>वास्तविक उपयोग शुरू करने से पहले नमूना डेटा हटाएँ (सेटिंग्स स्क्रीन से)।</li>
+    </ol>
+
+    <h3>चरण 2: उत्पाद मास्टर दर्ज करें</h3>
+    <ol class="steps">
+      <li>मुख्य स्क्रीन से <strong>मास्टर प्रबंधन</strong> खोलें।</li>
+      <li><strong>उत्पाद मास्टर</strong> जाएँ, नई प्रविष्टि बनाएँ और उत्पाद कोड व नाम दर्ज करें।</li>
+      <li>आवश्यकतानुसार श्रेणी, मूल्य और पुनःपूर्ति सीमा सेट करें।</li>
+      <li><strong>स्थान मास्टर</strong> में गोदाम, दुकान आदि दर्ज करें (इन्वेंटरी बेसिक अनलॉक या किसी फुल अनलॉक में उपलब्ध)।</li>
+    </ol>
+
+    <h3>चरण 3: दैनिक ऑपरेशन शुरू करें</h3>
+    <ol class="steps">
+      <li>स्टॉक प्राप्त होने पर: <strong>इन्वेंटरी प्रबंधन → प्राप्ति</strong> जाएँ, बारकोड स्कैन करें और मात्रा दर्ज करें।</li>
+      <li>निकासी के लिए: <strong>इन्वेंटरी प्रबंधन → निकासी</strong> जाएँ और वही प्रक्रिया करें।</li>
+      <li>स्टॉकटेक के लिए: <strong>स्टॉकटेक</strong> से भौतिक गणना दर्ज करें।</li>
+    </ol>
+
+    <div class="box box-hint">
+      <strong>💡 सुझाव</strong>
+      वास्तविक उत्पाद दर्ज करने से पहले नमूना डेटा से अभ्यास करें।
+    </div>
+  </section>
+
+  <!-- अध्याय 7 -->
+  <section class="chapter" id="top-screen">
+    <div class="chapter-head">
+      <div class="ch-no">अध्याय 7</div>
+      <h2>मुख्य स्क्रीन का उपयोग</h2>
+    </div>
+    <p>लॉन्च के बाद की मुख्य स्क्रीन सभी मुख्य सुविधाओं का प्रवेश बिंदु है।</p>
+
+    <div class="table-wrap">
+      <table>
+        <tr><th>प्रवेश बिंदु</th><th>विवरण</th></tr>
+        <tr><td>स्टॉकटेक</td><td>उत्पाद स्कैन करने और भौतिक गणना दर्ज करने के लिए स्टॉकटेक स्क्रीन खोलें</td></tr>
+        <tr><td>इन्वेंटरी प्रबंधन</td><td>स्टॉक जाँच, प्राप्ति, निकासी, स्थानांतरण और इन्वेंटरी इतिहास एक्सेस करें</td></tr>
+        <tr><td>मास्टर प्रबंधन</td><td>उत्पाद, श्रेणी और स्थान मास्टर डेटा प्रबंधित करें</td></tr>
+        <tr><td>सेटिंग्स</td><td>भाषा, स्टॉकटेक सेटिंग्स, CSV, नमूना डेटा, बिलिंग, कानूनी दस्तावेज़ आदि</td></tr>
+        <tr><td>सहायता</td><td>मैनुअल या सहायता पृष्ठ खोलें</td></tr>
+      </table>
+    </div>
+
+    <h3>अपूर्ण स्टॉकटेक डेटा चेतावनी</h3>
+    <p>यदि अंतिम रूप नहीं दिया गया स्टॉकटेक डेटा है, तो मुख्य स्क्रीन पर सूचना दिखाई देगी। इन्वेंटरी प्रबंधन में काम करने से पहले स्टॉकटेक स्क्रीन में उसकी समीक्षा करें और अंतिम रूप दें।</p>
+    <div class="box box-warn">
+      <strong>⚠ ध्यान दें</strong>
+      अपूर्ण स्टॉकटेक डेटा होने पर इन्वेंटरी प्रबंधन संचालित करने से डेटा असंगतता हो सकती है। स्टॉकटेक अंतिम रूप देने के बाद इन्वेंटरी में बदलाव करना अनुशंसित है।
+    </div>
+  </section>
+
+  <!-- अध्याय 8 -->
+  <section class="chapter" id="settings">
+    <div class="chapter-head">
+      <div class="ch-no">अध्याय 8</div>
+      <h2>सेटिंग्स स्क्रीन का अवलोकन</h2>
+    </div>
+    <p>सेटिंग्स स्क्रीन ऐप-व्यापी सेटिंग्स, स्टॉकटेक, इन्वेंटरी, CSV, भाषा, बिलिंग, नमूना डेटा और कानूनी दस्तावेज़ प्रबंधित करती है।</p>
+
+    <h3>डेटा आयात / निर्यात</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>क्रिया</th><th>विवरण</th><th>उपलब्ध में</th></tr></thead>
+        <tbody>
+          <tr><td>मास्टर CSV आयात करें</td><td>बाहरी CSV फ़ाइल को मास्टर डेटा के रूप में लोड करें (मौजूदा को ओवरराइट करता है)</td><td>सभी प्लान</td></tr>
+          <tr><td>साझा करें (ईमेल आदि)</td><td>इतिहास और मास्टर CSV किसी अन्य ऐप को भेजें</td><td>सभी प्लान</td></tr>
+          <tr><td>निर्यात (फ़ोल्डर चुनें)</td><td>इतिहास और मास्टर CSV किसी चुने हुए फ़ोल्डर में सहेजें</td><td>सभी प्लान</td></tr>
+          <tr><td>सारा इतिहास साफ़ करें</td><td>सारे स्कैन इतिहास को हटाएँ और रीसेट करें</td><td>सभी प्लान (अपरिवर्तनीय)</td></tr>
+          <tr><td>मास्टर कुल रीसेट करें</td><td>सभी दर्ज संचयी कुल 0 पर रीसेट करें</td><td>फुल अनलॉक (अपरिवर्तनीय)</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>सामान्य सेटिंग्स</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>सेटिंग</th><th>विवरण</th><th>प्लान</th></tr></thead>
+        <tbody>
+          <tr><td>प्रदर्शन भाषा</td><td>ऐप की प्रदर्शन भाषा चुनें</td><td>सभी प्लान (कुछ भाषाओं के लिए अनलॉक आवश्यक)</td></tr>
+          <tr><td>स्क्रीन रोटेशन लॉक करें</td><td>डिवाइस झुकाने पर भी स्क्रीन ओरिएंटेशन स्थिर रखें</td><td>संबंधित सुविधा के बेसिक अनलॉक या उससे ऊपर</td></tr>
+          <tr><td>नमूना डेटा बनाएँ</td><td>अभ्यास के लिए नमूना डेटा तैयार करें</td><td>सभी प्लान</td></tr>
+          <tr><td>नमूना डेटा हटाएँ</td><td>सारा नमूना डेटा एक साथ हटाएँ</td><td>सभी प्लान</td></tr>
+          <tr><td>खरीदारी बहाल करें</td><td>Google Play के माध्यम से पहले खरीदे गए प्लान पुनर्स्थापित करें</td><td>सभी प्लान</td></tr>
+          <tr><td>कानूनी दस्तावेज़</td><td>उपयोग की शर्तें, गोपनीयता नीति आदि देखें</td><td>सभी प्लान</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>स्टॉकटेक सेटिंग्स</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>मोड</th><th>विवरण</th><th>स्थान</th></tr></thead>
+        <tbody>
+          <tr><td>विस्तृत</td><td>स्थान मास्टर में दर्ज सभी स्थानों का उपयोग करें</td><td>सभी दर्ज स्थान</td></tr>
+          <tr><td>सरल A</td><td>केवल गोदाम का उपयोग करके स्टॉकटेक</td><td>केवल गोदाम</td></tr>
+          <tr><td>सरल B</td><td>गोदाम और दुकान का उपयोग करके स्टॉकटेक</td><td>गोदाम + दुकान</td></tr>
+          <tr><td>सरल C</td><td>केवल दुकान का उपयोग करके स्टॉकटेक</td><td>केवल दुकान</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="box box-warn">
+      <strong>⚠ ध्यान दें</strong>
+      फुल अनलॉक सक्रिय होने पर भी, यदि मोड अभी भी सरल A/B/C पर है, तो आप सरल स्थान विकल्प ही देखेंगे। विस्तृत स्थानों का उपयोग करने के लिए <strong>विस्तृत</strong> मोड पर स्विच करें।
+    </div>
+
+    <h3>उत्पाद कोड स्कैन सेटिंग्स</h3>
+    <p>उत्पाद कोड के लिए स्कैन किए जाने वाले प्रारूपों को सेटिंग्स स्क्रीन के <strong>उत्पाद कोड स्कैन सेटिंग्स</strong> से अलग फ़ॉर्म में देखें और बदलें। इसे स्थान कोड की सेटिंग्स से अलग रखें। जिन प्रारूपों का उपयोग नहीं करते उन्हें बंद करने से गलत रीडिंग कम करने में मदद मिलती है।</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>प्लान</th><th>उत्पाद कोड स्कैन प्रारूप</th><th>बदलने की अनुमति</th></tr></thead>
+        <tbody>
+          <tr><td>निःशुल्क संस्करण</td><td>EAN-13 / EAN-8 / UPC-A / UPC-E / Code39 / Code128</td><td>हमेशा ON, बदला नहीं जा सकता</td></tr>
+          <tr><td>बेसिक अनलॉक</td><td>मानक 6 प्रकारों (EAN-13 / EAN-8 / UPC-A / UPC-E / Code39 / Code128) में से चयन</td><td>चयन संभव</td></tr>
+          <tr><td>फुल अनलॉक</td><td>मानक 6 प्रकारों के साथ QR भी चयन योग्य</td><td>चयन संभव</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>कोड नियम / स्थान कोड नियम (फुल अनलॉक)</h3>
+    <p>उत्पाद कोड के वर्ण प्रकार (केवल अक्षरांक, केवल संख्या, या बिना प्रतिबंध), न्यूनतम/अधिकतम लंबाई और स्थान कोड की अधिकतम लंबाई सेट कर सकते हैं। उत्पाद कोड और स्थान कोड के नियम अलग-अलग जाँचें।</p>
+
+    <h3>खरीदारी बहाल करें</h3>
+    <p>Google Play से खरीदी गई सुविधाएँ पुनर्स्थापित करता है। खरीद अधिकार उसी Google खाते से जाँचे जाते हैं। डिवाइस के अंदर का डेटा अपने आप स्थानांतरित नहीं होता, इसलिए डिवाइस बदलते समय CSV बैकअप या एक्सपोर्ट भी करें। खरीद अधिकार किसी अलग Google खाते में स्थानांतरित नहीं किए जा सकते।</p>
+
+    <div class="box box-danger">
+      <strong>🚨 इतिहास साफ़ करें / टोटल रीसेट अपरिवर्तनीय हैं</strong>
+      "सारा इतिहास साफ़ करें" और "मास्टर कुल रीसेट करें" पूर्ववत नहीं किए जा सकते। इन्हें चलाने से पहले हमेशा <strong>निर्यात</strong> से बैकअप लें।
+    </div>
+  </section>
+
+  <!-- अध्याय 9 -->
+  <section class="chapter" id="language">
+    <div class="chapter-head">
+      <div class="ch-no">अध्याय 9</div>
+      <h2>भाषा सेटिंग्स</h2>
+    </div>
+    <p>आप ऐप में <strong>सेटिंग्स → भाषा</strong> के अंतर्गत प्रदर्शन भाषा चुन सकते हैं। लॉन्च पर ऐप आपके डिवाइस की भाषा स्वचालित रूप से पहचानता है और समर्थित होने पर उसी में शुरू होता है।</p>
+
+    <h3>समर्थित भाषाएँ (कुल 12)</h3>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>कोड</th><th>भाषा</th><th>निःशुल्क</th><th class="pro-col">सभी भाषाओं का अनलॉक</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>ja</code></td><td>जापानी</td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
+          <tr><td><code>en</code></td><td>अंग्रेज़ी</td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
+          <tr><td><code>zh</code></td><td>सरलीकृत चीनी</td><td>केवल डिवाइस प्राथमिक भाषा</td><td><span class="check">✓</span></td></tr>
+          <tr><td><code>tw</code></td><td>पारंपरिक चीनी</td><td>केवल डिवाइस प्राथमिक भाषा</td><td><span class="check">✓</span></td></tr>
+          <tr><td><code>ko</code></td><td>कोरियाई</td><td>केवल डिवाइस प्राथमिक भाषा</td><td><span class="check">✓</span></td></tr>
+          <tr><td><code>hi</code></td><td>हिंदी</td><td>केवल डिवाइस प्राथमिक भाषा</td><td><span class="check">✓</span></td></tr>
+          <tr><td><code>vi</code></td><td>वियतनामी</td><td>केवल डिवाइस प्राथमिक भाषा</td><td><span class="check">✓</span></td></tr>
+          <tr><td><code>it</code></td><td>इतालवी</td><td>केवल डिवाइस प्राथमिक भाषा</td><td><span class="check">✓</span></td></tr>
+          <tr><td><code>pt-BR</code></td><td>पुर्तगाली (ब्राज़ील)</td><td>केवल डिवाइस प्राथमिक भाषा</td><td><span class="check">✓</span></td></tr>
+          <tr><td><code>es-419</code></td><td>स्पेनिश (लैटिन अमेरिका)</td><td>केवल डिवाइस प्राथमिक भाषा</td><td><span class="check">✓</span></td></tr>
+          <tr><td><code>id</code></td><td>इंडोनेशियाई</td><td>केवल डिवाइस प्राथमिक भाषा</td><td><span class="check">✓</span></td></tr>
+          <tr><td><code>th</code></td><td>थाई</td><td>केवल डिवाइस प्राथमिक भाषा</td><td><span class="check">✓</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="box box-hint">
+      <strong>💡 स्वचालित भाषा पहचान</strong>
+      यदि आपके डिवाइस की भाषा समर्थित है, तो ऐप पहली बार उसी भाषा में शुरू हो सकता है। बाद में आप <strong>सेटिंग्स → भाषा</strong> से कोई विशिष्ट भाषा चुन सकते हैं। ऐप में चुनी गई भाषा को प्राथमिकता दी जाती है।
+    </div>
+    <div class="box box-warn">
+      <strong>⚠ ध्यान दें</strong>
+      अतिरिक्त भाषाओं का उपयोग करते समय कानूनी, खरीदारी और गोपनीयता से जुड़े विवरणों के लिए हमेशा ऐप स्क्रीन और Google Play पर दिखाई देने वाली नवीनतम जानकारी को प्राथमिकता दें।
+    </div>
+  </section>
+
+  <!-- अध्याय 10 -->
+  <section class="chapter" id="billing">
+    <div class="chapter-head">
+      <div class="ch-no">अध्याय 10</div>
+      <h2>खरीद प्लान का अवलोकन</h2>
+    </div>
+    <p>Quantiventra मुख्य सुविधाएँ निःशुल्क आज़माने देता है। यदि आपको अधिक क्षमता या कार्यक्षमता चाहिए, तो Google Play के माध्यम से संबंधित प्लान खरीदें।</p>
+    <div class="box box-danger">
+      <strong>🚨 महत्वपूर्ण</strong>
+      मूल्य निर्धारण, कर, खरीद की शर्तें और धनवापसी की शर्तें Google Play पर दिखाए गए द्वारा निर्धारित होती हैं — यह मैनुअल निश्चित दावे नहीं करता। खरीदने से पहले हमेशा Google Play लिस्टिंग जाँचें।
+    </div>
+
+    <h3>सुविधा तुलना</h3>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>सुविधा / सीमा</th>
+            <th>निःशुल्क</th>
+            <th>स्टॉकटेक बेसिक</th>
+            <th>स्टॉकटेक फुल</th>
+            <th>इन्वेंटरी बेसिक</th>
+            <th>इन्वेंटरी फुल</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>मास्टर रिकॉर्ड</td><td>30 तक</td><td>300 तक</td><td><span class="check">असीमित</span></td><td>300 तक</td><td><span class="check">असीमित</span></td></tr>
+          <tr><td>इतिहास रिकॉर्ड</td><td>30 तक</td><td>1,000 तक</td><td><span class="check">असीमित</span></td><td>1,000 तक</td><td><span class="check">असीमित</span></td></tr>
+          <tr><td>निर्यात रिकॉर्ड</td><td>30 तक</td><td>300 तक</td><td><span class="check">असीमित</span></td><td>300 तक</td><td><span class="check">असीमित</span></td></tr>
+          <tr><td>स्क्रीन रोटेशन लॉक</td><td><span class="cross">✗</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
+          <tr><td>कोड / स्थान नियम सेटिंग्स</td><td><span class="cross">✗ (केवल डिफ़ॉल्ट)</span></td><td><span class="cross">✗</span></td><td><span class="check">✓</span></td><td><span class="cross">✗</span></td><td><span class="check">✓</span></td></tr>
+          <tr><td>उत्पाद कोड स्कैन प्रारूप</td><td><span class="cross">मानक 6 प्रकार हमेशा ON</span></td><td><span class="check">मानक 6 प्रकारों में चयन</span></td><td><span class="check">QR सहित चयन</span></td><td><span class="check">मानक 6 प्रकारों में चयन</span></td><td><span class="check">QR सहित चयन</span></td></tr>
+          <tr><td>विस्तृत CSV निर्यात</td><td><span class="cross">✗</span></td><td><span class="cross">✗</span></td><td><span class="check">✓</span></td><td><span class="cross">✗</span></td><td><span class="check">✓</span></td></tr>
+          <tr><td>दर्ज संचयी कुल सीधे संपादन</td><td><span class="cross">✗</span></td><td><span class="cross">✗</span></td><td><span class="check">✓</span></td><td><span class="cross">✗</span></td><td><span class="check">✓</span></td></tr>
+          <tr><td>मास्टर टोटल बल्क रीसेट</td><td><span class="cross">✗</span></td><td><span class="cross">✗</span></td><td><span class="check">✓</span></td><td><span class="cross">✗</span></td><td><span class="check">✓</span></td></tr>
+          <tr><td>स्थान मास्टर दर्ज करना</td><td><span class="cross">✗</span></td><td><span class="cross">✗</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
+          <tr><td>स्टॉक स्थानांतरण और स्टॉकटेक लागू</td><td>शर्तें पूरी हों तो उपयोग योग्य</td><td>शर्तें पूरी हों तो उपयोग योग्य</td><td>शर्तें पूरी हों तो उपयोग योग्य</td><td>शर्तें पूरी हों तो उपयोग योग्य</td><td>शर्तें पूरी हों तो उपयोग योग्य</td></tr>
+          <tr><td>उपलब्ध भाषाएँ</td><td>जापानी, अंग्रेज़ी, डिवाइस प्राथमिक</td><td>समान</td><td>समान</td><td>समान</td><td>समान</td></tr>
+          <tr><td>सभी 12 भाषाएँ</td><td><span class="cross">✗</span></td><td colspan="4">सभी भाषाओं का अनलॉक अलग से खरीदें (पुष्टि करें)</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>बंडल प्लान और सभी भाषाओं का अनलॉक</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>प्लान</th><th>सामग्री</th></tr></thead>
+        <tbody>
+          <tr><td>बेसिक बंडल</td><td>स्टॉकटेक बेसिक + इन्वेंटरी बेसिक</td></tr>
+          <tr><td>पूर्ण बंडल</td><td>स्टॉकटेक फुल + इन्वेंटरी फुल</td></tr>
+          <tr><td>सभी भाषाओं का अनलॉक</td><td>सभी 12 भाषाएँ चुनने योग्य बनाता है</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>प्लान कैसे खरीदें</h3>
+    <ol class="steps">
+      <li>ऐप में <strong>सेटिंग्स → खरीद प्लान</strong> या खरीद बटन टैप करें।</li>
+      <li>Google Play खरीद स्क्रीन खुलती है।</li>
+      <li>भुगतान पूर्ण करें — प्लान तुरंत सक्रिय हो जाता है।</li>
+    </ol>
+
+    <h3>डिवाइस बदलने के बाद खरीदारी बहाल करें</h3>
+    <ol class="steps">
+      <li>नए डिवाइस में उसी Google खाते से साइन इन करें।</li>
+      <li>ऐप इंस्टॉल और लॉन्च करें।</li>
+      <li><strong>सेटिंग्स → खरीदारी बहाल करें</strong> टैप करें।</li>
+      <li>सत्यापित होने के बाद प्लान सक्रिय हो जाता है।</li>
+    </ol>
+
+    <div class="box box-check">
+      <strong>🔍 पुष्टि करें</strong>
+      खरीद बटन पर Google Play का वर्तमान मूल्य दिखना चाहिए। मूल्य, उपलब्धता और धनवापसी की शर्तें Google Play Store पर पुष्टि करें। बेसिक अनलॉक के बाद फुल अनलॉक खरीदते समय दिखाई गई कीमत अंतर-राशि नहीं होती।
+    </div>
+  </section>
+
+  <!-- अध्याय 11 -->
+  <section class="chapter" id="sample">
+    <div class="chapter-head">
+      <div class="ch-no">अध्याय 11</div>
+      <h2>नमूना डेटा</h2>
+    </div>
+    <p>नमूना डेटा वास्तविक ऑपरेशन शुरू करने से पहले Quantiventra का अन्वेषण करने के लिए अभ्यास डेटा है।</p>
+    <h3>क्या शामिल है</h3>
+    <ul>
+      <li>लगभग 10 नमूना उत्पाद</li>
+      <li>नमूना श्रेणियाँ</li>
+      <li>बुनियादी स्थान: "गोदाम" और "दुकान"</li>
+      <li>नमूना इन्वेंटरी और स्टॉकटेक इतिहास</li>
+    </ul>
+
+    <h3>नमूना डेटा बनाना</h3>
+    <ol class="steps">
+      <li>पहली बार लॉन्च पर प्रॉम्प्ट आने पर <strong>बनाएँ</strong> चुनें।</li>
+      <li>बाद में बनाने के लिए, <strong>सेटिंग्स → नमूना डेटा बनाएँ</strong> जाएँ।</li>
+    </ol>
+
+    <h3>नमूना डेटा हटाना</h3>
+    <ol class="steps">
+      <li><strong>सेटिंग्स → नमूना डेटा हटाएँ</strong> जाएँ।</li>
+      <li>क्या हटाया जाएगा (नमूना उत्पाद, स्टॉक, श्रेणियाँ और स्टॉकटेक इतिहास) की समीक्षा करें।</li>
+      <li>पुष्टि करें और हटाना निष्पादित करें।</li>
+    </ol>
+
+    <div class="box box-hint">
+      <strong>💡 हटाने के बाद क्या बचता है</strong>
+      बुनियादी स्थान "गोदाम" और "दुकान" और आपका बनाया कोई भी गैर-नमूना डेटा बना रहेगा।
+    </div>
+    <div class="box box-danger">
+      <strong>🚨 महत्वपूर्ण</strong>
+      वास्तविक उपयोग शुरू करने से पहले हमेशा नमूना डेटा हटाएँ। हटाने से पहले जाँचें कि कोई वास्तविक डेटा मिला हुआ न हो।
+    </div>
+  </section>
+
+  <!-- अध्याय 12 -->
+  <section class="chapter" id="trouble">
+    <div class="chapter-head">
+      <div class="ch-no">अध्याय 12</div>
+      <h2>समस्या निवारण</h2>
+    </div>
+
+    <div class="trouble">
+      <div class="trouble-q">बारकोड स्कैन नहीं हो रहा / कैमरा काम नहीं कर रहा</div>
+      <div class="trouble-a">
+        <ul>
+          <li>जाँचें कि ऊपर-दाईं ओर का कैमरा स्विच चालू है।</li>
+          <li>बारकोड को गाइड फ्रेम के <strong>पूरी तरह अंदर</strong> रखें — फ्रेम के बाहर के कोड नहीं पहचाने जाएँगे।</li>
+          <li>सेटिंग्स में उत्पाद कोड स्कैन प्रारूप जाँचें। निःशुल्क संस्करण में मानक 6 प्रकार हमेशा ON रहते हैं, बेसिक अनलॉक में मानक 6 प्रकारों में से चुना जा सकता है, और फुल अनलॉक में QR सहित चयन किया जा सकता है।</li>
+          <li>यदि बारकोड फटा या गंदा है, तो मैन्युअल प्रविष्टि का उपयोग करें।</li>
+          <li>कैमरा अनुमति जाँचें: <strong>सेटिंग्स → ऐप्स → Quantiventra → अनुमतियाँ → कैमरा</strong>।</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="trouble">
+      <div class="trouble-q">मास्टर CSV आयात के बाद उत्पाद नाम नहीं दिख रहे</div>
+      <div class="trouble-a">
+        <ul>
+          <li>पुष्टि करें कि CSV UTF-8 में एन्कोड है (Shift-JIS टूटे वर्ण देगा)।</li>
+          <li>हेडर पंक्ति आवश्यक प्रारूप से मेल खाती है: <code>barcode,name,theoretical_stock,actual_stock_total</code>।</li>
+          <li>यदि उत्पाद नाम में कॉमा है, तो उसे दोहरे उद्धरणों में रखें: जैसे <code>"बोल्ट, M6"</code>।</li>
+          <li><strong>मास्टर CSV आयात करें</strong> दोबारा चलाएँ।</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="trouble">
+      <div class="trouble-q">सहेजा नहीं जा रहा / "सहेजना विफल" संदेश आ रहा है</div>
+      <div class="trouble-a">
+        <ul>
+          <li>जाँचें कि डिवाइस में पर्याप्त खाली संग्रहण है।</li>
+          <li>बारकोड और उत्पाद नाम दोनों खाली होने पर प्रविष्टि सहेज नहीं सकते।</li>
+          <li>ऐप बंद करके दोबारा शुरू करें।</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="trouble">
+      <div class="trouble-q">साझा करें या निर्यात से कोई फ़ाइल नहीं बन रही</div>
+      <div class="trouble-a">
+        <ul>
+          <li>यदि 0 इतिहास रिकॉर्ड हैं, तो फ़ाइल खाली होगी — पहले कम से कम एक प्रविष्टि सहेजें।</li>
+          <li>निर्यात करते समय, डायलॉग में एक फ़ोल्डर चुनें और <strong>चुनें</strong> पर टैप करें।</li>
+          <li>लक्ष्य ऐप (जैसे ईमेल) इंस्टॉल है, पुष्टि करें।</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="trouble">
+      <div class="trouble-q">स्टॉक मात्राएँ मेल नहीं खाती</div>
+      <div class="trouble-a">
+        <ul>
+          <li>प्राप्ति, निकासी, स्थानांतरण और स्टॉकटेक समायोजन रिकॉर्ड के लिए इन्वेंटरी इतिहास देखें।</li>
+          <li>यदि CSV स्टॉक प्रतिस्थापन चलाया था, तो CSV में न आने वाले आइटम 0 पर सेट हो सकते थे।</li>
+          <li>यदि स्टॉकटेक लागू किया था, तो विसंगतियाँ "स्टॉकटेक समायोजन" के रूप में दर्ज हैं।</li>
+          <li>अपने बैकअप CSV से तुलना करें।</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="trouble">
+      <div class="trouble-q">स्थान नहीं दिख रहे / कोई स्थान नहीं मिल रहा</div>
+      <div class="trouble-a">
+        <ul>
+          <li>जाँचें कि स्टॉकटेक मोड अभी भी सरल A/B/C पर तो नहीं है। विस्तृत स्थानों के लिए <strong>विस्तृत</strong> मोड पर स्विच करें।</li>
+          <li>जाँचें कि स्थान मास्टर में स्थान <strong>निष्क्रिय</strong> तो नहीं है।</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="trouble">
+      <div class="trouble-q">खरीदे गए प्लान की सुविधाएँ उपलब्ध नहीं हैं</div>
+      <div class="trouble-a">
+        <ul>
+          <li><strong>सेटिंग्स → खरीदारी बहाल करें</strong> टैप करें।</li>
+          <li>सुनिश्चित करें कि आप खरीदारी के समय उपयोग किए Google खाते से साइन इन हैं।</li>
+          <li>कार्यशील इंटरनेट कनेक्शन के साथ दोबारा प्रयास करें (खरीद सत्यापन के लिए आवश्यक)।</li>
+          <li>पुष्टि करें कि आप Google Play Store के माध्यम से इंस्टॉल किए संस्करण का उपयोग कर रहे हैं।</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="trouble">
+      <div class="trouble-q">डिवाइस बदलने के बाद डेटा गायब हो गया</div>
+      <div class="trouble-a">
+        <ul>
+          <li>डेटा ऐप के आंतरिक संग्रहण में होता है और ऐप अनइंस्टॉल या डिवाइस बदलने पर खो जाता है।</li>
+          <li>नियमित रूप से <strong>निर्यात</strong> या <strong>साझा करें</strong> से डेटा बैकअप करना दृढ़ता से अनुशंसित है।</li>
+          <li>यदि बैकअप है, तो <strong>मास्टर CSV आयात करें</strong> का उपयोग करके पुनर्स्थापित करें।</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="trouble">
+      <div class="trouble-q">स्क्रीन घूमती रहती है, काम करना मुश्किल है</div>
+      <div class="trouble-a">
+        <ul>
+          <li>बेसिक अनलॉक या उससे ऊपर है: <strong>सेटिंग्स → स्क्रीन रोटेशन लॉक करें</strong> सक्षम करें।</li>
+          <li>निःशुल्क संस्करण पर है: डिवाइस का अंतर्निहित रोटेशन लॉक उपयोग करें (नोटिफिकेशन पैनल से उपलब्ध)।</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="trouble">
+      <div class="trouble-q">भाषा नहीं बदल रही</div>
+      <div class="trouble-a">
+        <ul>
+          <li><strong>सेटिंग्स → भाषा</strong> में मैन्युअल रूप से भाषा चुनें।</li>
+          <li>असमर्थित डिवाइस भाषाएँ अंग्रेज़ी पर डिफ़ॉल्ट होंगी।</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3>त्वरित लक्षण संदर्भ</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>लक्षण</th><th>संभावित कारण</th><th>क्रिया</th></tr></thead>
+        <tbody>
+          <tr><td>गलत स्टॉकटेक</td><td>इनपुट त्रुटि, CSV प्रतिस्थापन, स्टॉकटेक लागू</td><td>इन्वेंटरी इतिहास जाँचें</td></tr>
+          <tr><td>उत्पाद नहीं मिला</td><td>खोज में टाइपो, अदर्ज, निष्क्रिय</td><td>मास्टर डेटा जाँचें</td></tr>
+          <tr><td>स्थान नहीं दिख रहा</td><td>सरल मोड सेटिंग, निष्क्रिय</td><td>सेटिंग्स और मास्टर जाँचें</td></tr>
+          <tr><td>CSV आयात विफल</td><td>कॉलम गायब, गैर-संख्यात्मक मात्रा</td><td>कॉलम मैपिंग और CSV सामग्री जाँचें</td></tr>
+          <tr><td>बारकोड नहीं पढ़ रहा</td><td>कम रोशनी, गंदा कोड, असमर्थित प्रकार</td><td>मैन्युअल प्रविष्टि या सेटिंग्स जाँचें</td></tr>
+          <tr><td>खरीद परिलक्षित नहीं</td><td>गलत खाता, नेटवर्क समस्या</td><td>खरीदारी बहाल करें, कनेक्शन जाँचें</td></tr>
+          <tr><td>स्क्रीन घूमती रहती है</td><td>रोटेशन लॉक बंद है</td><td>सेटिंग्स में या डिवाइस लॉक से लॉक करें</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- अध्याय 13 -->
+  <section class="chapter" id="glossary">
+    <div class="chapter-head">
+      <div class="ch-no">अध्याय 13</div>
+      <h2>शब्दावली</h2>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>शब्द</th><th>परिभाषा</th></tr></thead>
+        <tbody>
+          <tr><td>स्टॉकटेक</td><td>स्टॉक में माल की मात्रा शारीरिक रूप से गिनने और दर्ज करने की क्रिया</td></tr>
+          <tr><td>वास्तविक गणना</td><td>फ़्लोर पर वास्तव में गिनी गई मात्रा</td></tr>
+          <tr><td>सैद्धांतिक स्टॉक</td><td>सिस्टम द्वारा गणना की गई स्टॉक मात्रा</td></tr>
+          <tr><td>विसंगति / भिन्नता</td><td>वास्तविक गणना और सैद्धांतिक स्टॉक का अंतर</td></tr>
+          <tr><td>उत्पाद</td><td>एक व्यक्तिगत आइटम जो इन्वेंटरी रखता है</td></tr>
+          <tr><td>श्रेणी</td><td>उत्पादों को वर्गीकृत करने के लिए उपयोग किया जाने वाला समूह</td></tr>
+          <tr><td>स्थान</td><td>स्टॉक रखे जाने की जगह (जैसे गोदाम, दुकान, शेल्फ)</td></tr>
+          <tr><td>पुनःपूर्ति जाँच में शामिल करें</td><td>एक सेटिंग जो किसी स्थान के स्टॉक को पुनःपूर्ति निर्णयों के लिए उपयोग किए जाने वाले टोटल में शामिल करती है</td></tr>
+          <tr><td>स्टॉक / इन्वेंटरी</td><td>हाथ में वर्तमान मात्रा</td></tr>
+          <tr><td>प्राप्ति (स्टॉक इन)</td><td>एक ऑपरेशन जो स्टॉक बढ़ाता है</td></tr>
+          <tr><td>निकासी (स्टॉक आउट)</td><td>एक ऑपरेशन जो स्टॉक घटाता है</td></tr>
+          <tr><td>स्टॉक स्थानांतरण</td><td>एक स्थान से दूसरे स्थान पर स्टॉक ले जाने का ऑपरेशन</td></tr>
+          <tr><td>इन्वेंटरी इतिहास</td><td>प्राप्ति, निकासी, स्थानांतरण और स्टॉकटेक समायोजन ऑपरेशनों का लॉग</td></tr>
+          <tr><td>पुनःपूर्ति सीमा</td><td>स्टॉक कम होने पर आकलन के लिए उपयोग की जाने वाली संदर्भ मात्रा</td></tr>
+          <tr><td>उत्पाद कोड</td><td>किसी उत्पाद को पहचानने के लिए उपयोग किया जाने वाला आंतरिक कोड</td></tr>
+          <tr><td>दर्ज संचयी कुल</td><td>अब तक सहेजी गई कुल संचयी मात्रा</td></tr>
+          <tr><td>CSV</td><td>एक कॉमा-सेपरेटेड टेक्स्ट फ़ाइल जिसे स्प्रेडशीट एप्लिकेशन में खोला जा सकता है</td></tr>
+          <tr><td>बैकअप</td><td>रिकवरी या संदर्भ उद्देश्यों के लिए सहेजा गया डेटा</td></tr>
+          <tr><td>वर्तमान स्टॉक प्रतिस्थापन</td><td>एक CSV आयात मोड जो फ़ाइल की मात्राओं को नए वर्तमान स्टॉक के रूप में मानता है</td></tr>
+          <tr><td>प्राप्ति के रूप में जोड़ें</td><td>एक CSV आयात मोड जो फ़ाइल की मात्राओं को प्राप्ति के रूप में जोड़ता है</td></tr>
+          <tr><td>वास्तविक गणना को अंतिम रूप देना</td><td>स्टॉकटेक परिणाम की पुष्टि करने की क्रिया</td></tr>
+          <tr><td>मास्टर डेटा</td><td>उत्पाद, श्रेणियाँ और स्थान जैसे मूल रिकॉर्ड प्रबंधित करने वाला डेटाबेस</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- अध्याय 14 -->
+  <section class="chapter" id="legal">
+    <div class="chapter-head">
+      <div class="ch-no">अध्याय 14</div>
+      <h2>नियम और अस्वीकरण</h2>
+    </div>
+
+    <div class="legal-block">
+      <h4>■ उपयोग की शर्तें</h4>
+      <p>इस ऐप का उपयोग करने से पहले कृपया निम्नलिखित उपयोग की शर्तें ध्यान से पढ़ें। ऐप डाउनलोड या उपयोग करके, आप इन शर्तों से सहमत होते हैं।</p>
+
+      <p><strong>1. लाइसेंस</strong><br>
+      इस ऐप का इन्वेंटरी प्रबंधन और स्टॉकटेक उद्देश्यों के लिए व्यक्तियों और व्यवसायों दोनों द्वारा उपयोग अनुमत है। ऐप का रिवर्स इंजीनियरिंग, डीकंपाइलिंग, संशोधन या पुनर्वितरण निषिद्ध है।</p>
+
+      <p><strong>2. उपयोगकर्ता डेटा</strong><br>
+      इस ऐप द्वारा उत्पन्न कार्य डेटा (मास्टर CSV, इतिहास CSV और सेटिंग्स फ़ाइलें) उपयोगकर्ता के डिवाइस पर संग्रहीत होता है। प्लान खरीद सत्यापन जैसे Google Play से जुड़े कार्यों को छोड़कर, ऐप कार्य डेटा को बाहरी सर्वर पर नहीं भेजा जाता।</p>
+
+      <p><strong>3. प्लान खरीद</strong><br>
+      सभी प्लान खरीदें Google Play बिलिंग के माध्यम से संसाधित होती हैं। धनवापसी Google Play की धनवापसी नीति के अधीन है।</p>
+
+      <p><strong>4. निषिद्ध उपयोग</strong><br>
+      इस ऐप का अवैध उद्देश्यों के लिए उपयोग, तृतीय पक्षों के अधिकारों का उल्लंघन, या ऐप सुविधाओं के दुरुपयोग के माध्यम से जानबूझकर धोखाधड़ी वाले डेटा उत्पन्न करना निषिद्ध है।</p>
+
+      <h4>■ अस्वीकरण</h4>
+      <p>यह ऐप "जैसा है" प्रदान किया जाता है। डेवलपर ऐप के उपयोग या उपयोग में असमर्थता से होने वाली किसी भी क्षति के लिए कोई दायित्व नहीं लेता, जिसमें डेटा हानि, व्यापार में रुकावट, या कोई अन्य प्रत्यक्ष या अप्रत्यक्ष क्षति शामिल है।</p>
+      <p>उपयोगकर्ता इस ऐप द्वारा उत्पन्न CSV डेटा की सटीकता और पूर्णता की जाँच के लिए जिम्मेदार हैं। स्कैन त्रुटियों या इनपुट गलतियों के कारण डेटा असंगतता के लिए डेवलपर जिम्मेदार नहीं है।</p>
+      <p>बारकोड पढ़ने की सटीकता डिवाइस के कैमरे के प्रदर्शन, बारकोड की स्थिति और पर्यावरणीय कारकों पर निर्भर करती है। स्कैनिंग संभव न होने पर मैन्युअल प्रविष्टि का उपयोग करें।</p>
+
+      <h4>■ गोपनीयता नीति</h4>
+      <p>यह ऐप कोई भी व्यक्तिगत जानकारी एकत्र, प्रसारित या उपयोग नहीं करता। सामान्य कार्य डेटा डिवाइस पर संसाधित होता है; प्लान खरीद सत्यापन जैसे कुछ कार्यों में Google Play के माध्यम से संचार हो सकता है।</p>
+      <p>कैमरे का उपयोग केवल बारकोड और QR कोड स्कैन करने के लिए होता है। कोई वीडियो रिकॉर्ड, सहेजा या प्रसारित नहीं किया जाता।</p>
+
+      <h4>■ कॉपीराइट</h4>
+      <p>Copyright © Quantiventra. सर्वाधिकार सुरक्षित।</p>
+      <p>इस ऐप और मैनुअल की सभी सामग्री (टेक्स्ट, डिज़ाइन, लोगो आदि) डेवलपर की संपत्ति है।</p>
+      <p>यह ऐप ओपन-सोर्स लाइब्रेरी का उपयोग करता है, जो संबंधित लाइसेंस द्वारा शासित हैं।</p>
+
+      <h4>■ शर्तों में बदलाव</h4>
+      <p>ये शर्तें बिना पूर्व सूचना के बदली जा सकती हैं। अपडेट की गई शर्तें Google Play Store पर प्रकाशित होने या ऐप के भीतर सूचना पर प्रभावी होती हैं।</p>
+    </div>
+  </section>
+
+  <div class="summary-box" id="summary">
+    <h3>📌 अध्याय के मुख्य बिंदु</h3>
+    <ul>
+      <li>Quantiventra = Quantity + Inventory। लगातार 3 मेल खाने वाले फ्रेम के बाद बारकोड स्वचालित रूप से पहचाना जाता है।</li>
+      <li>Android 8.0+ और ऑटोफोकस कैमरा चाहिए। संग्रहण अनुमति नहीं चाहिए। सामान्य कार्य डिवाइस पर किए जा सकते हैं।</li>
+      <li>डेटा आंतरिक ऐप संग्रहण में है — नियमित निर्यात करें, क्योंकि अनइंस्टॉल करने से सब हट जाता है।</li>
+      <li>स्टॉकटेक और इन्वेंटरी प्रबंधन अलग-अलग मॉड्यूल हैं — स्टॉकटेक मात्रा दर्ज करना इन्वेंटरी नहीं बदलता जब तक अंतिम रूप न दिया जाए।</li>
+      <li>अभ्यास के लिए नमूना डेटा से शुरू करें; वास्तविक उपयोग शुरू करने से पहले हटाएँ।</li>
+      <li>खरीद प्लान विवरण के लिए Google Play देखें — यह मैनुअल मूल्य निश्चित रूप से नहीं बताता।</li>
+      <li>समस्या निवारण करते समय, इन्वेंटरी इतिहास, मास्टर डेटा और सेटिंग्स इसी क्रम में जाँचें।</li>
+      <li>प्रमुख ऑपरेशनों (CSV प्रतिस्थापन, स्टॉकटेक लागू, हटाना, रीसेट) से पहले हमेशा बैकअप लें।</li>
+    </ul>
+  </div>
+
+  <div class="confirm-box" id="confirm">
+    <h3>🔍 पुष्टि करने योग्य बातें</h3>
+    <ul>
+      <li>प्लान की कीमत, कर और धनवापसी की शर्तें Google Play पर पुष्टि करें।</li>
+      <li>निःशुल्क संस्करण में उपलब्ध भाषाएँ ऐप स्क्रीन पर पुष्टि करें।</li>
+      <li>इन्वेंटरी बेसिक संस्करण में स्थान मास्टर का व्यवहार ऐप में पुष्टि करें।</li>
+      <li>वास्तविक गणना को अंतिम रूप देने या इन्वेंटरी में लागू करने से पहले पुष्टि स्क्रीन को ध्यान से पढ़ें।</li>
+      <li>CSV प्रतिस्थापन, स्टॉकटेक लागू करना, हटाना या रीसेट जैसे बड़े बदलावों से पहले हमेशा बैकअप लें।</li>
+    </ul>
+  </div>
+
+</div>
+
+<a href="#top" class="back-top" title="ऊपर जाएँ">↑</a>
+
+<footer>
+  <strong>Quantiventra</strong> — बारकोड स्टॉकटेक और इन्वेंटरी प्रबंधन ऐप<br>
+  Copyright © Quantiventra. सर्वाधिकार सुरक्षित।<br>
+  इस मैनुअल की सामग्री बिना सूचना के बदल सकती है।<br>
+  <p style="margin-top:4px;"><a href="privacy_hi.html">गोपनीयता नीति</a></p>
+</footer>
+
+</body>
+</html>
+
+

@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quantiventra – Kiểm kê Gói đầy đủ</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;font-size:15px;line-height:1.8;color:#1a2535;background:#f4f7fb;}
+a{color:#1a5fa8;text-decoration:none;}a:hover{text-decoration:underline;}
+.site-nav{background:#1a3a5c;color:#fff;padding:0;}.site-nav .nav-inner{max-width:960px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:stretch;}
+.site-nav a{color:#cde;padding:10px 13px;font-size:12px;display:block;border-right:1px solid #2a4a6c;white-space:nowrap;}
+.site-nav a:hover{background:#2a5090;text-decoration:none;}.site-nav a.active{background:#2a6cbe;color:#fff;font-weight:bold;}
+.page-header{background:linear-gradient(135deg,#1a3a5c 0%,#2a6cbe 100%);color:#fff;padding:40px 20px 30px;}
+.page-header .inner{max-width:960px;margin:0 auto;}.page-header .app-name{font-size:13px;opacity:.8;}
+.page-header h1{font-size:24px;font-weight:700;margin-top:6px;line-height:1.4;}.page-header .subtitle{font-size:14px;opacity:.85;margin-top:8px;}
+.scope-box{background:rgba(255,255,255,.15);border-left:4px solid #7ecfff;padding:12px 16px;margin-top:16px;border-radius:4px;font-size:13px;}
+.container{max-width:960px;margin:0 auto;padding:30px 16px;}
+.toc{background:#fff;border:1px solid #c8d8ec;border-radius:8px;padding:24px 28px;margin-bottom:32px;}
+.toc h2{font-size:16px;font-weight:700;color:#1a3a5c;border-bottom:2px solid #2a6cbe;padding-bottom:8px;margin-bottom:14px;}
+.toc ol{margin-left:18px;}.toc li{margin:5px 0;font-size:14px;}
+.chapter{background:#fff;border-radius:8px;box-shadow:0 1px 4px rgba(0,0,0,.08);padding:28px 28px 24px;margin-bottom:28px;}
+.chapter-head{border-left:5px solid #2a6cbe;padding-left:14px;margin-bottom:20px;}
+.chapter-head .ch-no{font-size:12px;color:#2a6cbe;font-weight:700;}.chapter-head h2{font-size:20px;font-weight:700;color:#1a2535;margin-top:2px;}
+h3{font-size:16px;font-weight:700;color:#1a3a5c;border-bottom:1px solid #dde8f5;padding-bottom:5px;margin:22px 0 12px;}
+p{margin-bottom:12px;}ul,ol{margin-left:20px;margin-bottom:12px;}li{margin-bottom:5px;}
+.steps{counter-reset:step;list-style:none;margin-left:0;}
+.steps li{counter-increment:step;padding:9px 12px 9px 46px;position:relative;background:#f8fbff;border:1px solid #dde8f5;border-radius:6px;margin-bottom:6px;}
+.steps li::before{content:counter(step);position:absolute;left:12px;top:50%;transform:translateY(-50%);width:24px;height:24px;background:#2a6cbe;color:#fff;border-radius:50%;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;}
+.table-wrap{overflow-x:auto;margin-bottom:16px;}
+table{width:100%;border-collapse:collapse;font-size:13px;min-width:380px;}
+th{background:#1a3a5c;color:#fff;padding:9px 12px;text-align:left;white-space:nowrap;}
+td{padding:8px 12px;border-bottom:1px solid #dde8f5;vertical-align:top;}tr:nth-child(even) td{background:#f4f7fb;}
+.box{border-radius:6px;padding:13px 16px;margin:14px 0;font-size:13px;}
+.box-warn{background:#fffbe6;border-left:4px solid #f5a623;color:#7a5700;}
+.box-danger{background:#fff0f0;border-left:4px solid #d43f3f;color:#7a0000;}
+.box-hint{background:#e8f4ff;border-left:4px solid #2a6cbe;color:#0a3060;}
+.box-check{background:#f4eeff;border-left:4px solid #8c4fc8;color:#3a0070;}
+.box strong{display:block;margin-bottom:4px;}
+figure{max-width:280px;width:100%;margin:18px auto;text-align:center;}
+figure img{display:block;width:100%;max-width:280px;height:auto;margin:0 auto;border:1px solid #c8d8ec;border-radius:6px;box-shadow:0 2px 8px rgba(0,0,0,.1);}
+figcaption{font-size:12px;color:#5a7a99;margin-top:6px;}
+.diff-add{background:#e8fff0;border-left:4px solid #2a9c5c;border-radius:6px;padding:12px 16px;margin:14px 0;font-size:13px;}
+.diff-add strong{display:block;color:#1a6c3c;margin-bottom:4px;}
+.flow-box{background:#f4f7fb;border:1px solid #c8d8ec;border-radius:8px;padding:20px;margin:16px 0;}
+.flow-box h4{color:#1a3a5c;margin-top:0;}
+.flow-arrow{text-align:center;font-size:20px;color:#2a6cbe;margin:4px 0;}
+.flow-step{background:#fff;border:1px solid #c8d8ec;border-radius:6px;padding:10px 16px;margin:4px 0;font-size:13px;}
+.flow-step strong{color:#1a3a5c;}
+.summary-box{background:linear-gradient(135deg,#e8f4ff,#f0f8ff);border:1px solid #99c8ec;border-radius:8px;padding:20px 24px;margin-top:32px;}
+.summary-box h3{border:none;color:#1a3a5c;margin-top:0;}
+.confirm-box{background:#fdf4ff;border:1px solid #c8a0e0;border-radius:8px;padding:20px 24px;margin-top:16px;}
+.confirm-box h3{border:none;color:#5a0090;margin-top:0;}
+footer{text-align:center;font-size:12px;color:#8a9aaa;padding:30px 16px;border-top:1px solid #dde8f5;margin-top:20px;}
+@media(max-width:640px){.page-header h1{font-size:18px;}.chapter{padding:20px 16px;}.site-nav a{padding:8px 9px;font-size:11px;}}
+@media print{body{background:#fff;font-size:12px;}.site-nav{display:none;}.chapter{box-shadow:none;border:1px solid #ccc;page-break-inside:avoid;}.page-header{background:#1a3a5c !important;-webkit-print-color-adjust:exact;print-color-adjust:exact;}}
+</style>
+</head>
+<body>
+<nav class="site-nav"><div class="nav-inner">
+    <a href="01_top_settings_common_vi.html">① Màn hình chính / Cài đặt</a>
+    <a href="02_stocktake_free_vi.html">② Kiểm kê Miễn phí</a>
+    <a href="03_stocktake_simple_vi.html">③ Kiểm kê Tiêu chuẩn</a>
+    <a href="04_stocktake_full_vi.html" class="active">④ Kiểm kê Đầy đủ</a>
+    <a href="05_inventory_free_vi.html">⑤ Tồn kho Miễn phí</a>
+    <a href="06_inventory_simple_vi.html">⑥ Tồn kho Tiêu chuẩn</a>
+    <a href="07_inventory_full_vi.html">⑦ Tồn kho Đầy đủ</a>
+</div></nav>
+<header class="page-header"><div class="inner">
+    <div class="app-name">Hướng dẫn sử dụng Quantiventra</div>
+    <h1>④ Kiểm kê — Gói đầy đủ</h1>
+    <div class="subtitle">Tính năng của Gói đầy đủ, vị trí chi tiết, xác nhận kết quả kiểm kê, áp dụng kết quả vào tồn kho và quy trình thực tế</div>
+    <div class="scope-box"><strong>Chủ đề trong trang này:</strong>
+    Tính năng của Gói đầy đủ / Khác biệt so với Gói tiêu chuẩn / Cài đặt và dùng vị trí chi tiết / Nhập/xuất CSV mở rộng / Lịch sử kiểm kê / Xác nhận kết quả kiểm kê thực tế / Áp dụng kết quả kiểm kê vào tồn kho / Lưu ý quan trọng / Quy trình thực tế cho Gói đầy đủ</div>
+</div></header>
+<div class="container">
+  <nav class="toc"><h2>Mục lục</h2><ol>
+    <li><a href="#overview">Tổng quan Gói đầy đủ</a></li>
+    <li><a href="#diff">Khác biệt so với Gói tiêu chuẩn</a></li>
+    <li><a href="#location">Vị trí chi tiết</a></li>
+    <li><a href="#csv">Nhập/Xuất CSV mở rộng</a></li>
+    <li><a href="#history">Lịch sử kiểm kê</a></li>
+    <li><a href="#confirm-flow">Xác nhận kết quả kiểm kê thực tế</a></li>
+    <li><a href="#inventory-reflect">Áp dụng kết quả kiểm kê vào tồn kho</a></li>
+    <li><a href="#notes">Lưu ý quan trọng khi áp dụng vào tồn kho</a></li>
+    <li><a href="#usecase">Quy trình thực tế cho Gói đầy đủ</a></li>
+    <li><a href="#summary">Điểm chính của chương</a></li>
+    <li><a href="#check">Lưu ý trước khi sử dụng</a></li>
+  </ol></nav>
+
+  <section class="chapter" id="overview">
+    <div class="chapter-head"><div class="ch-no">CHƯƠNG 1</div><h2>Tổng quan Gói đầy đủ</h2></div>
+    <p>Gói kiểm kê đầy đủ loại bỏ tất cả giới hạn bản ghi và kích hoạt các cài đặt đầy đủ dùng chung — quy tắc mã, quy tắc vị trí, cài đặt camera, CSV mở rộng và nhiều hơn nữa.</p>
+    <p>Gói này phù hợp với việc quản lý nhiều sản phẩm và quy trình kiểm kê theo từng vị trí chi tiết.</p>
+    <div class="diff-add">
+      <strong>✅ Tính năng được thêm trong Gói đầy đủ</strong>
+      <ul style="margin-top:6px;">
+        <li>Loại bỏ giới hạn bản ghi danh mục, lịch sử kiểm kê và bản ghi xuất</li>
+        <li>Cài đặt quy tắc mã chi tiết</li>
+        <li>Cài đặt quy tắc vị trí chi tiết</li>
+        <li>Cài đặt quét camera chi tiết</li>
+        <li>Xuất CSV mở rộng</li>
+        <li>Chỉnh sửa chi tiết</li>
+        <li>Khóa xoay màn hình (tiếp tục khả dụng từ Gói tiêu chuẩn)</li>
+      </ul>
+    </div>  </section>
+
+  <section class="chapter" id="diff">
+    <div class="chapter-head"><div class="ch-no">CHƯƠNG 2</div><h2>Khác biệt so với Gói tiêu chuẩn</h2></div>
+    <div class="table-wrap"><table>
+      <tr><th>Tính năng / Cài đặt</th><th>Gói tiêu chuẩn</th><th>Gói đầy đủ</th></tr>
+      <tr><td>Bản ghi danh mục</td><td>Đến 300</td><td>Không giới hạn</td></tr>
+      <tr><td>Bản ghi lịch sử kiểm kê</td><td>Đến 1.000</td><td>Không giới hạn</td></tr>
+      <tr><td>Bản ghi xuất ra</td><td>Đến 300</td><td>Không giới hạn</td></tr>
+      <tr><td>Cài đặt quy tắc mã chi tiết</td><td>✗</td><td>○</td></tr>
+      <tr><td>Cài đặt quy tắc vị trí chi tiết</td><td>✗</td><td>○</td></tr>
+      <tr><td>Cài đặt camera chi tiết</td><td>✗</td><td>○</td></tr>
+      <tr><td>Xuất CSV mở rộng</td><td>✗</td><td>○</td></tr>
+      <tr><td>Dùng vị trí chi tiết</td><td>✗ (có thể đặt chế độ Chi tiết nhưng tính năng hạn chế)</td><td>○</td></tr>
+    </table></div>
+  </section>
+
+  <section class="chapter" id="location">
+    <div class="chapter-head"><div class="ch-no">CHƯƠNG 3</div><h2>Vị trí chi tiết</h2></div>
+    <p>Với Gói đầy đủ, tất cả vị trí đã đăng ký trong Danh mục vị trí đều khả dụng cho kiểm kê. Bạn có thể cấu hình số kệ, tầng, khu vực và các vị trí chi tiết khác ngoài kho và cửa hàng.</p>
+    <h3>Cài đặt vị trí chi tiết</h3>
+    <ol class="steps">
+      <li>Vào <strong>Cài đặt → Cài đặt kiểm kê</strong> và chọn chế độ <strong>Chi tiết</strong>.</li>
+      <li>Vào <strong>Quản lý danh mục → Danh mục vị trí</strong> và đăng ký các vị trí cần thiết.</li>
+      <li>Trong màn hình kiểm kê, nhấn vào trường vị trí sẽ hiển thị tất cả vị trí đã đăng ký.</li>
+    </ol>
+    <div class="box box-warn"><strong>⚠ Lưu ý</strong>Ngay cả khi Gói đầy đủ đang được kích hoạt, nếu chế độ vẫn là Đơn giản A/B/C, chỉ các vị trí đơn giản được hiển thị. Chuyển sang chế độ <strong>Chi tiết</strong> để dùng tất cả vị trí đã đăng ký.</div>
+    <div class="box box-hint"><strong>💡 Mẹo</strong>Nếu vị trí chi tiết đã đăng ký nhưng ứng dụng vẫn ở chế độ Đơn giản, ứng dụng có thể nhắc: "Chuyển sang chế độ Chi tiết để dùng thêm vị trí."</div>
+  </section>
+
+  <section class="chapter" id="csv">
+    <div class="chapter-head"><div class="ch-no">CHƯƠNG 4</div><h2>Nhập/Xuất CSV mở rộng</h2></div>
+    <p>Gói đầy đủ cho phép sử dụng các chức năng nhập/xuất CSV mở rộng cho kiểm kê.</p>
+    <h3>Thông số nhập CSV kiểm kê (Gói đầy đủ)</h3>
+    <div class="table-wrap"><table>
+      <tr><th>Loại CSV</th><th>Mục đích</th><th>Cột chính</th><th>Bắt buộc/Tùy chọn</th><th>Ghi chú</th><th>Khả dụng trong</th></tr>
+      <tr><td>CSV kiểm kê (2 cột)</td><td>Nhập danh mục kiểm kê cơ bản</td><td>Mã sản phẩm, Tên sản phẩm</td><td>2 cột bắt buộc</td><td>Không có hàng tiêu đề; dữ liệu bắt đầu từ hàng 1</td><td>Tất cả các gói</td></tr>
+      <tr><td>CSV kiểm kê (3 cột)</td><td>Nhập danh mục kiểm kê với tồn kho lý thuyết</td><td>Mã sản phẩm, Tên sản phẩm, Tồn kho lý thuyết</td><td>3 cột bắt buộc</td><td>Không cần số đếm thực tế khi nhập (bắt đầu từ 0)</td><td>Tất cả các gói</td></tr>
+    </table></div>
+    <h3>Xuất CSV kiểm kê (Gói đầy đủ)</h3>
+    <ul>
+      <li>Tệp xuất có hàng tiêu đề theo ngôn ngữ ở dòng đầu tiên.</li>
+      <li>CSV <code>stocktake_summary</code> không bao gồm cột ngày, giờ hoặc vị trí.</li>
+      <li>Khi sử dụng xuất chi tiết theo vị trí, kệ, ngày hoặc từng dòng dữ liệu, hãy kiểm tra màn hình xuất và tệp CSV đã tạo trước khi sử dụng.</li>
+    </ul>
+    <div class="box box-danger"><strong>🚨 Quan trọng</strong>Các thao tác nhập và xuất CSV có thể thay đổi đáng kể dữ liệu của bạn. Luôn sao lưu trước khi tiến hành.</div>
+  </section>
+
+  <section class="chapter" id="history">
+    <div class="chapter-head"><div class="ch-no">CHƯƠNG 5</div><h2>Lịch sử kiểm kê</h2></div>
+    <p>Với Gói đầy đủ, giới hạn bản ghi lịch sử kiểm kê được bỏ. Dữ liệu kiểm kê cũ có thể lưu và xem lại trong thời gian dài.</p>    <h3>Những gì bạn có thể thấy trong lịch sử</h3>
+    <ul>
+      <li>Ngày/giờ lưu, mã sản phẩm, tên sản phẩm</li>
+      <li>Số lượng đếm thực tế, vị trí</li>
+      <li>Ghi chú (Gói đầy đủ)</li>
+      <li>Trạng thái xác nhận (Đang chờ / Đã xác nhận)</li>
+    </ul>
+  </section>
+
+  <section class="chapter" id="confirm-flow">
+    <div class="chapter-head"><div class="ch-no">CHƯƠNG 6</div><h2>Xác nhận kết quả kiểm kê thực tế</h2></div>
+    <p>Trong Gói đầy đủ, có thao tác "Xác nhận kết quả kiểm kê thực tế" cho dữ liệu kiểm kê đã nhập. Khi xác nhận, kết quả kiểm kê sẽ được lưu thành bản ghi chính thức.</p>
+    <div class="flow-box">
+      <h4>Quy trình từ kiểm kê đến xác nhận</h4>
+      <div class="flow-step"><strong>① Nhập dữ liệu kiểm kê</strong>: Quét mã vạch → Nhập số lượng → Lưu</div>
+      <div class="flow-arrow">↓</div>
+      <div class="flow-step"><strong>② Xem lại lịch sử kiểm kê</strong>: Kiểm tra các mục đã lưu và sửa lỗi theo thao tác được hướng dẫn trong ứng dụng</div>
+      <div class="flow-arrow">↓</div>
+      <div class="flow-step"><strong>③ Xác nhận kết quả kiểm kê thực tế</strong>: Thực hiện thao tác xác nhận</div>
+      <div class="flow-arrow">↓</div>
+      <div class="flow-step"><strong>④ Áp dụng vào tồn kho (tùy chọn)</strong>: Áp dụng kết quả đã xác nhận vào Quản lý tồn kho</div>
+    </div>
+    <div class="box box-danger"><strong>🚨 Về nút xác nhận</strong>Xác nhận kết quả kiểm kê thực tế là thao tác có tác động cao ảnh hưởng đến dữ liệu tồn kho. Nút Xác nhận nằm trong vùng nguy hiểm riêng bên dưới chi tiết xác nhận — không phải nút đầu tiên bạn nhấn. Xem lại cẩn thận tất cả sai lệch và dữ liệu bị ảnh hưởng trước khi nhấn.</div>
+    <div class="box box-check"><strong>🔍 Lưu ý</strong>Sau khi xác nhận kết quả kiểm kê, hãy làm theo hướng dẫn trên màn hình ứng dụng. Khi cần kiểm tra hoặc điều chỉnh dữ liệu, hãy đối chiếu lịch sử kiểm kê và bản sao lưu CSV trước khi tiếp tục.</div>
+    <div class="box box-danger"><strong>🚨 Quan trọng</strong>Luôn xem lại lịch sử kiểm kê trước khi xác nhận. Đọc kỹ hướng dẫn trên màn hình xác nhận trước khi tiến hành.</div>
+  </section>
+
+  <section class="chapter" id="inventory-reflect">
+    <div class="chapter-head"><div class="ch-no">CHƯƠNG 7</div><h2>Áp dụng kết quả kiểm kê vào tồn kho</h2></div>
+    <p>Áp dụng kết quả kiểm kê vào Quản lý tồn kho điều chỉnh số lượng tồn kho để khớp với số đếm thực tế đã xác nhận. Sai lệch được ghi là các mục nhập lịch sử điều chỉnh.</p>
+    <h3>Áp dụng vào tồn kho — Tổng quan</h3>
+    <ol class="steps">
+      <li>Nhập dữ liệu kiểm kê và xác nhận kết quả kiểm kê thực tế.</li>
+      <li>Chạy thao tác áp dụng kết quả kiểm kê vào tồn kho.</li>
+      <li>Xem lại nội dung (chi tiết điều chỉnh) trên màn hình xác nhận.</li>
+      <li>Xác nhận và thực hiện thao tác áp dụng.</li>
+      <li>Kiểm tra chi tiết điều chỉnh trong lịch sử tồn kho.</li>
+    </ol>
+    <div class="box box-danger"><strong>🚨 Quan trọng</strong>Áp dụng vào tồn kho thực hiện thay đổi đáng kể đối với số lượng tồn kho. Luôn sao lưu CSV trước khi tiến hành. Đọc kỹ màn hình xác nhận trước khi thực hiện.</div>
+    <div class="box box-check"><strong>🔍 Lưu ý</strong>Sau khi áp dụng kết quả kiểm kê vào tồn kho, hãy kiểm tra lịch sử tồn kho và bản sao lưu CSV. Khi cần điều chỉnh dữ liệu, hãy làm theo hướng dẫn trên màn hình ứng dụng và thao tác cẩn thận.</div>
+  </section>
+
+  <section class="chapter" id="notes">
+    <div class="chapter-head"><div class="ch-no">CHƯƠNG 8</div><h2>Lưu ý quan trọng khi áp dụng vào tồn kho</h2></div>
+    <div class="box box-danger"><strong>🚨 Luôn sao lưu trước khi áp dụng</strong>Áp dụng vào tồn kho thực hiện thay đổi quy mô lớn đối với dữ liệu của bạn. Luôn xuất CSV sao lưu trước (<strong>Cài đặt → Xuất tất cả dữ liệu</strong>).</div>
+    <div class="box box-warn"><strong>⚠ Đọc màn hình xác nhận</strong>Đối với bất kỳ thao tác nào thay đổi dữ liệu — xác nhận, áp dụng, xóa, đặt lại — đọc kỹ màn hình xác nhận trước khi thực hiện.</div>
+    <div class="box box-warn"><strong>⚠ Giá cả &amp; Điều khoản mua</strong>Vui lòng kiểm tra Google Play Store để biết điều khoản pháp lý và điều kiện mua hiện hành. Hướng dẫn này không đưa ra thông tin mang tính cam kết cố định.</div>
+  </section>
+
+  <section class="chapter" id="usecase">
+    <div class="chapter-head"><div class="ch-no">CHƯƠNG 9</div><h2>Quy trình thực tế cho Gói đầy đủ</h2></div>
+    <h3>Quy trình kiểm kê hàng tháng</h3>
+    <ol class="steps">
+      <li>Đầu tháng, nhập CSV kiểm kê để làm mới danh mục sản phẩm.</li>
+      <li>Đặt Cài đặt kiểm kê sang chế độ <strong>Chi tiết</strong> và chuẩn bị vị trí theo kệ và khu vực.</li>
+      <li>Tiến hành kiểm kê: quét mã vạch và nhập số đếm thực tế.</li>
+      <li>Xem lại tất cả mục nhập trong lịch sử kiểm kê.</li>
+      <li>Nếu mọi thứ chính xác, xác nhận kết quả kiểm kê thực tế.</li>
+      <li>Áp dụng vào tồn kho (sau khi sao lưu).</li>
+      <li>Xem mục nhập điều chỉnh kiểm kê trong lịch sử tồn kho và điều tra bất kỳ sai lệch nào.</li>
+      <li>Xuất CSV kết quả kiểm kê để lưu trữ.</li>
+    </ol>
+  </section>
+
+  <div class="summary-box" id="summary">
+    <h3>📌 Điểm chính của chương</h3>
+    <ul>
+      <li>Gói đầy đủ loại bỏ tất cả giới hạn bản ghi và kích hoạt vị trí chi tiết, tính năng CSV mở rộng.</li>
+      <li>Để dùng vị trí chi tiết, chuyển sang chế độ <strong>Chi tiết</strong> trong <strong>Cài đặt → Cài đặt kiểm kê</strong>.</li>
+      <li>Quy trình Xác nhận → Áp dụng vào tồn kho thực hiện thay đổi dữ liệu quy mô lớn — hãy thao tác cẩn thận.</li>
+      <li>Luôn sao lưu CSV trước khi áp dụng vào tồn kho.</li>
+    </ul>
+  </div>
+  <div class="confirm-box" id="check">
+    <h3>🔍 Lưu ý trước khi sử dụng</h3>
+    <ul>
+      <li>Sau khi xác nhận kết quả kiểm kê, hãy kiểm tra lịch sử kiểm kê và làm theo hướng dẫn trên màn hình nếu cần điều chỉnh dữ liệu.</li>
+      <li>Sau khi áp dụng kết quả kiểm kê vào tồn kho, hãy kiểm tra lịch sử tồn kho và đối chiếu với bản sao lưu CSV.</li>
+      <li>Khi xuất dữ liệu chi tiết theo vị trí, ngày hoặc từng dòng dữ liệu, hãy kiểm tra màn hình xuất và tệp CSV đã tạo trước khi sử dụng.</li>
+      <li>Nếu cần sửa dữ liệu kiểm kê đã lưu, hãy thực hiện theo thao tác chỉnh sửa được cung cấp trong ứng dụng.</li>
+    </ul>
+  </div>
+</div>
+<footer>
+  <p>Hướng dẫn sử dụng Quantiventra | ④ Kiểm kê Gói đầy đủ</p>
+  <p style="margin-top:4px;">Nội dung hướng dẫn này có thể thay đổi mà không cần báo trước. Vui lòng ưu tiên thông tin hiển thị trong ứng dụng để xem nội dung mới nhất.</p>
+  <p style="margin-top:4px;"><a href="privacy_vi.html">Chính sách Bảo mật</a></p>
+</footer>
+</body>
+</html>

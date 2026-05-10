@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quantiventra – 库存管理 – 标准版</title>
+<style>*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','Microsoft YaHei','Hiragino Sans GB',sans-serif;font-size:15px;line-height:1.9;color:#1a2535;background:#f4f7fb;}
+a{color:#1a5fa8;text-decoration:none;}a:hover{text-decoration:underline;}
+.site-nav{background:#1a3a5c;color:#fff;padding:0;}.site-nav .nav-inner{max-width:960px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:stretch;}
+.site-nav a{color:#cde;padding:10px 13px;font-size:12px;display:block;border-right:1px solid #2a4a6c;white-space:nowrap;}
+.site-nav a:hover{background:#2a5090;text-decoration:none;}.site-nav a.active{background:#2a6cbe;color:#fff;font-weight:bold;}
+.page-header{background:linear-gradient(135deg,#1a3a5c 0%,#2a6cbe 100%);color:#fff;padding:40px 20px 30px;}
+.page-header .inner{max-width:960px;margin:0 auto;}.page-header .app-name{font-size:13px;opacity:.8;}
+.page-header h1{font-size:22px;font-weight:700;margin-top:6px;line-height:1.5;}.page-header .subtitle{font-size:14px;opacity:.85;margin-top:8px;}
+.scope-box{background:rgba(255,255,255,.15);border-left:4px solid #7ecfff;padding:12px 16px;margin-top:16px;border-radius:4px;font-size:13px;}
+.container{max-width:960px;margin:0 auto;padding:30px 16px;}
+.toc{background:#fff;border:1px solid #c8d8ec;border-radius:8px;padding:24px 28px;margin-bottom:32px;}
+.toc h2{font-size:16px;font-weight:700;color:#1a3a5c;border-bottom:2px solid #2a6cbe;padding-bottom:8px;margin-bottom:14px;}
+.toc ol{margin-left:18px;}.toc li{margin:5px 0;font-size:14px;}
+.chapter{background:#fff;border-radius:8px;box-shadow:0 1px 4px rgba(0,0,0,.08);padding:28px 28px 24px;margin-bottom:28px;}
+.chapter-head{border-left:5px solid #2a6cbe;padding-left:14px;margin-bottom:20px;}
+.chapter-head .ch-no{font-size:12px;color:#2a6cbe;font-weight:700;}.chapter-head h2{font-size:20px;font-weight:700;color:#1a2535;margin-top:2px;}
+h3{font-size:16px;font-weight:700;color:#1a3a5c;border-bottom:1px solid #dde8f5;padding-bottom:5px;margin:22px 0 12px;}
+h4{font-size:14px;font-weight:700;color:#2a4a6c;margin:16px 0 8px;}
+p{margin-bottom:12px;}ul,ol{margin-left:20px;margin-bottom:12px;}li{margin-bottom:5px;}
+.steps{counter-reset:step;list-style:none;margin-left:0;}
+.steps li{counter-increment:step;padding:9px 12px 9px 46px;position:relative;background:#f8fbff;border:1px solid #dde8f5;border-radius:6px;margin-bottom:6px;}
+.steps li::before{content:counter(step);position:absolute;left:12px;top:50%;transform:translateY(-50%);width:24px;height:24px;background:#2a6cbe;color:#fff;border-radius:50%;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;}
+.table-wrap{overflow-x:auto;margin-bottom:16px;}
+table{width:100%;border-collapse:collapse;font-size:13px;min-width:380px;}
+th{background:#1a3a5c;color:#fff;padding:9px 12px;text-align:left;white-space:nowrap;}
+td{padding:8px 12px;border-bottom:1px solid #dde8f5;vertical-align:top;}tr:nth-child(even) td{background:#f4f7fb;}
+code{font-family:'Courier New',monospace;background:rgba(0,80,160,.08);color:#004080;padding:2px 6px;border-radius:3px;font-size:12px;}
+.box{border-radius:6px;padding:13px 16px;margin:14px 0;font-size:13px;}
+.box-warn{background:#fffbe6;border-left:4px solid #f5a623;color:#7a5700;}
+.box-danger{background:#fff0f0;border-left:4px solid #d43f3f;color:#7a0000;}
+.box-hint{background:#e8f4ff;border-left:4px solid #2a6cbe;color:#0a3060;}
+.box-check{background:#f4eeff;border-left:4px solid #8c4fc8;color:#3a0070;}
+.box strong{display:block;margin-bottom:4px;}
+figure{max-width:280px;width:100%;margin:18px auto;text-align:center;}
+figure img{display:block;width:100%;max-width:280px;height:auto;margin:0 auto;border:1px solid #c8d8ec;border-radius:6px;box-shadow:0 2px 8px rgba(0,0,0,.1);}
+figcaption{font-size:12px;color:#5a7a99;margin-top:6px;}
+.img-pending{display:flex;align-items:center;justify-content:center;max-width:280px;width:100%;box-sizing:border-box;background:#e8eef5;border:2px dashed #99b8d8;border-radius:6px;height:160px;color:#5a7a99;font-size:13px;margin:18px auto;}
+.diff-add{background:#e8fff0;border-left:4px solid #2a9c5c;border-radius:6px;padding:12px 16px;margin:14px 0;font-size:13px;}
+.diff-add strong{display:block;color:#1a6c3c;margin-bottom:4px;}
+.flow-box{background:#f4f7fb;border:1px solid #c8d8ec;border-radius:8px;padding:20px;margin:16px 0;}
+.flow-box h4{color:#1a3a5c;margin-top:0;}
+.flow-arrow{text-align:center;font-size:20px;color:#2a6cbe;margin:4px 0;}
+.flow-step{background:#fff;border:1px solid #c8d8ec;border-radius:6px;padding:10px 16px;margin:4px 0;font-size:13px;}
+.flow-step strong{color:#1a3a5c;}
+.summary-box{background:linear-gradient(135deg,#e8f4ff,#f0f8ff);border:1px solid #99c8ec;border-radius:8px;padding:20px 24px;margin-top:32px;}
+.summary-box h3{border:none;color:#1a3a5c;margin-top:0;}
+.confirm-box{background:#fdf4ff;border:1px solid #c8a0e0;border-radius:8px;padding:20px 24px;margin-top:16px;}
+.confirm-box h3{border:none;color:#5a0090;margin-top:0;}
+footer{text-align:center;font-size:12px;color:#8a9aaa;padding:30px 16px;border-top:1px solid #dde8f5;margin-top:20px;}
+@media(max-width:640px){.page-header h1{font-size:18px;}.chapter{padding:20px 16px;}.site-nav a{padding:8px 9px;font-size:11px;}}
+@media print{body{background:#fff;font-size:12px;}.site-nav{display:none;}.chapter{box-shadow:none;border:1px solid #ccc;page-break-inside:avoid;}.page-header{background:#1a3a5c !important;-webkit-print-color-adjust:exact;print-color-adjust:exact;}}
+</style></head>
+<body>
+<nav class="site-nav"><div class="nav-inner">
+  <a href="01_top_settings_common_zh.html">① 主屏幕 / 设置</a>
+  <a href="02_stocktake_free_zh.html">② 盘点 免费版</a>
+  <a href="03_stocktake_simple_zh.html">③ 盘点 标准版</a>
+  <a href="04_stocktake_full_zh.html">④ 盘点 完整版</a>
+  <a href="05_inventory_free_zh.html">⑤ 库存 免费版</a>
+  <a href="06_inventory_simple_zh.html" class="active">⑥ 库存 标准版</a>
+  <a href="07_inventory_full_zh.html">⑦ 库存 完整版</a>
+</div></nav>
+<header class="page-header"><div class="inner">
+  <div class="app-name">Quantiventra 使用手册</div>
+  <h1>⑥ 库存管理 — 标准版（标准版解锁）</h1>
+  <div class="subtitle">标准版新增内容、入库、出库、库存查询、历史记录、CSV 导入/导出、替换库存与以入库方式添加</div>
+  <div class="scope-box"><strong>本页涵盖内容：</strong>库存管理标准版新增内容 / 与免费版差异 / 入库 / 出库 / 库存查询 / 库存历史 / 位置管理 / CSV 导入/导出 / 替换当前库存 / 以入库方式添加 / 重要注意事项 / 推荐工作流程</div>
+</div></header>
+<div class="container">
+  <nav class="toc"><h2>目录</h2><ol>
+    <li><a href="#overview">标准版概览</a></li>
+    <li><a href="#diff">与免费版的差异</a></li>
+    <li><a href="#receive">入库（Stock In）</a></li>
+    <li><a href="#issue">出库（Stock Out）</a></li>
+    <li><a href="#stock-check">库存查询</a></li>
+    <li><a href="#history">库存历史</a></li>
+    <li><a href="#location">位置管理</a></li>
+    <li><a href="#csv">CSV 导入 / 导出</a></li>
+    <li><a href="#csv-replace">替换当前库存</a></li>
+    <li><a href="#csv-add">以入库方式添加</a></li>
+    <li><a href="#notes">重要注意事项</a></li>
+    <li><a href="#tips">推荐工作流程</a></li>
+    <li><a href="#summary">本章要点</a></li>
+    <li><a href="#confirm">使用前注意事项</a></li>
+  </ol></nav>
+
+  <section class="chapter" id="overview">
+    <div class="chapter-head"><div class="ch-no">第1章</div><h2>标准版概览</h2></div>
+    <p>库存管理标准版支持比免费版更多的记录数量。您可以更顺畅地执行日常入库、出库、库存查询和库存历史等操作，位置管理的使用范围也会扩大。</p>
+    <h3>标准版限制</h3>
+    <div class="table-wrap"><table>
+      <tr><th>项目</th><th>免费版</th><th>标准版</th></tr>
+      <tr><td>主数据记录数</td><td>最多 30 条</td><td>最多 300 条</td></tr>
+      <tr><td>库存历史记录数</td><td>最多 30 条</td><td>最多 1,000 条</td></tr>
+      <tr><td>导出记录数</td><td>最多 30 条</td><td>最多 300 条</td></tr>
+      <tr><td>锁定屏幕旋转</td><td>✗</td><td>○</td></tr>
+      <tr><td>位置主数据登记</td><td>免费版中受限</td><td>可在标准版限制范围内使用</td></tr>
+      <tr><td>直接编辑已登记累计总量</td><td>✗</td><td>✗（需要完整版解锁）</td></tr>
+    </table></div>  </section>
+
+  <section class="chapter" id="diff">
+    <div class="chapter-head"><div class="ch-no">第2章</div><h2>与免费版的差异</h2></div>
+    <div class="diff-add">
+      <strong>✅ 标准版新增或扩展的内容</strong>
+      <ul style="margin-top:6px;">
+        <li>主数据上限从 30 条提升至 300 条</li>
+        <li>库存历史上限从 30 条提升至 1,000 条</li>
+        <li>导出上限从 30 条提升至 300 条</li>
+        <li>可使用屏幕旋转锁定功能</li>
+        <li>扩大位置管理的使用范围</li>
+        <li>更容易持续维护日常入库、出库、库存查询和历史记录</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="chapter" id="receive">
+    <div class="chapter-head"><div class="ch-no">第3章</div><h2>入库（Stock In）</h2></div>
+    <p>入库操作会增加库存。商品到货时使用，例如采购、收货以及类似交易。</p>    <h3>入库步骤</h3>
+    <ol class="steps">
+      <li>进入<strong>库存管理 → 入库</strong>。</li>
+      <li>扫描条码或输入商品编码。</li>
+      <li>确认商品名称。如果编码未登记，请创建新的商品主数据条目。</li>
+      <li>在新的商品主数据条目中，登记商品名称、售价和补货点。</li>
+      <li>保存后返回入库界面，已登记的商品编码和名称会自动填入。</li>
+      <li>选择目标位置（仓库、门店等）。</li>
+      <li>输入入库数量。</li>
+      <li>点击<strong>保存</strong>。数量会立即加入库存。</li>
+      <li>在库存查询或库存历史中确认更新。</li>
+    </ol>
+    <div class="box box-hint"><strong>💡 关于商品主数据属性</strong>售价和补货点是在商品主数据中管理的属性，不需要在每次入库交易中输入。在普通入库界面中，请专注于输入数量、位置和备注。</div>
+    <div class="box box-warn"><strong>⚠ 注意</strong>入库会立即反映到库存。保存前请务必确认数量和位置。如果保存后发现数量错误，请查看库存历史，并按照应用内指引进行修正、冲销或记录调整。</div>
+  </section>
+
+  <section class="chapter" id="issue">
+    <div class="chapter-head"><div class="ch-no">第4章</div><h2>出库（Stock Out）</h2></div>
+    <p>出库操作会减少库存。用于销售、发货、配送以及类似交易。</p>    <h3>出库步骤</h3>
+    <ol class="steps">
+      <li>进入<strong>库存管理 → 出库</strong>。</li>
+      <li>扫描条码或输入商品编码。</li>
+      <li>确认商品名称。</li>
+      <li>选择来源位置（库存要从哪个位置扣除）。</li>
+      <li>输入出库数量。</li>
+      <li>点击<strong>保存</strong>。数量会立即从库存中扣除。</li>
+      <li>在库存查询或库存历史中确认更新。</li>
+    </ol>
+    <div class="box box-hint"><strong>💡 关于库存字段</strong>出库界面上的库存字段会显示所选商品和位置的当前库存，仅供参考；这是显示字段，不是可编辑输入字段。保存出库数量后，库存会随之减少。</div>
+    <div class="box box-danger"><strong>🚨 重要</strong>请勿输入超过当前库存的出库数量。输入出库数量前，请先按位置确认库存水平。</div>
+  </section>
+
+  <section class="chapter" id="stock-check">
+    <div class="chapter-head"><div class="ch-no">第5章</div><h2>库存查询</h2></div>
+    <p>库存查询一开始会显示每个商品的合并库存总量。补货判断会将所有“计入补货判断”已开启位置的库存总量，与商品主数据中的补货点进行比较。</p>    <h3>库存查询步骤</h3>
+    <ol class="steps">
+      <li>进入<strong>库存管理 → 库存查询</strong>。</li>
+      <li>找到要查询的商品（可搜索或滚动列表）。</li>
+      <li>找出低于补货点的商品（会显示为可能需要补货）。</li>
+      <li>点击商品可查看各位置明细、历史记录和详细信息。在位置明细界面中，补货判断不会显示，或会被视为未启用。</li>
+    </ol>
+  </section>
+
+  <section class="chapter" id="history">
+    <div class="chapter-head"><div class="ch-no">第6章</div><h2>库存历史</h2></div>
+    <p>库存历史会显示所有入库、出库、调拨、盘点调整、期初库存和 CSV 导入操作的记录。</p>    <h3>可在库存历史中查看的内容</h3>
+    <ul>
+      <li>日期/时间和操作类型（入库、出库、调拨、调整等）</li>
+      <li>商品编码和名称</li>
+      <li>位置和数量变动</li>
+      <li>备注</li>
+    </ul>
+    <div class="box box-hint"><strong>💡 提示</strong>如果库存数量对不上，可以回溯库存历史，检查是否有输入错误或意外调整。</div>
+  </section>
+
+  <section class="chapter" id="location">
+    <div class="chapter-head"><div class="ch-no">第7章</div><h2>位置管理</h2></div>
+    <p>标准版主要使用“仓库”和“门店”这两个基本位置。</p>
+    <div class="table-wrap"><table>
+      <tr><th>模式</th><th>可用位置</th></tr>
+      <tr><td>简单 A</td><td>仅仓库</td></tr>
+      <tr><td>简单 B</td><td>仓库 + 门店</td></tr>
+      <tr><td>简单 C</td><td>仅门店</td></tr>
+    </table></div>
+    <h3>库存调拨</h3>
+    <p>库存调拨会将库存数量从一个位置移动到另一个位置。</p>
+    <div class="box box-warn"><strong>⚠ 注意</strong>请勿在同一个位置之间执行调拨。如果只有一个位置（例如简单 A），就不需要库存调拨，请改用入库、出库或修正操作。</div>
+    <div class="box box-hint"><strong>💡 提示</strong>如需使用详细位置（例如货架编号），需要在设置中切换至<strong>详细</strong>模式。详细模式会在使用完整版功能时使用。</div>
+  </section>
+
+  <section class="chapter" id="csv">
+    <div class="chapter-head"><div class="ch-no">第8章</div><h2>CSV 导入 / 导出</h2></div>
+    <p>库存管理可让您使用 CSV 文件导入、导出并备份库存数据。</p>
+    <div class="box box-danger"><strong>🚨 重要</strong>CSV 导入操作可能大幅更改您的数据。导入前请务必先导出备份 CSV。</div>
+    <h3>库存 CSV 规格</h3>
+    <div class="table-wrap"><table>
+      <tr><th>CSV 类型</th><th>用途</th><th>主要列</th><th>必填 / 可选</th><th>备注</th><th>可用版本</th></tr>
+      <tr><td>库存 CSV（含位置列）</td><td>按位置导入库存数据</td><td>location, item_code, quantity, product_name</td><td>location、item_code、quantity 为必填；product_name 有条件必填</td><td>未登记编码需要 product_name 列</td><td>库存管理标准版及以上</td></tr>
+      <tr><td>库存 CSV（不含位置列）</td><td>将库存数据导入到指定位置</td><td>item_code, quantity, product_name</td><td>item_code、quantity 为必填</td><td>导入时选择目标位置</td><td>库存管理标准版及以上</td></tr>
+      <tr><td>备份 CSV</td><td>完整数据备份与还原</td><td>商品、当前库存、位置、类别 — 多个文件</td><td>需要完整备份集</td><td>可能会拆分为多个文件</td><td>库存管理标准版及以上</td></tr>
+    </table></div>
+    <h3>使用列映射界面</h3>
+    <p>导入 CSV 时，您需要选择哪一列对应商品编码、商品名称、数量、位置等数据。</p>
+    <ol class="steps">
+      <li>选择 CSV 文件。</li>
+      <li>在列映射界面中，将每个 CSV 列指定到对应字段（商品编码、数量等）。</li>
+      <li>确认指定结果并执行导入。</li>
+    </ol>
+    <div class="box box-warn">
+      <strong>⚠ 常见 CSV 导入错误</strong>
+      <ul style="margin-top:6px;">
+        <li>缺少必填列</li>
+        <li>同一列被指定到多个字段</li>
+        <li>数量列为空或不是数字</li>
+        <li>未登记编码未选择商品名称列</li>
+        <li>没有位置列，也没有选择目标位置</li>
+        <li>CSV 为空，或没有可导入的行</li>
+      </ul>
+    </div>  </section>
+
+  <section class="chapter" id="csv-replace">
+    <div class="chapter-head"><div class="ch-no">第9章</div><h2>替换当前库存</h2></div>
+    <p>替换当前库存是一种 CSV 导入模式，会将文件中的数量视为新的当前库存。现有历史记录会保留，差异会记录为调整历史项目。</p>
+    <div class="box box-danger">
+      <strong>🚨 重要：请谨慎使用替换当前库存</strong>
+      <ul style="margin-top:6px;">
+        <li>CSV 中未包含的库存行可能会被设为 0。</li>
+        <li>此操作可能对现有库存数据造成重大影响，请务必先备份。</li>
+        <li>执行前请仔细阅读确认界面。</li>
+      </ul>
+    </div>
+    <h3>替换当前库存步骤</h3>
+    <ol class="steps">
+      <li>导出备份 CSV（必须）。</li>
+      <li>进入<strong>库存管理 → CSV 导入 → 替换当前库存</strong>。</li>
+      <li>选择要导入的 CSV 文件。</li>
+      <li>在列映射界面确认列映射。</li>
+      <li>在确认界面仔细检查替换内容（调整内容）。</li>
+      <li>确认无误后执行导入。</li>
+      <li>在库存历史中确认调整记录。</li>
+    </ol>
+  </section>
+
+  <section class="chapter" id="csv-add">
+    <div class="chapter-head"><div class="ch-no">第10章</div><h2>以入库方式添加</h2></div>
+    <p>以入库方式添加是一种 CSV 导入模式，会将文件中的数量作为入库交易添加到现有库存。与替换当前库存不同，它是加入当前库存，而不是覆盖当前库存。</p>
+    <div class="table-wrap"><table>
+      <tr><th>导入模式</th><th>行为</th><th>使用示例</th></tr>
+      <tr><td>替换当前库存</td><td>将 CSV 数量视为新的当前库存，并将差异记录为调整历史</td><td>盘点后库存修正、初始设置</td></tr>
+      <tr><td>以入库方式添加</td><td>将 CSV 数量作为入库加入当前库存</td><td>批量入库导入</td></tr>
+    </table></div>
+    <div class="box box-hint"><strong>💡 提示</strong>第一次建立库存时使用<strong>替换当前库存</strong>；要把数量加到现有库存时，使用<strong>以入库方式添加</strong>。执行导入前，请先确认需要哪一种模式。</div>
+  </section>
+
+  <section class="chapter" id="notes">
+    <div class="chapter-head"><div class="ch-no">第11章</div><h2>重要注意事项</h2></div>
+    <div class="box box-warn"><strong>⚠ 设置详细位置</strong>如需使用详细位置，请在设置中切换至<strong>详细</strong>模式。如果仍在简单 A/B/C 模式，详细位置不会显示。</div>
+    <div class="box box-warn"><strong>⚠ 操作前确认位置和数量</strong>入库、出库、调拨和 CSV 导入会立即反映到库存。每次操作前都请先确认位置和数量。</div>
+    <div class="box box-danger"><strong>🚨 CSV 操作前请先备份</strong>使用替换当前库存、以入库方式添加或备份还原操作前，请务必先备份。</div>
+  </section>
+
+  <section class="chapter" id="tips">
+    <div class="chapter-head"><div class="ch-no">第12章</div><h2>推荐工作流程</h2></div>
+    <h3>每日记录入库和出库</h3>
+    <ul>
+      <li>每次商品到货时，都通过入库登记到货库存。</li>
+      <li>每次商品发出时，都通过出库记录出库库存。</li>
+      <li>在商品主数据中设置补货点，并使用库存查询监控补货时机。</li>
+    </ul>
+    <h3>定期库存核查</h3>
+    <ul>
+      <li>定期检查库存数量，例如每周、每月或按需要进行。</li>
+      <li>结合盘点使用，定期确认实际数量是否与库存记录一致。</li>
+    </ul>
+    <h3>定期备份</h3>
+    <ul>
+      <li>每月至少导出一次备份 CSV，并保存到电脑或云端存储空间。</li>
+    </ul>
+    <div class="box box-hint"><strong>💡 如有以下需求，建议考虑升级至完整版</strong>
+      <ul style="margin-top:6px;">
+        <li>希望盘点结果自动更新库存</li>
+        <li>需要直接编辑已登记的累计库存总量</li>
+        <li>商品数量超过 300 种</li>
+      </ul>
+    </div>
+  </section>
+
+  <div class="summary-box" id="summary">
+    <h3>📌 本章要点</h3>
+    <ul>
+      <li>标准版提高上限：主数据最多 300 条、历史记录最多 1,000 条、导出最多 300 条。</li>
+      <li>入库和出库会立即反映到库存；保存前请确认数量和位置。</li>
+      <li>库存历史会完整记录所有入库、出库、调拨和调整操作。</li>
+      <li>CSV 导入有两种模式：替换当前库存和以入库方式添加。使用任一模式前都请先备份。</li>
+      <li>位置通过简单 A/B/C 设置。如需使用详细位置，请切换至详细模式。</li>
+      <li>直接编辑已登记累计总量需要完整版解锁。</li>
+    </ul>
+  </div>
+  <div class="confirm-box" id="confirm">
+    <h3>🔍 使用前注意事项</h3>
+    <ul>
+      <li>请在应用显示的选项范围内使用位置主数据。如需详细位置管理，请确认当前模式，并视需要考虑使用完整版功能。</li>
+      <li>如果入库或出库数据保存错误，请查看库存历史，并按照应用内指引进行修正、冲销或记录调整。</li>
+      <li>导出备份 CSV 集时，请将生成的文件放在一起并妥善保存。</li>
+    </ul>
+  </div></div>
+<footer>
+  <p>Quantiventra 使用手册 | ⑥ 库存管理标准版</p>
+  <p style="margin-top:4px;">本手册可能会不经事先通知进行更新。最新信息请以应用内显示为准。</p>
+  <p style="margin-top:4px;"><a href="privacy_zh.html">隐私政策</a></p>
+</footer>
+</body></html>

@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="id">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quantiventra – Manajemen Stok – Paket Standar</title>
+<style>*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;font-size:15px;line-height:1.8;color:#1a2535;background:#f4f7fb;}
+a{color:#1a5fa8;text-decoration:none;}a:hover{text-decoration:underline;}
+.site-nav{background:#1a3a5c;color:#fff;padding:0;}.site-nav .nav-inner{max-width:960px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:stretch;}
+.site-nav a{color:#cde;padding:10px 13px;font-size:12px;display:block;border-right:1px solid #2a4a6c;white-space:nowrap;}
+.site-nav a:hover{background:#2a5090;text-decoration:none;}.site-nav a.active{background:#2a6cbe;color:#fff;font-weight:bold;}
+.page-header{background:linear-gradient(135deg,#1a3a5c 0%,#2a6cbe 100%);color:#fff;padding:40px 20px 30px;}
+.page-header .inner{max-width:960px;margin:0 auto;}.page-header .app-name{font-size:13px;opacity:.8;}
+.page-header h1{font-size:22px;font-weight:700;margin-top:6px;line-height:1.4;}.page-header .subtitle{font-size:14px;opacity:.85;margin-top:8px;}
+.scope-box{background:rgba(255,255,255,.15);border-left:4px solid #7ecfff;padding:12px 16px;margin-top:16px;border-radius:4px;font-size:13px;}
+.container{max-width:960px;margin:0 auto;padding:30px 16px;}
+.toc{background:#fff;border:1px solid #c8d8ec;border-radius:8px;padding:24px 28px;margin-bottom:32px;}
+.toc h2{font-size:16px;font-weight:700;color:#1a3a5c;border-bottom:2px solid #2a6cbe;padding-bottom:8px;margin-bottom:14px;}
+.toc ol{margin-left:18px;}.toc li{margin:5px 0;font-size:14px;}
+.chapter{background:#fff;border-radius:8px;box-shadow:0 1px 4px rgba(0,0,0,.08);padding:28px 28px 24px;margin-bottom:28px;}
+.chapter-head{border-left:5px solid #2a6cbe;padding-left:14px;margin-bottom:20px;}
+.chapter-head .ch-no{font-size:12px;color:#2a6cbe;font-weight:700;}.chapter-head h2{font-size:20px;font-weight:700;color:#1a2535;margin-top:2px;}
+h3{font-size:16px;font-weight:700;color:#1a3a5c;border-bottom:1px solid #dde8f5;padding-bottom:5px;margin:22px 0 12px;}
+h4{font-size:14px;font-weight:700;color:#2a4a6c;margin:16px 0 8px;}
+p{margin-bottom:12px;}ul,ol{margin-left:20px;margin-bottom:12px;}li{margin-bottom:5px;}
+.steps{counter-reset:step;list-style:none;margin-left:0;}
+.steps li{counter-increment:step;padding:9px 12px 9px 46px;position:relative;background:#f8fbff;border:1px solid #dde8f5;border-radius:6px;margin-bottom:6px;}
+.steps li::before{content:counter(step);position:absolute;left:12px;top:50%;transform:translateY(-50%);width:24px;height:24px;background:#2a6cbe;color:#fff;border-radius:50%;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;}
+.table-wrap{overflow-x:auto;margin-bottom:16px;}
+table{width:100%;border-collapse:collapse;font-size:13px;min-width:380px;}
+th{background:#1a3a5c;color:#fff;padding:9px 12px;text-align:left;white-space:nowrap;}
+td{padding:8px 12px;border-bottom:1px solid #dde8f5;vertical-align:top;}tr:nth-child(even) td{background:#f4f7fb;}
+code{font-family:'Courier New',monospace;background:rgba(0,80,160,.08);color:#004080;padding:2px 6px;border-radius:3px;font-size:12px;}
+.box{border-radius:6px;padding:13px 16px;margin:14px 0;font-size:13px;}
+.box-warn{background:#fffbe6;border-left:4px solid #f5a623;color:#7a5700;}
+.box-danger{background:#fff0f0;border-left:4px solid #d43f3f;color:#7a0000;}
+.box-hint{background:#e8f4ff;border-left:4px solid #2a6cbe;color:#0a3060;}
+.box-check{background:#f4eeff;border-left:4px solid #8c4fc8;color:#3a0070;}
+.box strong{display:block;margin-bottom:4px;}
+figure{max-width:280px;width:100%;margin:18px auto;text-align:center;}
+figure img{display:block;width:100%;max-width:280px;height:auto;margin:0 auto;border:1px solid #c8d8ec;border-radius:6px;box-shadow:0 2px 8px rgba(0,0,0,.1);}
+figcaption{font-size:12px;color:#5a7a99;margin-top:6px;}
+.img-pending{display:flex;align-items:center;justify-content:center;max-width:280px;width:100%;box-sizing:border-box;background:#e8eef5;border:2px dashed #99b8d8;border-radius:6px;height:160px;color:#5a7a99;font-size:13px;margin:18px auto;}
+.diff-add{background:#e8fff0;border-left:4px solid #2a9c5c;border-radius:6px;padding:12px 16px;margin:14px 0;font-size:13px;}
+.diff-add strong{display:block;color:#1a6c3c;margin-bottom:4px;}
+.flow-box{background:#f4f7fb;border:1px solid #c8d8ec;border-radius:8px;padding:20px;margin:16px 0;}
+.flow-box h4{color:#1a3a5c;margin-top:0;}
+.flow-arrow{text-align:center;font-size:20px;color:#2a6cbe;margin:4px 0;}
+.flow-step{background:#fff;border:1px solid #c8d8ec;border-radius:6px;padding:10px 16px;margin:4px 0;font-size:13px;}
+.flow-step strong{color:#1a3a5c;}
+.summary-box{background:linear-gradient(135deg,#e8f4ff,#f0f8ff);border:1px solid #99c8ec;border-radius:8px;padding:20px 24px;margin-top:32px;}
+.summary-box h3{border:none;color:#1a3a5c;margin-top:0;}
+.confirm-box{background:#fdf4ff;border:1px solid #c8a0e0;border-radius:8px;padding:20px 24px;margin-top:16px;}
+.confirm-box h3{border:none;color:#5a0090;margin-top:0;}
+.check{color:#2e7d32;font-weight:700;}.cross{color:#c62828;}
+th.pro-col{background:#5a2a8c;}
+.feature-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px;margin:16px 0;}
+.feature-card{background:#f4f7fb;border:1px solid #c8d8ec;border-radius:8px;padding:16px;}
+.feature-card h4{color:#1a3a5c;margin-top:0;margin-bottom:6px;font-size:14px;}
+.feature-card p{font-size:13px;margin:0;color:#3a5a7a;}
+.feature-card.pro-card{background:#f4eeff;border-color:#c8a0e0;}
+.feature-card.pro-card h4{color:#5a2a8c;}
+.trouble{border:1px solid #c8d8ec;border-radius:8px;margin:14px 0;overflow:hidden;}
+.trouble-q{background:#eef6fd;padding:13px 18px;font-weight:700;font-size:14px;color:#1a3a5c;display:flex;align-items:flex-start;gap:10px;}
+.trouble-q::before{content:'Q';background:#2a6cbe;color:#fff;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900;flex-shrink:0;margin-top:1px;}
+.trouble-a{padding:13px 18px 14px 50px;font-size:13.5px;border-top:1px solid #c8d8ec;line-height:1.9;}
+.trouble-a ul{margin-left:16px;}
+.legal-block{background:#f5f5f5;border:1px solid #ddd;border-radius:8px;padding:20px 24px;font-size:12.5px;color:#444;line-height:1.9;margin:14px 0;}
+.legal-block h4{font-size:13px;color:#333;margin:18px 0 6px;border-bottom:1px solid #ddd;padding-bottom:4px;}
+.legal-block h4:first-child{margin-top:0;}
+footer{text-align:center;font-size:12px;color:#8a9aaa;padding:30px 16px;border-top:1px solid #dde8f5;margin-top:20px;}
+@media(max-width:640px){.page-header h1{font-size:18px;}.chapter{padding:20px 16px;}.site-nav a{padding:8px 9px;font-size:11px;}}
+@media print{body{background:#fff;font-size:12px;}.site-nav{display:none;}.chapter{box-shadow:none;border:1px solid #ccc;page-break-inside:avoid;}.page-header{background:#1a3a5c !important;-webkit-print-color-adjust:exact;print-color-adjust:exact;}}
+</style></head>
+<body>
+<nav class="site-nav"><div class="nav-inner">
+  <a href="01_top_settings_common_id.html">① Beranda / Pengaturan</a>
+  <a href="02_stocktake_free_id.html">② Stok Opname Gratis</a>
+  <a href="03_stocktake_simple_id.html">③ Stok Opname Standar</a>
+  <a href="04_stocktake_full_id.html">④ Stok Opname Lengkap</a>
+  <a href="05_inventory_free_id.html">⑤ Manajemen Stok Gratis</a>
+  <a href="06_inventory_simple_id.html" class="active">⑥ Manajemen Stok Standar</a>
+  <a href="07_inventory_full_id.html">⑦ Manajemen Stok Lengkap</a>
+</div></nav>
+<header class="page-header"><div class="inner">
+  <div class="app-name">Manual Quantiventra</div>
+  <h1>⑥ Manajemen Stok — Paket Standar (Buka Kunci Standar)</h1>
+  <div class="subtitle">Yang ditambahkan Paket Standar, stok masuk, stok keluar, pengecekan stok, riwayat, impor/ekspor CSV, penggantian stok, dan penambahan sebagai stok masuk</div>
+  <div class="scope-box"><strong>Topik yang dibahas:</strong> Yang ditambahkan Manajemen Stok Paket Standar / Perbedaan dari paket gratis / Stok masuk / Stok keluar / Pengecekan stok / Riwayat stok / Pengelolaan lokasi / Impor/ekspor CSV / Ganti stok saat ini / Tambahkan sebagai stok masuk / Catatan penting / Alur kerja yang direkomendasikan</div>
+</div></header>
+<div class="container">
+  <nav class="toc"><h2>Daftar Isi</h2><ol>
+    <li><a href="#overview">Ikhtisar Paket Standar</a></li>
+    <li><a href="#diff">Perbedaan dari Paket Gratis</a></li>
+    <li><a href="#receive">Stok Masuk (Penerimaan)</a></li>
+    <li><a href="#issue">Stok Keluar (Pengiriman)</a></li>
+    <li><a href="#stock-check">Pengecekan Stok</a></li>
+    <li><a href="#history">Riwayat Stok</a></li>
+    <li><a href="#location">Pengelolaan Lokasi</a></li>
+    <li><a href="#csv">Impor / Ekspor CSV</a></li>
+    <li><a href="#csv-replace">Ganti Stok Saat Ini</a></li>
+    <li><a href="#csv-add">Tambahkan sebagai Stok Masuk</a></li>
+    <li><a href="#notes">Catatan Penting</a></li>
+    <li><a href="#tips">Alur Kerja yang Direkomendasikan</a></li>
+    <li><a href="#summary">Poin Utama Bab Ini</a></li>
+    <li><a href="#confirm">Catatan Sebelum Digunakan</a></li>
+  </ol></nav>
+
+  <section class="chapter" id="overview">
+    <div class="chapter-head"><div class="ch-no">BAB 1</div><h2>Ikhtisar Paket Standar</h2></div>
+    <p>Manajemen Stok Paket Standar mendukung lebih banyak data daripada paket gratis. Anda dapat menjalankan operasi harian seperti stok masuk, stok keluar, pengecekan stok, dan riwayat stok dengan lebih nyaman, dan cakupan pengelolaan lokasi juga diperluas.</p>
+    <h3>Batasan Paket Standar</h3>
+    <div class="table-wrap"><table>
+      <tr><th>Item</th><th>Paket Gratis</th><th>Paket Standar</th></tr>
+      <tr><td>Data master</td><td>Maks. 30</td><td>Maks. 300</td></tr>
+      <tr><td>Data riwayat stok</td><td>Maks. 30</td><td>Maks. 1.000</td></tr>
+      <tr><td>Data yang diekspor</td><td>Maks. 30</td><td>Maks. 300</td></tr>
+      <tr><td>Kunci rotasi layar</td><td>✗</td><td>○</td></tr>
+      <tr><td>Pendaftaran Katalog Lokasi</td><td>Terbatas di paket gratis</td><td>Tersedia dalam batas Paket Standar</td></tr>
+      <tr><td>Edit langsung total kumulatif terdaftar</td><td>✗</td><td>✗ (memerlukan Paket Lengkap)</td></tr>
+    </table></div>  </section>
+
+  <section class="chapter" id="diff">
+    <div class="chapter-head"><div class="ch-no">BAB 2</div><h2>Perbedaan dari Paket Gratis</h2></div>
+    <div class="diff-add">
+      <strong>✅ Yang ditambahkan atau diperluas oleh Paket Standar</strong>
+      <ul style="margin-top:6px;">
+        <li>Batas data master naik dari 30 → 300</li>
+        <li>Batas riwayat stok naik dari 30 → 1.000</li>
+        <li>Batas ekspor naik dari 30 → 300</li>
+        <li>Kunci rotasi layar tersedia</li>
+        <li>Cakupan pengelolaan lokasi diperluas</li>
+        <li>Lebih mudah mempertahankan operasi harian yang berkelanjutan: stok masuk, stok keluar, pengecekan stok, dan riwayat</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="chapter" id="receive">
+    <div class="chapter-head"><div class="ch-no">BAB 3</div><h2>Stok Masuk (Penerimaan)</h2></div>
+    <p>Operasi stok masuk menambah stok. Gunakan saat barang datang — misalnya untuk pembelian, penerimaan barang, dan transaksi sejenis.</p>    <h3>Prosedur Stok Masuk</h3>
+    <ol class="steps">
+      <li>Buka <strong>Manajemen Stok → Stok Masuk</strong>.</li>
+      <li>Pindai barcode atau masukkan kode produk.</li>
+      <li>Konfirmasi nama produk. Jika kode belum terdaftar, lanjutkan untuk membuat entri baru di Katalog Produk.</li>
+      <li>Di entri Katalog Produk baru, daftarkan nama produk, harga jual, dan titik pemesanan ulang.</li>
+      <li>Setelah disimpan, kembali ke layar Stok Masuk — kode dan nama produk yang terdaftar akan terisi otomatis.</li>
+      <li>Pilih lokasi tujuan (gudang, toko, dll.).</li>
+      <li>Masukkan jumlah yang diterima.</li>
+      <li>Ketuk <strong>Simpan</strong>. Jumlah langsung ditambahkan ke stok.</li>
+      <li>Konfirmasi pembaruan di Pengecekan Stok atau Riwayat Stok.</li>
+    </ol>
+    <div class="box box-hint"><strong>💡 Tentang atribut Katalog Produk</strong>Harga jual dan titik pemesanan ulang adalah atribut yang dikelola di Katalog Produk — tidak dimasukkan untuk setiap transaksi stok masuk. Pada layar Stok Masuk biasa, fokus pada pengisian jumlah, lokasi, dan catatan.</div>
+    <div class="box box-warn"><strong>⚠ Catatan</strong>Stok masuk langsung tercermin di stok. Selalu konfirmasi jumlah dan lokasi sebelum menyimpan. Jika Anda menyadari jumlah yang salah setelah menyimpan, periksa Riwayat Stok dan ikuti panduan dalam aplikasi untuk memperbaiki, membalikkan transaksi, atau mencatat penyesuaian sesuai kebutuhan.</div>
+  </section>
+
+  <section class="chapter" id="issue">
+    <div class="chapter-head"><div class="ch-no">BAB 4</div><h2>Stok Keluar (Pengiriman)</h2></div>
+    <p>Operasi stok keluar mengurangi stok. Gunakan untuk penjualan, pengiriman keluar, pengantaran, dan transaksi sejenis.</p>    <h3>Prosedur Stok Keluar</h3>
+    <ol class="steps">
+      <li>Buka <strong>Manajemen Stok → Stok Keluar</strong>.</li>
+      <li>Pindai barcode atau masukkan kode produk.</li>
+      <li>Konfirmasi nama produk.</li>
+      <li>Pilih lokasi sumber (lokasi tempat stok keluar).</li>
+      <li>Masukkan jumlah yang akan dikirim/dikeluarkan.</li>
+      <li>Ketuk <strong>Simpan</strong>. Jumlah langsung dikurangi dari stok.</li>
+      <li>Konfirmasi pembaruan di Pengecekan Stok atau Riwayat Stok.</li>
+    </ol>
+    <div class="box box-hint"><strong>💡 Tentang kolom stok</strong>Kolom stok di layar Stok Keluar menampilkan stok saat ini untuk produk dan lokasi yang dipilih — ini adalah kolom tampilan, bukan kolom input yang dapat diedit. Stok berkurang setelah jumlah stok keluar disimpan.</div>
+    <div class="box box-danger"><strong>🚨 Penting</strong>Jangan masukkan jumlah stok keluar yang melebihi stok saat ini. Periksa jumlah stok per lokasi sebelum memasukkan jumlah yang akan dikeluarkan.</div>
+  </section>
+
+  <section class="chapter" id="stock-check">
+    <div class="chapter-head"><div class="ch-no">BAB 5</div><h2>Pengecekan Stok</h2></div>
+    <p>Pengecekan Stok awalnya menampilkan total stok gabungan per produk. Pemeriksaan kebutuhan pemesanan ulang membandingkan total stok dari semua lokasi dengan pengaturan "Sertakan dalam pemeriksaan kebutuhan pemesanan ulang" yang aktif dengan titik pemesanan ulang di Katalog Produk.</p>    <h3>Prosedur Pengecekan Stok</h3>
+    <ol class="steps">
+      <li>Buka <strong>Manajemen Stok → Pengecekan Stok</strong>.</li>
+      <li>Temukan produk yang ingin Anda periksa (gunakan pencarian atau gulir daftar).</li>
+      <li>Identifikasi produk yang berada di bawah titik pemesanan ulangnya (ditampilkan sebagai produk yang memerlukan pemesanan ulang).</li>
+      <li>Ketuk produk untuk melihat rincian per lokasi, riwayat, dan informasi detail. Dalam tampilan rincian per lokasi, pemeriksaan kebutuhan pemesanan ulang tidak ditampilkan atau dianggap tidak aktif.</li>
+    </ol>
+  </section>
+
+  <section class="chapter" id="history">
+    <div class="chapter-head"><div class="ch-no">BAB 6</div><h2>Riwayat Stok</h2></div>
+    <p>Riwayat Stok menampilkan log semua operasi stok masuk, stok keluar, transfer, penyesuaian stok opname, stok awal, dan impor CSV.</p>    <h3>Yang Dapat Dilihat di Riwayat Stok</h3>
+    <ul>
+      <li>Tanggal/waktu dan jenis operasi (stok masuk, stok keluar, transfer, penyesuaian, dll.)</li>
+      <li>Kode dan nama produk</li>
+      <li>Lokasi dan perubahan jumlah</li>
+      <li>Catatan</li>
+    </ul>
+    <div class="box box-hint"><strong>💡 Tips</strong>Jika jumlah stok tidak sesuai, telusuri Riwayat Stok ke belakang untuk memeriksa kesalahan input atau penyesuaian yang tidak terduga.</div>
+  </section>
+
+  <section class="chapter" id="location">
+    <div class="chapter-head"><div class="ch-no">BAB 7</div><h2>Pengelolaan Lokasi</h2></div>
+    <p>Paket Standar terutama menggunakan lokasi dasar "Gudang" dan "Toko".</p>
+    <div class="table-wrap"><table>
+      <tr><th>Mode</th><th>Lokasi yang tersedia</th></tr>
+      <tr><td>Sederhana A</td><td>Gudang saja</td></tr>
+      <tr><td>Sederhana B</td><td>Gudang + Toko</td></tr>
+      <tr><td>Sederhana C</td><td>Toko saja</td></tr>
+    </table></div>
+    <h3>Transfer Stok</h3>
+    <p>Transfer stok memindahkan jumlah stok dari satu lokasi ke lokasi lain.</p>
+    <div class="box box-warn"><strong>⚠ Catatan</strong>Jangan melakukan transfer antara lokasi yang sama. Jika hanya ada satu lokasi (misalnya Sederhana A), transfer stok tidak diperlukan — gunakan stok masuk, stok keluar, atau koreksi sebagai gantinya.</div>
+    <div class="box box-hint"><strong>💡 Tips</strong>Untuk menggunakan lokasi detail (misalnya nomor rak), Anda perlu beralih ke mode <strong>Detail</strong> di pengaturan. Mode Detail digunakan saat mengakses fitur Paket Lengkap.</div>
+  </section>
+
+  <section class="chapter" id="csv">
+    <div class="chapter-head"><div class="ch-no">BAB 8</div><h2>Impor / Ekspor CSV</h2></div>
+    <p>Manajemen Stok memungkinkan Anda mengimpor, mengekspor, dan mencadangkan data stok menggunakan file CSV.</p>
+    <div class="box box-danger"><strong>🚨 Penting</strong>Operasi impor CSV dapat mengubah data Anda secara signifikan. Selalu ekspor CSV cadangan sebelum mengimpor.</div>
+    <h3>Spesifikasi CSV Stok</h3>
+    <div class="table-wrap"><table>
+      <tr><th>Jenis CSV</th><th>Tujuan</th><th>Kolom utama</th><th>Wajib/Opsional</th><th>Catatan</th><th>Tersedia di</th></tr>
+      <tr><td>CSV stok (dengan kolom lokasi)</td><td>Mengimpor data stok khusus per lokasi</td><td>location, item_code, quantity, product_name</td><td>location, item_code, quantity wajib; product_name wajib bersyarat</td><td>Kolom product_name diperlukan untuk kode yang belum terdaftar</td><td>Manajemen Stok Standar atau lebih tinggi</td></tr>
+      <tr><td>CSV stok (tanpa kolom lokasi)</td><td>Mengimpor data stok untuk lokasi yang ditentukan</td><td>item_code, quantity, product_name</td><td>item_code, quantity wajib</td><td>Pilih lokasi tujuan saat mengimpor</td><td>Manajemen Stok Standar atau lebih tinggi</td></tr>
+      <tr><td>CSV cadangan</td><td>Cadangan dan pemulihan data lengkap</td><td>Produk, stok saat ini, lokasi, kategori — beberapa file</td><td>Memerlukan set cadangan lengkap</td><td>Dapat dibagi ke beberapa file</td><td>Manajemen Stok Standar atau lebih tinggi</td></tr>
+    </table></div>
+    <h3>Menggunakan Layar Pemetaan Kolom</h3>
+    <p>Saat mengimpor CSV, Anda memilih kolom mana yang dipetakan ke kode produk, nama produk, jumlah, lokasi, dan sebagainya.</p>
+    <ol class="steps">
+      <li>Pilih file CSV.</li>
+      <li>Di layar pemetaan kolom, tetapkan setiap kolom CSV ke kolom yang sesuai (kode produk, jumlah, dll.).</li>
+      <li>Konfirmasi penetapan kolom dan jalankan impor.</li>
+    </ol>
+    <div class="box box-warn">
+      <strong>⚠ Kesalahan umum impor CSV</strong>
+      <ul style="margin-top:6px;">
+        <li>Kolom wajib tidak ada</li>
+        <li>Kolom yang sama ditetapkan ke lebih dari satu kolom</li>
+        <li>Kolom jumlah kosong atau bukan angka</li>
+        <li>Tidak ada kolom nama produk yang dipilih untuk kode yang belum terdaftar</li>
+        <li>Tidak ada kolom lokasi dan tidak ada lokasi tujuan yang dipilih</li>
+        <li>CSV kosong atau tidak memiliki baris yang dapat diimpor</li>
+      </ul>
+    </div>  </section>
+
+  <section class="chapter" id="csv-replace">
+    <div class="chapter-head"><div class="ch-no">BAB 9</div><h2>Ganti Stok Saat Ini</h2></div>
+    <p>Ganti Stok Saat Ini adalah mode impor CSV yang memperlakukan jumlah dalam file sebagai stok saat ini yang baru. Riwayat yang ada tetap dipertahankan, dan selisihnya dicatat sebagai entri riwayat penyesuaian.</p>
+    <div class="box box-danger">
+      <strong>🚨 Penting: gunakan Ganti Stok Saat Ini dengan hati-hati</strong>
+      <ul style="margin-top:6px;">
+        <li>Baris stok yang tidak ada di CSV mungkin diatur menjadi 0.</li>
+        <li>Operasi ini dapat berdampak besar pada data stok yang sudah ada — selalu buat cadangan terlebih dahulu.</li>
+        <li>Baca layar konfirmasi dengan teliti sebelum menjalankan.</li>
+      </ul>
+    </div>
+    <h3>Prosedur Ganti Stok Saat Ini</h3>
+    <ol class="steps">
+      <li>Ekspor CSV cadangan (wajib).</li>
+      <li>Buka <strong>Manajemen Stok → Impor CSV → Ganti Stok Saat Ini</strong>.</li>
+      <li>Pilih file CSV yang akan diimpor.</li>
+      <li>Konfirmasi pemetaan kolom di layar pemetaan.</li>
+      <li>Di layar konfirmasi, tinjau detail penggantian (isi penyesuaian) dengan cermat.</li>
+      <li>Jika semuanya terlihat benar, jalankan impor.</li>
+      <li>Verifikasi entri penyesuaian di Riwayat Stok.</li>
+    </ol>
+  </section>
+
+  <section class="chapter" id="csv-add">
+    <div class="chapter-head"><div class="ch-no">BAB 10</div><h2>Tambahkan sebagai Stok Masuk</h2></div>
+    <p>Tambahkan sebagai Stok Masuk adalah mode impor CSV yang menambahkan jumlah dalam file ke stok yang ada sebagai transaksi stok masuk — berbeda dari Ganti Stok Saat Ini, mode ini menambahkan ke stok saat ini, bukan menimpanya.</p>
+    <div class="table-wrap"><table>
+      <tr><th>Mode impor</th><th>Perilaku</th><th>Contoh penggunaan</th></tr>
+      <tr><td>Ganti Stok Saat Ini</td><td>Memperlakukan jumlah CSV sebagai stok saat ini yang baru. Selisih dicatat sebagai riwayat penyesuaian</td><td>Koreksi stok setelah stok opname, pengaturan awal</td></tr>
+      <tr><td>Tambahkan sebagai Stok Masuk</td><td>Menambahkan jumlah CSV ke stok saat ini sebagai stok masuk</td><td>Impor stok masuk secara massal</td></tr>
+    </table></div>
+    <div class="box box-hint"><strong>💡 Tips</strong>Gunakan <strong>Ganti Stok Saat Ini</strong> saat menyiapkan stok untuk pertama kali, dan gunakan <strong>Tambahkan sebagai Stok Masuk</strong> saat menambahkan ke stok yang sudah ada. Konfirmasi mode yang Anda butuhkan sebelum menjalankan impor.</div>
+  </section>
+
+  <section class="chapter" id="notes">
+    <div class="chapter-head"><div class="ch-no">BAB 11</div><h2>Catatan Penting</h2></div>
+    <div class="box box-warn"><strong>⚠ Menyiapkan Lokasi Detail</strong>Untuk menggunakan lokasi detail, beralihlah ke mode <strong>Detail</strong> di pengaturan. Lokasi detail tidak akan muncul jika Anda masih menggunakan Sederhana A/B/C.</div>
+    <div class="box box-warn"><strong>⚠ Verifikasi Lokasi dan Jumlah Sebelum Bertindak</strong>Stok masuk, stok keluar, transfer, dan impor CSV langsung tercermin di stok. Konfirmasi lokasi dan jumlah sebelum setiap operasi.</div>
+    <div class="box box-danger"><strong>🚨 Buat Cadangan Sebelum Operasi CSV</strong>Selalu buat cadangan sebelum menjalankan Ganti Stok Saat Ini, Tambahkan sebagai Stok Masuk, dan operasi pemulihan cadangan.</div>
+  </section>
+
+  <section class="chapter" id="tips">
+    <div class="chapter-head"><div class="ch-no">BAB 12</div><h2>Alur Kerja yang Direkomendasikan</h2></div>
+    <h3>Catat Stok Masuk dan Stok Keluar Setiap Hari</h3>
+    <ul>
+      <li>Daftarkan stok masuk melalui Stok Masuk setiap kali barang datang.</li>
+      <li>Catat stok keluar melalui Stok Keluar setiap kali barang keluar.</li>
+      <li>Tetapkan titik pemesanan ulang di Katalog Produk dan gunakan Pengecekan Stok untuk memantau waktu restok.</li>
+    </ul>
+    <h3>Pengecekan Stok Berkala</h3>
+    <ul>
+      <li>Periksa jumlah stok secara berkala — mingguan, bulanan, atau sesuai kebutuhan.</li>
+      <li>Kombinasikan dengan stok opname untuk memverifikasi secara berkala bahwa jumlah fisik sesuai dengan catatan stok Anda.</li>
+    </ul>
+    <h3>Cadangan Rutin</h3>
+    <ul>
+      <li>Ekspor CSV cadangan setidaknya sekali sebulan dan simpan di PC atau penyimpanan cloud.</li>
+    </ul>
+    <div class="box box-hint"><strong>💡 Pertimbangkan peningkatan ke Paket Lengkap jika Anda…</strong>
+      <ul style="margin-top:6px;">
+        <li>Ingin hasil stok opname otomatis memperbarui stok</li>
+        <li>Perlu mengedit langsung total stok kumulatif terdaftar</li>
+        <li>Memiliki lebih dari 300 produk</li>
+      </ul>
+    </div>
+  </section>
+
+  <div class="summary-box" id="summary">
+    <h3>📌 Poin Utama Bab Ini</h3>
+    <ul>
+      <li>Paket Standar menaikkan batas: hingga 300 data master, 1.000 data riwayat, dan 300 data ekspor.</li>
+      <li>Stok masuk dan stok keluar langsung tercermin di stok — konfirmasi jumlah dan lokasi sebelum menyimpan.</li>
+      <li>Riwayat Stok menampilkan log lengkap semua operasi stok masuk, stok keluar, transfer, dan penyesuaian.</li>
+      <li>Impor CSV memiliki dua mode — Ganti Stok Saat Ini dan Tambahkan sebagai Stok Masuk. Selalu buat cadangan sebelum menggunakan keduanya.</li>
+      <li>Lokasi diatur melalui mode Sederhana A/B/C. Beralihlah ke mode Detail untuk lokasi detail.</li>
+      <li>Edit langsung total kumulatif terdaftar memerlukan Paket Lengkap.</li>
+    </ul>
+  </div>
+  <div class="confirm-box" id="confirm">
+    <h3>🔍 Catatan Sebelum Digunakan</h3>
+    <ul>
+      <li>Gunakan Katalog Lokasi dalam opsi yang ditampilkan di aplikasi. Untuk pengelolaan lokasi detail, periksa mode saat ini dan pertimbangkan fitur Paket Lengkap bila diperlukan.</li>
+      <li>Jika entri stok masuk atau stok keluar tersimpan keliru, periksa Riwayat Stok dan ikuti panduan dalam aplikasi untuk memperbaiki, membalikkan transaksi, atau mencatat penyesuaian sesuai kebutuhan.</li>
+      <li>Saat mengekspor set CSV cadangan, simpan semua file yang dihasilkan bersama-sama dan simpan dengan aman.</li>
+      <li>Alur operasi aktual layar Transfer Stok ditunjukkan pada gambar di bagian sebelumnya.</li>
+      <li>Tangkapan layar pemeriksaan kolom CSV dan konfirmasi penggantian stok ditunjukkan pada bagian CSV.</li>
+    </ul>
+  </div>
+</div>
+<footer>
+  <p>Manual Quantiventra | ⑥ Manajemen Stok Paket Standar</p>
+  <p style="margin-top:4px;">Manual ini dapat diperbarui tanpa pemberitahuan sebelumnya. Selalu rujuk tampilan dalam aplikasi untuk informasi terbaru.</p>
+  <p style="margin-top:4px;"><a href="privacy_id.html">Kebijakan Privasi</a></p>
+</footer>
+</body></html>

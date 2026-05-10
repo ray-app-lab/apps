@@ -101,7 +101,9 @@ footer{text-align:center;font-size:12px;color:#8a9aaa;padding:30px 16px;border-t
       <tr><td>锁定屏幕旋转</td><td>✗</td><td>○</td></tr>
       <tr><td>位置主数据登记</td><td>免费版中受限</td><td>可在标准版限制范围内使用</td></tr>
       <tr><td>直接编辑已登记累计总量</td><td>✗</td><td>✗（需要完整版解锁）</td></tr>
-    </table></div>  </section>
+    </table></div>
+    <figure><img src="images/10_inventory_home.png" alt="库存管理主屏幕"><figcaption>图1-1 库存管理主屏幕</figcaption></figure>
+  </section>
 
   <section class="chapter" id="diff">
     <div class="chapter-head"><div class="ch-no">第2章</div><h2>与免费版的差异</h2></div>
@@ -120,7 +122,9 @@ footer{text-align:center;font-size:12px;color:#8a9aaa;padding:30px 16px;border-t
 
   <section class="chapter" id="receive">
     <div class="chapter-head"><div class="ch-no">第3章</div><h2>入库（Stock In）</h2></div>
-    <p>入库操作会增加库存。商品到货时使用，例如采购、收货以及类似交易。</p>    <h3>入库步骤</h3>
+    <p>入库操作会增加库存。商品到货时使用，例如采购、收货以及类似交易。</p>
+    <figure><img src="images/13_receive.png" alt="入库界面"><figcaption>图3-1 入库界面</figcaption></figure>
+    <h3>入库步骤</h3>
     <ol class="steps">
       <li>进入<strong>库存管理 → 入库</strong>。</li>
       <li>扫描条码或输入商品编码。</li>
@@ -138,7 +142,9 @@ footer{text-align:center;font-size:12px;color:#8a9aaa;padding:30px 16px;border-t
 
   <section class="chapter" id="issue">
     <div class="chapter-head"><div class="ch-no">第4章</div><h2>出库（Stock Out）</h2></div>
-    <p>出库操作会减少库存。用于销售、发货、配送以及类似交易。</p>    <h3>出库步骤</h3>
+    <p>出库操作会减少库存。用于销售、发货、配送以及类似交易。</p>
+    <figure><img src="images/14_issue.png" alt="出库界面"><figcaption>图4-1 出库界面</figcaption></figure>
+    <h3>出库步骤</h3>
     <ol class="steps">
       <li>进入<strong>库存管理 → 出库</strong>。</li>
       <li>扫描条码或输入商品编码。</li>
@@ -154,7 +160,9 @@ footer{text-align:center;font-size:12px;color:#8a9aaa;padding:30px 16px;border-t
 
   <section class="chapter" id="stock-check">
     <div class="chapter-head"><div class="ch-no">第5章</div><h2>库存查询</h2></div>
-    <p>库存查询一开始会显示每个商品的合并库存总量。补货判断会将所有“计入补货判断”已开启位置的库存总量，与商品主数据中的补货点进行比较。</p>    <h3>库存查询步骤</h3>
+    <p>库存查询一开始会显示每个商品的合并库存总量。补货判断会将所有“计入补货判断”已开启位置的库存总量，与商品主数据中的补货点进行比较。</p>
+    <figure><img src="images/11_stock_check.png" alt="库存查询界面"><figcaption>图5-1 库存查询界面</figcaption></figure>
+    <h3>库存查询步骤</h3>
     <ol class="steps">
       <li>进入<strong>库存管理 → 库存查询</strong>。</li>
       <li>找到要查询的商品（可搜索或滚动列表）。</li>
@@ -165,7 +173,9 @@ footer{text-align:center;font-size:12px;color:#8a9aaa;padding:30px 16px;border-t
 
   <section class="chapter" id="history">
     <div class="chapter-head"><div class="ch-no">第6章</div><h2>库存历史</h2></div>
-    <p>库存历史会显示所有入库、出库、调拨、盘点调整、期初库存和 CSV 导入操作的记录。</p>    <h3>可在库存历史中查看的内容</h3>
+    <p>库存历史会显示所有入库、出库、调拨、盘点调整、期初库存和 CSV 导入操作的记录。</p>
+    <figure><img src="images/16_stock_history.png" alt="库存历史界面"><figcaption>图6-1 库存历史界面</figcaption></figure>
+    <h3>可在库存历史中查看的内容</h3>
     <ul>
       <li>日期/时间和操作类型（入库、出库、调拨、调整等）</li>
       <li>商品编码和名称</li>
@@ -218,7 +228,9 @@ footer{text-align:center;font-size:12px;color:#8a9aaa;padding:30px 16px;border-t
         <li>没有位置列，也没有选择目标位置</li>
         <li>CSV 为空，或没有可导入的行</li>
       </ul>
-    </div>  </section>
+    </div>
+    <figure><img src="images/15_stock_move.png" alt="库存调拨界面（CSV 参考）"><figcaption>图8-1 库存调拨界面</figcaption></figure>
+  </section>
 
   <section class="chapter" id="csv-replace">
     <div class="chapter-head"><div class="ch-no">第9章</div><h2>替换当前库存</h2></div>
@@ -305,7 +317,10 @@ footer{text-align:center;font-size:12px;color:#8a9aaa;padding:30px 16px;border-t
       <li>如果入库或出库数据保存错误，请查看库存历史，并按照应用内指引进行修正、冲销或记录调整。</li>
       <li>导出备份 CSV 集时，请将生成的文件放在一起并妥善保存。</li>
     </ul>
-  </div></div>
+  </div>
+  <figure><img src="images/20_csv_inventory_mapping.png" alt="库存 CSV 列选择画面"><figcaption>图9-1 库存 CSV 列选择画面</figcaption></figure>
+  <figure><img src="images/21_csv_replace_confirm.png" alt="库存 CSV 替换确认画面"><figcaption>图9-2 库存 CSV 替换确认画面</figcaption></figure>
+</div>
 <footer>
   <p>Quantiventra 使用手册 | ⑥ 库存管理标准版</p>
   <p style="margin-top:4px;">本手册可能会不经事先通知进行更新。最新信息请以应用内显示为准。</p>

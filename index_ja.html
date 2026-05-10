@@ -9,9 +9,6 @@
         body { margin: 0; font-family: "Helvetica Neue", Arial, sans-serif; background-color: var(--bg-cream); color: var(--main-text); line-height: 1.6; }
         header { background: #fff; padding: 30px 20px; text-align: center; border-bottom: 1px solid #eee; position: relative; z-index: 1; }
         .logo { font-size: 1.8rem; font-weight: bold; letter-spacing: 4px; margin: 0; position: relative; z-index: 1; pointer-events: none; }
-        .lang-switch { position: absolute; top: 15px; right: 20px; font-size: 0.8rem; z-index: 9999; pointer-events: auto; }
-        .lang-switch a { color: #888; text-decoration: none; margin-left: 10px; border: 1px solid #eee; padding: 4px 8px; border-radius: 4px; position: relative; z-index: 10000; cursor: pointer; display: inline-block; background: #fff; }
-        .lang-switch a:hover { background-color: #eee; transition: 0.3s; }
         .hero { max-width: 800px; margin: 50px auto; text-align: center; padding: 0 20px; }
         .ray-photo { width: 180px; height: 180px; border-radius: 50%; object-fit: cover; border: 6px solid #fff; box-shadow: 0 5px 15px rgba(0,0,0,0.08); margin-bottom: 25px; }
         .container { max-width: 1000px; margin: 0 auto 80px; padding: 0 20px; }
@@ -30,7 +27,6 @@
 </head>
 <body>
 <header>
-    <div class="lang-switch"><a href="index_en.html">English</a> | <a href="index.html?select=true">言語選択</a></div>
     <div class="logo">RAY APP LAB</div>
 </header>
 <section class="hero">
@@ -51,7 +47,7 @@
                 const name = app.names[PAGE_LANG] || app.names['en'];
                 const desc = app.descs[PAGE_LANG] || app.descs['en'];
                 const btnText = app.btn_text[PAGE_LANG] || app.btn_text['en'];
-                const linkUrl = `${app.id}/intro_${PAGE_LANG}.html`;
+                const linkUrl = app.intro_urls ? app.intro_urls[PAGE_LANG] : '#';
                 const privacyUrl = app.privacy_urls ? (app.privacy_urls[PAGE_LANG] || app.privacy_urls['en']) : null;
                 const privacyHtml = privacyUrl ? `<a href="${privacyUrl}" class="privacy-link">プライバシーポリシー</a>` : "";
                 return `<div class="card"><a href="${linkUrl}" class="app-main-link"><span class="app-icon">${app.icon}</span><div class="app-name">${name}</div><p class="app-desc">${desc}</p><span class="btn">${btnText}</span></a>${privacyHtml}</div>`;
@@ -60,5 +56,25 @@
     }
     loadApps();
 </script>
+<script data-codex-source-guard>
+(function () {
+  document.addEventListener('contextmenu', function (event) {
+    event.preventDefault();
+  });
+  document.addEventListener('keydown', function (event) {
+    var key = (event.key || '').toLowerCase();
+    var blocked = event.key === 'F12'
+      || (event.ctrlKey && event.shiftKey && ['i', 'j', 'c'].indexOf(key) !== -1)
+      || (event.ctrlKey && ['u', 's'].indexOf(key) !== -1);
+    if (blocked) {
+      event.preventDefault();
+      event.stopPropagation();
+      return false;
+    }
+  }, true);
+})();
+</script>
 </body>
 </html>
+
+

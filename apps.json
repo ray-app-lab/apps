@@ -1,29 +1,75 @@
 [
-  {
-    "id": "quantiventra",
-    "icon": "📦",
-    "names": {
-      "ja": "Quantiventra", "en": "Quantiventra", "zh": "Quantiventra", "tw": "Quantiventra", "ko": "Quantiventra", "hi": "Quantiventra", "vi": "Quantiventra", "it": "Quantiventra", "pt": "Quantiventra", "es": "Quantiventra", "id": "Quantiventra", "th": "Quantiventra"
-    },
-    "descs": {
-      "ja": "現場を支えるスマート棚卸アプリ。高速バーコードスキャンで、在庫管理の負担を最小限に抑えます。",
-      "en": "Smart inventory app for professionals. Minimize stock management burden with high-speed barcode scanning.",
-      "zh": "面向专业人士的智能库存管理应用。通过高速条形码扫描减轻工作负担。",
-      "tw": "面向專業人士的智能庫存管理應用。透過高速條碼掃描減輕工作負擔。",
-      "ko": "전문가를 위한 스마트 재고 관리 앱. 고속 바코드 스캔으로 재고 관리 부담을 최소화합니다.",
-      "hi": "पेशेवरों के लिए स्मार्ट इन्वेंट्री ऐप। हाई-स्पीड बारकोड स्कैनिंग के साथ स्टॉक प्रबंधन का बोझ कम करें।",
-      "vi": "Ứng dụng kiểm kho thông minh cho chuyên gia. Giảm thiểu gánh nặng quản lý kho với tính năng quét mã vạch tốc độ cao.",
-      "it": "L'app intelligente per l'inventario professionale. Riduce il carico della gestione scorte con la scansione rapida dei codici a barre.",
-      "pt": "O app de inventário inteligente para profissionais. Minimize a carga de gestão de estoque com leitura de alta velocidade.",
-      "es": "La app de inventario inteligente para profesionales. Minimice la carga de gestión de stock con escaneo de códigos de barras de alta velocidad.",
-      "id": "Aplikasi inventaris cerdas untuk profesional. Minimalkan beban manajemen stok dengan pemindaian barcode kecepatan tinggi.",
-      "th": "แอปจัดการคลังสินค้าอัจฉริยะสำหรับมืออาชีพ ลดภาระการจัดการสต็อกด้วยการสแกนบาร์โค้ดความเร็วสูง"
-    },
-    "btn_text": {
-      "ja": "詳細・取説を見る", "en": "Details & Manual", "zh": "查看详情与手册", "tw": "查看詳情與手冊", "ko": "상세 및 매뉴얼 보기", "hi": "विवरण और नियमावली", "vi": "Xem chi tiết & Hướng dẫn", "it": "Dettagli e Manuale", "pt": "Detalhes e Manual", "es": "Detalles y Manual", "id": "Detail & Panduan", "th": "รายละเอียดและคู่มือ"
-    },
-    "privacy_urls": {
-      "ja": "quantiventra/privacy_ja.html", "en": "quantiventra/privacy_en.html", "zh": "quantiventra/privacy_zh.html", "tw": "quantiventra/privacy_tw.html", "ko": "quantiventra/privacy_ko.html", "hi": "quantiventra/privacy_hi.html", "vi": "quantiventra/privacy_vi.html", "it": "quantiventra/privacy_it.html", "pt": "quantiventra/privacy_pt.html", "es": "quantiventra/privacy_es.html", "id": "quantiventra/privacy_id.html", "th": "quantiventra/privacy_th.html"
-    }
-  }
+{
+    "id":  "quantiventra",
+    "icon":  "📦",
+    "names":  {
+                  "ja":  "Quantiventra（棚卸用アプリ）",
+                  "en":  "Quantiventra (Inventory App)",
+                  "zh":  "Quantiventra（盘点用应用）",
+                  "tw":  "Quantiventra（盤點用應用程式）",
+                  "ko":  "Quantiventra (재고조사용 앱)",
+                  "hi":  "Quantiventra (इन्वेंटरी ऐप)",
+                  "vi":  "Quantiventra (ứng dụng kiểm kê)",
+                  "it":  "Quantiventra (app per inventario)",
+                  "pt":  "Quantiventra (aplicação de inventário)",
+                  "es":  "Quantiventra (aplicación de inventario)",
+                  "id":  "Quantiventra (aplikasi inventaris)",
+                  "th":  "Quantiventra (แอปสำหรับตรวจนับสต็อก)"
+              },
+    "descs":  {
+                  "vi":  "Ứng dụng kiểm kê và quản lý tồn kho thông minh cho đội ngũ hiện trường. Các tác vụ kiểm kê, tồn kho, dữ liệu danh mục và CSV hằng ngày có thể xử lý trên thiết bị, nên dễ làm việc ở kho hoặc cửa hàng có kết nối không ổn định. Xác minh mua hàng và thao tác liên quan Google Play có thể cần internet.",
+                  "it":  "App intelligente per inventario fisico e gestione scorte sul campo. Le attività ordinarie di inventario, scorte, dati anagrafici e CSV possono essere gestite sul dispositivo, utile in magazzini o negozi con connessione instabile. La verifica degli acquisti e le azioni relative a Google Play possono richiedere internet.",
+                  "ja":  "現場を支えるスマート棚卸・在庫管理アプリ。通常の棚卸・在庫管理・マスタ管理・CSV作業は端末内で進められるため、通信が不安定な倉庫や店舗でも作業しやすい構成です。購入確認やGoogle Play関連操作では通信が必要になる場合があります。",
+                  "hi":  "मैदानी टीमों के लिए स्मार्ट स्टॉकटेक और इन्वेंटरी ऐप। नियमित स्टॉकटेक, इन्वेंटरी, मास्टर डेटा और CSV कार्य डिवाइस पर संभाले जा सकते हैं, इसलिए कमजोर नेटवर्क वाले गोदामों या दुकानों में भी काम आसान रहता है। खरीद सत्यापन और Google Play संबंधित कार्यों के लिए इंटरनेट की आवश्यकता हो सकती है।",
+                  "pt":  "App inteligente para inventário físico e gestão de estoque em campo. As tarefas rotineiras de inventário, estoque, cadastros e CSV podem ser feitas no dispositivo, facilitando o trabalho em depósitos ou lojas com conexão instável. Verificação de compra e ações relacionadas ao Google Play podem exigir internet.",
+                  "id":  "Aplikasi inventaris fisik dan manajemen stok untuk tim lapangan. Tugas rutin inventaris, stok, katalog, dan CSV dapat ditangani di perangkat, sehingga lebih mudah bekerja di gudang atau toko dengan koneksi tidak stabil. Verifikasi pembelian dan tindakan terkait Google Play mungkin memerlukan internet.",
+                  "ko":  "현장 업무를 위한 스마트 실사·재고 관리 앱입니다. 일반적인 실사, 재고, 마스터, CSV 작업은 기기 안에서 처리할 수 있어 연결이 불안정한 창고나 매장에서도 작업하기 쉽습니다. 구매 확인 및 Google Play 관련 작업에는 인터넷이 필요할 수 있습니다.",
+                  "en":  "A smart stocktaking and inventory app for field teams. Routine stocktaking, inventory, master data, and CSV tasks can be handled on the device, making it easier to work in warehouses or stores with unstable connectivity. Purchase verification and Google Play related actions may require internet.",
+                  "tw":  "適合現場團隊的智慧盤點與庫存管理應用。日常盤點、庫存、主資料和CSV作業可在裝置內處理，適合網路不穩定的倉庫與門市；購買驗證及Google Play相關操作可能需要連線。",
+                  "es":  "App inteligente para inventario físico y gestión de existencias en campo. Las tareas rutinarias de inventario, existencias, catálogos y CSV pueden realizarse en el dispositivo, lo que facilita trabajar en almacenes o tiendas con conexión inestable. La verificación de compras y acciones relacionadas con Google Play pueden requerir internet.",
+                  "zh":  "面向现场团队的智能盘点与库存管理应用。日常盘点、库存、主数据和CSV作业可在设备内处理，适合网络不稳定的仓库和门店；购买验证及Google Play相关操作可能需要联网。",
+                  "th":  "แอปตรวจนับและจัดการสต็อกสำหรับงานภาคสนาม งานตรวจนับ สต็อก ข้อมูลทะเบียน และ CSV ตามปกติสามารถทำบนอุปกรณ์ได้ จึงใช้งานง่ายในคลังหรือร้านค้าที่สัญญาณไม่เสถียร การยืนยันการซื้อและการทำงานที่เกี่ยวข้องกับ Google Play อาจต้องใช้อินเทอร์เน็ต"
+              },
+    "btn_text":  {
+                     "ja":  "詳細・取説を見る",
+                     "en":  "Details \u0026 Manual",
+                     "zh":  "查看详情与手册",
+                     "tw":  "查看詳情與手冊",
+                     "ko":  "상세 및 매뉴얼 보기",
+                     "hi":  "विवरण और नियमावली",
+                     "vi":  "Xem chi tiết \u0026 Hướng dẫn",
+                     "it":  "Dettagli e Manuale",
+                     "pt":  "Detalhes e Manual",
+                     "es":  "Detalles y Manual",
+                     "id":  "Detail \u0026 Panduan",
+                     "th":  "รายละเอียดและคู่มือ"
+                 },
+    "intro_urls":  {
+                         "vi":  "quantiventra/manual_vi/intro_vi.html",
+                         "it":  "quantiventra/manual_it/intro_it.html",
+                         "ja":  "quantiventra/manual_ja/intro_ja.html",
+                         "hi":  "quantiventra/manual_hi/intro_hi.html",
+                         "pt":  "quantiventra/manual_br/intro_pt-BR.html",
+                         "id":  "quantiventra/manual_id/intro_id.html",
+                         "ko":  "quantiventra/manual_ko/intro_ko.html",
+                         "en":  "quantiventra/manual_en/intro_en.html",
+                         "tw":  "quantiventra/manual_tw/intro_tw.html",
+                         "es":  "quantiventra/manual_es/intro_es-419.html",
+                         "zh":  "quantiventra/manual_zh/intro_zh.html",
+                         "th":  "quantiventra/manual_th/intro_th.html"
+                     },    "privacy_urls":  {
+                         "vi":  "quantiventra/manual_vi/privacy_vi.html",
+                         "it":  "quantiventra/manual_it/privacy_it.html",
+                         "ja":  "quantiventra/manual_ja/privacy_ja.html",
+                         "hi":  "quantiventra/manual_hi/privacy_hi.html",
+                         "pt":  "quantiventra/manual_br/privacy_pt-BR.html",
+                         "id":  "quantiventra/manual_id/privacy_id.html",
+                         "ko":  "quantiventra/manual_ko/privacy_ko.html",
+                         "en":  "quantiventra/manual_en/privacy_en.html",
+                         "tw":  "quantiventra/manual_tw/privacy_tw.html",
+                         "es":  "quantiventra/manual_es/privacy_es-419.html",
+                         "zh":  "quantiventra/manual_zh/privacy_zh.html",
+                         "th":  "quantiventra/manual_th/privacy_th.html"
+                     }
+}
 ]

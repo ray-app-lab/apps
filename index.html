@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -31,10 +31,11 @@
                 'vi': 'index_vi.html', 'zh': 'index_zh.html'
             };
             
-            let target = langMap[langKey] || 'index_en.html';
+            let target = langMap[langKey];
             if (langKey === 'zh' && (browserLang.includes('tw') || browserLang.includes('hk'))) {
                 target = 'index_tw.html';
             }
+            if (!target) return;
 
             // 転送実行
             window.location.replace(target);
@@ -61,5 +62,24 @@
         </div>
         <div class="footer">&copy; 2026 Ray App Lab</div>
     </div>
+<script data-codex-source-guard>
+(function () {
+  document.addEventListener('contextmenu', function (event) {
+    event.preventDefault();
+  });
+  document.addEventListener('keydown', function (event) {
+    var key = (event.key || '').toLowerCase();
+    var blocked = event.key === 'F12'
+      || (event.ctrlKey && event.shiftKey && ['i', 'j', 'c'].indexOf(key) !== -1)
+      || (event.ctrlKey && ['u', 's'].indexOf(key) !== -1);
+    if (blocked) {
+      event.preventDefault();
+      event.stopPropagation();
+      return false;
+    }
+  }, true);
+})();
+</script>
 </body>
 </html>
+

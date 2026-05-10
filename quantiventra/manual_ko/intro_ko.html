@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quantiventra - 재고 실사 및 재고 관리 앱</title>
+    <meta name="description" content="Quantiventra는 재고 실사와 재고 관리를 위한 스마트폰 앱입니다. 바코드/QR코드 스캔, 수량 입력, 위치 관리, CSV 가져오기/내보내기를 지원하며 필요에 따라 기능을 단계별로 잠금 해제할 수 있습니다.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>body{font-family:-apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo','Noto Sans KR','Malgun Gothic',sans-serif;}</style>
+</head>
+<body class="bg-[#fdfaf5] text-gray-800 leading-relaxed antialiased">
+    <header class="bg-white p-5 text-center border-b border-gray-200">
+        <a href="../../index_ko.html" class="text-xl font-bold tracking-[0.2em] text-gray-800 no-underline">RAY APP LAB</a>
+    </header>
+
+    <main class="max-w-4xl mx-auto px-5 py-10">
+        <nav class="mb-10">
+            <a href="../../index_ko.html" class="text-[#d4a373] text-sm font-bold no-underline hover:underline">← 홈으로 돌아가기</a>
+        </nav>
+
+        <section class="text-center mb-16">
+            <div class="text-7xl mb-4">📦</div>
+            <h1 class="text-[#006C9C] text-4xl md:text-5xl font-bold mb-4 tracking-tight">Quantiventra</h1>
+            <div class="offline-highlight bg-[#E6F4FA] border border-[#B9E0EE] rounded-xl px-4 py-3 max-w-3xl mx-auto mb-6 text-left md:text-center">
+                <p class="text-base md:text-lg font-semibold text-[#005F89]">네트워크가 불안정한 창고나 매장에서도 일반적인 재고 실사와 재고 관리 작업은 기기 안에서 계속 진행할 수 있습니다.</p>
+                <p class="text-sm text-gray-600 mt-1">구매 확인, 구매 복원, Google Play 관련 작업 등 일부 기능은 인터넷 연결이 필요할 수 있습니다.</p>
+            </div>
+            <p class="text-xl text-gray-600 mb-6">현장에서 바로 쓰는 재고 실사·재고 관리 도구</p>
+            <p class="text-lg text-gray-700 max-w-2xl mx-auto">바코드·QR코드 스캔, 수량 입력, 보관 위치 관리, CSV 데이터 가져오기/내보내기 — 창고와 매장의 실제 업무 흐름에 맞게 설계되었습니다.</p>
+        </section>
+
+        <section class="bg-white p-8 md:p-10 rounded-2xl shadow-sm mb-10">
+            <h2 class="text-2xl text-[#006C9C] font-bold border-l-4 border-[#006C9C] pl-4 mb-4">주요 기능</h2>
+            <p class="text-gray-600 mb-8">실사, 입고, 출고, 재고 조회 등 Quantiventra의 핵심 기능과 일상 업무에 어떻게 도움이 되는지 소개합니다.</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div>
+                    <strong class="block text-[#006C9C] text-lg mb-2">📸 카메라 스캔</strong>
+                    <p class="text-gray-700">기기 카메라로 1D 바코드와 QR코드 등 2D 코드를 읽습니다.</p>
+                </div>
+                <div>
+                    <strong class="block text-[#006C9C] text-lg mb-2">🔍 상품명 검색(부분 일치)</strong>
+                    <p class="text-gray-700">바코드가 없어도 괜찮습니다. 상품명의 일부를 입력하면 부분 일치 검색으로 빠르게 필터링됩니다.</p>
+                </div>
+                <div>
+                    <strong class="block text-[#006C9C] text-lg mb-2">📍 위치 관리</strong>
+                    <p class="text-gray-700">선반 번호·구역 등 보관 위치를 등록해 위치별로 재고를 추적합니다. 어느 위치를 보충 판단에 포함할지도 설정할 수 있습니다.</p>
+                </div>
+                <div>
+                    <strong class="block text-[#006C9C] text-lg mb-2">🧮 스마트 계산 및 내장 계산기</strong>
+                    <p class="text-gray-700">수량 입력란에 수식을 직접 입력하고(예: <code>10*5+3</code>), 내장 계산기로 여러 위치의 수량을 손쉽게 합산합니다.</p>
+                </div>
+                <div>
+                    <strong class="block text-[#006C9C] text-lg mb-2">📄 편리한 CSV 연동</strong>
+                    <p class="text-gray-700">마스터 데이터·실사 결과·재고 데이터를 CSV 파일로 가져오고 내보내 Excel이나 Google Sheets에서 확인·백업합니다.</p>
+                </div>
+                <div>
+                    <strong class="block text-[#006C9C] text-lg mb-2">🔒 오프라인 사용 및 데이터 보안</strong>
+                    <p class="text-gray-700">일반적인 실사·재고 데이터는 기기 안에 저장됩니다. 구매 확인이나 Google Play 관련 작업 등 일부 기능에서만 네트워크 연결이 필요할 수 있습니다.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="bg-white p-8 md:p-10 rounded-2xl shadow-sm mb-10">
+            <h2 class="text-2xl text-[#006C9C] font-bold border-l-4 border-[#006C9C] pl-4 mb-4">플랜 및 기능 잠금 해제</h2>
+            <p class="text-gray-600 mb-6">Quantiventra는 무료로 시작할 수 있으며, 필요한 기능을 선택해 업그레이드할 수 있습니다. 재고 실사와 재고 관리 모두 무료·표준·전체 버전이 있으며, 전체 언어 잠금 해제는 별도 추가 기능입니다. 현재 가격과 구매 조건은 Google Play에서 확인하세요.</p>
+            <ul class="space-y-3 text-gray-700">
+                <li><strong class="text-[#006C9C]">재고 실사:</strong>업무 흐름에 맞게 무료·표준·전체 버전 중 선택하세요.</li>
+                <li><strong class="text-[#006C9C]">재고 관리:</strong>무료·표준·전체 버전은 입고, 출고, 재고 조회 등의 기능에서 차이가 있습니다.</li>
+                <li><strong class="text-[#006C9C]">전체 언어 잠금 해제:</strong>지원되는 모든 표시 언어를 활성화하는 별도 추가 기능입니다.</li>
+            </ul>
+        </section>
+
+        <div class="text-center py-10">
+            <p class="text-gray-700 mb-6">무료 버전부터 각 단계별 잠금 해제까지 — 전체 사용 방법은 한국어 매뉴얼에서 확인하세요.</p>
+            <a href="01_top_settings_common_ko.html" class="inline-block bg-[#006C9C] text-white font-bold text-lg py-4 px-10 rounded-full shadow-md hover:bg-[#005a83] hover:-translate-y-1 transition-all duration-300">한국어 매뉴얼 보기</a>
+        </div>
+    </main>
+
+    <footer class="text-center py-10 text-sm text-gray-400 border-t border-gray-200 bg-white">
+        <p>&copy; 2026 Ray App Lab / Quantiventra</p>
+        <p class="mt-2"><a href="privacy_ko.html" class="text-[#006C9C] hover:underline">개인정보 처리방침</a></p>
+    </footer>
+</body>
+</html>

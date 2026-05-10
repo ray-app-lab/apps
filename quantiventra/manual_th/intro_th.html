@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quantiventra - แอปตรวจนับสต็อกและจัดการสต็อกสินค้า</title>
+    <meta name="description" content="Quantiventra คือแอปสมาร์ตโฟนสำหรับการตรวจนับสต็อกและการจัดการสต็อกสินค้า รองรับการสแกนบาร์โค้ด/คิวอาร์โค้ด การป้อนจำนวน การจัดการตำแหน่งจัดเก็บ และการนำเข้า/ส่งออกไฟล์ CSV พร้อมปลดล็อกฟีเจอร์ตามระดับที่ต้องการ">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>body{font-family:'Sarabun','Noto Sans Thai',Thonburi,sans-serif;}</style>
+</head>
+<body class="bg-[#fdfaf5] text-gray-800 leading-relaxed antialiased">
+    <header class="bg-white p-5 text-center border-b border-gray-200">
+        <a href="../../index_th.html" class="text-xl font-bold tracking-[0.2em] text-gray-800 no-underline">RAY APP LAB</a>
+    </header>
+
+    <main class="max-w-4xl mx-auto px-5 py-10">
+        <nav class="mb-10">
+            <a href="../../index_th.html" class="text-[#d4a373] text-sm font-bold no-underline hover:underline">← กลับหน้าหลัก</a>
+        </nav>
+
+        <section class="text-center mb-16">
+            <div class="text-7xl mb-4">📦</div>
+            <h1 class="text-[#006C9C] text-4xl md:text-5xl font-bold mb-4 tracking-tight">Quantiventra</h1>
+            <div class="offline-highlight bg-[#E6F4FA] border border-[#B9E0EE] rounded-xl px-4 py-3 max-w-3xl mx-auto mb-6 text-left md:text-center">
+                <p class="text-base md:text-lg font-semibold text-[#005F89]">สามารถทำงานตรวจนับและจัดการสต็อกตามปกติบนอุปกรณ์ได้ แม้อยู่ในคลังสินค้า ร้านค้า หรือพื้นที่ที่สัญญาณไม่เสถียร</p>
+                <p class="text-sm text-gray-600 mt-1">ฟังก์ชันบางอย่าง เช่น การตรวจสอบการซื้อหรือการดำเนินการที่เกี่ยวข้องกับ Google Play อาจต้องใช้อินเทอร์เน็ต</p>
+            </div>
+            <p class="text-xl text-gray-600 mb-6">เครื่องมือสำหรับตรวจนับและจัดการสต็อกที่พกติดตัวไปได้ทุกที่</p>
+            <p class="text-lg text-gray-700 max-w-2xl mx-auto">สแกนบาร์โค้ดและคิวอาร์โค้ด ป้อนจำนวน จัดการตำแหน่งจัดเก็บ นำเข้า/ส่งออกข้อมูล CSV — ออกแบบมาสำหรับการทำงานจริงในคลังสินค้าและร้านค้า</p>
+        </section>
+
+        <section class="bg-white p-8 md:p-10 rounded-2xl shadow-sm mb-10">
+            <h2 class="text-2xl text-[#006C9C] font-bold border-l-4 border-[#006C9C] pl-4 mb-4">ฟีเจอร์หลัก</h2>
+            <p class="text-gray-600 mb-8">ฟีเจอร์สำคัญของ Quantiventra ตั้งแต่การตรวจนับสต็อก การรับสินค้าเข้า การจ่ายสินค้าออก ไปจนถึงการตรวจสอบสต็อก พร้อมวิธีที่แต่ละฟีเจอร์ช่วยสนับสนุนการทำงานประจำวัน</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div>
+                    <strong class="block text-[#006C9C] text-lg mb-2">📸 สแกนด้วยกล้อง</strong>
+                    <p class="text-gray-700">ใช้กล้องของอุปกรณ์อ่านบาร์โค้ด 1D และโค้ด 2D เช่น คิวอาร์โค้ด</p>
+                </div>
+                <div>
+                    <strong class="block text-[#006C9C] text-lg mb-2">🔍 ค้นหาชื่อสินค้า (ตรงบางส่วน)</strong>
+                    <p class="text-gray-700">ไม่มีบาร์โค้ด? พิมพ์ชื่อสินค้าแค่บางส่วนก็กรองผลลัพธ์ได้รวดเร็วด้วยการค้นหาแบบตรงบางส่วน</p>
+                </div>
+                <div>
+                    <strong class="block text-[#006C9C] text-lg mb-2">📍 จัดการตำแหน่งจัดเก็บ</strong>
+                    <p class="text-gray-700">ลงทะเบียนและจัดการตำแหน่งจัดเก็บ เช่น หมายเลขชั้นวาง และโซนต่างๆ พร้อมกำหนดได้ว่าตำแหน่งใดจะรวมในการประเมินการเติมสต็อก</p>
+                </div>
+                <div>
+                    <strong class="block text-[#006C9C] text-lg mb-2">🧮 การคำนวณอัจฉริยะและเครื่องคิดเลขในตัว</strong>
+                    <p class="text-gray-700">พิมพ์สูตรในช่องจำนวนโดยตรง (เช่น <code>10*5+3</code>) พร้อมเครื่องคิดเลขในตัวสำหรับรวมยอดนับจากหลายตำแหน่ง</p>
+                </div>
+                <div>
+                    <strong class="block text-[#006C9C] text-lg mb-2">📄 เชื่อมต่อ CSV ได้อย่างราบรื่น</strong>
+                    <p class="text-gray-700">นำเข้าและส่งออกข้อมูลทะเบียน สต็อก และสินค้าคงคลังเป็นไฟล์ CSV พร้อมใช้งานใน Excel หรือ Google Sheets</p>
+                </div>
+                <div>
+                    <strong class="block text-[#006C9C] text-lg mb-2">🔒 ใช้งานออฟไลน์และความปลอดภัยของข้อมูล</strong>
+                    <p class="text-gray-700">ข้อมูลการทำงานหลักจัดเก็บบนอุปกรณ์ และไม่ได้ถูกส่งไปยังเซิร์ฟเวอร์ภายนอกโดยแอปโดยตรง การเชื่อมต่อเครือข่ายอาจเกิดขึ้นผ่าน Google Play เพื่อยืนยันการซื้อ</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="bg-white p-8 md:p-10 rounded-2xl shadow-sm mb-10">
+            <h2 class="text-2xl text-[#006C9C] font-bold border-l-4 border-[#006C9C] pl-4 mb-4">แผนและการปลดล็อกฟีเจอร์</h2>
+            <p class="text-gray-600 mb-6">Quantiventra เริ่มต้นใช้งานฟรี พร้อมตัวเลือกอัปเกรดเพื่อปลดล็อกฟีเจอร์ที่คุณต้องการ ทั้งการตรวจนับสต็อกและการจัดการสต็อกมีเวอร์ชันฟรี มาตรฐาน และครบวงจร ส่วนการปลดล็อกทุกภาษาเป็นส่วนเสริมแยกต่างหาก ดูราคาและเงื่อนไขการซื้อได้ที่ Google Play</p>
+            <ul class="space-y-3 text-gray-700">
+                <li><strong class="text-[#006C9C]">การตรวจนับสต็อก:</strong> เลือกเวอร์ชันฟรี มาตรฐาน หรือครบวงจรตามขั้นตอนการทำงานของคุณ</li>
+                <li><strong class="text-[#006C9C]">การจัดการสต็อก:</strong> เวอร์ชันฟรี มาตรฐาน และครบวงจรแตกต่างกันในฟีเจอร์อย่างรับสินค้าเข้า จ่ายสินค้าออก และตรวจสอบสต็อก</li>
+                <li><strong class="text-[#006C9C]">ปลดล็อกทุกภาษา:</strong> ส่วนเสริมแยกต่างหากเพื่อเปิดใช้ภาษาแสดงผลทั้งหมดที่รองรับ</li>
+            </ul>
+        </section>
+
+        <div class="text-center py-10">
+            <p class="text-gray-700 mb-6">ตั้งแต่เวอร์ชันฟรีไปจนถึงทุกระดับการปลดล็อก — คู่มือฉบับสมบูรณ์อยู่ในคู่มือภาษาไทย</p>
+            <a href="01_top_settings_common_th.html" class="inline-block bg-[#006C9C] text-white font-bold text-lg py-4 px-10 rounded-full shadow-md hover:bg-[#005a83] hover:-translate-y-1 transition-all duration-300">ดูคู่มือภาษาไทย</a>
+        </div>
+    </main>
+
+    <footer class="text-center py-10 text-sm text-gray-400 border-t border-gray-200 bg-white">
+        <p>&copy; 2026 Ray App Lab / Quantiventra</p>
+        <p class="mt-2"><a href="privacy_th.html" class="text-[#006C9C] hover:underline">นโยบายความเป็นส่วนตัว</a></p>
+    </footer>
+</body>
+</html>

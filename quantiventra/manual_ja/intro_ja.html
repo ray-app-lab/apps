@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quantiventra - 棚卸・在庫管理アプリ</title>
+    <meta name="description" content="Quantiventraは、スマートフォンで棚卸と在庫管理を行うためのアプリです。商品コード読取、数量入力、ロケーション管理、CSV入出力に対応し、無料版から必要な機能を段階的に解放できます。">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chosen Palette: Warm Neutrals with Ocean Blue (#006C9C) and Gold (#d4a373) -->
+    <!-- Application Structure Plan: A clean, vertical scrolling landing page layout. Features are presented in a straightforward grid to allow rapid visual parsing. The structure prioritizes direct information delivery without hidden tabs, ensuring all vital information, including new search and location features, is immediately accessible. -->
+    <!-- Content Choices: Features are presented in a simple grid, followed by plan and feature unlock guidance. NO SVG used. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+</head>
+<body class="bg-[#fdfaf5] text-gray-800 font-sans leading-relaxed antialiased">
+    <header class="bg-white p-5 text-center border-b border-gray-200">
+        <a href="../../index_ja.html" class="text-xl font-bold tracking-[0.2em] text-gray-800 no-underline">RAY APP LAB</a>
+    </header>
+
+    <main class="max-w-4xl mx-auto px-5 py-10">
+        <nav class="mb-10">
+            <a href="../../index_ja.html" class="text-[#d4a373] text-sm font-bold no-underline hover:underline">← ポータルへ戻る</a>
+        </nav>
+
+        <section class="text-center mb-16">
+            <div class="text-7xl mb-4">📦</div>
+            <h1 class="text-[#006C9C] text-4xl md:text-5xl font-bold mb-4 tracking-tight">Quantiventra</h1>
+            <div class="offline-highlight bg-[#E6F4FA] border border-[#B9E0EE] rounded-xl px-4 py-3 max-w-3xl mx-auto mb-6 text-left md:text-center">
+                <p class="text-base md:text-lg font-semibold text-[#005F89]">通信が不安定な現場でも、棚卸・在庫管理の通常作業を端末内で進められます。</p>
+                <p class="text-sm text-gray-600 mt-1">※購入確認やGoogle Play関連操作など、一部機能では通信が必要です。</p>
+            </div>
+            <p class="text-xl text-gray-600 mb-6">スマートフォンで、棚卸と在庫管理をまとめて扱う。</p>
+            <p class="text-lg text-gray-700 max-w-2xl mx-auto">商品コードの読取、数量入力、ロケーション管理、CSV入出力を、現場の作業に合わせて段階的に使えるアプリです。読み取り形式の利用範囲はプランにより異なります。</p>
+        </section>
+
+        <section class="bg-white p-8 md:p-10 rounded-2xl shadow-sm mb-10">
+            <h2 class="text-2xl text-[#006C9C] font-bold border-l-4 border-[#006C9C] pl-4 mb-4">主な機能</h2>
+            <p class="text-gray-600 mb-8">Quantiventraの主な機能を紹介します。棚卸、入荷、出荷、在庫確認など、日々の現場作業をどのように支援できるかを確認できます。</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div>
+                    <strong class="block text-[#006C9C] text-lg mb-2">📸 カメラスキャン</strong>
+                    <p class="text-gray-700">端末のカメラで商品コードを読み取れます。無料版では標準的なバーコード形式を固定で利用し、解放状況に応じて選択できる形式が広がります。</p>
+                </div>
+                <div>
+                    <strong class="block text-[#006C9C] text-lg mb-2">🔍 品名検索（部分一致対応）</strong>
+                    <p class="text-gray-700">バーコードがない場合でも、品名の一部を入力するだけで目的のアイテムを素早く絞り込める、部分一致検索に対応しています。</p>
+                </div>
+                <div>
+                    <strong class="block text-[#006C9C] text-lg mb-2">📍 ロケーション管理</strong>
+                    <p class="text-gray-700">保管場所（棚番やエリアなど）を記録・管理できます。在庫確認では、補充判定に含めるロケーションを分けて扱うこともできます。</p>
+                </div>
+                <div>
+                    <strong class="block text-[#006C9C] text-lg mb-2">🧮 スマート計算＆内蔵電卓</strong>
+                    <p class="text-gray-700">数量フィールドに計算式（例：<code>10*5+3</code>）を直接入力できるほか、便利な電卓機能も搭載しています。現場での集計作業をサポートします。</p>
+                </div>
+                <div>
+                    <strong class="block text-[#006C9C] text-lg mb-2">📄 シームレスなCSV連携</strong>
+                    <p class="text-gray-700">マスターデータや棚卸・在庫データのCSV取込/出力に対応しています。PCでの確認やバックアップ作業にも使いやすい形で扱えます。</p>
+                </div>
+                <div>
+                    <strong class="block text-[#006C9C] text-lg mb-2">🔒 オフライン＆プライバシー</strong>
+                    <p class="text-gray-700">棚卸や在庫管理の通常作業は、基本的に端末内で行えます。通信が不安定な倉庫・店舗・現場でも、記録や確認を進めやすいのが特徴です。購入状態の確認、購入済み復元、ストアへの移動、外部リンク表示など、一部機能では通信が必要になる場合があります。</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="bg-white p-8 md:p-10 rounded-2xl shadow-sm mb-10">
+            <h2 class="text-2xl text-[#006C9C] font-bold border-l-4 border-[#006C9C] pl-4 mb-4">プランと機能解放</h2>
+            <p class="text-gray-600 mb-6">Quantiventraは、無料版を基本に、必要な機能だけを段階的に解放できる構成です。棚卸と在庫管理は、それぞれ無料版・簡単版・フル版に分かれており、全言語解放は別機能として扱います。棚卸と在庫管理を両方使う場合は、単品よりセット購入のほうがお得になる場合があります。価格や販売条件はGoogle Play上の表示を確認してください。</p>
+            <ul class="space-y-3 text-gray-700">
+                <li><strong class="text-[#006C9C]">棚卸</strong>: 無料版、簡単版、フル版を用途に合わせて選べます。</li>
+                <li><strong class="text-[#006C9C]">在庫管理</strong>: 入荷・出荷・在庫確認などの日常操作は共通で使え、件数上限や詳細設定の範囲が変わります。</li>
+                <li><strong class="text-[#006C9C]">全言語解放</strong>: 対応言語を追加で利用したい場合のための別機能です。</li>
+            </ul>
+        </section>
+
+        <div class="text-center py-10">
+            <p class="text-gray-700 mb-6">無料版から各解放機能まで、詳しい使い方は日本語マニュアルで確認できます。</p>
+            <a href="01_top_settings_common_ja.html" class="inline-block bg-[#006C9C] text-white font-bold text-lg py-4 px-10 rounded-full shadow-md hover:bg-[#005a83] hover:-translate-y-1 transition-all duration-300">日本語マニュアルを見る</a>
+        </div>
+    </main>
+
+    <footer class="text-center py-10 text-sm text-gray-400 border-t border-gray-200 bg-white">
+        <p>&copy; 2026 Ray App Lab / Quantiventra</p>
+        <p class="mt-2"><a href="privacy_ja.html" class="text-[#006C9C] hover:underline">プライバシーポリシー</a></p>
+    </footer>
+</body>
+</html>
+
+
+
+
+
+
+

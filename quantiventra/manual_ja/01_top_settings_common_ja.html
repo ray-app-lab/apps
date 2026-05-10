@@ -177,6 +177,52 @@ footer{text-align:center;font-size:12px;color:#8a9aaa;padding:30px 16px 60px;bor
 </head>
 <body id="top">
 
+<!-- 固定「戻る」ボタン -->
+<a href="javascript:history.back()" class="back-prev">‹ 戻る</a>
+
+<!-- ナビゲーション -->
+<nav class="site-nav" aria-label="ファイル間ナビゲーション">
+  <div class="nav-inner">
+    <a href="01_top_settings_common_ja.html" class="active">① トップ・設定</a>
+    <a href="02_stocktake_free_ja.html">② 棚卸 無料版</a>
+    <a href="03_stocktake_simple_ja.html">③ 棚卸 簡単版</a>
+    <a href="04_stocktake_full_ja.html">④ 棚卸 フル版</a>
+    <a href="05_inventory_free_ja.html">⑤ 在庫管理 無料版</a>
+    <a href="06_inventory_simple_ja.html">⑥ 在庫管理 簡単版</a>
+    <a href="07_inventory_full_ja.html">⑦ 在庫管理 フル版</a>
+  </div>
+</nav>
+
+<!-- ページヘッダー -->
+<header class="page-header">
+  <div class="inner">
+    <div class="app-name">Quantiventra 取扱説明書 — 日本語版</div>
+    <h1>① トップ画面・設定・共通操作</h1>
+    <div class="subtitle">アプリ概要、動作環境、インストール、設定、課金プラン、サンプルデータ、用語集、規約</div>
+
+    <!-- Google Play ダウンロードセクション -->
+    <div class="play-section">
+      <div class="play-qr-wrap">
+        <div class="play-qr-frame">
+          <a href="https://play.google.com/store/apps/details?id=com.Quantiventra.app" target="_blank" rel="noopener">
+            <img src="../../image/badges/ＱＲ.png" alt="Google Play QRコード">
+          </a>
+          <div class="play-qr-corner tl"></div>
+          <div class="play-qr-corner tr"></div>
+          <div class="play-qr-corner bl"></div>
+          <div class="play-qr-corner br"></div>
+        </div>
+        <div class="play-qr-label">QRコードでアクセス</div>
+      </div>
+      <div class="play-info">
+        <h3>Quantiventra（棚卸・在庫管理アプリ）</h3>
+        <p>Google Play からインストール。上部QRコードをスキャンするか、下記バッジからストアへ進んでください。</p>
+        <a href="https://play.google.com/store/apps/details?id=com.Quantiventra.app" class="play-badge" target="_blank" rel="noopener">
+          <img src="../../image/badges/GetItOnGooglePlay_Badge_Web_color_Japanese.png" alt="Google Play で手に入れよう">
+        </a>
+      </div>
+    </div>
+
     <div class="scope-box">
       <strong>このHTMLで説明する範囲：</strong>
       アプリ概要 / 動作環境 / インストールと初回起動 / データ保存場所 / 棚卸と在庫管理の違い / 最初にやること / トップ画面 / 設定画面 / 言語設定 / 課金プラン / サンプルデータ / トラブルシューティング / 用語集 / 規約・免責事項
@@ -230,6 +276,11 @@ footer{text-align:center;font-size:12px;color:#8a9aaa;padding:30px 16px 60px;bor
 
     
     <p>棚卸・在庫管理・マスタ管理・CSV取込/出力などの通常業務は、基本的に端末内で行えます。通信が不安定な倉庫、店舗、バックヤード、現場でも記録や確認を進めやすく、入力した業務データも基本的に端末内で扱われます。購入状態の確認、購入済み復元、ストア遷移、外部リンク表示など、一部機能では通信が必要になる場合があります。</p>
+<figure>
+      <img src="images/01_top_home.png" alt="トップ画面">
+      <figcaption>図1-1 Quantiventra トップ画面</figcaption>
+    </figure>
+
     <h3>1-2. 主な特徴</h3>
     <div class="feature-grid">
       <div class="feature-card">
@@ -515,6 +566,11 @@ footer{text-align:center;font-size:12px;color:#8a9aaa;padding:30px 16px 60px;bor
     </div>
     <p>設定画面では、アプリ全体・棚卸・在庫管理・CSV・言語・課金・サンプルデータ・法務文書を管理します。</p>
 
+    <figure>
+      <img src="images/02_settings_main.png" alt="設定画面">
+      <figcaption>図8-1 設定画面（メイン）</figcaption>
+    </figure>
+
     <h3>データ入出力</h3>
     <div class="table-wrap">
       <table>
@@ -595,6 +651,11 @@ footer{text-align:center;font-size:12px;color:#8a9aaa;padding:30px 16px 60px;bor
       <h2>言語設定</h2>
     </div>
     <p>アプリ内で表示言語を選べます。設定は「設定 → 言語設定」から変更します。アプリ起動時に端末の言語設定を自動検出し、対応言語があれば自動的にその言語で起動します。</p>
+
+    <figure>
+      <img src="images/03_settings_language.png" alt="言語設定画面">
+      <figcaption>図9-1 言語設定画面</figcaption>
+    </figure>
 
     <h3>対応言語一覧（全12言語）</h3>
     <div class="table-wrap">
@@ -717,6 +778,11 @@ footer{text-align:center;font-size:12px;color:#8a9aaa;padding:30px 16px 60px;bor
       <h2>サンプルデータ</h2>
     </div>
     <p>サンプルデータは、Quantiventraを試すための練習用データです。実際の業務を始める前に、操作を練習するために使います。</p>
+
+    <figure>
+      <img src="images/24_sample_data_prompt.png" alt="サンプルデータ作成確認">
+      <figcaption>図11-1 サンプルデータ作成確認画面</figcaption>
+    </figure>
 
     <h3>サンプルデータの内容</h3>
     <ul>

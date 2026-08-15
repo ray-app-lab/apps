@@ -386,5 +386,24 @@
   <span style="font-size:11px; opacity:0.45;">manual_en.html</span>
 </footer>
 
+<script data-codex-source-guard>
+(function () {
+  document.addEventListener('contextmenu', function (event) {
+    event.preventDefault();
+  });
+  document.addEventListener('keydown', function (event) {
+    var key = (event.key || '').toLowerCase();
+    var blocked = event.key === 'F12'
+      || (event.ctrlKey && event.shiftKey && ['i', 'j', 'c'].indexOf(key) !== -1)
+      || (event.ctrlKey && ['u', 's'].indexOf(key) !== -1);
+    if (blocked) {
+      event.preventDefault();
+      event.stopPropagation();
+      return false;
+    }
+  }, true);
+})();
+</script>
 </body>
 </html>
+

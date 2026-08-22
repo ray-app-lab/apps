@@ -3,17 +3,19 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>プライバシーポリシー / Privacy Policy — しりとりパズル / Word Chain Puzzle</title>
+<meta name="description" content="しりとりパズル＆2歳からのことば学習 / Word Chain Puzzle のプライバシーポリシーです。">
+<title>プライバシーポリシー / Privacy Policy — しりとりパズル＆2歳からのことば学習 / Word Chain Puzzle</title>
 <style>
   :root {
     --bg: #FFF6E9;
     --card: #FFFFFF;
-    --accent: #E65100;
+    --accent: #B23A00;
     --accent-light: #FF9800;
     --text: #4E342E;
     --sub: #8D6E63;
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
   body {
     font-family: "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic",
                  -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
@@ -51,6 +53,11 @@
     text-decoration: none;
     border: 2px solid var(--accent-light);
   }
+  nav.lang a:focus-visible,
+  a:focus-visible {
+    outline: 3px solid var(--accent);
+    outline-offset: 3px;
+  }
   section.card {
     background: var(--card);
     border-radius: 20px;
@@ -66,12 +73,14 @@
   section.card p.meta { color: var(--sub); font-size: 13px; margin-bottom: 16px; }
   section.card h3 {
     font-size: 16px;
-    margin: 18px 0 6px;
+    margin: 20px 0 6px;
     padding-left: 10px;
     border-left: 4px solid var(--accent-light);
   }
-  section.card p, section.card li { font-size: 15px; }
+  section.card p,
+  section.card li { font-size: 15px; }
   section.card ul { padding-left: 22px; margin: 6px 0; }
+  section.card li + li { margin-top: 4px; }
   .badge-row { display: flex; flex-wrap: wrap; gap: 8px; margin: 14px 0 4px; }
   .badge {
     background: #FFF3E0;
@@ -81,124 +90,174 @@
     font-weight: 700;
     padding: 6px 14px;
   }
+  .note {
+    margin-top: 10px;
+    padding: 12px 14px;
+    border-radius: 12px;
+    background: #FFF8EE;
+    color: var(--sub);
+    font-size: 14px;
+  }
   footer { text-align: center; color: var(--sub); font-size: 12px; padding: 8px 0 24px; }
   a { color: var(--accent); }
+  @media (max-width: 480px) {
+    body { padding: 10px; }
+    header h1 { font-size: 22px; }
+    section.card { padding: 22px 18px; }
+  }
 </style>
 </head>
 <body>
 <div class="wrap">
   <header>
-    <div class="emoji">🐶🚌🏰</div>
-    <h1>しりとりパズル / Word Chain Puzzle</h1>
+    <div class="emoji" aria-hidden="true">🐶🚌🏰</div>
+    <h1>しりとりパズル＆2歳からのことば学習 / Word Chain Puzzle</h1>
     <p class="sub">プライバシーポリシー / Privacy Policy</p>
   </header>
 
-  <nav class="lang">
-    <a href="#ja">日本語</a>
-    <a href="#en">English</a>
+  <nav class="lang" aria-label="Language / 言語">
+    <a href="#ja" lang="ja">日本語</a>
+    <a href="#en" lang="en">English</a>
   </nav>
 
-  <!-- ===================== 日本語 ===================== -->
-  <section class="card" id="ja">
-    <h2>プライバシーポリシー</h2>
-    <p class="meta">制定日: 2026年7月25日</p>
+  <main>
+    <section class="card" id="ja" lang="ja">
+      <h2>プライバシーポリシー</h2>
+      <p class="meta">制定日: 2026年7月25日 / 最終更新日: 2026年8月22日</p>
 
-    <p>「しりとりパズル」（以下「本アプリ」）は、3〜8歳のお子さまを対象とした知育ゲームです。開発者は、お子さまの安全とプライバシーを最優先に考え、<strong>個人情報を一切収集しない</strong>設計で本アプリを提供します。</p>
+      <p>「しりとりパズル＆2歳からのことば学習」（以下「本アプリ」）は、2〜10歳のお子さま向けの知育ゲームです。年齢の選択肢は遊び方やことばの内容を調整するための年齢別おすすめ設定であり、お子さまの実年齢を確認するものではありません。本アプリは、<strong>お子さまを特定できる情報を開発者へ送信せず</strong>、広告、利用状況の解析、トラッキング、アプリ内アカウント登録を行わない設計です。</p>
 
-    <div class="badge-row">
-      <span class="badge">個人情報の収集なし</span>
-      <span class="badge">広告なし</span>
-      <span class="badge">外部送信なし</span>
-      <span class="badge">アカウント登録なし</span>
-    </div>
+      <div class="badge-row" aria-label="プライバシーの概要">
+        <span class="badge">お子さまの個人情報を開発者へ送信しない</span>
+        <span class="badge">広告・解析・追跡なし</span>
+        <span class="badge">開発者サーバーへの送信なし</span>
+        <span class="badge">アプリ内アカウント登録なし</span>
+      </div>
 
-    <h3>1. 収集しない情報</h3>
-    <p>本アプリは、氏名・住所・メールアドレス・電話番号・位置情報・写真・連絡先・端末識別子・利用履歴などの個人情報を、<strong>一切収集・送信しません</strong>。アカウント登録もありません。</p>
+      <h3>1. お子さまについて開発者が受け取らない情報</h3>
+      <p>本アプリは、お子さまの氏名、生年月日、住所、メールアドレス、電話番号、位置情報、写真、連絡先、端末識別子などの入力を求めず、これらを端末外へ送信しません。ゲームの設定やプレイ状態は次項のとおり端末内で扱いますが、開発者は受け取りません。お子さまのプロフィールやアプリ内アカウントを作成する機能もありません。</p>
 
-    <h3>2. 端末内にのみ保存される情報</h3>
-    <p>次の情報は、ゲームを楽しむためにお使いの端末の中だけに保存されます。外部のサーバーへ送信されることはなく、アプリを削除すると消去されます。</p>
-    <ul>
-      <li>ゲームの設定（ことば・レベル・ばんめん など）</li>
-      <li>アイテムの所持数、プレイ時間の残り</li>
-      <li>保護者向け設定パスワード</li>
-      <li>プレミアム購入の有無</li>
-    </ul>
+      <h3>2. 端末内で取り扱う情報</h3>
+      <p>本アプリは、機能の提供に必要な次の情報を端末内に保存します。これらを開発者が運用するサーバーへ送信することはありません。</p>
+      <ul>
+        <li>ゲームの設定（言語、年齢のおすすめ設定、遊び方、ことばのレベル、盤面、表示、音、全画面読み上げ、自動読み上げの順序・速度・回数、プレイ時間など）</li>
+        <li>アイテムの所持数、残り回数、休憩・回復時刻、再生時間、進行中のラウンドなどのプレイ状態</li>
+        <li>保護者用4桁PINの照合値（現行版で新しく設定するPINは、PINそのものではなくソルト（salt）付きハッシュを保存します。旧版のPINは、照合後に現行形式へ移行または再設定します）</li>
+        <li>iOS版で保護者確認に使用する生年月日の照合値（生年月日そのものは保存しません）</li>
+        <li>サブスクリプションの利用可否を確認するための最小限の記録（プラン、プラットフォーム、確認日時、非可逆の証跡IDなど）</li>
+      </ul>
+      <p>生のレシート、Google Playの購入トークン、StoreKitのJWS、クレジットカード番号などの決済情報は、端末内の利用可否記録として永続保存しません。AppleまたはGoogleが保持する購入履歴は、各社の規約およびプライバシーポリシーに従って管理されます。</p>
+      <p class="note">Android版では、アプリデータのクラウドバックアップと端末間転送を無効にしています。iOS版では、保護者確認と購入権利の記録をこの端末に限定されたKeychainへ保存し、プレイ制限の状態をバックアップ対象外にしています。OSの仕様により、Keychainやストアの購入履歴はアプリ削除後も残る場合がありますが、開発者には送信されません。</p>
 
-    <h3>3. 広告について</h3>
-    <p>本アプリは広告を表示しません。第三者の広告SDK・トラッキングSDKも組み込んでいません。</p>
+      <h3>3. 広告、解析、トラッキング</h3>
+      <p>本アプリは広告を表示せず、第三者の広告SDK、アクセス解析SDK、トラッキングSDKを組み込んでいません。</p>
 
-    <h3>4. アプリ内課金について</h3>
-    <p>プレミアム（買い切り）の決済は、Apple または Google の公式決済システムが処理します。開発者がクレジットカード番号などの決済情報を受け取ることはありません。購入操作は、端末の保護者向け承認機能および本アプリの保護者パスワードで保護されます。</p>
+      <h3>4. サブスクリプションとアプリ内課金</h3>
+      <p>本アプリは、次の2種類のプランを月額または年額の自動更新サブスクリプションとして提供します。月額と年額で利用できる機能に違いはありません。</p>
+      <ul>
+        <li><strong>プレミアムプラン:</strong> 端末の現在の主言語で、すべてのレベルを利用できます。</li>
+        <li><strong>ことば解放プラン:</strong> 日本語、英語、および今後追加される言語を利用できます。</li>
+      </ul>
+      <p>機能制限付きの無料版は期間限定の無料トライアルではありません。ことば解放プランはプレミアムプランの機能を含む上位プランです。</p>
+      <p>決済、自動更新、解約、返金および購入履歴の管理は、AppleまたはGoogleの公式決済システムが行います。開発者がクレジットカード番号などの決済情報を受け取ることはありません。サブスクリプションは、解約しない限り各ストアの条件に従って更新され、アプリを削除しただけでは解約されません。契約状況の確認と解約は、<a href="https://support.apple.com/118428">Appleのサブスクリプション管理</a>または<a href="https://support.google.com/googleplay/answer/7018481?hl=ja">Google Playのサブスクリプション管理</a>から行えます。プラン変更の可否と方法は、各ストアに表示される選択肢に従ってください。</p>
 
-    <h3>5. 音声読み上げについて</h3>
-    <p>単語の読み上げには端末に内蔵された音声合成機能（TTS)を使用します。マイクは使用せず、音声の録音・送信は行いません。</p>
+      <h3>5. 保護者向け設定と保護者確認</h3>
+      <p>サブスクリプションでは、保護者が1回のプレイ時間、続けて遊べる回数、ゲーム間の休憩時間、回数が戻るまでの時間などを設定できます。年齢ごとの目安から外れる設定を選んだ場合は、保存前に保護者向けの確認を表示します。設定値は端末内にのみ保存されます。</p>
+      <ul>
+        <li><strong>4桁の保護者用PIN:</strong> サブスクリプション利用中の設定画面を誤操作から守るために使用します。現行版で新しく設定するPINは、PINそのものではなくソルト（salt）付きハッシュを保存します。旧版のPINは、照合後に現行形式へ移行または再設定します。</li>
+        <li><strong>Android版:</strong> 保護者用PINの設定がONかOFFかにかかわらず、購入・復元を開始する前に4桁PINが端末へ設定済みであることを確認し、未設定なら設定を求めます。設定済みの場合、購入・復元のたびにPINを再入力する仕様ではありません。</li>
+        <li><strong>iOS版:</strong> 設定画面のPIN保護を無効にしていても、購入、復元またはPINの再設定には、18歳以上の保護者の生年月日確認と4桁PINの設定または照合が必要です。入力した生年月日そのものは保存・送信せず、ソルト（salt）付きハッシュだけをこの端末に限定されたKeychainへ保存して、次回以降の照合に使用します。お子さまの生年月日を入力するものではありません。</li>
+      </ul>
+      <p>新しいサブスクリプションの購入がストアで確認されると、「保護者パスワードを使う」は自動的にONになります。保護者が後からOFFへ変更する場合は、端末の保護者向け機能で購入やアプリの削除も制限してください。アプリ内のPINと保護者確認は誤操作を減らすための補助機能であり、購入承認やアプリ削除の制限そのものではありません。</p>
 
-    <h3>6. 通信について</h3>
-    <p>本アプリのゲームプレイにインターネット接続は必要ありません。ストアの課金処理を除き、外部との通信は行いません。アプリ内に外部サイトへのリンクやSNS連携はありません。</p>
+      <h3>6. 音声の再生</h3>
+      <p>日本語の単語は同梱した音声を優先して再生し、必要な場合は端末の音声合成機能（TTS）を使用します。その他の読み上げにも端末のTTSを使用します。全画面読み上げとレベル自動読み上げも同じ音声経路を使用し、その表示、順序、速度および繰り返し回数の設定は端末内にのみ保存されます。本アプリはマイクを使用せず、音声を録音・送信しません。TTSの音声データ取得や通信の有無は、端末のOS、TTS提供者および端末設定によって異なる場合があります。</p>
 
-    <h3>7. 児童のプライバシー保護（COPPA / GDPR-K）</h3>
-    <p>本アプリは児童向けに設計されており、児童の個人情報を収集しないため、米国児童オンラインプライバシー保護法（COPPA）および EU 一般データ保護規則（GDPR）の児童関連規定の趣旨に沿った運用を行います。</p>
+      <h3>7. 通信</h3>
+      <p>通常のゲームプレイにインターネット接続は必要ありません。AppleまたはGoogleのストアを通じた商品情報の取得、購入、復元、サブスクリプションの利用可否確認などでは通信が必要になる場合があります。端末のTTSに関する通信は前項のとおり端末側の仕様と設定に従います。本アプリは開発者のバックエンドへデータを送信せず、SNS連携もありません。</p>
 
-    <h3>8. ポリシーの改定</h3>
-    <p>本ポリシーを改定する場合は、本ページにて告知します。重要な変更がある場合は、アプリのアップデート情報でもお知らせします。</p>
+      <h3>8. 児童のプライバシー</h3>
+      <p>本アプリは児童向けサービスとして、お子さまを特定できる情報を求めず、開発者へ送信しないことを基本方針とし、COPPAおよびGDPRの児童に関する規定を含む、適用される法令とストア要件を踏まえて運用します。将来、お子さまの情報の取扱いを伴う機能を追加する場合は、公開前に本ポリシーを更新し、必要な保護者の同意その他の対応を行います。</p>
 
-    <h3>9. お問い合わせ</h3>
-    <p>本ポリシーに関するご質問は、下記までご連絡ください。<br>
-    開発者: 伊藤 雅博<br>
-    メール: <a href="mailto:rei1002masa0911@yahoo.co.jp">rei1002masa0911@yahoo.co.jp</a></p>
-  </section>
+      <h3>9. ポリシーの改定</h3>
+      <p>本ポリシーを改定する場合は、本ページに最終更新日とともに掲載します。重要な変更がある場合は、アプリのアップデート情報でもお知らせします。</p>
 
-  <!-- ===================== English ===================== -->
-  <section class="card" id="en" lang="en">
-    <h2>Privacy Policy</h2>
-    <p class="meta">Effective date: July 25, 2026</p>
+      <h3>10. お問い合わせ</h3>
+      <p>本ポリシーに関するご質問は、下記までご連絡ください。お問い合わせメールを送信した場合、送信者のメールアドレスと本文は、利用するメールサービスを通じて、お問い合わせへの回答と必要な連絡のために取り扱います。これは本アプリによる自動収集ではありません。<br>
+      開発者: 伊藤 雅博<br>
+      メール: <a href="mailto:rei1002masa0911@yahoo.co.jp">rei1002masa0911@yahoo.co.jp</a></p>
+    </section>
 
-    <p>"Word Chain Puzzle" (the "App") is an educational game designed for children ages 3–8. We put children's safety and privacy first: the App is built to <strong>collect no personal information at all</strong>.</p>
+    <section class="card" id="en" lang="en">
+      <h2>Privacy Policy</h2>
+      <p class="meta">Effective date: July 25, 2026 / Last updated: August 22, 2026</p>
 
-    <div class="badge-row">
-      <span class="badge">No personal data collected</span>
-      <span class="badge">No ads</span>
-      <span class="badge">No data transmission</span>
-      <span class="badge">No account required</span>
-    </div>
+      <p>“Word Chain Puzzle” (the “App”) is an educational game for children ages 2–10. Its age choices are recommended presets that adjust the play style and vocabulary; they are not used to verify a child’s actual age. The App is designed to <strong>send no identifying information about children to the developer</strong> and uses no advertising, analytics, tracking, or in-App account registration.</p>
 
-    <h3>1. Information We Do NOT Collect</h3>
-    <p>The App does <strong>not</strong> collect or transmit any personal information — no names, addresses, email addresses, phone numbers, location data, photos, contacts, device identifiers, or usage analytics. No account registration exists.</p>
+      <div class="badge-row" aria-label="Privacy summary">
+        <span class="badge">No children’s personal data sent to the developer</span>
+        <span class="badge">No ads, analytics, or tracking</span>
+        <span class="badge">No data sent to a developer backend</span>
+        <span class="badge">No in-App account registration</span>
+      </div>
 
-    <h3>2. Data Stored Only on Your Device</h3>
-    <p>The following is saved only on your device so the game works. It is never sent to any server, and it is deleted when you uninstall the App:</p>
-    <ul>
-      <li>Game settings (language, level, board size, etc.)</li>
-      <li>Item counts and remaining play time</li>
-      <li>The parental settings password</li>
-      <li>Premium purchase status</li>
-    </ul>
+      <h3>1. Children’s Information the Developer Does Not Receive</h3>
+      <p>The App does not ask for a child’s name, date of birth, address, email address, phone number, location, photos, contacts, device identifiers, or similar identifying information, and it does not send such information off the device. Game settings and play state are handled locally as described below, but the developer does not receive them. The App does not create child profiles or in-App user accounts.</p>
 
-    <h3>3. Advertising</h3>
-    <p>The App shows no ads and contains no third-party advertising or tracking SDKs.</p>
+      <h3>2. Information Handled on the Device</h3>
+      <p>The App stores the following information locally as needed to provide its features. These records are not sent to a server operated by the developer.</p>
+      <ul>
+        <li>Game settings, including language, recommended age preset, play mode, word levels, board, display, sound, full-screen speech, automatic-reading order, speed and repeat count, and play-time settings</li>
+        <li>Item counts and session state, such as remaining rounds, break or reset times, playback time, and any round in progress</li>
+        <li>A verification value for the four-digit parent PIN (new PINs set in the current version are stored as salted hashes, not as the PIN itself; a PIN from an older version is migrated or reset after verification)</li>
+        <li>On iOS, a verification value for the parent’s date of birth (the date itself is not stored)</li>
+        <li>Minimal proof of subscription access, such as the plan, platform, verification time, and an irreversible proof identifier</li>
+      </ul>
+      <p>Raw receipts, Google Play purchase tokens, StoreKit JWS data, and payment details such as credit card numbers are not retained as the App’s local proof of access. Purchase history held by Apple or Google is managed under that company’s terms and privacy policy.</p>
+      <p class="note">On Android, cloud backup and device-to-device transfer of App data are disabled. On iOS, parent-verification and purchase-access records are stored in a device-only Keychain, and play-limit state is excluded from backup. Depending on the operating system, Keychain records and store purchase history may remain after the App is deleted, but they are not sent to the developer.</p>
 
-    <h3>4. In-App Purchases</h3>
-    <p>The one-time Premium purchase is processed by Apple's or Google's official payment systems. We never receive your payment details. Purchases are protected by the device's parental approval features and by the App's parental password.</p>
+      <h3>3. Advertising, Analytics, and Tracking</h3>
+      <p>The App shows no ads and includes no third-party advertising, analytics, or tracking SDKs.</p>
 
-    <h3>5. Text-to-Speech</h3>
-    <p>Words are read aloud using the speech synthesizer built into your device (TTS). The App does not use the microphone and does not record or transmit any audio.</p>
+      <h3>4. Subscriptions and In-App Purchases</h3>
+      <p>The App offers two plans as monthly or yearly auto-renewing subscriptions. Monthly and yearly billing unlock the same features.</p>
+      <ul>
+        <li><strong>Premium plan:</strong> Unlocks every level in the device’s current primary language.</li>
+        <li><strong>Language Unlock plan:</strong> Unlocks Japanese, English, and languages added in the future.</li>
+      </ul>
+      <p>The limited free version is not a time-limited free trial. The Language Unlock plan is the higher tier and includes all features of the Premium plan.</p>
+      <p>Apple or Google processes payments, renewals, cancellations, refunds, and purchase history through its official store system. The developer does not receive payment details such as credit card numbers. Subscriptions renew under the applicable store terms until canceled, and deleting the App does not cancel a subscription. You can review subscription status and cancel through <a href="https://support.apple.com/118428">Apple subscription settings</a> or <a href="https://support.google.com/googleplay/answer/7018481?hl=en">Google Play subscription settings</a>. Plan-change options, if available, are the options shown by the applicable store.</p>
 
-    <h3>6. Network Use</h3>
-    <p>No internet connection is required to play. Except for store purchase processing, the App performs no external communication. It contains no external links and no social media features.</p>
+      <h3>5. Parent Settings and Parent Verification</h3>
+      <p>With a subscription, parents can set the length of each round, the number of rounds available in a row, breaks between rounds, and the time until rounds reset. If a choice falls outside the guideline for the selected age preset, the App asks the parent to confirm before saving it. These settings stay on the device.</p>
+      <ul>
+        <li><strong>Four-digit parent PIN:</strong> This PIN helps prevent accidental changes to settings while a subscription is active. New PINs set in the current version are stored as salted hashes, not as the PIN itself. A PIN from an older version is migrated or reset after verification.</li>
+        <li><strong>Android:</strong> Whether parent-PIN protection is on or off, the App ensures that a four-digit PIN has been configured before starting a purchase or restore and asks the parent to set one if needed. It does not ask for an already configured PIN to be re-entered for every purchase or restore.</li>
+        <li><strong>iOS:</strong> Even when PIN protection for the settings screen is turned off, a purchase, restore, or PIN reset requires both verification of an adult parent’s date of birth and configuration or verification of a four-digit PIN. The raw date is neither stored nor transmitted. Only a salted hash is stored in a device-only Keychain for later verification. The App is asking for the parent’s date of birth, not the child’s.</li>
+      </ul>
+      <p>After the store verifies a new subscription purchase, “Use parent password” is turned on automatically. If a parent later turns it off, the device’s parental controls should also be used to restrict purchases and App removal. The in-App PIN and parent-verification steps help reduce accidental actions; they do not replace the operating system’s purchase approval or App-removal restrictions.</p>
 
-    <h3>7. Children's Privacy (COPPA / GDPR-K)</h3>
-    <p>The App is designed for children and collects no personal information from them, consistent with the U.S. Children's Online Privacy Protection Act (COPPA) and the children's provisions of the EU General Data Protection Regulation (GDPR).</p>
+      <h3>6. Spoken Audio</h3>
+      <p>For Japanese words, the App first uses audio bundled with the App and falls back to the device’s text-to-speech (TTS) feature when needed. Other spoken content also uses device TTS. Full-screen speech and level-based automatic reading use the same audio path, and their display, order, speed, and repeat-count preferences remain on the device. The App does not use the microphone and does not record or transmit audio. Voice downloads or network use by TTS may vary according to the operating system, TTS provider, and device settings.</p>
 
-    <h3>8. Changes to This Policy</h3>
-    <p>If this policy changes, the updated version will be posted on this page. Significant changes will also be noted in the App's update notes.</p>
+      <h3>7. Network Use</h3>
+      <p>Ordinary gameplay does not require an internet connection. Network access may be needed to retrieve product information, make or restore purchases, and check subscription status through Apple’s or Google’s store. Any TTS-related network behavior follows the device-side conditions described above. The App sends no data to a developer backend and has no social-media integration.</p>
 
-    <h3>9. Contact</h3>
-    <p>If you have any questions about this policy, please contact:<br>
-    Developer: Masahiro Ito<br>
-    Email: <a href="mailto:rei1002masa0911@yahoo.co.jp">rei1002masa0911@yahoo.co.jp</a></p>
-  </section>
+      <h3>8. Children’s Privacy</h3>
+      <p>As a children’s service, the App’s core policy is not to ask for identifying information about children or send it to the developer. It is operated with regard to applicable laws and store requirements, including COPPA and the GDPR provisions concerning children. If a future feature would involve handling children’s information, this policy will be updated before release and any required parental consent and other safeguards will be put in place.</p>
 
-  <footer>© 2026 Masahiro Ito — しりとりパズル / Word Chain Puzzle</footer>
+      <h3>9. Changes to This Policy</h3>
+      <p>Any revision will be posted on this page with a new “Last updated” date. Significant changes will also be noted in the App’s update information.</p>
+
+      <h3>10. Contact</h3>
+      <p>If you email us with a question about this policy, the sender’s email address and message are handled through the applicable email service solely to respond and provide any necessary follow-up. This is not automatic collection by the App.<br>
+      Contact:<br>
+      Developer: Masahiro Ito<br>
+      Email: <a href="mailto:rei1002masa0911@yahoo.co.jp">rei1002masa0911@yahoo.co.jp</a></p>
+    </section>
+  </main>
+
+  <footer>© 2026 Masahiro Ito — しりとりパズル＆2歳からのことば学習 / Word Chain Puzzle</footer>
 </div>
 </body>
 </html>

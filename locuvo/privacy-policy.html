@@ -1,10 +1,10 @@
 <!doctype html>
-<html lang="en">
+<html lang="ja">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Privacy Policy - Locuvo</title>
-  <meta name="description" content="Privacy Policy for the Locuvo Android app.">
+  <title>プライバシーポリシー - Locuvo</title>
+  <meta name="description" content="Privacy Policy for the Locuvo Android app. / Locuvo Androidアプリのプライバシーポリシー">
   <style>
     :root {
       color-scheme: light;
@@ -18,7 +18,7 @@
     * { box-sizing: border-box; }
     body {
       margin: 0;
-      font-family: Arial, Helvetica, sans-serif;
+      font-family: "Hiragino Sans", "Hiragino Kaku Gothic ProN", Arial, Helvetica, sans-serif;
       line-height: 1.65;
       color: var(--text);
       background: var(--bg);
@@ -44,107 +44,291 @@
       background: #edf7f5;
       border-radius: 6px;
     }
+    .lang-divider {
+      margin-top: 48px;
+      padding-top: 28px;
+      border-top: 3px double var(--line);
+    }
+    table { border-collapse: collapse; width: 100%; margin: 12px 0; }
+    th, td { border: 1px solid var(--line); padding: 8px 10px; text-align: left; font-size: 0.95rem; }
+    th { background: #edf7f5; }
   </style>
 </head>
 <body>
   <main>
-    <h1>Privacy Policy</h1>
-    <p class="meta">App: Locuvo<br>Developer: Ray App Lab<br>Last updated: June 22, 2026</p>
+    <h1>プライバシーポリシー</h1>
+    <p class="meta">アプリ: Locuvo<br>提供者: 伊藤 雅博（屋号 RayAppLab）<br>最終更新日: 2026年8月24日</p>
 
     <p>
-      This Privacy Policy explains how Locuvo handles information when you use the Locuvo Android app.
-      Locuvo is a travel route planning app that lets you create trips, days, places, schedules, and navigation plans.
+      本プライバシーポリシーは、Android アプリ「Locuvo」（以下「本アプリ」）における情報の取り扱いを説明するものです。
+      本アプリは、旅行の計画（旅行・日・訪問先・時刻・移動の計画）を作成できる旅行計画アプリです。
     </p>
 
-    <h2>1. Information You Enter in the App</h2>
+    <h2>1. 利用者が本アプリに入力する情報</h2>
     <p>
-      Locuvo may store information that you choose to enter, such as trip names, travel dates, place names,
-      addresses, latitude and longitude values, notes, visit status, transport choices, and planned travel times.
-      This information is used to provide the app's trip planning, route organization, backup, restore, and today-mode features.
+      本アプリは、利用者が入力を選んだ情報を保存する場合があります。たとえば、旅行名、日程、訪問先の名称、住所、
+      緯度・経度の値、メモ、訪問状況、移動手段の選択、予定の移動時間などです。
+      これらは、旅行の計画・並べ替え・バックアップ・復元・当日モードの各機能を提供するために使用します。
     </p>
     <p>
-      Locuvo does not operate its own server for storing your trip data. Your trip data is stored locally on your device,
-      unless you choose to export or share it using features provided by your device or other apps.
-    </p>
-
-    <h2>2. Backups and Files You Create</h2>
-    <p>
-      If you use backup or restore features, Locuvo may create or read backup files only as directed by you.
-      Backup files may contain the trip and place information stored in the app. You are responsible for where you save,
-      copy, upload, or share those backup files outside Locuvo.
+      当方は、利用者の旅行データを保存するための独自のサーバーを運用していません。
+      旅行データは利用者の端末内に保存されます（利用者が端末や他のアプリの機能を使って書き出し・共有した場合を除きます）。
     </p>
 
-    <h2>3. Advertising</h2>
+    <h2>2. 位置情報（GPS）</h2>
+    <ul>
+      <li>
+        利用者が旅行の<strong>実行モードを開始した場合にのみ</strong>、移動の足跡の記録・現在位置の表示・到着の判定のために、
+        フォアグラウンドサービスとして位置情報を取得します（取得中は通知に常時表示されます）。
+      </li>
+      <li>取得した位置情報は<strong>端末内にのみ保存</strong>され、外部へ送信されません。</li>
+      <li>位置情報の許可は任意です。許可しなくても、計画の作成・閲覧・日記などの主要機能は利用できます。</li>
+    </ul>
+
+    <h2>3. カメラ・写真</h2>
     <p>
-      Locuvo may show ads in the free version of the app. Advertising is provided through Google Mobile Ads.
-      Google and its partners may collect or process information such as device identifiers, app activity related to ad delivery,
-      approximate technical information, and ad interaction information in order to deliver, measure, and improve ads.
-    </p>
-    <p>
-      For more information about Google's data practices, please review Google's Privacy Policy at
-      <a href="https://policies.google.com/privacy">https://policies.google.com/privacy</a>.
+      日記やカレンダーに写真を残すためにカメラを使用します。また、端末内の写真を選んで取り込むこともできます。
+      撮影・取り込んだ写真は端末内に保存され、外部へ送信されません。
     </p>
 
-    <h2>4. In-App Purchases</h2>
+    <h2>4. 通知・アラーム</h2>
     <p>
-      Locuvo may offer in-app purchases through Google Play Billing. Payment processing is handled by Google Play.
-      Locuvo does not collect or store your full payment card number or payment account credentials.
-      The app may receive purchase status, product identifiers, purchase tokens, and related billing status information
-      from Google Play so that it can unlock purchased features and restore purchases.
+      出発時刻のお知らせのために通知と正確なアラームを使用します。
+      端末の再起動後に通知予定を復元するため、起動完了の通知を受け取ります。
     </p>
 
-    <h2>5. Navigation and External Apps</h2>
+    <h2>5. バックアップと利用者が作成するファイル</h2>
     <p>
-      When you choose to open navigation or map-related actions, Locuvo may send the destination information needed for that action,
-      such as a place name, address, or coordinates, to another app or service installed on your device, such as a map or navigation app.
-      The handling of that information by the external app or service is governed by that provider's own privacy policy.
+      バックアップ・復元の機能を使う場合、本アプリは利用者の指示があったときにのみバックアップファイルを作成・読み取ります。
+      バックアップファイルには、本アプリに保存された旅行・訪問先の情報が含まれることがあります。
+      本アプリの外へ保存・複製・アップロード・共有したバックアップファイルの管理は、利用者の責任となります。
     </p>
 
-    <h2>6. Information Sharing</h2>
+    <h2>6. 広告について</h2>
     <p>
-      Locuvo does not sell your personal information. Locuvo does not intentionally share your locally stored trip data with the developer's own server.
-      Information may be processed by third-party services used by the app, including Google Mobile Ads and Google Play Billing,
-      as described in this Privacy Policy and those providers' own policies.
+      無料プランでは広告を表示することがあります。広告は Google Mobile Ads（AdMob）により配信されます。
+      Google およびそのパートナーは、広告の配信・測定・改善のために、端末識別子、広告配信に関するアプリの利用状況、
+      おおよその技術情報、広告への反応に関する情報などを収集・処理することがあります。
+    </p>
+    <p>
+      法令の適用がある地域では、広告表示の前に同意管理プラットフォーム（Google UMP）による同意確認を表示します。
+      同意内容はアプリ内の「設定 → プライバシー設定（広告の同意）」からいつでも変更できます。
+    </p>
+    <p>
+      Google のデータの取り扱いについては
+      <a href="https://policies.google.com/privacy">https://policies.google.com/privacy</a> をご確認ください。
     </p>
 
-    <h2>7. Data Retention and Deletion</h2>
+    <h2>7. アプリ内購入</h2>
     <p>
-      Trip data stored in Locuvo remains on your device until you delete it in the app, clear the app's data, or uninstall the app.
-      Backup files remain wherever you saved them until you delete them yourself. Purchase records may be retained by Google Play
-      according to Google's policies and legal requirements.
-    </p>
-    <p>
-      Locuvo currently does not require you to create a Locuvo account. If the app later adds an account feature,
-      this Privacy Policy will be updated with account deletion instructions.
+      本アプリは Google Play ビリングによるアプリ内購入を提供する場合があります。決済処理は Google Play が行います。
+      当方がクレジットカード番号や決済アカウントの認証情報を取得・保存することはありません。
+      購入した機能の解放や購入の復元のために、購入状況・商品ID・購入トークン・関連する課金ステータス情報を
+      Google Play から受け取ることがあります。
     </p>
 
-    <h2>8. Security</h2>
+    <h2>8. 地図・経路の外部サービス</h2>
     <p>
-      Locuvo is designed to keep your trip planning data on your device. Third-party services used for ads and billing may transmit data
-      using secure network connections. No method of storage or transmission is completely secure, but we aim to use reasonable safeguards
-      appropriate for the nature of the app.
+      本アプリは以下の Google のサービスを利用しており、その際に必要最小限の情報が各サービスへ送信されます。
+    </p>
+    <table>
+      <thead><tr><th>サービス</th><th>目的</th><th>送信され得る情報</th></tr></thead>
+      <tbody>
+        <tr><td>Google Maps</td><td>地図の表示（足跡・経路の確認）</td><td>表示した地図領域、IPアドレス等</td></tr>
+        <tr><td>Googleの経路サービス</td><td>移動時間の自動取得（利用者が実行した場合）</td><td>出発地・目的地の座標、移動手段</td></tr>
+        <tr><td>Google AdMob</td><td>広告表示（無料プラン）</td><td>広告ID、IPアドレス、端末情報等</td></tr>
+        <tr><td>Google Play ビリング</td><td>購入・プランの管理</td><td>購入処理はGoogleが行い、当方はカード情報等を取得しません</td></tr>
+      </tbody>
+    </table>
+    <p>
+      また、利用者がナビや地図を開く操作を選んだとき、その操作に必要な目的地の情報（名称・住所・座標など）を、
+      端末内の他のアプリやサービス（地図アプリ・ナビアプリなど）へ渡すことがあります。
+      渡した先での取り扱いは、その提供者自身のプライバシーポリシーに従います。
     </p>
 
-    <h2>9. Children's Privacy</h2>
+    <h2>9. 情報の共有</h2>
     <p>
-      Locuvo is not directed to children. If you believe that a child has provided personal information through the app,
-      please contact us so that we can review the issue.
+      当方は利用者の個人情報を販売しません。端末内に保存された旅行データを当方自身のサーバーへ共有することも意図的に行いません。
+      情報は、本ポリシーおよび各提供者のポリシーに記載のとおり、本アプリが利用する第三者サービス
+      （Google Mobile Ads、Google Play ビリングなど）によって処理されることがあります。
     </p>
 
-    <h2>10. Changes to This Policy</h2>
+    <h2>10. データの保存期間と削除</h2>
     <p>
-      We may update this Privacy Policy when the app changes or when legal, platform, or operational requirements change.
-      The updated version will be posted on this page with a new last updated date.
+      本アプリに保存された旅行データは、アプリ内で削除する、アプリのデータを消去する、
+      またはアプリをアンインストールするまで端末内に残ります。
+      バックアップファイルは、利用者が保存した場所に、自ら削除するまで残ります。
+      購入記録は、Google のポリシーおよび法令上の要件に従って Google Play が保持することがあります。
+    </p>
+    <p>
+      本アプリは現在、Locuvo のアカウント作成を必要としません。将来アカウント機能を追加する場合は、
+      アカウント削除の手順を本ポリシーに追記します。
     </p>
 
-    <h2>11. Contact</h2>
+    <h2>11. 安全管理</h2>
     <p>
-      For privacy questions or requests, please contact us using the developer contact email shown on Locuvo's Google Play store listing.
+      本アプリは、旅行計画のデータを端末内に保持する設計です。広告・課金に利用する第三者サービスは、
+      安全なネットワーク接続を用いてデータを送信することがあります。
+      保存・送信のいずれの方法も完全に安全とはいえませんが、本アプリの性質に応じた合理的な保護措置を用いるよう努めます。
+    </p>
+
+    <h2>12. お子様のプライバシー</h2>
+    <p>
+      本アプリはお子様（13歳未満）を対象としていません。お子様が本アプリを通じて個人情報を提供したとお考えの場合は、
+      確認いたしますのでご連絡ください。
+    </p>
+
+    <h2>13. 本ポリシーの変更</h2>
+    <p>
+      本アプリの変更、または法令・プラットフォーム・運用上の要件の変更に応じて、本ポリシーを更新することがあります。
+      更新後の内容は、新しい最終更新日とともに本ページに掲載します。
+    </p>
+
+    <h2>14. お問い合わせ</h2>
+    <p>
+      プライバシーに関するご質問・ご依頼は、伊藤 雅博（屋号 RayAppLab）
+      <a href="mailto:ray.app.lab@gmail.com">ray.app.lab@gmail.com</a> までご連絡ください。
     </p>
 
     <p class="note">
-      This page is intended to describe Locuvo's app data practices for users and app store review. It is not legal advice.
+      本ページは、利用者およびアプリストアの審査に向けて Locuvo のデータの取り扱いを説明するものであり、法的助言ではありません。
     </p>
+
+    <div class="lang-divider">
+      <h1>Privacy Policy</h1>
+      <p class="meta">App: Locuvo<br>Provider: Masahiro Ito (operating as RayAppLab)<br>Last updated: August 24, 2026</p>
+
+      <p>
+        This Privacy Policy explains how Locuvo handles information when you use the Locuvo Android app.
+        Locuvo is a travel route planning app that lets you create trips, days, places, schedules, and navigation plans.
+      </p>
+
+      <h2>1. Information You Enter in the App</h2>
+      <p>
+        Locuvo may store information that you choose to enter, such as trip names, travel dates, place names,
+        addresses, latitude and longitude values, notes, visit status, transport choices, and planned travel times.
+        This information is used to provide the app's trip planning, route organization, backup, restore, and today-mode features.
+      </p>
+      <p>
+        Locuvo does not operate its own server for storing your trip data. Your trip data is stored locally on your device,
+        unless you choose to export or share it using features provided by your device or other apps.
+      </p>
+
+      <h2>2. Location (GPS)</h2>
+      <ul>
+        <li>
+          Only when you start a trip's execution mode, the app records your location as a foreground service
+          (always visible as a notification while active) to draw your trail, show your position, and detect arrivals.
+        </li>
+        <li>Recorded locations are stored <strong>only on your device</strong> and are never transmitted externally.</li>
+        <li>Location permission is optional; planning, viewing, and diary features work without it.</li>
+      </ul>
+
+      <h2>3. Camera and Photos</h2>
+      <p>
+        The camera is used to attach photos to your diary and calendar, and you can also pick photos already on your device.
+        Photos you take or import are stored on your device and are not transmitted.
+      </p>
+
+      <h2>4. Notifications and Alarms</h2>
+      <p>
+        Notifications and exact alarms are used for departure reminders. The app receives the boot-completed signal
+        so it can restore scheduled reminders after a restart.
+      </p>
+
+      <h2>5. Backups and Files You Create</h2>
+      <p>
+        If you use backup or restore features, Locuvo may create or read backup files only as directed by you.
+        Backup files may contain the trip and place information stored in the app. You are responsible for where you save,
+        copy, upload, or share those backup files outside Locuvo.
+      </p>
+
+      <h2>6. Advertising</h2>
+      <p>
+        Locuvo may show ads in the free version of the app. Advertising is provided through Google Mobile Ads.
+        Google and its partners may collect or process information such as device identifiers, app activity related to ad delivery,
+        approximate technical information, and ad interaction information in order to deliver, measure, and improve ads.
+      </p>
+      <p>
+        Where required by law, a consent prompt from a consent management platform (Google UMP) is shown before ads are served.
+        You can change your choices at any time in the app under Settings → Privacy settings (ad consent).
+      </p>
+      <p>
+        For more information about Google's data practices, please review Google's Privacy Policy at
+        <a href="https://policies.google.com/privacy">https://policies.google.com/privacy</a>.
+      </p>
+
+      <h2>7. In-App Purchases</h2>
+      <p>
+        Locuvo may offer in-app purchases through Google Play Billing. Payment processing is handled by Google Play.
+        Locuvo does not collect or store your full payment card number or payment account credentials.
+        The app may receive purchase status, product identifiers, purchase tokens, and related billing status information
+        from Google Play so that it can unlock purchased features and restore purchases.
+      </p>
+
+      <h2>8. Maps, Routing, and External Apps</h2>
+      <p>The app uses the following Google services, which receive the minimum information needed:</p>
+      <table>
+        <thead><tr><th>Service</th><th>Purpose</th><th>Data that may be sent</th></tr></thead>
+        <tbody>
+          <tr><td>Google Maps</td><td>Map display (trails, routes)</td><td>Displayed map area, IP address, etc.</td></tr>
+          <tr><td>Google routing service</td><td>Automatic travel-time lookup (when you request it)</td><td>Origin/destination coordinates, transport mode</td></tr>
+          <tr><td>Google AdMob</td><td>Ads (free version)</td><td>Advertising ID, IP address, device info, etc.</td></tr>
+          <tr><td>Google Play Billing</td><td>Purchases and plans</td><td>Payments are processed by Google; we never receive your card details</td></tr>
+        </tbody>
+      </table>
+      <p>
+        In addition, when you choose to open navigation or map-related actions, Locuvo may send the destination information
+        needed for that action, such as a place name, address, or coordinates, to another app or service installed on your device.
+        The handling of that information by the external app or service is governed by that provider's own privacy policy.
+      </p>
+
+      <h2>9. Information Sharing</h2>
+      <p>
+        Locuvo does not sell your personal information. Locuvo does not intentionally share your locally stored trip data
+        with the developer's own server. Information may be processed by third-party services used by the app,
+        including Google Mobile Ads and Google Play Billing, as described in this Privacy Policy and those providers' own policies.
+      </p>
+
+      <h2>10. Data Retention and Deletion</h2>
+      <p>
+        Trip data stored in Locuvo remains on your device until you delete it in the app, clear the app's data, or uninstall the app.
+        Backup files remain wherever you saved them until you delete them yourself. Purchase records may be retained by Google Play
+        according to Google's policies and legal requirements.
+      </p>
+      <p>
+        Locuvo currently does not require you to create a Locuvo account. If the app later adds an account feature,
+        this Privacy Policy will be updated with account deletion instructions.
+      </p>
+
+      <h2>11. Security</h2>
+      <p>
+        Locuvo is designed to keep your trip planning data on your device. Third-party services used for ads and billing may transmit data
+        using secure network connections. No method of storage or transmission is completely secure, but we aim to use reasonable safeguards
+        appropriate for the nature of the app.
+      </p>
+
+      <h2>12. Children's Privacy</h2>
+      <p>
+        Locuvo is not directed to children. If you believe that a child has provided personal information through the app,
+        please contact us so that we can review the issue.
+      </p>
+
+      <h2>13. Changes to This Policy</h2>
+      <p>
+        We may update this Privacy Policy when the app changes or when legal, platform, or operational requirements change.
+        The updated version will be posted on this page with a new last updated date.
+      </p>
+
+      <h2>14. Contact</h2>
+      <p>
+        For privacy questions or requests, contact Masahiro Ito, operating as RayAppLab, at <a href="mailto:ray.app.lab@gmail.com">ray.app.lab@gmail.com</a>.
+      </p>
+
+      <p class="note">
+        This page is intended to describe Locuvo's app data practices for users and app store review. It is not legal advice.
+      </p>
+    </div>
   </main>
 </body>
 </html>

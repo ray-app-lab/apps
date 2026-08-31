@@ -143,14 +143,13 @@
         <li>ゲームの設定（言語、年齢のおすすめ設定、遊び方、ことばのレベル、盤面、表示、音、全画面読み上げ、自動読み上げの順序・速度・回数、プレイ時間など）</li>
         <li>アイテムの所持数、残り回数、休憩・回復時刻、再生時間、進行中のラウンドなどのプレイ状態</li>
         <li>保護者用4桁PINの照合値（現行版で新しく設定するPINは、PINそのものではなくソルト（salt）付きハッシュを保存します。旧版のPINは、照合後に現行形式へ移行または再設定します）</li>
-        <li>iOS版で保護者確認に使用する生年月日の照合値（生年月日そのものは保存しません）</li>
         <li>サブスクリプションの利用可否を確認するための最小限の記録（プラン、プラットフォーム、確認日時、非可逆の証跡IDなど）</li>
       </ul>
       <p>生のレシート、Google Playの購入トークン、StoreKitのJWS、クレジットカード番号などの決済情報は、端末内の利用可否記録として永続保存しません。AppleまたはGoogleが保持する購入履歴は、各社の規約およびプライバシーポリシーに従って管理されます。</p>
-        <p class="note">Android版では、アプリデータのクラウドバックアップと端末間転送を無効にしています。iOS版では、保護者PINと購入権利の一部記録だけをこの端末に限定されたKeychainへ保存し、生年月日の照合値はアプリ内設定へ保存し、プレイ制限の状態をバックアップ対象外にしています。OSの仕様により、Keychainやストアの購入履歴はアプリ削除後も残る場合がありますが、開発者には送信されません。</p>
+        <p class="note">Android版では、アプリデータのクラウドバックアップと端末間転送を無効にしています。iOS版では、保護者PINと購入権利の一部記録だけをこの端末に限定されたKeychainへ保存し、プレイ制限の状態をバックアップ対象外にしています。OSの仕様により、Keychainやストアの購入履歴はアプリ削除後も残る場合がありますが、開発者には送信されません。</p>
 
       <h3>2.1 保存期間と削除</h3>
-      <p>開発者はバックエンドを運用しておらず、本アプリからデータを受け取って保存しません。通常の設定とプレイ状態は、利用中の端末に必要な間保存され、アプリのデータ消去またはアンインストールで削除されます。「保護者パスワードを使う」をOFFにしても保護者用PINは端末に残ります。これは設定画面に入るときに入力を求めるかどうかの設定であり、購入時などに保護者の確認が必要な場面では、そのPINをそのまま使います。PINを消したい場合は「わすれた・さいせってい」で作り直すか、アプリのデータ消去またはアンインストールを行ってください。iOSのアプリ内設定にある生年月日の照合値もアプリ削除時に削除されます。AppleまたはGoogleが管理する購入履歴は、OSまたはストアの仕様によりアプリ削除後も残る場合があります。サブスクリプションの解約はデータ削除とは別の手続です。</p>
+      <p>開発者はバックエンドを運用しておらず、本アプリからデータを受け取って保存しません。通常の設定とプレイ状態は、利用中の端末に必要な間保存され、アプリのデータ消去またはアンインストールで削除されます。「保護者パスワードを使う」をOFFにしても保護者用PINは端末に残ります。これは設定画面に入るときに入力を求めるかどうかの設定であり、購入時などに保護者の確認が必要な場面では、そのPINをそのまま使います。PINを消したい場合は「わすれた・さいせってい」で作り直すか、アプリのデータ消去またはアンインストールを行ってください。AppleまたはGoogleが管理する購入履歴は、OSまたはストアの仕様によりアプリ削除後も残る場合があります。サブスクリプションの解約はデータ削除とは別の手続です。</p>
 
       <h3>3. 広告、解析、トラッキング</h3>
       <p>本アプリは広告を表示せず、第三者の広告SDK、アクセス解析SDK、トラッキングSDKを組み込んでいません。</p>
@@ -168,8 +167,8 @@
       <p>サブスクリプションでは、保護者が1回のプレイ時間、続けて遊べる回数、ゲーム間の休憩時間、回数が戻るまでの時間などを設定できます。年齢ごとの目安から外れる設定を選んだ場合は、保存前に保護者向けの確認を表示します。設定値は端末内にのみ保存されます。</p>
       <ul>
         <li><strong>4桁の保護者用PIN:</strong> サブスクリプション利用中の設定画面を誤操作から守るために使用します。現行版で新しく設定するPINは、PINそのものではなくソルト（salt）付きハッシュを保存します。旧版のPINは、照合後に現行形式へ移行または再設定します。</li>
-        <li><strong>Android版:</strong> 保護者用PINの設定がONかOFFかにかかわらず、購入・復元を開始する前に4桁PINが端末へ設定済みであることを確認し、未設定なら設定を求めます。設定済みの場合、購入・復元のたびにPINを再入力する仕様ではありません。</li>
-        <li><strong>iOS版:</strong> 設定画面のPIN保護を無効にしていても、購入、復元またはPINの再設定には、18歳以上の保護者の生年月日確認と4桁PINの設定または照合が必要です。初回登録では生年月日を2回入力して一致を確認します。入力した生年月日そのものは保存・送信せず、ソルト（salt）付きハッシュだけをアプリ内設定へ保存して、次回以降の照合に使用します。アプリ削除後は照合値も削除され、再インストール後に再登録が必要です。お子さまの生年月日を入力するものではありません。</li>
+        <li><strong>Android版:</strong> 保護者用PINの設定がONかOFFかにかかわらず、購入・復元・PINの再設定の前に保護者の確認が必要です。画面の文章の指示に従い、指定された図形を約3秒長押しして確認します。この確認で個人情報の入力・登録は求めず、確認のために何も保存・送信しません。4桁PINが未設定の場合は、確認に続けて設定を求めます。設定済みのPINを購入・復元のたびに再入力する仕様ではありません。</li>
+        <li><strong>iOS版:</strong> 設定画面のPIN保護を無効にしていても、購入、復元またはPINの再設定には保護者の確認が必要です。画面の文章の指示に従い、指定された図形を約3秒長押しして確認し、続けて4桁PINを設定または照合します。この確認で個人情報の入力・登録は求めず、確認のために何も保存・送信しません。</li>
       </ul>
       <p>無料の状態から最初のサブスクリプション購入がストアで確認されると、「保護者パスワードを使う」は自動的にONになります。すでに契約中の追加購入やプラン変更では、保護者がOFFにした設定を変更しません。OFFにしていた間もPINは残っているため、あらためて作り直す必要はありません。保護者が後からOFFへ変更する場合は、端末の保護者向け機能で購入やアプリの削除も制限してください。アプリ内のPINと保護者確認は誤操作を減らすための補助機能であり、購入承認やアプリ削除の制限そのものではありません。</p>
 
@@ -213,14 +212,13 @@
         <li>Game settings, including language, recommended age preset, play mode, word levels, board, display, sound, full-screen speech, automatic-reading order, speed and repeat count, and play-time settings</li>
         <li>Item counts and session state, such as remaining rounds, break or reset times, playback time, and any round in progress</li>
         <li>A verification value for the four-digit parent PIN (new PINs set in the current version are stored as salted hashes, not as the PIN itself; a PIN from an older version is migrated or reset after verification)</li>
-        <li>On iOS, a verification value for the parent’s date of birth (the date itself is not stored)</li>
         <li>Minimal proof of subscription access, such as the plan, platform, verification time, and an irreversible proof identifier</li>
       </ul>
       <p>Raw receipts, Google Play purchase tokens, StoreKit JWS data, and payment details such as credit card numbers are not retained as the App’s local proof of access. Purchase history held by Apple or Google is managed under that company’s terms and privacy policy.</p>
-        <p class="note">On Android, cloud backup and device-to-device transfer of App data are disabled. On iOS, the parent PIN and limited purchase-access records are stored in a device-only Keychain, while the date-of-birth verifier is stored only in app-local settings; play-limit state is excluded from backup. Depending on the operating system, Keychain records and store purchase history may remain after the App is deleted, but they are not sent to the developer.</p>
+        <p class="note">On Android, cloud backup and device-to-device transfer of App data are disabled. On iOS, the parent PIN and limited purchase-access records are stored in a device-only Keychain; play-limit state is excluded from backup. Depending on the operating system, Keychain records and store purchase history may remain after the App is deleted, but they are not sent to the developer.</p>
 
       <h3>2.1 Retention and Deletion</h3>
-      <p>The developer operates no backend for the App and does not receive or retain App data. Ordinary settings, play state, and the date-of-birth verifier remain on the device while needed for use and are removed when the App data is cleared or the App is uninstalled. When “Use parent password” is turned off, the App verifies deletion of the parent PIN before saving that change. Apple or Google purchase history may remain after the App is deleted, but the app-local date-of-birth verifier is removed. Canceling a subscription is a separate action from deleting local App data.</p>
+      <p>The developer operates no backend for the App and does not receive or retain App data. Ordinary settings and play state remain on the device while needed for use and are removed when the App data is cleared or the App is uninstalled. When “Use parent password” is turned off, the App verifies deletion of the parent PIN before saving that change. Apple or Google purchase history may remain after the App is deleted, so a subscription can be restored. Canceling a subscription is a separate action from deleting local App data.</p>
 
       <h3>3. Advertising, Analytics, and Tracking</h3>
       <p>The App shows no ads and includes no third-party advertising, analytics, or tracking SDKs.</p>
@@ -238,8 +236,8 @@
       <p>With a subscription, parents can set the length of each round, the number of rounds available in a row, breaks between rounds, and the time until rounds reset. If a choice falls outside the guideline for the selected age preset, the App asks the parent to confirm before saving it. These settings stay on the device.</p>
       <ul>
         <li><strong>Four-digit parent PIN:</strong> This PIN helps prevent accidental changes to settings while a subscription is active. New PINs set in the current version are stored as salted hashes, not as the PIN itself. A PIN from an older version is migrated or reset after verification.</li>
-        <li><strong>Android:</strong> Whether parent-PIN protection is on or off, the App ensures that a four-digit PIN has been configured before starting a purchase or restore and asks the parent to set one if needed. It does not ask for an already configured PIN to be re-entered for every purchase or restore.</li>
-        <li><strong>iOS:</strong> Even when PIN protection for the settings screen is turned off, a purchase, restore, or PIN reset requires both verification of an adult parent’s date of birth and configuration or verification of a four-digit PIN. On first enrollment, the date is entered twice and must match. The raw date is neither stored nor transmitted; only a salted hash is stored in app-local settings for later verification. After reinstall, the verifier must be enrolled again. The App is asking for the parent’s date of birth, not the child’s.</li>
+        <li><strong>Android:</strong> Whether parent-PIN protection is on or off, a purchase, restore, or PIN reset requires parental confirmation. The parent follows a written instruction and presses and holds the indicated shape for about three seconds. This confirmation asks for no personal information, and nothing is stored or transmitted for it. If no four-digit PIN is configured yet, the App asks the parent to set one after the confirmation. It does not ask for an already configured PIN to be re-entered for every purchase or restore.</li>
+        <li><strong>iOS:</strong> Even when PIN protection for the settings screen is turned off, a purchase, restore, or PIN reset requires parental confirmation. The parent follows a written instruction and presses and holds the indicated shape for about three seconds, then sets or verifies a four-digit PIN. This confirmation asks for no personal information, and nothing is stored or transmitted for it.</li>
       </ul>
       <p>After the store verifies a new subscription purchase, “Use parent password” is turned on automatically. If a parent later turns it off, the device’s parental controls should also be used to restrict purchases and App removal. The in-App PIN and parent-verification steps help reduce accidental actions; they do not replace the operating system’s purchase approval or App-removal restrictions.</p>
 

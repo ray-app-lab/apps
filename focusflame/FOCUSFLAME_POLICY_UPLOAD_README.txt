@@ -22,8 +22,7 @@ Before an App Store submission:
 1. Confirm the deployed pages are publicly reachable without a login and do not
    redirect to localhost, a private network, or temporary content.
 2. Confirm that ray.app.lab@gmail.com is monitored and usable as the public
-   support contact. These pages identify the provider as Masahiro Ito,
-   operating as RayAppLab. Before submission, confirm any address required by
+   support contact. These pages identify the provider as RayAppLab. Before submission, confirm any address required by
    the applicable law; do not invent an address.
 3. Ask the business/legal owner to review the policy and terms against the final
    app, subscription configuration, App Privacy declaration, and support process.
